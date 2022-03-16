@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA660AE8-9794-4E56-B7E8-AC56840F4A4B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LIB_</RootNamespace>
+    <AssemblyName>LIB_</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_GEM</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_AJIN;_MULTICAM;_GEM;</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_GEM</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cognex.DataMan.CogNamer.PC, Version=5.6.3.122, Culture=neutral, PublicKeyToken=9f98866f2a3a2e78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Cognex.DataMan.CogNamer.PC.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.DataMan.SDK.Discovery.PC, Version=5.6.3.122, Culture=neutral, PublicKeyToken=9f98866f2a3a2e78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Cognex.DataMan.SDK.Discovery.PC.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.DataMan.SDK.PC, Version=5.6.3.122, Culture=neutral, PublicKeyToken=9f98866f2a3a2e78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Cognex.DataMan.SDK.PC.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.DataMan.SDK.Utils.PC, Version=5.6.3.122, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Cognex.DataMan.SDK.Utils.PC.dll</HintPath>
+    </Reference>
+    <Reference Include="Crevis.VirtualFG40Library, Version=4.0.2.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Crevis.VirtualFG40Library.dll</HintPath>
+    </Reference>
+    <Reference Include="EZGemPlusCS_32, Version=1.0.8026.25734, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\WORK\OUTPUT\NEONTECH\NSS-3310S\EZGemPlusCS_32.dll</HintPath>
+    </Reference>
+    <Reference Include="freeLicence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-4310S\freeLicence.dll</HintPath>
+    </Reference>
+    <Reference Include="GlassButton, Version=1.3.2.12831, Culture=neutral, PublicKeyToken=2e983e6e44d23a4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\GlassButton.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="Multimedia, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="netDxf, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\netDxf.dll</HintPath>
+    </Reference>
+    <Reference Include="Open_eVision_NetApi_2_12, Version=2.12.1.12913, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Open_eVision_NetApi_2_12.dll</HintPath>
+    </Reference>
+    <Reference Include="Owf.Controls.A1Panel, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-4310S\Owf.Controls.A1Panel.dll</HintPath>
+    </Reference>
+    <Reference Include="Owf.Controls.DigitalDisplayControl, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Owf.Controls.DigitalDisplayControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToggleSwitch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ToggleSwitch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DateType\CLOT.cs" />
+    <Compile Include="DateType\MES.cs" />
+    <Compile Include="DateType\USER.cs" />
+    <Compile Include="SerialCommunication\LightController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SerialCommunication\LightController.Designer.cs">
+      <DependentUpon>LightController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SerialCommunication\PowerMeter.cs" />
+    <Compile Include="SerialCommunication\OMRON.cs" />
+    <Compile Include="SubFROMLib\CogBarcoder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\CogBarcoder.Designer.cs">
+      <DependentUpon>CogBarcoder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\CogBarcoderReconnecting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\CogBarcoderReconnecting.Designer.cs">
+      <DependentUpon>CogBarcoderReconnecting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\LotIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\LotIn.Designer.cs">
+      <DependentUpon>LotIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\SecGemTerminalMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\SecGemTerminalMessage.Designer.cs">
+      <DependentUpon>SecGemTerminalMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\SecsGem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\SecsGem.Designer.cs">
+      <DependentUpon>SecsGem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\SystemK_RFReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\SystemK_RFReader.Designer.cs">
+      <DependentUpon>SystemK_RFReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\UserID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\UserID.Designer.cs">
+      <DependentUpon>UserID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\UserReqister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\UserReqister.Designer.cs">
+      <DependentUpon>UserReqister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\LedBulb.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_JOG.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_JOG.Designer.cs">
+      <DependentUpon>UCL_JOG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_JogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_JogControl.Designer.cs">
+      <DependentUpon>UCL_JogControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_MOVE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_MOVE.Designer.cs">
+      <DependentUpon>UCL_MOVE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_O.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_O.Designer.cs">
+      <DependentUpon>UCL_O.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_OUTPUT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_OUTPUT.Designer.cs">
+      <DependentUpon>UCL_OUTPUT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_OUTPUT_INPUT2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UERCTRL\UCL_OUTPUT_INPUT2.Designer.cs">
+      <DependentUpon>UCL_OUTPUT_INPUT2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vision\CogBCR.cs" />
+    <Compile Include="Vision\eVisionLib.cs" />
+    <Compile Include="Vision\MultiCam.cs" />
+    <Compile Include="COMMON_.cs" />
+    <Compile Include="FileLib\cDATA_READ_WRITE.cs" />
+    <Compile Include="DataManager.cs" />
+    <Compile Include="FileLib\AccDB.cs" />
+    <Compile Include="FileLib\FileIO.cs" />
+    <Compile Include="FileLib\FileManager.cs" />
+    <Compile Include="FileLib\LogWR.cs" />
+    <Compile Include="MotionLib\LAB_.cs" />
+    <Compile Include="MathLib\cMathLib.cs" />
+    <Compile Include="MotionLib\AZIN\AXA.cs" />
+    <Compile Include="MotionLib\AZIN\AXC.cs" />
+    <Compile Include="MotionLib\AZIN\AXD.cs" />
+    <Compile Include="MotionLib\AZIN\AXDev.cs" />
+    <Compile Include="MotionLib\AZIN\AXHD.cs" />
+    <Compile Include="MotionLib\AZIN\AXHS.cs" />
+    <Compile Include="MotionLib\AZIN\AXL.cs" />
+    <Compile Include="MotionLib\AZIN\AXM.cs" />
+    <Compile Include="MotionLib\EzSERVO\EziSERVOPlusR.cs" />
+    <Compile Include="MotionLib\EzSERVO\FAS_EziMOTIONPlusR.cs" />
+    <Compile Include="MotionLib\T1\T1.cs" />
+    <Compile Include="Object\cEnumLib.cs" />
+    <Compile Include="Object\StructLib.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DateType\SPC.cs" />
+    <Compile Include="SubFROMLib\ConfirmProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\ConfirmProcess.Designer.cs">
+      <DependentUpon>ConfirmProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\ErrorList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\ErrorList.Designer.cs">
+      <DependentUpon>ErrorList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\ErrorPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\ErrorPopUp.Designer.cs">
+      <DependentUpon>ErrorPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\InitialStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\InitialStatus.Designer.cs">
+      <DependentUpon>InitialStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\IOCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\IOCheck.Designer.cs">
+      <DependentUpon>IOCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\IOView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\IOView.Designer.cs">
+      <DependentUpon>IOView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\LOG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\LOG.Designer.cs">
+      <DependentUpon>LOG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\LoginChangePassWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\LoginChangePassWord.Designer.cs">
+      <DependentUpon>LoginChangePassWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\ManualRepeat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\ManualRepeat.Designer.cs">
+      <DependentUpon>ManualRepeat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MessageBoxView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MessageBoxView.Designer.cs">
+      <DependentUpon>MessageBoxView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MonIO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MonIO.Designer.cs">
+      <DependentUpon>MonIO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MonMotion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MonMotion.Designer.cs">
+      <DependentUpon>MonMotion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MTPosTeaching.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MTPosTeaching.Designer.cs">
+      <DependentUpon>MTPosTeaching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MTPosTeachingData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MTPosTeachingData.Designer.cs">
+      <DependentUpon>MTPosTeachingData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\MTSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\MTSelect.Designer.cs">
+      <DependentUpon>MTSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\PM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\PM.Designer.cs">
+      <DependentUpon>PM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\SoftLimitSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\SoftLimitSetting.Designer.cs">
+      <DependentUpon>SoftLimitSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\TENKEY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\TENKEY.Designer.cs">
+      <DependentUpon>TENKEY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\TenkeyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\TenkeyList.Designer.cs">
+      <DependentUpon>TenkeyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubFROMLib\VENDER.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubFROMLib\VENDER.Designer.cs">
+      <DependentUpon>VENDER.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilManager.cs" />
+    <Compile Include="Vision\NeptuneC_Interface.cs" />
+    <Compile Include="WIN32\Win32API.cs" />
+    <Compile Include="MotionLib\WRAP.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\CogBarcoder.resx">
+      <DependentUpon>CogBarcoder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\CogBarcoderReconnecting.resx">
+      <DependentUpon>CogBarcoderReconnecting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\ConfirmProcess.resx">
+      <DependentUpon>ConfirmProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\ErrorList.resx">
+      <DependentUpon>ErrorList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\ErrorPopUp.resx">
+      <DependentUpon>ErrorPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\InitialStatus.resx">
+      <DependentUpon>InitialStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\IOCheck.resx">
+      <DependentUpon>IOCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\IOView.resx">
+      <DependentUpon>IOView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\LOG.resx">
+      <DependentUpon>LOG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\LoginChangePassWord.resx">
+      <DependentUpon>LoginChangePassWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\LotIn.resx">
+      <DependentUpon>LotIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\ManualRepeat.resx">
+      <DependentUpon>ManualRepeat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MessageBoxView.resx">
+      <DependentUpon>MessageBoxView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MonIO.resx">
+      <DependentUpon>MonIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MonMotion.resx">
+      <DependentUpon>MonMotion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MTPosTeaching.resx">
+      <DependentUpon>MTPosTeaching.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MTPosTeachingData.resx">
+      <DependentUpon>MTPosTeachingData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\MTSelect.resx">
+      <DependentUpon>MTSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\PM.resx">
+      <DependentUpon>PM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\SecGemTerminalMessage.resx">
+      <DependentUpon>SecGemTerminalMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\SecsGem.resx">
+      <DependentUpon>SecsGem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\SoftLimitSetting.resx">
+      <DependentUpon>SoftLimitSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\SystemK_RFReader.resx">
+      <DependentUpon>SystemK_RFReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\TENKEY.resx">
+      <DependentUpon>TENKEY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\TenkeyList.resx">
+      <DependentUpon>TenkeyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\UserID.resx">
+      <DependentUpon>UserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\UserReqister.resx">
+      <DependentUpon>UserReqister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubFROMLib\VENDER.resx">
+      <DependentUpon>VENDER.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_JOG.resx">
+      <DependentUpon>UCL_JOG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_JogControl.resx">
+      <DependentUpon>UCL_JogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_MOVE.resx">
+      <DependentUpon>UCL_MOVE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_O.resx">
+      <DependentUpon>UCL_O.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_OUTPUT.resx">
+      <DependentUpon>UCL_OUTPUT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UERCTRL\UCL_OUTPUT_INPUT2.resx">
+      <DependentUpon>UCL_OUTPUT_INPUT2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DOCUMENT\C#.txt" />
+    <Content Include="DOCUMENT\REFERENCE.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

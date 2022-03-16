@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BBCD4C5-F95E-43F2-BF46-5EA97724A2D4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NSS_3310S</RootNamespace>
+    <AssemblyName>NSS-3310S</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_nUDP;_MsSQL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1373571337_53851.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_nUDP;_MsSQL</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="freeLicence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\freeLicence.dll</HintPath>
+    </Reference>
+    <Reference Include="GlassButton, Version=1.3.2.12831, Culture=neutral, PublicKeyToken=2e983e6e44d23a4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\GlassButton.dll</HintPath>
+    </Reference>
+    <Reference Include="LIB_, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\LIB_.dll</HintPath>
+    </Reference>
+    <Reference Include="Multimedia, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="netDxf, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\netDxf.dll</HintPath>
+    </Reference>
+    <Reference Include="Open_eVision_NetApi_2_12, Version=2.12.1.12913, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Open_eVision_NetApi_2_12.dll</HintPath>
+    </Reference>
+    <Reference Include="Owf.Controls.A1Panel, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Owf.Controls.A1Panel.dll</HintPath>
+    </Reference>
+    <Reference Include="Owf.Controls.DigitalDisplayControl, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Owf.Controls.DigitalDisplayControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToggleSwitch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\ToggleSwitch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DEFINE\DI.cs" />
+    <Compile Include="DEFINE\DO.cs" />
+    <Compile Include="DEFINE\DM.cs" />
+    <Compile Include="DEFINE\ERR.cs" />
+    <Compile Include="ITS\MsSQL.cs" />
+    <Compile Include="FORM\FormRecipeCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormRecipeCreate.Designer.cs">
+      <DependentUpon>FormRecipeCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DEFINE\MOTOR.cs" />
+    <Compile Include="DEFINE\SYSTEM.cs" />
+    <Compile Include="SYSTEM\INTERLOCK.cs" />
+    <Compile Include="SYSTEM\TENKEY.cs" />
+    <Compile Include="FORM\FormVision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormVision.Designer.cs">
+      <DependentUpon>FormVision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DEFINE\DEFINE.cs" />
+    <Compile Include="FORM\FormAuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormAuto.Designer.cs">
+      <DependentUpon>FormAuto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FORM\FormDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormDevice.Designer.cs">
+      <DependentUpon>FormDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FORM\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FORM\FormManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormManual.Designer.cs">
+      <DependentUpon>FormManual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FORM\FormMotor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormMotor.Designer.cs">
+      <DependentUpon>FormMotor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FORM\FormSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\FormSystem.Designer.cs">
+      <DependentUpon>FormSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SEQ\BASE.cs" />
+    <Compile Include="SEQ\MODULE\DRY_TABLE_2.cs" />
+    <Compile Include="SEQ\MODULE\DRY_TABLE_1.cs" />
+    <Compile Include="SEQ\MODULE\EMPTY.cs" />
+    <Compile Include="SEQ\MODULE\GOOD_TRAY_FEEDER_1.cs" />
+    <Compile Include="SEQ\MODULE\GOOD_TRAY_FEEDER_2.cs" />
+    <Compile Include="SEQ\MODULE\GRIPPER.cs" />
+    <Compile Include="SEQ\MODULE\HEAD_2.cs" />
+    <Compile Include="SEQ\MODULE\HEAD_1.cs" />
+    <Compile Include="SEQ\MODULE\MAGAZINE.cs" />
+    <Compile Include="SEQ\MODULE\REWORK_TRAY_FEEDER.cs" />
+    <Compile Include="SEQ\MODULE\STRIP_PICKER.cs" />
+    <Compile Include="SEQ\MODULE\TRAY_PICKER.cs" />
+    <Compile Include="SEQ\MODULE\UNIT_PICKER.cs" />
+    <Compile Include="SYSTEM\MANUAL.cs" />
+    <Compile Include="SYSTEM\AZIN.cs" />
+    <Compile Include="SYSTEM\OPERATOR.cs" />
+    <Compile Include="SYSTEM\UDP_SAW.cs" />
+    <Compile Include="SYSTEM\UDP_VISION.cs" />
+    <Compile Include="VISION\gigEViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VISION\mgrVision.cs" />
+    <EmbeddedResource Include="FORM\FormAuto.resx">
+      <DependentUpon>FormAuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormDevice.resx">
+      <DependentUpon>FormDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormManual.resx">
+      <DependentUpon>FormManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormMotor.resx">
+      <DependentUpon>FormMotor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormRecipeCreate.resx">
+      <DependentUpon>FormRecipeCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormSystem.resx">
+      <DependentUpon>FormSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORM\FormVision.resx">
+      <DependentUpon>FormVision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1373571337_53851.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

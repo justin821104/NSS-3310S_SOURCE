@@ -1,0 +1,212 @@
+이 대화 상자 대신 JIT(Just-in-time) 디버깅을 호출하는
+방법에 대한 자세한 내용은 이 메시지의 뒷부분을 참조하십시오.
+
+************** 예외 텍스트 **************
+System.OutOfMemoryException: 메모리가 부족합니다.
+   위치: System.Drawing.Graphics.CheckErrorStatus(Int32 status)
+   위치: System.Drawing.Graphics.DrawImage(Image image, Int32 x, Int32 y, Int32 width, Int32 height)
+   위치: System.Drawing.Graphics.DrawImage(Image image, Rectangle rect)
+   위치: System.Windows.Forms.PictureBox.OnPaint(PaintEventArgs pe)
+   위치: System.Windows.Forms.Control.PaintWithErrorHandling(PaintEventArgs e, Int16 layer)
+   위치: System.Windows.Forms.Control.WmPaint(Message& m)
+   위치: System.Windows.Forms.Control.WndProc(Message& m)
+   위치: System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   위치: System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   위치: System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+
+************** 로드된 어셈블리 **************
+mscorlib
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4420.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
+----------------------------------------
+NSS-3310S
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/NSS-3310S.exe
+----------------------------------------
+System.Windows.Forms
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4400.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
+----------------------------------------
+System
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4360.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+System.Drawing
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4390.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
+----------------------------------------
+Multimedia
+    어셈블리 버전: 5.0.0.0
+    Win32 버전: 5.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Multimedia.DLL
+----------------------------------------
+System.Configuration
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4190.0 built by: NET48REL1LAST_B
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
+----------------------------------------
+System.Core
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4390.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
+----------------------------------------
+System.Xml
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+LIB_
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/LIB_.DLL
+----------------------------------------
+freeLicence
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/freeLicence.DLL
+----------------------------------------
+System.Data
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4270.0 built by: NET48REL1LAST_C
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_32/System.Data/v4.0_4.0.0.0__b77a5c561934e089/System.Data.dll
+----------------------------------------
+System.Data.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Data.resources/v4.0_4.0.0.0_ko_b77a5c561934e089/System.Data.resources.dll
+----------------------------------------
+Cognex.DataMan.SDK.Discovery.PC
+    어셈블리 버전: 5.6.3.122
+    Win32 버전: 5.6.3.122
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Cognex.DataMan.SDK.Discovery.PC.DLL
+----------------------------------------
+Cognex.DataMan.SDK.PC
+    어셈블리 버전: 5.6.3.122
+    Win32 버전: 5.6.3.122
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Cognex.DataMan.SDK.PC.DLL
+----------------------------------------
+Cognex.DataMan.CogNamer.PC
+    어셈블리 버전: 5.6.3.122
+    Win32 버전: 5.6.3.122
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Cognex.DataMan.CogNamer.PC.DLL
+----------------------------------------
+System.Windows.Forms.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_ko_b77a5c561934e089/System.Windows.Forms.resources.dll
+----------------------------------------
+System.Windows.Forms.DataVisualization
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4200.0
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization/v4.0_4.0.0.0__31bf3856ad364e35/System.Windows.Forms.DataVisualization.dll
+----------------------------------------
+Owf.Controls.DigitalDisplayControl
+    어셈블리 버전: 1.0.6088.12830
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Owf.Controls.DigitalDisplayControl.DLL
+----------------------------------------
+Owf.Controls.A1Panel
+    어셈블리 버전: 1.0.6088.12830
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Owf.Controls.A1Panel.DLL
+----------------------------------------
+System.Windows.Forms.DataVisualization.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization.resources/v4.0_4.0.0.0_ko_31bf3856ad364e35/System.Windows.Forms.DataVisualization.resources.dll
+----------------------------------------
+AxInterop.EZGEMLib
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/AxInterop.EZGEMLib.DLL
+----------------------------------------
+mscorlib.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_ko_b77a5c561934e089/mscorlib.resources.dll
+----------------------------------------
+Interop.EZGEMLib
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Interop.EZGEMLib.DLL
+----------------------------------------
+Accessibility
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Accessibility/v4.0_4.0.0.0__b03f5f7f11d50a3a/Accessibility.dll
+----------------------------------------
+GlassButton
+    어셈블리 버전: 1.3.2.12831
+    Win32 버전: 1.3.2.12831
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/GlassButton.DLL
+----------------------------------------
+ToggleSwitch
+    어셈블리 버전: 1.0.0.0
+    Win32 버전: 1.0.0.0
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/ToggleSwitch.DLL
+----------------------------------------
+System.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.resources/v4.0_4.0.0.0_ko_b77a5c561934e089/System.resources.dll
+----------------------------------------
+System.Transactions
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_32/System.Transactions/v4.0_4.0.0.0__b77a5c561934e089/System.Transactions.dll
+----------------------------------------
+System.EnterpriseServices
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_32/System.EnterpriseServices/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.EnterpriseServices.dll
+----------------------------------------
+Microsoft.VisualBasic
+    어셈블리 버전: 10.0.0.0
+    Win32 버전: 14.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Microsoft.VisualBasic/v4.0_10.0.0.0__b03f5f7f11d50a3a/Microsoft.VisualBasic.dll
+----------------------------------------
+Cognex.DataMan.SDK.Utils.PC
+    어셈블리 버전: 5.6.3.122
+    Win32 버전: 5.6.3.122
+    코드베이스: file:///D:/WORK/OUTPUT/NEONTECH/NSS-3310S/Cognex.DataMan.SDK.Utils.PC.DLL
+----------------------------------------
+System.Runtime.Caching
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Runtime.Caching/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Runtime.Caching.dll
+----------------------------------------
+System.Numerics
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Numerics/v4.0_4.0.0.0__b77a5c561934e089/System.Numerics.dll
+----------------------------------------
+System.Drawing.resources
+    어셈블리 버전: 4.0.0.0
+    Win32 버전: 4.8.4084.0 built by: NET48REL1
+    코드베이스: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing.resources/v4.0_4.0.0.0_ko_b03f5f7f11d50a3a/System.Drawing.resources.dll
+----------------------------------------
+
+************** JIT 디버깅 **************
+JIT(Just In Time) 디버깅을 사용하려면 이 응용 프로그램 또는 컴퓨터의
+config 파일(machine.config)의 jitDebugging 값을 
+system.windows.forms 섹션에 설정해야 합니다.
+또한 응용 프로그램은 디버깅할 수 있도록 컴파일되어야
+합니다.
+
+예:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+JIT 디버깅을 사용하면 처리되지 않은 모든 예외는
+이 대화 상자에서 처리되지 않고 컴퓨터에 등록된 JIT 
+디버거에 보내집니다.
+
+
