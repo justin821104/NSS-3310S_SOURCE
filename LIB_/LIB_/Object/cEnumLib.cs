@@ -344,6 +344,8 @@ namespace Object
 
         NotITSCountFile,    //ITS 수량 정보 FILE 없음
         NotITSLocationFile, //ITS 좌표 정보 FILE 없음
+        FailITSCountDataParsingFail,
+        FailITSLocationDataParsingFail,
 
         NOT_MODULE = 100,  // IO 모듈 번호 없음.
         ERR_OUT_MODULE,         // OUTPUT 모듈 통신 에러.

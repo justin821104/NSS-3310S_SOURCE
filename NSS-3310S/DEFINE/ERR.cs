@@ -51,6 +51,8 @@
         public const int DllWarnning                                = 46;
         public const int Rail_StripRemove                           = 47;   // 레일 위 스트립 바코드 재검사 하시겠습니까. (YES : 스트립 제거 / NO : 바코드 다시 검사)
         public const int ChkForm_LotIn                              = 48;   // LOT 등록창 열려 있습니다. LOT 등록창 닫고 다시 실행 하셔야 합니다.
+        public const int ITSReadingFail                             = 49;   // 맵블록 테이블 유닛 ITS 값 리딩 중 에러 발생 (YES : 다시 리딩 / NO : ITS 데이터 무시하고 작업 진행)
+
     } //WARNING DEFINE
 
     public class E : DATA_
@@ -244,6 +246,12 @@
         public const int emsLotIDFail                               = eEMSBegin + 87;   // 현재 진행 LOT ID의 스트립 아닙니다. 스트립 ID 또는 LOT ID 확인 바랍니다.
         public const int emsRailStrpRemove                          = eEMSBegin + 88;   // 레일 위에 스트립 제거 하셔야합니다.! 
         public const int emsUnitInspectionReTrayTimeOut             = eEMSBegin + 89;   // 비전에서 유닛 사이즈 검사 재검사 요청 신호 응답 시간 오버 되었습니다.
+
+        public const int emsDesertUnitBarcodeMemory                 = eEMSBegin + 90;   // 맵블록 테이블 유닛 바코드 메모리 지워짐
+        public const int emsNotFindITSCountFile                     = eEMSBegin + 100;  // ITS 수량 파일 찾을 수 없습니다. 
+        public const int emsNotFindITSLocationFile                  = eEMSBegin + 101;  // ITS 좌표 파일 찾을 수 없습니다. 
+        public const int emsITSCountDataParsingFail                 = eEMSBegin + 102;  // ITS 수량 파일 파싱 중 에러 발생 하였습니다.
+        public const int emsITSLocationDataParsingFail              = eEMSBegin + 103;  // ITS 좌표계 파일 파싱 중 에러 발생 하였습니다.
 
         #endregion
 

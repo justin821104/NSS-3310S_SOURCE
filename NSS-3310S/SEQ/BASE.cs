@@ -445,13 +445,18 @@ namespace NSS_3310S.SEQ{
             if (prMACHINE[CP.UseITSData] == (int)eUSE.USE){
                 Result = DEF.ReadITSResult(eSTAGE, sBarcode);
                 if (Result != eRTN.SUCESS){
-                    UTIL_.OnERROR(E.emsFailITSDataReading);
+                    if (Result == eRTN.NothingBarcode)                      UTIL_.OnERROR(E.emsDesertUnitBarcodeMemory);
+                    else if (Result == eRTN.NotITSCountFile)                UTIL_.OnERROR(E.emsNotFindITSCountFile);
+                    else if (Result == eRTN.NotITSLocationFile)             UTIL_.OnERROR(E.emsNotFindITSLocationFile);
+                    else if (Result == eRTN.FailITSCountDataParsingFail)    UTIL_.OnERROR(E.emsITSCountDataParsingFail);
+                    else if (Result == eRTN.FailITSLocationDataParsingFail) UTIL_.OnERROR(E.emsITSLocationDataParsingFail);
+                    else UTIL_.OnERROR(E.emsFailITSDataReading);
+                    
+
                     goto ReCheckITS;
                 }
             }
-
             MAP_.PalletMap_ChkMarkCam(eSTAGE, (eMAP_DATA)IsLONG[L.ReverseMode[(int)eSTAGE]], (int)prMODEL[RP.GroupCntX], (int)prMODEL[RP.GroupCntY], (int)prMODEL[RP.UnitCntX], (int)prMODEL[RP.UnitCntY]);
-            //UTIL_.DELAY(500);
             return eRTN.SUCESS;
         }
 

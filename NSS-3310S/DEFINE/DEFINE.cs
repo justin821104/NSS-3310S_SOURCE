@@ -580,7 +580,7 @@ namespace NSS_3310S
             }
             catch (Exception E){
                 LogWR_.SaveLogException("ITS count infomation write fail", E);
-                return eRTN.ReadingDataFail;
+                return eRTN.FailITSCountDataParsingFail;
             }
          Search:
             if (!bSerch)        return eRTN.NothingBarcode; //바코드 정보 없음
@@ -655,7 +655,7 @@ namespace NSS_3310S
             }
             catch (Exception E){
                 LogWR_.SaveLogException("ITS location list infomation write fail", E);
-                return eRTN.ReadingDataFail;
+                return eRTN.FailITSLocationDataParsingFail;
             }
             return eRTN.SUCESS;
         }
