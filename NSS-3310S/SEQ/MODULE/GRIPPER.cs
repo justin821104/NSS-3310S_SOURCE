@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using LIB_.DateType;
+using System.IO;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class GRIPPER : BASE{
@@ -74,9 +75,30 @@ namespace NSS_3310S.SEQ.MODULE{
                 goto ReTrayBarcode;
             }
             IsLONG[L.StripCnt]++;
-            CLOT.InfoStrip[nThread].Index = (int)IsLONG[L.StripCnt];
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
-                SUBFRM_.gSecsGem.SetPanelLineIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode);
+                try{
+                    string[] CheckOverlap = File.ReadAllText(PATH_.StripOverlap).Split(ETC.CrLf);
+                    for (int n = 0; n < CheckOverlap.Length; n++){
+                        string[] sRslt = CheckOverlap[n].Split(',');
+                        if (sRslt.Length <= 1) continue;
+                        if (CLOT.InfoStrip[nThread].Barcode == sRslt[0]){
+                            CLOT.InfoStrip[nThread].Overlap = true;
+                            CLOT.InfoStrip[nThread].Index = int.Parse(sRslt[1]);
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex){
+                    LogWR_.SaveLogException("OVERLAP CHECK FAIL", ex);
+                }
+                if (!CLOT.InfoStrip[nThread].Overlap) {
+                    CLOT.InfoStrip[nThread].Index = (int)IsLONG[L.StripCnt];
+                    SUBFRM_.gSecsGem.SetPanelLineIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode);
+                    TEACH_.WRITE_STRIP_INFO(CLOT.InfoStrip[nThread].Barcode + "," + CLOT.InfoStrip[nThread].Index);
+                }
+                else{
+                    IsLONG[L.StripCnt] -= 1;
+                }
             }
             while (eRTN.SUCESS != Grip("그리퍼 그립")) ;
             while (eRTN.SUCESS != MoveX(P.StripOpn, "", "그리퍼 X축 스트립 그립 OPEN 위치")) ;
@@ -100,7 +122,8 @@ namespace NSS_3310S.SEQ.MODULE{
             InLetTableVac(stBIT.ON);
             while (eRTN.SUCESS != InLET_UP("인-렛 테이블 업")) ;
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
-                SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.IN_LET);
+                if (!CLOT.InfoStrip[nThread].Overlap)
+                    SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.IN_LET);
             }
             if (bMF) return;
             COM_.SetBit(nThread, B.StripPkRequest, true, "레일 위 스트립 공급");
@@ -147,6 +170,10 @@ namespace NSS_3310S.SEQ.MODULE{
                     goto Pass;
                 }
             }
+
+            if (SUBFRM_.cBarcode.ReadResult.Length > 17){
+                SUBFRM_.cBarcode.ReadResult = SUBFRM_.cBarcode.ReadResult.Substring(0, 17);
+            } // STRIP BARCODE 17 자리 이상이면 17자리까지만 가져오기!
             CLOT.InfoStrip[nThread].Barcode = SUBFRM_.cBarcode.ReadResult;
         Pass:            
             string[] sList  = CLOT.InfoStrip[nThread].Barcode.Split(' ');

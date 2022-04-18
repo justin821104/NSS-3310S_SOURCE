@@ -45,7 +45,16 @@ namespace SYSTEM{
                         string PROCESS_STATE = sRSLT[1];
 
                         break;
-
+                    case "PV":
+                        int nPVID = 0;
+                        string pVALUE = string.Empty;
+                        for (int i = 1; i < sRSLT.Length - 1; i++){
+                            string[] aSVID = sRSLT[i].Split('=');
+                            nPVID = int.Parse(aSVID[0]);
+                            pVALUE = aSVID[1];
+                            SUBFRM_.gSecsGem.SetSVID(nPVID, pVALUE);
+                        }
+                        break;
                     case "SVID":
                         int nSVID = 0;
                         string nVALUE = string.Empty;

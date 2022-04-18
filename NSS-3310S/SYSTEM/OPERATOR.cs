@@ -118,6 +118,8 @@ namespace SYSTEM{
                         IsBIT[B.MachineWaitProduct] = false;
                         bPushStart = true;
                         SUBFRM_.gSecsGem.SetPrecessState(CCEID.EQUIPMENT_STATE_RUN);
+                        C.SendSaw.SEND("GET_SVID,*");
+                        DEF.SetParaFDC();
                         UTIL_.DELAY(10);
                         if (CLOT.bFirstLot){
                             CLOT.bFirstLot = false;

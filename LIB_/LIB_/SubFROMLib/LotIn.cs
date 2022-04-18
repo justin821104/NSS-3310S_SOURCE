@@ -8,6 +8,8 @@ namespace LIB_.SubFROMLib{
         public bool bLotInView = false;
         public string OldLotInfo = "";
         public string OldITSInfo = "";
+        public bool bLotValidationWait  = false;
+        public int nLotValidationWaitCnt = 0;
         public LotIn() {
             InitializeComponent();
         }
@@ -37,6 +39,8 @@ namespace LIB_.SubFROMLib{
             LBL_LossEndTime.Text        = "";
             LOT_INFO.Visible            = false;
             CLOT.bLotValidationSusses   = false;
+            bLotValidationWait          = false;
+            nLotValidationWaitCnt       = 0;
             timer1.Enabled              = true;
             bLotInView                  = true;
             this.Show();
@@ -109,6 +113,7 @@ namespace LIB_.SubFROMLib{
                 } //mes 미사용
                 else{
                     SUBFRM_.gSecsGem.SetLotRequest(CLOT.CurLotID, CLOT.nLotType, CLOT.CurLotStripCnt);
+                    bLotValidationWait = true;
                 } //mes 사용
             }
             catch (Exception ex){
@@ -138,6 +143,7 @@ namespace LIB_.SubFROMLib{
                 DATA_.bStripDefect          = true; // ITS 정보 읽기 !
                 LOT_INFO.Visible            = false;
                 bLotInView                  = false;
+                bLotValidationWait          = false;
                 CLOT.bFirstLot              = true;
                 CLOT.ClearStripBarcodeInfo();
                 this.Hide();
@@ -145,6 +151,18 @@ namespace LIB_.SubFROMLib{
             if (CLOT.bLotCanceled){
                 CLOT.bLotCanceled = false;
                 LOT_INFO.Visible = false;
+            }
+
+            if (bLotValidationWait){
+                nLotValidationWaitCnt++;
+                if (nLotValidationWaitCnt > 30){
+                    LOT_INFO.Visible = false;
+                    bLotValidationWait = false;
+                    MessageBox.Show("LOT VALIDATION 응답 없습니다 !");
+                }
+            }
+            else{
+                nLotValidationWaitCnt = 0;
             }
         }
 

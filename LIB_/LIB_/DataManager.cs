@@ -103,6 +103,7 @@ public class PATH_
     public static string BladeThickness             = "D:\\ShareFile\\BladeThickness.txt";
     public static string ITSCount                   = "D:\\ShareFile\\ITSCount.txt";
     public static string ITSLocation                = "D:\\ShareFile\\ITSLocation.txt";
+    public static string StripOverlap               = "D:\\ShareFile\\StripOverlap.txt";
 
     //기본 폴더 
     public const string BACKUP_FOLDER               = "D:\\BACKUP\\";

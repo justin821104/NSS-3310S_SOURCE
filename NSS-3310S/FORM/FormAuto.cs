@@ -167,10 +167,14 @@ namespace NSS_3310S{
                     /*if (DATA_.prMACHINE[CP.UseMES] == (int)eUSE.USE){
                         COM_.ViewWarning(T.Manual, W.ManualErrMassage, "MES 사용 모드 입니다 !" + ETC.NewLine + "MES 미사용 모드에서만 적용 가능합니다 !");
                     }
-                    else */if (CUSER.Current.ID == ""){
+                    else */
+                    if (CUSER.Current.ID == ""){
                         COM_.ViewWarning(T.Manual, W.ManualErrMassage, "USER ID  입력 안되어 있습니다 !" + ETC.NewLine + "USER ID 등록하셔야 진행 가능합니다 !");
                     }
-                    else SUBFRM_.gLotID.INI_();
+                    else{
+                        C.SendSaw.SEND("GET_SVID,*");
+                        SUBFRM_.gLotID.INI_();
+                    }
                 }
             };
 
@@ -429,11 +433,19 @@ namespace NSS_3310S{
             //double dValue = 0;
             //BASE.RD_BladeThickness(ref dValue);
             //DEF.SaveProduction();
-            if (lbITS_ID.Text == ""){
-                MessageBox.Show("ITS ID 없습니다.");
-                return;
-            }
-            MsSQL.GetPrevProcResult(lbITS_ID.Text);
+            //if (lbITS_ID.Text == ""){
+            //   MessageBox.Show("ITS ID 없습니다.");
+            //    return;
+            //}
+            //MsSQL.GetPrevProcResult(lbITS_ID.Text);
+
+            //C.SendSaw.SEND("GET_SVID,*");
+            //C.SendSaw.SEND("GET_PVID,*");
+            //DEF.SetParaFDC();
+            //DEF.CurDataFDC();
+            //C.SendVision.SEND("GET_SVID_VISION,*");
+
+            //TEACH_.DEL_STRIP_INFO();
         }
 
         private void DGV_INFO_BARCODE_CellDoubleClick(object sender, DataGridViewCellEventArgs e){
@@ -633,26 +645,6 @@ namespace NSS_3310S{
             }
             UTIL_.CLEAR_GRID_SELECTED(ref GridWorkLot);
             GridWorkLot.Height = nHeight;
-
-            nHeight = 20 + 2;
-            GridProcCondition_1.RowCount = 1;
-            for (int i = 0; i < GridProcCondition_1.RowCount; i++){
-                row = GridProcCondition_1.Rows[i];
-                row.Height = 20;
-                nHeight += row.Height;
-            }
-            UTIL_.CLEAR_GRID_SELECTED(ref GridProcCondition_1);
-            GridProcCondition_1.Height = nHeight + 17;
-
-            nHeight = 20 + 2;
-            GridProcCondition_2.RowCount = 2;
-            for (int i = 0; i < GridProcCondition_2.RowCount; i++){
-                row = GridProcCondition_2.Rows[i];
-                row.Height = 20;
-                nHeight += row.Height;
-            }
-            UTIL_.CLEAR_GRID_SELECTED(ref GridProcCondition_2);
-            GridProcCondition_2.Height = nHeight + 17;
         } 
 
         private void FormAuto_Load(object sender, EventArgs e){
@@ -981,6 +973,9 @@ namespace NSS_3310S{
             Blink();
             Option();
             InvokeSignal();
+
+            BTN_TEST.Visible = true; //임시
+
             TmrAUTO.Enabled = true;
         }
         void Invoke(){
@@ -1018,6 +1013,13 @@ namespace NSS_3310S{
                 GridEndLot.Rows[n].Cells[8].Value = CLOT.FINISH_LOT[n].WorkScope == "" || CLOT.FINISH_LOT[n].WorkScope == null ? "" : CLOT.FINISH_LOT[n].UnloadingCount.ToString();
                 GridEndLot.Rows[n].Cells[9].Value = CLOT.FINISH_LOT[n].WorkSort;
             }
+
+            RAIL_OVERLAP.BackColor = CLOT.InfoStrip[T.Gripper].Overlap ? Color.Red : Color.White;
+            STRIP_OVERLAP.BackColor = CLOT.InfoStrip[T.StripPk].Overlap ? Color.Red : Color.White;
+            SAW_OVERLAP.BackColor = CLOT.SawStageStripOverlap ? Color.Red : Color.White;
+            UNIT_OVERLAP.BackColor = CLOT.InfoStrip[T.UnitPk].Overlap ? Color.Red : Color.White;
+            MAPBLOCK1_OVERLAP.BackColor = CLOT.InfoStrip[T.DryTable1].Overlap ? Color.Red : Color.White;
+            MAPBLOCK2_OVERLAP.BackColor = CLOT.InfoStrip[T.DryTable2].Overlap ? Color.Red : Color.White;
         }
 
         void DrawMGZ(PictureBox image, int cnt, int m){

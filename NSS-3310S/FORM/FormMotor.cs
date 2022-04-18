@@ -745,6 +745,7 @@ namespace NSS_3310S{
                 InfoComboBox();
             }
             P.GetHandlerPkZSafetyPos();
+            DEF.SetParaFDC();
             MessageBox.Show("Save Success");
         }
 

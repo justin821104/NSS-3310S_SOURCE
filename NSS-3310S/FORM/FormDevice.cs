@@ -394,6 +394,8 @@ namespace NSS_3310S{
                 EVENT_OPEN();
                 MessageBox.Show("OK SAVE");
             }
+            C.SendSaw.SEND("GET_SVID,*");
+            DEF.SetParaFDC();
         }
         void SelectedPPID(object sender){
             dgv = (DataGridView)sender;

@@ -82,6 +82,17 @@ namespace SYSTEM{
                     case "HEAD2_TEACHING":
 
                         break;
+
+                    case "SVID":
+                        int nSVID = 0;
+                        string nVALUE = string.Empty;
+                        for (int i = 1; i < sRSLT.Length - 1; i++){
+                            string[] aSVID = sRSLT[i].Split('=');
+                            nSVID = int.Parse(aSVID[0]);
+                            nVALUE = aSVID[1];
+                            SUBFRM_.gSecsGem.SetSVID(nSVID, nVALUE);
+                        }
+                        break;
                     default: break;
                 }
             }

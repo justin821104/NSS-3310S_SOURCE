@@ -30,6 +30,7 @@ namespace NSS_3310S.SEQ.MODULE{
                         while (UTIL_.WaitWarning(nThread, W.LotEndComplete, "LOT-END 처리")) ;
                         if (ConfirmUser[W.LotEndComplete].result) {
                             // lot count 저장!
+                            TEACH_.DEL_STRIP_INFO();
                             MsSQL.bITSDataReading = false;
                             COM_.SetBit(nThread, B.LotEnd, true, "LOT-END 처리 진행");
                         ChkTrayPk:
@@ -41,21 +42,24 @@ namespace NSS_3310S.SEQ.MODULE{
                                 IsBIT[B.GoodTrayUnloadingMode] = true;
                                 IsBIT[B.GoodTrayWork] = false;
                             }
+                            SUBFRM_.gSecsGem.SetLotComplete((int)IsLONG[L.StripCnt]);
+                            bWriteLotInfo = true; // LOT 수량 정보 리셋 !
                             if (IsBIT[B.ReWorkTrayWork]) IsBIT[B.ReWorkTrayWork] = false;
                         ChkTrayUnlaoading:
                             if (IsBIT[B.GoodTray1Place] || IsBIT[B.GoodTray2Place] || IsBIT[B.ReWorkTrayWork] || IsBIT[B.GoodTray1Unloading] || IsBIT[B.GoodTray2Unloading]){
                                 UTIL_.DELAY(500);
                                 goto ChkTrayUnlaoading;
                             }
-                            SUBFRM_.gSecsGem.SetLotComplete((int)IsLONG[L.StripCnt]);
                             mIN[I.vtStop] = true;
-                            bWriteLotInfo = true; // LOT 수량 정보 리셋 !
+                            TEACH_.DEL_STRIP_INFO();
                             LogWR_.SaveLogOperate("LOT-END SIGNAL ON-OFF", "MC");
                             UTIL_.DELAY(2000);
                             bLotEndProcess = true;
                             while (bLotEndProcess) UTIL_.DELAY(100);
+                            IsBIT[B.CstRequest] = false;
                         } //LOT-END 처리!
-                        else{
+                        else
+                        {
                             IsBIT[B.CstRequest] = false;
                         } //매거진 투입!
                     } //LOT-END 처리
@@ -336,12 +340,12 @@ namespace NSS_3310S.SEQ.MODULE{
             if (!IsBIT[B.Stage1Working] && (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.ALL || prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.STAGE1)){
                 COM_.SetBit(nThread, B.Stage1_UnitReceive, true, "유닛 피커 맵-블록 테이블1에 유닛 공급");
                 while (UTIL_.WaitBIT(nThread, B.Stage1_UnitReceive, true, "맵-블록 테이블1 유닛 전달 완료 돨때까지 대기")) ;
-                CLOT.SEND_STRIP_INFO(nThread, T.DryTable1);
+                //CLOT.SEND_STRIP_INFO(nThread, T.DryTable1);
             }
             else if (!IsBIT[B.Stage2Working] && (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.ALL || prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.STAGE2)){
                 COM_.SetBit(nThread, B.Stage2_UnitReceive, true, "유닛 피커 맵-블록 테이블2에 유닛 공급");
                 while (UTIL_.WaitBIT(nThread, B.Stage2_UnitReceive, true, "맵-블록 테이블2 유닛 전달 완료 돨때까지 대기")) ;
-                CLOT.SEND_STRIP_INFO(nThread, T.DryTable2);
+                //CLOT.SEND_STRIP_INFO(nThread, T.DryTable2);
             }
             else{
                 COM_.ViewWarning(nThread, W.UnitPlaceSignelOff);

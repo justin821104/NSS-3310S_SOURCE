@@ -248,10 +248,10 @@
         public const int emsUnitInspectionReTrayTimeOut             = eEMSBegin + 89;   // 비전에서 유닛 사이즈 검사 재검사 요청 신호 응답 시간 오버 되었습니다.
 
         public const int emsDesertUnitBarcodeMemory                 = eEMSBegin + 90;   // 맵블록 테이블 유닛 바코드 메모리 지워짐
-        public const int emsNotFindITSCountFile                     = eEMSBegin + 100;  // ITS 수량 파일 찾을 수 없습니다. 
-        public const int emsNotFindITSLocationFile                  = eEMSBegin + 101;  // ITS 좌표 파일 찾을 수 없습니다. 
-        public const int emsITSCountDataParsingFail                 = eEMSBegin + 102;  // ITS 수량 파일 파싱 중 에러 발생 하였습니다.
-        public const int emsITSLocationDataParsingFail              = eEMSBegin + 103;  // ITS 좌표계 파일 파싱 중 에러 발생 하였습니다.
+        public const int emsNotFindITSCountFile                     = eEMSBegin + 91;  // ITS 수량 파일 찾을 수 없습니다. 
+        public const int emsNotFindITSLocationFile                  = eEMSBegin + 92;  // ITS 좌표 파일 찾을 수 없습니다. 
+        public const int emsITSCountDataParsingFail                 = eEMSBegin + 93;  // ITS 수량 파일 파싱 중 에러 발생 하였습니다.
+        public const int emsITSLocationDataParsingFail              = eEMSBegin + 94;  // ITS 좌표계 파일 파싱 중 에러 발생 하였습니다.
 
         #endregion
 

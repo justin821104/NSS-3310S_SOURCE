@@ -331,6 +331,32 @@ public class TEACH_ : DATA_
     } // 바코드 저장 파일 삭제
     #endregion "SAW 데이터 전달"
 
+    public static void DEL_STRIP_INFO(){
+        if (File.Exists(PATH_.StripOverlap)) File.Delete(PATH_.StripOverlap); //OFFSET FILE 있으면 삭제함.
+    }
+    public static void WRITE_STRIP_INFO(string StripInfo){
+        try{
+            FILE_.WRL_File(PATH_.StripOverlap, StripInfo, true);
+        }
+        catch (Exception exp) {
+            LogWR_.SaveLogException("WRITE STRIP INFO FAIL", exp);
+            return;
+        }
+    }
+    public static string READ_STRIP_INFO(){
+        string mStr;
+        try{
+            if (!File.Exists(PATH_.StripOverlap)) return "";
+            StreamReader sr = new StreamReader(PATH_.StripOverlap);
+            mStr = sr.ReadLine();
+        }
+        catch (Exception ex){
+            LogWR_.SaveLogException("Offset File Read Fail", ex);
+            return "";
+        }
+        return mStr;
+    }
+
     #region "RD/WR 설비 디바이스"
     public static string RD_DEIVCE_ID(){
         if (!File.Exists(PATH_.DeviceID)) return "";

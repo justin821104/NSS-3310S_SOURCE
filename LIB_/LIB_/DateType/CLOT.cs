@@ -10,21 +10,27 @@ namespace LIB_.DateType
         public static PANEL_INFO[] InfoStrip        = new PANEL_INFO[CNT_.THREAD];
         public static string SawStageStripBarcode   = "";
         public static int SawStageStripIndex        = 0;
+        public static bool SawStageStripOverlap     = false;
         public static void SEND_STRIP_INFO(int Give, int Get){
-            InfoStrip[Get].Barcode = InfoStrip[Give].Barcode;
-            InfoStrip[Get].Index = InfoStrip[Give].Index;
+            InfoStrip[Get].Barcode  = InfoStrip[Give].Barcode;
+            InfoStrip[Get].Index    = InfoStrip[Give].Index;
+            InfoStrip[Get].Overlap  = InfoStrip[Give].Overlap;
         }
         public static void RESET_STRIP_INFO(int nTH){
             InfoStrip[nTH].Barcode  = "";
             InfoStrip[nTH].Index    = 0;
+            InfoStrip[nTH].Overlap  = false;
         }
         public static void RECEIVE_SAW_STRIP_INFO(int nTH){
-            SawStageStripBarcode = InfoStrip[nTH].Barcode;
-            SawStageStripIndex = InfoStrip[nTH].Index;
+            SawStageStripBarcode    = InfoStrip[nTH].Barcode;
+            SawStageStripIndex      = InfoStrip[nTH].Index;
+            SawStageStripOverlap    = InfoStrip[nTH].Overlap;
         }
         public static void SEND_SAW_STRIP_INFO(int nTH){
             InfoStrip[nTH].Barcode = SawStageStripBarcode;
             InfoStrip[nTH].Index   = SawStageStripIndex;
+            SawStageStripOverlap = false;
+            InfoStrip[nTH].Overlap = SawStageStripOverlap;
         }
         public static void RESET_SAW_STRIP_INFO(){
             SawStageStripBarcode    = "";
@@ -40,6 +46,7 @@ namespace LIB_.DateType
         public struct PANEL_INFO{
             public int Index;                   //PANEL 수량
             public string Barcode;              //바코드
+            public bool Overlap;                //중복 투입 스트립
         }
 
 

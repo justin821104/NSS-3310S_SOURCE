@@ -302,6 +302,7 @@ namespace NSS_3310S{
                     MessageBox.Show(btn.Tag + " Save Fail" + ETC.CrLf + ex.Message);
                 }
             }
+            DEF.SetParaFDC();
         }
 
         private void Blow_Click(object sender, EventArgs e){

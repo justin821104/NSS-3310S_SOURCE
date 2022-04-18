@@ -18,7 +18,7 @@ namespace NSS_3310S{
         int nERR;
         private bool bChageLabel = false;
         int isDryOn = 0, isDryOff = 0;
-
+        int nSendPVIDCont = 0;
         public FormMain(){
             InitializeComponent();
 
@@ -615,11 +615,19 @@ namespace NSS_3310S{
             }
             else DATA_.TW_TIME++;
 
-            if (BeforTime != DateTime.Now.Hour && DateTime.Now.Hour == DATA_.START_HOUR)
-            {
+            if (BeforTime != DateTime.Now.Hour && DateTime.Now.Hour == DATA_.START_HOUR){
                 //DEF.CountReset(false);
             }
             BeforTime = DateTime.Now.Hour;
+            
+            if (DATA_.mIN[I.SAW_READY]){
+                if (nSendPVIDCont > 10){
+                    nSendPVIDCont = 0;
+                    C.SendSaw.SEND("GET_PVID,*");
+                    DEF.CurDataFDC();
+                }
+                else nSendPVIDCont++;
+            }
             SPC.Enabled = true;
         }
     }

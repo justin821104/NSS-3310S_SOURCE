@@ -13,8 +13,8 @@ namespace NSS_3310S
 {
     public class DEF : DATA_ 
     {
-        public const string MCVersion   = "0222.22";    // << 0211.22
-        public const string UpdataMemo  = "CONV' WAITTIME";   // << MES 2.2
+        public const string MCVersion   = "0415.22";
+        public const string UpdataMemo  = "OVERLAP Ver1.0"; 
 
         public static int Ux, Uy            = 0; //검사 ROI X,Y 개수
         public static int[] Utx             = new int[2];
@@ -776,6 +776,138 @@ namespace NSS_3310S
         public static void CountReset(bool bSave){
             if (bSave) SaveProduction();
             L.Reset();
+        }
+    
+        public static void SetParaFDC(){
+            int nVALUE;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MGZ_SLOT_CNT, prMODEL[RP.MGZSlotCnt].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MGZ_SLOT_PITCH, prMODEL[RP.MGZSlotPitch].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet1_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.TopVision_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet1].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.HD1_Unit].Pos.ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet2_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.TopVision_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet2].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.HD1_Unit].Pos.ToString());
+
+            //HEAD 2번 추가 필요!
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_SIZE_X, prMODEL[RP.UnitSizeX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_SIZE_Y, prMODEL[RP.UnitSizeY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_THICKNES, prMODEL[RP.UnitThickess].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_X, prMODEL[RP.TrayCntX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_Y, prMODEL[RP.TrayCntY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_X, prMODEL[RP.TrayPitchX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_Y, prMODEL[RP.TrayPitchY].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_X, prMODEL[RP.UnitCntX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_Y, prMODEL[RP.UnitCntY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_X, prMODEL[RP.UnitPitchX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_Y, prMODEL[RP.UnitPitchY].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_CNT_X, prMODEL[RP.GroupCntX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_CNT_Y, prMODEL[RP.GroupCntY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_X, prMODEL[RP.GroupPitchX].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_Y, prMODEL[RP.GroupPitchY].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_BLOW_PICKUP_CNT, prMODEL[RP.StageBlowUnitPickUpCnt].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_VAC_ON_PICKUP, prMACHINE[CP.StagePickupMovingVac].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_INSPECTION_NG_COUNT, prMODEL[RP.SizeNGOverCnt].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_MAP_BLOCK, prMACHINE[CP.SelectStage].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_HEAD, prMACHINE[CP.SelectHead].ToString());
+
+            nVALUE = PK_[0, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK1, nVALUE.ToString());
+            nVALUE = PK_[1, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK2, nVALUE.ToString());
+            nVALUE = PK_[2, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK3, nVALUE.ToString());
+            nVALUE = PK_[3, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK4, nVALUE.ToString());
+            nVALUE = PK_[4, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK5, nVALUE.ToString());
+            nVALUE = PK_[5, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD1_PK6, nVALUE.ToString());
+
+            nVALUE = PK_[0 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK1, nVALUE.ToString());
+            nVALUE = PK_[1 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK2, nVALUE.ToString());
+            nVALUE = PK_[2 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK3, nVALUE.ToString());
+            nVALUE = PK_[3 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK4, nVALUE.ToString());
+            nVALUE = PK_[4 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK5, nVALUE.ToString());
+            nVALUE = PK_[5 + CNT_.PKR, 0] == eSTATUS.NONE ? 0 : 1;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.USE_HD2_PK6, nVALUE.ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_TRAY_UNLOADER_MODE, prMACHINE[CP.TrayUnloadingMode].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_TRAY_STACKER_MODE, prMACHINE[CP.SelectStackerUnloading].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_TRAY_CONV_MODE, prMACHINE[CP.SelectConveyorUnloading].ToString());
+
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder1].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_Y, mtDATA[M.TrayFeeder1, P.HD1TrayPocket].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder2].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_Y, mtDATA[M.TrayFeeder2, P.HD1TrayPocket].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder3].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_Y, mtDATA[M.TrayFeeder3, P.HD1TrayPocket].Pos.ToString());
+
+            //HEAD 2번 추가 필요!
+
+        }
+        public static void CurDataFDC(){
+            int nVALUE;
+            nVALUE = mIN[I.STAGE_VACUUM1] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_VAC, nVALUE.ToString());
+            nVALUE = mIN[I.STAGE_VACUUM2] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_VAC, nVALUE.ToString());
+            nVALUE = mIN[I.ULD_CONV_READY] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.ULD_CONV_RADY, nVALUE.ToString());
+            nVALUE = mIN[I.ULD_CONV_LOADING] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.ULD_CONV_LOADING, nVALUE.ToString());
+            nVALUE = mIN[I.ULD_CONV_LOADING_END] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.ULD_CONV_END, nVALUE.ToString());
+
+            nVALUE = mIN[I.DRIVER_AIR_PRESSURE] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.DRIVER_AIR, nVALUE.ToString());
+            nVALUE = mIN[I.BLOW_AIR_PRESSURE] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.BLOW_AIR, nVALUE.ToString());
+            nVALUE = mIN[I.STAGE_AIR_PRESSURE] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.STAGE_AIR, nVALUE.ToString());
+            nVALUE = mIN[I.PICKER_AIR_PRESSURE] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.PICKER_AIR, nVALUE.ToString());
+
+            nVALUE = mAI[0] > mSET_AI[0] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK1_VAC, mAI[0].ToString());
+            nVALUE = mAI[1] > mSET_AI[1] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK2_VAC, mAI[1].ToString());
+            nVALUE = mAI[2] > mSET_AI[2] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK3_VAC, mAI[2].ToString());
+            nVALUE = mAI[3] > mSET_AI[3] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK4_VAC, mAI[3].ToString());
+            nVALUE = mAI[4] > mSET_AI[4] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK5_VAC, mAI[4].ToString());
+            nVALUE = mAI[5] > mSET_AI[5] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK6_VAC, mAI[5].ToString());
+            
+            nVALUE = mAI[8] > mSET_AI[8] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK1_VAC, mAI[8].ToString());
+            nVALUE = mAI[9] > mSET_AI[9] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK2_VAC, mAI[9].ToString());
+            nVALUE = mAI[10] > mSET_AI[10] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK3_VAC, mAI[10].ToString());
+            nVALUE = mAI[11] > mSET_AI[11] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK4_VAC, mAI[11].ToString());
+            nVALUE = mAI[12] > mSET_AI[12] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK5_VAC, mAI[12].ToString());
+            nVALUE = mAI[13] > mSET_AI[13] ? 1 : 0;
+            SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK6_VAC, mAI[13].ToString());
+            
         }
     } //DEFINE
 

@@ -23,7 +23,8 @@ namespace NSS_3310S.SEQ.MODULE{
                 }
                 if (!Pic("스트립 픽업")) goto RePic;
                 if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
-                    SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.STRIP_PK);
+                    if (!CLOT.InfoStrip[nThread].Overlap)
+                        SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.STRIP_PK);
                 }
             Shortcut_Place:
                 Plc("다이싱 테이블로 스트립 공급");
@@ -111,7 +112,8 @@ namespace NSS_3310S.SEQ.MODULE{
             COM_.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
             CLOT.InfoStrip[nThread] = CLOT.InfoStrip[T.Gripper];
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
-                SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[T.Gripper].Index, CLOT.InfoStrip[T.Gripper].Barcode, (int)CMES.ModuleID.IN_LET);
+                if (!CLOT.InfoStrip[T.Gripper].Overlap)
+                    SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[T.Gripper].Index, CLOT.InfoStrip[T.Gripper].Barcode, (int)CMES.ModuleID.IN_LET);
             }
             CLOT.RESET_STRIP_INFO(T.Gripper);
             //스트립 정보 저장
@@ -173,8 +175,10 @@ namespace NSS_3310S.SEQ.MODULE{
             ChekPlc();
             CLOT.RECEIVE_SAW_STRIP_INFO(nThread);
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
-                SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.STRIP_PK);
-                SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.SawStageStripIndex, CLOT.SawStageStripBarcode, CMES.ModuleID.SAW_STAGE);
+                if (!CLOT.InfoStrip[nThread].Overlap) { 
+                    SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.STRIP_PK);
+                    SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.SawStageStripIndex, CLOT.SawStageStripBarcode, CMES.ModuleID.SAW_STAGE);
+                }
             }
             CLOT.RESET_STRIP_INFO(nThread);
             //스트립 정보 저장

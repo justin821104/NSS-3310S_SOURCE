@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using LIB_.DateType;
+using Object;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -317,6 +318,8 @@ namespace NSS_3310S.SEQ{
             LAB_.OUTPUT(O.SCRAP_BLOW_2, false);
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.PLACE_PALLET[(int)eSTAGE], "offset=-10:spd=5", "유닛 피커 Z축 테이블에 유닛 내려놓고 대기 위치 이송")) ;
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
+            if (eMAP_BLOCK.STAGE1 == eSTAGE)    CLOT.SEND_STRIP_INFO(T.UnitPk, T.DryTable1);
+            else                                CLOT.SEND_STRIP_INFO(T.UnitPk, T.DryTable2);
             COM_.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 완료");
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
