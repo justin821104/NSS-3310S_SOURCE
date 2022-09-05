@@ -104,11 +104,13 @@ namespace LIB_.SubFROMLib{
                 LogWR_.SAVE_ChangeDataEvent(sLogMessage);
                 sLogMessage = OldITSInfo + " -> " + CLOT.GET_LOT.ItsID;
                 LogWR_.SAVE_ChangeDataEvent(sLogMessage);
+                
                 if (DATA_.prMACHINE[DATA_.UseMES] == (int)eUSE.NotUSE){
                     DATA_.bStripDefect  = true; // ITS 정보 읽기 !
                     LOT_INFO.Visible    = false;
                     bLotInView          = false;
                     CLOT.ClearStripBarcodeInfo();
+
                     this.Hide();
                 } //mes 미사용
                 else{
@@ -146,6 +148,10 @@ namespace LIB_.SubFROMLib{
                 bLotValidationWait          = false;
                 CLOT.bFirstLot              = true;
                 CLOT.ClearStripBarcodeInfo();
+
+                //CLOT.GET_LOT.ProcCondition_1 
+                //CLOT.GET_LOT.ProcCondition_2
+                //CLOT.GET_LOT.ProcCondition_3
                 this.Hide();
             }
             if (CLOT.bLotCanceled){

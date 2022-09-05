@@ -33,6 +33,17 @@
             this.pnlIN = new System.Windows.Forms.Panel();
             this.lblLABEL = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbnIN_26 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_25 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_24 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_23 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_22 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_21 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_20 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_19 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_18 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_17 = new System.Windows.Forms.RadioButton();
+            this.rbnIN_16 = new System.Windows.Forms.RadioButton();
             this.rbnIN_15 = new System.Windows.Forms.RadioButton();
             this.rbnIN_14 = new System.Windows.Forms.RadioButton();
             this.rbnIN_13 = new System.Windows.Forms.RadioButton();
@@ -50,8 +61,18 @@
             this.rbnIN_1 = new System.Windows.Forms.RadioButton();
             this.rbnIN_0 = new System.Windows.Forms.RadioButton();
             this.frm_OUT = new System.Windows.Forms.GroupBox();
-            this.pnlOUT = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbnOUT_25 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_24 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_23 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_22 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_21 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_20 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_19 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_18 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_17 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_16 = new System.Windows.Forms.RadioButton();
+            this.rbnOUT_15 = new System.Windows.Forms.RadioButton();
             this.rbnOUT_14 = new System.Windows.Forms.RadioButton();
             this.rbnOUT_13 = new System.Windows.Forms.RadioButton();
             this.rbnOUT_12 = new System.Windows.Forms.RadioButton();
@@ -67,29 +88,8 @@
             this.rbnOUT_2 = new System.Windows.Forms.RadioButton();
             this.rbnOUT_1 = new System.Windows.Forms.RadioButton();
             this.rbnOUT_0 = new System.Windows.Forms.RadioButton();
+            this.pnlOUT = new System.Windows.Forms.Panel();
             this.tmrIO = new System.Windows.Forms.Timer(this.components);
-            this.rbnIN_16 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_17 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_18 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_19 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_20 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_21 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_22 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_23 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_24 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_25 = new System.Windows.Forms.RadioButton();
-            this.rbnIN_26 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_15 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_16 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_17 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_18 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_19 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_20 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_21 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_22 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_23 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_24 = new System.Windows.Forms.RadioButton();
-            this.rbnOUT_25 = new System.Windows.Forms.RadioButton();
             this.frm_IN.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.frm_OUT.SuspendLayout();
@@ -171,6 +171,156 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "SELECT";
             // 
+            // rbnIN_26
+            // 
+            this.rbnIN_26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_26.Location = new System.Drawing.Point(5, 450);
+            this.rbnIN_26.Name = "rbnIN_26";
+            this.rbnIN_26.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_26.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_26.TabIndex = 26;
+            this.rbnIN_26.Text = "CH 26";
+            this.rbnIN_26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_26.UseVisualStyleBackColor = true;
+            this.rbnIN_26.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_25
+            // 
+            this.rbnIN_25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_25.Location = new System.Drawing.Point(5, 407);
+            this.rbnIN_25.Name = "rbnIN_25";
+            this.rbnIN_25.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_25.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_25.TabIndex = 25;
+            this.rbnIN_25.Text = "CH 25";
+            this.rbnIN_25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_25.UseVisualStyleBackColor = true;
+            this.rbnIN_25.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_24
+            // 
+            this.rbnIN_24.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_24.Location = new System.Drawing.Point(5, 364);
+            this.rbnIN_24.Name = "rbnIN_24";
+            this.rbnIN_24.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_24.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_24.TabIndex = 24;
+            this.rbnIN_24.Text = "CH 24";
+            this.rbnIN_24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_24.UseVisualStyleBackColor = true;
+            this.rbnIN_24.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_23
+            // 
+            this.rbnIN_23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_23.Location = new System.Drawing.Point(5, 321);
+            this.rbnIN_23.Name = "rbnIN_23";
+            this.rbnIN_23.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_23.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_23.TabIndex = 23;
+            this.rbnIN_23.Text = "CH 23";
+            this.rbnIN_23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_23.UseVisualStyleBackColor = true;
+            this.rbnIN_23.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_22
+            // 
+            this.rbnIN_22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_22.Location = new System.Drawing.Point(-8, 648);
+            this.rbnIN_22.Name = "rbnIN_22";
+            this.rbnIN_22.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_22.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_22.TabIndex = 22;
+            this.rbnIN_22.Text = "CH 22";
+            this.rbnIN_22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_22.UseVisualStyleBackColor = true;
+            this.rbnIN_22.Visible = false;
+            this.rbnIN_22.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_21
+            // 
+            this.rbnIN_21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_21.Location = new System.Drawing.Point(0, 718);
+            this.rbnIN_21.Name = "rbnIN_21";
+            this.rbnIN_21.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_21.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_21.TabIndex = 21;
+            this.rbnIN_21.Text = "CH 21";
+            this.rbnIN_21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_21.UseVisualStyleBackColor = true;
+            this.rbnIN_21.Visible = false;
+            this.rbnIN_21.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_20
+            // 
+            this.rbnIN_20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_20.Location = new System.Drawing.Point(-3, 658);
+            this.rbnIN_20.Name = "rbnIN_20";
+            this.rbnIN_20.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_20.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_20.TabIndex = 20;
+            this.rbnIN_20.Text = "CH 20";
+            this.rbnIN_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_20.UseVisualStyleBackColor = true;
+            this.rbnIN_20.Visible = false;
+            this.rbnIN_20.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_19
+            // 
+            this.rbnIN_19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_19.Location = new System.Drawing.Point(-8, 658);
+            this.rbnIN_19.Name = "rbnIN_19";
+            this.rbnIN_19.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_19.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_19.TabIndex = 19;
+            this.rbnIN_19.Text = "CH 19";
+            this.rbnIN_19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_19.UseVisualStyleBackColor = true;
+            this.rbnIN_19.Visible = false;
+            this.rbnIN_19.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_18
+            // 
+            this.rbnIN_18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_18.Location = new System.Drawing.Point(-8, 638);
+            this.rbnIN_18.Name = "rbnIN_18";
+            this.rbnIN_18.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_18.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_18.TabIndex = 18;
+            this.rbnIN_18.Text = "CH 18";
+            this.rbnIN_18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_18.UseVisualStyleBackColor = true;
+            this.rbnIN_18.Visible = false;
+            this.rbnIN_18.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_17
+            // 
+            this.rbnIN_17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_17.Location = new System.Drawing.Point(-2, 664);
+            this.rbnIN_17.Name = "rbnIN_17";
+            this.rbnIN_17.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_17.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_17.TabIndex = 17;
+            this.rbnIN_17.Text = "CH 17";
+            this.rbnIN_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_17.UseVisualStyleBackColor = true;
+            this.rbnIN_17.Visible = false;
+            this.rbnIN_17.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
+            // rbnIN_16
+            // 
+            this.rbnIN_16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnIN_16.Location = new System.Drawing.Point(3, 774);
+            this.rbnIN_16.Name = "rbnIN_16";
+            this.rbnIN_16.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnIN_16.Size = new System.Drawing.Size(113, 37);
+            this.rbnIN_16.TabIndex = 16;
+            this.rbnIN_16.Text = "CH 16";
+            this.rbnIN_16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnIN_16.UseVisualStyleBackColor = true;
+            this.rbnIN_16.Visible = false;
+            this.rbnIN_16.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
+            // 
             // rbnIN_15
             // 
             this.rbnIN_15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -244,7 +394,7 @@
             // rbnIN_10
             // 
             this.rbnIN_10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_10.Location = new System.Drawing.Point(3, 621);
+            this.rbnIN_10.Location = new System.Drawing.Point(5, 450);
             this.rbnIN_10.Name = "rbnIN_10";
             this.rbnIN_10.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnIN_10.Size = new System.Drawing.Size(113, 37);
@@ -258,7 +408,7 @@
             // rbnIN_9
             // 
             this.rbnIN_9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_9.Location = new System.Drawing.Point(0, 595);
+            this.rbnIN_9.Location = new System.Drawing.Point(5, 407);
             this.rbnIN_9.Name = "rbnIN_9";
             this.rbnIN_9.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnIN_9.Size = new System.Drawing.Size(113, 37);
@@ -272,7 +422,7 @@
             // rbnIN_8
             // 
             this.rbnIN_8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_8.Location = new System.Drawing.Point(0, 569);
+            this.rbnIN_8.Location = new System.Drawing.Point(5, 364);
             this.rbnIN_8.Name = "rbnIN_8";
             this.rbnIN_8.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnIN_8.Size = new System.Drawing.Size(113, 37);
@@ -286,7 +436,7 @@
             // rbnIN_7
             // 
             this.rbnIN_7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_7.Location = new System.Drawing.Point(0, 543);
+            this.rbnIN_7.Location = new System.Drawing.Point(5, 321);
             this.rbnIN_7.Name = "rbnIN_7";
             this.rbnIN_7.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnIN_7.Size = new System.Drawing.Size(113, 37);
@@ -386,6 +536,7 @@
             this.rbnIN_0.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnIN_0.Size = new System.Drawing.Size(113, 37);
             this.rbnIN_0.TabIndex = 0;
+            this.rbnIN_0.TabStop = true;
             this.rbnIN_0.Text = "CH   0";
             this.rbnIN_0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rbnIN_0.UseVisualStyleBackColor = false;
@@ -403,15 +554,6 @@
             this.frm_OUT.TabIndex = 11;
             this.frm_OUT.TabStop = false;
             this.frm_OUT.Text = "OUTPUT";
-            // 
-            // pnlOUT
-            // 
-            this.pnlOUT.BackColor = System.Drawing.Color.Lavender;
-            this.pnlOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOUT.Location = new System.Drawing.Point(137, 27);
-            this.pnlOUT.Name = "pnlOUT";
-            this.pnlOUT.Size = new System.Drawing.Size(476, 809);
-            this.pnlOUT.TabIndex = 388;
             // 
             // groupBox1
             // 
@@ -449,6 +591,156 @@
             this.groupBox1.TabIndex = 386;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SELECT";
+            // 
+            // rbnOUT_25
+            // 
+            this.rbnOUT_25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_25.Location = new System.Drawing.Point(5, 407);
+            this.rbnOUT_25.Name = "rbnOUT_25";
+            this.rbnOUT_25.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_25.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_25.TabIndex = 25;
+            this.rbnOUT_25.Text = "CH 25";
+            this.rbnOUT_25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_25.UseVisualStyleBackColor = true;
+            this.rbnOUT_25.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_24
+            // 
+            this.rbnOUT_24.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_24.Location = new System.Drawing.Point(5, 364);
+            this.rbnOUT_24.Name = "rbnOUT_24";
+            this.rbnOUT_24.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_24.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_24.TabIndex = 24;
+            this.rbnOUT_24.Text = "CH 24";
+            this.rbnOUT_24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_24.UseVisualStyleBackColor = true;
+            this.rbnOUT_24.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_23
+            // 
+            this.rbnOUT_23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_23.Location = new System.Drawing.Point(5, 321);
+            this.rbnOUT_23.Name = "rbnOUT_23";
+            this.rbnOUT_23.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_23.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_23.TabIndex = 23;
+            this.rbnOUT_23.Text = "CH 23";
+            this.rbnOUT_23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_23.UseVisualStyleBackColor = true;
+            this.rbnOUT_23.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_22
+            // 
+            this.rbnOUT_22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_22.Location = new System.Drawing.Point(5, 278);
+            this.rbnOUT_22.Name = "rbnOUT_22";
+            this.rbnOUT_22.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_22.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_22.TabIndex = 22;
+            this.rbnOUT_22.Text = "CH 22";
+            this.rbnOUT_22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_22.UseVisualStyleBackColor = true;
+            this.rbnOUT_22.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_21
+            // 
+            this.rbnOUT_21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_21.Location = new System.Drawing.Point(5, 589);
+            this.rbnOUT_21.Name = "rbnOUT_21";
+            this.rbnOUT_21.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_21.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_21.TabIndex = 21;
+            this.rbnOUT_21.Text = "CH 21";
+            this.rbnOUT_21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_21.UseVisualStyleBackColor = true;
+            this.rbnOUT_21.Visible = false;
+            this.rbnOUT_21.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_20
+            // 
+            this.rbnOUT_20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_20.Location = new System.Drawing.Point(9, 589);
+            this.rbnOUT_20.Name = "rbnOUT_20";
+            this.rbnOUT_20.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_20.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_20.TabIndex = 20;
+            this.rbnOUT_20.Text = "CH 20";
+            this.rbnOUT_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_20.UseVisualStyleBackColor = true;
+            this.rbnOUT_20.Visible = false;
+            this.rbnOUT_20.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_19
+            // 
+            this.rbnOUT_19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_19.Location = new System.Drawing.Point(3, 589);
+            this.rbnOUT_19.Name = "rbnOUT_19";
+            this.rbnOUT_19.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_19.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_19.TabIndex = 19;
+            this.rbnOUT_19.Text = "CH 19";
+            this.rbnOUT_19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_19.UseVisualStyleBackColor = true;
+            this.rbnOUT_19.Visible = false;
+            this.rbnOUT_19.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_18
+            // 
+            this.rbnOUT_18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_18.Location = new System.Drawing.Point(5, 589);
+            this.rbnOUT_18.Name = "rbnOUT_18";
+            this.rbnOUT_18.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_18.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_18.TabIndex = 18;
+            this.rbnOUT_18.Text = "CH 18";
+            this.rbnOUT_18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_18.UseVisualStyleBackColor = true;
+            this.rbnOUT_18.Visible = false;
+            this.rbnOUT_18.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_17
+            // 
+            this.rbnOUT_17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_17.Location = new System.Drawing.Point(6, 765);
+            this.rbnOUT_17.Name = "rbnOUT_17";
+            this.rbnOUT_17.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_17.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_17.TabIndex = 17;
+            this.rbnOUT_17.Text = "CH 17";
+            this.rbnOUT_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_17.UseVisualStyleBackColor = true;
+            this.rbnOUT_17.Visible = false;
+            this.rbnOUT_17.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_16
+            // 
+            this.rbnOUT_16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_16.Location = new System.Drawing.Point(5, 742);
+            this.rbnOUT_16.Name = "rbnOUT_16";
+            this.rbnOUT_16.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_16.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_16.TabIndex = 16;
+            this.rbnOUT_16.Text = "CH 16";
+            this.rbnOUT_16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_16.UseVisualStyleBackColor = true;
+            this.rbnOUT_16.Visible = false;
+            this.rbnOUT_16.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
+            // 
+            // rbnOUT_15
+            // 
+            this.rbnOUT_15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnOUT_15.Location = new System.Drawing.Point(6, 718);
+            this.rbnOUT_15.Name = "rbnOUT_15";
+            this.rbnOUT_15.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.rbnOUT_15.Size = new System.Drawing.Size(113, 37);
+            this.rbnOUT_15.TabIndex = 15;
+            this.rbnOUT_15.Text = "CH 15";
+            this.rbnOUT_15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbnOUT_15.UseVisualStyleBackColor = true;
+            this.rbnOUT_15.Visible = false;
+            this.rbnOUT_15.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
             // 
             // rbnOUT_14
             // 
@@ -523,7 +815,7 @@
             // rbnOUT_9
             // 
             this.rbnOUT_9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_9.Location = new System.Drawing.Point(5, 589);
+            this.rbnOUT_9.Location = new System.Drawing.Point(5, 407);
             this.rbnOUT_9.Name = "rbnOUT_9";
             this.rbnOUT_9.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnOUT_9.Size = new System.Drawing.Size(113, 37);
@@ -537,7 +829,7 @@
             // rbnOUT_8
             // 
             this.rbnOUT_8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_8.Location = new System.Drawing.Point(5, 567);
+            this.rbnOUT_8.Location = new System.Drawing.Point(5, 364);
             this.rbnOUT_8.Name = "rbnOUT_8";
             this.rbnOUT_8.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnOUT_8.Size = new System.Drawing.Size(113, 37);
@@ -551,7 +843,7 @@
             // rbnOUT_7
             // 
             this.rbnOUT_7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_7.Location = new System.Drawing.Point(5, 546);
+            this.rbnOUT_7.Location = new System.Drawing.Point(5, 321);
             this.rbnOUT_7.Name = "rbnOUT_7";
             this.rbnOUT_7.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnOUT_7.Size = new System.Drawing.Size(113, 37);
@@ -565,7 +857,7 @@
             // rbnOUT_6
             // 
             this.rbnOUT_6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_6.Location = new System.Drawing.Point(5, 524);
+            this.rbnOUT_6.Location = new System.Drawing.Point(5, 278);
             this.rbnOUT_6.Name = "rbnOUT_6";
             this.rbnOUT_6.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnOUT_6.Size = new System.Drawing.Size(113, 37);
@@ -652,314 +944,24 @@
             this.rbnOUT_0.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.rbnOUT_0.Size = new System.Drawing.Size(113, 37);
             this.rbnOUT_0.TabIndex = 0;
+            this.rbnOUT_0.TabStop = true;
             this.rbnOUT_0.Text = "CH   0";
             this.rbnOUT_0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rbnOUT_0.UseVisualStyleBackColor = false;
             this.rbnOUT_0.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
             // 
+            // pnlOUT
+            // 
+            this.pnlOUT.BackColor = System.Drawing.Color.Lavender;
+            this.pnlOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOUT.Location = new System.Drawing.Point(137, 27);
+            this.pnlOUT.Name = "pnlOUT";
+            this.pnlOUT.Size = new System.Drawing.Size(476, 809);
+            this.pnlOUT.TabIndex = 388;
+            // 
             // tmrIO
             // 
             this.tmrIO.Tick += new System.EventHandler(this.TimerIO_Tick);
-            // 
-            // rbnIN_16
-            // 
-            this.rbnIN_16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_16.Location = new System.Drawing.Point(3, 774);
-            this.rbnIN_16.Name = "rbnIN_16";
-            this.rbnIN_16.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_16.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_16.TabIndex = 16;
-            this.rbnIN_16.Text = "CH 16";
-            this.rbnIN_16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_16.UseVisualStyleBackColor = true;
-            this.rbnIN_16.Visible = false;
-            this.rbnIN_16.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_17
-            // 
-            this.rbnIN_17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_17.Location = new System.Drawing.Point(-2, 621);
-            this.rbnIN_17.Name = "rbnIN_17";
-            this.rbnIN_17.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_17.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_17.TabIndex = 17;
-            this.rbnIN_17.Text = "CH 17";
-            this.rbnIN_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_17.UseVisualStyleBackColor = true;
-            this.rbnIN_17.Visible = false;
-            this.rbnIN_17.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_18
-            // 
-            this.rbnIN_18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_18.Location = new System.Drawing.Point(-8, 586);
-            this.rbnIN_18.Name = "rbnIN_18";
-            this.rbnIN_18.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_18.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_18.TabIndex = 18;
-            this.rbnIN_18.Text = "CH 18";
-            this.rbnIN_18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_18.UseVisualStyleBackColor = true;
-            this.rbnIN_18.Visible = false;
-            this.rbnIN_18.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_19
-            // 
-            this.rbnIN_19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_19.Location = new System.Drawing.Point(-8, 605);
-            this.rbnIN_19.Name = "rbnIN_19";
-            this.rbnIN_19.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_19.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_19.TabIndex = 19;
-            this.rbnIN_19.Text = "CH 19";
-            this.rbnIN_19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_19.UseVisualStyleBackColor = true;
-            this.rbnIN_19.Visible = false;
-            this.rbnIN_19.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_20
-            // 
-            this.rbnIN_20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_20.Location = new System.Drawing.Point(-8, 594);
-            this.rbnIN_20.Name = "rbnIN_20";
-            this.rbnIN_20.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_20.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_20.TabIndex = 20;
-            this.rbnIN_20.Text = "CH 20";
-            this.rbnIN_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_20.UseVisualStyleBackColor = true;
-            this.rbnIN_20.Visible = false;
-            this.rbnIN_20.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_21
-            // 
-            this.rbnIN_21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_21.Location = new System.Drawing.Point(0, 718);
-            this.rbnIN_21.Name = "rbnIN_21";
-            this.rbnIN_21.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_21.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_21.TabIndex = 21;
-            this.rbnIN_21.Text = "CH 21";
-            this.rbnIN_21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_21.UseVisualStyleBackColor = true;
-            this.rbnIN_21.Visible = false;
-            this.rbnIN_21.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_22
-            // 
-            this.rbnIN_22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_22.Location = new System.Drawing.Point(-8, 648);
-            this.rbnIN_22.Name = "rbnIN_22";
-            this.rbnIN_22.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_22.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_22.TabIndex = 22;
-            this.rbnIN_22.Text = "CH 22";
-            this.rbnIN_22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_22.UseVisualStyleBackColor = true;
-            this.rbnIN_22.Visible = false;
-            this.rbnIN_22.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_23
-            // 
-            this.rbnIN_23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_23.Location = new System.Drawing.Point(5, 321);
-            this.rbnIN_23.Name = "rbnIN_23";
-            this.rbnIN_23.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_23.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_23.TabIndex = 23;
-            this.rbnIN_23.Text = "CH 23";
-            this.rbnIN_23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_23.UseVisualStyleBackColor = true;
-            this.rbnIN_23.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_24
-            // 
-            this.rbnIN_24.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_24.Location = new System.Drawing.Point(5, 364);
-            this.rbnIN_24.Name = "rbnIN_24";
-            this.rbnIN_24.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_24.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_24.TabIndex = 24;
-            this.rbnIN_24.Text = "CH 24";
-            this.rbnIN_24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_24.UseVisualStyleBackColor = true;
-            this.rbnIN_24.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_25
-            // 
-            this.rbnIN_25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_25.Location = new System.Drawing.Point(5, 407);
-            this.rbnIN_25.Name = "rbnIN_25";
-            this.rbnIN_25.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_25.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_25.TabIndex = 25;
-            this.rbnIN_25.Text = "CH 25";
-            this.rbnIN_25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_25.UseVisualStyleBackColor = true;
-            this.rbnIN_25.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnIN_26
-            // 
-            this.rbnIN_26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnIN_26.Location = new System.Drawing.Point(5, 450);
-            this.rbnIN_26.Name = "rbnIN_26";
-            this.rbnIN_26.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnIN_26.Size = new System.Drawing.Size(113, 37);
-            this.rbnIN_26.TabIndex = 26;
-            this.rbnIN_26.Text = "CH 26";
-            this.rbnIN_26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnIN_26.UseVisualStyleBackColor = true;
-            this.rbnIN_26.CheckedChanged += new System.EventHandler(this.IN_0_CheckedChanged);
-            // 
-            // rbnOUT_15
-            // 
-            this.rbnOUT_15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_15.Location = new System.Drawing.Point(6, 718);
-            this.rbnOUT_15.Name = "rbnOUT_15";
-            this.rbnOUT_15.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_15.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_15.TabIndex = 15;
-            this.rbnOUT_15.Text = "CH 15";
-            this.rbnOUT_15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_15.UseVisualStyleBackColor = true;
-            this.rbnOUT_15.Visible = false;
-            this.rbnOUT_15.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_16
-            // 
-            this.rbnOUT_16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_16.Location = new System.Drawing.Point(5, 742);
-            this.rbnOUT_16.Name = "rbnOUT_16";
-            this.rbnOUT_16.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_16.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_16.TabIndex = 16;
-            this.rbnOUT_16.Text = "CH 16";
-            this.rbnOUT_16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_16.UseVisualStyleBackColor = true;
-            this.rbnOUT_16.Visible = false;
-            this.rbnOUT_16.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_17
-            // 
-            this.rbnOUT_17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_17.Location = new System.Drawing.Point(6, 765);
-            this.rbnOUT_17.Name = "rbnOUT_17";
-            this.rbnOUT_17.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_17.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_17.TabIndex = 17;
-            this.rbnOUT_17.Text = "CH 17";
-            this.rbnOUT_17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_17.UseVisualStyleBackColor = true;
-            this.rbnOUT_17.Visible = false;
-            this.rbnOUT_17.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_18
-            // 
-            this.rbnOUT_18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_18.Location = new System.Drawing.Point(5, 460);
-            this.rbnOUT_18.Name = "rbnOUT_18";
-            this.rbnOUT_18.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_18.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_18.TabIndex = 18;
-            this.rbnOUT_18.Text = "CH 18";
-            this.rbnOUT_18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_18.UseVisualStyleBackColor = true;
-            this.rbnOUT_18.Visible = false;
-            this.rbnOUT_18.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_19
-            // 
-            this.rbnOUT_19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_19.Location = new System.Drawing.Point(3, 481);
-            this.rbnOUT_19.Name = "rbnOUT_19";
-            this.rbnOUT_19.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_19.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_19.TabIndex = 19;
-            this.rbnOUT_19.Text = "CH 19";
-            this.rbnOUT_19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_19.UseVisualStyleBackColor = true;
-            this.rbnOUT_19.Visible = false;
-            this.rbnOUT_19.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_20
-            // 
-            this.rbnOUT_20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_20.Location = new System.Drawing.Point(9, 503);
-            this.rbnOUT_20.Name = "rbnOUT_20";
-            this.rbnOUT_20.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_20.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_20.TabIndex = 20;
-            this.rbnOUT_20.Text = "CH 20";
-            this.rbnOUT_20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_20.UseVisualStyleBackColor = true;
-            this.rbnOUT_20.Visible = false;
-            this.rbnOUT_20.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_21
-            // 
-            this.rbnOUT_21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_21.Location = new System.Drawing.Point(5, 438);
-            this.rbnOUT_21.Name = "rbnOUT_21";
-            this.rbnOUT_21.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_21.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_21.TabIndex = 21;
-            this.rbnOUT_21.Text = "CH 21";
-            this.rbnOUT_21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_21.UseVisualStyleBackColor = true;
-            this.rbnOUT_21.Visible = false;
-            this.rbnOUT_21.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_22
-            // 
-            this.rbnOUT_22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_22.Location = new System.Drawing.Point(5, 278);
-            this.rbnOUT_22.Name = "rbnOUT_22";
-            this.rbnOUT_22.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_22.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_22.TabIndex = 22;
-            this.rbnOUT_22.Text = "CH 22";
-            this.rbnOUT_22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_22.UseVisualStyleBackColor = true;
-            this.rbnOUT_22.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_23
-            // 
-            this.rbnOUT_23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_23.Location = new System.Drawing.Point(5, 321);
-            this.rbnOUT_23.Name = "rbnOUT_23";
-            this.rbnOUT_23.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_23.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_23.TabIndex = 23;
-            this.rbnOUT_23.Text = "CH 23";
-            this.rbnOUT_23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_23.UseVisualStyleBackColor = true;
-            this.rbnOUT_23.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_24
-            // 
-            this.rbnOUT_24.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_24.Location = new System.Drawing.Point(5, 364);
-            this.rbnOUT_24.Name = "rbnOUT_24";
-            this.rbnOUT_24.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_24.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_24.TabIndex = 24;
-            this.rbnOUT_24.Text = "CH 24";
-            this.rbnOUT_24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_24.UseVisualStyleBackColor = true;
-            this.rbnOUT_24.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
-            // 
-            // rbnOUT_25
-            // 
-            this.rbnOUT_25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbnOUT_25.Location = new System.Drawing.Point(5, 407);
-            this.rbnOUT_25.Name = "rbnOUT_25";
-            this.rbnOUT_25.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.rbnOUT_25.Size = new System.Drawing.Size(113, 37);
-            this.rbnOUT_25.TabIndex = 25;
-            this.rbnOUT_25.Text = "CH 25";
-            this.rbnOUT_25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbnOUT_25.UseVisualStyleBackColor = true;
-            this.rbnOUT_25.CheckedChanged += new System.EventHandler(this.OUT_0_CheckedChanged);
             // 
             // IOView
             // 

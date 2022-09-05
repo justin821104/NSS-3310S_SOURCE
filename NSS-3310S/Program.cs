@@ -10,7 +10,7 @@ namespace NSS_3310S
         /// </summary>
         [STAThread]
         static void Main()
-      {
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

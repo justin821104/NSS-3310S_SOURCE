@@ -174,10 +174,10 @@
             this.lbUDP.BackColor = System.Drawing.Color.DarkGreen;
             this.lbUDP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbUDP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUDP.ForeColor = System.Drawing.Color.Black;
+            this.lbUDP.ForeColor = System.Drawing.Color.Red;
             this.lbUDP.Location = new System.Drawing.Point(0, 0);
             this.lbUDP.Name = "lbUDP";
-            this.lbUDP.Size = new System.Drawing.Size(64, 20);
+            this.lbUDP.Size = new System.Drawing.Size(58, 20);
             this.lbUDP.TabIndex = 1261;
             this.lbUDP.Text = "UDP";
             this.lbUDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,10 +187,10 @@
             this.lbBARCODE.BackColor = System.Drawing.Color.DarkGreen;
             this.lbBARCODE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbBARCODE.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBARCODE.ForeColor = System.Drawing.Color.Black;
+            this.lbBARCODE.ForeColor = System.Drawing.Color.Red;
             this.lbBARCODE.Location = new System.Drawing.Point(0, 38);
             this.lbBARCODE.Name = "lbBARCODE";
-            this.lbBARCODE.Size = new System.Drawing.Size(64, 20);
+            this.lbBARCODE.Size = new System.Drawing.Size(58, 20);
             this.lbBARCODE.TabIndex = 1260;
             this.lbBARCODE.Text = "BARCODE";
             this.lbBARCODE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -200,10 +200,10 @@
             this.lbITS.BackColor = System.Drawing.Color.DarkGreen;
             this.lbITS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbITS.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbITS.ForeColor = System.Drawing.Color.Black;
+            this.lbITS.ForeColor = System.Drawing.Color.Red;
             this.lbITS.Location = new System.Drawing.Point(0, 19);
             this.lbITS.Name = "lbITS";
-            this.lbITS.Size = new System.Drawing.Size(64, 20);
+            this.lbITS.Size = new System.Drawing.Size(58, 20);
             this.lbITS.TabIndex = 1259;
             this.lbITS.Text = "ITS DB";
             this.lbITS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,7 +215,7 @@
             this.swVisionSet.ForeColor = System.Drawing.Color.Black;
             this.swVisionSet.Image = ((System.Drawing.Image)(resources.GetObject("swVisionSet.Image")));
             this.swVisionSet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.swVisionSet.Location = new System.Drawing.Point(1006, 3);
+            this.swVisionSet.Location = new System.Drawing.Point(1001, 3);
             this.swVisionSet.Name = "swVisionSet";
             this.swVisionSet.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
             this.swVisionSet.Size = new System.Drawing.Size(129, 53);
@@ -232,7 +232,7 @@
             this.swSet.ForeColor = System.Drawing.Color.Black;
             this.swSet.Image = ((System.Drawing.Image)(resources.GetObject("swSet.Image")));
             this.swSet.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swSet.Location = new System.Drawing.Point(873, 3);
+            this.swSet.Location = new System.Drawing.Point(866, 3);
             this.swSet.Margin = new System.Windows.Forms.Padding(1);
             this.swSet.Name = "swSet";
             this.swSet.Padding = new System.Windows.Forms.Padding(2);
@@ -249,7 +249,7 @@
             this.swMotionSet.ForeColor = System.Drawing.Color.Black;
             this.swMotionSet.Image = ((System.Drawing.Image)(resources.GetObject("swMotionSet.Image")));
             this.swMotionSet.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swMotionSet.Location = new System.Drawing.Point(1139, 3);
+            this.swMotionSet.Location = new System.Drawing.Point(1136, 3);
             this.swMotionSet.Margin = new System.Windows.Forms.Padding(1);
             this.swMotionSet.Name = "swMotionSet";
             this.swMotionSet.Padding = new System.Windows.Forms.Padding(1, 1, 2, 2);
@@ -266,7 +266,7 @@
             this.swDEVICE.ForeColor = System.Drawing.Color.Black;
             this.swDEVICE.Image = ((System.Drawing.Image)(resources.GetObject("swDEVICE.Image")));
             this.swDEVICE.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swDEVICE.Location = new System.Drawing.Point(340, 3);
+            this.swDEVICE.Location = new System.Drawing.Point(330, 3);
             this.swDEVICE.Margin = new System.Windows.Forms.Padding(1);
             this.swDEVICE.Name = "swDEVICE";
             this.swDEVICE.Padding = new System.Windows.Forms.Padding(2);
@@ -283,7 +283,7 @@
             this.swIO.ForeColor = System.Drawing.Color.Black;
             this.swIO.Image = ((System.Drawing.Image)(resources.GetObject("swIO.Image")));
             this.swIO.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swIO.Location = new System.Drawing.Point(740, 3);
+            this.swIO.Location = new System.Drawing.Point(732, 3);
             this.swIO.Margin = new System.Windows.Forms.Padding(1);
             this.swIO.Name = "swIO";
             this.swIO.Padding = new System.Windows.Forms.Padding(2);
@@ -300,7 +300,7 @@
             this.swHistory.ForeColor = System.Drawing.Color.Black;
             this.swHistory.Image = ((System.Drawing.Image)(resources.GetObject("swHistory.Image")));
             this.swHistory.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swHistory.Location = new System.Drawing.Point(607, 3);
+            this.swHistory.Location = new System.Drawing.Point(598, 3);
             this.swHistory.Margin = new System.Windows.Forms.Padding(1);
             this.swHistory.Name = "swHistory";
             this.swHistory.Padding = new System.Windows.Forms.Padding(2);
@@ -317,7 +317,7 @@
             this.swManual.ForeColor = System.Drawing.Color.Black;
             this.swManual.Image = ((System.Drawing.Image)(resources.GetObject("swManual.Image")));
             this.swManual.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swManual.Location = new System.Drawing.Point(473, 3);
+            this.swManual.Location = new System.Drawing.Point(464, 3);
             this.swManual.Margin = new System.Windows.Forms.Padding(1);
             this.swManual.Name = "swManual";
             this.swManual.Padding = new System.Windows.Forms.Padding(2);
@@ -334,7 +334,7 @@
             this.swAuto.ForeColor = System.Drawing.Color.Black;
             this.swAuto.Image = ((System.Drawing.Image)(resources.GetObject("swAuto.Image")));
             this.swAuto.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swAuto.Location = new System.Drawing.Point(206, 3);
+            this.swAuto.Location = new System.Drawing.Point(196, 3);
             this.swAuto.Margin = new System.Windows.Forms.Padding(1);
             this.swAuto.Name = "swAuto";
             this.swAuto.Padding = new System.Windows.Forms.Padding(2);
@@ -351,7 +351,7 @@
             this.swLogIn.ForeColor = System.Drawing.Color.Black;
             this.swLogIn.Image = ((System.Drawing.Image)(resources.GetObject("swLogIn.Image")));
             this.swLogIn.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swLogIn.Location = new System.Drawing.Point(72, 3);
+            this.swLogIn.Location = new System.Drawing.Point(62, 3);
             this.swLogIn.Margin = new System.Windows.Forms.Padding(1);
             this.swLogIn.Name = "swLogIn";
             this.swLogIn.Padding = new System.Windows.Forms.Padding(2);

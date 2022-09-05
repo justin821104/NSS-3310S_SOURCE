@@ -10,11 +10,18 @@ namespace NSS_3310S.SEQ.MODULE{
         long TackStart = 0, TackEnd = 0;
         bool bPicSignel = false;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
+                if (!CheckRunThread()) continue;
+
             RePIC:
                 while (UTIL_.WaitInput(nThread, I.SAW_ULD_REQ, false, "다이싱에서 유닛 배출 요청 할때까지 대기")){
                     if (mIN[I.UNIT_PK_VAC] /*|| bDRYRUN*/){
@@ -22,10 +29,7 @@ namespace NSS_3310S.SEQ.MODULE{
                         COM_.SetBit(nThread, B.UnitPkPic, B.UnitPkMask, true, true, "유닛 피커 작업 스크랩 파기 작업 진행");
                         goto UnitPlace;
                     }
-                    UTIL_.DELAY(100); 
-
                     if (prMACHINE[CP.UseLotEnd] == (int)eUSE.USE && IsBIT[B.CstRequest] && !IsBIT[B.InRailRequest] && !IsBIT[B.GripperWorking] && !IsBIT[B.StripPkRequest] && !mIN[I.SAW_CUTTING] && !IsBIT[B.Stage1Working] && !IsBIT[B.Stage2Working] && !IsBIT[B.X1Working] && !IsBIT[B.X2Working] && !IsBIT[B.TrayPkWorking]){
-                        UTIL_.DELAY(3);
                         COM_.ViewWarning(nThread, W.LotEndComplete);
                         while (UTIL_.WaitWarning(nThread, W.LotEndComplete, "LOT-END 처리")) ;
                         if (ConfirmUser[W.LotEndComplete].result) {
@@ -35,32 +39,35 @@ namespace NSS_3310S.SEQ.MODULE{
                             COM_.SetBit(nThread, B.LotEnd, true, "LOT-END 처리 진행");
                         ChkTrayPk:
                             if (IsBIT[B.TrayPkPic] || IsBIT[B.TrayPkWorking]){
-                                UTIL_.DELAY(100);
+                                UTIL_.DELAY(500);
                                 goto ChkTrayPk;
                             }
                             if (IsBIT[B.GoodTrayWork]) {
-                                IsBIT[B.GoodTrayUnloadingMode] = true;
-                                IsBIT[B.GoodTrayWork] = false;
+                                COM_.Bit(nThread, B.GoodTrayUnloadingMode, true, "LOT-END 진행 GOOD 트레이 배출 플로그 ON");
+                                COM_.Bit(nThread, B.GoodTrayWork, false, "LOT-END 진행 중 GOOD 트레이 작업 플러그 OFF");
                             }
-                            SUBFRM_.gSecsGem.SetLotComplete((int)IsLONG[L.StripCnt]);
-                            bWriteLotInfo = true; // LOT 수량 정보 리셋 !
-                            if (IsBIT[B.ReWorkTrayWork]) IsBIT[B.ReWorkTrayWork] = false;
+                            if (IsBIT[B.ReWorkTrayWork]) COM_.Bit(nThread, B.ReWorkTrayWork, false, "REWORK 트레이 작업 플러그 OFF");
                         ChkTrayUnlaoading:
                             if (IsBIT[B.GoodTray1Place] || IsBIT[B.GoodTray2Place] || IsBIT[B.ReWorkTrayWork] || IsBIT[B.GoodTray1Unloading] || IsBIT[B.GoodTray2Unloading]){
                                 UTIL_.DELAY(500);
                                 goto ChkTrayUnlaoading;
                             }
+                            if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
+                                SUBFRM_.gSecsGem.SetLotComplete((int)IsLONG[L.StripCnt]);
+                            }
+                            LogWR_.SaveLotEnd(CLOT.GET_LOT.LotID, CLOT.GET_LOT.ItsID, (int)IsLONG[L.StripCnt], (int)IsLONG[L.GoodCnt], (int)IsLONG[L.ReworkCnt], (int)IsLONG[L.NGCnt], (int)IsLONG[L.ITSCount]);
+                            CLOT.FinishLot(false);
+                            UTIL_.DEL_LOT_INFO();
+                            bWriteLotInfo = true; // LOT 수량 정보 리셋 !
                             mIN[I.vtStop] = true;
-                            TEACH_.DEL_STRIP_INFO();
                             LogWR_.SaveLogOperate("LOT-END SIGNAL ON-OFF", "MC");
                             UTIL_.DELAY(2000);
                             bLotEndProcess = true;
                             while (bLotEndProcess) UTIL_.DELAY(100);
-                            IsBIT[B.CstRequest] = false;
+                            COM_.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
                         } //LOT-END 처리!
-                        else
-                        {
-                            IsBIT[B.CstRequest] = false;
+                        else{
+                            COM_.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
                         } //매거진 투입!
                     } //LOT-END 처리
                 }
@@ -126,15 +133,15 @@ namespace NSS_3310S.SEQ.MODULE{
                     while (eRTN.SUCESS != MoveZ(P.UnitPckUp, "offset=-5", "MOVE UNIT PICKER Z AXIS SAW STAGE PICK-UP POS -> 1st DOWN")) ;
                     while (eRTN.SUCESS != MoveZ(P.UnitPckUp, "spd=10", "MOVE UNIT PICKER Z AXIS SAW STAGE PICK-UP POS")) ;
                     AllVac(stBIT.ON);
-                    SawStageVac(false);
+                    SawStageVac(nThread, false);
                     UTIL_.DELAY(2000);
-                    SawStageBlow(true);
+                    SawStageBlow(nThread, true);
                     UTIL_.DELAY(1000);
-                    SawStageBlow(false);
+                    SawStageBlow(nThread, false);
                     UTIL_.DELAY(500);
                     if (!mIN[I.UNIT_PK_VAC]){
                         AllVac(stBIT.OFF);
-                        SawStageVac(true);
+                        SawStageVac(nThread, true);
                         UTIL_.DELAY(1000);
                         AllBlow();
                     }
@@ -145,17 +152,17 @@ namespace NSS_3310S.SEQ.MODULE{
                 else{
                     while (eRTN.SUCESS != MoveX(P.Ready, "", "Move unit picker ready position")) ;
                     if (mIN[I.UNIT_PK_VAC]) goto RePick;
-                    //saw stage check
                     LAB_.BIT_OUT(O.HANDLER_SCRAP_CHECK, true);
                     UTIL_.DELAY(500);
                     LAB_.BIT_OUT(O.HANDLER_SCRAP_CHECK, false);
+                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
                     COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "유닛 피커 유닛 픽업 중 유닛 유실되어 다시 처음부터 픽업");
                     while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS] || mIN[I.SAW_STAGE_BLOW]) ;
                     ResetInterface();
                     while (mOUT[O.UNIT_PK_VAC] || mOUT[O.SCRAP_VAC_1] || mOUT[O.SCRAP_VAC_2]){
                         UTIL_.OnERROR(E.emsNotUnitPk_VacOff, 500);
                     }
-                    //AllVaccum(stBIT.OFF);
+                    COM_.Bit(nThread, B.UnitPkPic, false, "유닛 피커 픽업 유실 처리됨");
                     return false;
                 } //유실 처리 처음 부터.
             }
@@ -180,6 +187,7 @@ namespace NSS_3310S.SEQ.MODULE{
             }
             COM_.SetBit(nThread, B.UnitPkMask, true, "유닛 피커 작업 진행");
             CLOT.SEND_SAW_STRIP_INFO(nThread);
+            LogOneCycle(CLOT.InfoStrip[nThread].Barcode);
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.SawStageStripIndex, CLOT.SawStageStripBarcode, CMES.ModuleID.SAW_STAGE);
                 SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.UNIT_PK);
@@ -361,6 +369,19 @@ namespace NSS_3310S.SEQ.MODULE{
             Tack();
             WorkedAirShower("유닛 피커 플레이스 후 바닥면 에어 샤워");
             WorkedCleaner("유닛 피커 플레이스 후 클리너 박스 클린");
+            //UnitPkPlcBrush
+            if (prMACHINE[CP.UnitPkPlcBrush] == (int)eUSE.USE){
+                for (int i = 0; i < (int)prMACHINE[CP.BrushRepeatCnt]; i++){
+                    if (i == 0) cmds = "";
+                    else        cmds = "spd=" + string.Format("{0:0}", prMACHINE[CP.BrushSpd]);
+                    while (eRTN.SUCESS != MoveX(P.BrushStart, cmds, "유닛 피커 X축 브러쉬 시작 위치 이송")) ;
+                    while (eRTN.SUCESS != MoveZ(P.BrushStart, "", "유닛 피커 Z축 브러쉬 시작 위치 이송")) ;
+                    cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.UnitKitWidthPitch]) + ":spd=" + string.Format("{0:0}", prMACHINE[CP.BrushSpd]);
+                    while (eRTN.SUCESS != MoveX(P.BrushStart, cmds, "유닛 피커 X축 브러쉬 끝 위치 이송")) ;
+                }
+                while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
+            }
+
             if (mIN[I.SAW_ULD_REQ] && mIN[I.SAW_LD_REQ] && !IsBIT[B.StripPkPlc] && !IsBIT[B.UnitPickupStop])
                 while (eRTN.SUCESS != MoveX(P.UnitPckUp, "", "유닛 피커 X축 유닛 픽업 위치 이송")) ;
             else { 
@@ -427,7 +448,7 @@ namespace NSS_3310S.SEQ.MODULE{
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.UnitPkCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.UnitPkCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",유닛 피커," + IsDOUBLE[D.UnitPkCycle].ToString(), "");
             COM_.SetBit(nThread, B.UnitPkMask, false, "유닛 피커 작업 진행");
             TackStart = Environment.TickCount;
         }
@@ -440,6 +461,7 @@ namespace NSS_3310S.SEQ.MODULE{
                     LAB_.BIT_OUT(O.HANDLER_SCRAP_CHECK, false);
                 }
             }
+            while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
             COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "다이싱 설비에 유닛 픽업 완료 신호 ON");
             while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS] || mIN[I.SAW_STAGE_BLOW]) UTIL_.DELAY(10);
             COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, false, "다이싱 설비에 유닛 픽업 완료 신호 OFF");
@@ -447,6 +469,7 @@ namespace NSS_3310S.SEQ.MODULE{
         public void ResetInterface(){
             mOUT[O.HANDLER_UNIT_COMPLETE] = false;
             COM_.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 ");
+            
         }
 
         public void AllVac(bool bFlog){
@@ -456,27 +479,32 @@ namespace NSS_3310S.SEQ.MODULE{
             LAB_.OUTPUT(O.SCRAP_BLOW_2, false);
 
             LAB_.OUTPUT(O.UNIT_PK_VAC, bFlog);
-            LAB_.OUTPUT(O.UNIT_PK_PURGE, bFlog);
             LAB_.OUTPUT(O.SCRAP_VAC_1, bFlog);
             LAB_.OUTPUT(O.SCRAP_VAC_2, bFlog);
+#if _NSS3300
+#else
+            LAB_.OUTPUT(O.UNIT_PK_PURGE, bFlog);
             LAB_.OUTPUT(O.SCRAP_PURGE_1, bFlog);
             LAB_.OUTPUT(O.SCRAP_PURGE_2, bFlog);
             LAB_.OUTPUT(O.UNIT_PK_VAC_OFF, !bFlog);
             LAB_.OUTPUT(O.SCRAP1_VAC_OFF, !bFlog);
             LAB_.OUTPUT(O.SCRAP2_VAC_OFF, !bFlog);
-
+#endif
             UTIL_.DELAY(nDelay);
         }
         public void AllBlow(){
             LAB_.OUTPUT(O.UNIT_PK_VAC, false);
-            LAB_.OUTPUT(O.UNIT_PK_PURGE, false);
             LAB_.OUTPUT(O.SCRAP_VAC_1, false);
             LAB_.OUTPUT(O.SCRAP_VAC_2, false);
+#if _NSS3300
+#else
+            LAB_.OUTPUT(O.UNIT_PK_PURGE, false);
             LAB_.OUTPUT(O.SCRAP_PURGE_1, false);
             LAB_.OUTPUT(O.SCRAP_PURGE_2, false);
             LAB_.OUTPUT(O.UNIT_PK_VAC_OFF, true);
             LAB_.OUTPUT(O.SCRAP1_VAC_OFF, true);
             LAB_.OUTPUT(O.SCRAP2_VAC_OFF, true);
+#endif
 
             LAB_.OUTPUT(O.UNIT_PK_BLOW, true);
             LAB_.OUTPUT(O.SCRAP_BLOW_1, true);
@@ -489,14 +517,17 @@ namespace NSS_3310S.SEQ.MODULE{
         }
         public void AllBlow(bool bFLOG){
             LAB_.OUTPUT(O.UNIT_PK_VAC, false);
-            LAB_.OUTPUT(O.UNIT_PK_PURGE, false);
             LAB_.OUTPUT(O.SCRAP_VAC_1, false);
             LAB_.OUTPUT(O.SCRAP_VAC_2, false);
+#if _NSS3300
+#else
+            LAB_.OUTPUT(O.UNIT_PK_PURGE, false);
             LAB_.OUTPUT(O.SCRAP_PURGE_1, false);
             LAB_.OUTPUT(O.SCRAP_PURGE_2, false);
             LAB_.OUTPUT(O.UNIT_PK_VAC_OFF, true);
             LAB_.OUTPUT(O.SCRAP1_VAC_OFF, true);
             LAB_.OUTPUT(O.SCRAP2_VAC_OFF, true);
+#endif
 
             LAB_.OUTPUT(O.UNIT_PK_BLOW, bFLOG);
             LAB_.OUTPUT(O.SCRAP_BLOW_1, bFLOG);
@@ -506,18 +537,21 @@ namespace NSS_3310S.SEQ.MODULE{
         public void Vac(bool bFlog){
             int nDelay = bFlog ? (int)prMACHINE[CP.UnitPkVacOn] : (int)prMACHINE[CP.UnitPkVacOff];
             LAB_.OUTPUT(O.UNIT_PK_BLOW, false);
-
             LAB_.OUTPUT(O.UNIT_PK_VAC, bFlog);
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.UNIT_PK_PURGE, bFlog);
             LAB_.OUTPUT(O.UNIT_PK_VAC_OFF, !bFlog);
-
+#endif
             UTIL_.DELAY(nDelay);
         }
         public void Blow(){
             LAB_.OUTPUT(O.UNIT_PK_VAC, false);
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.UNIT_PK_PURGE, false);
             LAB_.OUTPUT(O.UNIT_PK_VAC_OFF, true);
-
+#endif
             LAB_.OUTPUT(O.UNIT_PK_BLOW, true);
             UTIL_.DELAY((int)prMACHINE[CP.UnitPkBlowOn]);
             LAB_.OUTPUT(O.UNIT_PK_BLOW, false);
@@ -529,15 +563,21 @@ namespace NSS_3310S.SEQ.MODULE{
                 for (int i = 0; i < O.ScrapVac.Length; i++){
                     LAB_.OUTPUT(O.ScrapBlow[i], false);
                     LAB_.OUTPUT(O.ScrapVac[i], bFlog);
+#if _NSS3300
+#else
                     LAB_.OUTPUT(O.ScrapPurge[i], bFlog);
                     LAB_.OUTPUT(O.ScrapVacOff[i], !bFlog);
+#endif
                 }
             }
             else{
                 LAB_.OUTPUT(O.ScrapBlow[(int)Ch], false);
                 LAB_.OUTPUT(O.ScrapVac[(int)Ch], bFlog);
+#if _NSS3300
+#else
                 LAB_.OUTPUT(O.ScrapPurge[(int)Ch], bFlog);
                 LAB_.OUTPUT(O.ScrapVacOff[(int)Ch], !bFlog);
+#endif
             }
             UTIL_.DELAY(nDelay);
         }
@@ -547,18 +587,22 @@ namespace NSS_3310S.SEQ.MODULE{
             }
             if (eSCRAP.All == Ch){
                 LAB_.OUTPUT(O.ScrapVac, false);
+#if _NSS3300
+#else
                 LAB_.OUTPUT(O.ScrapPurge, false);
                 LAB_.OUTPUT(O.ScrapVacOff, true);
-
+#endif
                 LAB_.OUTPUT(O.ScrapBlow, true);
                 UTIL_.DELAY((int)prMACHINE[CP.ScrapBlowOn]);
                 LAB_.OUTPUT(O.ScrapBlow, false);
             }
             else{
                 LAB_.OUTPUT(O.ScrapVac[(int)Ch], false);
+#if _NSS3300
+#else
                 LAB_.OUTPUT(O.ScrapVacOff[(int)Ch], true);
                 LAB_.OUTPUT(O.ScrapPurge[(int)Ch], false);
-
+#endif
                 LAB_.OUTPUT(O.ScrapBlow[(int)Ch], true);
                 UTIL_.DELAY((int)prMACHINE[CP.ScrapBlowOn]);
                 LAB_.OUTPUT(O.ScrapBlow[(int)Ch], false);
@@ -567,7 +611,13 @@ namespace NSS_3310S.SEQ.MODULE{
 
         public void BrushWater(bool bFlog) { LAB_.OUTPUT(O.BRUSH_WATER, bFlog); }
 
-        public void CleanerAir(bool bFlog) { LAB_.OUTPUT(O.CLEANER_AIR_1, O.CLEANER_AIR_2, bFlog); }
+        public void CleanerAir(bool bFlog) {
+#if _NSS3300
+            LAB_.OUTPUT(O.CLEANER_AIR, bFlog);
+#else
+            LAB_.OUTPUT(O.CLEANER_AIR_1, O.CLEANER_AIR_2, bFlog); 
+#endif
+        }
         public bool CleanerWater(bool bFlog){
             if (bDRYRUN) bFlog = false;
 
@@ -583,7 +633,12 @@ namespace NSS_3310S.SEQ.MODULE{
             //    if (!ConfirmUser[W.CleanerWater].result) return false;
             //}
 
+#if _NSS3300
             LAB_.OUTPUT(O.CLEANER_WATER_1, O.CLEANER_WATER_2, bFlog);
+            LAB_.OUTPUT(O.CLEANER_WATER_3, O.CLEANER_WATER_4, bFlog);
+#else
+            LAB_.OUTPUT(O.CLEANER_WATER_1, O.CLEANER_WATER_2, bFlog);
+#endif
             return true;
         }
         public bool Cleaner(bool bFlog){
@@ -643,6 +698,6 @@ namespace NSS_3310S.SEQ.MODULE{
             if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.UnitPkZ, nPos, 0.005, false, false, false, cmd, IsSTRING[S.UnitPkMessage])) return eRTN.FAIL;
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
     }
 }

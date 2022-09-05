@@ -86,7 +86,9 @@ namespace NSS_3310S{
                                             ChkStageVacSensor, ChkUnitInspectionStageAirShower, ChkWorkedAirShowre, ChkPkrVacCheck, 
                                             ChkXMarkInspectionMode, ChkUseUnitPkWorkedAirshower, ChkUseUnitPkWorkedCleaner, ChkUseTrayFeederTrayCheck, 
                                             ChkUseLotStartPkAutoCal, ChkUsePickUpVac, ChkLotEnd, ChkUsePlaceCheck, ChkUseStripPkrCheck, 
-                                            ChkUseCheckRejectBox, SelectMotorSpd };
+                                            ChkUseCheckRejectBox, SelectMotorSpd,
+                                            ChkUnitPlcBrush
+            };
             for (int i = 0; i < tUse.Length; i++){
                 tUse[i].TabIndex = CP.UseData[i];
             }
@@ -241,8 +243,22 @@ namespace NSS_3310S{
                         if (tUse[i].Tag.ToString() == "MC") TEACH_.WR_MCPara(tUse[i].TabIndex, nValue);
                         else TEACH_.WR_MDLPara(tUse[i].TabIndex, nValue);
                     }
-
                     TEACH_.Write_Parameter(ChkMGZDir);
+
+                    if (!ChkTrayUnloading.Checked){ // ok 트레이 스태커로 배출 선택시 확인
+                        if (DATA_.IsBIT[B.GoodTray1Place]){
+                            if (!ChkGoodTray2.Checked){
+                                COM_.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 1 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이1 선택하여 저장 후 다시 선택 하셔야 합니다!");
+                                return;
+                            }
+                        } // ok 트레이1 작업 진행 중
+                        if (DATA_.IsBIT[B.GoodTray2Place]){
+                            if (!ChkGoodTray1.Checked){
+                                COM_.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 2 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이2 선택하여 저장 후 다시 선택 하셔야 합니다!");
+                                return;
+                            }
+                        } // ok 트레이2 작업 진행 중
+                    }
                     TEACH_.Write_Parameter(ChkTrayUnloading);
                     TEACH_.Write_Parameter(CHK_SCRAP_ALARM);
                     TEACH_.Write_Parameter(CHK_SCRAP_VACUUM);
@@ -435,6 +451,7 @@ namespace NSS_3310S{
             sLabel += "M," + CP.CamZigBwdDelay.ToString() + "," + DATA_.MCParaName[CP.CamZigBwdDelay] + ETC.CrLf;
             sLabel += "M," + CP.BarcodeReadingCheck.ToString() + "," + DATA_.MCParaName[CP.BarcodeReadingCheck] + ETC.CrLf;
             sLabel += "MD," + RP.ULDConvWaitTime.ToString() + "," + DATA_.MDParaName[RP.ULDConvWaitTime] + ETC.CrLf;
+            sLabel += "M," + CP.GoodTrayPushEndDealy + "," + DATA_.MCParaName[CP.GoodTrayPushEndDealy] + ETC.CrLf;
             return sLabel;
         }
         void ReadDataGridViewPara(eGridDataViewPara ePara){

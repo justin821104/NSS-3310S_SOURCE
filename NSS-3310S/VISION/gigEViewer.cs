@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-
 namespace NSS_3310S.VISION
 {
     [Flags]

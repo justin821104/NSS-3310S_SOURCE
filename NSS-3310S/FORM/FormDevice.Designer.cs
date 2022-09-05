@@ -453,7 +453,7 @@
             this.lbl_DeviceName.ForeColor = System.Drawing.Color.Black;
             this.lbl_DeviceName.Location = new System.Drawing.Point(25, 72);
             this.lbl_DeviceName.Name = "lbl_DeviceName";
-            this.lbl_DeviceName.Size = new System.Drawing.Size(72, 16);
+            this.lbl_DeviceName.Size = new System.Drawing.Size(71, 16);
             this.lbl_DeviceName.TabIndex = 3;
             this.lbl_DeviceName.Text = "NEW NAME";
             // 
@@ -3591,7 +3591,7 @@
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.label33.Location = new System.Drawing.Point(482, 75);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(66, 16);
+            this.label33.Size = new System.Drawing.Size(65, 16);
             this.label33.TabIndex = 1319;
             this.label33.Text = "사용자 ID :";
             this.label33.Visible = false;
@@ -3962,7 +3962,7 @@
             this.JIG_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.JIG_ID.Location = new System.Drawing.Point(482, 139);
             this.JIG_ID.Name = "JIG_ID";
-            this.JIG_ID.Size = new System.Drawing.Size(50, 16);
+            this.JIG_ID.Size = new System.Drawing.Size(49, 16);
             this.JIG_ID.TabIndex = 1309;
             this.JIG_ID.Text = "JIG ID :";
             this.JIG_ID.Visible = false;
@@ -3974,7 +3974,7 @@
             this.LOT_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.LOT_ID.Location = new System.Drawing.Point(482, 118);
             this.LOT_ID.Name = "LOT_ID";
-            this.LOT_ID.Size = new System.Drawing.Size(56, 16);
+            this.LOT_ID.Size = new System.Drawing.Size(55, 16);
             this.LOT_ID.TabIndex = 1308;
             this.LOT_ID.Text = "LOT ID :";
             this.LOT_ID.Visible = false;
@@ -3986,7 +3986,7 @@
             this.MARSTER_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.MARSTER_ID.Location = new System.Drawing.Point(482, 98);
             this.MARSTER_ID.Name = "MARSTER_ID";
-            this.MARSTER_ID.Size = new System.Drawing.Size(66, 16);
+            this.MARSTER_ID.Size = new System.Drawing.Size(65, 16);
             this.MARSTER_ID.TabIndex = 1307;
             this.MARSTER_ID.Text = "관리자 ID :";
             this.MARSTER_ID.Visible = false;

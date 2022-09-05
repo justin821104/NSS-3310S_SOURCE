@@ -68,6 +68,8 @@ namespace LIB_.SubFROMLib{
             btnLOG_5.Click += LOG_CLICK;
             btnLOG_7.Click += LOG_CLICK;
             btnLOG_8.Click += LOG_CLICK;
+            btnLOG_9.Click += LOG_CLICK;
+            btnLOG_10.Click += LOG_CLICK;
 
             swLogView.Click += (sender, e) => LogView_Click(swLogView);
             swSave.Click    += (sender, e) => LogSAVE(swSave);
@@ -91,6 +93,11 @@ namespace LIB_.SubFROMLib{
             else if (LogPAGE == 3) DGV = dgvManual;
             else if (LogPAGE == 4) DGV = dgvWarning;
             else if (LogPAGE == 5) DGV = dgvProcess;
+            else if (LogPAGE == 6) DGV = dgwEvent;
+            else if (LogPAGE == 7) DGV = gridDefectCount;
+            else if (LogPAGE == 8) DGV = gridLocationList;
+            else if (LogPAGE == 9) DGV = gridLot;
+            else if (LogPAGE == 10) DGV = dgwOneCycle;
             else return;
             if (DGV == null || DGV.RowCount == 0) return;
 
@@ -138,7 +145,7 @@ namespace LIB_.SubFROMLib{
         }
 
         void RESET_SCREEN_CHANGE(){
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 11; i++){
                 pBTN = Controls.Find("btnLOG_" + i.ToString(), true).FirstOrDefault() as Button;
                 if (pBTN != null){
                     pBTN.ForeColor = Color.Black;
@@ -171,6 +178,8 @@ namespace LIB_.SubFROMLib{
             if (LogPAGE == 6) VIEW_MC_EVENT();
             if (LogPAGE == 7) VIEW_STRIP_DEFECT_COUNT();
             if (LogPAGE == 8) VIEW_STRIP_DEFECT_LOCATION_LIST();
+            if (LogPAGE == 9) VIEW_LOT();
+            if (LogPAGE == 10) VIEW_ONECYCLE();
         }
         string GET_LOG_FILE_PATH(double dDATA){
             dt = DateTime.FromOADate(dDATA);
@@ -213,9 +222,9 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(sPath)) continue;
                     int rCNT = FILE_.RDInt(sPath, "ERROR", "COUNT", 0);
                     for (int i = 0; i < rCNT; i++){
-                        cERR[idx].ErrorNumber = FILE_.RDInt(sPath, "ERROR NUMBER", i.ToString(), 0);
-                        cERR[idx].BeginTime = FILE_.RDString(sPath, "BEGIN TIME", i.ToString(), "");
-                        cERR[idx].EndTime = FILE_.RDString(sPath, "END TIME", i.ToString(), "");
+                        cERR[idx].ErrorNumber   = FILE_.RDInt(sPath, "ERROR NUMBER", i.ToString(), 0);
+                        cERR[idx].BeginTime     = FILE_.RDString(sPath, "BEGIN TIME", i.ToString(), "");
+                        cERR[idx].EndTime       = FILE_.RDString(sPath, "END TIME", i.ToString(), "");
 
                         idx += 1;
                         if (idx >= cERR.Length) break;
@@ -249,11 +258,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 10000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 10000) break;
                     }
                 }
 
@@ -311,11 +320,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 10000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 10000) break;
                     }
                 }
 
@@ -357,11 +366,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 5000) break;
                     }
                 }
 
@@ -383,7 +392,6 @@ namespace LIB_.SubFROMLib{
                 if (dgvManual.RowCount <= 0) return;
             }
             catch (Exception ex) { LogWR_.SaveLogException("frmLG->MANUALRUN", ex); }
-
         }
         void VIEW_SPC(){
 
@@ -407,11 +415,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 5000) break;
                     }
                 }
                 gridDefectCount.RowCount = idx;
@@ -452,11 +460,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 5000) break;
                     }
                 }
                 gridLocationList.RowCount = idx;
@@ -483,13 +491,115 @@ namespace LIB_.SubFROMLib{
                 LogWR_.SaveLogException("frmLG->VIEW_STRIP_DEFECT_LOCATION_LIST", ex);
             }
         }
+        void VIEW_LOT(){
+            string fLOG = "LOT.log";
+            sDate = dtBegin.Value.Date.ToOADate();
+            eDate = dtEnd.Value.Date.ToOADate();
+            sAll = "";
+            sUnit = "All";
+            if (rbUnitA.Checked) sUnit = "A";
+            if (rbUnitB.Checked) sUnit = "B";
+            if (rbUnitC.Checked) sUnit = "C";
+            idx = 0;
 
+            try{
+                for (double i = sDate; i < eDate + 1; i++){
+                    string fn = LogWR_.GET_PathOperation(i, PATH_.LogLotEnd) + fLOG;
+                    if (!File.Exists(fn)) continue;
+                    string[] sARR = File.ReadAllLines(fn);
+                    for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
+                        string[] subarr = sARR[cnt].Split(',');
+                        if (sUnit != "All" && sUnit != subarr[2]) continue;
+                        sAll += sARR[cnt] + ETC.CrLf;
+                        idx += 1;
+                    }
+                }
+
+                gridLot.RowCount = idx;
+                string[] allARR = sAll.Split(ETC.CrLf);
+                int wIdx = 0;
+                for (int i = 0; i < idx; i++){
+                    string[] subARR = allARR[i].Split(',');
+                    if (subARR.Length < 9) continue;
+                    gridLot.Rows[wIdx].Cells[0].Value = i.ToString();
+
+                    gridLot.Rows[wIdx].Cells[1].Value = subARR[4];
+                    gridLot.Rows[wIdx].Cells[2].Value = subARR[0];
+                    gridLot.Rows[wIdx].Cells[3].Value = subARR[1];
+                    gridLot.Rows[wIdx].Cells[4].Value = subARR[2];
+                    gridLot.Rows[wIdx].Cells[5].Value = subARR[3];
+                    gridLot.Rows[wIdx].Cells[6].Value = subARR[5];
+                    gridLot.Rows[wIdx].Cells[7].Value = subARR[6];
+                    gridLot.Rows[wIdx].Cells[8].Value = subARR[7];
+                    gridLot.Rows[wIdx].Cells[9].Value = subARR[8];
+                    gridLot.Rows[wIdx].Cells[10].Value = subARR[9];
+                    gridLot.Rows[wIdx].Cells[11].Value = subARR[10];
+
+                    wIdx++;
+                }
+                if (dgvManual.RowCount <= 0) return;
+            }
+            catch (Exception ex) { LogWR_.SaveLogException("frmLG->MANUALRUN", ex); }
+        }
+        void VIEW_ONECYCLE(){
+            string fLOG = "TACK.log";
+            sDate = dtBegin.Value.Date.ToOADate();
+            eDate = dtEnd.Value.Date.ToOADate();
+            sAll = "";
+            sUnit = "All";
+            if (rbUnitA.Checked) sUnit = "A";
+            if (rbUnitB.Checked) sUnit = "B";
+            if (rbUnitC.Checked) sUnit = "C";
+            idx = 0;
+            
+            try
+            {
+                for (double i = sDate; i < eDate + 1; i++)
+                {
+                    string fn = LogWR_.GET_PathOperation(i, PATH_.LogOneCycleTime) + fLOG;
+                    if (!File.Exists(fn)) continue;
+                    string[] sARR = File.ReadAllLines(fn);
+                    for (int cnt = 0; cnt < sARR.Length; cnt++)
+                    {
+                        if (idx > 5000) break;
+                        string[] subarr = sARR[cnt].Split(',');
+                        if (sUnit != "All" && sUnit != subarr[2]) continue;
+                        sAll += sARR[cnt] + ETC.CrLf;
+                        idx += 1;
+                    }
+                }
+
+                dgwOneCycle.RowCount = idx;
+                string[] allARR = sAll.Split(ETC.CrLf);
+                int wIdx = 0;
+                for (int i = 0; i < idx; i++)
+                {
+                    string[] subARR = allARR[i].Split(',');
+                    if (subARR.Length < 9) continue;
+                    dgwOneCycle.Rows[wIdx].Cells[0].Value = i.ToString();
+
+                    dgwOneCycle.Rows[wIdx].Cells[1].Value = subARR[4];
+                    dgwOneCycle.Rows[wIdx].Cells[2].Value = subARR[0];
+                    dgwOneCycle.Rows[wIdx].Cells[3].Value = subARR[1];
+                    dgwOneCycle.Rows[wIdx].Cells[4].Value = subARR[2];
+                    dgwOneCycle.Rows[wIdx].Cells[5].Value = subARR[5];
+                    dgwOneCycle.Rows[wIdx].Cells[6].Value = subARR[6];
+                    dgwOneCycle.Rows[wIdx].Cells[7].Value = subARR[7];
+                    dgwOneCycle.Rows[wIdx].Cells[8].Value = subARR[8];
+                    dgwOneCycle.Rows[wIdx].Cells[9].Value = subARR[9];
+                    
+                    wIdx++;
+                }
+                if (dgwOneCycle.RowCount <= 0) return;
+            }
+            catch (Exception ex) { LogWR_.SaveLogException("frmLG->ONECYCLE", ex); }
+        }
         private void LOG_Load(object sender, EventArgs e){
             arrTEMP = new int[CNT_.ERR];
             if (LogPAGE < 0) LOG_CLICK(btnLOG_0, EventArgs.Empty);
             tmrHISTORY.Enabled = true;
         }
-
         void VIEW_PROCESS(){
             string fLOG = "PROCESS.log";
             sDate = dtBegin.Value.Date.ToOADate();
@@ -506,11 +616,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 5000) break;
                     }
                 }
 
@@ -538,7 +648,6 @@ namespace LIB_.SubFROMLib{
             }
             catch (Exception ex) { LogWR_.SaveLogException("frmLOG->VIEW_MEASURE", ex); }
         }
-
         void VIEW_MC_EVENT(){
             string fLOG = "MACHINE_EVENT.log";
             sDate = dtBegin.Value.Date.ToOADate();
@@ -556,11 +665,11 @@ namespace LIB_.SubFROMLib{
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
                     for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
                         sAll += sARR[cnt] + ETC.CrLf;
                         idx += 1;
-                        if (cnt > 5000) break;
                     }
                 }
 

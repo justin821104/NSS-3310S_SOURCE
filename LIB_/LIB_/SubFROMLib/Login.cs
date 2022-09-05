@@ -20,6 +20,7 @@ namespace LIB_.SubFROMLib{
             DATA_.eLoginLevelBuffer = eLogLevel.Null;
             txtPassWord.Text = string.Empty;
             sPassWord = string.Empty;
+            LB_MACHINE_INFO.Text = DATA_.MachineInfo;
 
             tmrLogin.Enabled = true;
             Show();

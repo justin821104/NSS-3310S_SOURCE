@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 public class CAXDev
 {
 
-    //========== 보드 및 모듈 확인함수(Info) - Infomation =================================================================================
+//========== 보드 및 모듈 확인함수(Info) - Infomation =================================================================================
 
     // Board Number를 이용하여 Board Address 찾기
     [DllImport("AXL.dll")] public static extern uint AxlGetBoardAddress(int nBoardNo, ref uint upBoardAddress);
@@ -69,13 +69,13 @@ public class CAXDev
     //    1: 기능 사용
     // 2. 디지털 필터 값
     //      입력 필터 상수 설정 범위 1 ~ 40, 단위 msec
-    // Board 에 dwInterLock, dwDigFilterVal을 이용하여 EstopInterLock 기능 설정
-    [DllImport("AXL.dll")] public static extern uint AxlSetEStopInterLock(int lBoardNo, uint dwInterLock, uint dwDigFilterVal);
-    // Board에 설정된 dwInterLock, dwDigFilterVal 정보를 가져오기
-    [DllImport("AXL.dll")] public static extern uint AxlGetEStopInterLock(int lBoardNo, ref uint dwInterLock, ref uint dwDigFilterVal);
-    // Board에 입력된 EstopInterLock 신호를 읽는다.
-    [DllImport("AXL.dll")] public static extern uint AxlReadEStopInterLock(int lBoardNo, ref uint dwInterLock);
-
+	// Board 에 dwInterLock, dwDigFilterVal을 이용하여 EstopInterLock 기능 설정
+	[DllImport("AXL.dll")] public static extern uint AxlSetEStopInterLock(int lBoardNo, uint dwInterLock, uint dwDigFilterVal);
+	// Board에 설정된 dwInterLock, dwDigFilterVal 정보를 가져오기
+	[DllImport("AXL.dll")] public static extern uint AxlGetEStopInterLock(int lBoardNo, ref uint dwInterLock, ref uint dwDigFilterVal);
+	// Board에 입력된 EstopInterLock 신호를 읽는다.
+	[DllImport("AXL.dll")] public static extern uint AxlReadEStopInterLock(int lBoardNo, ref uint dwInterLock);
+        
     // Board에 내장된 범용 Data Flash Read(PCI-R1604[RTEX master board]전용)
     // lPageAddr(0 ~ 199)
     // lByteNum(1 ~ 120)
@@ -104,7 +104,7 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmSetCommandData32(int nAxisNo, byte sCommand, uint uData);
     // 지정 축에 32bit byte 가져오기
     [DllImport("AXL.dll")] public static extern uint AxmGetCommandData32(int nAxisNo, byte sCommand, ref uint upData);
-
+    
     // 지정 축에 byte Setting
     [DllImport("AXL.dll")] public static extern uint AxmSetCommandQi(int nAxisNo, byte sCommand);
     // 지정 축에 8bit byte Setting
@@ -123,9 +123,9 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmSetCommandData32Qi(int nAxisNo, byte sCommand, uint uData);
     // 지정 축에 32bit byte 가져오기
     [DllImport("AXL.dll")] public static extern uint AxmGetCommandData32Qi(int nAxisNo, byte sCommand, ref uint upData);
-
+    
     // 지정 축에 Port Data 가져오기 - IP
-    [DllImport("AXL.dll")] public static extern uint AxmGetPortData(int nAxisNo, uint wOffset, ref uint upData);
+    [DllImport("AXL.dll")] public static extern uint AxmGetPortData(int nAxisNo,  uint wOffset, ref uint upData);
     // 지정 축에 Port Data Setting - IP
     [DllImport("AXL.dll")] public static extern uint AxmSetPortData(int nAxisNo, uint wOffset, uint dwData);
 
@@ -133,7 +133,7 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmGetPortDataQi(int nAxisNo, uint byOffset, ref uint wData);
     // 지정 축에 Port Data Setting - QI
     [DllImport("AXL.dll")] public static extern uint AxmSetPortDataQi(int nAxisNo, uint byOffset, uint wData);
-
+        
     // 지정 축에 스크립트를 설정한다. - IP
     // sc    : 스크립트 번호 (1 - 4)
     // event : 발생할 이벤트 SCRCON 을 정의한다.
@@ -164,7 +164,7 @@ public class CAXDev
     //        (1): 스크립트 Queue 2 Index 를 Clear한다.
 
     [DllImport("AXL.dll")] public static extern uint AxmSetScriptCaptionQueueClear(int nAxisNo, uint uSelect);
-
+    
     // 지정 축에 스크립트 내부 Queue의 Index 반환한다. 
     // uSelect IP
     // uSelect(0): 스크립트 Queue Index를 읽어온다.
@@ -188,8 +188,7 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmGetScriptCaptionQueueDataCount(int nAxisNo, ref uint updata, uint uSelect);
 
     // 내부 데이타를 읽어온다.
-    [DllImport("AXL.dll")]
-    public static extern uint AxmGetOptimizeDriveData(int nAxisNo, double dMinVel, double dVel, double dAccel, double dDecel,
+    [DllImport("AXL.dll")] public static extern uint AxmGetOptimizeDriveData(int nAxisNo, double dMinVel, double dVel, double dAccel, double  dDecel, 
             ref uint wRangeData, ref uint wStartStopSpeedData, ref uint wObjectSpeedData, ref uint wAccelRate, ref uint wDecelRate);
 
     // 보드내에 레지스터를 Byte단위로 설정 및 확인한다.
@@ -215,7 +214,7 @@ public class CAXDev
     // 보드내에 모듈에 레지스터를 DWord설정 및 확인한다.
     [DllImport("AXL.dll")] public static extern uint AxmModuleWriteDWord(int nBoardNo, int nModulePos, uint wOffset, uint dwData);
     [DllImport("AXL.dll")] public static extern uint AxmModuleReadDWord(int nBoardNo, int nModulePos, uint wOffset, ref uint dwData);
-
+    
 
     // 외부 위치 비교기에 값을 설정한다.(Pos = Unit)
     [DllImport("AXL.dll")] public static extern uint AxmStatusSetActComparatorPos(int nAxisNo, double dPos);
@@ -226,15 +225,15 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmStatusSetCmdComparatorPos(int nAxisNo, double dPos);
     // 내부 위치 비교기에 값을 반환한다.(Pos = Unit)
     [DllImport("AXL.dll")] public static extern uint AxmStatusGetCmdComparatorPos(int nAxisNo, ref double dpPos);
-
-    //========== 추가 함수 =========================================================================================================
-
+    
+//========== 추가 함수 =========================================================================================================
+    
     // 직선 보간 을 속도만 가지고 무한대로 증가한다.
     // 속도 비율대로 거리를 넣어주어야 한다. 
     [DllImport("AXL.dll")] public static extern uint AxmLineMoveVel(int nCoord, double dVel, double dAccel, double dDecel);
 
-    //========= 센서 위치 구동 함수( 필독: IP만가능 , QI에는 기능없음)==============================================================
-
+//========= 센서 위치 구동 함수( 필독: IP만가능 , QI에는 기능없음)==============================================================
+    
     // 지정 축의 Sensor 신호의 사용 유무 및 신호 입력 레벨을 설정한다.
     // 사용 유무 LOW(0), HIGH(1), UNUSED(2), USED(3)
     [DllImport("AXL.dll")] public static extern uint AxmSensorSetSignal(int nAxisNo, uint uLevel);
@@ -242,7 +241,7 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmSensorGetSignal(int nAxisNo, ref uint upLevel);
     // 지정 축의 Sensor 신호의 입력 상태를 반환한다
     [DllImport("AXL.dll")] public static extern uint AxmSensorReadSignal(int nAxisNo, ref uint upStatus);
-
+    
     // 지정 축의 설정된 속도와 가속율로 센서 위치 드라이버를 구동한다.
     // Sensor 신호의 Active level입력 이후 상대 좌표로 설정된 거리만큼 구동후 정지한다.
     // 펄스가 출력되는 시점에서 함수를 벗어난다.
@@ -263,7 +262,7 @@ public class CAXDev
     // 주의: 배열개수는 50개로 고정
     [DllImport("AXL.dll")] public static extern uint AxmHomeGetStepTrace(int nAxisNo, ref uint upStepCount, ref uint upMainStepNumber, ref uint upStepNumber, ref uint upStepBranch);
 
-    //=======추가 홈 서치 (PI-N804/404에만 해당됨.)=================================================================================
+//=======추가 홈 서치 (PI-N804/404에만 해당됨.)=================================================================================
 
     // 사용자가 지정한 축의 홈설정 파라메타를 설정한다.(QI칩 전용 레지스터 이용).
     // uZphasCount : 홈 완료후에 Z상 카운트(0 - 15)
@@ -278,7 +277,7 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmHomeSetConfig(int nAxisNo, uint uZphasCount, int nHomeMode, int nClearSet, double dOrgVel, double dLastVel, double dLeavePos);
     // 사용자가 지정한 축의 홈설정 파라메타를 반환한다.
     [DllImport("AXL.dll")] public static extern uint AxmHomeGetConfig(int nAxisNo, ref uint upZphasCount, ref int npHomeMode, ref int npClearSet, ref double dpOrgVel, ref double dpLastVel, ref double dpLeavePos); //KKJ(070215)
-
+    
     // 사용자가 지정한 축의 홈 서치를 시작한다.
     // lHomeMode 사용시 설정 : 0 - 5 설정 (Move Return후에 Search를  시작한다.)
     // lHomeMode -1로 그대로 사용시 HomeConfig에서 사용한대로 그대로 설정됨.
@@ -290,7 +289,7 @@ public class CAXDev
     // lHomeMode -1로 그대로 사용시 HomeConfig에서 사용한대로 그대로 설정됨.
     // 구동방향      : Vel값이 양수이면 CW, 음수이면 CCW.
     [DllImport("AXL.dll")] public static extern uint AxmHomeSetMoveReturn(int nAxisNo, double dVel, double dAccel, double dDecel);
-
+    
     // 사용자가 지정한 축의 홈 이탈을 시작한다.
     // 구동방향      : Vel값이 양수이면 CW, 음수이면 CCW.
     [DllImport("AXL.dll")] public static extern uint AxmHomeSetMoveLeave(int nAxisNo, double dVel, double dAccel, double dDecel);
@@ -313,17 +312,17 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxmContiGetProfileMode(int nCoord, ref uint upProfileMode);
 
     // 연속보간 구동 시 첫 노드 시작 및 마지막 노드 시작 시 일정시간 이후 OutputBit On/Off 제어
-    // AxmContiBeginNode 앞에 호출해야 한다. 한번 구동하면 Flag가 초기화되어 다시 호출해야 사용할 수 있다.
+	// AxmContiBeginNode 앞에 호출해야 한다. 한번 구동하면 Flag가 초기화되어 다시 호출해야 사용할 수 있다.
     // StartTime/EndTime 단위는 [Sec]이며, 최대 0 ~ 6.5초까지 설정 가능하다.
     // uOnoff	: 0 - 시작 위치에서 Bit On 종료 위치에서 Bit Off
     //          : 1 - 시작 위치에서 Bit Off 종료 위치에서 Bit On
     // lEndMode : 0 - 마지막 노드 구동 종료 후 즉시 Output Write
     //			: 1 - 마지막 노드 구동 시작 후 입력한 EndTime 이후 Output Write
     [DllImport("AXL.dll")] public static extern uint AxmContiSetWriteOutputBit(int nCoordinate, double dStartTime, double dEndTime, int nBitNo, int uOnoff, int nEndMode);
-
+   
     // AxmContiSetWriteOutputBit로 설정한 값들을 반환한다.
     [DllImport("AXL.dll")] public static extern uint AxmContiGetWriteOutputBit(int nCoordinate, ref double dpStartTime, ref double dpEndTime, ref uint upBitNo, ref uint upOnoff, ref uint upEndMode);
-
+  
     // AxmContiSetWriteOutputBit로 설정한 값들을 리셋한다.
     [DllImport("AXL.dll")] public static extern uint AxmContiResetWriteOutputBit(int nCoordinate);
 
@@ -344,23 +343,23 @@ public class CAXDev
     // 설정 축의 함수 실행 결과를 EzSpy에서 모니터링 할 수 있도록 설정 또는 해제하는 함수이다.
     // uUse : 사용 유무 => DISABLE(0), ENABLE(1)
     [DllImport("AXL.dll")] public static extern uint AxmLogSetAxis(int nAxisNo, uint uUse);
-
+    
     // EzSpy에서의 설정 축 함수 실행 결과 모니터링 여부를 확인하는 함수이다.
     [DllImport("AXL.dll")] public static extern uint AxmLogGetAxis(int nAxisNo, ref uint upUse);
 
-    //=========== 로그 출력 관련 함수
+//=========== 로그 출력 관련 함수
     //지정한 입력 채널의 EzSpy에 로그 출력 여부를 설정한다.
     [DllImport("AXL.dll")] public static extern uint AxaiLogSetChannel(int nChannelNo, uint uUse);
     //지정한 입력 채널의 EzSpy에 로그 출력 여부를 확인한다.
     [DllImport("AXL.dll")] public static extern uint AxaiLogGetChannel(int nChannelNo, ref uint upUse);
 
-    //==지정한 출력 채널의 EzSpy 로그 출력 
+//==지정한 출력 채널의 EzSpy 로그 출력 
     //지정한 출력 채널의 EzSpy에 로그 출력 여부를 설정한다.
     [DllImport("AXL.dll")] public static extern uint AxaoLogSetChannel(int nChannelNo, uint uUse);
     //지정한 출력 채널의 EzSpy에 로그 출력 여부를 확인한다.
     [DllImport("AXL.dll")] public static extern uint AxaoLogGetChannel(int nChannelNo, ref uint upUse);
 
-    //==Log
+//==Log
     // 지정한 모듈의 EzSpy에 로그 출력 여부 설정
     [DllImport("AXL.dll")] public static extern uint AxdLogSetModule(int nModuleNo, uint uUse);
     // 지정한 모듈의 EzSpy에 로그 출력 여부 확인
@@ -383,14 +382,14 @@ public class CAXDev
     // 지정한 축에 RTEX 상태 정보를 확인한다.
     [DllImport("AXL.dll")] public static extern uint AxmRtexGetAxisStatus(int nAxisNo, ref uint dwStatus);
     // 지정한 축에 RTEX 통신 리턴 정보를 확인한다.(Actual position, Velocity, Torque)
-    [DllImport("AXL.dll")] public static extern uint AxmRtexGetAxisReturnData(int nAxisNo, ref uint dwReturn1, ref uint dwReturn2, ref uint dwReturn3);
+    [DllImport("AXL.dll")] public static extern uint AxmRtexGetAxisReturnData(int nAxisNo,  ref uint dwReturn1, ref uint dwReturn2, ref uint dwReturn3);
     // 지정한 축에 RTEX Slave 축의 현재 상태 정보를 확인한다.(mechanical, Inposition and etc)
-    [DllImport("AXL.dll")] public static extern uint AxmRtexGetAxisSlaveStatus(int nAxisNo, ref uint dwStatus);
+    [DllImport("AXL.dll")] public static extern uint AxmRtexGetAxisSlaveStatus(int nAxisNo,  ref uint dwStatus);
     // 지정한 축에 MLII Slave 축에 범용 네트웍 명령어를 기입한다.
     [DllImport("AXL.dll")] public static extern uint AxmSetAxisCmd(int nAxisNo, ref uint tagCommand);
     // 지정한 축에 MLII Slave 축에 범용 네트웍 명령의 결과를 확인한다.
     [DllImport("AXL.dll")] public static extern uint AxmGetAxisCmdResult(int nAxisNo, ref uint tagCommand);
-
+    
     [DllImport("AXL.dll")] public static extern uint AxlGetDpRamData(int nBoardNo, ushort uAddress, ref uint upRdData);
     [DllImport("AXL.dll")] public static extern uint AxlBoardReadDpramWord(int nBoardNo, ushort uOffset, ref uint upRdData);
     [DllImport("AXL.dll")] public static extern uint AxlBoardWriteDpramWord(int nBoardNo, ushort uOffset, uint upWrData);
@@ -406,22 +405,22 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxaInfoGetFirmwareVersion(int nModuleNo, ref byte ucaFirmwareVersion);
     [DllImport("AXL.dll")] public static extern uint AxdInfoGetFirmwareVersion(int nModuleNo, ref byte ucaFirmwareVersion);
 
-    //======== PCI-R1604-MLII 전용 함수=========================================================================== 
+//======== PCI-R1604-MLII 전용 함수=========================================================================== 
     // INTERPOLATE and LATCH Command의 Option Field의 Torq Feed Forward의 값을 설정 하도록 합니다.
     // 기본값은 MAX로 설정되어 있습니다.
     // 설정값은 0 ~ 4000H까지 설정 할 수 있습니다.
     // 설정값은 4000H이상으로 설정하면 설정은 그 이상으로 설정되나 동작은 4000H값이 적용 됩니다.
     [DllImport("AXL.dll")] public static extern uint AxmSetTorqFeedForward(int nAxisNo, uint uTorqFeedForward);
-
+ 
     // INTERPOLATE and LATCH Command의 Option Field의 Torq Feed Forward의 값을 읽어오는 함수 입니다.
     // 기본값은 MAX로 설정되어 있습니다.
     [DllImport("AXL.dll")] public static extern uint AxmGetTorqFeedForward(int nAxisNo, ref uint upTorqFeedForward);
-
+ 
     // INTERPOLATE and LATCH Command의 VFF Field의 Velocity Feed Forward의 값을 설정 하도록 합니다.
     // 기본값은 '0'로 설정되어 있습니다.
     // 설정값은 0 ~ FFFFH까지 설정 할 수 있습니다.
     [DllImport("AXL.dll")] public static extern uint AxmSetVelocityFeedForward(int nAxisNo, uint uVelocityFeedForward);
-
+ 
     // INTERPOLATE and LATCH Command의 VFF Field의 Velocity Feed Forward의 값을 읽어오는 함수 입니다.
     [DllImport("AXL.dll")] public static extern uint AxmGetVelocityFeedForward(int nAxisNo, ref uint upVelocityFeedForward);
 
@@ -469,21 +468,21 @@ public class CAXDev
     [DllImport("AXL.dll")] public static extern uint AxcStatusGetWaitState(int lChannelNo, ref uint dwpState);
     // 트리거 대기 상태 설정 함수
     [DllImport("AXL.dll")] public static extern uint AxcStatusSetWaitState(int lChannelNo, uint dwState);
-
+    
     //지정 채널에 명령어 기입
     [DllImport("AXL.dll")] public static extern uint AxcKeSetCommandData32(int lChannelNo, uint dwCommand, uint dwData);
-
+    
     //지정 채널에 명령어 기입
-    [DllImport("AXL.dll")] public static extern uint AxcKeSetCommandData16(int lChannelNo, uint dwCommand, uint wData);
-
+    [DllImport("AXL.dll")] public static extern uint AxcKeSetCommandData16(int lChannelNo, uint dwCommand, uint wData); 
+    
     //지정 채널의 레지스터 확인
     [DllImport("AXL.dll")] public static extern uint AxcKeGetCommandData32(int lChannelNo, uint dwCommand, ref uint dwpData);
-
+    
     //지정 채널의 레지스터 확인
-    [DllImport("AXL.dll")] public static extern uint AxcKeGetCommandData16(int lChannelNo, uint dwCommand, ref uint wpData);
-
+    [DllImport("AXL.dll")] public static extern uint AxcKeGetCommandData16(int lChannelNo, uint dwCommand, ref uint wpData); 
+    
     //======================================================================================================== 
-
+	
     //======== PCI-N804/N404 전용, Sequence Motion ===================================================================
     // Sequence Motion의 축 정보를 설정 합니다. (최소 1축)
     // lSeqMapNo : 축 번호 정보를 담는 Sequence Motion Index Point
@@ -539,8 +538,8 @@ public class CAXDev
     [DllImport("AXL.dll")]
     public static extern uint AxmSeqStop(int lSeqMapNo, uint dwStopMode);
     //======================================================================================================== 
-
-    [DllImport("AXL.dll")]
+    
+    [DllImport("AXL.dll")] 
     public static extern uint AxmMoveStartPosWithAVC(int nAxisNo, double dPos, double dMaxVel, double dMaxAccel, double dMinJerk);
 
     //======== PCI-R32IOEV-RTEX 전용 함수=========================================================================== 
@@ -803,44 +802,44 @@ public class CAXDev
     // dPos 설정 값은 양수의 값만 입력한다.
     [DllImport("AXL.dll")]
     public static extern uint AxmHomeSetM3OffsetAvoideSenArea(int lAxisNo, double dPos);
-
-    // Monitor
+	
+	// Monitor
     // 데이터를 수집을 진행할 항목을 추가합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorSetItem(int nBoardNo, int nItemIndex, uint dwSignalType, int nSignalNo, int nSubSignalNo);
-
+    
     // 데이터 수집을 진행할 항목들에 관한 정보를 가져옵니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorGetIndexInfo(int nBoardNo, ref int npItemSize, ref int npItemIndex);
-
+    
     // 데이터 수집을 진행할 각 항목의 세부 설정을 가져옵니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorGetItemInfo(int nBoardNo, int nItemIndex, ref uint dwpSignalType, ref int npSignalNo, ref int npSubSignalNo);
-
+    
     // 모든 데이터 수집 항목의 설정을 초기화 합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorResetAllItem(int nBoardNo);
-
+    
     // 선택된 데이터 수집 항목의 설정을 초기화 합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorResetItem(int nBoardNo, int nItemIndex);
-
+    
     // 데이터 수집의 트리거 조건을 설정합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorSetTriggerOption(int nBoardNo, uint dwSignalType, int nSignalNo, int nSubSignalNo, uint dwOperatorType, double dValue1, double dValue2);
-
+    
     // 데이터 수집의 트리거 조건을 가져옵니다.
     //[DllImport("AXL.dll")] public static extern uint AxlMonitorGetTriggerOption(ref uint dwpSignalType, ref int npSignalNo, ref int npSubSignalNo, ref uint dwpOperatorType, ref double dpValue1, ref double dpValue2);
-
+    
     // 데이터 수집의 트리거 조건을 초기화합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorResetTriggerOption(int nBoardNo);
-
+    
     // 데이터 수집을 시작합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorStart(int nBoardNo, uint dwStartOption, uint dwOverflowOption);
-
+    
     // 데이터 수집을 정지합니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorStop(int nBoardNo);
-
+    
     // 수집된 데이터를 가져옵니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorReadData(int nBoardNo, ref int npItemSize, ref int npDataCount, double[] dpReadData);
-
+    
     // 데이터 수집의 주기를 가져옵니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorReadPeriod(int nBoardNo, ref uint dwpPeriod);
-
+    
     //////////////////////////////////////////////////////////////////////////
     // MonitorEx
     // 데이터를 수집을 진행할 항목을 추가합니다.
@@ -879,4 +878,8 @@ public class CAXDev
     // 데이터 수집의 주기를 가져옵니다.
     [DllImport("AXL.dll")] public static extern uint AxlMonitorExReadPeriod(ref uint dwpPeriod);
     //////////////////////////////////////////////////////////////////////////
+
+	// EzConfig가 제공하는 확장 기능 사용을 위한 함수
+    [DllImport("AXL.dll")] public static extern uint AxlSetExFunction(uint uFunction, uint uValue);
+    [DllImport("AXL.dll")] public static extern uint AxlGetExFunction(uint uFunction, ref uint upValue);
 }

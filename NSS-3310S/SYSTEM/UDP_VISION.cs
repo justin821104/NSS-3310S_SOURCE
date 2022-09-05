@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SYSTEM{
     public class RECEIVE_VISION : DATA_{
-        int nThread = T.ReceiveVision;
+        readonly int nThread = T.ReceiveVision;
         /// <summary>
         /// VISION PC UDP 통신
         /// VISION PC IP : 192.168.1.111 / PORT : 6002
@@ -102,11 +102,11 @@ namespace SYSTEM{
         }
 
         public void ManualSecuss(){
-            IsBIT[B.VisionManualRun] = false;
+            COM_.Bit(T.ReceiveVision, B.VisionManualRun, false, "[SECUSS] 메뉴얼 동작 플러그 OFF");
             C.SendVision.SEND("OK,*");
         }
         public void ManualFail(string msg){
-            IsBIT[B.VisionManualRun] = false;
+            COM_.Bit(T.ReceiveVision, B.VisionManualRun, false, "[FAIL] 메뉴얼 동작 플러그 OFF");
             C.SendVision.SEND("FAIL," + msg + ",*");
         }
     }

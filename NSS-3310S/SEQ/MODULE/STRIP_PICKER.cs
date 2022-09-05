@@ -8,13 +8,19 @@ namespace NSS_3310S.SEQ.MODULE{
         string cmds = string.Empty;
         long TackStart = 0, TackEnd = 0;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
+                if (!CheckRunThread()) continue;
 
-                RePic:
+            RePic:
                 while (UTIL_.WaitBIT(nThread, B.StripPkRequest, false, "레일에 스트립 공급 할때까지 대기")){
                     if (mIN[I.STRIP_PK_VAC]){
                         COM_.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
@@ -140,6 +146,7 @@ namespace NSS_3310S.SEQ.MODULE{
                     while (UTIL_.WaitWarning(nThread, W.SawStripReuestsingal, "다이싱 스트립 요청 신호 끊어짐")) ;
                     while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
                     while (eRTN.SUCESS != MoveX(P.StripPckUp, "", "스트립 피커 X축 스트립 픽업 위치 이송")) ;
+                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
                     COM_.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
                     UTIL_.DELAY(100);
                     ResetInterface();
@@ -197,8 +204,9 @@ namespace NSS_3310S.SEQ.MODULE{
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.StripPkCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.StripPkCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",스트립 피커," + IsDOUBLE[D.StripPkCycle].ToString(), "");
             TackStart = Environment.TickCount;
+            IsDOUBLE[D.StripPlcTime] = TackStart;
         }
 
         public void ResetAlignValue(){
@@ -207,6 +215,7 @@ namespace NSS_3310S.SEQ.MODULE{
             IsDOUBLE[D.PreAlignT] = 0;
         }
         void ChekPlc(){
+            while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
             COM_.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
             while (mIN[I.SAW_LD_REQ] || mIN[I.SAW_LD_POS] || mIN[I.SAW_STAGE_VAC_ON]) UTIL_.DELAY(10);
             ResetInterface();
@@ -219,17 +228,21 @@ namespace NSS_3310S.SEQ.MODULE{
         public void Vac(bool bFlog){
             int nDelay = bFlog ? (int)prMACHINE[CP.StripPkVacOn] : (int)prMACHINE[CP.StripPkVacOff];
             LAB_.OUTPUT(O.STRIP_PK_BLOW, false);
-
             LAB_.OUTPUT(O.STRIP_PK_VAC, bFlog);
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.STRIP_PK_PURGE, bFlog);
             LAB_.OUTPUT(O.STRIP_PK_VAC_OFF, !bFlog);
+#endif
             UTIL_.DELAY(nDelay);
         }
         public void Blow(){
             LAB_.OUTPUT(O.STRIP_PK_VAC, false);
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.STRIP_PK_VAC_OFF, false);
             LAB_.OUTPUT(O.STRIP_PK_PURGE, false);
-
+#endif
             LAB_.OUTPUT(O.STRIP_PK_BLOW, true);
             UTIL_.DELAY((int)prMACHINE[CP.StripBlowOn]);
             LAB_.OUTPUT(O.STRIP_PK_BLOW, false);
@@ -264,11 +277,13 @@ namespace NSS_3310S.SEQ.MODULE{
 
         public eRTN MovePreAlignY(int nPos, string cmd, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
-
+#if _NSS3300
+#else
             IsSTRING[S.StripPkMessage] = comment + " " + LogWR_.LogPos(M.PreAlign, nPos);
             if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.PreAlign, nPos, 0.005, false, false, false, cmd, IsSTRING[S.StripPkMessage])) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
     }
 }

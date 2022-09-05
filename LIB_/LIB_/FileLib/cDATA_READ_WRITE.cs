@@ -39,11 +39,25 @@ public class TEACH_ : DATA_
         FILE_.WR_ASCLL_FILE(PATH_.UnitPitch, sWR);
     }
 
+    public static void WRITE_INFO_PCB_TYPE(int TYPE){
+        string str = TYPE.ToString();
+        FILE_.WR_ASCLL_FILE(PATH_.PCBTYPE, str);
+    }
+
     public static void WRITE_INFO_MAP_BLOCK(int GX, int GY, int MB1_X, int MB1_Y, int MB2_X, int MB2_Y){
         string sMessage = GX.ToString() + "," + GY.ToString() + "," + MB1_X.ToString() + "," + MB1_Y.ToString() + ";";
         FILE_.WR_ASCLL_FILE(PATH_.MapBlock1, sMessage);
         sMessage = GX.ToString() + "," + GY.ToString() + "," + MB2_X.ToString() + "," + MB2_Y.ToString() + ";";
         FILE_.WR_ASCLL_FILE(PATH_.MapBlock2, sMessage);
+    }
+
+    public static void WRITE_INFO_STIP_BARCODE(string Barcode){
+        FILE_.WR_ASCLL_FILE(PATH_.BARCODE, Barcode);
+    }
+
+    public static void WRITE_INFO_MAPBLOCK_STIP_BARCODE(eMAP_BLOCK Stage, string Barcode){
+        string path = Stage == eMAP_BLOCK.STAGE1 ? PATH_.MapBlock1StripBarcode : PATH_.MapBlock2StripBarcode;
+        FILE_.WR_ASCLL_FILE(path, Barcode);
     }
 
     public static void WR_NewJobFile(){ // 설비 레스피 적아 두기
@@ -101,15 +115,22 @@ public class TEACH_ : DATA_
         FILE_.WR_File(PATH_.ITSLocation, sData, false);
     }
 
-    public static void SAVE_DAY_COUNT(int cEMPTY_TRAY, int cLOADING, int cGOOD_TRAY, int cGOOD, int cREWORK_TRAY, int cREWORK, int cNG, int cLOT, int cPIC, int cPLACE, int cTOTAL){
-        string sTitle = "EMPTY TRAY,STRIP LOADING,GOOD TRAY,GOOD UNIT,REWORK TRAY,REWORK UNIT,NG UNIT,LOT,PICKUP,PLACE,TOTAL UNIT" + ETC.CrLf;
-        string sVal = cEMPTY_TRAY.ToString() + "," + cLOADING.ToString() + "," + cGOOD_TRAY.ToString() + "," + cGOOD.ToString() + ","
-                    + cREWORK_TRAY.ToString() + "," + cREWORK.ToString() + "," + cNG.ToString() + "," + cLOT.ToString() + "," + cPIC.ToString() + "," + cPLACE.ToString() + "," + cTOTAL.ToString();
+    public static void SAVE_DAY_COUNT(ref long CntMGZ, ref long CntStrip, ref long CntGood, ref long CntRework, ref long CntReject){
+        string sTitle = "MAGAZINE,STRIP,GOOD,REWORK,REJECT" + ETC.CrLf;
+        string sVal = CntMGZ.ToString() + "," + CntStrip.ToString() + "," + CntGood.ToString() + "," + CntRework.ToString() + "," + CntReject.ToString();
         try{
             string fn = LogWR_.GET_DirNameDate(PATH_.LogCount) + "_" + string.Format("{0:00}", DateTime.Now.Hour) + string.Format("{0:00}", DateTime.Now.Minute) + string.Format("{0:00}", DateTime.Now.Second) + "_COUNT.csv";
             FILE_.WR_File(fn, sTitle + sVal, false);
         }
         catch (Exception E) { LogWR_.SaveLogException("SAVE DAY COUNT FAIL", E); }
+        RESET_DAY_COUNT(ref CntMGZ, ref CntStrip, ref CntGood, ref CntRework, ref CntReject);
+    }
+    public static void RESET_DAY_COUNT(ref long CntMGZ, ref long CntStrip, ref long CntGood, ref long CntRework, ref long CntReject){
+        CntMGZ = 0;
+        CntStrip = 0;
+        CntGood = 0;
+        CntRework = 0;
+        CntReject = 0;
     }
 
     public static void SAVE_VISION_RESULT_WRITE_FAIL(int nPALLET, string[] sLOG){
@@ -203,6 +224,42 @@ public class TEACH_ : DATA_
             cntGOODTRAY = 0;
             cntREWORKTRAY = 0;
             cntTOTAL = 0;
+        }
+    }
+
+    public static void SAVE_INFO_COUNT(long CntMGZ, long CntStrip, long CntGoodUnit, long CntRework, long CntReject){
+        try
+        {
+            StreamWriter sw = new StreamWriter(PATH_.DAY_COUNT, false, Encoding.UTF8);
+            sw.WriteLine(CntMGZ);
+            sw.WriteLine(CntStrip);
+            sw.WriteLine(CntGoodUnit);
+            sw.WriteLine(CntRework);
+            sw.WriteLine(CntReject);
+            sw.Close();
+        }
+        catch (Exception ex) { LogWR_.SaveLogException("SAVE DAY COUNT INFO FAIL", ex); }
+    }
+    public static void LOAD_INFO_COUNT(ref long CntMGZ, ref long CntStrip, ref long CntGoodUnit, ref long CntReWork, ref long CntReject){
+        try
+        {
+            string[] sLine = File.ReadAllText(PATH_.DAY_COUNT).Split(ETC.CrLf);
+            if (sLine.Length - 1 >= 4)
+            {
+                CntMGZ = long.Parse(sLine[0].Replace("\r", ""));
+                CntStrip = long.Parse(sLine[1].Replace("\r", ""));
+                CntGoodUnit = long.Parse(sLine[2].Replace("\r", ""));
+                CntReWork = long.Parse(sLine[3].Replace("\r", ""));
+                CntReject = long.Parse(sLine[4].Replace("\r", ""));
+            }
+        }
+        catch (Exception ex) {
+            LogWR_.SaveLogException("LOAD DAY COUNT INFO FAIL", ex);
+            CntMGZ = 0;
+            CntStrip = 0;
+            CntGoodUnit = 0;
+            CntReWork = 0;
+            CntReject = 0;
         }
     }
 
@@ -574,8 +631,14 @@ public class TEACH_ : DATA_
     public static void Read_InputLabel(){
         string mSTR;
         short i = 0;
+#if _NSS3300
+        StreamReader sr = new StreamReader(PATH_.inputLabel3300);
+#else
         StreamReader sr = new StreamReader(PATH_.inputLabel);
-        try{
+#endif
+
+        try
+        {
             while (sr.Peek() != -1){
                 if (InputName.Length < i) break;
                 mSTR = sr.ReadLine();
@@ -593,7 +656,11 @@ public class TEACH_ : DATA_
     public static void Read_OutputLabel(){
         string mSTR;
         short i = 0;
+#if _NSS3300
+        StreamReader sr = new StreamReader(PATH_.outputLabel3300);
+#else
         StreamReader sr = new StreamReader(PATH_.outputLabel);
+#endif
         try{
             while (sr.Peek() != -1){
                 if (OutputName.Length < i) break;
@@ -665,9 +732,9 @@ public class TEACH_ : DATA_
         }
         Microsoft.VisualBasic.FileIO.FileSystem.WriteAllText(PATH_.InfoOUTPUT, sOUT, false);
     }
-    #endregion "RD/WR ANALOG & IO"
+#endregion "RD/WR ANALOG & IO"
 
-    #region "RD/WR PARAMETERS"
+#region "RD/WR PARAMETERS"
     public static void Write_Parameter(NumericUpDown nup){
         int value = (int)nup.Value;
         if (nup.Tag.ToString() == "MC" || nup.Tag.ToString() == "mc")   WR_MCPara(nup.TabIndex, value);
@@ -1004,16 +1071,21 @@ public class TEACH_ : DATA_
         }
         return true;
     }
-    #endregion "RD/WR PARAMETERS"
+#endregion "RD/WR PARAMETERS"
 
-    #region "RD/WR MOTOR DATA"
+#region "RD/WR MOTOR DATA"
     public static void Read_MotorLabel(){
         string mSTR;
         string sPath = PATH_.MTName;
         short m = 0;
         short p;
+#if _NSS3300
+        sPath = PATH_.MTName3300;
+#else
         if (MC_DIR == 1) sPath = PATH_.MTNameR;
-        try{
+#endif
+        try
+        {
             StreamReader sr = new StreamReader(sPath);
             while (sr.Peek() != -1){
                 mSTR = sr.ReadLine();
@@ -1277,9 +1349,9 @@ public class TEACH_ : DATA_
         }
         return bRTN;
     }
-    #endregion "RD/WR MOTOR DATA"
+#endregion "RD/WR MOTOR DATA"
 
-    #region "RD ERROR LIST"
+#region "RD ERROR LIST"
     public static void Read_ErrorLabel(){
         try{
             if (File.Exists(PATH_.SystemError)){
@@ -1314,7 +1386,8 @@ public class TEACH_ : DATA_
                     string[] sSecond    = mSTR.Split(',');
 
                     if (sSecond.Length >= 2){
-                        ErrName[num + eEMSBegin] = sSecond[1];
+                        ErrName[num + eEMSBegin]    = sSecond[1];
+                        IntkName[num + eEMSBegin]   = sSecond[1];
                     }
                     num++;
                 }
@@ -1324,9 +1397,9 @@ public class TEACH_ : DATA_
         }
         catch (Exception ex) { MessageBox.Show("RD_INTERLOCK_ERROR FAIL" + ETC.NewLine + ex.ToString()); }
     }
-    #endregion "RD ERROR LIST"
+#endregion "RD ERROR LIST"
 
-    #region "WARNING LIST"
+#region "WARNING LIST"
     public static void Read_WarningLabel(){
         string mSTR;
         string mLabel;
@@ -1353,5 +1426,5 @@ public class TEACH_ : DATA_
         }
         catch (Exception ex) { MessageBox.Show("READ_MD_PARA_LABEL FAIL" + ETC.NewLine + ex.ToString()); }
     }
-    #endregion "WARNING LIST"
+#endregion "WARNING LIST"
 }

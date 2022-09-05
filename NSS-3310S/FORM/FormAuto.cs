@@ -18,6 +18,7 @@ namespace NSS_3310S{
 
         Label[] iInterfaceState = null;
         Label[] oInterfaceState = null;
+        Label[] StripIndexNum   = null;
         public PictureBox PIC_X1 { get; set; }
         public PictureBox PIC_X2 { get; set; }
         int nPK = 0;
@@ -28,8 +29,9 @@ namespace NSS_3310S{
         Label[] PkrVac { get; set; }
         Button[] Pause { get; set; }
         DataGridViewRow DGV_ROW { get; set; }
-        bool bSetSkipView = false;
-        bool bViewCassage = false;
+        bool bSetSkipView           = false;
+        bool bViewCassage           = false;
+        bool bViewMachineCassage    = false;
 
         int uGW, uGH, y_offset, uX1, uX2, uY2, uW, uH;
         Label LBL;
@@ -53,6 +55,8 @@ namespace NSS_3310S{
             MGZ = imgMGZ;
             STAGE = new Image[] { imgMAPBLOCK1, imgMAPBLOCK2 };
             TRAY = new Image[] { imgTRAY1, imgTRAY2 };
+
+            StripIndexNum = new Label[] { LBL_BRCD_RAIL_IDX, LBL_BRCD_STRIP_PK_IDX, LBL_BRCD_SAW_IDX, LBL_BRCD_UNIT_PK_IDX, LBL_BRCD_MB_1_IDX, LBL_BRCD_MB_2_IDX };
 
             iInterfaceState = new Label[] { X_LD_REQ, X_SAW_LD_POS,  X_SAW_STAGE_VAC,
                                            X_ULD_REQ, X_SAW_ULD_POS,  X_SAW_STAGE_REJECT,
@@ -110,6 +114,8 @@ namespace NSS_3310S{
             
             OptionSkip.Click        += (sender, e) => SettingSkipPanel();
             OptionCstInfo.Click     += (sender, e) => ViewCassage();
+            OptionMachineInfo.Click += (sender, e) => ViewMachineInfo();
+
             lbAIR.DoubleClick       += (sender, e) => EventSkip(lbAIR);
             lbDoor.DoubleClick      += (sender, e) => EventSkip(lbDoor);
             lbTrip.DoubleClick      += (sender, e) => EventSkip(lbTrip);
@@ -189,6 +195,24 @@ namespace NSS_3310S{
 
             DocCogBarcode();
             DocMES();
+
+#if _NSS3300
+            lbInletVac.Visible  = false;
+            lbX310.Visible      = false;
+            lbX309.Visible      = false;
+            lbX308.Visible      = false;
+            lbX300.Visible      = false;
+            lbX215.Visible      = false;
+            lbX214.Visible      = false;
+#else
+            lbInletVac.Visible  = true;
+            lbX310.Visible      = true;
+            lbX309.Visible      = true;
+            lbX308.Visible      = true;
+            lbX300.Visible      = true;
+            lbX215.Visible      = true;
+            lbX214.Visible      = true;
+#endif
         }
 
         public void IniInfoStripBarcoder(DataGridView grd, int nRowCount, int nHeight){
@@ -247,6 +271,18 @@ namespace NSS_3310S{
                 VIEW_CASSATE.Location = new Point(192, 397);
                 VIEW_CASSATE.Size = new Size(56, 20);
             }//192, 396 / 56, 20
+        }
+        void ViewMachineInfo(){
+            bViewMachineCassage = !bViewMachineCassage;
+
+            if (bViewMachineCassage){
+                VIEW_MACHINE_INFO.Location = new Point(1, 0);
+                VIEW_MACHINE_INFO.Size = new Size(362, 165);
+            }
+            else{
+                VIEW_MACHINE_INFO.Location = new Point(300, 0);
+                VIEW_MACHINE_INFO.Size = new Size(63, 20);
+            }
         }
         void EventSkip(object sender){
             LBL = (Label)sender;
@@ -446,6 +482,12 @@ namespace NSS_3310S{
             //C.SendVision.SEND("GET_SVID_VISION,*");
 
             //TEACH_.DEL_STRIP_INFO();
+
+            //CLOT.GET_LOT.ProcCondition_1 = "";
+            //CLOT.GET_LOT.ProcCondition_2 = "1287129-009SB#2300#QC GATE (SAP)#1/4#Lot 보류#1170#SPC_Y_RULEOUT#WIP증가#SPC##2022-04-18 오후 2:21:04";
+            //CLOT.GET_LOT.ProcCondition_3 = "1287129-009SB#2300#QC GATE (SAP)#1/4#Lot 보류#1170#SPC_Y_RULEOUT#WIP증가#SPC##2022-04-18 오후 2:21:04";
+            //CLOT.GET_LOT.ProcCondition_4 = "3050#R1341#SAWING(UNIT)#0.7000#0.0750#0.0750#0.7000#0.0750#0.0750";
+            //AddConditionMassage();
         }
 
         private void DGV_INFO_BARCODE_CellDoubleClick(object sender, DataGridViewCellEventArgs e){
@@ -476,21 +518,24 @@ namespace NSS_3310S{
         }
 
         private void ModuleBarcodeInput_DoubleClick(object sender, EventArgs e){
-            LBL = (Label)sender;
+            LBL                 = (Label)sender;
+            int nNumber = LBL.TabIndex;
+            string sOldValue    = LBL.Text == null ? "" : LBL.Text;
+            string sLabel       = LBL.Tag.ToString();
+            
             LBL.BackColor = Color.Lime;
-            string sOldValue = LBL.Text == null ? "" : LBL.Text;
-            string sLabel = LBL.Tag.ToString();
-            string sValue = UTIL_.INPUT_MESSAGE("BARCODE", sLabel + " ZONE STRIP BARCODE", sOldValue, false);
-            //if (sValue != ""){
+            StripIndexNum[nNumber].BackColor = Color.Lime;
+            string sValue       = UTIL_.INPUT_MESSAGE("BARCODE", sLabel + " ZONE STRIP BARCODE", sOldValue, false);
+            
             if (LBL.Name == "LBL_BRCD_RAIL")        CLOT.InfoStrip[T.Gripper].Barcode   = sValue;
             if (LBL.Name == "LBL_BRCD_STRIP_PK")    CLOT.InfoStrip[T.StripPk].Barcode   = sValue;
             if (LBL.Name == "LBL_BRCD_SAW")         CLOT.SawStageStripBarcode           = sValue;
             if (LBL.Name == "LBL_BRCD_UNIT_PK")     CLOT.InfoStrip[T.UnitPk].Barcode    = sValue;
             if (LBL.Name == "LBL_BRCD_MB_1")        CLOT.InfoStrip[T.DryTable1].Barcode = sValue;
             if (LBL.Name == "LBL_BRCD_MB_2")        CLOT.InfoStrip[T.DryTable2].Barcode = sValue;
-            //LBL.Text = sValue;
-            //}
+            
             LBL.Text = sValue;
+            StripIndexNum[nNumber].BackColor = Color.White;
             LBL.BackColor = Color.White;
         }
 
@@ -542,7 +587,6 @@ namespace NSS_3310S{
                     if (GetProcLog(tn)) lvi.ForeColor = Color.Gold; //return; //LOG SKIP일 경우 
                     lvi.SubItems.Add(DATA_.ThreadName[tn]);
                     lvi.SubItems.Add(msg);
-
                     listLog.Items.Add(lvi);
                     listLog.Items[listLog.Items.Count - 1].EnsureVisible();
                     listLog.EndUpdate();
@@ -551,6 +595,19 @@ namespace NSS_3310S{
             }
             catch (Exception EX){
                 LogWR_.SaveLogException("[AUTO] ADD MESSAGE FAIL!" + ETC.NewLine + "THREAD NUMBER = " + tn.ToString() + " / " + msg, EX);
+            }
+        }
+
+        void AddConditionMassage(){
+            try{
+                LBX_PROC_CONDITION_MESSAGE.Items.Clear();
+                LBX_PROC_CONDITION_MESSAGE.Items.Add(CLOT.GET_LOT.ProcCondition_1);
+                LBX_PROC_CONDITION_MESSAGE.Items.Add(CLOT.GET_LOT.ProcCondition_2);
+                LBX_PROC_CONDITION_MESSAGE.Items.Add(CLOT.GET_LOT.ProcCondition_3);
+                LBX_PROC_CONDITION_MESSAGE.Items.Add(CLOT.GET_LOT.ProcCondition_4);
+            }
+            catch (Exception EX){
+                LogWR_.SaveLogException("[AUTO] ADD CONDITION MESSAGE FAIL!", EX);
             }
         }
 
@@ -636,7 +693,7 @@ namespace NSS_3310S{
             GridEndLot.CurrentCell.Selected = false; // CELL 선택 안되게
 
             nHeight = 20 + 2;
-            GridWorkLot.RowCount = CLOT.WORK_LOT.Length;
+            GridWorkLot.RowCount =  1;
             for (int i = 0; i < GridWorkLot.RowCount; i++){
                 //GridWorkLot[0, i].Value = (i + 1).ToString();
                 row = GridWorkLot.Rows[i];
@@ -651,7 +708,7 @@ namespace NSS_3310S{
             CreatePicker();
             COM_.RECREATE_THREAD(ref DATA_.mcTH[T.Picker], MMI_THREAD);
 
-             LogWR_.ProMsgEvent  += AddProcessMessage;
+            LogWR_.ProMsgEvent  += AddProcessMessage;
             BASE.ProMsgEvent    += AddProcessMessage;
              
             SUBFRM_.cBarcode.Conect();
@@ -660,6 +717,8 @@ namespace NSS_3310S{
             RunningEvent(EES_DISPLAY);
 
             gbxOP.Text = DEF.UpdataMemo;
+
+            LBX_PROC_CONDITION_MESSAGE.Items.Clear();
         }
 
         private void FormAuto_FormClosing(object sender, FormClosingEventArgs e){
@@ -704,11 +763,28 @@ namespace NSS_3310S{
             lbGT1.BackColor = (int)eTRAY.GOOD1 == (int)DATA_.IsLONG[L.CurWorkTray] ? Color.Lime : Color.White;
             lbGT2.BackColor = (int)eTRAY.GOOD2 == (int)DATA_.IsLONG[L.CurWorkTray] ? Color.Lime : Color.White;
 
-            cpHD1.Text = DATA_.mtSTS[M.TRIGGER1].CurrentPosition.ToString("0.0");
-            cpHD2.Text = DATA_.mtSTS[M.TRIGGER2].CurrentPosition.ToString("0.0");
+            dDly_X1.DigitText = DATA_.mtSTS[M.TRIGGER1].CurrentPosition.ToString("0.0");
+            dDly_X2.DigitText = DATA_.mtSTS[M.TRIGGER2].CurrentPosition.ToString("0.0");
 
-            cpT1.Text = DATA_.cntSTS[DATA_.SubTrigger[0]].CurrentPosition.ToString("0.0");
-            cpT2.Text = DATA_.cntSTS[DATA_.SubTrigger[1]].CurrentPosition.ToString("0.0");
+            dDlyCAXC_X1.DigitText = DATA_.cntSTS[DATA_.SubTrigger[0]].CurrentPosition.ToString("0.0");
+            dDlyCAXC_X2.DigitText = DATA_.cntSTS[DATA_.SubTrigger[1]].CurrentPosition.ToString("0.0");
+
+            dDly_T1.DigitText = DATA_.mtSTS[M.X1T].CurrentPosition.ToString();
+            dDly_T2.DigitText = DATA_.mtSTS[M.X2T].CurrentPosition.ToString();
+
+            dDly_UnitPkPicOffset_X.DigitText = DATA_.IsDOUBLE[D.UnitPk_PicOffsetX].ToString();
+
+            dDly_Stage1Offset_X.DigitText = DATA_.IsDOUBLE[D.Stage1UnitOffsetX].ToString();
+            dDly_Stage1Offset_Y.DigitText = DATA_.IsDOUBLE[D.Stage1UnitOffsetY].ToString();
+
+            dDly_Stage2Offset_X.DigitText = DATA_.IsDOUBLE[D.Stage2UnitOffsetX].ToString();
+            dDly_Stage2Offset_Y.DigitText = DATA_.IsDOUBLE[D.Stage2UnitOffsetY].ToString();
+
+            DDC_MGZ_CNT.DigitText = DATA_.IsLONG[L.DayMGZCnt].ToString();
+            DDC_STRIP_CNT.DigitText = DATA_.IsLONG[L.DayStripCnt].ToString();
+            DDC_GOOD_CNT.DigitText = DATA_.IsLONG[L.DayGoodUnit].ToString();
+            DDC_REWORK_CNT.DigitText = DATA_.IsLONG[L.DayReworkUnit].ToString();
+            DDC_REJECT_CNT.DigitText = DATA_.IsLONG[L.DayRejectUnit].ToString();
 
             PowerMeter.BackColor = DATA_.cPM.IsOpen() ? Color.Lime : Color.White;
             Barcode.BackColor = SUBFRM_.cBarcode.bOpen ? Color.Lime : Color.White;
@@ -735,7 +811,6 @@ namespace NSS_3310S{
 
             lblSAW_MAIN_AIR.BackColor   = DATA_.mIN[I.SAW_MAIN_AIR] ? Color.Lime : Color.DarkGreen;
             lbStripPkrVac.BackColor     = DATA_.mIN[I.STRIP_PK_VAC] ? Color.Lime : Color.White;
-            lbInletVac.BackColor        = DATA_.mIN[I.INLET_TABLE_VAC] ? Color.Lime : Color.White;
             lbUnitPkrVac1.BackColor     = DATA_.mIN[I.UNIT_PK_VAC] ? Color.Lime : Color.White;
             lbUnitPkrScrap.BackColor    = DATA_.mIN[I.SCRAP_VAC1] ? Color.Lime : Color.White;
             lbUnitPkrScrap2.BackColor   = DATA_.mIN[I.SCRAP_VAC2] ? Color.Lime : Color.White;
@@ -755,36 +830,32 @@ namespace NSS_3310S{
             }
 
             if (DATA_.bStripDefect){
-                MsSQL.GetPrevProcResult(CLOT.GET_LOT.ItsID);
                 DATA_.bStripDefect = false;
+                MsSQL.GetPrevProcResult(CLOT.GET_LOT.ItsID);
+                if (DATA_.prMACHINE[DATA_.UseMES] == (int)eUSE.USE){
+                    AddConditionMassage();
+                }
             }
 
             EES_DISPLAY.BackColor = bEES_DISPLY ? Color.Lime : Color.White;
 
-            lbTEST_POS1.Text = DATA_.mtSTS[M.X1T].CurrentPosition.ToString();
-            lbTEST_POS2.Text = DATA_.mtSTS[M.X2T].CurrentPosition.ToString();
-
             lbX401.BackColor = DATA_.mIN[I.GOOD_TRAY2_FEEDER_TRAY_CHECK] ? Color.Lime : Color.White;
             lbX314.BackColor = DATA_.mIN[I.GOOD_TRAY1_FEEDER_TRAY_CHECK] ? Color.Lime : Color.White;
+            lbX307.BackColor = DATA_.mIN[I.GOOD_RAIL_STACKER_CHECK] ? Color.Lime : Color.White;
+            lbX303.BackColor = DATA_.mIN[I.NG_TRAY_FEEDER_TRAY_CHECK] ? Color.Lime : Color.White;
+            lbX213.BackColor = DATA_.mIN[I.NG_RAIL_STACKER_TRAY_CHECK] ? Color.Lime : Color.White;
+#if _NSS3300
+#else
+            lbInletVac.BackColor = DATA_.mIN[I.INLET_TABLE_VAC] ? Color.Lime : Color.White;
 
             lbX310.BackColor = DATA_.mIN[I.GOOD_RAIL_HEAD2_CHECK] ? Color.Lime : Color.White;
             lbX309.BackColor = DATA_.mIN[I.GOOD_RAIL_HEAD1_CHECK] ? Color.Lime : Color.White;
             lbX308.BackColor = DATA_.mIN[I.GOOD_RAIL_TRAY_LOADING_CHECK] ? Color.Lime : Color.White;
-            lbX307.BackColor = DATA_.mIN[I.GOOD_RAIL_STACKER_CHECK] ? Color.Lime : Color.White;
-
-            lbX303.BackColor = DATA_.mIN[I.NG_TRAY_FEEDER_TRAY_CHECK] ? Color.Lime : Color.White;
 
             lbX300.BackColor = DATA_.mIN[I.NG_RAIL_HEAD2_TRAY_CHECK] ? Color.Lime : Color.White;
             lbX215.BackColor = DATA_.mIN[I.NG_RAIL_HEAD1_TRAY_CHECK] ? Color.Lime : Color.White;
             lbX214.BackColor = DATA_.mIN[I.NG_RAIL_LOADING_TRAY_CHECK] ? Color.Lime : Color.White;
-            lbX213.BackColor = DATA_.mIN[I.NG_RAIL_STACKER_TRAY_CHECK] ? Color.Lime : Color.White;
-
-            lbSTAGE1_OFFSET_X.Text = DATA_.IsDOUBLE[D.Stage1UnitOffsetX].ToString();
-            lbSTAGE1_OFFSET_Y.Text = DATA_.IsDOUBLE[D.Stage1UnitOffsetY].ToString();
-
-            lbSTAGE2_OFFSET_X.Text = DATA_.IsDOUBLE[D.Stage2UnitOffsetX].ToString();
-            lbSTAGE2_OFFSET_Y.Text = DATA_.IsDOUBLE[D.Stage2UnitOffsetY].ToString();
-			
+#endif      
 			dgvInfo[0, 0].Style.BackColor = DATA_.IsBIT[B.MGZWorking] ? Color.Lime : Color.White;
             dgvInfo[1, 0].Style.BackColor = DATA_.IsBIT[B.GripperWorking] ? Color.Lime : Color.White;
             dgvInfo[2, 0].Style.BackColor = DATA_.IsBIT[B.StripPkMask] ? Color.Lime : Color.White;
@@ -811,7 +882,6 @@ namespace NSS_3310S{
             LBL_BRCD_MB_1_IDX.Text          = CLOT.InfoStrip[T.DryTable1].Index == 0 ? "" : CLOT.InfoStrip[T.DryTable1].Index.ToString();
             LBL_BRCD_MB_2_IDX.Text          = CLOT.InfoStrip[T.DryTable2].Index == 0 ? "" : CLOT.InfoStrip[T.DryTable2].Index.ToString();
 
-            label26.Text = DATA_.IsDOUBLE[D.UnitPk_PicOffsetX].ToString();
             lbMGZ_CHECK_1.BackColor = DATA_.mIN[I.LD_CONV_MZ_CHECK1] ? Color.Lime : Color.White;
             lbMGZ_CHECK_2.BackColor = DATA_.mIN[I.LD_CONV_MZ_CHECK2] ? Color.Lime : Color.White;
 
@@ -821,7 +891,6 @@ namespace NSS_3310S{
         void Blink(){
             for (int i = 0; i < Pause.Length; i++){
                 if (DATA_.IsBIT[B.PauseOption[i]]){
-
                     if (PauseOff[i] > 3){
                         if (PauseOn[i] > 3){
                             PauseOn[i] = 0;
@@ -840,23 +909,18 @@ namespace NSS_3310S{
                 else Pause[i].BackColor = Color.White;
             }
 
-            if (DATA_.IsBIT[B.CstRequest])
-            {
-                if (iswCstSupplyOn > 5)
-                {
-                    if (iswCstSupplyOff > 10)
-                    {
+            if (DATA_.IsBIT[B.CstRequest]){
+                if (iswCstSupplyOn > 5){
+                    if (iswCstSupplyOff > 10){
                         iswCstSupplyOn = 0;
                         iswCstSupplyOff = 0;
                     }
-                    else
-                    {
+                    else{
                         swCst_SUPPLY.BackColor = Color.Red;
                         iswCstSupplyOff += 1;
                     }
                 }
-                else
-                {
+                else{
                     swCst_SUPPLY.BackColor = Color.White;
                     iswCstSupplyOn += 1;
                 }
@@ -974,8 +1038,7 @@ namespace NSS_3310S{
             Option();
             InvokeSignal();
 
-            BTN_TEST.Visible = true; //임시
-
+            BTN_TEST.Visible = false; //임시
             TmrAUTO.Enabled = true;
         }
         void Invoke(){
@@ -998,28 +1061,55 @@ namespace NSS_3310S{
             lbPRS_RESULT.ForeColor = DATA_.mIN[I.PRSVisionWirte] ? Color.Lime : Color.Black;
             WipCheck.BackColor = DATA_.prMACHINE[CP.UseMES] == (int)eUSE.USE ? Color.Lime : Color.White;
 
-            for (int n = 0; n < CLOT.WORK_LOT.Length; n++){
-                CLOT.WORK_LOT[n].LoadingCount   = CLOT.WORK_LOT[0].LoadingCount;
-                CLOT.WORK_LOT[n].UnloadingCount = CLOT.WORK_LOT[0].UnloadingCount;
+            if (CLOT.GET_LOT.LotType < 1)       GridWorkLot.Rows[0].Cells[0].Value = "";
+            else                                GridWorkLot.Rows[0].Cells[0].Value = "0";
+            GridWorkLot.Rows[0].Cells[1].Value = CLOT.GET_LOT.WorkScope;   //작업 구분
+            GridWorkLot.Rows[0].Cells[2].Value = CLOT.GET_LOT.ToolNo;    //관리 번호
+            GridWorkLot.Rows[0].Cells[3].Value = CLOT.GET_LOT.Recipe;    //RECIPE ID
+            GridWorkLot.Rows[0].Cells[4].Value = CLOT.GET_LOT.LotID;       //LOT ID
+            
+            GridWorkLot.Rows[0].Cells[5].Value = CLOT.GET_LOT.LotType < 1 ? "" : CLOT.GET_LOT.Qty.ToString(); //MES 매수
+            GridWorkLot.Rows[0].Cells[6].Value = CLOT.GET_LOT.LotType < 1 ? "" : CLOT.GET_LOT.LoadingCount.ToString(); //STRIP
+            GridWorkLot.Rows[0].Cells[7].Value = CLOT.GET_LOT.LotType < 1 ? "" : CLOT.GET_LOT.InCnt.ToString(); //투입 매수
+            GridWorkLot.Rows[0].Cells[8].Value = CLOT.GET_LOT.LotType < 1 ? "" : CLOT.GET_LOT.ExceptCount.ToString(); //제외 매수
+            GridWorkLot.Rows[0].Cells[9].Value = CLOT.GET_LOT.LotType < 1 ? "" : CLOT.GET_LOT.OutCnt.ToString(); //배출 매수
+            GridWorkLot.Rows[0].Cells[10].Value = CLOT.GET_LOT.WorkSort; //작업 종류
+
+            for (int n = 0; n < CLOT.FINISH_LOT.Length; n++){
+                if (CLOT.FINISH_LOT[n].LotType < 1)     GridEndLot.Rows[n].Cells[0].Value = "";
+                else                                    GridEndLot.Rows[n].Cells[0].Value = CLOT.FINISH_LOT[n].nNUM;
 
                 GridEndLot.Rows[n].Cells[1].Value = CLOT.FINISH_LOT[n].WorkScope;
                 GridEndLot.Rows[n].Cells[2].Value = CLOT.FINISH_LOT[n].ToolNo;
                 GridEndLot.Rows[n].Cells[3].Value = CLOT.FINISH_LOT[n].Recipe;
                 GridEndLot.Rows[n].Cells[4].Value = CLOT.FINISH_LOT[n].LotID;
 
-                GridEndLot.Rows[n].Cells[5].Value = CLOT.FINISH_LOT[n].WorkScope == "" || CLOT.FINISH_LOT[n].WorkScope == null ? "" : CLOT.FINISH_LOT[n].CurCnt.ToString();
-                GridEndLot.Rows[n].Cells[6].Value = CLOT.FINISH_LOT[n].WorkScope == "" || CLOT.FINISH_LOT[n].WorkScope == null ? "" : CLOT.FINISH_LOT[n].LoadingCount.ToString();
-                GridEndLot.Rows[n].Cells[7].Value = CLOT.FINISH_LOT[n].WorkScope == "" || CLOT.FINISH_LOT[n].WorkScope == null ? "" : CLOT.FINISH_LOT[n].ExceptCount.ToString();
-                GridEndLot.Rows[n].Cells[8].Value = CLOT.FINISH_LOT[n].WorkScope == "" || CLOT.FINISH_LOT[n].WorkScope == null ? "" : CLOT.FINISH_LOT[n].UnloadingCount.ToString();
-                GridEndLot.Rows[n].Cells[9].Value = CLOT.FINISH_LOT[n].WorkSort;
+                GridEndLot.Rows[n].Cells[5].Value = CLOT.FINISH_LOT[n].LotType < 1 ? "" : CLOT.FINISH_LOT[n].Qty.ToString();
+                GridEndLot.Rows[n].Cells[6].Value = CLOT.FINISH_LOT[n].LotType < 1 ? "" : CLOT.FINISH_LOT[n].LoadingCount.ToString();
+                GridEndLot.Rows[n].Cells[7].Value = CLOT.FINISH_LOT[n].LotType < 1 ? "" : CLOT.FINISH_LOT[n].InCnt.ToString();
+                GridEndLot.Rows[n].Cells[8].Value = CLOT.FINISH_LOT[n].LotType < 1 ? "" : CLOT.FINISH_LOT[n].ExceptCount.ToString();
+                GridEndLot.Rows[n].Cells[9].Value = CLOT.FINISH_LOT[n].LotType < 1 ? "" : CLOT.FINISH_LOT[n].OutCnt.ToString();
+                GridEndLot.Rows[n].Cells[10].Value = CLOT.FINISH_LOT[n].WorkSort;
             }
 
-            RAIL_OVERLAP.BackColor = CLOT.InfoStrip[T.Gripper].Overlap ? Color.Red : Color.White;
-            STRIP_OVERLAP.BackColor = CLOT.InfoStrip[T.StripPk].Overlap ? Color.Red : Color.White;
-            SAW_OVERLAP.BackColor = CLOT.SawStageStripOverlap ? Color.Red : Color.White;
-            UNIT_OVERLAP.BackColor = CLOT.InfoStrip[T.UnitPk].Overlap ? Color.Red : Color.White;
+            RAIL_OVERLAP.BackColor      = CLOT.InfoStrip[T.Gripper].Overlap ? Color.Red : Color.White;
+            STRIP_OVERLAP.BackColor     = CLOT.InfoStrip[T.StripPk].Overlap ? Color.Red : Color.White;
+            SAW_OVERLAP.BackColor       = CLOT.SawStageStripOverlap ? Color.Red : Color.White;
+            UNIT_OVERLAP.BackColor      = CLOT.InfoStrip[T.UnitPk].Overlap ? Color.Red : Color.White;
             MAPBLOCK1_OVERLAP.BackColor = CLOT.InfoStrip[T.DryTable1].Overlap ? Color.Red : Color.White;
             MAPBLOCK2_OVERLAP.BackColor = CLOT.InfoStrip[T.DryTable2].Overlap ? Color.Red : Color.White;
+
+            LB_DOOR_SKIP.BackColor = DATA_.mDOOR_SKIP ? Color.Red : Color.White;
+            if (DATA_.eLoginLevel >= eLogLevel.ADMIN){
+                BTN_CNT_RESET.Visible   = true;
+                SETTING_SKIP.Visible    = true;
+            }
+            else { 
+                BTN_CNT_RESET.Visible   = false;
+                SETTING_SKIP.Visible    = false;
+                DATA_.mTRIP_SKIP        = false;
+                DATA_.mAIR_SKIP         = false;
+            }
         }
 
         void DrawMGZ(PictureBox image, int cnt, int m){

@@ -4,12 +4,18 @@ namespace NSS_3310S.SEQ.MODULE{
     public class HEAD_2 : BASE{
         readonly int nThread = T.Head2;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO || prMACHINE[CP.SelectHead] == (int)eHD.HD1){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             UTIL_.DELAY(100);
             do{
                 if (gExit) break;
-                UTIL_.DELAY(2);
-                if (eMCStatus != eMachineStatus.AUTO || prMACHINE[CP.SelectHead] == (int)eHD.HD1) continue;
+                if (!CheckRunThread()) continue;
 
                 if (IsBIT[B.X1PicBusy])
                     while (eRTN.SUCESS != MoveXPicReady(nThread, eHD.HD2, (eMAP_BLOCK)IsLONG[L.CurWorkStage], ePK.PKR1, stBIT.NotCAM, "X2 PICKUP 대기 위치 이송")) ;
@@ -33,6 +39,8 @@ namespace NSS_3310S.SEQ.MODULE{
 
                 PkRejectPlc(nThread, eHD.HD2, "UNIT REJECT");
                 COM_.SetBit(nThread, B.X2Working, false, "X2 PIC AND PLC 진행");
+
+                PkVacReset(eHD.HD2);
             } while (true);
         }
     }

@@ -172,6 +172,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.HeadAndPalletAndTray = new System.Windows.Forms.TabPage();
+            this.Pkr_Pic = new System.Windows.Forms.Button();
             this.btnAllPkCal = new System.Windows.Forms.Button();
             this.CHK_PK_Z_OPTION = new System.Windows.Forms.CheckBox();
             this.CHK_BTM_Z_POSITION = new System.Windows.Forms.CheckBox();
@@ -372,6 +373,9 @@
             this.uBarcode_Y = new LIB_.UERCTRL.UCL_JOG();
             this.label51 = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
+            this.CHK_UNCLEMP_DELAY = new System.Windows.Forms.CheckBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.LBL_UNCLEMP_DELAY = new System.Windows.Forms.Label();
             this.ledMGZ_CONV_F = new System.Windows.Forms.Label();
             this.oPusher_B = new System.Windows.Forms.Label();
             this.ucMGZ_CONV_B = new System.Windows.Forms.Button();
@@ -2650,6 +2654,7 @@
             // 
             this.HeadAndPalletAndTray.BackColor = System.Drawing.Color.WhiteSmoke;
             this.HeadAndPalletAndTray.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HeadAndPalletAndTray.Controls.Add(this.Pkr_Pic);
             this.HeadAndPalletAndTray.Controls.Add(this.btnAllPkCal);
             this.HeadAndPalletAndTray.Controls.Add(this.CHK_PK_Z_OPTION);
             this.HeadAndPalletAndTray.Controls.Add(this.CHK_BTM_Z_POSITION);
@@ -2692,6 +2697,20 @@
             this.HeadAndPalletAndTray.TabIndex = 3;
             this.HeadAndPalletAndTray.Text = "BOTTOM VISION";
             // 
+            // Pkr_Pic
+            // 
+            this.Pkr_Pic.BackColor = System.Drawing.Color.White;
+            this.Pkr_Pic.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Pkr_Pic.ForeColor = System.Drawing.Color.Black;
+            this.Pkr_Pic.Location = new System.Drawing.Point(22, 512);
+            this.Pkr_Pic.Name = "Pkr_Pic";
+            this.Pkr_Pic.Size = new System.Drawing.Size(72, 48);
+            this.Pkr_Pic.TabIndex = 1531;
+            this.Pkr_Pic.Tag = "0";
+            this.Pkr_Pic.Text = "TEST\r\nPICKUP";
+            this.Pkr_Pic.UseVisualStyleBackColor = false;
+            this.Pkr_Pic.Click += new System.EventHandler(this.ManualRun_Click);
+            // 
             // btnAllPkCal
             // 
             this.btnAllPkCal.BackColor = System.Drawing.Color.White;
@@ -2700,10 +2719,10 @@
             this.btnAllPkCal.ForeColor = System.Drawing.Color.Black;
             this.btnAllPkCal.Image = ((System.Drawing.Image)(resources.GetObject("btnAllPkCal.Image")));
             this.btnAllPkCal.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAllPkCal.Location = new System.Drawing.Point(502, 432);
+            this.btnAllPkCal.Location = new System.Drawing.Point(502, 284);
             this.btnAllPkCal.Margin = new System.Windows.Forms.Padding(0);
             this.btnAllPkCal.Name = "btnAllPkCal";
-            this.btnAllPkCal.Size = new System.Drawing.Size(123, 84);
+            this.btnAllPkCal.Size = new System.Drawing.Size(120, 69);
             this.btnAllPkCal.TabIndex = 1530;
             this.btnAllPkCal.Tag = "1";
             this.btnAllPkCal.Text = "모든 피커\r\nPICK-UP / PLACE\r\n위치 AUTO CAL\'";
@@ -2774,7 +2793,7 @@
             this.btnPkCal.Location = new System.Drawing.Point(502, 211);
             this.btnPkCal.Margin = new System.Windows.Forms.Padding(0);
             this.btnPkCal.Name = "btnPkCal";
-            this.btnPkCal.Size = new System.Drawing.Size(100, 58);
+            this.btnPkCal.Size = new System.Drawing.Size(120, 69);
             this.btnPkCal.TabIndex = 1526;
             this.btnPkCal.Tag = "1";
             this.btnPkCal.Text = "피커 CAL\'";
@@ -5574,7 +5593,7 @@
             // 
             // pRFReader
             // 
-            this.pRFReader.Location = new System.Drawing.Point(5, 406);
+            this.pRFReader.Location = new System.Drawing.Point(5, 451);
             this.pRFReader.Name = "pRFReader";
             this.pRFReader.Size = new System.Drawing.Size(281, 137);
             this.pRFReader.TabIndex = 1518;
@@ -5657,6 +5676,9 @@
             // panel23
             // 
             this.panel23.BackColor = System.Drawing.Color.Lavender;
+            this.panel23.Controls.Add(this.CHK_UNCLEMP_DELAY);
+            this.panel23.Controls.Add(this.label64);
+            this.panel23.Controls.Add(this.LBL_UNCLEMP_DELAY);
             this.panel23.Controls.Add(this.ledMGZ_CONV_F);
             this.panel23.Controls.Add(this.oPusher_B);
             this.panel23.Controls.Add(this.ucMGZ_CONV_B);
@@ -5681,16 +5703,54 @@
             this.panel23.Controls.Add(this.MGZ_Unloading);
             this.panel23.Location = new System.Drawing.Point(5, 29);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(281, 378);
+            this.panel23.Size = new System.Drawing.Size(281, 421);
             this.panel23.TabIndex = 1514;
+            // 
+            // CHK_UNCLEMP_DELAY
+            // 
+            this.CHK_UNCLEMP_DELAY.BackColor = System.Drawing.Color.Transparent;
+            this.CHK_UNCLEMP_DELAY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CHK_UNCLEMP_DELAY.ForeColor = System.Drawing.Color.Black;
+            this.CHK_UNCLEMP_DELAY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.CHK_UNCLEMP_DELAY.Location = new System.Drawing.Point(63, 315);
+            this.CHK_UNCLEMP_DELAY.Name = "CHK_UNCLEMP_DELAY";
+            this.CHK_UNCLEMP_DELAY.Padding = new System.Windows.Forms.Padding(7, 0, 2, 0);
+            this.CHK_UNCLEMP_DELAY.Size = new System.Drawing.Size(95, 31);
+            this.CHK_UNCLEMP_DELAY.TabIndex = 1524;
+            this.CHK_UNCLEMP_DELAY.Text = "언클램프\r\nDELAY 적용";
+            this.CHK_UNCLEMP_DELAY.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CHK_UNCLEMP_DELAY.UseVisualStyleBackColor = false;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.Location = new System.Drawing.Point(241, 331);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(31, 13);
+            this.label64.TabIndex = 1534;
+            this.label64.Text = "msec";
+            // 
+            // LBL_UNCLEMP_DELAY
+            // 
+            this.LBL_UNCLEMP_DELAY.BackColor = System.Drawing.Color.White;
+            this.LBL_UNCLEMP_DELAY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LBL_UNCLEMP_DELAY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBL_UNCLEMP_DELAY.Location = new System.Drawing.Point(160, 313);
+            this.LBL_UNCLEMP_DELAY.Name = "LBL_UNCLEMP_DELAY";
+            this.LBL_UNCLEMP_DELAY.Size = new System.Drawing.Size(78, 30);
+            this.LBL_UNCLEMP_DELAY.TabIndex = 1533;
+            this.LBL_UNCLEMP_DELAY.Tag = "언클램프 대기시간";
+            this.LBL_UNCLEMP_DELAY.Text = "5000";
+            this.LBL_UNCLEMP_DELAY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ledMGZ_CONV_F
             // 
             this.ledMGZ_CONV_F.BackColor = System.Drawing.Color.Red;
             this.ledMGZ_CONV_F.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ledMGZ_CONV_F.Location = new System.Drawing.Point(179, 309);
+            this.ledMGZ_CONV_F.Location = new System.Drawing.Point(180, 353);
             this.ledMGZ_CONV_F.Name = "ledMGZ_CONV_F";
-            this.ledMGZ_CONV_F.Size = new System.Drawing.Size(15, 65);
+            this.ledMGZ_CONV_F.Size = new System.Drawing.Size(11, 65);
             this.ledMGZ_CONV_F.TabIndex = 1527;
             // 
             // oPusher_B
@@ -5698,7 +5758,7 @@
             this.oPusher_B.BackColor = System.Drawing.Color.Red;
             this.oPusher_B.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.oPusher_B.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.oPusher_B.Location = new System.Drawing.Point(101, 292);
+            this.oPusher_B.Location = new System.Drawing.Point(179, 292);
             this.oPusher_B.Name = "oPusher_B";
             this.oPusher_B.Size = new System.Drawing.Size(11, 15);
             this.oPusher_B.TabIndex = 1532;
@@ -5709,10 +5769,11 @@
             // ucMGZ_CONV_B
             // 
             this.ucMGZ_CONV_B.BackColor = System.Drawing.Color.White;
+            this.ucMGZ_CONV_B.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ucMGZ_CONV_B.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucMGZ_CONV_B.Image = ((System.Drawing.Image)(resources.GetObject("ucMGZ_CONV_B.Image")));
             this.ucMGZ_CONV_B.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.ucMGZ_CONV_B.Location = new System.Drawing.Point(92, 309);
+            this.ucMGZ_CONV_B.Location = new System.Drawing.Point(92, 353);
             this.ucMGZ_CONV_B.Name = "ucMGZ_CONV_B";
             this.ucMGZ_CONV_B.Size = new System.Drawing.Size(85, 65);
             this.ucMGZ_CONV_B.TabIndex = 1524;
@@ -5726,7 +5787,7 @@
             this.iPusher_B.BackColor = System.Drawing.Color.Lime;
             this.iPusher_B.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.iPusher_B.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.iPusher_B.Location = new System.Drawing.Point(101, 259);
+            this.iPusher_B.Location = new System.Drawing.Point(179, 259);
             this.iPusher_B.Name = "iPusher_B";
             this.iPusher_B.Size = new System.Drawing.Size(11, 15);
             this.iPusher_B.TabIndex = 1531;
@@ -5737,10 +5798,11 @@
             // ucMGZ_CONV_F
             // 
             this.ucMGZ_CONV_F.BackColor = System.Drawing.Color.White;
+            this.ucMGZ_CONV_F.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ucMGZ_CONV_F.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucMGZ_CONV_F.Image = ((System.Drawing.Image)(resources.GetObject("ucMGZ_CONV_F.Image")));
             this.ucMGZ_CONV_F.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.ucMGZ_CONV_F.Location = new System.Drawing.Point(194, 309);
+            this.ucMGZ_CONV_F.Location = new System.Drawing.Point(190, 353);
             this.ucMGZ_CONV_F.Name = "ucMGZ_CONV_F";
             this.ucMGZ_CONV_F.Size = new System.Drawing.Size(85, 65);
             this.ucMGZ_CONV_F.TabIndex = 1526;
@@ -5753,9 +5815,9 @@
             // 
             this.ledMGZ_CONV_B.BackColor = System.Drawing.Color.Red;
             this.ledMGZ_CONV_B.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ledMGZ_CONV_B.Location = new System.Drawing.Point(77, 309);
+            this.ledMGZ_CONV_B.Location = new System.Drawing.Point(82, 353);
             this.ledMGZ_CONV_B.Name = "ledMGZ_CONV_B";
-            this.ledMGZ_CONV_B.Size = new System.Drawing.Size(15, 65);
+            this.ledMGZ_CONV_B.Size = new System.Drawing.Size(11, 65);
             this.ledMGZ_CONV_B.TabIndex = 1525;
             // 
             // oPusher_F
@@ -5763,7 +5825,7 @@
             this.oPusher_F.BackColor = System.Drawing.Color.Red;
             this.oPusher_F.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.oPusher_F.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.oPusher_F.Location = new System.Drawing.Point(101, 277);
+            this.oPusher_F.Location = new System.Drawing.Point(179, 277);
             this.oPusher_F.Name = "oPusher_F";
             this.oPusher_F.Size = new System.Drawing.Size(11, 15);
             this.oPusher_F.TabIndex = 1530;
@@ -5776,7 +5838,7 @@
             this.iPusher_F.BackColor = System.Drawing.Color.Lime;
             this.iPusher_F.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.iPusher_F.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.iPusher_F.Location = new System.Drawing.Point(101, 244);
+            this.iPusher_F.Location = new System.Drawing.Point(179, 244);
             this.iPusher_F.Name = "iPusher_F";
             this.iPusher_F.Size = new System.Drawing.Size(11, 15);
             this.iPusher_F.TabIndex = 1529;
@@ -5793,7 +5855,7 @@
             this.Pusher_FB.Image = ((System.Drawing.Image)(resources.GetObject("Pusher_FB.Image")));
             this.Pusher_FB.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.Pusher_FB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Pusher_FB.Location = new System.Drawing.Point(113, 243);
+            this.Pusher_FB.Location = new System.Drawing.Point(191, 243);
             this.Pusher_FB.Margin = new System.Windows.Forms.Padding(0);
             this.Pusher_FB.Name = "Pusher_FB";
             this.Pusher_FB.Size = new System.Drawing.Size(85, 65);
@@ -5809,7 +5871,7 @@
             this.oMGZClamp_U.BackColor = System.Drawing.Color.Red;
             this.oMGZClamp_U.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.oMGZClamp_U.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.oMGZClamp_U.Location = new System.Drawing.Point(3, 292);
+            this.oMGZClamp_U.Location = new System.Drawing.Point(80, 292);
             this.oMGZClamp_U.Name = "oMGZClamp_U";
             this.oMGZClamp_U.Size = new System.Drawing.Size(11, 15);
             this.oMGZClamp_U.TabIndex = 1527;
@@ -5822,7 +5884,7 @@
             this.iMGZClamp_U.BackColor = System.Drawing.Color.Lime;
             this.iMGZClamp_U.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.iMGZClamp_U.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.iMGZClamp_U.Location = new System.Drawing.Point(3, 259);
+            this.iMGZClamp_U.Location = new System.Drawing.Point(80, 259);
             this.iMGZClamp_U.Name = "iMGZClamp_U";
             this.iMGZClamp_U.Size = new System.Drawing.Size(11, 15);
             this.iMGZClamp_U.TabIndex = 1526;
@@ -5835,7 +5897,7 @@
             this.oMGZClamp_L.BackColor = System.Drawing.Color.Red;
             this.oMGZClamp_L.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.oMGZClamp_L.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.oMGZClamp_L.Location = new System.Drawing.Point(3, 277);
+            this.oMGZClamp_L.Location = new System.Drawing.Point(80, 277);
             this.oMGZClamp_L.Name = "oMGZClamp_L";
             this.oMGZClamp_L.Size = new System.Drawing.Size(11, 15);
             this.oMGZClamp_L.TabIndex = 1525;
@@ -5848,7 +5910,7 @@
             this.iMGZClamp_L.BackColor = System.Drawing.Color.Lime;
             this.iMGZClamp_L.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.iMGZClamp_L.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.iMGZClamp_L.Location = new System.Drawing.Point(3, 244);
+            this.iMGZClamp_L.Location = new System.Drawing.Point(80, 244);
             this.iMGZClamp_L.Name = "iMGZClamp_L";
             this.iMGZClamp_L.Size = new System.Drawing.Size(11, 15);
             this.iMGZClamp_L.TabIndex = 1524;
@@ -5865,7 +5927,7 @@
             this.MGZClamp_LU.Image = ((System.Drawing.Image)(resources.GetObject("MGZClamp_LU.Image")));
             this.MGZClamp_LU.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MGZClamp_LU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MGZClamp_LU.Location = new System.Drawing.Point(15, 243);
+            this.MGZClamp_LU.Location = new System.Drawing.Point(92, 243);
             this.MGZClamp_LU.Margin = new System.Windows.Forms.Padding(0);
             this.MGZClamp_LU.Name = "MGZClamp_LU";
             this.MGZClamp_LU.Size = new System.Drawing.Size(85, 65);
@@ -7975,5 +8037,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button CleanZone_Airshower;
         private System.Windows.Forms.Label oUnitPkAirShower;
+        private System.Windows.Forms.CheckBox CHK_UNCLEMP_DELAY;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label LBL_UNCLEMP_DELAY;
+        private System.Windows.Forms.Button Pkr_Pic;
     }
 }

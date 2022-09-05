@@ -52,7 +52,7 @@
 
     public class D : DATA_
     {
-        public static readonly int CycleTime                    = 0;    // ONE CYCLE.
+        public static readonly int CycleTime                    = 0;    // ONE CYCLE. //STRIP PLACE -> UNIT PICK-UP CYCLE-TIME
         public static readonly int UPH                          = 1;    // UPH 시간 
         public static readonly int PkgUPH                       = 2;    // 자재 개별 로딩시간
         public static readonly int Tact_Avg                     = 3;    // 평균 택타임
@@ -89,7 +89,9 @@
         public static readonly int Stage2UnitOffsetY            = 35;   // 유닛 얼라인 OFFSET Y
         public static readonly int Stage2UnitOffsetT            = 36;   // 유닛 얼라인 OFFSET T
         public static readonly int UnitPk_PicOffsetX            = 37;   // 유닛 피커 픽업 옵셋 
-
+        public static readonly int StripPlcTime                 = 38;   // 다이싱 테이블에 스트립 내려놓은 시간
+        public static readonly int UnitPicTime                  = 39;   // 다이싱 테이블에서 유닛 픽업한 시간
+        
         #region ARRAY
         public static int[] UnitOffsetX                         = { Stage1UnitOffsetX, Stage2UnitOffsetX };
         public static int[] UnitOffsetY                         = { Stage1UnitOffsetY, Stage2UnitOffsetY };
@@ -177,7 +179,15 @@
         public static readonly int GoodTrayTackNow              = 36;
         public static readonly int GoodTrayTackEnd              = 37;
         public static readonly int ITSCount                     = 38;
-        
+        public static readonly int PowerSwitchOnDelayTime       = 39;
+        public static readonly int PowerSwitchOffDelayTime      = 40;
+        //24시간 기준 생산량 확인 
+        public static readonly int DayMGZCnt                    = 41;
+        public static readonly int DayStripCnt                  = 42;
+        public static readonly int DayGoodUnit                  = 43;
+        public static readonly int DayReworkUnit                = 44;
+        public static readonly int DayRejectUnit                = 45;
+
         #region ARRAY
         public static int[] Production                          = { LotCnt, StripCnt, UnitCnt, GoodCnt, ReworkCnt, NGCnt, GoodTrayCnt, ReworkTrayCnt, EmptyTrayCnt, InCnt, OutCnt, ITSCount };
         public static int[] ReverseMode                         = { Stage1Reverse, Stage2Reverse };
@@ -216,8 +226,22 @@
             mLName[CurWorkStage]                                = "CURRENT PIC STAGE INFO";
             mLName[CurWorkTray]                                 = "CURRENT PLC TRAY INFO";
             mLName[CurWorkXPlc]                                 = "CURRENT PLC HEAD INFO";
-
+            mLName[Stage1TackNow]                               = "STAGE1 TACK START";
+            mLName[Stage1TackEnd]                               = "STAGE1 TACK END";
+            mLName[Stage2TackNow]                               = "STAGE2 TACK START";
+            mLName[Stage2TackEnd]                               = "STAGE2 TACK END";
+            mLName[GoodTrayTackNow]                             = "OK TRAY TACK START";
+            mLName[GoodTrayTackEnd]                             = "OK TRAY TACK START";
             mLName[ITSCount]                                    = "ITS COUNT";
+
+            mLName[PowerSwitchOnDelayTime]                      = "POWER ON PUSH DELAY TIME";
+            mLName[PowerSwitchOffDelayTime]                     = "POWER OFF PUSH DELAY TIME";
+
+            mLName[DayMGZCnt]                                   = "TODAY MAGAZINE ADD COUNT";
+            mLName[DayStripCnt]                                 = "TODAY STRIP ADD COUNT";
+            mLName[DayGoodUnit]                                 = "TODAY GOOD UNIT ADD COUNT";
+            mLName[DayReworkUnit]                               = "TODAY REWORK UNIT ADD COUNT";
+            mLName[DayRejectUnit]                               = "TODAY REJECT UNIT ADD COUNT";
         }
 
         public static void Reset(){
@@ -384,7 +408,48 @@
         #endregion
 
         public static void Label(){
-            mBName[WorkEndStop]                                 = "WORK END";
+            mBName[WorkEndStop]         = "WORK END";
+            mBName[HomeStop]            = "HOME STOP";
+            mBName[ToolDataPause]       = "";
+            mBName[InitFail]            = "";
+            mBName[JobMiss]             = "";
+            mBName[Simulation]          = "";
+            mBName[Arear]               = "";
+            mBName[Air]                 = "";
+            mBName[CPTrip]              = "";
+            mBName[StopLoading]         = "";
+            mBName[SystemMSG]           = "";
+            mBName[Runrate_Each]        = "";
+            mBName[EndINITIAL]          = "";
+            mBName[StartEdge]           = "";
+            mBName[InitialEdge]         = "";
+            mBName[HWJogRun]            = "";
+            mBName[TENKEY_JOG]          = "";
+            mBName[MachineWaitProduct]  = "";
+            mBName[PowerOnEdge]         = "";
+            mBName[PowerOffEdge]        = "";
+            mBName[UnitEdgeInspection]  = "";
+            mBName[Dry]                 = "";
+            mBName[ChkEXE]              = "";
+            mBName[TowerLampFlog]       = "";
+            mBName[LoadingStop]         = "";
+            mBName[UnloadingStop]       = "";
+            mBName[WriteLog_UDP]        = "";
+            mBName[PkrPickUpStop]       = "";
+            mBName[PkrPlaceStop]        = "";
+            mBName[SawRecipeOpen]       = "";
+            mBName[VisionRecipeOpen]    = "";
+            mBName[StripPlacStop]       = "";
+            mBName[UnitPickupStop]      = "";
+            mBName[PkrUnitPickUpStop]   = "";
+            mBName[PkrUnitPlaceStop]    = "";
+            mBName[TrayStop]            = "";
+            mBName[NotCheckCleanWater]  = "";
+            mBName[LotEnd]              = "";
+            mBName[SkipDoorLock]        = "";
+            mBName[ElvLDLocation]       = "";
+            mBName[ElvULDLocation]      = "";
+            mBName[ElvStripLoading]     = "";
 
         }
 

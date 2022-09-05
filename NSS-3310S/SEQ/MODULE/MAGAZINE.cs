@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using LIB_.DateType;
+using Object;
 using System;
 
 namespace NSS_3310S.SEQ.MODULE{
@@ -7,12 +8,19 @@ namespace NSS_3310S.SEQ.MODULE{
         string cmds = string.Empty;
         long TackStart = 0, TackEnd = 0;
         eRTN eReturn;
+        string offset;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO /*|| bDRYRUN*/){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO /*|| bDRYRUN*/) continue;
+                if (!CheckRunThread()) continue;
 
                 GetCassate("매거진 공급");
                 StripLoading("매거진 작업 진행");
@@ -29,7 +37,8 @@ namespace NSS_3310S.SEQ.MODULE{
             while (eRTN.SUCESS != UnClamp("매거진 언클램프")) ;
             while (eRTN.SUCESS != MoveY(P.Ready, "", comment + " 엘리베이터 Y축 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.Recive, "", comment + " 엘리베이터 Z축 로딩 매거진 위치 이송")) ;
-            ReCheck:
+            while (eRTN.SUCESS != MoveY(P.Recive, "", comment + " 엘리베이터 Y축 로딩 매거진 위치 이송")) ;
+        ReCheck:
             eReturn = CcwConveyor("로더 컨베어 매거진 투입");
             if (eReturn != eRTN.SUCESS && !bDRYRUN){
                 if (bMF) return eRTN.NotLoadingMagazine;
@@ -49,16 +58,22 @@ namespace NSS_3310S.SEQ.MODULE{
             if (prMACHINE[CP.UseRFID] == (int)eUSE.USE){
 
             } //RF ID READING....
-
+#if _NSS3300
+            cmds = "offset=-" + string.Format("{0:0.0}", prMODEL[RP.MGZ_CLAMP_UP_PITCH]) + ":spd=5";
+#else
             cmds = "offset=" + string.Format("{0:0.0}", prMODEL[RP.MGZ_CLAMP_UP_PITCH]) + ":spd=5";
-            while (eRTN.SUCESS != MoveZ(P.Recive, cmds, comment + " 엘리베이터 Z축 매거진 로딩 픽업 위치 이송")) ;
+#endif
+            while (eRTN.SUCESS != MoveZ(P.Recive, cmds, comment + " 엘리베이터 Z축 매거진 로딩 픽업 위치 이송"));
             if (!bDRYRUN) while (eRTN.SUCESS != Clamp("매거진 클램프")) ;
+#if _NSS3300
+            cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.ElvUpDownPitch]) + ":spd=10";
+#else
             cmds = "offset=" + string.Format("{0:0.0}", prMACHINE[CP.ElvUpDownPitch]) + ":spd=10";
+#endif
             while (eRTN.SUCESS != MoveZ(P.Recive, cmds, comment + " 엘리베이터 Z축 매거진 로딩 픽업 위치 이송")) ;
             while (eRTN.SUCESS != MoveY(P.FirstSlot, "", comment + " 엘리베이터 Y축 매거진 첫번째 슬롯 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.FirstSlot, "", comment + " 엘리베이터 Z축 매거진 첫번째 슬롯 위치 이송")) ;
-            MAP_.SET_CstMapAllExists(M.ElvZ);
-            IsLONG[L.LotCnt]++;
+            AddMagazine();
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
         }
@@ -114,8 +129,11 @@ namespace NSS_3310S.SEQ.MODULE{
             LogStart(nThread, comment + " 시작");
             while (eRTN.SUCESS != PusherBackward("푸셔 후진")) ;
             while (eRTN.SUCESS != MoveY(P.Ready, "", "엘리베이터 Y축 대기 위치 이송")) ;
-
+#if _NSS3300
+            cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.ElvULDUpDownPitch]);
+#else
             cmds = "offset=" + string.Format("{0:0.0}", prMACHINE[CP.ElvULDUpDownPitch]);
+#endif
             while (eRTN.SUCESS != MoveZ(P.Give, cmds, comment + " 엘리베이터 Z축 매거진 언로딩 픽업 위치 이송")) ;
             while (!CheckUnloadingConveyor("언로더 콘베어 상태 확인")) ;
             while (eRTN.SUCESS != MoveY(P.Give, "", comment + " 엘리베이터 Y축 매거진 언로딩 위치 이송")) ;
@@ -125,15 +143,20 @@ namespace NSS_3310S.SEQ.MODULE{
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
 
         #region>> Moudle
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.MGZCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.MGZCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",MGZ," + IsDOUBLE[D.MGZCycle].ToString(), "");
             COM_.SetBit(nThread, B.MGZWorking, false, "엘리베이터 매거진 작업 진행");
             TackStart = Environment.TickCount;
+        }
+        void AddMagazine(){
+            MAP_.SET_CstMapAllExists(M.ElvZ);
+            IsLONG[L.LotCnt]++;
+            IsLONG[L.DayMGZCnt]++;
         }
 
         public bool CheckLoadingMagazine(string comment){
@@ -151,7 +174,12 @@ namespace NSS_3310S.SEQ.MODULE{
             return false;
         }
         public bool CheckUnloadingConveyor(string comment){
+        RECHECK_UNLOADING_MGZ:
+#if _NSS3300
+            if (LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK1) || !LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK2)){
+#else
             if (LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK1) || LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK2)){
+#endif
                 AddMessage(nThread, comment + " - 매거진 가득참 !");
                 COM_.ViewWarning(nThread, W.ULDCst_FullCheck);
                 bWaitProduct = true;
@@ -159,26 +187,45 @@ namespace NSS_3310S.SEQ.MODULE{
                 COM_.SetBit(nThread, B.CstRequest, true, "매거진 배출 확인 플로그");
                 while (UTIL_.WaitBIT(nThread, B.CstRequest, true, "언로더 매거진 배출 상태 확인")) ;
                 bWaitProduct = false;
+                goto RECHECK_UNLOADING_MGZ;
             }
             return true;
         }
 
         public void Conveyor(eConv Status){
             if (eConv.FWD == Status){
+#if _NSS3300
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CW, true);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_BRAKE, true);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CCW, false);
+#else
                 LAB_.BIT_OUT(O.LD_CONV_CW, true);
                 LAB_.BIT_OUT(O.LD_CONV_CCW, false);
                 LAB_.BIT_OUT(O.LD_CONV_STOP, false);
+#endif
             }
             else if (eConv.BWD == Status){
+#if _NSS3300
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CW, false);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_BRAKE, true);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CCW, true);
+#else
                 LAB_.BIT_OUT(O.LD_CONV_CW, false);
                 LAB_.BIT_OUT(O.LD_CONV_CCW, true);
                 LAB_.BIT_OUT(O.LD_CONV_STOP, false);
+#endif
             }
             else{
+#if _NSS3300
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CW, false);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_CCW, false);
+                LAB_.BIT_OUT(O.LD_MGZ_CONVEYOR_BRAKE, false);
+#else
                 LAB_.BIT_OUT(O.LD_CONV_STOP, true);
+#endif
             }
         }
-        public eRTN CwConveyor(string comment){
+        public eRTN CwConveyor(string comment){ //후진
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (bDRYRUN){
                 Conveyor(eConv.FWD);
@@ -187,16 +234,25 @@ namespace NSS_3310S.SEQ.MODULE{
                 return eRTN.SUCESS;
             }
 
+
+#if _NSS3300
+            int[] OffInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
+            int[] OnOutputs = { O.LD_MGZ_CONVEYOR_CCW, O.LD_MGZ_CONVEYOR_BRAKE };
+            int[] OffOutputs = { O.LD_MGZ_CONVEYOR_CW };
+            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, I.Null, OffInpts, OnOutputs, OffOutputs, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
+                return eRTN.TimeOver;
+            }
+#else
             int[] OnInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
             int[] OnOutputs = { O.LD_CONV_CW };
             int[] OffOutputs = { O.LD_CONV_CCW, O.LD_CONV_STOP };
-
             if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
                 return eRTN.TimeOver;
             }
+#endif
             return eRTN.SUCESS;
         }
-        public eRTN CcwConveyor(string comment){
+        public eRTN CcwConveyor(string comment){ //로딩 전진함
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (bDRYRUN){
                 Conveyor(eConv.BWD);
@@ -205,18 +261,30 @@ namespace NSS_3310S.SEQ.MODULE{
                 return eRTN.SUCESS;
             }
 
+
+#if _NSS3300
+            int[] OnInputs = { I.ELV_MZ_EXIST1, I.ELV_MZ_EXIST2 };
+            int[] OffInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
+            int[] OnOutputs = { O.LD_MGZ_CONVEYOR_CW, O.LD_MGZ_CONVEYOR_BRAKE };
+            int[] OffOutputs = { O.LD_MGZ_CONVEYOR_CCW };
+            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInputs, OffInpts, OnOutputs, OffOutputs, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+#else
             int[] OnInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK/*, I.ELV_MZ_EXIST1, I.ELV_MZ_EXIST2*/ };
             int[] OnOutputs = { O.LD_CONV_CCW };
             int[] OffOutputs = { O.LD_CONV_CW, O.LD_CONV_STOP };
-
             if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
 
         public eRTN Clamp(string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
-
+#if _NSS3300
+            if (eMCStatus == eMachineStatus.AUTO) Conveyor(eConv.FWD);
+#else
             if (eMCStatus == eMachineStatus.AUTO) Conveyor(eConv.BWD);
+#endif
+
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.MagazineClamp, -1, I.ELV_MZ_UNCLAMP, O.ELV_CLAMP, O.ELV_UNCLAMP, (int)prMACHINE[CP.ElvClampDelay], comment)){
                 Conveyor(eConv.STOP);
                 return eRTN.FAIL;
@@ -271,6 +339,15 @@ namespace NSS_3310S.SEQ.MODULE{
             SetMoveInfoRaw(M.ElvZ, P.FirstSlot, P.CAL_);
             double dPitch = prMODEL[RP.MGZSlotPitch] * nSlot;
             double dEndPitch = prMODEL[RP.MGZSlotPitch] * (prMODEL[RP.MGZSlotCnt] - 1);
+#if _NSS3300
+            if (prMODEL[RP.MGZ_DIR] == 0){
+                mtDATA[M.ElvZ, P.CAL_].Pos -= dPitch; //기존
+            }
+            else{
+                mtDATA[M.ElvZ, P.CAL_].Pos -= dEndPitch;
+                mtDATA[M.ElvZ, P.CAL_].Pos += dPitch;
+            }
+#else
             if (prMODEL[RP.MGZ_DIR] == 0){
                 mtDATA[M.ElvZ, P.CAL_].Pos += dPitch; //기존
             }
@@ -278,6 +355,7 @@ namespace NSS_3310S.SEQ.MODULE{
                 mtDATA[M.ElvZ, P.CAL_].Pos += dEndPitch;
                 mtDATA[M.ElvZ, P.CAL_].Pos -= dPitch;
             }
+#endif
 
             double dPitchSpd = prMACHINE[CP.MGZPitchSpeed];
             if (dPitchSpd <= 0) dPitchSpd = 50;

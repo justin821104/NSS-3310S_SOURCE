@@ -1,0 +1,29 @@
+﻿1>------ 빌드 시작: 프로젝트: LIB_, 구성: Debug x86 ------
+1>D:\SOURCE\NSS-3310S_SOURCE\LIB_\LIB_\SubFROMLib\CogBarcoder.cs(214,17,214,46): warning CS0618: 'ResultCollector.ComplexResultArrived'은(는) 사용되지 않습니다. 'Use event ComplexResultCompleted instead'
+1>D:\SOURCE\NSS-3310S_SOURCE\LIB_\LIB_\SubFROMLib\CogBarcoder.cs(215,17,215,46): warning CS0618: 'ResultCollector.PartialResultDropped'은(는) 사용되지 않습니다. 'Use event SimpleResultDropped instead'
+1>  LIB_ -> D:\WORK\OUTPUT\NEONTECH\NSS-3310S\LIB_.dll
+2>------ 빌드 시작: 프로젝트: NSS-3310S, 구성: Debug x86 ------
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SEQ\BASE.cs(9,27,9,35): warning CS0108: 'BASE.PkOffset'은(는) 상속된 'DATA_.PkOffset' 멤버를 숨깁니다. 숨기려면 new 키워드를 사용하세요.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(407,28,407,44): warning CS0219: 'dOffestPositionX' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(408,28,408,45): warning CS0219: 'dOffestPositionY1' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(409,28,409,45): warning CS0219: 'dOffestPositionY2' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(411,28,411,33): warning CS0219: 'dSetX' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(412,28,412,34): warning CS0219: 'dSetY1' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(413,28,413,34): warning CS0219: 'dSetY2' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\FORM\FormMotor.cs(415,25,415,30): warning CS0219: 'nXPOS' 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SYSTEM\OPERATOR.cs(322,73,322,89): warning CS0618: 'Thread.Resume()'은(는) 사용되지 않습니다. 'Thread.Resume has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202'
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SYSTEM\OPERATOR.cs(332,123,332,140): warning CS0618: 'Thread.Suspend()'은(는) 사용되지 않습니다. 'Thread.Suspend has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202'
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SYSTEM\OPERATOR.cs(355,21,355,37): warning CS0618: 'Thread.Resume()'은(는) 사용되지 않습니다. 'Thread.Resume has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202'
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SEQ\MODULE\TRAY_PICKER.cs(105,13,105,22): warning CS0164: 이 레이블은 참조되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(59,20,59,28): warning CS0169: 'gigEViewer.pbViewer' 필드가 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(61,14,61,21): warning CS0169: 'gigEViewer.sizeOrg' 필드가 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\SEQ\MODULE\MAGAZINE.cs(11,16,11,22): warning CS0169: 'MAGAZINE.offset' 필드가 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(61,23,61,31): warning CS0169: 'gigEViewer.sizePrev' 필드가 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(66,15,66,21): warning CS0414: 'gigEViewer.fZoomY' 필드가 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(65,15,65,21): warning CS0414: 'gigEViewer.fZoomX' 필드가 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(63,15,63,28): warning CS0414: 'gigEViewer.ratioUcHeight' 필드가 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(57,14,57,19): warning CS0414: 'gigEViewer.alive' 필드가 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(62,15,62,27): warning CS0414: 'gigEViewer.ratioUcWidth' 필드가 할당되었지만 사용되지 않았습니다.
+2>D:\SOURCE\NSS-3310S_SOURCE\NSS-3310S\VISION\gigEViewer.cs(73,15,73,26): warning CS0414: 'gigEViewer.ratioScreen' 필드가 할당되었지만 사용되지 않았습니다.
+2>  NSS-3310S -> D:\WORK\OUTPUT\NEONTECH\NSS-3310S\NSS-3310S.exe
+========== 빌드: 성공 2, 실패 0, 최신 0, 생략 0 ==========

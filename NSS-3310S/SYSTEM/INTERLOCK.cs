@@ -42,18 +42,17 @@ namespace nINTERLOCK{
             }
             else                                                                                IsInterlock(E.emsStripPkZNotReadyPos, false);
 
-            if (P.UnitPkZSafetyPos <= mtSTS[M.UnitPkZ].CurrentPosition) IsInterlock(E.emsUnitPkZnotSafetyLocation, true);
-            else IsInterlock(E.emsUnitPkZnotSafetyLocation, false);
+            if (P.UnitPkZSafetyPos <= mtSTS[M.UnitPkZ].CurrentPosition)                         IsInterlock(E.emsUnitPkZnotSafetyLocation, true);
+            else                                                                                IsInterlock(E.emsUnitPkZnotSafetyLocation, false);
 
-            if (mtDATA[M.StripPkX, P.StripPckUp].bPOS) IsInterlock(E.emsNotStripPkXPicPos, false);
-            else IsInterlock(E.emsNotStripPkXPicPos, true);
+            if (mtDATA[M.StripPkX, P.StripPckUp].bPOS)                                          IsInterlock(E.emsNotStripPkXPicPos, false);
+            else                                                                                IsInterlock(E.emsNotStripPkXPicPos, true);
 
-            if (mtDATA[M.StripPkX, P.StripPlc].bPOS) IsInterlock(E.emsNotStripPkXPlcPos, false);
-            else IsInterlock(E.emsNotStripPkXPlcPos, true);
+            if (mtDATA[M.StripPkX, P.StripPlc].bPOS)                                            IsInterlock(E.emsNotStripPkXPlcPos, false);
+            else                                                                                IsInterlock(E.emsNotStripPkXPlcPos, true);
 
-
-            if (mtDATA[M.UnitPkX, P.UnitPckUp].bPOS) IsInterlock(E.emsNotUnitPkXPicPos, false);
-            else IsInterlock(E.emsNotUnitPkXPicPos, true);
+            if (mtDATA[M.UnitPkX, P.UnitPckUp].bPOS)                                            IsInterlock(E.emsNotUnitPkXPicPos, false);
+            else                                                                                IsInterlock(E.emsNotUnitPkXPicPos, true);
 
             if (mtDATA[M.UnitPkX, P.Cleaner].bPOS) IsInterlock(E.emsNotCleanerPos, false);
             else IsInterlock(E.emsNotCleanerPos, true);
@@ -97,14 +96,24 @@ namespace nINTERLOCK{
             if (mIN[I.NG_STACKER_DN]) IsInterlock(E.emsReworkStackerNotDown, false);
             else IsInterlock(E.emsReworkStackerNotDown, true);
 
+#if _NSS3300
+            if (!mIN[I.NG_RAIL_STACKER_TRAY_CHECK]) IsInterlock(E.emsRworkStackerTraySensing, false);
+            else IsInterlock(E.emsRworkStackerTraySensing, true);
+#else
             if (mIN[I.NG_RAIL_STACKER_TRAY_CHECK]) IsInterlock(E.emsRworkStackerTraySensing, false);
             else IsInterlock(E.emsRworkStackerTraySensing, true);
+#endif
 
             if (mIN[I.GOOD_STACKER_DN]) IsInterlock(E.emsGoodStackerNotDown, false);
             else IsInterlock(E.emsGoodStackerNotDown, true);
 
+#if _NSS3300
+            if (!mIN[I.GOOD_RAIL_STACKER_CHECK]) IsInterlock(E.emsGoodStackerTraySensing, false);
+            else IsInterlock(E.emsGoodStackerTraySensing, true);
+#else
             if (mIN[I.GOOD_RAIL_STACKER_CHECK]) IsInterlock(E.emsGoodStackerTraySensing, false);
             else IsInterlock(E.emsGoodStackerTraySensing, true);
+#endif
 
             if (mtDATA[M.TrayPickerX, P.OKTrayPlc].bPOS && mtSTS[M.TrayPickerZ].CurrentPosition > mtDATA[M.TrayPickerZ, P.Ready].Pos + 10) IsInterlock(E.emsNotMoveGoodTrayFeederBecauseTrayPk, true);
             else IsInterlock(E.emsNotMoveGoodTrayFeederBecauseTrayPk, false);
@@ -112,6 +121,8 @@ namespace nINTERLOCK{
             if (mtDATA[M.TrayPickerX, P.NGTrayPlc].bPOS && mtSTS[M.TrayPickerZ].CurrentPosition > mtDATA[M.TrayPickerZ, P.Ready].Pos + 10) IsInterlock(E.emsNotMoveReworkTrayFeederBecauseTrayPk, true);
             else IsInterlock(E.emsNotMoveReworkTrayFeederBecauseTrayPk, false);
 
+#if _NSS3300
+#else
             if (mIN[I.NG_RAIL_LOADING_TRAY_CHECK]) IsInterlock(E.emsReworkLoadingLocationSensing, false);
             else IsInterlock(E.emsReworkLoadingLocationSensing, true);
 
@@ -123,6 +134,7 @@ namespace nINTERLOCK{
 
             if (mIN[I.GOOD_RAIL_HEAD1_CHECK] && mIN[I.GOOD_RAIL_HEAD2_CHECK]) IsInterlock(E.emsGoodPlaceLocationSensing, false);
             else IsInterlock(E.emsGoodPlaceLocationSensing, true);
+#endif
         }
 
         public bool ChkInterlock(int[] Interlock, bool WithError){
@@ -228,6 +240,7 @@ namespace nINTERLOCK{
                 case W.PlaceFail:
                 case W.DllWarnning:
                 case W.ChkForm_LotIn:
+                case W.RemoveGoodTray:
                     ConfirmUser[nWAR].TypeOk = true;
                     ConfirmUser[nWAR].AfterReset = false;
                     ConfirmUser[nWAR].bz = O.BUZZER_ERR;
@@ -241,6 +254,7 @@ namespace nINTERLOCK{
                     ConfirmUser[nWAR].bz = -1;
                     break;
 
+                case W.ChkMessageBox:
                 case W.EmptyTray:
                 case W.ReworkTrayFull:
                 case W.GoodTrayFull:

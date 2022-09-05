@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NSS_3310S</RootNamespace>
     <AssemblyName>NSS-3310S</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_EURESYS;_nUDP;_MsSQL</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_UDP;_MsSQL;_NSS3300;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
@@ -41,11 +41,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_EURESYS;_UDP;_MsSQL</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_nUDP;_nMsSQL;_nNSS3300;</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>7</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>

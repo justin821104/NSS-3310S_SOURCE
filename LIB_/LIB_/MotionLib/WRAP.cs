@@ -311,12 +311,21 @@ public class WRAP_ : DATA_
                 if (LAB_.INPUT((short)OffINPUT)) bFLAG = false;
             }
             if (ChkOverloadINPUT > -1){
+#if _NSS3300 //접점 반대임!
+                if (LAB_.INPUT((short)ChkOverloadINPUT)){
+                    if (OnOUTPUT > -1) LAB_.BIT_OUT((short)OnOUTPUT, false);
+                    if (OffOUTPUT > -1) LAB_.BIT_OUT((short)OffOUTPUT, true);
+                    UTIL_.OnERROR(nERR_OVERLOAD, 100);
+                    goto Fail;
+                }
+#else
                 if (!LAB_.INPUT((short)ChkOverloadINPUT)){
                     if (OnOUTPUT > -1)  LAB_.BIT_OUT((short)OnOUTPUT, false);
                     if (OffOUTPUT > -1) LAB_.BIT_OUT((short)OffOUTPUT, true);
                     UTIL_.OnERROR(nERR_OVERLOAD, 100);
                     goto Fail;
                 }
+#endif
             }
             if (bFLAG) goto Sucess;
         }

@@ -50,6 +50,7 @@ namespace NSS_3310S{
             bMN_4.Click += (sender, e) => SCREEN_CHAGE(bMN_4);
             bMN_5.Click += (sender, e) => SCREEN_CHAGE(bMN_5);
 
+            LBL_UNCLEMP_DELAY.DoubleClick += (sender, e) => INPUT_KEYPAD(LBL_UNCLEMP_DELAY);
             editREPEAT_TIME.DoubleClick += (sender, e) => REPEAT_TIME(editREPEAT_TIME);
             swRepeat.Click += (sender, e) => REPEAT();
 
@@ -64,7 +65,15 @@ namespace NSS_3310S{
             btn_Pitch_5.Click += (sender, e) => OffestPitchValue(btn_Pitch_5);
 
             lbl_IncPitch.DoubleClick += (sender, e) => SetIncPitch(lbl_IncPitch);
-
+#if _NSS3300
+            uMT = new UCL_JOG[] { uElv_Y, uElv_Z, uBarcode_Y, uRail_Y1, uGripperX,
+                                     uStripPkr_X, uStripPkr_Z,
+                                     uUnitPkr_X, uUnitPkr_Z,
+                                     uMappingTable, uMarkVisionX, uMarkVisionZ,
+                                     uBtmCamY, uBtmCamZ, uHeadX, uHeadT, uHeadPkrZ, uTrayTransferY,
+                                     uTrayPkr_X, uTrayPkr_Z, uEmptyLift
+                                    };
+#else
             uMT = new UCL_JOG[] { uElv_Y, uElv_Z, uBarcode_Y, uRail_Y1, uRail_Y2, uGripperX,
                                      uStripPkr_X, uStripPkr_Z, uPreAlign_Z,
                                      uUnitPkr_X, uUnitPkr_Z,
@@ -72,10 +81,19 @@ namespace NSS_3310S{
                                      uBtmCamY, uBtmCamZ, uHeadX, uHeadT, uHeadPkrZ, uTrayTransferY,
                                      uTrayPkr_X, uTrayPkr_Z, uEmptyLift
                                     };
+#endif
             for (int i = 0; i < uMT.Length; i++){
                 uMT[i].NumMT = M.MN_MT[i];
             }
 
+#if _NSS3300
+            Input = new Label[] { iMGZClamp_L, iMGZClamp_U, iPusher_F, iPusher_B, iRAIL_U, iRAIL_D, iGrp_O, iGrp_C,
+                                  iStripVcm, iUnitVcm, iScrapVcm1, iScrapVcm2, iCleaner_L, iCleaner_R,
+                                  iPallet_V, iBTMCalZig_F, iBTMCalZig_B,
+                                  iGT1FClamp_U, iGT1BClamp_U, iGT2FClamp_U, iGT2BClamp_U, iGoodTrayTable_U, iGoodTrayTable_D, iRTClamp_U1, iRTClamp_U2, iGoodTrayPreAlign_F, iGoodTrayPreAlign_B, iReworkTrayTable_U, iReworkTrayTable_D,
+                                  iFTRAY_PKR_L, iFTRAY_PKR_U, iEmptyStakerStopper_F1, iEmptyStakerStopper_F2, iEmptyStakerStopper_F3, iEmptyStakerStopper_F4, iEmptyStakerStopper_B1, iEmptyStakerStopper_B2, iEmptyStakerStopper_B3, iEmptyStakerStopper_B4, iEmptyTrayTransfer_U1, iEmptyTrayTransfer_U2, iEmptyTransfer_F, iEmptyTransfer_B
+            };
+#else
             Input = new Label[] { iMGZClamp_L, iMGZClamp_U, iPusher_F, iPusher_B, iRAIL_U, iRAIL_D, iGrp_O, iGrp_C,
                                   iStripVcm, iUnitVcm, iScrapVcm1, iScrapVcm2, iCleaner_L, iCleaner_R,
                                   iPallet_V, iBTMCalZig_F, iBTMCalZig_B,
@@ -83,10 +101,19 @@ namespace NSS_3310S{
                                   iFTRAY_PKR_L, iFTRAY_PKR_U, iEmptyStakerStopper_F1, iEmptyStakerStopper_F2, iEmptyStakerStopper_F3, iEmptyStakerStopper_F4, iEmptyStakerStopper_B1, iEmptyStakerStopper_B2, iEmptyStakerStopper_B3, iEmptyStakerStopper_B4, iEmptyTrayTransfer_U1, iEmptyTrayTransfer_U2, iEmptyTransfer_F, iEmptyTransfer_B,
                                   iRAIL_V
             };
+#endif
             for (int i = 0; i < Input.Length; i++){
                 Input[i].TabIndex = I.MNInput[i];
             }
-
+#if _NSS3300
+            Output = new Label[] { oMGZClamp_L, oMGZClamp_U, oPusher_F, oPusher_B, oRAIL_U, oRAIL_D, oGrp_O, oGrp_C,
+                                   oStripVcmOn, oStripBlow, oUnitVcm, oUnitRej, oSCRAP1_V, oSCRAP2_V, oSCRAP1_R, oSCRAP2_R,oCleaner_W1,oCleaner_W2, oCleaner_A1, oCleaner_L, oCleaner_R,
+                                   oPallet_Air, oPallet_V, oTopVision_A, oBTMCalZig_F, oBTMCalZig_B, oBTMVision_A,
+                                   oGT1FClamp_L, oGT1FClamp_U, oGT1RClamp_L, oGT1RClamp_U, oGT2FClamp_L, oGT2FClamp_U, oGT2RClamp_L, oGT2RClamp_U, oGoodTrayTable_U, oGoodTrayTable_D, oRTClamp_L, oRTClamp_U, oGoodTrayPreAlign_F, oGoodTrayPreAlign_B, oReworkTrayTable_U, oReworkTrayTable_D,
+                                   oFTRYPKR_L, oFTRYPKR_U, oEmptyStakerStopper_F1, oEmptyStakerStopper_F2, oEmptyStakerStopper_B1, oEmptyStakerStopper_B2, oEmptyTrayTransfer_L, oEmptyTrayTransfer_U, oEmptyTransfer_F, oEmptyTransfer_B,
+                                   oUnitPkAirShower
+            };
+#else
             Output = new Label[] { oMGZClamp_L, oMGZClamp_U, oPusher_F, oPusher_B, oRAIL_U, oRAIL_D, oGrp_O, oGrp_C,
                                    oStripVcmOn, oStripVcmOff, oStripBlow, oStripPurge, oUnitVcm, oUnitRej, oSCRAP1_V, oSCRAP2_V, oSCRAP1_R, oSCRAP2_R,oCleaner_W1,oCleaner_W2, oCleaner_A1, oCleaner_A2, oCleaner_L, oCleaner_R,
                                    oPallet_Air, oPallet_V, oTopVision_A, oBTMCalZig_F, oBTMCalZig_B, oBTMVision_A,
@@ -94,6 +121,8 @@ namespace NSS_3310S{
                                    oFTRYPKR_L, oFTRYPKR_U, oEmptyStakerStopper_F1, oEmptyStakerStopper_F2, oEmptyStakerStopper_B1, oEmptyStakerStopper_B2, oEmptyTrayTransfer_L, oEmptyTrayTransfer_U, oEmptyTransfer_F, oEmptyTransfer_B,
                                    oRAIL_V, oRAIL_B, oUnitPkAirShower
             };
+#endif
+
             for (int i = 0; i < Output.Length; i++){
                 Output[i].TabIndex = O.MNOutput[i];
             }
@@ -129,7 +158,7 @@ namespace NSS_3310S{
                                       OKTray1_Unloading, OKTray2_Unloading, OKTray1_Loading, OKTray2_Loading,
                                       NGTray_Unloading, NGTray_Loading,
                                       EmptyLift_TrayLoading, EmptyTrayPickUp,
-                                      btnPkCal, CycleRun_PRS_TEST, RunMarkInspection, btnAllPkCal
+                                      btnPkCal, CycleRun_PRS_TEST, RunMarkInspection, btnAllPkCal, Pkr_Pic
             };
             for (int i = 0; i < CycleRun.Length; i++){
                 CycleRun[i].TabIndex = ManualNumber.MNCycleRun[i];
@@ -241,7 +270,7 @@ namespace NSS_3310S{
             SelectGoodTrayTransfer1.Click += (sender, e) => SelectMoter(SelectGoodTrayTransfer1);
             SelectGoodTrayTransfer2.Click += (sender, e) => SelectMoter(SelectGoodTrayTransfer2);
             SelectReworkTrayTransfer.Click += (sender, e) => SelectMoter(SelectReworkTrayTransfer);
-            #endregion
+#endregion
 
             cbxScrap.SelectedIndex = 2;
             SelectMapTable1.Checked = true;
@@ -255,6 +284,14 @@ namespace NSS_3310S{
             SelectMoter(SelectMapTable1);
 
             DocRFReader();
+
+#if _NSS3300
+            uPreAlign_Z.Visible = false;
+            uRail_Y2.Visible = false;
+#else
+            uPreAlign_Z.Visible = true;
+            uRail_Y2.Visible = true;
+#endif
         }
 
         public void DocRFReader(){
@@ -341,7 +378,7 @@ namespace NSS_3310S{
             cbxTRAY_Y.SelectedIndex = 0;
         }
 
-        #region >>EVENT
+#region >>EVENT
         void RESET_SCREEN(){
             for (int i = 0; i < 6; i++){
                 if (Controls.Find("bMN_" + i.ToString(), true).FirstOrDefault() is Button nBtn) nBtn.BackColor = Color.White; //bMN_3
@@ -356,6 +393,14 @@ namespace NSS_3310S{
             BTN = sender as Button;
             DEF.ManualPage = Convert.ToInt32(BTN.Tag);
             SCREEN_VIEW(DEF.ManualPage);
+        }
+
+        void INPUT_KEYPAD(object sender){
+            LBL = (Label)sender;
+            LBL.BackColor = Color.Lime;
+            string msg = (LBL.Tag).ToString();
+            double backup = Convert.ToDouble(LBL.Text);
+            UTIL_.OPEN_KEYPAD_LABEL(msg, ref LBL, false);
         }
 
         void REPEAT_TIME(object sender){
@@ -508,7 +553,7 @@ namespace NSS_3310S{
 
             if (!bFirstView) IniComboBox();
         }
-        #endregion
+#endregion
 
         private void ManualRun_Click(object sender, EventArgs e){
             BTN = (Button)sender;
@@ -533,6 +578,17 @@ namespace NSS_3310S{
                         break;
                     case ManualNumber.RunMGZSlotLocation:
                         DATA_.iMANUAL.int_1 = cSlotCnt.SelectedIndex;
+                        break;
+                    case ManualNumber.MGZClamp:
+                        DATA_.iMANUAL.bool_1 = CHK_UNCLEMP_DELAY.Checked;
+                        try{
+                            DATA_.iMANUAL.int_1 = int.Parse(LBL_UNCLEMP_DELAY.Text);
+                        }
+                        catch (Exception E){
+                            LogWR_.SaveLogException("MANUAL MAGAZINE UNCLAMP DELAY TIME WRITE FAIL", E);
+                            LBL_UNCLEMP_DELAY.Text = "0";
+                            DATA_.iMANUAL.int_1 = 0;
+                        }
                         break;
 
                     case ManualNumber.StripPkPic:
@@ -681,6 +737,17 @@ namespace NSS_3310S{
                         DATA_.iMANUAL.iMT1 = mtHead;
                         DATA_.iMANUAL.int_1 = nHD;
                         break;
+
+                    case ManualNumber.PkrPic:
+                        DATA_.iMANUAL.int_1 = nHD; //eHD
+                        DATA_.iMANUAL.int_2 = nStage; //eMAP_BLOCK
+                        DATA_.iMANUAL.int_3 = Pkr_Num.SelectedIndex; //PKR NUM
+                        DATA_.iMANUAL.int_4 = cMB_Group_X.SelectedIndex;
+                        DATA_.iMANUAL.int_5 = cMB_Group_Y.SelectedIndex;
+                        DATA_.iMANUAL.int_6 = cMB_UNIT_X.SelectedIndex;
+                        DATA_.iMANUAL.int_7 = cMB_UNIT_Y.SelectedIndex;
+
+                        break;
                     default: break;
                 }
                 DATA_.iMANUAL.bRESULT = COM_.RUN_MANUAL(DATA_.iMANUAL.Number, DATA_.IsSTRING[S.ManualMessage], !cbkNotMSG.Checked);
@@ -714,24 +781,34 @@ namespace NSS_3310S{
             for (int o = 0; o < Output.Length; o++){
                 Output[o].BackColor = DATA_.mOUT[/*O.MNOutput[o]*/Output[o].TabIndex] ? Color.Red : Color.DarkRed;
             }
-
+#if _NSS3300
+            ledMGZ_CONV_B.BackColor = (DATA_.mOUT[O.LD_MGZ_CONVEYOR_CCW] && DATA_.mOUT[O.LD_MGZ_CONVEYOR_BRAKE]) ? Color.Red : Color.DarkRed;
+            ledMGZ_CONV_F.BackColor = (DATA_.mOUT[O.LD_MGZ_CONVEYOR_CW] && DATA_.mOUT[O.LD_MGZ_CONVEYOR_BRAKE]) ? Color.Red : Color.DarkRed;
+#else
             ledMGZ_CONV_B.BackColor = (DATA_.mOUT[O.LD_CONV_CCW] && !DATA_.mOUT[O.LD_CONV_STOP]) ? Color.Red : Color.DarkRed;
             ledMGZ_CONV_F.BackColor = (DATA_.mOUT[O.LD_CONV_CW] && !DATA_.mOUT[O.LD_CONV_STOP]) ? Color.Red : Color.DarkRed;
-
+#endif
             lbBarcode.Text = SUBFRM_.cBarcode.ReadResult;
         }
         void ViewLoading(){
             uElv_Y.CurPosition = DATA_.mtSTS[M.ElvY].CurrentPosition;
             uElv_Z.CurPosition = DATA_.mtSTS[M.ElvZ].CurrentPosition;
+#if _NSS3300
+            uRail_Y1.CurPosition = DATA_.mtSTS[M.Rail].CurrentPosition;
+#else
             uRail_Y1.CurPosition = DATA_.mtSTS[M.RailF].CurrentPosition;
             uRail_Y2.CurPosition = DATA_.mtSTS[M.RailR].CurrentPosition;
+#endif
             uBarcode_Y.CurPosition = DATA_.mtSTS[M.Barcode].CurrentPosition;
             uGripperX.CurPosition = DATA_.mtSTS[M.GrpX].CurrentPosition;
         }
         void ViewHandlerPicker(){
             uStripPkr_X.CurPosition = DATA_.mtSTS[M.StripPkX].CurrentPosition;
             uStripPkr_Z.CurPosition = DATA_.mtSTS[M.StripPkZ].CurrentPosition;
+#if _NSS3300
+#else
             uPreAlign_Z.CurPosition = DATA_.mtSTS[M.PreAlign].CurrentPosition;
+#endif
             uUnitPkr_X.CurPosition = DATA_.mtSTS[M.UnitPkX].CurrentPosition;
             uUnitPkr_Z.CurPosition = DATA_.mtSTS[M.UnitPkZ].CurrentPosition;
         }

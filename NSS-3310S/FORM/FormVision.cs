@@ -20,13 +20,16 @@ namespace NSS_3310S{
 
             Pre_X1.TabIndex = M.StripPkX;
             Pre_X2.TabIndex = M.StripPkX;
-            Pre_Y1.TabIndex = M.PreAlign;
-            Pre_Y2.TabIndex = M.PreAlign;
             Pre_Z1.TabIndex = M.StripPkZ;
             Pre_Z2.TabIndex = M.StripPkZ;
-
+#if _NSS3300
+#else
+            Pre_Y1.TabIndex = M.PreAlign;
+            Pre_Y2.TabIndex = M.PreAlign;
             bMTY_CW.TabIndex = M.PreAlign;
             bMTY_CCW.TabIndex = M.PreAlign;
+#endif
+
             bMTX_CW.TabIndex = M.StripPkX;
             bMX_Ccw.TabIndex = M.StripPkX;
             bMTZ_Cw.TabIndex = M.StripPkZ;
@@ -71,28 +74,39 @@ namespace NSS_3310S{
         void SetReferencePos(object sender){
             btn = (Button)sender;
             if (btn.Name == "btnSetRef_X") dRefCurPos_X = LAB_.GET_ACTPOS(M.StripPkX);
-            if (btn.Name == "btnSetRef_Y") dRefCurPos_Y = LAB_.GET_ACTPOS(M.PreAlign);
+#if _NSS3300
+#else
+                if (btn.Name == "btnSetRef_Y") dRefCurPos_Y = LAB_.GET_ACTPOS(M.PreAlign);
+#endif
         }
         void GetPos(object sender){
             btn = (Button)sender;
             if (btn.Name == "GetX_1") Pre_X1.Text = LAB_.GET_ACTPOS(M.StripPkX).ToString();
-            if (btn.Name == "GetY_1") Pre_Y1.Text = LAB_.GET_ACTPOS(M.PreAlign).ToString();
-            if (btn.Name == "GetZ_1") Pre_Z1.Text = LAB_.GET_ACTPOS(M.StripPkZ).ToString();
-
             if (btn.Name == "GetX_2") Pre_X2.Text = LAB_.GET_ACTPOS(M.StripPkX).ToString();
+#if _NSS3300
+#else
+            if (btn.Name == "GetY_1") Pre_Y1.Text = LAB_.GET_ACTPOS(M.PreAlign).ToString();
             if (btn.Name == "GetY_2") Pre_Y2.Text = LAB_.GET_ACTPOS(M.PreAlign).ToString();
+#endif
+            if (btn.Name == "GetZ_1") Pre_Z1.Text = LAB_.GET_ACTPOS(M.StripPkZ).ToString();
             if (btn.Name == "GetZ_2") Pre_Z2.Text = LAB_.GET_ACTPOS(M.StripPkZ).ToString();
         }
         void ResetPos(object sender){
             btn = (Button)sender;
             if (btn.Name == "Reset_1"){
                 Pre_X1.Text = DATA_.mtDATA[M.StripPkX, P.FirstTrigger].Pos.ToString();
+#if _NSS3300
+#else
                 Pre_Y1.Text = DATA_.mtDATA[M.PreAlign, P.StripTrigger1].Pos.ToString();
+#endif
                 Pre_Z1.Text = DATA_.mtDATA[M.StripPkZ, P.FirstTrigger].Pos.ToString();
             }
             if (btn.Name == "Reset_2"){
                 Pre_X2.Text = DATA_.mtDATA[M.StripPkX, P.SecondTrigger].Pos.ToString();
+#if _NSS3300
+#else
                 Pre_Y2.Text = DATA_.mtDATA[M.PreAlign, P.StripTrigger2].Pos.ToString();
+#endif
                 Pre_Z2.Text = DATA_.mtDATA[M.StripPkZ, P.SecondTrigger].Pos.ToString();
             }
         }
@@ -137,11 +151,13 @@ namespace NSS_3310S{
             if (btn.Name == "btnSave"){
                 if (DialogResult.OK == MessageBox.Show("데이터 값 저장 하시겠습니까 ?", "Select", MessageBoxButtons.OKCancel)){
                     TEACH_.SaveMotorPos(M.StripPkX, P.FirstTrigger, double.Parse(Pre_X1.Text));
-                    TEACH_.SaveMotorPos(M.PreAlign, P.StripTrigger1, double.Parse(Pre_Y1.Text));
-                    TEACH_.SaveMotorPos(M.StripPkZ, P.FirstTrigger, double.Parse(Pre_Z1.Text));
-
                     TEACH_.SaveMotorPos(M.StripPkX, P.SecondTrigger, double.Parse(Pre_X2.Text));
+#if _NSS3300
+#else
+                    TEACH_.SaveMotorPos(M.PreAlign, P.StripTrigger1, double.Parse(Pre_Y1.Text));
                     TEACH_.SaveMotorPos(M.PreAlign, P.StripTrigger2, double.Parse(Pre_Y2.Text));
+#endif
+                    TEACH_.SaveMotorPos(M.StripPkZ, P.FirstTrigger, double.Parse(Pre_Z1.Text));
                     TEACH_.SaveMotorPos(M.StripPkZ, P.SecondTrigger, double.Parse(Pre_Z2.Text));
 
                     TEACH_.Write_Parameter(tbxResolution);
@@ -217,11 +233,13 @@ namespace NSS_3310S{
 
         public void UpdataDate(){
             Pre_X1.Text = DATA_.mtDATA[M.StripPkX, P.FirstTrigger].Pos.ToString();
-            Pre_Y1.Text = DATA_.mtDATA[M.PreAlign, P.StripTrigger1].Pos.ToString();
-            Pre_Z1.Text = DATA_.mtDATA[M.StripPkZ, P.FirstTrigger].Pos.ToString();
-
             Pre_X2.Text = DATA_.mtDATA[M.StripPkX, P.SecondTrigger].Pos.ToString();
+#if _NSS3300
+#else
+            Pre_Y1.Text = DATA_.mtDATA[M.PreAlign, P.StripTrigger1].Pos.ToString();
             Pre_Y2.Text = DATA_.mtDATA[M.PreAlign, P.StripTrigger2].Pos.ToString();
+#endif
+            Pre_Z1.Text = DATA_.mtDATA[M.StripPkZ, P.FirstTrigger].Pos.ToString();
             Pre_Z2.Text = DATA_.mtDATA[M.StripPkZ, P.SecondTrigger].Pos.ToString();
 
             bLedBright_0.Value = (int)DATA_.prMODEL[RP.PreAlignLight];
@@ -236,13 +254,16 @@ namespace NSS_3310S{
 
         void Invoke(){
             dtxMT_X.DigitText = DATA_.mtSTS[M.StripPkX].CurrentPosition.ToString();
-            dtxMT_Y.DigitText = DATA_.mtSTS[M.PreAlign].CurrentPosition.ToString();
-            dtxMT_Z.DigitText = DATA_.mtSTS[M.StripPkZ].CurrentPosition.ToString();
-
             lblRefPos_X.Text = string.Format("{0:0.###}", DATA_.mtSTS[M.StripPkX].CurrentPosition - dRefCurPos_X);
             lblRefHalfPos_X.Text = string.Format("{0:0.###}", (DATA_.mtSTS[M.StripPkX].CurrentPosition - dRefCurPos_X) / 2);
+#if _NSS3300
+#else
+            dtxMT_Y.DigitText = DATA_.mtSTS[M.PreAlign].CurrentPosition.ToString();
             lblRefPos_Y.Text = string.Format("{0:0.###}", DATA_.mtSTS[M.PreAlign].CurrentPosition - dRefCurPos_Y);
             lblRefHalfPos_Y.Text = string.Format("{0:0.###}", (DATA_.mtSTS[M.PreAlign].CurrentPosition - dRefCurPos_Y) / 2);
+#endif
+            dtxMT_Z.DigitText = DATA_.mtSTS[M.StripPkZ].CurrentPosition.ToString();
+
         }
     }
 }

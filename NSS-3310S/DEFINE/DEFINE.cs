@@ -13,8 +13,8 @@ namespace NSS_3310S
 {
     public class DEF : DATA_ 
     {
-        public const string MCVersion   = "0415.22";
-        public const string UpdataMemo  = "OVERLAP Ver1.0"; 
+        public const string MCVersion   = "0825.22";
+        public const string UpdataMemo  = "PCB TYPE";
 
         public static int Ux, Uy            = 0; //검사 ROI X,Y 개수
         public static int[] Utx             = new int[2];
@@ -26,12 +26,17 @@ namespace NSS_3310S
         public static int ManualPage        = -1;
         public static int MotorPage         = -1;
         public static long sUph, eUph, cntUph, tmNow, tmOld;
-        public static bool[] bUSE_PK = new bool[2];
+        public static bool[] bUSE_PK        = new bool[2];
 
-        #region >>UDP DEFINE
+#region >>UDP DEFINE
 #if _UDP
+#if _NSS3300 //추후 통합 IP ADDRESS
+        public static string SawIP              = "192.168.1.101";  //saw pc ip
+        public static string HandlerIP          = "192.168.1.100";  //handler pc ip
+#else
         public static string SawIP              = "192.168.1.2";  //saw pc ip
         public static string HandlerIP          = "192.168.1.1";  //handler pc ip
+#endif
         public static string SorterIP           = "192.168.1.110"; //sorter pc ip
         public static string VisionIP           = "192.168.1.111"; //vision pc ip
 
@@ -50,7 +55,7 @@ namespace NSS_3310S
 
         public static int SorterPort            = 6000;
         public static int VisionPort            = 6002;
-        #endregion
+#endregion
 
         public static void SendDllDefine() {
             VT_START            = I.vtStart;
@@ -75,7 +80,43 @@ namespace NSS_3310S
             DllWarningMessage   = W.DllWarnning;
             WarningMessageBox   = W.ChkMessageBox;
             WAR_EndInitial      = W.EndInitial;
+
             MANUAL_REPEAT_DLAY  = D.ManualRepeat_Interval;
+            DAY_MGZ_CNT         = L.DayMGZCnt;
+            DAY_STRIP_CNT       = L.DayStripCnt;
+            DAY_GOOD_CNT        = L.DayGoodUnit;
+            DAY_REWORK_CNT      = L.DayReworkUnit;
+            DAY_REJECT_CNT      = L.DayRejectUnit;
+
+#if _NSS3300
+            MachineInfo = "NSS-3300";
+
+            //0(0123)SAW[63], 1(0123456)SORTER[175], 2(01234567)HD1PICKER(303), 3(01234567)HD2PICKER[431] 
+            inModNum        = new int[] { 0, 1, 2, 3 };
+            InputNum        = new int[] { 63, 175, 303, 431 };
+            InputModule     = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
+
+            //0(0123)SAW[63], 1(012345)HD1PICKER[159], 2(01234567)HD1PICKER[287], 3(01234567)HD2PICKER[415] 
+            outModNum       = new int[] { 0, 1, 2, 3 };
+            OutputNum       = new int[] { 63, 159, 287, 415 };
+            OutputModule    = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
+
+            //1HD1PICKER(128), 2HD2PICKER(128)
+            aiModNum        = new int[] { 2, 3 };
+            aoModNum        = new int[] { 2, 3 };
+
+            mtSPARE         = new int[] { M.SPARE1, M.SPARE2 };
+            MT_GROUP_0      = new int[] { M.ElvY, M.ElvZ, M.Rail, M.GrpX, M.Barcode, M.StripPkX, M.StripPkZ, M.UnitPkX, M.UnitPkZ };
+
+            iDOOR           = new short[] { /*I.DOOR_SAW_FRONT_LEFT, */I.DOOR_SAW_FRONT_RIGHT, I.DOOR_SORTER_FRONT_LEFT, I.DOOR_SORTER_FRONT_RIGHT, I.DOOR_SORTER_RIGHT_SIDE_LEFT, I.DOOR_SORTER_RIGHT_SIDE_RIGHT, I.DOOR_SORTER_BACK_LEFT, I.DOOR_SORTER_BACK_RIGHT };
+            eDOOR           = new short[] { /*E.DOOR_SAW_FRONT_LEFT, */E.DOOR_SAW_FRONT_RIGHT, E.DOOR_SORTER_FRONT_LEFT, E.DOOR_SORTER_FRONT_RIGHT, E.DOOR_SORTER_RIGHT_SIDE_LEFT, E.DOOR_SORTER_RIGHT_SIDE_RIGHT, E.DOOR_SORTER_BACK_LEFT, E.DOOR_SORTER_BACK_RIGHT };
+
+            iTRIP           = new short[] { I.SERVO1_SAW, I.SERVO2_SAW, I.SERVO3_SAW, I.SERVO1_SORTER, I.SERVO3_SORTER };
+            eTRIP           = new short[] { E.SERVO1_SAW, E.SERVO2_SAW, E.SERVO3_SAW, E.SERVO1_SORTER, E.SERVO3_SORTER };
+
+            oDOOR           = new short[] { O.DOOR_LOCK };
+#else
+            MachineInfo = "NSS-3320";
 
             //0(0123456)SORTER[128], 1HD1PICKER(128), 2HD2PICKER(128), 3(01)HANDLER1[32], 4(01)HANDLER2[32] 
             inModNum            = new int[] { 0, 1, 2, 3, 4 };
@@ -90,39 +131,47 @@ namespace NSS_3310S
             //1HD1PICKER(128), 2HD2PICKER(128)
             aiModNum            = new int[] { 1, 2 };
             aoModNum            = new int[] { 1, 2 };
-            for (int i = 0; i < mAI_READ_WORD.Length; i++) { 
-                mAI_READ_WORD[i] = new List<uint>(); 
+
+            MT_GROUP_0          = new int[] { M.ElvY, M.ElvZ, M.RailF, M.RailR, M.GrpX, M.Barcode, M.StripPkX, M.StripPkZ, M.PreAlign, M.UnitPkX, M.UnitPkZ };            
+
+            iDOOR               = new short[] { I.DOOR_SAW_FRONT_LEFT, I.DOOR_SAW_FRONT_RIGHT, I.DOOR_SAW_SIDE_LEFT, I.DOOR_SORTER_FRONT_LEFT, I.DOOR_SORTER_FRONT_RIGHT, I.DOOR_SORTER_RIGHT_SIDE_LEFT, I.DOOR_SORTER_RIGHT_SIDE_RIGHT, I.DOOR_SORTER_BACK_LEFT, I.DOOR_SORTER_BACK_RIGHT };
+            eDOOR               = new short[] { E.DOOR_SAW_FRONT_LEFT, E.DOOR_SAW_FRONT_RIGHT, E.DOOR_SAW_SIDE_LEFT, E.DOOR_SORTER_FRONT_LEFT, E.DOOR_SORTER_FRONT_RIGHT, E.DOOR_SORTER_RIGHT_SIDE_LEFT, E.DOOR_SORTER_RIGHT_SIDE_RIGHT, E.DOOR_SORTER_BACK_LEFT, E.DOOR_SORTER_BACK_RIGHT };
+
+            iTRIP               = new short[] { I.SERVO1_SAW, I.SERVO2_SAW, I.SERVO3_SAW, I.SERVO4_SAW, I.CONV_TRIP, I.SERVO1_SORTER, I.SERVO2_SORTER, I.SERVO3_SORTER };
+            eTRIP               = new short[] { E.SERVO1_SAW, E.SERVO2_SAW, E.SERVO3_SAW, E.SERVO4_SAW, E.CONV_TRIP, E.SERVO1_SORTER, E.SERVO2_SORTER, E.SERVO3_SORTER };
+
+            oDOOR               = new short[] { O.DOOR_LOCK, O.SAW_DOOR_LOCK };
+#endif
+
+            for (int i = 0; i < mAI_READ_WORD.Length; i++){
+                mAI_READ_WORD[i] = new List<uint>();
             }
 
-            MT_GROUP_0          = new int[] { M.ElvY, M.ElvZ, M.RailF, M.RailR, M.GrpX, M.Barcode, M.StripPkX, M.StripPkZ, M.PreAlign, M.UnitPkX, M.UnitPkZ };
-            MT_GROUP_1          = new int[] { M.TopVisionX, M.TopVisionZ, M.BtnVisionY, M.BtnVisionZ };
-            MT_GROUP_2          = new int[] { M.Table1, M.Table2 };
-            MT_GROUP_3          = new int[] { M.TRIGGER1, M.X1Z12, M.X1Z34, M.X1Z56, M.X1T, M.TRIGGER2, M.X2Z12, M.X2Z34, M.X2Z56, M.X2T };
-            MT_GROUP_4          = new int[] { M.TrayFeeder1, M.TrayFeeder2, M.TrayFeeder3, M.TrayPickerX, M.TrayPickerZ, M.EmptyElv };
+            MT_GROUP_1      = new int[] { M.TopVisionX, M.TopVisionZ, M.BtnVisionY, M.BtnVisionZ };
+            MT_GROUP_2      = new int[] { M.Table1, M.Table2 };
+            MT_GROUP_3      = new int[] { M.TRIGGER1, M.X1Z12, M.X1Z34, M.X1Z56, M.X1T, M.TRIGGER2, M.X2Z12, M.X2Z34, M.X2Z56, M.X2T };
+            MT_GROUP_4      = new int[] { M.TrayFeeder1, M.TrayFeeder2, M.TrayFeeder3, M.TrayPickerX, M.TrayPickerZ, M.EmptyElv };
 
-            MT_GROUP_0_NAME     = "HANDER ZONE";
-            MT_GROUP_1_NAME     = "VISION ZONE";
-            MT_GROUP_2_NAME     = "DAY-BLOCK ZONE";
-            MT_GROUP_3_NAME     = "HEAD ZONE";
-            MT_GROUP_4_NAME     = "TRY ZONE";
+            MT_GROUP_0_NAME = "HANDER ZONE";
+            MT_GROUP_1_NAME = "VISION ZONE";
+            MT_GROUP_2_NAME = "DAY-BLOCK ZONE";
+            MT_GROUP_3_NAME = "HEAD ZONE";
+            MT_GROUP_4_NAME = "TRY ZONE";
 
             mtTrigger           = new int[] { M.TRIGGER1, M.TRIGGER2 };
             SubTrigger          = new int[] { (int)eTRIGGER.HD1, (int)eTRIGGER.HD2 };
 
             iEMO                = new short[] { I.EMO_SAW_FRONT, I.EMO_SAW_REAR, I.EMO_SORTER_FRONT, I.EMO_SORTER_RIGHT, I.EMO_SORTER_BACK };
             eEMO                = new short[] { E.EMO_SAW_FRONT, E.EMO_SAW_REAR, E.EMO_SORTER_FRONT, E.EMO_SORTER_RIGHT, E.EMO_SORTER_BACK };
-            iDOOR               = new short[] { I.DOOR_SAW_FRONT_LEFT, I.DOOR_SAW_FRONT_RIGHT, I.DOOR_SAW_SIDE_LEFT, I.DOOR_SORTER_FRONT_LEFT, I.DOOR_SORTER_FRONT_RIGHT, I.DOOR_SORTER_RIGHT_SIDE_LEFT, I.DOOR_SORTER_RIGHT_SIDE_RIGHT, I.DOOR_SORTER_BACK_LEFT, I.DOOR_SORTER_BACK_RIGHT };
-            eDOOR               = new short[] { E.DOOR_SAW_FRONT_LEFT, E.DOOR_SAW_FRONT_RIGHT, E.DOOR_SAW_SIDE_LEFT, E.DOOR_SORTER_FRONT_LEFT, E.DOOR_SORTER_FRONT_RIGHT, E.DOOR_SORTER_RIGHT_SIDE_LEFT, E.DOOR_SORTER_RIGHT_SIDE_RIGHT, E.DOOR_SORTER_BACK_LEFT, E.DOOR_SORTER_BACK_RIGHT };
+
             iAEAR               = new short[] { I.LD_CONV_AREA_SENSOR };
             eAEAR               = new short[] { E.LD_CONV_AREA_SENSOR };
-            iTRIP               = new short[] { I.SERVO1_SAW, I.SERVO2_SAW, I.SERVO3_SAW, I.SERVO4_SAW, I.CONV_TRIP, I.SERVO1_SORTER, I.SERVO2_SORTER, I.SERVO3_SORTER };
-            eTRIP               = new short[] { E.SERVO1_SAW, E.SERVO2_SAW, E.SERVO3_SAW, E.SERVO4_SAW, E.CONV_TRIP, E.SERVO1_SORTER, E.SERVO2_SORTER, E.SERVO3_SORTER };
+
             iAIR                = new short[] { I.DRIVER_AIR_PRESSURE, I.BLOW_AIR_PRESSURE, I.STAGE_AIR_PRESSURE, I.PICKER_AIR_PRESSURE };
             eAIR                = new short[] { E.DRIVER_AIR_PRESSURE, E.BLOW_AIR_PRESSURE, E.STAGE_AIR_PRESSURE, E.PICKER_AIR_PRESSURE };
             
             iVAC                = new short[] { I.STRIP_PK_VAC, I.UNIT_PK_VAC, I.SCRAP_VAC1,  I.SCRAP_VAC2, I.STAGE_VACUUM1,   I.STAGE_VACUUM2 };
 
-            oDOOR               = new short[] { O.DOOR_LOCK, O.SAW_DOOR_LOCK };
             oACMT               = new short[] { };
             oVAC                = new short[] { };
             oREJ                = new short[] { };
@@ -135,6 +184,19 @@ namespace NSS_3310S
 
         public static void CHK_MCDIR() {
             if (MC_DIR == 0) {
+#if _NSS3300
+                //0(0123)SAW[63], 1(0123456)SORTER[175], 2(01234567)HD1PICKER(303), 3(01234567)HD2PICKER[431] 
+                //0(0123)SAW[63], 1(012345)HD1PICKER[159], 2(01234567)HD1PICKER[287], 3(01234567)HD2PICKER[415]
+                InputOffset     = new int[] { 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 };  //0:정(STANDARD)
+                OutputOffset    = new int[] { 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 }; //0:정(STANDARD)
+                //진공모듈
+                aiOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };  //0:정(STANDARD)
+                aoOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };  //0:정
+                O.HD1PkVac      = new int[] { O.X1_VAC1, O.X1_VAC2, O.X1_VAC3, O.X1_VAC4, O.X1_VAC5, O.X1_VAC6, O.X1_VAC7, O.X1_VAC8 };
+                O.HD1PkRej      = new int[] { O.X1_BLOW1, O.X1_BLOW2, O.X1_BLOW3, O.X1_BLOW4, O.X1_BLOW5, O.X1_BLOW6, O.X1_BLOW7, O.X1_BLOW8 };
+                O.HD2PkVac      = new int[] { O.X2_VAC1, O.X2_VAC2, O.X2_VAC3, O.X2_VAC4, O.X2_VAC5, O.X2_VAC6, O.X2_VAC7, O.X2_VAC8 };
+                O.HD2PkRej      = new int[] { O.X2_BLOW1, O.X2_BLOW2, O.X2_BLOW3, O.X2_BLOW4, O.X2_BLOW5, O.X2_BLOW6, O.X2_BLOW7, O.X2_BLOW8 };
+#else
                 InputOffset     = new int[] { 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 0, 1 };  //0:정(STANDARD)
                 OutputOffset    = new int[] { 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 0, 1 }; //0:정(STANDARD)
                 //진공모듈
@@ -144,6 +206,7 @@ namespace NSS_3310S
                 O.HD1PkRej      = new int[] { O.X1_BLOW1, O.X1_BLOW2, O.X1_BLOW3, O.X1_BLOW4, O.X1_BLOW5, O.X1_BLOW6, O.X1_BLOW7, O.X1_BLOW8 };
                 O.HD2PkVac      = new int[] { O.X2_VAC8, O.X2_VAC7, O.X2_VAC6, O.X2_VAC5, O.X2_VAC4, O.X2_VAC3, O.X2_VAC2, O.X2_VAC1 };
                 O.HD2PkRej      = new int[] { O.X2_BLOW8, O.X2_BLOW7, O.X2_BLOW6, O.X2_BLOW5, O.X2_BLOW4, O.X2_BLOW3, O.X2_BLOW2, O.X2_BLOW1 };
+#endif
             } //정방향 (자재 투입 방향 : 왼쪽 -> 오른쪽)
             else {
                 InputOffset     = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 0, 1 };  //1:역
@@ -241,8 +304,8 @@ namespace NSS_3310S
                 return false;
             }
 
-            if (nThread == T.ReceiveSaw)    IsBIT[B.SawManualRun] = true;
-            else                            IsBIT[B.VisionManualRun] = true;
+            if (nThread == T.ReceiveSaw)    COM_.Bit(nThread, B.SawManualRun, true, "SAW PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
+            else                            COM_.Bit(nThread, B.VisionManualRun, true, "VISION PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
             return true;
         }
 
@@ -256,8 +319,23 @@ namespace NSS_3310S
         }
 
         public static void Power(bool bFlog) {
+#if _NSS3300
+#else
             mOUT[O.LD_CONV_INVERTER_POWER]  = bFlog;
+#endif
             mOUT[O.FLUORESENT_LIGHT]        = bFlog;
+        }
+
+        public static void SevoPower(bool bFlog){
+#if _NSS3300
+            mOUT[O.SERVO_POWER_1] = bFlog;
+            mOUT[O.SERVO_POWER_2] = bFlog;
+            mOUT[O.SERVO_POWER_3] = bFlog;
+            mOUT[O.SERVO_POWER_4] = bFlog;
+
+            mOUT[O.POWER_ON_LAMP] = bFlog;
+            mOUT[O.POWER_OFF_LAMP] = !bFlog;
+#endif
         }
 
         public static bool ChkUsePicker() {
@@ -754,10 +832,13 @@ namespace NSS_3310S
             //Trace.WriteLine("CaL TRAY END");
         }
 
-        public static void UPH(){
+        static public void AddUnit(){
             IsLONG[L.GoodCnt]++;
+            IsLONG[L.DayGoodUnit]++;
             IsLONG[L.OutCnt]++;
-
+        }
+        public static void UPH(){
+            AddUnit();
             cntUph += 1;
             if (cntUph >= prMACHINE[CP.UphCalcCount]){ // 10 개 단위로.->나중에 100개 단위로
                 cntUph                  = 0;
@@ -924,7 +1005,7 @@ namespace NSS_3310S
 
     public class C
     {
-        #region >>SYSTEM
+#region >>SYSTEM
         public static MOTOR_STATUS[] Motion                 = new MOTOR_STATUS[2];
         public static INFO_MOTOR_LOCATION MotorLocation     = new INFO_MOTOR_LOCATION();
         public static HOMMING_STATUS Homming                = new HOMMING_STATUS();
@@ -942,9 +1023,9 @@ namespace NSS_3310S
         public static SEND_SAW SendSaw                      = new SEND_SAW();
         public static RECEIVE_VISION RecieveVision          = new RECEIVE_VISION();
         public static SEND_VISION SendVision                = new SEND_VISION();
-        #endregion
+#endregion
 
-        #region >>SEQUENCE
+#region >>SEQUENCE
         public static MAGAZINE Magazine                     = new MAGAZINE();
         public static GRIPPER Gripper                       = new GRIPPER();
         public static STRIP_PICKER StripPk                  = new STRIP_PICKER();
@@ -958,12 +1039,12 @@ namespace NSS_3310S
         public static GOOD_TRAY_FEEDER_1 GoodTrayFeeder1    = new GOOD_TRAY_FEEDER_1();
         public static GOOD_TRAY_FEEDER_2 GoodTrayFeeder2    = new GOOD_TRAY_FEEDER_2();
         public static REWORK_TRAY_FEEDER ReworkTrayFeeder   = new REWORK_TRAY_FEEDER();
-        #endregion
+#endregion
     } //CLASS
     
     public class T : DATA_
     {
-        #region >>SYSTEM
+#region >>SYSTEM
         public const int Motion1                            = 0;
         public const int Motion2                            = 1;
         public const int MotorLocation                      = 2;
@@ -978,13 +1059,13 @@ namespace NSS_3310S
         public const int StopEvent                          = 11;
         public const int ReceiveSaw                         = 12;
         public const int ReceiveVision                      = 13;
-        #endregion
+#endregion
 
-        #region >>OPTION 
+#region >>OPTION 
         public const int Picker                             = 14;
-        #endregion
+#endregion
 
-        #region >>SEQUENCE
+#region >>SEQUENCE
         public const int Magazine                           = 15;
         public const int Gripper                            = 16;
         public const int StripPk                            = 17;
@@ -998,7 +1079,7 @@ namespace NSS_3310S
         public const int GoodTrayFeeder1                    = 25;
         public const int GoodTrayFeeder2                    = 26;
         public const int ReworkTrayFeeder                   = 27;
-        #endregion
+#endregion
 
         public static void Label(){
             thNotSeqThread  = new int[] { Motion1, Motion2, MotorLocation, Homming, Input, Output, PkVac, Warnning, Manual, ManualRepeat, Op, StopEvent, ReceiveSaw, ReceiveVision, Picker };

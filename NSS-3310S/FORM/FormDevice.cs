@@ -39,7 +39,6 @@ namespace NSS_3310S{
         dxy PkOffset;
         public string mSubItem = string.Empty;
         public string mSelectedItem, mSelectedItem_Job = string.Empty;
-        string sMakeJobFile = string.Empty;
         int nSelectOffsetHD = 0;
         int nSelectHDTh = 0;
         bool bChagePkOffsetView = false;
@@ -51,7 +50,7 @@ namespace NSS_3310S{
         ComboBox[] WorkedCleanMode = null;
         Label[] WorkedCleanRepeat = null;
 
-        enum eMake{
+        enum TYPE_MAKE{
             Device = 0,
             Group = 1,
         }
@@ -64,8 +63,8 @@ namespace NSS_3310S{
             lvwDEVICE.SelectedIndexChanged  += (sender, e) => SelectedIndex(lvwDEVICE);
             DGV_PPID_LIST.CellClick         += (sender, e) => SelectedPPID(DGV_PPID_LIST);
 
-            btnGroup.Click                  += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)eMake.Group, "NEW GROUP"); };
-            btnSaveAs.Click                 += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)eMake.Device, "NEW RECIPE"); };
+            btnGroup.Click                  += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.Group, "NEW GROUP"); };
+            btnSaveAs.Click                 += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.Device, "NEW RECIPE"); };
             btnNewMake.Click                += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) NewMake(); };
             btnNewReturn.Click              += (sender, e) => { gNEW_DEVICE.Visible = false; };
 
@@ -185,7 +184,7 @@ namespace NSS_3310S{
                 //    }
                 //}
 
-                if (nIndex == (int)eMake.Device){ //Make device
+                if (nIndex == (int)TYPE_MAKE.Device){ //Make device
                     if (mSubItem == "" || mSubItem == null){
                         MessageBox.Show("Select WORK GROUP!" + ETC.NewLine + "(WORK GROUP 리스트를 먼저 선택하셔야 합니다 !)");
                         txNAME.Text = "";
@@ -198,7 +197,6 @@ namespace NSS_3310S{
                         return;
                     }
                     if (DATA_.sJobName == "" || DATA_.sJobName == null){
-                        sMakeJobFile = PATH_.DATA + mSubItem + "\\" + txNAME.Text + ".job";
                         TEACH_.WR_NewJobFile();
                         if (DATA_.sCurrJobName == null || DATA_.sCurrJobName == ""){
                             DATA_.sCurrJobName = PATH_.DATA + mSubItem + "\\" + txNAME.Text + ".job";

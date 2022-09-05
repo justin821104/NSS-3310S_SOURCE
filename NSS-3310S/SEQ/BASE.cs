@@ -43,11 +43,19 @@ namespace NSS_3310S.SEQ{
             }
         }
 
+        public static void LogOneCycle(string StripBarcode){
+            IsLONG[D.UnitPicTime] = Environment.TickCount;
+            IsDOUBLE[D.CycleTime] = (IsLONG[D.UnitPicTime] - IsLONG[D.StripPlcTime]) / 1000;
+            LogWR_.SaveLogOneCyle(sJobName + "," + CLOT.GET_LOT.LotID + "," + StripBarcode + "," + IsDOUBLE[D.CycleTime].ToString() + "," + IsDOUBLE[D.StripPkCycle].ToString(), "");
+        }
+
         public static void RD_LOT_INF(){
             TEACH_.LOAD_COUNT(ref IsLONG[L.LotCnt], ref IsLONG[L.StripCnt], ref IsLONG[L.UnitCnt], ref IsLONG[L.GoodCnt], ref IsLONG[L.ReworkCnt], ref IsLONG[L.NGCnt], ref IsLONG[L.GoodTrayCnt], ref IsLONG[L.ReworkTrayCnt], ref IsLONG[L.OutCnt], ref IsLONG[L.ITSCount]);
+            TEACH_.LOAD_INFO_COUNT(ref IsLONG[L.DayMGZCnt], ref IsLONG[L.DayStripCnt], ref IsLONG[L.DayGoodUnit], ref IsLONG[L.DayReworkUnit], ref IsLONG[L.DayRejectUnit]);
         }
         public static void WR_LOT_INF(){
             TEACH_.SAVE_COUNT(IsLONG[L.LotCnt], IsLONG[L.StripCnt], IsLONG[L.UnitCnt], IsLONG[L.GoodCnt], IsLONG[L.ReworkCnt], IsLONG[L.NGCnt], IsLONG[L.GoodTrayCnt], IsLONG[L.ReworkTrayCnt], IsLONG[L.OutCnt], IsLONG[L.ITSCount]);
+            TEACH_.SAVE_INFO_COUNT(IsLONG[L.DayMGZCnt], IsLONG[L.DayStripCnt], IsLONG[L.DayGoodUnit], IsLONG[L.DayReworkUnit], IsLONG[L.DayRejectUnit]);
         }
 
         public static bool ChkRunning(int nThread){
@@ -68,17 +76,20 @@ namespace NSS_3310S.SEQ{
                     return false;
                 }
             }
-            //LAB_.ONE_SHOT_TRI(Ch);
+#if _NSS3300
+            LAB_.ONE_SHOT_TRI(Ch);
+#else
             LAB_.TriggerOutput(Ch, uVAL.High);
             LAB_.ONE_SHOT(Ch);
             LAB_.TriggerOutput(Ch, uVAL.Low);
+#endif
             UTIL_.DELAY((int)prMACHINE[CP.TriggerEnd]);
             return true;
         }
 
-        public static bool SawStageVac(bool bFlog){
+        public static bool SawStageVac(int nTHREAD, bool bFlog){
             string sValue = bFlog ? "1" : "0";
-            IsBIT[B.SawVacuumInterface] = false;
+            COM_.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 진공 인터페이스 플러그 OFF");
             C.SendSaw.SEND("VACUUM," + sValue + ",*");
             for (int i = 0; i < 2000; i++){
                 UTIL_.DELAY(1);
@@ -87,9 +98,9 @@ namespace NSS_3310S.SEQ{
             if (!IsBIT[B.SawVacuumInterface]) return false;
             return true;
         }
-        public static bool SawStageBlow(bool bFlog){
+        public static bool SawStageBlow(int nTHREAD, bool bFlog){
             string sValue = bFlog ? "1" : "0";
-            IsBIT[B.SawVacuumInterface] = false;
+            COM_.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 파기 인터페이스 플러그 OFF");
             C.SendSaw.SEND("BLOW," + sValue + ",*");
             for (int i = 0; i < 2000; i++){
                 UTIL_.DELAY(1);
@@ -99,7 +110,7 @@ namespace NSS_3310S.SEQ{
             return true;
         }
 
-        #region >>TOP CAM
+#region >>TOP CAM
         public static eRTN MoveTopCam(int nThread, int nPos, string cmd, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
 
@@ -116,9 +127,9 @@ namespace NSS_3310S.SEQ{
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, mt, pos, toller, bOnlyStop, bNoChange, bDontStop, cmds, sLog)) return eRTN.FAIL;
             return eRTN.SUCESS;
         }
-        #endregion 
+#endregion
 
-        #region >>BOTTOM CAM
+#region >>BOTTOM CAM
         public static eRTN BottomCameraCalibrationZig_Fwd(int nThread, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.CameraCalibrationZigFwdFail, I.CAM_CAL_ZIG_FWD, I.CAM_CAL_ZIG_BWD, O.CAM_CAL_ZIG_FWD, O.CAM_CAL_ZIG_BWD, (int)prMACHINE[CP.CamZigFwdDelay], comment)) return eRTN.FAIL;
@@ -146,9 +157,9 @@ namespace NSS_3310S.SEQ{
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, mt, pos, toller, bOnlyStop, bNoChange, bDontStop, cmds, sLog)) return eRTN.FAIL;
             return eRTN.SUCESS;
         }
-        #endregion 
+#endregion
 
-        #region >> STAGE
+#region >> STAGE
         public static void VisionBlow(eMAP_BLOCK eSTAGE, bool bFlog){
             LAB_.BIT_OUT(O.TOP_VISION_BLOW, bFlog);
             if (prMACHINE[CP.UseInspectionStageAir] == (int)eUSE.USE)
@@ -318,8 +329,12 @@ namespace NSS_3310S.SEQ{
             LAB_.OUTPUT(O.SCRAP_BLOW_2, false);
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.PLACE_PALLET[(int)eSTAGE], "offset=-10:spd=5", "유닛 피커 Z축 테이블에 유닛 내려놓고 대기 위치 이송")) ;
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
-            if (eMAP_BLOCK.STAGE1 == eSTAGE)    CLOT.SEND_STRIP_INFO(T.UnitPk, T.DryTable1);
-            else                                CLOT.SEND_STRIP_INFO(T.UnitPk, T.DryTable2);
+            
+            int nThreadNum;
+            if (eMAP_BLOCK.STAGE1 == eSTAGE)    nThreadNum = T.DryTable1;
+            else                                nThreadNum = T.DryTable2;                     
+            CLOT.SEND_STRIP_INFO(T.UnitPk, nThreadNum);
+            TEACH_.WRITE_INFO_MAPBLOCK_STIP_BARCODE(eSTAGE, CLOT.InfoStrip[nThreadNum].Barcode);
             COM_.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 완료");
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
@@ -448,14 +463,20 @@ namespace NSS_3310S.SEQ{
             if (prMACHINE[CP.UseITSData] == (int)eUSE.USE){
                 Result = DEF.ReadITSResult(eSTAGE, sBarcode);
                 if (Result != eRTN.SUCESS){
-                    if (Result == eRTN.NothingBarcode)                      UTIL_.OnERROR(E.emsDesertUnitBarcodeMemory);
-                    else if (Result == eRTN.NotITSCountFile)                UTIL_.OnERROR(E.emsNotFindITSCountFile);
-                    else if (Result == eRTN.NotITSLocationFile)             UTIL_.OnERROR(E.emsNotFindITSLocationFile);
-                    else if (Result == eRTN.FailITSCountDataParsingFail)    UTIL_.OnERROR(E.emsITSCountDataParsingFail);
+                    if (Result == eRTN.NothingBarcode) UTIL_.OnERROR(E.emsDesertUnitBarcodeMemory);
+                    else if (Result == eRTN.NotITSCountFile) UTIL_.OnERROR(E.emsNotFindITSCountFile);
+                    else if (Result == eRTN.NotITSLocationFile) UTIL_.OnERROR(E.emsNotFindITSLocationFile);
+                    else if (Result == eRTN.FailITSCountDataParsingFail) UTIL_.OnERROR(E.emsITSCountDataParsingFail);
                     else if (Result == eRTN.FailITSLocationDataParsingFail) UTIL_.OnERROR(E.emsITSLocationDataParsingFail);
-                    else UTIL_.OnERROR(E.emsFailITSDataReading);
-                    
-
+                    else{
+                        UTIL_.OnERROR(E.emsFailITSDataReading);
+                        UTIL_.DELAY(1000);
+                    }
+                    if (IsBIT[B.JobCancel[(int)eSTAGE]]){
+                        VisionBlow(eSTAGE, stBIT.OFF);
+                        COM_.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
+                        return eRTN.JOB_CANCEL;
+                    }
                     goto ReCheckITS;
                 }
             }
@@ -473,7 +494,7 @@ namespace NSS_3310S.SEQ{
             }
 
             if (IsBIT[B.StageUnitExist[(int)eSTAGE]]){
-                IsBIT[B.StageUnitExist[(int)eSTAGE]] = false;
+                COM_.Bit(nThread, B.StageUnitExist[(int)eSTAGE], false, "맵블록 작업 완료 후 유닛 제거 진행 비트 FALSE");
                 while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, "", eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
                 UTIL_.OnERROR(E.StageUnitExist[(int)eSTAGE]);
             }
@@ -519,12 +540,12 @@ namespace NSS_3310S.SEQ{
         public static void StageTack(eMAP_BLOCK eSTAGE){
             IsLONG[L.StageTackEnd[(int)eSTAGE]] = Environment.TickCount;
             IsDOUBLE[D.StageTack[(int)eSTAGE]] = (IsLONG[L.StageTackEnd[(int)eSTAGE]] - IsLONG[L.StageTackNow[(int)eSTAGE]]) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.StageTack[(int)eSTAGE]].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + "," + eSTAGE.ToString() + "," + IsDOUBLE[D.StageTack[(int)eSTAGE]].ToString(), "");
             IsLONG[L.StageTackNow[(int)eSTAGE]] = Environment.TickCount;
         }
-        #endregion
+#endregion
 
-        #region >> GOOD TRAY FEEDER 1/2
+#region >> GOOD TRAY FEEDER 1/2
         public static eRTN GoodTrayFeederFrontGrip(int nThread, eTRAY Tray, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
             int[] OnInput = Tray == eTRAY.GOOD1 ? I.GoodFeeder1Grip : I.GoodFeeder2Grip;
@@ -800,12 +821,19 @@ namespace NSS_3310S.SEQ{
             int nRtnPX = 0, nRtnPY = 0;
             while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중 대기")) ;
 
+            if (prMACHINE[CP.SelectStackerUnloading] == (int)eGOOD_TRAY.GD1 && Tray == eTRAY.GOOD2 && prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.STACKER){
+                return eRTN.UnloadingStacker;
+            }
+            else if (prMACHINE[CP.SelectStackerUnloading] == (int)eGOOD_TRAY.GD2 && Tray == eTRAY.GOOD1 && prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.STACKER){
+                return eRTN.UnloadingStacker;
+            }
+        
             LogStart(nThread, comment + " 진행");
             COM_.SetBit(nThread, B.TrayPlc[(int)Tray], true, Tray.ToString() + " PLACE");
             IsLONG[L.CurWorkTray] = (int)Tray;
             if (IsBIT[B.GoodTrayAutoUnloading]){
                 while (UTIL_.WaitBIT(nThread, B.WaitTrayUldConv[(int)Tray], true, "콘베어 배출 진행 중 대기")) ;
-                IsBIT[B.GoodTrayAutoUnloading] = false;
+                COM_.Bit(nThread, B.GoodTrayAutoUnloading, false, "구동 중 트레이 언로딩 진행 플로그 FALSE");
             }
             while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.Tray_Place[(int)Tray], "", Tray.ToString() + " Feeder Y축 유닛 플레이스 위치 이송")) ;
             COM_.SetBit(nThread, B.TrayLoading[(int)Tray], false, Tray.ToString() + " 빈-트레이 공급 완료");
@@ -830,11 +858,18 @@ namespace NSS_3310S.SEQ{
             LogStart(nThread, comment + " 진행");
             if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.CONVEYOR){
                 COM_.SetBit(nThread, B.TrayConveyorUnloadingWork, true, "굿 트레이 콘베어 배출 작업 진행");
-            ReTrayUnloading:                
+            ReTrayUnloading:
+#if _NSS3300
+                if (mIN[I.GOOD_RAIL_CONVEYOR_CHECK]){
+                    UTIL_.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
+                    goto ReTrayUnloading;
+                }
+#else
                 if (!mIN[I.GOOD_RAIL_CONVEYOR_CHECK]){
                     UTIL_.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
                     goto ReTrayUnloading;
                 }
+#endif
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.FastPsh, "", Tray.ToString() + " 언로딩 푸셔 위치 이송")) ;
                 while (eRTN.SUCESS != GoodTrayFeederUnGrip(nThread, Tray, Tray.ToString() + " 트레이 언그립")) ;
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.Psh, "", Tray.ToString() + " 푸셔 시작 위치 이송")) ;
@@ -858,6 +893,7 @@ namespace NSS_3310S.SEQ{
                 COM_.SetBit(nThread, B.GoodTrayUldEnd[(int)Tray], true, Tray.ToString() + " 콘베어 투입 확인");
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.TrayUnload, "", Tray.ToString() + " 콘베어 배출 위치 이송")) ;
                 COM_.SetBit(nThread, B.WaitTrayUldConv[(int)Tray], false, Tray.ToString() + " 콘베어 배출 완료");
+                UTIL_.DELAY((int)prMACHINE[CP.GoodTrayPushEndDealy]);
                 while (eRTN.SUCESS != GoodTrayFeederUnGrip(nThread, Tray, Tray.ToString() + " 트레이 언그립")) ;
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.TrayLoad, "", Tray.ToString() + " 콘베어 배출 위치 이송")) ;
                 //트레이 배출 완료
@@ -897,12 +933,12 @@ namespace NSS_3310S.SEQ{
         public static void GoodTrayFeederTack(){
             IsLONG[L.GoodTrayTackEnd] = Environment.TickCount;
             IsDOUBLE[D.TrayCycle] = (IsLONG[L.GoodTrayTackEnd] - IsLONG[L.GoodTrayTackNow]) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.TrayCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",OK 트레이," + IsDOUBLE[D.TrayCycle].ToString(), "");
             IsLONG[L.GoodTrayTackNow] = Environment.TickCount;
         }
-        #endregion
+#endregion
 
-        #region >> HEAD 1/2
+#region >> HEAD 1/2
         public static void PkVac(eHD nHEAD, ePK nPK, bool bFLOG, bool bDEALY, string cmd){
             int iOUT1, iOUT2;
             int iDelay = bDEALY ? (int)prMODEL[RP.PickupVacDelay] : 0;
@@ -914,7 +950,8 @@ namespace NSS_3310S.SEQ{
                 iOUT1 = O.HD1PkRej[(int)nPK];
                 iOUT2 = O.HD1PkVac[(int)nPK];
             }
-            else{
+            else
+            {
                 iOUT1 = O.HD2PkRej[(int)nPK];
                 iOUT2 = O.HD2PkVac[(int)nPK];
             }
@@ -968,13 +1005,14 @@ namespace NSS_3310S.SEQ{
             if (bFLOG){
                 LAB_.BIT_OUT((short)iOUT1, true);
                 LAB_.BIT_OUT((short)iOUT2, false);
-                UTIL_.DELAY(iDelay);
+                UTIL_.DELAY(iDelay + 5);
                 LAB_.BIT_OUT((short)iOUT1, false);
             } //BLOW
             else{
-                LAB_.BIT_OUT((short)iOUT1, false);
-                LAB_.BIT_OUT((short)iOUT2, false);
-            }
+                //LAB_.BIT_OUT((short)iOUT1, false);
+                //LAB_.BIT_OUT((short)iOUT2, false);
+                PkFree(nHEAD, nPK);
+            } //OFF
         }
         public static void PkBlow(eHD nHEAD, ePK nPK, bool bDEALY){
             int iOUT1, iOUT2;
@@ -987,11 +1025,12 @@ namespace NSS_3310S.SEQ{
             else{
                 iOUT1 = O.HD2PkRej[(int)nPK];
                 iOUT2 = O.HD2PkVac[(int)nPK];
-            }
-
+            } 
+            //BLOW
             LAB_.BIT_OUT((short)iOUT1, true);
             LAB_.BIT_OUT((short)iOUT2, false);
-            UTIL_.DELAY(iDelay);
+            UTIL_.DELAY(iDelay + 5);
+            //OFF
             LAB_.BIT_OUT((short)iOUT1, false);
             LAB_.BIT_OUT((short)iOUT2, false);
         }
@@ -1374,10 +1413,10 @@ namespace NSS_3310S.SEQ{
             return eRTN.SUCESS;
         }
 
-        public static void ResetHeadBuffer(eHD nX){
-            IsBIT[B.HD_NG[(int)nX]] = false;
-            IsBIT[B.HD_REJECT[(int)nX]] = false;
-            IsBIT[B.HD_INSPECTION[(int)nX]] = false;
+        public static void ResetHeadBuffer(int nThread, eHD nX){
+            COM_.Bit(nThread, B.HD_NG[(int)nX], false, "유닛 NG 플러그 초기화");
+            COM_.Bit(nThread, B.HD_REJECT[(int)nX], false, "유닛 REJECT 플러그 초기화");
+            COM_.Bit(nThread, B.HD_INSPECTION[(int)nX], false, "유닛 INSPECTION 플러그 초기화");
         }
         public static eRTN UnitPic(int nThread, eHD nX, string comment){
             int gX = 0, gY = 0, pocketX = 0, pocketY = 0, nIndex = 0;
@@ -1386,12 +1425,12 @@ namespace NSS_3310S.SEQ{
             COM_.SetBit(nThread, B.XWorking[(int)nX], true, nX.ToString() + " PIC AND PLC 진행");
             while (UTIL_.WaitBIT(nThread, B.PkrUnitPickUpStop, true, nX.ToString() + " 픽업 일시 정지")) ;
             LogStart(nThread, comment + " 진행");
-            ResetHeadBuffer(nX);
+            ResetHeadBuffer(nThread, nX);
             for (int z = 0; z < CNT_.PKR; z++){
             NextUnit:
                 if (PK_Z[z + (CNT_.PKR * (int)nX)] == eSTATUS.NONE) continue; // 피커 스킵 상태 확인
                 if (IsBIT[B.JobCancel[(int)IsLONG[L.CurWorkStage]]]){
-                    IsBIT[B.JobCancel[(int)IsLONG[L.CurWorkStage]]] = false;
+                    COM_.Bit(nThread, B.JobCancel[(int)IsLONG[L.CurWorkStage]], false, "작업 취소 실행 플러그 OFF");
                     MAP_.CancelPalletData((eMAP_BLOCK)IsLONG[L.CurWorkStage], eMAP_DATA.FULL, (int)prMODEL[RP.GroupX[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.GroupY[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.UnitX[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.UnitY[(int)IsLONG[L.CurWorkStage]]]);
                     COM_.SetBit(nThread, B.StageUnitExist[(int)IsLONG[L.CurWorkStage]], true, ((eMAP_BLOCK)IsLONG[L.CurWorkStage]).ToString() + " 작업 완료 후 유닛 유무 확인 플러그");
                 }
@@ -1449,7 +1488,6 @@ namespace NSS_3310S.SEQ{
             if (nSTAGE == eMAP_BLOCK.STAGE2){
                 if (!C.Interlock.ChkInterlock(E.emsNotMoveMapBlock2BecauseUnitPkr, true)) return eRTN.EMS;
             }
-
             if (prMACHINE[CP.StagePickupMovingVac] == (int)eUSE.USE) StageVac(stBIT.ON);
 
             int mtZ = M.HD1Pk[nPK];
@@ -1563,6 +1601,8 @@ namespace NSS_3310S.SEQ{
                 PkVac(nX, (ePK)nPK, stBIT.ON, stBIT.Delay, sIdx);
                 while (eRTN.SUCESS != MovePK(nThread, nX, nPK, P.PK_PIC[nPK], "ReCheckZ", nX.ToString() + " 피커" + (nPK + 1).ToString() + comment + " 체크 위치 이송")) ;
                 if (mAI[nPK + (8 * (int)nX)] > mSET_AI[nPK + (8 * (int)nX)] || bDRYRUN){
+                    if (bMF) return eRTN.SUCESS;
+
                     PK_Z[nPK + (CNT_.PKR * (int)nX)] = eSTATUS.MARK;
                     PICKER[(int)nX].finger[nPK].valid = true;
                     PICKER[(int)nX].finger[nPK].iResult = PALLET[(int)nSTAGE, GX, GY, UX, UY];
@@ -1643,7 +1683,7 @@ namespace NSS_3310S.SEQ{
                         for (int n = 0; n < isPrsErr.Length; n++){
                             if (isPrsErr[n]){
                                 PICKER[(int)nX].finger[n].iResult = (int)eSTATUS.NG;
-                                IsBIT[B.HD_NG[(int)nX]] = true;
+                                COM_.Bit(nThread, B.HD_NG[(int)nX], true, "유닛 NG 결과 플러그 ON");
                             }
                         }
                     } //rework 트레이로 배출
@@ -1685,26 +1725,27 @@ namespace NSS_3310S.SEQ{
                                         mv.Pos
                                     };
 
-            ////External Trigger 설정 // 펄스 타입
-            //CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
-            //uint uiRet = CAXM.AxmTriggerSetTimeLevel(M.HD[(int)nX], 50, 1, 1, 0);
-            //if (uiRet != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-            //    CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
-            //    return eRTN.FAIL;//에러 발생.
-            //}
-            //uiRet = CAXM.AxmTriggerOnlyAbs(M.HD[(int)nX], dAbsTrargetPos.Length, dAbsTrargetPos);
-            //if (uiRet != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-            //    CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
-            //    return eRTN.FAIL;//에러 발생.
-            //}
-
+#if _NSS3300
+            //External Trigger 설정 // 펄스 타입
+            CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
+            uint uiRet = CAXM.AxmTriggerSetTimeLevel(M.HD[(int)nX], 50, 1, 1, 0);
+            if (uiRet != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
+                CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
+                return eRTN.FAIL;//에러 발생.
+            }
+            uiRet = CAXM.AxmTriggerOnlyAbs(M.HD[(int)nX], dAbsTrargetPos.Length, dAbsTrargetPos);
+            if (uiRet != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
+                CAXM.AxmTriggerSetReset(M.HD[(int)nX]);
+                return eRTN.FAIL;//에러 발생.
+            }
+#else
             //카운트 모듈
             CAXC.AxcTriggerSetFunction((int)nX, 2);
             //CAXC.AxcTriggerSetBlockLowerPos((int)nX, );
             //CAXC.AxcTriggerSetBlockUpperPos((int)nX, );
             CAXC.AxcTriggerSetAbsDouble((int)nX, (uint)dAbsTrargetPos.Length, dAbsTrargetPos, 0);
             LAB_.TriggerOutput((int)nX, uVAL.High);
-
+#endif
             mv.Pos = dEndPos;
             mv.Spd = 1800; //1800; (j사 2500) // jjh 1000 기본
             mv.Acc = 18000;//30000; (j사 35000)
@@ -1974,7 +2015,7 @@ namespace NSS_3310S.SEQ{
             RePLACE:
                 if (PK_Z[z + (CNT_.PKR * (int)nX)] == eSTATUS.NONE || !PICKER[(int)nX].finger[z].valid || IsBIT[B.HD_INSPECTION[(int)nX]] || PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.NG) continue; // 피커 스킵 상태 확인.
                 if (PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.X_MARK) {
-                    IsBIT[B.HD_REJECT[(int)nX]] = true;
+                    COM_.Bit(nThread, B.HD_REJECT[(int)nX], true, "유닛 REJECT 결과 플러그 ON");
                     continue;
                 }
 
@@ -2059,6 +2100,11 @@ namespace NSS_3310S.SEQ{
             return eRTN.SUCESS;
         }
 
+        static void AddReworkUnit(){
+            IsLONG[L.ReworkCnt]++;
+            IsLONG[L.DayReworkUnit]++;
+            IsLONG[L.OutCnt]++;
+        }
         public static eRTN PkNGPlc(int nThread, eHD nX, string comment){
             int pocketX = 0, pocketY = 0;
             if (!IsBIT[B.HD_NG[(int)nX]] && !IsBIT[B.HD_INSPECTION[(int)nX]]){
@@ -2091,9 +2137,7 @@ namespace NSS_3310S.SEQ{
                 PICKER[(int)nX].finger[z].valid = false;
                 MAP_.TrayMap_Reject((int)eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], pocketX, pocketY);
                 MAP_.mapTray[(int)eTRAY.REWORK, pocketY, pocketX] = true;
-                IsLONG[L.ReworkCnt]++;
-                IsLONG[L.OutCnt] += 1;
-
+                AddReworkUnit();
                 if (-1 == MAP_.GetTrayPocket(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref pocketX, ref pocketY)){
                     COM_.SetBit(nThread, B.ReWorkTrayWork, false, "REWORK TRAY 가득참");
                     if (z == CNT_.PKR - 1) break;  // 마지막 핑거면 빠져나가
@@ -2107,6 +2151,11 @@ namespace NSS_3310S.SEQ{
             return eRTN.SUCESS;
         }
 
+        static void AddRejectUnit(){
+            IsLONG[L.NGCnt]++;
+            IsLONG[L.DayRejectUnit]++;
+            IsLONG[L.OutCnt]++;
+        }
         public static eRTN PkRejectPlc(int nThread, eHD nX, string comment){
             //while (eRTN.SUCESS != MovePicRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 픽업 대기 위치")) ;
         ReCheck:
@@ -2128,13 +2177,7 @@ namespace NSS_3310S.SEQ{
                 if (PK_Z[i + (CNT_.PKR * (int)nX)] == eSTATUS.NONE || !PICKER[(int)nX].finger[i].valid) continue;
                 PK_Z[i + (CNT_.PKR * (int)nX)] = eSTATUS.EMPTY;
                 PICKER[(int)nX].finger[i].valid = false;
-                IsLONG[L.NGCnt]++;
-                IsLONG[L.OutCnt] += 1;
-                //if (mAI[i + (8 * (int)nX)] > mSET_AI[i + (8 * (int)nX)]){
-                //    PICKER[(int)nX].finger[i].valid = false;
-                //    IsLONG[L.NGCnt]++;
-                //    IsLONG[L.OutCnt] += 1;
-                //}
+                AddRejectUnit();
             }
             PkBlow(nX, true);
             UTIL_.DELAY((int)prMACHINE[CP.RejectBlowDelay]);
@@ -2146,6 +2189,11 @@ namespace NSS_3310S.SEQ{
             }
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
+        }
+        public static void PkVacReset(eHD nX){
+            for (int p = 0; p < CNT_.PKR; p++){
+                PkFree(nX, (ePK)p);
+            }
         }
 
         public static eRTN MoveXPlc(int nThread, eHD nX, int nPK, eTRAY nFeeder, int nPocketX, int nPocketY, bool CamView, string comment){
@@ -2163,13 +2211,20 @@ namespace NSS_3310S.SEQ{
                         if (!bGT1_PLACE_POS){
                             if (bGT2_PLACE_POS){
                                 if (mtDATA[M.TrayFeeder2, P.Psh].Pos > mtSTS[M.TrayFeeder2].CurrentPosition){
+#if _NSS3300
+#else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK]){
                                         UTIL_.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
+#endif
                                 }
                                 else{
+#if _NSS3300
+                                    if (!mIN[I.GOOD_TRAY2_UNGRIP_C]){
+#else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK] || !mIN[I.GOOD_TRAY2_UNGRIP_C]){
+#endif
                                         UTIL_.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
@@ -2181,13 +2236,20 @@ namespace NSS_3310S.SEQ{
                         if (!bGT2_PLACE_POS){
                             if (bGT1_PLACE_POS){
                                 if (mtDATA[M.TrayFeeder1, P.Psh].Pos > mtSTS[M.TrayFeeder1].CurrentPosition){
+#if _NSS3300
+#else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK]){
                                         UTIL_.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
+#endif
                                 }
                                 else{
+#if _NSS3300
+                                    if (!mIN[I.GOOD_TRAY1_UNGRIP_C]){
+#else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK] || !mIN[I.GOOD_TRAY1_UNGRIP_C]){
+#endif
                                         UTIL_.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
@@ -2309,6 +2371,6 @@ namespace NSS_3310S.SEQ{
 
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
     }
 }

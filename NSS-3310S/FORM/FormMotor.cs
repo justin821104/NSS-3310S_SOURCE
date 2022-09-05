@@ -84,7 +84,17 @@ namespace NSS_3310S{
             SET_ALL_PLACE_PITCH.Click += (sender, e) => SavePkPos(SET_ALL_PLACE_PITCH);
 
             swSave.Click += (sender, e) => SAVE(swSave);
-
+#if _NSS3300
+            uMT = new UCL_JOG[] { uElv_Y, uElv_Z, uBarcode_Y, uRail_Y1, uGripperX,
+                                  uStripPkr_X, uStripPkr_Z,
+                                  uUnitPkr_X, uUnitPkr_Z,
+                                  uMappingTable, uMarkVisionX, uMarkVisionZ,
+                                  uBtmCamY, uBtmCamZ, uHeadX, uHeadT, uHeadPkrZ,
+                                  uGoodTrayTransferY1, uGoodTrayTransferY2, uReworkTrayTransferY,
+                                  uTrayPkr_X, uTrayPkr_Z, uEMPTY_LIFT,
+                                  CovMK_X, CovMK_Z, CovPALLET, CovHD, CovTRAY
+                                };
+#else
             uMT = new UCL_JOG[] { uElv_Y, uElv_Z, uBarcode_Y, uRail_Y1, uRail_Y2, uGripperX,
                                   uStripPkr_X, uStripPkr_Z, uPreAlign_Z,
                                   uUnitPkr_X, uUnitPkr_Z,
@@ -94,6 +104,7 @@ namespace NSS_3310S{
                                   uTrayPkr_X, uTrayPkr_Z, uEMPTY_LIFT,
                                   CovMK_X, CovMK_Z, CovPALLET, CovHD, CovTRAY
                                 };
+#endif
             for (int i = 0; i < uMT.Length; i++)
             {
                 uMT[i].NumMT = M.MT[i];
@@ -230,7 +241,7 @@ namespace NSS_3310S{
             SelectGoodTrayTransfer1.Click += (sender, e) => SelectMoter(SelectGoodTrayTransfer1);
             SelectGoodTrayTransfer2.Click += (sender, e) => SelectMoter(SelectGoodTrayTransfer2);
             SelectReworkTrayTransfer.Click += (sender, e) => SelectMoter(SelectReworkTrayTransfer);
-            #endregion
+#endregion
 
             lbMC = new[] {
                              lblMGZ_UDPitch, lblMGZ_ULD_UDPitch, lblGripperBackPitch, lblRailLoaingOpenPitch,
@@ -281,6 +292,22 @@ namespace NSS_3310S{
             ChkGripperLoadingPos.TabIndex   = RP.UseStripLoadngPos;
             lbPlaceCheckDelay.TabIndex      = CP.PlaceCheckDalay;
             lbRejectBlow.TabIndex           = CP.RejectBlowDelay;
+
+#if _NSS3300
+            uRail_Y2.Visible    = false;
+            uPreAlign_Z.Visible = false;
+            groupBox12.Visible  = false;
+
+            label4.Visible      = false;
+            panel2.Visible      = false;
+#else
+            uRail_Y2.Visible    = true;
+            uPreAlign_Z.Visible = true;
+            groupBox12.Visible  = true;
+
+            label4.Visible      = true;
+            panel2.Visible      = true;
+#endif
 
             if (DATA_.MC_DIR == 0){
                 //uStripPkr_X.ImgJogCcw = iltDir.Images(2)
@@ -337,11 +364,25 @@ namespace NSS_3310S{
                 pnlTrayTeaching1Dir1.Visible = true;
                 pnlTrayTeaching2Dir1.Visible = true;
                 pnlTrayTeaching3Dir1.Visible = true;
-
             }
 
             lbTrayDownX.Text = "0";
             lbTrayDownY.Text = "0";
+
+            if (DATA_.eLoginLevel > eLogLevel.ENG){
+                label21.Visible = true;
+                lblStripPickUpCheckPitch.Visible = true;
+
+                label22.Visible = true;
+                lblUnitPickUpCheckPitch.Visible = true;
+            }
+            else{
+                label21.Visible = false;
+                lblStripPickUpCheckPitch.Visible = false;
+
+                label22.Visible = false;
+                lblUnitPickUpCheckPitch.Visible = false;
+            }
 
             TmrMT.Enabled = true;
             Show();
@@ -374,7 +415,8 @@ namespace NSS_3310S{
                     int nXPOS = P.StripLoad;
                     if (DATA_.prMODEL[RP.UseStripLoadngPos] == (int)ePARA.RECIPE) nXPOS = P.RecipStripLoad;
 
-
+#if _NSS3300
+#else
                     if (RailOptionSelect.Checked){
                         if (DialogResult.OK == MessageBox.Show("스트립 소재 안착 위치 값 바로 변경 하시겠습니까", "Select", MessageBoxButtons.OKCancel)){
                             if (dRY_F == 0 && dRY_B == 0) return;
@@ -410,6 +452,8 @@ namespace NSS_3310S{
                             bMMIChage = true;
                         }
                     } //작업 위치
+#endif
+                    
                 }
                 catch (Exception ex){
                     MessageBox.Show("fMOTOR -> RailOptionSet_Click Fail !" + ETC.NewLine + ex.ToString());
@@ -626,7 +670,10 @@ namespace NSS_3310S{
             }
             if (DEF.MotorPage == (long)ePage.HandlerPk){
                 TEACH_.Write_MotorPos(dgvStripPkrXZ, M.STRIP_PK);
+#if _NSS3300
+#else
                 TEACH_.Write_MotorPos(dgvPreAlignZ, M.PreAlign);
+#endif
                 TEACH_.Write_MotorPos(dgvUnitPkrXZ, M.UNIT_PK);
 
                 TEACH_.Write_Parameter(lblStripPickUpCheckPitch);
@@ -749,7 +796,7 @@ namespace NSS_3310S{
             MessageBox.Show("Save Success");
         }
 
-        #region >>EVENT
+#region >>EVENT
         void ResetScreen(){
             for (int i = 0; i < 7; i++){
                 if (Controls.Find("bMT_" + i.ToString(), true).FirstOrDefault() is Button bt) bt.BackColor = Color.White;
@@ -965,15 +1012,19 @@ namespace NSS_3310S{
             if (mtTrayFeeder == M.TrayFeeder1 || mtTrayFeeder == M.TrayFeeder2) TrayUnloadingPos.Enabled = true;
             else TrayUnloadingPos.Enabled = false;
         }
-        #endregion
+#endregion
 
         void InfoDataGridView(){
             UTIL_.PosGrid(dgvCassetteYZ, M.ElvY, M.ElvZ, P.MAGZINE, ref nValue);
-            UTIL_.PosGridOption(dgvRail, M.RailF, M.RailR, P.RAIL, ref nValue);
             UTIL_.PosGrid(dgvGripperX, M.GrpX, P.GRIPPER, ref nValue);
             UTIL_.PosGrid(dgvBarcode, M.Barcode, P.BARCODE, ref nValue);
             UTIL_.PosGrid(dgvStripPkrXZ, M.StripPkX, M.StripPkZ, P.STRIP_PK, ref nValue);
+#if _NSS3300
+            UTIL_.PosGridOption1(dgvRail, M.Rail, P.RAIL, ref nValue);
+#else
+            UTIL_.PosGridOption(dgvRail, M.RailF, M.RailR, P.RAIL, ref nValue);
             UTIL_.PosGrid(dgvPreAlignZ, M.PreAlign, P.PRE_AIGN, ref nValue);
+#endif
             UTIL_.PosGrid(dgvUnitPkrXZ, M.UnitPkX, M.UnitPkZ, P.UNIT_PK, ref nValue);
             UTIL_.PosGrid(dgvMappingTable, mtStage, P.DRY_TABLE, ref nValue);
             UTIL_.PosGridOption(dgvMarkVision, M.TopVisionX, M.TopVisionZ, P.TOP_CAM, ref nValue);
@@ -989,11 +1040,16 @@ namespace NSS_3310S{
         }
         void ReadPara(){
             COM_.SetGridData(dgvCassetteYZ, M.ElvY, M.ElvZ);
-            COM_.SetGridData(dgvRail, M.RailF, M.RailR);
             COM_.SetGridData(dgvGripperX, M.GrpX);
             COM_.SetGridData(dgvBarcode, M.Barcode);
             COM_.SetGridData(dgvStripPkrXZ, M.StripPkX, M.StripPkZ);
+#if _NSS3300
+            COM_.SetGridData(dgvRail, M.Rail);
+#else
+            COM_.SetGridData(dgvRail, M.RailF, M.RailR);
             COM_.SetGridData(dgvPreAlignZ, M.PreAlign);
+#endif
+
             COM_.SetGridData(dgvUnitPkrXZ, M.UnitPkX, M.UnitPkZ);
             COM_.SetGridData(dgvMappingTable, mtStage);
             COM_.SetGridData(dgvMarkVision, M.TopVisionX, M.TopVisionZ);
@@ -1187,10 +1243,33 @@ namespace NSS_3310S{
         private void dgvRail_CellClick(object sender, DataGridViewCellEventArgs e){
             dgv = (DataGridView)sender;
             if (!GetCellClickNumber(dgv, e.RowIndex, e.ColumnIndex)) return;
+#if _NSS3300
+            int[] mt = { M.Rail };
+            double[] GetPos = new double[mt.Length];
+            UTIL_.GET_GRID_MOTOR_DATA(dgv, nRow, ref nIndex, ref GetPos);
+            DATA_.IsSTRING[S.MotorMessage] = DATA_.MtName[mt[0]] + " axis - " + DATA_.PosName[mt[0], nIndex];
+            if (nCol == 2) UTIL_.OPEN_KEYPAD_GRID(DATA_.IsSTRING[S.MotorMessage], ref dgv, true);
+            else if (nCol == 4){
+                DATA_.IsSTRING[S.MotorMessage] += "를(을) 현재 위치값으로 변경 하시겠습니까?" + ETC.CrLf + "SET CURRENT POSITION ?";
+                if (UTIL_.PRINT_MASSAGE(DATA_.IsSTRING[S.MotorMessage], false, false, false))
+                    dgv[2, nRow].Value = LAB_.GET_ACTPOS(mt[0]);
+            }
+            else if (nCol == 6){
+                DATA_.IsSTRING[S.MotorMessage] += "로 이송하시겠습니까?" + ETC.CrLf + "MOTION MOVING ?";
+                if (UTIL_.PRINT_MASSAGE(DATA_.IsSTRING[S.MotorMessage], false, false, false)){
+                    DATA_.iMANUAL.Option = false;
+                    if (nRow == 0) DATA_.iMANUAL.RunManual = ManualNumber.RailRdy;
+                    if (nRow == 1) DATA_.iMANUAL.RunManual = ManualNumber.RailLoading;
+                    if (nRow == 2) DATA_.iMANUAL.RunManual = ManualNumber.RailWork;
+                    if (nRow == 3) DATA_.iMANUAL.RunManual = ManualNumber.RailPicOpen;
+
+                    COM_.RUN_MANUAL(DATA_.iMANUAL.RunManual, DATA_.IsSTRING[S.MotorMessage]);
+                }
+            }
+#else
             int[] mt = { M.RailF, M.RailR };
             double[] GetPos = new double[mt.Length];
             UTIL_.GET_GRID_MOTOR_DATA(dgv, nRow, ref nIndex, ref GetPos);
-
             if (nCol == 2 || nCol == 4 || nCol == 6) DATA_.IsSTRING[S.MotorMessage] = DATA_.MtName[mt[0]] + " axis - " + DATA_.PosName[mt[0], nIndex];
             else if (nCol == 3 || nCol == 5) DATA_.IsSTRING[S.MotorMessage] = DATA_.MtName[mt[1]] + " axis - " + DATA_.PosName[mt[1], nIndex];
             else if (nCol == 7) DATA_.IsSTRING[S.MotorMessage] = DATA_.MtName[mt[0]] + " / " + DATA_.MtName[mt[1]] + " aixs - " + DATA_.PosName[mt[0], nIndex];
@@ -1220,6 +1299,7 @@ namespace NSS_3310S{
                     COM_.RUN_MANUAL(DATA_.iMANUAL.RunManual, DATA_.IsSTRING[S.MotorMessage]);
                 }
             }
+#endif
             UTIL_.CLEAR_GRID_MOTOR_SELECTED(dgv, nRow, GetPos);
         }
         private void dgvGripperX_CellClick(object sender, DataGridViewCellEventArgs e){
@@ -1320,6 +1400,8 @@ namespace NSS_3310S{
         }
         private void dgvPreAlignZ_CellClick(object sender, DataGridViewCellEventArgs e){
             dgv = (DataGridView)sender;
+#if _NSS3300
+#else
             if (!GetCellClickNumber(dgv, e.RowIndex, e.ColumnIndex)) return;
             int[] mt = { M.PreAlign };
             double[] GetPos = new double[mt.Length];
@@ -1344,6 +1426,7 @@ namespace NSS_3310S{
                 }
             }
             UTIL_.CLEAR_GRID_MOTOR_SELECTED(dgv, nRow, GetPos);
+#endif
         }
         private void dgvUnitPkrXZ_CellClick(object sender, DataGridViewCellEventArgs e){
             dgv = (DataGridView)sender;
@@ -2008,8 +2091,12 @@ namespace NSS_3310S{
         void ViewLoading(){
             uElv_Y.CurPosition = DATA_.mtSTS[M.ElvY].CurrentPosition;
             uElv_Z.CurPosition = DATA_.mtSTS[M.ElvZ].CurrentPosition;
+#if _NSS3300
+            uRail_Y1.CurPosition = DATA_.mtSTS[M.Rail].CurrentPosition;
+#else
             uRail_Y1.CurPosition = DATA_.mtSTS[M.RailF].CurrentPosition;
             uRail_Y2.CurPosition = DATA_.mtSTS[M.RailR].CurrentPosition;
+#endif
             uGripperX.CurPosition = DATA_.mtSTS[M.GrpX].CurrentPosition;
             uBarcode_Y.CurPosition = DATA_.mtSTS[M.Barcode].CurrentPosition;
 
@@ -2017,7 +2104,10 @@ namespace NSS_3310S{
         void ViewHeandlerPicker(){
             uStripPkr_X.CurPosition = DATA_.mtSTS[M.StripPkX].CurrentPosition;
             uStripPkr_Z.CurPosition = DATA_.mtSTS[M.StripPkZ].CurrentPosition;
+#if _NSS3300
+#else
             uPreAlign_Z.CurPosition = DATA_.mtSTS[M.PreAlign].CurrentPosition;
+#endif
             uUnitPkr_X.CurPosition = DATA_.mtSTS[M.UnitPkX].CurrentPosition;
             uUnitPkr_Z.CurPosition = DATA_.mtSTS[M.UnitPkZ].CurrentPosition;
 

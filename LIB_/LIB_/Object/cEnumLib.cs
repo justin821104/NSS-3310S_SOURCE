@@ -323,6 +323,7 @@ namespace Object
         THREAD_NOT_MATCH,       // 스레드 번호 불일치 (잘못된 함수 호출)
         PUSH_STOP,              // STOP 정지
         ERROR_STOP,             // 에러 정지 
+
         DOOR_OPEN = 10,         // 도어 열림
         PLUS_LIMIT,             // 플러스 리미트 감지
         MINUS_LIMIT,            // 마이너스 리미트 감지
@@ -372,6 +373,8 @@ namespace Object
         VANISH, // 사라짐
 
         NotLoadingMagazine,
+
+        UnloadingStacker, // 
 
         AllPkrCalFail // 전체 피커 오토 cal 동작 실패
     }

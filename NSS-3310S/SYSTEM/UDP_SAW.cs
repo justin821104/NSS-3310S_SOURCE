@@ -11,7 +11,7 @@ namespace SYSTEM{
     /// HANDLER PC IP : 192.168.1.1 / PORT : 5001
     /// </summary>
     public class RECEIVE_SAW : DATA_{
-        int nThread = T.ReceiveSaw;
+        readonly int nThread = T.ReceiveSaw;
         public void DoReceiveEvent(){
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(DEF.HandlerIP), DEF.HandlerPort);
             UdpClient newSock = new UdpClient(ipep);
@@ -38,7 +38,7 @@ namespace SYSTEM{
                         
                         break;
                     case "RecipeOpen":
-                        IsBIT[B.SawRecipeOpen] = true;
+                        COM_.Bit(T.ReceiveSaw, B.SawRecipeOpen, true, "다이싱 레스피 OPEN 플러그 ON");
                         break;
 
                     case "PROCESS":
@@ -95,7 +95,7 @@ namespace SYSTEM{
 
                     case "VACUUM":
                     case "BLOW":
-                        IsBIT[B.SawVacuumInterface] = true;
+                        COM_.Bit(T.ReceiveSaw, B.SawVacuumInterface, true, "다이싱 UDP 통신 진공 부분 응답 확인 비트 SawIOInterface 플러그 ON");
                         break;
 
                     #region >> saw manual-run
@@ -113,13 +113,12 @@ namespace SYSTEM{
             }
         }
 
-
         public void ManualSecuss(){
-            IsBIT[B.SawManualRun] = false;
+            COM_.Bit(T.ReceiveSaw, B.SawManualRun, false, "[SECUSS] 메뉴얼 동작 진행 플러그 OFF");
             C.SendSaw.SEND("OK,*");
         }
         public void ManualFail(string msg){
-            IsBIT[B.SawManualRun] = false;
+            COM_.Bit(T.ReceiveSaw, B.SawManualRun, false, "[FAIL] 메뉴얼 동작 진행 플러그 OFF");
             C.SendSaw.SEND("FAIL," + msg + ",*");
         }
     }

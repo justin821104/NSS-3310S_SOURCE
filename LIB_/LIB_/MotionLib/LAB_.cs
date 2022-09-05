@@ -53,11 +53,11 @@ public class LAB_ : DATA_
     public static bool BOARD_INIALIZE(){
         try{
             bBD = false;
-            uint uRtn = CAXL.AxlOpen(7);
-            //if (CAXL.AxlOpen(7) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS) { }
-            //else bBD = true;
-            if (uRtn == (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS) { }
+            //uint uRtn = CAXL.AxlOpen(7);//CAXL.AxlOpen(7);
+            if (CAXL.AxlOpen(7) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS) { }
             else bBD = true;
+            //if (uRtn == (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS) { }
+            //else bBD = true;
             //if (CAXL.AxlIsOpened() == 1) { bBD = false; }
             // bBD = true;
             int iRtn = CAXL.AxlIsOpened();
@@ -393,12 +393,15 @@ public class LAB_ : DATA_
     }
 
     public static void ONE_SHOT(int i){
-        //CAXM.AxmTriggerSetReset(i);
-        //CAXM.AxmTriggerSetTimeLevel(i, 100, 1, 1, 0);
-        //CAXM.AxmTriggerOneShot(i);
+#if _NSS3300
+        CAXM.AxmTriggerSetReset(i);
+        CAXM.AxmTriggerSetTimeLevel(i, 100, 1, 1, 0);
+        CAXM.AxmTriggerOneShot(i);
 
-        //CAXC.AxcTriggerSetEnable(i, 1);
+        CAXC.AxcTriggerSetEnable(i, 1);
+#else
         CAXC.AxcTriggerSetOutput(i, 1);
+#endif
     }
     public static void TriggerOutput(int nCh, uVAL eVal){
         CAXC.AxcTriggerSetEnable(nCh, (uint)eVal);

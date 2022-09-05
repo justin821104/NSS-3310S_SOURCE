@@ -2,6 +2,295 @@
 {
     public class O
     {
+#if _NSS3300
+        #region >> SawHandlerOutputList (0~63)
+        //MODULE #0 - OFFSET #0 (0~15)
+        public const short LD_MGZ_CONVEYOR_CW           = 0;    //Y600 MAGAZINE LOADING CONVEYOR CW
+        public const short LD_MGZ_CONVEYOR_CCW          = 1;    //Y601 MAGAZINE LOADING CONVEYOR CCW
+        public const short LD_MGZ_CONVEYOR_BRAKE        = 2;    //Y602 MAGAZINE CONVERYOR BRAKE 
+        public const short ELV_UNCLAMP                  = 3;    //Y603 MAGAZINE LOADER CLAMP UP
+        public const short ELV_CLAMP                    = 4;    //Y604 MAGAZINE LOADER CLAMP DOWN
+        public const short PUSHER_FWD                   = 5;    //Y605 LEAD FRAME PUSHER FORWARD
+        public const short PUSHER_BWD                   = 6;    //Y606 LEAD FRAME PUSHER BACKWARD
+        public const short INLET_TABLE_UP               = 7;    //Y607 INLET RAIL STRIP SUPPORT UP
+        public const short INLET_TABLE_DN               = 8;    //Y608 INLET RAIL STRIP SUPPORT DOWN
+        public const short GRIPPER_OPEN                 = 9;    //Y609 INLET RAIL GRIP OPEN
+        public const short GRIPPER_CLOSE                = 10;   //Y610 INLET RAIL GRIP CLOSE
+        public const short CLEANER_SWING_R              = 11;   //Y611 CLEANER FORWARD
+        public const short CLEANER_SWING_L              = 12;   //Y612 CLEANER BACKWARD
+        public const short o0613                        = 13;   //Y613
+        public const short o0614                        = 14;   //Y614
+        public const short o0615                        = 15;   //Y615
+
+        //OFFSET #1 (16~31)
+        public const short BRUSH_WATER                  = 16;   //Y700 CLEANER UNIT PVA SPONGE OPEN
+        public const short CLEANER_WATER_1              = 17;   //Y701 CLEANER UNIT WATER CLEANING #1
+        public const short CLEANER_WATER_2              = 18;   //Y702 CLEANER UNIT WATER CLEANING #2
+        public const short CLEANER_WATER_3              = 19;   //Y703 CLEANER UNIT WATER CLEANING #3
+        public const short CLEANER_WATER_4              = 20;   //Y704 CLEANER UNIT WATER CLEANING #4
+        public const short STRIP_PK_VAC                 = 21;   //Y705 STRIP PICKER VACUUM
+        public const short o0706                        = 22;   //Y706 
+        public const short STRIP_PK_BLOW                = 23;   //Y707 STRIP PICKER BLOW
+        public const short UNIT_PK_VAC                  = 24;   //Y708 UNIT PICKER VACUUM #1
+        public const short o0709                        = 25;   //Y709 
+        public const short UNIT_PK_BLOW                 = 26;   //Y710 UNIT PICKER BLOW #1
+        public const short SCRAP_VAC_1                  = 27;   //Y711 SCRAP PICKER VACUUM #1
+        public const short o0712                        = 28;   //Y712 
+        public const short SCRAP_BLOW_1                 = 29;   //Y713 SCRAP PICKER BLOW #1
+        public const short SCRAP_VAC_2                  = 30;   //Y714 SCRAP PICKER VACUUM #2
+        public const short o0715                        = 31;   //Y715 
+
+        //OFFSET #2 (32~47)
+        public const short SCRAP_BLOW_2                 = 32;   //Y800 SCRAP PICKER BLOW #2
+        public const short CLEANER_AIR_KNIFE            = 33;   //Y801 UNIT PICKER CLEANER AIR BAR
+        public const short CLEANER_AIR                  = 34;   //Y802 CLEAN BOX AIR BLOW
+        public const short o0803                        = 35;   //Y803 
+        public const short o0804                        = 36;   //Y804 
+        public const short o0805                        = 37;   //Y805 
+        public const short o0806                        = 38;   //Y806 
+        public const short o0807                        = 39;   //Y807 
+        public const short o0808                        = 40;   //Y808
+        public const short o0809                        = 41;   //Y809 
+        public const short o0810                        = 42;   //Y810 
+        public const short o0811                        = 43;   //Y811
+        public const short o0812                        = 44;   //Y812   
+        public const short o0813                        = 45;   //Y813 
+        public const short o0814                        = 46;   //Y814 
+        public const short o0815                        = 47;   //Y815 
+
+        //OFFSET #3 (48~63)
+        public const short HANDLER_READY                = 48;   //Y900 HANDLER READY 핸들러 프로그램 실행 상태
+        public const short HANDLER_SCRAP_CHECK          = 49;   //Y901 HANDLER ERRPR 핸들러 알발 발생 하였을 경우
+        public const short HANDLER_INITIAL_OK           = 50;   //Y902 HANDLER INITIAL OK 다이싱 로딩/언로딩 요청 비트 초기화 요청하여 완료 확인
+        public const short HANDLER_STRIP_PK_X_PLACE_POS = 51;   //Y903 HANDLER STRIP PICKER X PLACE POSITION 스트립 피커 X축 자재 스테이즈에 내려 놓는 위치
+        public const short HANDLER_STRIP_PK_Z_PLACE_POS = 52;   //Y904 HANDLER STRIP PICKER Z PLACE POSITION 스트립 피커 Z축 자재 스테이즈에 내려 놓는 위치
+        public const short HANDLER_LD_COMPLETE          = 53;   //Y905 HANDLER LOADING COMPLETE 스트립 피커 스테이즈에 로딩 완료 되었을 경우
+        public const short HANDLER_UNIT_PK_X_PICKUP_POS = 54;   //Y906 HANDLER UNIT PICKER X PICK UP POSITION 유닛 피커 X축 자재 스테이즈에서 잡아가는 위치
+        public const short HANDLER_UNIT_PK_Z_PICKUP_POS = 55;   //Y907 HANDLER UNIT PICKER Z PICK UP POSITION 유닛 피커 Z축 자재 스테이즈에서 잡아가는 위치
+        public const short HANDLER_UNIT_COMPLETE        = 56;   //Y908 HANDLER UNIT PICK-UP COMPLETE 유닛 피커 스테이즈에 픽업 완료 되었을 경우
+        public const short HANDLER_SAW_REJECT_OFF       = 57;   //Y909 HANDLER SAW REJECT OFF 신호 (100ms 이상 ON 후 OFF)
+        public const short HANDLER_SP10                 = 58;   //Y910
+        public const short HANDLER_SP11                 = 59;   //Y911
+        public const short HANDLER_SP12                 = 60;   //Y912
+        public const short HANDLER_RECIPE_CHANGE        = 61;   //Y913
+        public const short HANDLER_SP14                 = 62;   //Y914
+        public const short HANDLER_PICKER_Z_INTERLOCK   = 63;   //Y915 HANDLER STRIP/UNIT PICKER DOWN INTERLOCK 스트립/유닛 피커 다이싱 테이블 위치에 다운되어 있는지 확인 인터락
+        #endregion
+
+        #region >>SoterOutputList (64~159)
+        //MODULE #1 - OFFSET #0 (64~79)
+        public const short TENKEY1                      = 64;	//Y000 [SORTER] TENKEY #1								
+        public const short TENKEY2                      = 65;   //Y001 [SORTER] TENKEY #2       							
+        public const short TENKEY3                      = 66;   //Y002 [SORTER] TENKEY #3
+        public const short TENKEY4                      = 67;   //Y003 [SORTER] TENKEY #4
+        public const short TENKEY5                      = 68;   //Y004 [SORTER] TENKEY #5
+        public const short TENKEY6                      = 69;   //Y005 [SORTER] TENKEY #6
+        public const short TENKEY7                      = 70;   //Y006 [SORTER] TENKEY #7
+        public const short TENKEY8                      = 71;   //Y007 [SORTER] TENKEY #8
+        public const short TENKEY9                      = 72;   //Y008 [SORTER] TENKEY #9
+        public const short TENKEY10                     = 73;   //Y009 [SORTER] TENKEY #10
+        public const short PC_POWER_LAMP                = 74;   //Y010 [SORTER] HANDLER PC POWER SWITCH LED 
+        public const short POWER_ON_LAMP                = 75;   //Y011 [SORTER] POWER ON SWITCH LAMP        							
+        public const short POWER_OFF_LAMP               = 76;   //Y012 [SORTER] POWER OFF SWITCH LED        							
+        public const short START                        = 77;   //Y013 [SORTER] START SWITCH LED        							
+        public const short STOP                         = 78;   //Y014 [SORTER] STOP SWITCH LED
+        public const short RESET                        = 79;   //Y015 [SORTER] RESET SWITCH LED
+
+        //OFFSET #1 (80~95)
+        public const short DOOR_LOCK                    = 80;   //Y100 [SORTER] DOOR LOCK SIGNAL
+        public const short o0101                        = 81;   //Y101 접점 나감!
+        public const short SERVO_POWER_1                = 82;   //Y102 [SORTER] SERVO POWER SIGNAL #1
+        public const short SERVO_POWER_2                = 83;   //Y103 [SORTER] SERVO POWER SIGNAL #2
+        public const short SERVO_POWER_3                = 84;   //Y104 [SORTER] SERVO POWER SIGNAL #3
+        public const short FLUORESENT_LIGHT             = 85;   //Y105 [SORTER] FLUORESCENT LIGHT ON/OFF SIGNAL
+        public const short TOWER_RED                    = 86;   //Y106 [SORTER] TOWER LAMP LED : RED
+        public const short TOWER_YELLOW                 = 87;   //Y107 [SORTER] TOWER LAMP LED : YELLOW
+        public const short TOWER_GREEN                  = 88;   //Y108 [SORTER] TOWRE LAMP LED : GREEN
+        public const short BUZZER_ERR                   = 89;   //Y109 [SORTER] TOWER LAMP BUZZER : ERR
+        public const short BUZZER_END                   = 90;   //Y110 [SORTER] TOWER LAMP BUZZER : END
+        public const short o0111                        = 91;   //Y111
+        public const short o0112                        = 92;   //Y112
+        public const short SERVO_POWER_4    = 93;   //Y113 [SORTER] SERVO POWER SIGNAL #4
+        public const short o0114                        = 94;   //Y114
+        public const short o0115                        = 95;   //Y115
+
+        //OFFSET #2 (96~111)
+        public const short EMPTY_STACKER_LOCK1          = 96;   //Y200 [SORTER] BIN TRAY UP STOPPER FORWARD #1
+        public const short EMPTY_STACKER_UNLOCK1        = 97;   //Y201 [SORTER] BIN TRAY UP STOPPER BACKWARD #1
+        public const short EMPTY_STACKER_LOCK2          = 98;   //Y202 [SORTER] BIN TRAY UP STOPPER FORWARD #2
+        public const short EMPTY_STACKER_UNLOCK2        = 99;   //Y203 [SORTER] BIN TRAY UP STOPPER BACKWARD #2
+        public const short GOOD_TRAY1_UNGRIP_S          = 100;  //Y204 [SORTER] GOOD TRAY 1 GRIP1 OPEN (뒤)
+        public const short GOOD_TRAY1_GRIP_S            = 101;  //Y205 [SORTER] GOOD TRAY 1 GRIP1 CLOSE (뒤)
+        public const short GOOD_TRAY2_UNGRIP_S          = 102;  //Y206 [SORTER] GOOD TRAY 2 GRIP1 OPEN (뒤)
+        public const short GOOD_TRAY2_GRIP_S            = 103;  //Y207 [SORTER] GOOD TRAY 2 GRIP1 CLOSE (뒤)
+        public const short NG_TRAY_UNGRIP               = 104;  //Y208 [SORTER] NG TRAY GRIP OPEN
+        public const short NG_TRAY_GRIP                 = 105;  //Y209 [SORTER] NG TRAY GRIP CLOSE
+        public const short EMPTY_TRAY_UNGRIP            = 106;  //Y210 [SORTER] EMPTY TRAY GRIP OPEN 
+        public const short EMPTY_TRAY_GRIP              = 107;  //Y211 [SORTER] EMPTY TRAY GRIP CLOSE
+        public const short GOOD_STACKER_UP              = 108;  //Y212 [SORTER] GOOD TRAY TABLE UP
+        public const short GOOD_STACKER_DN              = 109;  //Y213 [SORTER] GOOD TRAY TABLE DOWN
+        public const short NG_STACKER_UP                = 110;  //Y214 [SORTER] NG TRAY TABLE UP
+        public const short NG_STACKER_DN                = 111;  //Y215 [SORTER] NG TRAY TABLE DOWN
+
+        //OFFSET #3 (112~127)
+        public const short EMPTY_TRAY_FWD               = 112;  //Y300 [SORTER] EMTPTY TRAY FORWARD MOVING
+        public const short EMPTY_TRAY_BWD               = 113;  //Y301 [SORTER] EMTPTY TRAY BACKWARD MOVING
+        public const short TRAY_PK_UNGRIP               = 114;  //Y302 [SORTER] TRAY PICKER GRIP OPEN
+        public const short TRAY_PK_GRIP                 = 115;  //Y303 [SORTER] TRAY PICKER GRIP CLOSE
+        public const short STAGE1_BLOW                  = 116;  //Y304 [SORTER] STAGE 1 BLOW
+        public const short STAGE2_BLOW                  = 117;  //Y305 [SORTER] STAGE 2 BLOW
+        public const short BTM_VISION_BLOW              = 118;  //Y306 [SORTER] PRS VISION BLOW
+        public const short STAGE1_VAC                   = 119;  //Y307 [SORTER] STAGE 1 WORK VACUUM 
+        public const short STAGE1_BACK_VAC              = 120;  //Y308 [SORTER] STAGE 1 WORK BACK-VACUUM
+        public const short STAGE1_DRAIN                 = 121;  //Y309 [SORTER] STAGE 1 WATER DRAIN
+        public const short STAGE2_VAC                   = 122;  //Y310 [SORTER] STAGE 1 WORK VACUUM 
+        public const short STAGE2_BACK_VAC              = 123;  //Y311 [SORTER] STAGE 1 WORK BACK-VACUUM
+        public const short STAGE2_DRAIN                 = 124;  //Y312 [SORTER] STAGE 1 WATER DRAIN
+        public const short o0313                        = 125;  //Y313
+        public const short o0314                        = 126;  //Y314
+        public const short TOP_VISION_BLOW              = 127;  //Y315 [SORTER] TOP VISION BLOW
+
+        //OFFSET #4 (128~143)
+        public const short GOOD_TRAY1_GRIP_C            = 128;  //Y400 GOOD TRAY 1 GRIP2 OPEN
+        public const short GOOD_TRAY1_UNGRIP_C          = 129;  //Y401 GOOD TRAY 1 GRIP2 CLOSE
+        public const short GOOD_TRAY2_GRIP_C            = 130;  //Y402 GOOD TRAY 2 GRIP2 OPEN
+        public const short GOOD_TRAY2_UNGRIP_C          = 131;  //Y403 GOOD TRAY 2 GRIP2 CLOSE
+        public const short GOOD_TRAY_PRE_ALIGN_FWD      = 132;  //Y404 GOOD TRAY PRE-ALIGN FORWARD
+        public const short GOOD_TRAY_PRE_ALIGN_BWD      = 133;  //Y405 GOOD TRAY PRE-ALIGN BACKWARD
+        public const short o0406                        = 134;  //Y406 
+        public const short o0407                        = 135;  //Y407 
+        public const short CAM_CAL_ZIG_FWD              = 136;  //Y408 CAM CALIBRATION FORWARD (DIR:TEACHING) //200917 추가
+        public const short CAM_CAL_ZIG_BWD              = 137;  //Y409 CAM CALIBRATION BACKWARD (회피) //200917 추가
+        public const short o410                         = 138;  //Y410 
+        public const short o411                         = 139;  //Y411 
+        public const short o0412                        = 140;  //Y412 UNLOADER CONVEYOR 1 (PC)  
+        public const short o0413                        = 141;  //Y413 UNLOADER CONVEYOR 2 (PC)
+        public const short UldConveyorTrayUnloading     = 142;  //Y414 TRAY UNLOADING END (PC)
+        public const short o0415                        = 143;  //Y415 UNLOADER CONVEYOR 3 (PC)
+
+        //OFFSET #5 [VISION INTERFACE] (144~159)
+        public const short MapBlockUnitInfoWriting      = 144;  //Y500 MAP BLOCK UNIT INFOMATION WRITING 
+        public const short MapBlockInspectionStart      = 145;  //Y501 MAP BLOCK INSPECTION START
+        public const short UnitReading                  = 146;  //Y502 MAP BLOCK UNIT INSPECTION MOVE END SIGNAL 
+        public const short PRSStart                     = 147;  //Y503 PRS INPECTION START
+        public const short PRSReading                   = 148;  //Y504 PRS INSPECTION RESULT READ
+        public const short RECIPE_CHANGE                = 149;  //Y505 RECIPE CHANGE
+        public const short SelectMapBlock               = 150;  //Y506 MAP-BLOCK (ON : TABLE 1 / OFF : TABLE 2)
+        public const short UnitAlignReading             = 151;  //Y507 UNIT 맵칭 XYT 값 읽음
+        public const short PkCalStart                   = 152;  //Y508 PICKER CALIBRATION START
+        public const short PkCalReading                 = 153;  //Y509 PICKER CALIBRATION 결과 값 읽음
+        public const short UsePkCal                     = 154;  //Y510 USE PICKER CALIBRATION (조명 ON)
+        public const short NotUsePkCal                  = 155;  //Y511 NOT USE PICKER CALIBRATION (조명 OFF)
+        public const short UnitReStart                  = 156;  //Y512 UNIT RESTART
+        public const short o513                         = 157;  //Y513
+        public const short o514                         = 158;  //Y514
+        public const short o515                         = 159;  //Y515
+        #endregion
+
+        #region >>Head1 Picker Vacuum Moudle (160~287)
+        //MODULE 2
+        //////OFFSET #0 (160~175)
+        //public const short X1_VAC8 = 171; //vac
+        //public const short X1_BLOW8 = 172; //rej
+        //////OFFSET #1 (176~191)
+        //public const short X1_VAC7 = 187;
+        //public const short X1_BLOW7 = 188;
+        //////OFFSET #2 (192~207)
+        //public const short X1_VAC6 = 203;
+        //public const short X1_BLOW6 = 204;
+        //////OFFSET #3 (208~223)
+        //public const short X1_VAC5 = 219;
+        //public const short X1_BLOW5 = 220;
+        //////OFFSET #4 (224~239)
+        //public const short X1_VAC4 = 235;
+        //public const short X1_BLOW4 = 236;
+        //////OFFSET #5 (240~255)
+        //public const short X1_VAC3 = 251;
+        //public const short X1_BLOW3 = 252;
+        //////OFFSET #6 (256~271)
+        //public const short X1_VAC2 = 267;
+        //public const short X1_BLOW2 = 268;
+        //////OFFSET #7 (272~287)
+        //public const short X1_VAC1 = 283;
+        //public const short X1_BLOW1 = 284;
+
+        ////OFFSET #0 (160~175)
+        public const short X1_VAC8 = 170; //vac
+        public const short X1_BLOW8 = 171; //rej
+                                           ////OFFSET #1 (176~191)
+        public const short X1_VAC7 = 186;
+        public const short X1_BLOW7 = 187;
+        ////OFFSET #2 (192~207)
+        public const short X1_VAC6 = 202;
+        public const short X1_BLOW6 = 203;
+        ////OFFSET #3 (208~223)
+        public const short X1_VAC5 = 218;
+        public const short X1_BLOW5 = 219;
+        ////OFFSET #4 (224~239)
+        public const short X1_VAC4 = 234;
+        public const short X1_BLOW4 = 235;
+        ////OFFSET #5 (240~255)
+        public const short X1_VAC3 = 250;
+        public const short X1_BLOW3 = 251;
+        ////OFFSET #6 (256~271)
+        public const short X1_VAC2 = 266;
+        public const short X1_BLOW2 = 267;
+        ////OFFSET #7 (272~287)
+        public const short X1_VAC1 = 282;
+        public const short X1_BLOW1 = 283;
+        #endregion
+
+        #region >>Head2 Picker Vacuum Moudle (288~415) 0- 10/11
+        ////OFFSET #0 (288~303)
+        //public const short X2_VAC1 = 299;
+        //public const short X2_BLOW1 = 300;
+        //////OFFSET #1 (304~319)
+        //public const short X2_VAC2 = 315;
+        //public const short X2_BLOW2 = 316;
+        //////OFFSET #2 (320~335)
+        //public const short X2_VAC3 = 331;
+        //public const short X2_BLOW3 = 332;
+        //////OFFSET #3 (336~351)
+        //public const short X2_VAC4 = 347;
+        //public const short X2_BLOW4 = 348;
+        //////OFFSET #4 (352~367)
+        //public const short X2_VAC5 = 363;
+        //public const short X2_BLOW5 = 364;
+        //////OFFSET #5 (368~383)
+        //public const short X2_VAC6 = 379;
+        //public const short X2_BLOW6 = 380;
+        //////OFFSET #6 (384~399)
+        //public const short X2_VAC7 = 395;
+        //public const short X2_BLOW7 = 396;
+        //////OFFSET #7 (400~415)
+        //public const short X2_VAC8 = 411;
+        //public const short X2_BLOW8 = 412;
+
+        public const short X2_BLOW1 = 298;
+        public const short X2_VAC1 = 299;
+        ////OFFSET #1 (304~319)
+        public const short X2_BLOW2 = 314;
+        public const short X2_VAC2 = 315;
+        ////OFFSET #2 (320~335)
+        public const short X2_BLOW3 = 330;
+        public const short X2_VAC3 = 331;
+        ////OFFSET #3 (336~351)
+        public const short X2_BLOW4 = 346;
+        public const short X2_VAC4 = 347;
+        ////OFFSET #4 (352~367)
+        public const short X2_BLOW5 = 362;
+        public const short X2_VAC5 = 363;
+        ////OFFSET #5 (368~383)
+        public const short X2_BLOW6 = 378;
+        public const short X2_VAC6 = 379;
+        ////OFFSET #6 (384~399)
+        public const short X2_BLOW7 = 394;
+        public const short X2_VAC7 = 395;
+        ////OFFSET #7 (400~415)
+        public const short X2_BLOW8 = 410;
+        public const short X2_VAC8 = 411;
+        #endregion
+#else
         #region >>SoterOutputList (0~95)
         //MODULE #0 - OFFSET #0 (0~15)
         public const short TENKEY1                      = 0;    // Y000 [SORTER] TENKEY #1								
@@ -164,31 +453,6 @@
         //OFFSET #7 (336~351)                                                                       
         public const short X2_BLOW8                     = 346;
         public const short X2_VAC8                      = 347;
-
-        ////MODULE #2 - OFFSET #0 (244~239) //s
-        //public const short X2_BLOW8                       = 234;
-        //public const short X2_VAC8                        = 235;
-        ////OFFSET #1 (240~255)
-        //public const short X2_BLOW7                       = 250;
-        //public const short X2_VAC7                        = 251;
-        ////OFFSET #2 (256~271)
-        //public const short X2_BLOW6                       = 266;
-        //public const short X2_VAC6                        = 267;
-        ////OFFSET #3 (272~287)
-        //public const short X2_BLOW5                       = 282;
-        //public const short X2_VAC5                        = 283;
-        ////OFFSET #4 (288~303)
-        //public const short X2_BLOW4                       = 298;
-        //public const short X2_VAC4                        = 299;
-        ////OFFSET #5 (304~319)
-        //public const short X2_BLOW3                       = 314;
-        //public const short X2_VAC3                        = 315;
-        ////OFFSET #6 (320~335)
-        //public const short X2_BLOW2                       = 330;
-        //public const short X2_VAC2                        = 331;
-        ////OFFSET #7 (336~351)
-        //public const short X2_BLOW1                       = 346;
-        //public const short X2_VAC1                        = 347;
         #endregion
 
         #region >>SawHandlerOuputList (352~415)
@@ -264,13 +528,19 @@
         public const short HANDLER_SP14                 = 414;  // Y0914 [SAW INTERFACCE] 
         public const short HANDLER_PICKER_Z_INTERLOCK   = 415;  // Y0915 [SAW INTERFACCE] HANDLER STRIP/UNIT PICKER DOWN INTERLOCK 스트립/유닛 피커 다이싱 테이블 위치에 다운되어 있는지 확인 인터락
         #endregion
+#endif
 
         #region >>OUTPUT ARRAY
         public static int[] Null                        = { };
         public static short[] ScrapVac                  = { SCRAP_VAC_1, SCRAP_VAC_2 };
-        public static short[] ScrapVacOff               = { SCRAP1_VAC_OFF, SCRAP2_VAC_OFF };
         public static short[] ScrapBlow                 = { SCRAP_BLOW_1, SCRAP_BLOW_2 };
+#if _NSS3300
+#else
+        public static short[] ScrapVacOff               = { SCRAP1_VAC_OFF, SCRAP2_VAC_OFF };
         public static short[] ScrapPurge                = { SCRAP_PURGE_1, SCRAP_PURGE_2 };
+        public static int[] TrayAlignUp                 = { TRAY_PK_TRAY_ALIGN_UP };
+        public static int[] TrayAlignDn                 = { TRAY_PK_TRAY_ALIGN_DN };
+#endif
         public static short[] StageVac                  = { STAGE1_VAC, STAGE2_VAC };
         public static short[] StageDrain                = { STAGE1_DRAIN, STAGE2_DRAIN };
         public static short[] StageBackVac              = { STAGE1_BACK_VAC, STAGE2_BACK_VAC };
@@ -297,16 +567,22 @@
         public static int[] GoodTrayBackUnGrip          = { GOOD_TRAY1_UNGRIP_S, GOOD_TRAY2_UNGRIP_S };
         public static int[] ReWorkFeederGrip            = { NG_TRAY_GRIP };
         public static int[] ReWorkFeederUnGrip          = { NG_TRAY_UNGRIP };
-        public static int[] TrayAlignUp                 = { TRAY_PK_TRAY_ALIGN_UP };
-        public static int[] TrayAlignDn                 = { TRAY_PK_TRAY_ALIGN_DN };
-
+        
         //CHK_MCDIR 함수에서 정의! (정/역 설비 방향 때문)
         public static int[] HD1PkVac;    //= { X1_VAC1, X1_VAC2, X1_VAC3, X1_VAC4, X1_VAC5, X1_VAC6, X1_VAC7, X1_VAC8 };
         public static int[] HD1PkRej;    //= { X1_BLOW1, X1_BLOW2, X1_BLOW3, X1_BLOW4, X1_BLOW5, X1_BLOW6, X1_BLOW7, X1_BLOW8 };
         public static int[] HD2PkVac;    //= { X2_VAC1, X2_VAC2, X2_VAC3, X2_VAC4, X2_VAC5, X2_VAC6, X2_VAC7, X2_VAC8 };
         public static int[] HD2PkRej;    //= { X2_BLOW1, X2_BLOW2, X2_BLOW3, X2_BLOW4, X2_BLOW5, X2_BLOW6, X2_BLOW7, X2_BLOW8 };
 
-
+#if _NSS3300
+        public static int[] MNOutput = { ELV_CLAMP, ELV_UNCLAMP, PUSHER_FWD, PUSHER_BWD, INLET_TABLE_UP, INLET_TABLE_DN, GRIPPER_OPEN, GRIPPER_CLOSE,
+                                         STRIP_PK_VAC, STRIP_PK_BLOW, UNIT_PK_VAC, UNIT_PK_BLOW, SCRAP_VAC_1, SCRAP_VAC_2, SCRAP_BLOW_1, SCRAP_BLOW_2, CLEANER_WATER_1, CLEANER_WATER_2, CLEANER_AIR, CLEANER_SWING_R, CLEANER_SWING_L,
+                                         STAGE1_BLOW, STAGE1_VAC, TOP_VISION_BLOW, CAM_CAL_ZIG_FWD, CAM_CAL_ZIG_BWD, BTM_VISION_BLOW,
+                                         GOOD_TRAY1_GRIP_C, GOOD_TRAY1_UNGRIP_C, GOOD_TRAY1_GRIP_S, GOOD_TRAY1_UNGRIP_S, GOOD_TRAY2_GRIP_C, GOOD_TRAY2_UNGRIP_C, GOOD_TRAY2_GRIP_S, GOOD_TRAY2_UNGRIP_S, GOOD_STACKER_UP, GOOD_STACKER_DN, NG_TRAY_GRIP, NG_TRAY_UNGRIP, GOOD_TRAY_PRE_ALIGN_FWD, GOOD_TRAY_PRE_ALIGN_BWD, NG_STACKER_UP, NG_STACKER_DN,
+                                         TRAY_PK_GRIP, TRAY_PK_UNGRIP, EMPTY_STACKER_LOCK1, EMPTY_STACKER_LOCK2, EMPTY_STACKER_UNLOCK1, EMPTY_STACKER_UNLOCK2, EMPTY_TRAY_GRIP, EMPTY_TRAY_UNGRIP, EMPTY_TRAY_FWD, EMPTY_TRAY_BWD,
+                                         CLEANER_AIR_KNIFE
+        };
+#else
         public static int[] MNOutput = { ELV_CLAMP, ELV_UNCLAMP, PUSHER_FWD, PUSHER_BWD, INLET_TABLE_UP, INLET_TABLE_DN, GRIPPER_OPEN, GRIPPER_CLOSE,
                                          STRIP_PK_VAC, STRIP_PK_VAC_OFF, STRIP_PK_BLOW, STRIP_PK_PURGE, UNIT_PK_VAC, UNIT_PK_BLOW, SCRAP_VAC_1, SCRAP_VAC_2, SCRAP_BLOW_1, SCRAP_BLOW_2, CLEANER_WATER_1, CLEANER_WATER_2, CLEANER_AIR_1, CLEANER_AIR_2, CLEANER_SWING_R, CLEANER_SWING_L,
                                          STAGE1_BLOW, STAGE1_VAC, TOP_VISION_BLOW, CAM_CAL_ZIG_FWD, CAM_CAL_ZIG_BWD, BTM_VISION_BLOW,
@@ -314,20 +590,29 @@
                                          TRAY_PK_GRIP, TRAY_PK_UNGRIP, EMPTY_STACKER_LOCK1, EMPTY_STACKER_LOCK2, EMPTY_STACKER_UNLOCK1, EMPTY_STACKER_UNLOCK2, EMPTY_TRAY_GRIP, EMPTY_TRAY_UNGRIP, EMPTY_TRAY_FWD, EMPTY_TRAY_BWD,
                                          INLET_TABLE_VAC, INLET_TABLE_BACK_VAC, CLEANER_AIR_KNIFE
         };
+#endif
 
         public static int[] InterfaceState = {
             HANDLER_STRIP_PK_X_PLACE_POS, HANDLER_STRIP_PK_Z_PLACE_POS, HANDLER_LD_COMPLETE,
             HANDLER_UNIT_PK_X_PICKUP_POS, HANDLER_UNIT_PK_Z_PICKUP_POS, HANDLER_UNIT_COMPLETE,
             UldConveyorTrayUnloading
         };
-        #endregion
+#endregion
 
         public static void GET_MODULE_START_END(){
-            CNT_.OutSortStart   = 0;
-            CNT_.OutSortEnd     = 95;
+#if _NSS3300
+            CNT_.OutSortStart   = 64;
+            CNT_.OutSortEnd     = 159;
 
-            CNT_.OutSawStart    = 352;
-            CNT_.OutSawEnd      = 367;
+            CNT_.OutSawStart    = 0;
+            CNT_.OutSawEnd      = 63;
+#else
+            CNT_.OutSortStart = 0;
+            CNT_.OutSortEnd = 95;
+
+            CNT_.OutSawStart = 352;
+            CNT_.OutSawEnd = 367;
+#endif
         }
     } //OUTPUT DEFINE
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LIB_</RootNamespace>
     <AssemblyName>LIB_</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_GEM</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_GEM;_NSS3300;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -37,13 +37,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_EURESYS;_AJIN;_MULTICAM;_GEM;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_EURESYS;_AJIN;_MULTICAM;_GEM;_nNSS3300;</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>

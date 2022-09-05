@@ -188,6 +188,10 @@ namespace LIB_.SubFROMLib
 
             //DisableAutoReply 해당 메세지를 OnMsgRequested로 받오록한다.
             //user msg를 사용 해서 OnMsgRequest 이벤트로 보내는 경우
+
+            //대덕전자 요청 S1F1 응답시 무조건 S1F2 0829.22 HK.PARK
+            m_gem.DisableAutoReply(1, 1);
+
             m_gem.DisableAutoReply(6, 12); // CEID 응답
 
             //FILE
@@ -620,6 +624,8 @@ namespace LIB_.SubFROMLib
 
                 lblConnectState.Text        = CMES.sConnectState;
                 lblConnectState.BackColor   = CMES.cConnectState;
+
+                //m_gem.GoOnlineRemote(); //220708 HK.PARK ,m_gem.GoOnlineLocal
             }));
 
             if (CMES.m_nControlState == CMES.ControlValue.CONTROL_EQ_OFFLINE){
@@ -948,14 +954,73 @@ namespace LIB_.SubFROMLib
                     if (strCPName == CPNAME.UNITSIZE_UPPER) CLOT.GET_LOT.UnitSize_USL   = double.Parse(strCPValue);
                     if (strCPName == CPNAME.UNITSIZE_LOWER) CLOT.GET_LOT.UnitSize_LSL   = double.Parse(strCPValue);
                     if (strCPName == CPNAME.ABFMATERIAL)    CLOT.GET_LOT.ABFMATERIAL    = strCPValue;
-                    if (strCPName == CPNAME.LANDPKGX)       CLOT.GET_LOT.LANDPKGX       = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.LANDPKGX_UPPER) CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.LANDPKGX_LOWER) CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.LANDPKGY)       CLOT.GET_LOT.LANDPKGY       = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.LANDPKGY_UPPER) CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.LANDPKGY_LOWER) CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.LANDPKGX) {
+                        try{
+                            CLOT.GET_LOT.LANDPKGX = double.Parse(strCPValue);
+                        }
+                        catch{
+                            CLOT.GET_LOT.LANDPKGX = 0;
+                        }
+                    }
+                    if (strCPName == CPNAME.LANDPKGX_UPPER) {
+                        try{
+                            CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(strCPValue);
+                        }
+                        catch{
+                            CLOT.GET_LOT.LANDPKGX_UPPER = 0;
+                        }
+                    }
+                    if (strCPName == CPNAME.LANDPKGX_LOWER){
+                        try{
+                            CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(strCPValue);
+                        }
+                        catch{
+                            CLOT.GET_LOT.LANDPKGX_LOWER = 0;
+                        }
+                    }
+                    if (strCPName == CPNAME.LANDPKGY){
+                        try{
+                            CLOT.GET_LOT.LANDPKGY = double.Parse(strCPValue);
+                        }
+                        catch{
+                            CLOT.GET_LOT.LANDPKGY = 0;
+                        }
+                    }
+                    if (strCPName == CPNAME.LANDPKGY_UPPER) {
+                        try{
+                            CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(strCPValue);
+                        }
+                        catch {
+                            CLOT.GET_LOT.LANDPKGY_UPPER = 0;
+                        } 
+                    }
+                    if (strCPName == CPNAME.LANDPKGY_LOWER){
+                        try{
+                            CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(strCPValue);
+                        }
+                        catch{
+                            CLOT.GET_LOT.LANDPKGY_LOWER = 0;
+                        }
+                    }
                     AddGemLog(string.Format("CPNAME:{0}", strCPName));
                     AddGemLog(string.Format("CPVALUE:{0}", strCPValue));
+
+                    // LOT INFO 저장
+                    CLOT.GET_LOT.WorkScope = "진행";
+                    CLOT.GET_LOT.WorkSort = "";
+                    if (CLOT.GET_LOT.LotType == 1)      CLOT.GET_LOT.WorkSort = "초도";
+                    else if (CLOT.GET_LOT.LotType == 2) CLOT.GET_LOT.WorkSort = "본낫";
+                    else if (CLOT.GET_LOT.LotType == 3) CLOT.GET_LOT.WorkSort = "더미";
+                    else if (CLOT.GET_LOT.LotType == 4) CLOT.GET_LOT.WorkSort = "재초도";
+                    else if (CLOT.GET_LOT.LotType == 5) CLOT.GET_LOT.WorkSort = "재작업";
+                    
+                    string sCurLotInfo = CLOT.GET_LOT.LotID + "," + CLOT.GET_LOT.LotType + "," + CLOT.GET_LOT.Qty + "," + CLOT.GET_LOT.ProductType + "," + CLOT.GET_LOT.ToolNo + "," +
+                                        CLOT.GET_LOT.ITS + "," + CLOT.GET_LOT.ITS_LotID_IN + "," + CLOT.GET_LOT.ITS_LotID_CT + "," + 
+                                        CLOT.GET_LOT.UnitSizeX + "," + CLOT.GET_LOT.UnitSizeY + "," + CLOT.GET_LOT.UnitSize_USL + "," + CLOT.GET_LOT.UnitSize_LSL + "," + CLOT.GET_LOT.ABFMATERIAL + "," +
+                                        CLOT.GET_LOT.LANDPKGX + "," + CLOT.GET_LOT.LANDPKGX_UPPER + "," + CLOT.GET_LOT.LANDPKGX_LOWER + "," + CLOT.GET_LOT.LANDPKGY + "," + CLOT.GET_LOT.LANDPKGY_UPPER + "," + CLOT.GET_LOT.LANDPKGY_LOWER + "," +
+                                        CLOT.GET_LOT.WorkSort + "," + CLOT.GET_LOT.WorkScope; 
+                    FILE_.WR_File(PATH_.CurrLot, sCurLotInfo, false);
+
                     m_gem.GetListItemClose(lMsgId);
                 }
                 m_gem.GetListItemClose(lMsgId);
@@ -1067,6 +1132,17 @@ namespace LIB_.SubFROMLib
             short nStream = 0, nFunction = 0, nWbit = 0;
             int nLength = 0;
             m_gem.GetMsgInfo(lMsgId, ref nStream, ref nFunction, ref nWbit, ref nLength);
+
+            if (nStream == 1 && nFunction == 1){ // S1F1 직접 처리 (대덕전자 요청)
+                int rMsgId = m_gem.CreateReplyMsg(lMsgId);
+                m_gem.OpenListItem(rMsgId);
+                {
+                    m_gem.AddAsciiItem(rMsgId, CMES.m_strModelName, CMES.m_strModelName.Length);
+                    m_gem.AddAsciiItem(rMsgId, CMES.m_strSoftRev, CMES.m_strSoftRev.Length);
+                }
+                m_gem.CloseListItem(rMsgId);
+                m_gem.SendMsg(rMsgId);
+            }
 
             if (CMES.m_nControlState == CMES.ControlValue.CONTROL_EQ_OFFLINE){
                 m_gem.AbortMsg(lMsgId);

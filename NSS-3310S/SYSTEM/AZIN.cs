@@ -52,28 +52,44 @@ namespace nAZIN{
             } // 엘리베이터 스트립 로딩 위치
             else IsBIT[B.ElvStripLoading] = false;
 
+
             //[sawing interface] strip picker 
-            if (mtDATA[M.StripPkX, P.StripPlc].bPOS) mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = true;
-            else mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = false;
-            ChkPos = 1;//prMACHINE[CP.StipPkCheckUpPitch] <= 0 ? 1 : prMACHINE[CP.StipPkCheckUpPitch] - 1;
-            if ((mtDATA[M.StripPkZ, P.StripPlc].Pos - ChkPos < mtSTS[M.StripPkZ].CurrentPosition)) mOUT[O.HANDLER_STRIP_PK_Z_PLACE_POS] = true;
-            else mOUT[O.HANDLER_STRIP_PK_Z_PLACE_POS] = false;
+            //if (mtDATA[M.StripPkX, P.StripPlc].bPOS)    mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = true;
+            //else                                        mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = false;
+            // 스트립 피커 X축 다이싱 테이블 플레이스 위치 +/- 2mm 안에 들어와 있을 경우만 on
+            if (mtDATA[M.StripPkX, P.StripPlc].Pos - 2 < mtSTS[M.StripPkX].CurrentPosition && mtDATA[M.StripPkX, P.StripPlc].Pos + 2 > mtSTS[M.StripPkX].CurrentPosition){
+                mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = true;
+            }
+            else{
+                mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS] = false;
+            }
+
+            ChkPos = 3;//prMACHINE[CP.StipPkCheckUpPitch] <= 0 ? 1 : prMACHINE[CP.StipPkCheckUpPitch] - 1;
+            if ((mtDATA[M.StripPkZ, P.StripPlc].Pos - ChkPos < mtSTS[M.StripPkZ].CurrentPosition))  mOUT[O.HANDLER_STRIP_PK_Z_PLACE_POS] = true;
+            else                                                                                    mOUT[O.HANDLER_STRIP_PK_Z_PLACE_POS] = false;
 
             //[sawing interface] unit picker
-            if (mtDATA[M.UnitPkX, P.UnitPckUp].bPOS) mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = true;
-            else mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = false;
-            ChkPos = 1;//prMACHINE[CP.UnitPkCheckUpPitch] <= 0 ? 1 : prMACHINE[CP.UnitPkCheckUpPitch] - 1;
+            //if (mtDATA[M.UnitPkX, P.UnitPckUp].bPOS)    mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = true;
+            //else                                        mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = false;
+            if (mtDATA[M.UnitPkX, P.UnitPckUp].Pos - 2 < mtSTS[M.UnitPkX].CurrentPosition && mtDATA[M.UnitPkX, P.UnitPckUp].Pos + 2 > mtSTS[M.UnitPkX].CurrentPosition) {
+                mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = true;
+            }
+            else{
+                mOUT[O.HANDLER_UNIT_PK_X_PICKUP_POS] = false;
+            }
+
+            ChkPos = 3;//prMACHINE[CP.UnitPkCheckUpPitch] <= 0 ? 1 : prMACHINE[CP.UnitPkCheckUpPitch] - 1;
             if (mtDATA[M.UnitPkZ, P.UnitPckUp].Pos - ChkPos < mtSTS[M.UnitPkZ].CurrentPosition) mOUT[O.HANDLER_UNIT_PK_Z_PICKUP_POS] = true;
-            else mOUT[O.HANDLER_UNIT_PK_Z_PICKUP_POS] = false;
+            else                                                                                mOUT[O.HANDLER_UNIT_PK_Z_PICKUP_POS] = false;
 
             //[sawing interface] handler picker interlock
             if (mtDATA[M.StripPkX, P.StripPlc].bPOS){
-                if ((mtDATA[M.StripPkZ, P.StripPlc].Pos - 5) < mtSTS[M.StripPkZ].CurrentPosition) mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = true;
-                else mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = false;
+                if ((mtDATA[M.StripPkZ, P.StripPlc].Pos - 5) < mtSTS[M.StripPkZ].CurrentPosition)   mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = true;
+                else                                                                                mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = false;
             }
             else if (mtDATA[M.UnitPkX, P.UnitPckUp].bPOS){
-                if ((mtDATA[M.UnitPkX, P.UnitPckUp].Pos - 10) < mtSTS[M.UnitPkZ].CurrentPosition) mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = true;
-                else mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = false;
+                if ((mtDATA[M.UnitPkX, P.UnitPckUp].Pos - 10) < mtSTS[M.UnitPkZ].CurrentPosition)   mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = true;
+                else                                                                                mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = false;
             }
             else mOUT[O.HANDLER_PICKER_Z_INTERLOCK] = false;
 
@@ -113,9 +129,17 @@ namespace nAZIN{
     }
 
     public class PK_VACUUM_STATUS : DATA_{
-        int[] INPUT = { I.X1_VAC1, /*I.X2_VAC8*/ I.X2_VAC1 };
-        int[] OUTPUT1 = { O.X1_BLOW1, /*O.X2_BLOW8*/ O.X2_BLOW1 };
-        int[] OUTPUT2 = { O.X1_VAC1, /*O.X2_VAC8*/ O.X2_VAC1 };
+#if _NSS3300
+        readonly int[] INPUT    = { I.X1_VAC8, I.X2_VAC1 };
+        readonly int[] OUTPUT1  = { O.X1_VAC8, O.X2_VAC1 };//{ O.X1_VAC8, O.X2_VAC1 };
+        readonly int[] OUTPUT2  = { O.X1_BLOW8, O.X2_BLOW1 };//{ O.X1_BLOW8, O.X2_BLOW1 };
+
+#else
+        readonly int[] INPUT     = { I.X1_VAC1, I.X2_VAC1 };
+        readonly int[] OUTPUT1   = { O.X1_BLOW1, O.X2_BLOW1 };
+        readonly int[] OUTPUT2   = { O.X1_VAC1, O.X2_VAC1 };
+#endif
+
         int iMODULE, iOFFSET, oOFFSET, no, iOUT_1, iOUT_2, nIN;
         uint uReadWord, sum, temp = 0;
         double Conversion_AD, Set_AD, dAI_VALUE = 0;
@@ -147,8 +171,11 @@ namespace nAZIN{
                     foreach (uint value in mAI_READ_WORD[no]) sum += value;
                     temp = sum / (uint)(mAI_READ_WORD[no].Count);
 
-                    iOUT_1 = OUTPUT1[i]; //blow
-                    iOUT_2 = OUTPUT2[i]; //vac
+                    iOUT_1 = OUTPUT1[i]; //blow -> vac
+                    iOUT_2 = OUTPUT2[i]; //vac -> blow
+                    if (iOUT_1 == 172 || iOUT_2 == 172){
+                        UTIL_.DELAY(1);
+                    }
                     OUTPUT(iOUT_1, iOUT_2, iMODULE, /*iOFFSET*/oOFFSET);
 
                     Conversion_AD = (temp & /*0x03ff*/0x000003ff) * 0.1;   // 아날로그 값. // (m_Read & 0x000003ff) * 0.1
@@ -165,8 +192,8 @@ namespace nAZIN{
             }
         }
         void OUTPUT(int Out1, int Out2, int module, int offset){
-            SetOUT1 = Out1 + (offset * 16); //blow
-            SetOUT2 = Out2 + (offset * 16); //vac
+            SetOUT1 = Out1 + (offset * 16); //blow -> vac
+            SetOUT2 = Out2 + (offset * 16); //vac -> blow
             if (mOUT[SetOUT1] && mOUT[SetOUT2]){
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 10, 1);
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 11, 1);
@@ -174,7 +201,7 @@ namespace nAZIN{
             else if (mOUT[SetOUT1] && !mOUT[SetOUT2]){
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 10, 1);
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 11, 0);
-            } //blow
+            } //blow -> vac
             else if (!mOUT[SetOUT1] && !mOUT[SetOUT2]){
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 10, 0);
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 11, 0);
@@ -182,7 +209,7 @@ namespace nAZIN{
             else{
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 10, 0);
                 LAB_.SET_OUTPUT_BIT(module, (16 * offset) + 11, 1);
-            } //vac
+            } //vac -> blow
         }
     }
 }

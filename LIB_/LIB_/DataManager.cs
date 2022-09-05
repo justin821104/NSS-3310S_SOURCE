@@ -15,8 +15,7 @@ using LIB_.DateType;
 public class CNT_ : DATA_
 { // 프로젝트 사직 마다 확인 !
     public const int TriggerCnt     = 4;
-
-    public const int MT             = 33; //33 -> 37;   // 모터 수량 (0 ~ 32->36)
+    public const int MT             = 33;   //모터 수량 [NSS-3310/3320]0~32=33
     public const int POS            = 21;   // 위치값 버퍼 개수
     public const int ComPos         = 10;   // 공통 위치값 버퍼 개수
     public const int IndPos         = 10;   // 개별 위치값 버퍼 개수
@@ -104,7 +103,10 @@ public class PATH_
     public static string ITSCount                   = "D:\\ShareFile\\ITSCount.txt";
     public static string ITSLocation                = "D:\\ShareFile\\ITSLocation.txt";
     public static string StripOverlap               = "D:\\ShareFile\\StripOverlap.txt";
-
+    public static string MapBlock1StripBarcode      = "D:\\ShareFile\\MapBlock1StripBarcode.txt";   // 맵블럭에 안착 되어 있는 스트립 바코드
+    public static string MapBlock2StripBarcode      = "D:\\ShareFile\\MapBlock2StripBarcode.txt";   // 맵블럭에 안착 되어 있는 스트립 바코드
+    public static string PCBTYPE                    = "D:\\ShareFile\\PCBType.txt";                 // 설비 PCB TYPE = 0: STRIP / 1: QURD  [VISION 에서는 IF (0) {STRIP} else {QUAD} ]
+    
     //기본 폴더 
     public const string BACKUP_FOLDER               = "D:\\BACKUP\\";
     public const string COMPANY                     = "NEONTECH";
@@ -152,15 +154,21 @@ public class PATH_
     public const string USE_PKR_Z                   = SYSTEM + "USESKIP_PK.TXT";            // 피커 사용 유무
     public const string UNIT_COLOR                  = SYSTEM + "UNIT_COLOR.TXT";            // 유닛 상태 색상
     public const string COUNT                       = SYSTEM + "COUNT.TXT";                 // 현재 생산 수량 저장
+    public const string DAY_COUNT                   = SYSTEM + "DAY_COUNT.TXT";             // 하루 생산 수량 확인
     public const string UserID                      = SYSTEM + "USERID.TXT";                // USER ID 리스트
     public const string CurrUSER                    = SYSTEM + "CURRUSER.TXT";              // 현재 클릭된 user 
-    
+
+    public const string CurrLot                     = SYSTEM + "CURRLOT.TXT";               // 현재 LOT 정보
+
     //LABEL  
     public const string Tenkey                      = InfoLABEL + "TENKEY.TXT";             // TENKEY 리스트
     public const string inputLabel                  = InfoLABEL + "INPUT.TXT";              // INPUT 리스트
-    public const string outputLabel                 = InfoLABEL + "OUTPUT.TXT";             // OUTPUT 리스트
+    public const string inputLabel3300              = InfoLABEL + "INPUT_3300.TXT";
+    public const string outputLabel                 = InfoLABEL + "OUTPUT.TXT";             // OUTPUT 리스트a
+    public const string outputLabel3300             = InfoLABEL + "OUTPUT_3300.TXT";
     public const string MTName                      = InfoLABEL + "MT.TXT";                 // MOTOR 리스트 (설비 정방향 자재 투입 방향 좌->우) 
     public const string MTNameR                     = InfoLABEL + "MT_RIGHT.TXT";           // MOTOR 리스트 (설비 역방향 자재 투입 방향 우->좌)
+    public const string MTName3300                  = InfoLABEL + "MT_3300.TXT";            // MOTOR 리스트 (광주 NSS-3300)
     public const string MCName                      = InfoLABEL + "MC_NAME.TXT";            // 장비 파라메타 리스트
     public const string MDName                      = InfoLABEL + "MD_NAME.TXT";            // 모델 파라메타 리스트
     public const string AnalogName                  = InfoLABEL + "ANALOG.TXT";             // 아날로그 리스트
@@ -194,6 +202,7 @@ public class PATH_
     public const string LogPROCESS                  = LOG + "PROCESS\\";
     public const string LogLotInfo                  = LOG + "LOTINFO\\";
     public const string LogITSInfo                  = LOG + "ITS\\";
+    public const string LogLotEnd                   = LOG + "LOTEND\\";
 
     //프로세스 로그 경로
     public const string ProcMAGAINE                 = LOG + "MAGAINE\\";
@@ -205,19 +214,20 @@ public class PATH_
     public const string ProcREJECT                  = LOG + "REJECT\\";
 
     public const string LogCycleTack                = LOG + "TACK\\";
-
+    public const string LogOneCycleTime             = LOG + "ONECYCLE\\";
+    
     public const string LogStripDefectCount         = LOG + "STRIPDEFECTCOUNT\\";
     public const string LogStripDefectLocationList  = LOG + "STRIPDEFECTLOCATIONLIST\\";
 
     public static string[] PROCESS_FILENAME     = new string[] { "MAGAZINE.log", "INRAIL.log", "STRIPPICKER.log", "UNITPICKER.log", "WORKPICKER.log", "REJECT.log", "ULOADERPICKER.log" };
     public static string MARS_FILENAME          = "MARS.log";
 
-    public static string[] aPath_DEL_LOGs       = {
+    public static string[] aPath_DEL_LOGs = {
                                                                 LogAppEVENT, LogEVENT,LogEXCEPTION,LogImage,
                                                                 LogLOGGING,LogProcMANUAL,LogMARS,LogMEASURE,
                                                                 LogMovingERR,LogPCBDATA,LogPRINTMESSAGE,LogSPC,
                                                                 LogSYSTEM,LogWARNING, ProcesInfoData, LogCount, LogVisionWriteFailData,
-                                                                LogPROCESS, LogCycleTack, LogLotInfo, LogITSInfo, LogStripDefectCount, LogStripDefectLocationList
+                                                                LogPROCESS, LogCycleTack, LogLotInfo, LogITSInfo, LogStripDefectCount, LogStripDefectLocationList, LogLotEnd
                                                             };
     public static string[] sPath_DEL_LOGs_ONE_MONTH = {
 
@@ -249,6 +259,7 @@ public class PATH_
         if (!Directory.Exists(LogITSInfo))                  Directory.CreateDirectory(LogITSInfo);
         if (!Directory.Exists(LogStripDefectCount))         Directory.CreateDirectory(LogStripDefectCount);
         if (!Directory.Exists(LogStripDefectLocationList))  Directory.CreateDirectory(LogStripDefectLocationList);
+        if (!Directory.Exists(LogLotEnd))                   Directory.CreateDirectory(LogLotEnd);
     }
 }
 public class SUBFRM_
@@ -413,10 +424,10 @@ public class DATA_
     public static Color ComBackColor = Color.Lime;
     public static Color ComForeColor = Color.Lime;
 
-    public static string EQPCode                = ""; //EQUIPMENT CODE 
-    
+    public static string EQPCode                = "";   //EQUIPMENT CODE 
+    public static string MachineInfo            = "";   //설비 정보 (NSS-3300 / NSS-3320)
 
-    #region "배열"
+#region "배열"
     //TEXT 관련
     public static string[] ThreadName       = new string[CNT_.THREAD];
     public static string[] MtName           = new string[CNT_.MT];
@@ -866,15 +877,20 @@ public class DATA_
     public static int BZOffTime             { get; set; }
     public static int USE_LOG_SAVE          { get; set; }
     public static int MANUAL_REPEAT_DLAY    { get; set; }
+    public static int DAY_MGZ_CNT           { get; set; }
+    public static int DAY_STRIP_CNT         { get; set; }
+    public static int DAY_GOOD_CNT          { get; set; }
+    public static int DAY_REWORK_CNT        { get; set; }
+    public static int DAY_REJECT_CNT        { get; set; }
     public static int UseLotEnd             { get; set; }
     public static int SelectMTSpd           { get; set; }
     public static int UseMES                { get; set; }
-    #endregion "배열"
+#endregion "배열"
 }
 
 public class MAP_ : DATA_
 {
-    #region "MAGAZINE"
+#region "MAGAZINE"
     public static int nLDSlot           = 0;
     public static int nULDSlot          = 0;
     public static eSTATUS[] nState      = new eSTATUS[30]; // 슬롯 최대 30개.
@@ -951,9 +967,9 @@ public class MAP_ : DATA_
         }
         return nState.Length - 1;
     }
-    #endregion  "MAGAZINE"
+#endregion  "MAGAZINE"
 
-    #region "TRAY"
+#region "TRAY"
     static public bool[,,] mapTray      = new bool[3, 100, 100]; //TRAY TRANSFER AXIS, Unit Y, Unit X
     static public bool[,,] mapTray_View = new bool[3, 100, 100]; //TRAY TRANSFER AXIS, Unit Y, Unit X
     static public eSTATUS[,] ARR_TRAY   = new eSTATUS[3, 9999];
@@ -994,9 +1010,9 @@ public class MAP_ : DATA_
         }
         return -1;
     }
-    #endregion "TRAY"
+#endregion "TRAY"
 
-    #region "MAPBLOCK"
+#region "MAPBLOCK"
     public static bool[,,,,] mapPallet      = new bool[2, 10, 10, 100, 100];    //PALLET AXIS, GROUP Y, GROUP X, UNIT Y, UINT X
     public static bool[,,,,] mapPallet_View = new bool[2, 10, 10, 100, 100];    //PALLET AXIS, GROUP Y, GROUP X, UNIT Y, UINT X
     public static eSTATUS[,,,,] ARR_PALLET  = new eSTATUS[2, 10, 10, 100, 100]; //PALLET AXIS, GROUP Y, GROUP X, UNIT X, UNIT Y(INDEX)
@@ -1181,5 +1197,5 @@ public class MAP_ : DATA_
             }
         }
     }
-    #endregion "MAPBLOCK"
+#endregion "MAPBLOCK"
 }

@@ -140,48 +140,70 @@
             this.lbHD1_PK1 = new System.Windows.Forms.Label();
             this.lbCurPkr = new System.Windows.Forms.Label();
             this.pnlOP = new System.Windows.Forms.Panel();
-            this.lbMGZ_CHECK_2 = new System.Windows.Forms.Label();
-            this.lbMGZ_CHECK_1 = new System.Windows.Forms.Label();
-            this.lbSTAGE2_OFFSET_Y = new System.Windows.Forms.Label();
-            this.lbSTAGE2_OFFSET_X = new System.Windows.Forms.Label();
-            this.lbSTAGE1_OFFSET_Y = new System.Windows.Forms.Label();
-            this.lbSTAGE1_OFFSET_X = new System.Windows.Forms.Label();
             this.BTN_TEST = new System.Windows.Forms.Button();
-            this.lbTEST_POS2 = new System.Windows.Forms.Label();
-            this.lbTEST_POS1 = new System.Windows.Forms.Label();
-            this.lbUnitPkrXSafety = new System.Windows.Forms.Label();
-            this.lbStripPkrXSafety = new System.Windows.Forms.Label();
-            this.swCst_SUPPLY = new System.Windows.Forms.Button();
-            this.cpT2 = new System.Windows.Forms.Label();
-            this.cpHD2 = new System.Windows.Forms.Label();
-            this.cpT1 = new System.Windows.Forms.Label();
-            this.cpHD1 = new System.Windows.Forms.Label();
             this.btnLAMP = new System.Windows.Forms.Button();
             this.gbxOP = new System.Windows.Forms.GroupBox();
-            this.lbPRS_READ = new System.Windows.Forms.Label();
-            this.lbPRS_RESULT = new System.Windows.Forms.Label();
-            this.lbPRS_START = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
             this.swStart = new Glass.GlassButton();
             this.swStop = new Glass.GlassButton();
             this.swRest = new Glass.GlassButton();
             this.btn_HOME = new Glass.GlassButton();
-            this.Stacker_SUPPLY = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.bMAPBLOCK2_WORK_RESET = new System.Windows.Forms.Button();
             this.bMAPBLOCK1_WORK_RESET = new System.Windows.Forms.Button();
             this.editStatus = new System.Windows.Forms.TextBox();
+            this.EES_DISPLAY = new System.Windows.Forms.Button();
+            this.swCst_SUPPLY = new System.Windows.Forms.Button();
+            this.lbMGZ_CHECK_2 = new System.Windows.Forms.Label();
+            this.lbMGZ_CHECK_1 = new System.Windows.Forms.Label();
+            this.lbUnitPkrXSafety = new System.Windows.Forms.Label();
+            this.lbStripPkrXSafety = new System.Windows.Forms.Label();
+            this.lbPRS_READ = new System.Windows.Forms.Label();
+            this.lbPRS_RESULT = new System.Windows.Forms.Label();
+            this.lbPRS_START = new System.Windows.Forms.Label();
             this.lbTrip = new System.Windows.Forms.Label();
             this.lbDoor = new System.Windows.Forms.Label();
             this.lbAIR = new System.Windows.Forms.Label();
             this.PKPlaceStop = new System.Windows.Forms.Button();
-            this.EES_DISPLAY = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listLog = new System.Windows.Forms.ListView();
             this.TIME = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SITE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MESSAGE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
+            this.VIEW_MACHINE_INFO = new System.Windows.Forms.Panel();
+            this.DDC_REJECT_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.label52 = new System.Windows.Forms.Label();
+            this.DDC_REWORK_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.label51 = new System.Windows.Forms.Label();
+            this.DDC_GOOD_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.label50 = new System.Windows.Forms.Label();
+            this.DDC_STRIP_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.label49 = new System.Windows.Forms.Label();
+            this.DDC_MGZ_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.label26 = new System.Windows.Forms.Label();
+            this.LB_DOOR_SKIP = new System.Windows.Forms.Label();
+            this.dDly_UnitPkPicOffset_X = new Owf.Controls.DigitalDisplayControl();
+            this.label48 = new System.Windows.Forms.Label();
+            this.dDly_Stage2Offset_Y = new Owf.Controls.DigitalDisplayControl();
+            this.label46 = new System.Windows.Forms.Label();
+            this.dDly_Stage2Offset_X = new Owf.Controls.DigitalDisplayControl();
+            this.label47 = new System.Windows.Forms.Label();
+            this.dDly_Stage1Offset_Y = new Owf.Controls.DigitalDisplayControl();
+            this.label45 = new System.Windows.Forms.Label();
+            this.dDly_Stage1Offset_X = new Owf.Controls.DigitalDisplayControl();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dDly_T2 = new Owf.Controls.DigitalDisplayControl();
+            this.label40 = new System.Windows.Forms.Label();
+            this.dDlyCAXC_X2 = new Owf.Controls.DigitalDisplayControl();
+            this.label42 = new System.Windows.Forms.Label();
+            this.dDly_X2 = new Owf.Controls.DigitalDisplayControl();
+            this.label44 = new System.Windows.Forms.Label();
+            this.dDly_T1 = new Owf.Controls.DigitalDisplayControl();
+            this.label38 = new System.Windows.Forms.Label();
+            this.dDlyCAXC_X1 = new Owf.Controls.DigitalDisplayControl();
+            this.label36 = new System.Windows.Forms.Label();
+            this.dDly_X1 = new Owf.Controls.DigitalDisplayControl();
+            this.label31 = new System.Windows.Forms.Label();
+            this.OptionMachineInfo = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.dcITScnt = new Owf.Controls.DigitalDisplayControl();
             this.dcUnitULDCnt = new Owf.Controls.DigitalDisplayControl();
@@ -300,8 +322,14 @@
             this.LBL_POINT = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tpgMESStatus = new System.Windows.Forms.TabPage();
+            this.label34 = new System.Windows.Forms.Label();
+            this.MAPBLOCK2_OVERLAP = new System.Windows.Forms.Panel();
+            this.MAPBLOCK1_OVERLAP = new System.Windows.Forms.Panel();
+            this.UNIT_OVERLAP = new System.Windows.Forms.Panel();
+            this.SAW_OVERLAP = new System.Windows.Forms.Panel();
+            this.STRIP_OVERLAP = new System.Windows.Forms.Panel();
+            this.RAIL_OVERLAP = new System.Windows.Forms.Panel();
             this.LBX_PROC_CONDITION_MESSAGE = new System.Windows.Forms.ListBox();
-            this.label31 = new System.Windows.Forms.Label();
             this.LBL_BRCD_MB_2_IDX = new System.Windows.Forms.Label();
             this.LBL_BRCD_MB_1_IDX = new System.Windows.Forms.Label();
             this.LBL_BRCD_UNIT_PK_IDX = new System.Windows.Forms.Label();
@@ -355,6 +383,7 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -367,6 +396,7 @@
             this.Recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LotID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MESCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoadingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExcludeCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnloadingCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -431,12 +461,10 @@
             this.lbComSorterVision = new System.Windows.Forms.Label();
             this.lbComSawMachine = new System.Windows.Forms.Label();
             this.TmrAUTO = new System.Windows.Forms.Timer(this.components);
-            this.RAIL_OVERLAP = new System.Windows.Forms.Panel();
-            this.STRIP_OVERLAP = new System.Windows.Forms.Panel();
-            this.SAW_OVERLAP = new System.Windows.Forms.Panel();
-            this.UNIT_OVERLAP = new System.Windows.Forms.Panel();
-            this.MAPBLOCK1_OVERLAP = new System.Windows.Forms.Panel();
-            this.MAPBLOCK2_OVERLAP = new System.Windows.Forms.Panel();
+            this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
+            this.digitalDispladDisplay_Stage1Offset_XyControl5 = new Owf.Controls.DigitalDisplayControl();
+            this.dDisplay_Stage2Offset_X = new Owf.Controls.DigitalDisplayControl();
+            this.dDisplay_Stage2Offset_Y = new Owf.Controls.DigitalDisplayControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfo)).BeginInit();
             this.gbxHD2.SuspendLayout();
@@ -453,6 +481,7 @@
             this.gbxOP.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.VIEW_MACHINE_INFO.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -1341,102 +1370,22 @@
             this.pnlOP.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.pnlOP.BackColor = System.Drawing.Color.White;
             this.pnlOP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOP.Controls.Add(this.lbMGZ_CHECK_2);
-            this.pnlOP.Controls.Add(this.lbMGZ_CHECK_1);
-            this.pnlOP.Controls.Add(this.lbSTAGE2_OFFSET_Y);
-            this.pnlOP.Controls.Add(this.lbSTAGE2_OFFSET_X);
-            this.pnlOP.Controls.Add(this.lbSTAGE1_OFFSET_Y);
-            this.pnlOP.Controls.Add(this.lbSTAGE1_OFFSET_X);
             this.pnlOP.Controls.Add(this.BTN_TEST);
-            this.pnlOP.Controls.Add(this.lbTEST_POS2);
-            this.pnlOP.Controls.Add(this.lbTEST_POS1);
-            this.pnlOP.Controls.Add(this.lbUnitPkrXSafety);
-            this.pnlOP.Controls.Add(this.lbStripPkrXSafety);
-            this.pnlOP.Controls.Add(this.swCst_SUPPLY);
-            this.pnlOP.Controls.Add(this.cpT2);
-            this.pnlOP.Controls.Add(this.cpHD2);
-            this.pnlOP.Controls.Add(this.cpT1);
-            this.pnlOP.Controls.Add(this.cpHD1);
             this.pnlOP.Controls.Add(this.btnLAMP);
             this.pnlOP.Controls.Add(this.gbxOP);
             this.pnlOP.Controls.Add(this.bMAPBLOCK2_WORK_RESET);
             this.pnlOP.Controls.Add(this.bMAPBLOCK1_WORK_RESET);
             this.pnlOP.Controls.Add(this.editStatus);
+            this.pnlOP.Controls.Add(this.EES_DISPLAY);
             this.pnlOP.Location = new System.Drawing.Point(1162, 1);
             this.pnlOP.Name = "pnlOP";
             this.pnlOP.Size = new System.Drawing.Size(114, 685);
             this.pnlOP.TabIndex = 1267;
             // 
-            // lbMGZ_CHECK_2
-            // 
-            this.lbMGZ_CHECK_2.BackColor = System.Drawing.Color.White;
-            this.lbMGZ_CHECK_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbMGZ_CHECK_2.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMGZ_CHECK_2.ForeColor = System.Drawing.Color.Black;
-            this.lbMGZ_CHECK_2.Location = new System.Drawing.Point(55, 426);
-            this.lbMGZ_CHECK_2.Name = "lbMGZ_CHECK_2";
-            this.lbMGZ_CHECK_2.Size = new System.Drawing.Size(56, 16);
-            this.lbMGZ_CHECK_2.TabIndex = 1485;
-            this.lbMGZ_CHECK_2.Text = "MGZ CHK2";
-            this.lbMGZ_CHECK_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbMGZ_CHECK_1
-            // 
-            this.lbMGZ_CHECK_1.BackColor = System.Drawing.Color.White;
-            this.lbMGZ_CHECK_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbMGZ_CHECK_1.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMGZ_CHECK_1.ForeColor = System.Drawing.Color.Black;
-            this.lbMGZ_CHECK_1.Location = new System.Drawing.Point(1, 426);
-            this.lbMGZ_CHECK_1.Name = "lbMGZ_CHECK_1";
-            this.lbMGZ_CHECK_1.Size = new System.Drawing.Size(56, 16);
-            this.lbMGZ_CHECK_1.TabIndex = 1484;
-            this.lbMGZ_CHECK_1.Text = "MGZ CHK1";
-            this.lbMGZ_CHECK_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbSTAGE2_OFFSET_Y
-            // 
-            this.lbSTAGE2_OFFSET_Y.AutoSize = true;
-            this.lbSTAGE2_OFFSET_Y.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSTAGE2_OFFSET_Y.Location = new System.Drawing.Point(57, 382);
-            this.lbSTAGE2_OFFSET_Y.Name = "lbSTAGE2_OFFSET_Y";
-            this.lbSTAGE2_OFFSET_Y.Size = new System.Drawing.Size(53, 13);
-            this.lbSTAGE2_OFFSET_Y.TabIndex = 1483;
-            this.lbSTAGE2_OFFSET_Y.Text = "0000.000";
-            // 
-            // lbSTAGE2_OFFSET_X
-            // 
-            this.lbSTAGE2_OFFSET_X.AutoSize = true;
-            this.lbSTAGE2_OFFSET_X.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSTAGE2_OFFSET_X.Location = new System.Drawing.Point(57, 369);
-            this.lbSTAGE2_OFFSET_X.Name = "lbSTAGE2_OFFSET_X";
-            this.lbSTAGE2_OFFSET_X.Size = new System.Drawing.Size(53, 13);
-            this.lbSTAGE2_OFFSET_X.TabIndex = 1482;
-            this.lbSTAGE2_OFFSET_X.Text = "0000.000";
-            // 
-            // lbSTAGE1_OFFSET_Y
-            // 
-            this.lbSTAGE1_OFFSET_Y.AutoSize = true;
-            this.lbSTAGE1_OFFSET_Y.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSTAGE1_OFFSET_Y.Location = new System.Drawing.Point(2, 382);
-            this.lbSTAGE1_OFFSET_Y.Name = "lbSTAGE1_OFFSET_Y";
-            this.lbSTAGE1_OFFSET_Y.Size = new System.Drawing.Size(53, 13);
-            this.lbSTAGE1_OFFSET_Y.TabIndex = 1481;
-            this.lbSTAGE1_OFFSET_Y.Text = "0000.000";
-            // 
-            // lbSTAGE1_OFFSET_X
-            // 
-            this.lbSTAGE1_OFFSET_X.AutoSize = true;
-            this.lbSTAGE1_OFFSET_X.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSTAGE1_OFFSET_X.Location = new System.Drawing.Point(2, 369);
-            this.lbSTAGE1_OFFSET_X.Name = "lbSTAGE1_OFFSET_X";
-            this.lbSTAGE1_OFFSET_X.Size = new System.Drawing.Size(53, 13);
-            this.lbSTAGE1_OFFSET_X.TabIndex = 1480;
-            this.lbSTAGE1_OFFSET_X.Text = "0000.000";
-            // 
             // BTN_TEST
             // 
             this.BTN_TEST.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_TEST.Location = new System.Drawing.Point(1, 408);
+            this.BTN_TEST.Location = new System.Drawing.Point(30, 399);
             this.BTN_TEST.Name = "BTN_TEST";
             this.BTN_TEST.Size = new System.Drawing.Size(47, 19);
             this.BTN_TEST.TabIndex = 1479;
@@ -1444,112 +1393,6 @@
             this.BTN_TEST.UseVisualStyleBackColor = true;
             this.BTN_TEST.Visible = false;
             this.BTN_TEST.Click += new System.EventHandler(this.BTN_TEST_Click);
-            // 
-            // lbTEST_POS2
-            // 
-            this.lbTEST_POS2.AutoSize = true;
-            this.lbTEST_POS2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTEST_POS2.Location = new System.Drawing.Point(57, 395);
-            this.lbTEST_POS2.Name = "lbTEST_POS2";
-            this.lbTEST_POS2.Size = new System.Drawing.Size(53, 13);
-            this.lbTEST_POS2.TabIndex = 1478;
-            this.lbTEST_POS2.Text = "0000.000";
-            // 
-            // lbTEST_POS1
-            // 
-            this.lbTEST_POS1.AutoSize = true;
-            this.lbTEST_POS1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTEST_POS1.Location = new System.Drawing.Point(2, 395);
-            this.lbTEST_POS1.Name = "lbTEST_POS1";
-            this.lbTEST_POS1.Size = new System.Drawing.Size(53, 13);
-            this.lbTEST_POS1.TabIndex = 1477;
-            this.lbTEST_POS1.Text = "0000.000";
-            // 
-            // lbUnitPkrXSafety
-            // 
-            this.lbUnitPkrXSafety.BackColor = System.Drawing.Color.White;
-            this.lbUnitPkrXSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbUnitPkrXSafety.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUnitPkrXSafety.ForeColor = System.Drawing.Color.Black;
-            this.lbUnitPkrXSafety.Location = new System.Drawing.Point(1, 456);
-            this.lbUnitPkrXSafety.Name = "lbUnitPkrXSafety";
-            this.lbUnitPkrXSafety.Size = new System.Drawing.Size(110, 16);
-            this.lbUnitPkrXSafety.TabIndex = 1476;
-            this.lbUnitPkrXSafety.Text = "UNIT PKR X SAFETY";
-            this.lbUnitPkrXSafety.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbStripPkrXSafety
-            // 
-            this.lbStripPkrXSafety.BackColor = System.Drawing.Color.White;
-            this.lbStripPkrXSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbStripPkrXSafety.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStripPkrXSafety.ForeColor = System.Drawing.Color.Black;
-            this.lbStripPkrXSafety.Location = new System.Drawing.Point(1, 441);
-            this.lbStripPkrXSafety.Name = "lbStripPkrXSafety";
-            this.lbStripPkrXSafety.Size = new System.Drawing.Size(110, 16);
-            this.lbStripPkrXSafety.TabIndex = 1475;
-            this.lbStripPkrXSafety.Text = "STRIP PKR X SAFETY";
-            this.lbStripPkrXSafety.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // swCst_SUPPLY
-            // 
-            this.swCst_SUPPLY.BackColor = System.Drawing.Color.White;
-            this.swCst_SUPPLY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swCst_SUPPLY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.swCst_SUPPLY.Image = ((System.Drawing.Image)(resources.GetObject("swCst_SUPPLY.Image")));
-            this.swCst_SUPPLY.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swCst_SUPPLY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.swCst_SUPPLY.Location = new System.Drawing.Point(1, 472);
-            this.swCst_SUPPLY.Margin = new System.Windows.Forms.Padding(0);
-            this.swCst_SUPPLY.Name = "swCst_SUPPLY";
-            this.swCst_SUPPLY.Size = new System.Drawing.Size(110, 51);
-            this.swCst_SUPPLY.TabIndex = 1470;
-            this.swCst_SUPPLY.Tag = "111";
-            this.swCst_SUPPLY.Text = "MAGAZINE\r\nSUPPLY";
-            this.swCst_SUPPLY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.swCst_SUPPLY.UseVisualStyleBackColor = false;
-            // 
-            // cpT2
-            // 
-            this.cpT2.AutoSize = true;
-            this.cpT2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpT2.ForeColor = System.Drawing.Color.Blue;
-            this.cpT2.Location = new System.Drawing.Point(57, 355);
-            this.cpT2.Name = "cpT2";
-            this.cpT2.Size = new System.Drawing.Size(53, 13);
-            this.cpT2.TabIndex = 1469;
-            this.cpT2.Text = "0000.000";
-            // 
-            // cpHD2
-            // 
-            this.cpHD2.AutoSize = true;
-            this.cpHD2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpHD2.Location = new System.Drawing.Point(57, 341);
-            this.cpHD2.Name = "cpHD2";
-            this.cpHD2.Size = new System.Drawing.Size(53, 13);
-            this.cpHD2.TabIndex = 1468;
-            this.cpHD2.Text = "0000.000";
-            // 
-            // cpT1
-            // 
-            this.cpT1.AutoSize = true;
-            this.cpT1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpT1.ForeColor = System.Drawing.Color.Blue;
-            this.cpT1.Location = new System.Drawing.Point(2, 355);
-            this.cpT1.Name = "cpT1";
-            this.cpT1.Size = new System.Drawing.Size(53, 13);
-            this.cpT1.TabIndex = 1467;
-            this.cpT1.Text = "0000.000";
-            // 
-            // cpHD1
-            // 
-            this.cpHD1.AutoSize = true;
-            this.cpHD1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpHD1.Location = new System.Drawing.Point(2, 341);
-            this.cpHD1.Name = "cpHD1";
-            this.cpHD1.Size = new System.Drawing.Size(53, 13);
-            this.cpHD1.TabIndex = 1466;
-            this.cpHD1.Text = "0000.000";
             // 
             // btnLAMP
             // 
@@ -1569,16 +1412,10 @@
             // 
             // gbxOP
             // 
-            this.gbxOP.Controls.Add(this.lbPRS_READ);
-            this.gbxOP.Controls.Add(this.lbPRS_RESULT);
-            this.gbxOP.Controls.Add(this.lbPRS_START);
-            this.gbxOP.Controls.Add(this.label26);
             this.gbxOP.Controls.Add(this.swStart);
             this.gbxOP.Controls.Add(this.swStop);
             this.gbxOP.Controls.Add(this.swRest);
             this.gbxOP.Controls.Add(this.btn_HOME);
-            this.gbxOP.Controls.Add(this.Stacker_SUPPLY);
-            this.gbxOP.Controls.Add(this.label3);
             this.gbxOP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gbxOP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxOP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -1588,49 +1425,6 @@
             this.gbxOP.TabIndex = 961;
             this.gbxOP.TabStop = false;
             this.gbxOP.Text = "MES ver 2.2";
-            // 
-            // lbPRS_READ
-            // 
-            this.lbPRS_READ.AutoSize = true;
-            this.lbPRS_READ.Font = new System.Drawing.Font("Agency FB", 9F);
-            this.lbPRS_READ.ForeColor = System.Drawing.Color.Black;
-            this.lbPRS_READ.Location = new System.Drawing.Point(2, 233);
-            this.lbPRS_READ.Name = "lbPRS_READ";
-            this.lbPRS_READ.Size = new System.Drawing.Size(44, 15);
-            this.lbPRS_READ.TabIndex = 1482;
-            this.lbPRS_READ.Text = "PRS READ";
-            // 
-            // lbPRS_RESULT
-            // 
-            this.lbPRS_RESULT.AutoSize = true;
-            this.lbPRS_RESULT.Font = new System.Drawing.Font("Agency FB", 9F);
-            this.lbPRS_RESULT.ForeColor = System.Drawing.Color.Black;
-            this.lbPRS_RESULT.Location = new System.Drawing.Point(59, 217);
-            this.lbPRS_RESULT.Name = "lbPRS_RESULT";
-            this.lbPRS_RESULT.Size = new System.Drawing.Size(51, 15);
-            this.lbPRS_RESULT.TabIndex = 1481;
-            this.lbPRS_RESULT.Text = "PRS RESULT";
-            // 
-            // lbPRS_START
-            // 
-            this.lbPRS_START.AutoSize = true;
-            this.lbPRS_START.Font = new System.Drawing.Font("Agency FB", 9F);
-            this.lbPRS_START.ForeColor = System.Drawing.Color.Black;
-            this.lbPRS_START.Location = new System.Drawing.Point(1, 217);
-            this.lbPRS_START.Name = "lbPRS_START";
-            this.lbPRS_START.Size = new System.Drawing.Size(48, 15);
-            this.lbPRS_START.TabIndex = 1480;
-            this.lbPRS_START.Text = "PRS START";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(54, 204);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 13);
-            this.label26.TabIndex = 1479;
-            this.label26.Text = "0000.000";
             // 
             // swStart
             // 
@@ -1695,7 +1489,7 @@
             this.btn_HOME.GlowColor = System.Drawing.Color.White;
             this.btn_HOME.Image = ((System.Drawing.Image)(resources.GetObject("btn_HOME.Image")));
             this.btn_HOME.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_HOME.Location = new System.Drawing.Point(3, 253);
+            this.btn_HOME.Location = new System.Drawing.Point(3, 251);
             this.btn_HOME.Name = "btn_HOME";
             this.btn_HOME.Padding = new System.Windows.Forms.Padding(5);
             this.btn_HOME.Size = new System.Drawing.Size(104, 60);
@@ -1703,38 +1497,6 @@
             this.btn_HOME.Tag = "0";
             this.btn_HOME.Text = "전체원점";
             this.btn_HOME.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            // 
-            // Stacker_SUPPLY
-            // 
-            this.Stacker_SUPPLY.BackColor = System.Drawing.Color.White;
-            this.Stacker_SUPPLY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stacker_SUPPLY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Stacker_SUPPLY.Image = ((System.Drawing.Image)(resources.GetObject("Stacker_SUPPLY.Image")));
-            this.Stacker_SUPPLY.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.Stacker_SUPPLY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Stacker_SUPPLY.Location = new System.Drawing.Point(1, 247);
-            this.Stacker_SUPPLY.Margin = new System.Windows.Forms.Padding(0);
-            this.Stacker_SUPPLY.Name = "Stacker_SUPPLY";
-            this.Stacker_SUPPLY.Padding = new System.Windows.Forms.Padding(5, 5, 0, 2);
-            this.Stacker_SUPPLY.Size = new System.Drawing.Size(42, 18);
-            this.Stacker_SUPPLY.TabIndex = 1280;
-            this.Stacker_SUPPLY.Tag = "111";
-            this.Stacker_SUPPLY.Text = "트레이\r\n공급";
-            this.Stacker_SUPPLY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.Stacker_SUPPLY.UseVisualStyleBackColor = false;
-            this.Stacker_SUPPLY.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(2, 204);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 1247;
-            this.label3.Text = "0000.000";
-            this.label3.Visible = false;
             // 
             // bMAPBLOCK2_WORK_RESET
             // 
@@ -1782,6 +1544,131 @@
             this.editStatus.Text = "USER STOP";
             this.editStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.editStatus.WordWrap = false;
+            // 
+            // EES_DISPLAY
+            // 
+            this.EES_DISPLAY.BackColor = System.Drawing.Color.White;
+            this.EES_DISPLAY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EES_DISPLAY.ForeColor = System.Drawing.Color.Black;
+            this.EES_DISPLAY.Image = ((System.Drawing.Image)(resources.GetObject("EES_DISPLAY.Image")));
+            this.EES_DISPLAY.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.EES_DISPLAY.Location = new System.Drawing.Point(1, 470);
+            this.EES_DISPLAY.Name = "EES_DISPLAY";
+            this.EES_DISPLAY.Padding = new System.Windows.Forms.Padding(5);
+            this.EES_DISPLAY.Size = new System.Drawing.Size(111, 52);
+            this.EES_DISPLAY.TabIndex = 1250;
+            this.EES_DISPLAY.Text = "EES\r\n표시";
+            this.EES_DISPLAY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.EES_DISPLAY.UseVisualStyleBackColor = false;
+            // 
+            // swCst_SUPPLY
+            // 
+            this.swCst_SUPPLY.BackColor = System.Drawing.Color.White;
+            this.swCst_SUPPLY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swCst_SUPPLY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.swCst_SUPPLY.Image = ((System.Drawing.Image)(resources.GetObject("swCst_SUPPLY.Image")));
+            this.swCst_SUPPLY.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.swCst_SUPPLY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.swCst_SUPPLY.Location = new System.Drawing.Point(165, 350);
+            this.swCst_SUPPLY.Margin = new System.Windows.Forms.Padding(0);
+            this.swCst_SUPPLY.Name = "swCst_SUPPLY";
+            this.swCst_SUPPLY.Size = new System.Drawing.Size(82, 46);
+            this.swCst_SUPPLY.TabIndex = 1470;
+            this.swCst_SUPPLY.Tag = "111";
+            this.swCst_SUPPLY.Text = "매거진\r\nSUPPLY";
+            this.swCst_SUPPLY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.swCst_SUPPLY.UseVisualStyleBackColor = false;
+            // 
+            // lbMGZ_CHECK_2
+            // 
+            this.lbMGZ_CHECK_2.BackColor = System.Drawing.Color.White;
+            this.lbMGZ_CHECK_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbMGZ_CHECK_2.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMGZ_CHECK_2.ForeColor = System.Drawing.Color.Black;
+            this.lbMGZ_CHECK_2.Location = new System.Drawing.Point(92, 23);
+            this.lbMGZ_CHECK_2.Name = "lbMGZ_CHECK_2";
+            this.lbMGZ_CHECK_2.Size = new System.Drawing.Size(90, 17);
+            this.lbMGZ_CHECK_2.TabIndex = 1485;
+            this.lbMGZ_CHECK_2.Text = "MGZ CHK2";
+            this.lbMGZ_CHECK_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbMGZ_CHECK_1
+            // 
+            this.lbMGZ_CHECK_1.BackColor = System.Drawing.Color.White;
+            this.lbMGZ_CHECK_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbMGZ_CHECK_1.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMGZ_CHECK_1.ForeColor = System.Drawing.Color.Black;
+            this.lbMGZ_CHECK_1.Location = new System.Drawing.Point(2, 23);
+            this.lbMGZ_CHECK_1.Name = "lbMGZ_CHECK_1";
+            this.lbMGZ_CHECK_1.Size = new System.Drawing.Size(90, 17);
+            this.lbMGZ_CHECK_1.TabIndex = 1484;
+            this.lbMGZ_CHECK_1.Text = "MGZ CHK1";
+            this.lbMGZ_CHECK_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbUnitPkrXSafety
+            // 
+            this.lbUnitPkrXSafety.BackColor = System.Drawing.Color.White;
+            this.lbUnitPkrXSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbUnitPkrXSafety.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUnitPkrXSafety.ForeColor = System.Drawing.Color.Black;
+            this.lbUnitPkrXSafety.Location = new System.Drawing.Point(272, 23);
+            this.lbUnitPkrXSafety.Name = "lbUnitPkrXSafety";
+            this.lbUnitPkrXSafety.Size = new System.Drawing.Size(90, 17);
+            this.lbUnitPkrXSafety.TabIndex = 1476;
+            this.lbUnitPkrXSafety.Text = "UNIT PKR X SAFETY";
+            this.lbUnitPkrXSafety.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbStripPkrXSafety
+            // 
+            this.lbStripPkrXSafety.BackColor = System.Drawing.Color.White;
+            this.lbStripPkrXSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbStripPkrXSafety.Font = new System.Drawing.Font("Agency FB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStripPkrXSafety.ForeColor = System.Drawing.Color.Black;
+            this.lbStripPkrXSafety.Location = new System.Drawing.Point(182, 23);
+            this.lbStripPkrXSafety.Name = "lbStripPkrXSafety";
+            this.lbStripPkrXSafety.Size = new System.Drawing.Size(90, 17);
+            this.lbStripPkrXSafety.TabIndex = 1475;
+            this.lbStripPkrXSafety.Text = "STRIP PKR X SAFETY";
+            this.lbStripPkrXSafety.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbPRS_READ
+            // 
+            this.lbPRS_READ.BackColor = System.Drawing.Color.White;
+            this.lbPRS_READ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbPRS_READ.Font = new System.Drawing.Font("Agency FB", 9F);
+            this.lbPRS_READ.ForeColor = System.Drawing.Color.Black;
+            this.lbPRS_READ.Location = new System.Drawing.Point(92, 39);
+            this.lbPRS_READ.Name = "lbPRS_READ";
+            this.lbPRS_READ.Size = new System.Drawing.Size(90, 17);
+            this.lbPRS_READ.TabIndex = 1482;
+            this.lbPRS_READ.Text = "PRS READ";
+            this.lbPRS_READ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbPRS_RESULT
+            // 
+            this.lbPRS_RESULT.BackColor = System.Drawing.Color.White;
+            this.lbPRS_RESULT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbPRS_RESULT.Font = new System.Drawing.Font("Agency FB", 9F);
+            this.lbPRS_RESULT.ForeColor = System.Drawing.Color.Black;
+            this.lbPRS_RESULT.Location = new System.Drawing.Point(182, 39);
+            this.lbPRS_RESULT.Name = "lbPRS_RESULT";
+            this.lbPRS_RESULT.Size = new System.Drawing.Size(90, 17);
+            this.lbPRS_RESULT.TabIndex = 1481;
+            this.lbPRS_RESULT.Text = "PRS RESULT";
+            this.lbPRS_RESULT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbPRS_START
+            // 
+            this.lbPRS_START.BackColor = System.Drawing.Color.White;
+            this.lbPRS_START.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbPRS_START.Font = new System.Drawing.Font("Agency FB", 9F);
+            this.lbPRS_START.ForeColor = System.Drawing.Color.Black;
+            this.lbPRS_START.Location = new System.Drawing.Point(2, 39);
+            this.lbPRS_START.Name = "lbPRS_START";
+            this.lbPRS_START.Size = new System.Drawing.Size(90, 17);
+            this.lbPRS_START.TabIndex = 1480;
+            this.lbPRS_START.Text = "PRS START";
+            this.lbPRS_START.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbTrip
             // 
@@ -1837,24 +1724,9 @@
             this.PKPlaceStop.Size = new System.Drawing.Size(82, 46);
             this.PKPlaceStop.TabIndex = 4;
             this.PKPlaceStop.Tag = "4";
-            this.PKPlaceStop.Text = "UNIT 안착\r\n일시 정지";
+            this.PKPlaceStop.Text = "유닛 안착\r\n일시 정지";
             this.PKPlaceStop.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.PKPlaceStop.UseVisualStyleBackColor = false;
-            // 
-            // EES_DISPLAY
-            // 
-            this.EES_DISPLAY.BackColor = System.Drawing.Color.White;
-            this.EES_DISPLAY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EES_DISPLAY.ForeColor = System.Drawing.Color.Black;
-            this.EES_DISPLAY.Image = ((System.Drawing.Image)(resources.GetObject("EES_DISPLAY.Image")));
-            this.EES_DISPLAY.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.EES_DISPLAY.Location = new System.Drawing.Point(165, 350);
-            this.EES_DISPLAY.Name = "EES_DISPLAY";
-            this.EES_DISPLAY.Size = new System.Drawing.Size(82, 46);
-            this.EES_DISPLAY.TabIndex = 1250;
-            this.EES_DISPLAY.Text = "EES\r\n표시";
-            this.EES_DISPLAY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.EES_DISPLAY.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -1909,6 +1781,7 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.VIEW_MACHINE_INFO);
             this.panel4.Controls.Add(this.label27);
             this.panel4.Controls.Add(this.dcITScnt);
             this.panel4.Controls.Add(this.dcUnitULDCnt);
@@ -1962,6 +1835,463 @@
             this.panel4.Size = new System.Drawing.Size(365, 169);
             this.panel4.TabIndex = 1269;
             // 
+            // VIEW_MACHINE_INFO
+            // 
+            this.VIEW_MACHINE_INFO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.VIEW_MACHINE_INFO.Controls.Add(this.DDC_REJECT_CNT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label52);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.DDC_REWORK_CNT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label51);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.DDC_GOOD_CNT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label50);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.DDC_STRIP_CNT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label49);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.DDC_MGZ_CNT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label26);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.LB_DOOR_SKIP);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_UnitPkPicOffset_X);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label48);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_Stage2Offset_Y);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label46);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_Stage2Offset_X);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label47);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_Stage1Offset_Y);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label45);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_Stage1Offset_X);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label3);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_T2);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label40);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDlyCAXC_X2);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label42);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_X2);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label44);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_T1);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label38);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDlyCAXC_X1);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label36);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.dDly_X1);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.label31);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbPRS_READ);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbPRS_RESULT);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbMGZ_CHECK_2);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.OptionMachineInfo);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbMGZ_CHECK_1);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbStripPkrXSafety);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbPRS_START);
+            this.VIEW_MACHINE_INFO.Controls.Add(this.lbUnitPkrXSafety);
+            this.VIEW_MACHINE_INFO.Location = new System.Drawing.Point(300, 0);
+            this.VIEW_MACHINE_INFO.Name = "VIEW_MACHINE_INFO";
+            this.VIEW_MACHINE_INFO.Size = new System.Drawing.Size(64, 21);
+            this.VIEW_MACHINE_INFO.TabIndex = 1328;
+            // 
+            // DDC_REJECT_CNT
+            // 
+            this.DDC_REJECT_CNT.BackColor = System.Drawing.Color.Transparent;
+            this.DDC_REJECT_CNT.DigitColor = System.Drawing.Color.White;
+            this.DDC_REJECT_CNT.DigitText = "00000";
+            this.DDC_REJECT_CNT.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DDC_REJECT_CNT.Location = new System.Drawing.Point(321, 151);
+            this.DDC_REJECT_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DDC_REJECT_CNT.Name = "DDC_REJECT_CNT";
+            this.DDC_REJECT_CNT.Size = new System.Drawing.Size(40, 11);
+            this.DDC_REJECT_CNT.TabIndex = 1518;
+            // 
+            // label52
+            // 
+            this.label52.BackColor = System.Drawing.Color.Transparent;
+            this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.Color.Lime;
+            this.label52.Location = new System.Drawing.Point(299, 148);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(19, 15);
+            this.label52.TabIndex = 1517;
+            this.label52.Text = "RJ";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DDC_REWORK_CNT
+            // 
+            this.DDC_REWORK_CNT.BackColor = System.Drawing.Color.Transparent;
+            this.DDC_REWORK_CNT.DigitColor = System.Drawing.Color.White;
+            this.DDC_REWORK_CNT.DigitText = "00000";
+            this.DDC_REWORK_CNT.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DDC_REWORK_CNT.Location = new System.Drawing.Point(255, 151);
+            this.DDC_REWORK_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DDC_REWORK_CNT.Name = "DDC_REWORK_CNT";
+            this.DDC_REWORK_CNT.Size = new System.Drawing.Size(40, 11);
+            this.DDC_REWORK_CNT.TabIndex = 1516;
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.Color.Transparent;
+            this.label51.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.Lime;
+            this.label51.Location = new System.Drawing.Point(228, 148);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(24, 15);
+            this.label51.TabIndex = 1515;
+            this.label51.Text = "RW";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DDC_GOOD_CNT
+            // 
+            this.DDC_GOOD_CNT.BackColor = System.Drawing.Color.Transparent;
+            this.DDC_GOOD_CNT.DigitColor = System.Drawing.Color.White;
+            this.DDC_GOOD_CNT.DigitText = "00000";
+            this.DDC_GOOD_CNT.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DDC_GOOD_CNT.Location = new System.Drawing.Point(184, 151);
+            this.DDC_GOOD_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DDC_GOOD_CNT.Name = "DDC_GOOD_CNT";
+            this.DDC_GOOD_CNT.Size = new System.Drawing.Size(40, 11);
+            this.DDC_GOOD_CNT.TabIndex = 1514;
+            // 
+            // label50
+            // 
+            this.label50.BackColor = System.Drawing.Color.Transparent;
+            this.label50.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.ForeColor = System.Drawing.Color.Lime;
+            this.label50.Location = new System.Drawing.Point(144, 148);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(37, 15);
+            this.label50.TabIndex = 1513;
+            this.label50.Text = "GOOD";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DDC_STRIP_CNT
+            // 
+            this.DDC_STRIP_CNT.BackColor = System.Drawing.Color.Transparent;
+            this.DDC_STRIP_CNT.DigitColor = System.Drawing.Color.White;
+            this.DDC_STRIP_CNT.DigitText = "0000";
+            this.DDC_STRIP_CNT.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DDC_STRIP_CNT.Location = new System.Drawing.Point(101, 151);
+            this.DDC_STRIP_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DDC_STRIP_CNT.Name = "DDC_STRIP_CNT";
+            this.DDC_STRIP_CNT.Size = new System.Drawing.Size(39, 11);
+            this.DDC_STRIP_CNT.TabIndex = 1512;
+            // 
+            // label49
+            // 
+            this.label49.BackColor = System.Drawing.Color.Transparent;
+            this.label49.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.ForeColor = System.Drawing.Color.Lime;
+            this.label49.Location = new System.Drawing.Point(62, 148);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(36, 15);
+            this.label49.TabIndex = 1511;
+            this.label49.Text = "STRIP";
+            this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DDC_MGZ_CNT
+            // 
+            this.DDC_MGZ_CNT.BackColor = System.Drawing.Color.Transparent;
+            this.DDC_MGZ_CNT.DigitColor = System.Drawing.Color.White;
+            this.DDC_MGZ_CNT.DigitText = "000";
+            this.DDC_MGZ_CNT.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DDC_MGZ_CNT.Location = new System.Drawing.Point(33, 151);
+            this.DDC_MGZ_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DDC_MGZ_CNT.Name = "DDC_MGZ_CNT";
+            this.DDC_MGZ_CNT.Size = new System.Drawing.Size(25, 11);
+            this.DDC_MGZ_CNT.TabIndex = 1510;
+            // 
+            // label26
+            // 
+            this.label26.BackColor = System.Drawing.Color.Transparent;
+            this.label26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Lime;
+            this.label26.Location = new System.Drawing.Point(2, 148);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(28, 15);
+            this.label26.TabIndex = 1509;
+            this.label26.Text = "MGZ";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_DOOR_SKIP
+            // 
+            this.LB_DOOR_SKIP.BackColor = System.Drawing.Color.White;
+            this.LB_DOOR_SKIP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LB_DOOR_SKIP.Font = new System.Drawing.Font("Agency FB", 9F);
+            this.LB_DOOR_SKIP.ForeColor = System.Drawing.Color.Black;
+            this.LB_DOOR_SKIP.Location = new System.Drawing.Point(272, 39);
+            this.LB_DOOR_SKIP.Name = "LB_DOOR_SKIP";
+            this.LB_DOOR_SKIP.Size = new System.Drawing.Size(90, 17);
+            this.LB_DOOR_SKIP.TabIndex = 1508;
+            this.LB_DOOR_SKIP.Text = "DOOR SKIP";
+            this.LB_DOOR_SKIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_UnitPkPicOffset_X
+            // 
+            this.dDly_UnitPkPicOffset_X.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_UnitPkPicOffset_X.DigitColor = System.Drawing.Color.White;
+            this.dDly_UnitPkPicOffset_X.DigitText = "00.000";
+            this.dDly_UnitPkPicOffset_X.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_UnitPkPicOffset_X.Location = new System.Drawing.Point(132, 132);
+            this.dDly_UnitPkPicOffset_X.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_UnitPkPicOffset_X.Name = "dDly_UnitPkPicOffset_X";
+            this.dDly_UnitPkPicOffset_X.Size = new System.Drawing.Size(47, 11);
+            this.dDly_UnitPkPicOffset_X.TabIndex = 1507;
+            // 
+            // label48
+            // 
+            this.label48.BackColor = System.Drawing.Color.Transparent;
+            this.label48.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.ForeColor = System.Drawing.Color.Gold;
+            this.label48.Location = new System.Drawing.Point(2, 129);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(118, 15);
+            this.label48.TabIndex = 1506;
+            this.label48.Text = "UNIT PK PIC OFFSET X";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_Stage2Offset_Y
+            // 
+            this.dDly_Stage2Offset_Y.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_Stage2Offset_Y.DigitColor = System.Drawing.Color.White;
+            this.dDly_Stage2Offset_Y.DigitText = "00.000";
+            this.dDly_Stage2Offset_Y.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_Stage2Offset_Y.Location = new System.Drawing.Point(311, 114);
+            this.dDly_Stage2Offset_Y.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_Stage2Offset_Y.Name = "dDly_Stage2Offset_Y";
+            this.dDly_Stage2Offset_Y.Size = new System.Drawing.Size(47, 11);
+            this.dDly_Stage2Offset_Y.TabIndex = 1505;
+            // 
+            // label46
+            // 
+            this.label46.BackColor = System.Drawing.Color.Transparent;
+            this.label46.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.ForeColor = System.Drawing.Color.Gold;
+            this.label46.Location = new System.Drawing.Point(183, 111);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(118, 15);
+            this.label46.TabIndex = 1504;
+            this.label46.Text = "STAGE2 PLC OFFSET Y";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_Stage2Offset_X
+            // 
+            this.dDly_Stage2Offset_X.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_Stage2Offset_X.DigitColor = System.Drawing.Color.White;
+            this.dDly_Stage2Offset_X.DigitText = "00.000";
+            this.dDly_Stage2Offset_X.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_Stage2Offset_X.Location = new System.Drawing.Point(132, 114);
+            this.dDly_Stage2Offset_X.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_Stage2Offset_X.Name = "dDly_Stage2Offset_X";
+            this.dDly_Stage2Offset_X.Size = new System.Drawing.Size(47, 11);
+            this.dDly_Stage2Offset_X.TabIndex = 1503;
+            // 
+            // label47
+            // 
+            this.label47.BackColor = System.Drawing.Color.Transparent;
+            this.label47.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.ForeColor = System.Drawing.Color.Gold;
+            this.label47.Location = new System.Drawing.Point(2, 111);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(118, 15);
+            this.label47.TabIndex = 1502;
+            this.label47.Text = "STAGE2 PLC OFFSET X";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_Stage1Offset_Y
+            // 
+            this.dDly_Stage1Offset_Y.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_Stage1Offset_Y.DigitColor = System.Drawing.Color.White;
+            this.dDly_Stage1Offset_Y.DigitText = "00.000";
+            this.dDly_Stage1Offset_Y.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_Stage1Offset_Y.Location = new System.Drawing.Point(311, 95);
+            this.dDly_Stage1Offset_Y.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_Stage1Offset_Y.Name = "dDly_Stage1Offset_Y";
+            this.dDly_Stage1Offset_Y.Size = new System.Drawing.Size(47, 11);
+            this.dDly_Stage1Offset_Y.TabIndex = 1501;
+            // 
+            // label45
+            // 
+            this.label45.BackColor = System.Drawing.Color.Transparent;
+            this.label45.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.ForeColor = System.Drawing.Color.Gold;
+            this.label45.Location = new System.Drawing.Point(183, 93);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(118, 15);
+            this.label45.TabIndex = 1500;
+            this.label45.Text = "STAGE1 PLC OFFSET Y";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_Stage1Offset_X
+            // 
+            this.dDly_Stage1Offset_X.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_Stage1Offset_X.DigitColor = System.Drawing.Color.White;
+            this.dDly_Stage1Offset_X.DigitText = "00.000";
+            this.dDly_Stage1Offset_X.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_Stage1Offset_X.Location = new System.Drawing.Point(132, 95);
+            this.dDly_Stage1Offset_X.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_Stage1Offset_X.Name = "dDly_Stage1Offset_X";
+            this.dDly_Stage1Offset_X.Size = new System.Drawing.Size(47, 11);
+            this.dDly_Stage1Offset_X.TabIndex = 1499;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Gold;
+            this.label3.Location = new System.Drawing.Point(2, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 15);
+            this.label3.TabIndex = 1498;
+            this.label3.Text = "STAGE1 PLC OFFSET X";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_T2
+            // 
+            this.dDly_T2.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_T2.DigitColor = System.Drawing.Color.White;
+            this.dDly_T2.DigitText = "0000.000";
+            this.dDly_T2.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_T2.Location = new System.Drawing.Point(311, 76);
+            this.dDly_T2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_T2.Name = "dDly_T2";
+            this.dDly_T2.Size = new System.Drawing.Size(47, 13);
+            this.dDly_T2.TabIndex = 1497;
+            // 
+            // label40
+            // 
+            this.label40.BackColor = System.Drawing.Color.Transparent;
+            this.label40.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.Gold;
+            this.label40.Location = new System.Drawing.Point(243, 75);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(65, 15);
+            this.label40.TabIndex = 1496;
+            this.label40.Text = "T2";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDlyCAXC_X2
+            // 
+            this.dDlyCAXC_X2.BackColor = System.Drawing.Color.Transparent;
+            this.dDlyCAXC_X2.DigitColor = System.Drawing.Color.White;
+            this.dDlyCAXC_X2.DigitText = "0000.000";
+            this.dDlyCAXC_X2.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDlyCAXC_X2.Location = new System.Drawing.Point(190, 76);
+            this.dDlyCAXC_X2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDlyCAXC_X2.Name = "dDlyCAXC_X2";
+            this.dDlyCAXC_X2.Size = new System.Drawing.Size(47, 13);
+            this.dDlyCAXC_X2.TabIndex = 1495;
+            // 
+            // label42
+            // 
+            this.label42.BackColor = System.Drawing.Color.Transparent;
+            this.label42.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.Gold;
+            this.label42.Location = new System.Drawing.Point(122, 75);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(65, 15);
+            this.label42.TabIndex = 1494;
+            this.label42.Text = "X2 (CAXC)";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_X2
+            // 
+            this.dDly_X2.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_X2.DigitColor = System.Drawing.Color.White;
+            this.dDly_X2.DigitText = "0000.000";
+            this.dDly_X2.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_X2.Location = new System.Drawing.Point(70, 76);
+            this.dDly_X2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_X2.Name = "dDly_X2";
+            this.dDly_X2.Size = new System.Drawing.Size(47, 13);
+            this.dDly_X2.TabIndex = 1493;
+            // 
+            // label44
+            // 
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.Gold;
+            this.label44.Location = new System.Drawing.Point(2, 75);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(65, 15);
+            this.label44.TabIndex = 1492;
+            this.label44.Text = "HEAD X2";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_T1
+            // 
+            this.dDly_T1.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_T1.DigitColor = System.Drawing.Color.White;
+            this.dDly_T1.DigitText = "0000.000";
+            this.dDly_T1.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_T1.Location = new System.Drawing.Point(311, 58);
+            this.dDly_T1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_T1.Name = "dDly_T1";
+            this.dDly_T1.Size = new System.Drawing.Size(47, 13);
+            this.dDly_T1.TabIndex = 1491;
+            // 
+            // label38
+            // 
+            this.label38.BackColor = System.Drawing.Color.Transparent;
+            this.label38.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Gold;
+            this.label38.Location = new System.Drawing.Point(243, 57);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(65, 15);
+            this.label38.TabIndex = 1490;
+            this.label38.Text = "T1";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDlyCAXC_X1
+            // 
+            this.dDlyCAXC_X1.BackColor = System.Drawing.Color.Transparent;
+            this.dDlyCAXC_X1.DigitColor = System.Drawing.Color.White;
+            this.dDlyCAXC_X1.DigitText = "0000.000";
+            this.dDlyCAXC_X1.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDlyCAXC_X1.Location = new System.Drawing.Point(190, 58);
+            this.dDlyCAXC_X1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDlyCAXC_X1.Name = "dDlyCAXC_X1";
+            this.dDlyCAXC_X1.Size = new System.Drawing.Size(47, 13);
+            this.dDlyCAXC_X1.TabIndex = 1489;
+            // 
+            // label36
+            // 
+            this.label36.BackColor = System.Drawing.Color.Transparent;
+            this.label36.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.Gold;
+            this.label36.Location = new System.Drawing.Point(122, 57);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(65, 15);
+            this.label36.TabIndex = 1488;
+            this.label36.Text = "X1 (CAXC)";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dDly_X1
+            // 
+            this.dDly_X1.BackColor = System.Drawing.Color.Transparent;
+            this.dDly_X1.DigitColor = System.Drawing.Color.White;
+            this.dDly_X1.DigitText = "0000.000";
+            this.dDly_X1.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDly_X1.Location = new System.Drawing.Point(70, 58);
+            this.dDly_X1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDly_X1.Name = "dDly_X1";
+            this.dDly_X1.Size = new System.Drawing.Size(47, 13);
+            this.dDly_X1.TabIndex = 1487;
+            // 
+            // label31
+            // 
+            this.label31.BackColor = System.Drawing.Color.Transparent;
+            this.label31.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.Color.Gold;
+            this.label31.Location = new System.Drawing.Point(2, 57);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(65, 15);
+            this.label31.TabIndex = 1486;
+            this.label31.Text = "HEAD X1";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OptionMachineInfo
+            // 
+            this.OptionMachineInfo.BackColor = System.Drawing.Color.White;
+            this.OptionMachineInfo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionMachineInfo.Location = new System.Drawing.Point(3, 0);
+            this.OptionMachineInfo.Name = "OptionMachineInfo";
+            this.OptionMachineInfo.Size = new System.Drawing.Size(60, 20);
+            this.OptionMachineInfo.TabIndex = 1291;
+            this.OptionMachineInfo.Text = "INFO";
+            this.OptionMachineInfo.UseVisualStyleBackColor = false;
+            // 
             // label27
             // 
             this.label27.BackColor = System.Drawing.Color.Transparent;
@@ -1981,6 +2311,7 @@
             this.dcITScnt.DigitText = "999999";
             this.dcITScnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcITScnt.Location = new System.Drawing.Point(71, 151);
+            this.dcITScnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcITScnt.Name = "dcITScnt";
             this.dcITScnt.Size = new System.Drawing.Size(46, 13);
             this.dcITScnt.TabIndex = 1327;
@@ -1989,9 +2320,10 @@
             // 
             this.dcUnitULDCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcUnitULDCnt.DigitColor = System.Drawing.Color.White;
-            this.dcUnitULDCnt.DigitText = "99999";
+            this.dcUnitULDCnt.DigitText = "999999";
             this.dcUnitULDCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dcUnitULDCnt.Location = new System.Drawing.Point(71, 115);
+            this.dcUnitULDCnt.Location = new System.Drawing.Point(71, 113);
+            this.dcUnitULDCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcUnitULDCnt.Name = "dcUnitULDCnt";
             this.dcUnitULDCnt.Size = new System.Drawing.Size(46, 13);
             this.dcUnitULDCnt.TabIndex = 1325;
@@ -2002,7 +2334,8 @@
             this.dcEmptyCnt.DigitColor = System.Drawing.Color.White;
             this.dcEmptyCnt.DigitText = "999999";
             this.dcEmptyCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dcEmptyCnt.Location = new System.Drawing.Point(89, 3);
+            this.dcEmptyCnt.Location = new System.Drawing.Point(138, 150);
+            this.dcEmptyCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcEmptyCnt.Name = "dcEmptyCnt";
             this.dcEmptyCnt.Size = new System.Drawing.Size(32, 13);
             this.dcEmptyCnt.TabIndex = 1313;
@@ -2038,6 +2371,7 @@
             this.ddcMapBlock2CycleTime.DigitText = "0.00";
             this.ddcMapBlock2CycleTime.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ddcMapBlock2CycleTime.Location = new System.Drawing.Point(2, 1);
+            this.ddcMapBlock2CycleTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcMapBlock2CycleTime.Name = "ddcMapBlock2CycleTime";
             this.ddcMapBlock2CycleTime.Size = new System.Drawing.Size(54, 13);
             this.ddcMapBlock2CycleTime.TabIndex = 1235;
@@ -2059,6 +2393,7 @@
             this.ddcMapBlock1CycleTime.DigitText = "0.00";
             this.ddcMapBlock1CycleTime.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ddcMapBlock1CycleTime.Location = new System.Drawing.Point(1, 1);
+            this.ddcMapBlock1CycleTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcMapBlock1CycleTime.Name = "ddcMapBlock1CycleTime";
             this.ddcMapBlock1CycleTime.Size = new System.Drawing.Size(54, 13);
             this.ddcMapBlock1CycleTime.TabIndex = 1237;
@@ -2092,6 +2427,7 @@
             this.dcUnitSizeNGCnt.DigitColor = System.Drawing.Color.Red;
             this.dcUnitSizeNGCnt.DigitText = "000";
             this.dcUnitSizeNGCnt.Location = new System.Drawing.Point(1, 1);
+            this.dcUnitSizeNGCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcUnitSizeNGCnt.Name = "dcUnitSizeNGCnt";
             this.dcUnitSizeNGCnt.Size = new System.Drawing.Size(54, 13);
             this.dcUnitSizeNGCnt.TabIndex = 0;
@@ -2112,6 +2448,7 @@
             this.StripPlaceTack.DigitColor = System.Drawing.Color.White;
             this.StripPlaceTack.DigitText = "00:00";
             this.StripPlaceTack.Location = new System.Drawing.Point(1, 1);
+            this.StripPlaceTack.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.StripPlaceTack.Name = "StripPlaceTack";
             this.StripPlaceTack.Size = new System.Drawing.Size(54, 13);
             this.StripPlaceTack.TabIndex = 1321;
@@ -2172,6 +2509,7 @@
             this.dDsp_UnitPkrCycleTime.DigitText = "000:00";
             this.dDsp_UnitPkrCycleTime.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dDsp_UnitPkrCycleTime.Location = new System.Drawing.Point(1, 1);
+            this.dDsp_UnitPkrCycleTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dDsp_UnitPkrCycleTime.Name = "dDsp_UnitPkrCycleTime";
             this.dDsp_UnitPkrCycleTime.Size = new System.Drawing.Size(54, 13);
             this.dDsp_UnitPkrCycleTime.TabIndex = 1237;
@@ -2193,20 +2531,22 @@
             // 
             this.dcXMarkChipCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcXMarkChipCnt.DigitColor = System.Drawing.Color.White;
-            this.dcXMarkChipCnt.DigitText = "99999";
+            this.dcXMarkChipCnt.DigitText = "999999";
             this.dcXMarkChipCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dcXMarkChipCnt.Location = new System.Drawing.Point(318, 131);
+            this.dcXMarkChipCnt.Location = new System.Drawing.Point(315, 131);
+            this.dcXMarkChipCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcXMarkChipCnt.Name = "dcXMarkChipCnt";
-            this.dcXMarkChipCnt.Size = new System.Drawing.Size(44, 13);
+            this.dcXMarkChipCnt.Size = new System.Drawing.Size(46, 13);
             this.dcXMarkChipCnt.TabIndex = 1305;
             // 
             // dcReworkChipCnt
             // 
             this.dcReworkChipCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcReworkChipCnt.DigitColor = System.Drawing.Color.White;
-            this.dcReworkChipCnt.DigitText = "99999";
+            this.dcReworkChipCnt.DigitText = "999999";
             this.dcReworkChipCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dcReworkChipCnt.Location = new System.Drawing.Point(196, 133);
+            this.dcReworkChipCnt.Location = new System.Drawing.Point(194, 133);
+            this.dcReworkChipCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcReworkChipCnt.Name = "dcReworkChipCnt";
             this.dcReworkChipCnt.Size = new System.Drawing.Size(46, 13);
             this.dcReworkChipCnt.TabIndex = 1307;
@@ -2227,6 +2567,7 @@
             this.ddcTrayCycle.DigitColor = System.Drawing.Color.White;
             this.ddcTrayCycle.DigitText = "00:00";
             this.ddcTrayCycle.Location = new System.Drawing.Point(1, 1);
+            this.ddcTrayCycle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcTrayCycle.Name = "ddcTrayCycle";
             this.ddcTrayCycle.Size = new System.Drawing.Size(54, 13);
             this.ddcTrayCycle.TabIndex = 0;
@@ -2286,9 +2627,9 @@
             this.BTN_CNT_RESET.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_CNT_RESET.ForeColor = System.Drawing.Color.Black;
             this.BTN_CNT_RESET.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_CNT_RESET.Location = new System.Drawing.Point(312, -1);
+            this.BTN_CNT_RESET.Location = new System.Drawing.Point(312, 147);
             this.BTN_CNT_RESET.Name = "BTN_CNT_RESET";
-            this.BTN_CNT_RESET.Size = new System.Drawing.Size(50, 21);
+            this.BTN_CNT_RESET.Size = new System.Drawing.Size(50, 19);
             this.BTN_CNT_RESET.TabIndex = 1320;
             this.BTN_CNT_RESET.Text = "RESET";
             this.BTN_CNT_RESET.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -2324,6 +2665,7 @@
             this.dclERROR.DigitColor = System.Drawing.Color.Red;
             this.dclERROR.DigitText = "00:00:00";
             this.dclERROR.Location = new System.Drawing.Point(1, 1);
+            this.dclERROR.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dclERROR.Name = "dclERROR";
             this.dclERROR.Size = new System.Drawing.Size(54, 13);
             this.dclERROR.TabIndex = 0;
@@ -2335,6 +2677,7 @@
             this.dcGoodChipCnt.DigitText = "999999";
             this.dcGoodChipCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcGoodChipCnt.Location = new System.Drawing.Point(71, 132);
+            this.dcGoodChipCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcGoodChipCnt.Name = "dcGoodChipCnt";
             this.dcGoodChipCnt.Size = new System.Drawing.Size(46, 13);
             this.dcGoodChipCnt.TabIndex = 1303;
@@ -2355,6 +2698,7 @@
             this.dclSTOP.DigitColor = System.Drawing.Color.White;
             this.dclSTOP.DigitText = "00:00:00";
             this.dclSTOP.Location = new System.Drawing.Point(1, 1);
+            this.dclSTOP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dclSTOP.Name = "dclSTOP";
             this.dclSTOP.Size = new System.Drawing.Size(54, 13);
             this.dclSTOP.TabIndex = 0;
@@ -2387,6 +2731,7 @@
             this.dclRUN.DigitColor = System.Drawing.Color.Lime;
             this.dclRUN.DigitText = "00:00:00";
             this.dclRUN.Location = new System.Drawing.Point(1, 1);
+            this.dclRUN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dclRUN.Name = "dclRUN";
             this.dclRUN.Size = new System.Drawing.Size(54, 13);
             this.dclRUN.TabIndex = 0;
@@ -2421,6 +2766,7 @@
             this.ddcAvg.DigitColor = System.Drawing.Color.Yellow;
             this.ddcAvg.DigitText = "000:000";
             this.ddcAvg.Location = new System.Drawing.Point(1, 1);
+            this.ddcAvg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcAvg.Name = "ddcAvg";
             this.ddcAvg.Size = new System.Drawing.Size(54, 13);
             this.ddcAvg.TabIndex = 0;
@@ -2441,6 +2787,7 @@
             this.ddcUPH.DigitColor = System.Drawing.Color.Yellow;
             this.ddcUPH.DigitText = "00.000";
             this.ddcUPH.Location = new System.Drawing.Point(1, 1);
+            this.ddcUPH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcUPH.Name = "ddcUPH";
             this.ddcUPH.Size = new System.Drawing.Size(54, 13);
             this.ddcUPH.TabIndex = 0;
@@ -2474,6 +2821,7 @@
             this.ddcTack.DigitColor = System.Drawing.Color.Yellow;
             this.ddcTack.DigitText = "000:000";
             this.ddcTack.Location = new System.Drawing.Point(1, 1);
+            this.ddcTack.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ddcTack.Name = "ddcTack";
             this.ddcTack.Size = new System.Drawing.Size(54, 13);
             this.ddcTack.TabIndex = 0;
@@ -2523,6 +2871,7 @@
             this.dcTotalCnt.DigitText = "999999";
             this.dcTotalCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcTotalCnt.Location = new System.Drawing.Point(315, 94);
+            this.dcTotalCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcTotalCnt.Name = "dcTotalCnt";
             this.dcTotalCnt.Size = new System.Drawing.Size(46, 13);
             this.dcTotalCnt.TabIndex = 1301;
@@ -2531,9 +2880,10 @@
             // 
             this.dcLOTCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcLOTCnt.DigitColor = System.Drawing.Color.White;
-            this.dcLOTCnt.DigitText = "0000";
+            this.dcLOTCnt.DigitText = "999999";
             this.dcLOTCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcLOTCnt.Location = new System.Drawing.Point(71, 94);
+            this.dcLOTCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcLOTCnt.Name = "dcLOTCnt";
             this.dcLOTCnt.Size = new System.Drawing.Size(46, 13);
             this.dcLOTCnt.TabIndex = 1319;
@@ -2542,11 +2892,12 @@
             // 
             this.dcReworkTryCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcReworkTryCnt.DigitColor = System.Drawing.Color.White;
-            this.dcReworkTryCnt.DigitText = "99999";
+            this.dcReworkTryCnt.DigitText = "999999";
             this.dcReworkTryCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dcReworkTryCnt.Location = new System.Drawing.Point(319, 113);
+            this.dcReworkTryCnt.Location = new System.Drawing.Point(315, 113);
+            this.dcReworkTryCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcReworkTryCnt.Name = "dcReworkTryCnt";
-            this.dcReworkTryCnt.Size = new System.Drawing.Size(44, 13);
+            this.dcReworkTryCnt.Size = new System.Drawing.Size(46, 13);
             this.dcReworkTryCnt.TabIndex = 1317;
             // 
             // label18
@@ -2565,9 +2916,10 @@
             // 
             this.dcStripLDCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcStripLDCnt.DigitColor = System.Drawing.Color.White;
-            this.dcStripLDCnt.DigitText = "99999";
+            this.dcStripLDCnt.DigitText = "999999";
             this.dcStripLDCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcStripLDCnt.Location = new System.Drawing.Point(194, 94);
+            this.dcStripLDCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcStripLDCnt.Name = "dcStripLDCnt";
             this.dcStripLDCnt.Size = new System.Drawing.Size(46, 13);
             this.dcStripLDCnt.TabIndex = 1309;
@@ -2613,9 +2965,10 @@
             // 
             this.dcGoodTryCnt.BackColor = System.Drawing.Color.Transparent;
             this.dcGoodTryCnt.DigitColor = System.Drawing.Color.White;
-            this.dcGoodTryCnt.DigitText = "99999";
+            this.dcGoodTryCnt.DigitText = "999999";
             this.dcGoodTryCnt.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dcGoodTryCnt.Location = new System.Drawing.Point(194, 113);
+            this.dcGoodTryCnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dcGoodTryCnt.Name = "dcGoodTryCnt";
             this.dcGoodTryCnt.Size = new System.Drawing.Size(46, 13);
             this.dcGoodTryCnt.TabIndex = 1315;
@@ -3149,7 +3502,7 @@
             // 
             this.lbPallet1.AutoSize = true;
             this.lbPallet1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPallet1.Location = new System.Drawing.Point(3, 6);
+            this.lbPallet1.Location = new System.Drawing.Point(3, 3);
             this.lbPallet1.Name = "lbPallet1";
             this.lbPallet1.Size = new System.Drawing.Size(82, 13);
             this.lbPallet1.TabIndex = 943;
@@ -3184,7 +3537,7 @@
             // 
             this.lbPallet2.AutoSize = true;
             this.lbPallet2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPallet2.Location = new System.Drawing.Point(227, 6);
+            this.lbPallet2.Location = new System.Drawing.Point(227, 3);
             this.lbPallet2.Name = "lbPallet2";
             this.lbPallet2.Size = new System.Drawing.Size(82, 13);
             this.lbPallet2.TabIndex = 945;
@@ -3289,6 +3642,7 @@
             // tpgMESStatus
             // 
             this.tpgMESStatus.BackColor = System.Drawing.Color.White;
+            this.tpgMESStatus.Controls.Add(this.label34);
             this.tpgMESStatus.Controls.Add(this.MAPBLOCK2_OVERLAP);
             this.tpgMESStatus.Controls.Add(this.MAPBLOCK1_OVERLAP);
             this.tpgMESStatus.Controls.Add(this.UNIT_OVERLAP);
@@ -3296,7 +3650,6 @@
             this.tpgMESStatus.Controls.Add(this.STRIP_OVERLAP);
             this.tpgMESStatus.Controls.Add(this.RAIL_OVERLAP);
             this.tpgMESStatus.Controls.Add(this.LBX_PROC_CONDITION_MESSAGE);
-            this.tpgMESStatus.Controls.Add(this.label31);
             this.tpgMESStatus.Controls.Add(this.LBL_BRCD_MB_2_IDX);
             this.tpgMESStatus.Controls.Add(this.LBL_BRCD_MB_1_IDX);
             this.tpgMESStatus.Controls.Add(this.LBL_BRCD_UNIT_PK_IDX);
@@ -3352,23 +3705,87 @@
             this.tpgMESStatus.TabIndex = 3;
             this.tpgMESStatus.Text = "MES";
             // 
+            // label34
+            // 
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label34.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Image = ((System.Drawing.Image)(resources.GetObject("label34.Image")));
+            this.label34.Location = new System.Drawing.Point(0, 219);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(901, 23);
+            this.label34.TabIndex = 1506;
+            this.label34.Text = "PROCESS CONDITION MASSAGE";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // MAPBLOCK2_OVERLAP
+            // 
+            this.MAPBLOCK2_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.MAPBLOCK2_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MAPBLOCK2_OVERLAP.Location = new System.Drawing.Point(705, 556);
+            this.MAPBLOCK2_OVERLAP.Name = "MAPBLOCK2_OVERLAP";
+            this.MAPBLOCK2_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.MAPBLOCK2_OVERLAP.TabIndex = 1505;
+            // 
+            // MAPBLOCK1_OVERLAP
+            // 
+            this.MAPBLOCK1_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.MAPBLOCK1_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MAPBLOCK1_OVERLAP.Location = new System.Drawing.Point(705, 519);
+            this.MAPBLOCK1_OVERLAP.Name = "MAPBLOCK1_OVERLAP";
+            this.MAPBLOCK1_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.MAPBLOCK1_OVERLAP.TabIndex = 1504;
+            // 
+            // UNIT_OVERLAP
+            // 
+            this.UNIT_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.UNIT_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UNIT_OVERLAP.Location = new System.Drawing.Point(705, 482);
+            this.UNIT_OVERLAP.Name = "UNIT_OVERLAP";
+            this.UNIT_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.UNIT_OVERLAP.TabIndex = 1503;
+            // 
+            // SAW_OVERLAP
+            // 
+            this.SAW_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.SAW_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SAW_OVERLAP.Location = new System.Drawing.Point(705, 445);
+            this.SAW_OVERLAP.Name = "SAW_OVERLAP";
+            this.SAW_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.SAW_OVERLAP.TabIndex = 1502;
+            // 
+            // STRIP_OVERLAP
+            // 
+            this.STRIP_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.STRIP_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.STRIP_OVERLAP.Location = new System.Drawing.Point(705, 408);
+            this.STRIP_OVERLAP.Name = "STRIP_OVERLAP";
+            this.STRIP_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.STRIP_OVERLAP.TabIndex = 1501;
+            // 
+            // RAIL_OVERLAP
+            // 
+            this.RAIL_OVERLAP.BackColor = System.Drawing.Color.White;
+            this.RAIL_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RAIL_OVERLAP.Location = new System.Drawing.Point(705, 371);
+            this.RAIL_OVERLAP.Name = "RAIL_OVERLAP";
+            this.RAIL_OVERLAP.Size = new System.Drawing.Size(10, 10);
+            this.RAIL_OVERLAP.TabIndex = 1500;
+            // 
             // LBX_PROC_CONDITION_MESSAGE
             // 
+            this.LBX_PROC_CONDITION_MESSAGE.BackColor = System.Drawing.Color.White;
+            this.LBX_PROC_CONDITION_MESSAGE.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBX_PROC_CONDITION_MESSAGE.ForeColor = System.Drawing.Color.Black;
             this.LBX_PROC_CONDITION_MESSAGE.FormattingEnabled = true;
-            this.LBX_PROC_CONDITION_MESSAGE.Location = new System.Drawing.Point(3, 248);
+            this.LBX_PROC_CONDITION_MESSAGE.Items.AddRange(new object[] {
+            "CONDITION 1",
+            "CONDITION 2",
+            "CONDITION 3",
+            "CONDITION 4"});
+            this.LBX_PROC_CONDITION_MESSAGE.Location = new System.Drawing.Point(0, 241);
             this.LBX_PROC_CONDITION_MESSAGE.Name = "LBX_PROC_CONDITION_MESSAGE";
-            this.LBX_PROC_CONDITION_MESSAGE.Size = new System.Drawing.Size(895, 108);
+            this.LBX_PROC_CONDITION_MESSAGE.Size = new System.Drawing.Size(901, 69);
             this.LBX_PROC_CONDITION_MESSAGE.TabIndex = 1499;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(3, 232);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(200, 14);
-            this.label31.TabIndex = 1498;
-            this.label31.Text = "PROCESS CONDITION MASSAGE";
             // 
             // LBL_BRCD_MB_2_IDX
             // 
@@ -3380,7 +3797,7 @@
             this.LBL_BRCD_MB_2_IDX.Name = "LBL_BRCD_MB_2_IDX";
             this.LBL_BRCD_MB_2_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_MB_2_IDX.TabIndex = 1497;
-            this.LBL_BRCD_MB_2_IDX.Text = "000";
+            this.LBL_BRCD_MB_2_IDX.Text = "0000";
             this.LBL_BRCD_MB_2_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_MB_1_IDX
@@ -3393,7 +3810,7 @@
             this.LBL_BRCD_MB_1_IDX.Name = "LBL_BRCD_MB_1_IDX";
             this.LBL_BRCD_MB_1_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_MB_1_IDX.TabIndex = 1496;
-            this.LBL_BRCD_MB_1_IDX.Text = "000";
+            this.LBL_BRCD_MB_1_IDX.Text = "0000";
             this.LBL_BRCD_MB_1_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_UNIT_PK_IDX
@@ -3406,7 +3823,7 @@
             this.LBL_BRCD_UNIT_PK_IDX.Name = "LBL_BRCD_UNIT_PK_IDX";
             this.LBL_BRCD_UNIT_PK_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_UNIT_PK_IDX.TabIndex = 1495;
-            this.LBL_BRCD_UNIT_PK_IDX.Text = "000";
+            this.LBL_BRCD_UNIT_PK_IDX.Text = "0000";
             this.LBL_BRCD_UNIT_PK_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_SAW_IDX
@@ -3419,7 +3836,7 @@
             this.LBL_BRCD_SAW_IDX.Name = "LBL_BRCD_SAW_IDX";
             this.LBL_BRCD_SAW_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_SAW_IDX.TabIndex = 1494;
-            this.LBL_BRCD_SAW_IDX.Text = "000";
+            this.LBL_BRCD_SAW_IDX.Text = "0000";
             this.LBL_BRCD_SAW_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_STRIP_PK_IDX
@@ -3432,7 +3849,7 @@
             this.LBL_BRCD_STRIP_PK_IDX.Name = "LBL_BRCD_STRIP_PK_IDX";
             this.LBL_BRCD_STRIP_PK_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_STRIP_PK_IDX.TabIndex = 1493;
-            this.LBL_BRCD_STRIP_PK_IDX.Text = "000";
+            this.LBL_BRCD_STRIP_PK_IDX.Text = "0000";
             this.LBL_BRCD_STRIP_PK_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_RAIL_IDX
@@ -3445,7 +3862,7 @@
             this.LBL_BRCD_RAIL_IDX.Name = "LBL_BRCD_RAIL_IDX";
             this.LBL_BRCD_RAIL_IDX.Size = new System.Drawing.Size(34, 11);
             this.LBL_BRCD_RAIL_IDX.TabIndex = 1492;
-            this.LBL_BRCD_RAIL_IDX.Text = "000";
+            this.LBL_BRCD_RAIL_IDX.Text = "0000";
             this.LBL_BRCD_RAIL_IDX.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBL_BRCD_MB_2
@@ -3457,8 +3874,9 @@
             this.LBL_BRCD_MB_2.Location = new System.Drawing.Point(705, 556);
             this.LBL_BRCD_MB_2.Name = "LBL_BRCD_MB_2";
             this.LBL_BRCD_MB_2.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_MB_2.TabIndex = 1489;
+            this.LBL_BRCD_MB_2.TabIndex = 5;
             this.LBL_BRCD_MB_2.Tag = "MAP-BLOCK 2";
+            this.LBL_BRCD_MB_2.Text = "5";
             this.LBL_BRCD_MB_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_MB_2.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3485,8 +3903,9 @@
             this.LBL_BRCD_MB_1.Location = new System.Drawing.Point(705, 519);
             this.LBL_BRCD_MB_1.Name = "LBL_BRCD_MB_1";
             this.LBL_BRCD_MB_1.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_MB_1.TabIndex = 1487;
+            this.LBL_BRCD_MB_1.TabIndex = 4;
             this.LBL_BRCD_MB_1.Tag = "MAP-BLOCK 1";
+            this.LBL_BRCD_MB_1.Text = "4";
             this.LBL_BRCD_MB_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_MB_1.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3513,8 +3932,9 @@
             this.LBL_BRCD_UNIT_PK.Location = new System.Drawing.Point(705, 482);
             this.LBL_BRCD_UNIT_PK.Name = "LBL_BRCD_UNIT_PK";
             this.LBL_BRCD_UNIT_PK.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_UNIT_PK.TabIndex = 1485;
+            this.LBL_BRCD_UNIT_PK.TabIndex = 3;
             this.LBL_BRCD_UNIT_PK.Tag = "UNIT PICKER";
+            this.LBL_BRCD_UNIT_PK.Text = "3";
             this.LBL_BRCD_UNIT_PK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_UNIT_PK.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3541,8 +3961,9 @@
             this.LBL_BRCD_SAW.Location = new System.Drawing.Point(705, 445);
             this.LBL_BRCD_SAW.Name = "LBL_BRCD_SAW";
             this.LBL_BRCD_SAW.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_SAW.TabIndex = 1483;
+            this.LBL_BRCD_SAW.TabIndex = 2;
             this.LBL_BRCD_SAW.Tag = "SAW STAGE";
+            this.LBL_BRCD_SAW.Text = "2";
             this.LBL_BRCD_SAW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_SAW.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3569,8 +3990,9 @@
             this.LBL_BRCD_STRIP_PK.Location = new System.Drawing.Point(705, 408);
             this.LBL_BRCD_STRIP_PK.Name = "LBL_BRCD_STRIP_PK";
             this.LBL_BRCD_STRIP_PK.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_STRIP_PK.TabIndex = 1481;
+            this.LBL_BRCD_STRIP_PK.TabIndex = 1;
             this.LBL_BRCD_STRIP_PK.Tag = "STRIP PICKER";
+            this.LBL_BRCD_STRIP_PK.Text = "1";
             this.LBL_BRCD_STRIP_PK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_STRIP_PK.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3597,8 +4019,9 @@
             this.LBL_BRCD_RAIL.Location = new System.Drawing.Point(705, 371);
             this.LBL_BRCD_RAIL.Name = "LBL_BRCD_RAIL";
             this.LBL_BRCD_RAIL.Size = new System.Drawing.Size(194, 22);
-            this.LBL_BRCD_RAIL.TabIndex = 1479;
+            this.LBL_BRCD_RAIL.TabIndex = 0;
             this.LBL_BRCD_RAIL.Tag = "RAIL";
+            this.LBL_BRCD_RAIL.Text = "0";
             this.LBL_BRCD_RAIL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LBL_BRCD_RAIL.DoubleClick += new System.EventHandler(this.ModuleBarcodeInput_DoubleClick);
             // 
@@ -3621,9 +4044,9 @@
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
-            this.label11.Location = new System.Drawing.Point(0, 123);
+            this.label11.Location = new System.Drawing.Point(0, 153);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 42);
+            this.label11.Size = new System.Drawing.Size(901, 23);
             this.label11.TabIndex = 1328;
             this.label11.Text = "진행";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3633,9 +4056,9 @@
             this.label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label30.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.Image = ((System.Drawing.Image)(resources.GetObject("label30.Image")));
-            this.label30.Location = new System.Drawing.Point(0, 42);
+            this.label30.Location = new System.Drawing.Point(0, 47);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(20, 82);
+            this.label30.Size = new System.Drawing.Size(901, 23);
             this.label30.TabIndex = 1327;
             this.label30.Text = "완료";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3646,9 +4069,9 @@
             this.WRITE_LOT_NUMBER.Font = new System.Drawing.Font("Arial", 8.25F);
             this.WRITE_LOT_NUMBER.ForeColor = System.Drawing.Color.Black;
             this.WRITE_LOT_NUMBER.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.WRITE_LOT_NUMBER.Location = new System.Drawing.Point(860, 192);
+            this.WRITE_LOT_NUMBER.Location = new System.Drawing.Point(680, 312);
             this.WRITE_LOT_NUMBER.Name = "WRITE_LOT_NUMBER";
-            this.WRITE_LOT_NUMBER.Size = new System.Drawing.Size(35, 20);
+            this.WRITE_LOT_NUMBER.Size = new System.Drawing.Size(54, 20);
             this.WRITE_LOT_NUMBER.TabIndex = 1477;
             this.WRITE_LOT_NUMBER.Text = "등록";
             this.WRITE_LOT_NUMBER.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -3663,7 +4086,7 @@
             this.LBL_EQPCODE.ForeColor = System.Drawing.Color.Lime;
             this.LBL_EQPCODE.Location = new System.Drawing.Point(97, 0);
             this.LBL_EQPCODE.Name = "LBL_EQPCODE";
-            this.LBL_EQPCODE.Size = new System.Drawing.Size(106, 22);
+            this.LBL_EQPCODE.Size = new System.Drawing.Size(106, 23);
             this.LBL_EQPCODE.TabIndex = 1326;
             this.LBL_EQPCODE.Text = "EQUIPMENT CODE";
             this.LBL_EQPCODE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3675,7 +4098,7 @@
             this.label28.Image = ((System.Drawing.Image)(resources.GetObject("label28.Image")));
             this.label28.Location = new System.Drawing.Point(0, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(98, 22);
+            this.label28.Size = new System.Drawing.Size(98, 23);
             this.label28.TabIndex = 1325;
             this.label28.Text = "EQP CODE";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3716,7 +4139,7 @@
             dataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV_INFO_BARCODE.DefaultCellStyle = dataGridViewCellStyle72;
-            this.DGV_INFO_BARCODE.Location = new System.Drawing.Point(801, 169);
+            this.DGV_INFO_BARCODE.Location = new System.Drawing.Point(436, 317);
             this.DGV_INFO_BARCODE.MultiSelect = false;
             this.DGV_INFO_BARCODE.Name = "DGV_INFO_BARCODE";
             dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -3808,7 +4231,7 @@
             this.lbITS_ID.ForeColor = System.Drawing.Color.Lime;
             this.lbITS_ID.Location = new System.Drawing.Point(648, 0);
             this.lbITS_ID.Name = "lbITS_ID";
-            this.lbITS_ID.Size = new System.Drawing.Size(253, 22);
+            this.lbITS_ID.Size = new System.Drawing.Size(253, 23);
             this.lbITS_ID.TabIndex = 1322;
             this.lbITS_ID.Text = "--";
             this.lbITS_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3820,7 +4243,7 @@
             this.label24.Image = ((System.Drawing.Image)(resources.GetObject("label24.Image")));
             this.label24.Location = new System.Drawing.Point(551, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(98, 22);
+            this.label24.Size = new System.Drawing.Size(98, 23);
             this.label24.TabIndex = 1321;
             this.label24.Text = "ITS ID";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3833,7 +4256,7 @@
             this.lbLOT_ID.ForeColor = System.Drawing.Color.Lime;
             this.lbLOT_ID.Location = new System.Drawing.Point(299, 0);
             this.lbLOT_ID.Name = "lbLOT_ID";
-            this.lbLOT_ID.Size = new System.Drawing.Size(253, 22);
+            this.lbLOT_ID.Size = new System.Drawing.Size(253, 23);
             this.lbLOT_ID.TabIndex = 1320;
             this.lbLOT_ID.Text = "--";
             this.lbLOT_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3845,7 +4268,7 @@
             this.label15.Image = ((System.Drawing.Image)(resources.GetObject("label15.Image")));
             this.label15.Location = new System.Drawing.Point(202, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 22);
+            this.label15.Size = new System.Drawing.Size(98, 23);
             this.label15.TabIndex = 1319;
             this.label15.Text = "LOT ID";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3855,9 +4278,9 @@
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
-            this.label6.Location = new System.Drawing.Point(0, 21);
+            this.label6.Location = new System.Drawing.Point(0, 22);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 22);
+            this.label6.Size = new System.Drawing.Size(98, 23);
             this.label6.TabIndex = 1318;
             this.label6.Text = "PANEL CNT";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3882,9 +4305,9 @@
             this.LBL_USER_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LBL_USER_NAME.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBL_USER_NAME.ForeColor = System.Drawing.Color.Lime;
-            this.LBL_USER_NAME.Location = new System.Drawing.Point(648, 21);
+            this.LBL_USER_NAME.Location = new System.Drawing.Point(648, 22);
             this.LBL_USER_NAME.Name = "LBL_USER_NAME";
-            this.LBL_USER_NAME.Size = new System.Drawing.Size(253, 22);
+            this.LBL_USER_NAME.Size = new System.Drawing.Size(253, 23);
             this.LBL_USER_NAME.TabIndex = 1313;
             this.LBL_USER_NAME.Text = "--";
             this.LBL_USER_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3894,9 +4317,9 @@
             this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Image = ((System.Drawing.Image)(resources.GetObject("label17.Image")));
-            this.label17.Location = new System.Drawing.Point(551, 21);
+            this.label17.Location = new System.Drawing.Point(551, 22);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(98, 22);
+            this.label17.Size = new System.Drawing.Size(98, 23);
             this.label17.TabIndex = 1312;
             this.label17.Text = "USER NAME";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3907,9 +4330,9 @@
             this.LBL_CNT_PANEL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LBL_CNT_PANEL.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBL_CNT_PANEL.ForeColor = System.Drawing.Color.Lime;
-            this.LBL_CNT_PANEL.Location = new System.Drawing.Point(97, 21);
+            this.LBL_CNT_PANEL.Location = new System.Drawing.Point(97, 22);
             this.LBL_CNT_PANEL.Name = "LBL_CNT_PANEL";
-            this.LBL_CNT_PANEL.Size = new System.Drawing.Size(106, 22);
+            this.LBL_CNT_PANEL.Size = new System.Drawing.Size(106, 23);
             this.LBL_CNT_PANEL.TabIndex = 1310;
             this.LBL_CNT_PANEL.Text = "000";
             this.LBL_CNT_PANEL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3920,7 +4343,7 @@
             this.CoercionCemplete.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CoercionCemplete.ForeColor = System.Drawing.Color.Black;
             this.CoercionCemplete.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.CoercionCemplete.Location = new System.Drawing.Point(836, 166);
+            this.CoercionCemplete.Location = new System.Drawing.Point(633, 335);
             this.CoercionCemplete.Margin = new System.Windows.Forms.Padding(0);
             this.CoercionCemplete.Name = "CoercionCemplete";
             this.CoercionCemplete.Size = new System.Drawing.Size(62, 19);
@@ -3935,13 +4358,14 @@
             this.Cancel_MESLoading.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cancel_MESLoading.ForeColor = System.Drawing.Color.Black;
             this.Cancel_MESLoading.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.Cancel_MESLoading.Location = new System.Drawing.Point(365, 166);
+            this.Cancel_MESLoading.Location = new System.Drawing.Point(521, 333);
             this.Cancel_MESLoading.Margin = new System.Windows.Forms.Padding(0);
             this.Cancel_MESLoading.Name = "Cancel_MESLoading";
-            this.Cancel_MESLoading.Size = new System.Drawing.Size(267, 41);
+            this.Cancel_MESLoading.Size = new System.Drawing.Size(92, 23);
             this.Cancel_MESLoading.TabIndex = 1306;
             this.Cancel_MESLoading.Text = "MES  투입취소";
             this.Cancel_MESLoading.UseVisualStyleBackColor = false;
+            this.Cancel_MESLoading.Visible = false;
             // 
             // Del_Lot
             // 
@@ -3949,13 +4373,14 @@
             this.Del_Lot.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Del_Lot.ForeColor = System.Drawing.Color.Black;
             this.Del_Lot.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.Del_Lot.Location = new System.Drawing.Point(632, 166);
+            this.Del_Lot.Location = new System.Drawing.Point(597, 316);
             this.Del_Lot.Margin = new System.Windows.Forms.Padding(0);
             this.Del_Lot.Name = "Del_Lot";
-            this.Del_Lot.Size = new System.Drawing.Size(267, 41);
+            this.Del_Lot.Size = new System.Drawing.Size(75, 22);
             this.Del_Lot.TabIndex = 1305;
             this.Del_Lot.Text = "LOT 삭제";
             this.Del_Lot.UseVisualStyleBackColor = false;
+            this.Del_Lot.Visible = false;
             // 
             // Clear_FinishLot
             // 
@@ -3963,20 +4388,21 @@
             this.Clear_FinishLot.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Clear_FinishLot.ForeColor = System.Drawing.Color.Black;
             this.Clear_FinishLot.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.Clear_FinishLot.Location = new System.Drawing.Point(2, 166);
+            this.Clear_FinishLot.Location = new System.Drawing.Point(482, 313);
             this.Clear_FinishLot.Margin = new System.Windows.Forms.Padding(0);
             this.Clear_FinishLot.Name = "Clear_FinishLot";
-            this.Clear_FinishLot.Size = new System.Drawing.Size(267, 41);
+            this.Clear_FinishLot.Size = new System.Drawing.Size(99, 25);
             this.Clear_FinishLot.TabIndex = 1304;
             this.Clear_FinishLot.Text = "완료  LOT 초기화";
             this.Clear_FinishLot.UseVisualStyleBackColor = false;
+            this.Clear_FinishLot.Visible = false;
             // 
             // LOT_ID
             // 
             this.LOT_ID.BackColor = System.Drawing.Color.Black;
             this.LOT_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LOT_ID.ForeColor = System.Drawing.Color.Lime;
-            this.LOT_ID.Location = new System.Drawing.Point(846, 193);
+            this.LOT_ID.Location = new System.Drawing.Point(846, 335);
             this.LOT_ID.Name = "LOT_ID";
             this.LOT_ID.Size = new System.Drawing.Size(16, 19);
             this.LOT_ID.TabIndex = 1307;
@@ -3988,7 +4414,7 @@
             // 
             this.label20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Image = ((System.Drawing.Image)(resources.GetObject("label20.Image")));
-            this.label20.Location = new System.Drawing.Point(800, 193);
+            this.label20.Location = new System.Drawing.Point(800, 335);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(47, 19);
             this.label20.TabIndex = 1306;
@@ -4022,6 +4448,7 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
+            this.Column1,
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12,
@@ -4035,7 +4462,7 @@
             dataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GridWorkLot.DefaultCellStyle = dataGridViewCellStyle80;
             this.GridWorkLot.EnableHeadersVisualStyles = false;
-            this.GridWorkLot.Location = new System.Drawing.Point(19, 123);
+            this.GridWorkLot.Location = new System.Drawing.Point(0, 175);
             this.GridWorkLot.Name = "GridWorkLot";
             dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle81.BackColor = System.Drawing.SystemColors.Control;
@@ -4051,7 +4478,7 @@
             dataGridViewCellStyle82.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.GridWorkLot.RowsDefaultCellStyle = dataGridViewCellStyle82;
             this.GridWorkLot.RowTemplate.Height = 40;
-            this.GridWorkLot.Size = new System.Drawing.Size(882, 42);
+            this.GridWorkLot.Size = new System.Drawing.Size(901, 42);
             this.GridWorkLot.TabIndex = 831;
             // 
             // dataGridViewTextBoxColumn4
@@ -4062,7 +4489,7 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn4.Width = 32;
+            this.dataGridViewTextBoxColumn4.Width = 30;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -4070,7 +4497,7 @@
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn5.Width = 80;
+            this.dataGridViewTextBoxColumn5.Width = 70;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -4080,7 +4507,7 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn6.Width = 145;
+            this.dataGridViewTextBoxColumn6.Width = 140;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -4091,7 +4518,7 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn7.Width = 145;
+            this.dataGridViewTextBoxColumn7.Width = 140;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -4099,15 +4526,23 @@
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn8.Width = 145;
+            this.dataGridViewTextBoxColumn8.Width = 140;
             // 
             // dataGridViewTextBoxColumn9
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "MES매수";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Qty";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn9.Width = 63;
+            this.dataGridViewTextBoxColumn9.Width = 60;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "STRIP";
+            this.Column1.Name = "Column1";
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 60;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -4115,7 +4550,7 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn10.Width = 63;
+            this.dataGridViewTextBoxColumn10.Width = 60;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -4123,7 +4558,7 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn11.Width = 63;
+            this.dataGridViewTextBoxColumn11.Width = 60;
             // 
             // dataGridViewTextBoxColumn12
             // 
@@ -4131,7 +4566,7 @@
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn12.Width = 63;
+            this.dataGridViewTextBoxColumn12.Width = 60;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -4139,16 +4574,16 @@
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn13.Width = 80;
+            this.dataGridViewTextBoxColumn13.Width = 78;
             // 
             // USER_ID
             // 
             this.USER_ID.BackColor = System.Drawing.Color.Black;
             this.USER_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.USER_ID.ForeColor = System.Drawing.Color.Lime;
-            this.USER_ID.Location = new System.Drawing.Point(846, 180);
+            this.USER_ID.Location = new System.Drawing.Point(846, 322);
             this.USER_ID.Name = "USER_ID";
-            this.USER_ID.Size = new System.Drawing.Size(49, 19);
+            this.USER_ID.Size = new System.Drawing.Size(20, 19);
             this.USER_ID.TabIndex = 1305;
             this.USER_ID.Text = "-";
             this.USER_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4180,6 +4615,7 @@
             this.Recipe,
             this.LotID,
             this.MESCount,
+            this.Column2,
             this.LoadingCount,
             this.ExcludeCount,
             this.UnloadingCount,
@@ -4193,7 +4629,7 @@
             dataGridViewCellStyle88.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GridEndLot.DefaultCellStyle = dataGridViewCellStyle88;
             this.GridEndLot.EnableHeadersVisualStyles = false;
-            this.GridEndLot.Location = new System.Drawing.Point(19, 42);
+            this.GridEndLot.Location = new System.Drawing.Point(0, 69);
             this.GridEndLot.Name = "GridEndLot";
             dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle89.BackColor = System.Drawing.SystemColors.Control;
@@ -4209,7 +4645,7 @@
             dataGridViewCellStyle90.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.GridEndLot.RowsDefaultCellStyle = dataGridViewCellStyle90;
             this.GridEndLot.RowTemplate.Height = 40;
-            this.GridEndLot.Size = new System.Drawing.Size(882, 82);
+            this.GridEndLot.Size = new System.Drawing.Size(901, 82);
             this.GridEndLot.TabIndex = 830;
             // 
             // NO
@@ -4220,7 +4656,7 @@
             this.NO.Name = "NO";
             this.NO.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.NO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.NO.Width = 32;
+            this.NO.Width = 30;
             // 
             // WorkScope
             // 
@@ -4228,7 +4664,7 @@
             this.WorkScope.Name = "WorkScope";
             this.WorkScope.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.WorkScope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.WorkScope.Width = 80;
+            this.WorkScope.Width = 70;
             // 
             // ManagemetNum
             // 
@@ -4238,7 +4674,7 @@
             this.ManagemetNum.Name = "ManagemetNum";
             this.ManagemetNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ManagemetNum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ManagemetNum.Width = 145;
+            this.ManagemetNum.Width = 140;
             // 
             // Recipe
             // 
@@ -4249,7 +4685,7 @@
             this.Recipe.Name = "Recipe";
             this.Recipe.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Recipe.Width = 145;
+            this.Recipe.Width = 140;
             // 
             // LotID
             // 
@@ -4257,7 +4693,7 @@
             this.LotID.Name = "LotID";
             this.LotID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.LotID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LotID.Width = 145;
+            this.LotID.Width = 140;
             // 
             // MESCount
             // 
@@ -4265,7 +4701,15 @@
             this.MESCount.Name = "MESCount";
             this.MESCount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.MESCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.MESCount.Width = 63;
+            this.MESCount.Width = 60;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "STRIP";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 60;
             // 
             // LoadingCount
             // 
@@ -4273,7 +4717,7 @@
             this.LoadingCount.Name = "LoadingCount";
             this.LoadingCount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.LoadingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LoadingCount.Width = 63;
+            this.LoadingCount.Width = 60;
             // 
             // ExcludeCount
             // 
@@ -4281,7 +4725,7 @@
             this.ExcludeCount.Name = "ExcludeCount";
             this.ExcludeCount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ExcludeCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ExcludeCount.Width = 63;
+            this.ExcludeCount.Width = 60;
             // 
             // UnloadingCount
             // 
@@ -4289,7 +4733,7 @@
             this.UnloadingCount.Name = "UnloadingCount";
             this.UnloadingCount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.UnloadingCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.UnloadingCount.Width = 63;
+            this.UnloadingCount.Width = 60;
             // 
             // WorkEnd
             // 
@@ -4297,13 +4741,13 @@
             this.WorkEnd.Name = "WorkEnd";
             this.WorkEnd.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.WorkEnd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.WorkEnd.Width = 80;
+            this.WorkEnd.Width = 78;
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Image = ((System.Drawing.Image)(resources.GetObject("label10.Image")));
-            this.label10.Location = new System.Drawing.Point(799, 180);
+            this.label10.Location = new System.Drawing.Point(799, 322);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 19);
             this.label10.TabIndex = 1304;
@@ -4317,9 +4761,9 @@
             this.LBL_USER_ID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LBL_USER_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBL_USER_ID.ForeColor = System.Drawing.Color.Lime;
-            this.LBL_USER_ID.Location = new System.Drawing.Point(299, 21);
+            this.LBL_USER_ID.Location = new System.Drawing.Point(299, 22);
             this.LBL_USER_ID.Name = "LBL_USER_ID";
-            this.LBL_USER_ID.Size = new System.Drawing.Size(253, 22);
+            this.LBL_USER_ID.Size = new System.Drawing.Size(253, 23);
             this.LBL_USER_ID.TabIndex = 1295;
             this.LBL_USER_ID.Text = "--";
             this.LBL_USER_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4329,9 +4773,9 @@
             this.lbLED_BRIGHT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbLED_BRIGHT.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLED_BRIGHT.Image = ((System.Drawing.Image)(resources.GetObject("lbLED_BRIGHT.Image")));
-            this.lbLED_BRIGHT.Location = new System.Drawing.Point(202, 21);
+            this.lbLED_BRIGHT.Location = new System.Drawing.Point(202, 22);
             this.lbLED_BRIGHT.Name = "lbLED_BRIGHT";
-            this.lbLED_BRIGHT.Size = new System.Drawing.Size(98, 22);
+            this.lbLED_BRIGHT.Size = new System.Drawing.Size(98, 23);
             this.lbLED_BRIGHT.TabIndex = 1294;
             this.lbLED_BRIGHT.Text = "USER ID";
             this.lbLED_BRIGHT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4358,13 +4802,13 @@
             this.LotWrite.BackColor = System.Drawing.Color.White;
             this.LotWrite.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LotWrite.ForeColor = System.Drawing.Color.Black;
+            this.LotWrite.Image = ((System.Drawing.Image)(resources.GetObject("LotWrite.Image")));
             this.LotWrite.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.LotWrite.Location = new System.Drawing.Point(83, 213);
             this.LotWrite.Name = "LotWrite";
-            this.LotWrite.Padding = new System.Windows.Forms.Padding(5);
             this.LotWrite.Size = new System.Drawing.Size(82, 45);
             this.LotWrite.TabIndex = 1302;
-            this.LotWrite.Text = "LOT 등록";
+            this.LotWrite.Text = "LOT\r\n등록";
             this.LotWrite.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.LotWrite.UseVisualStyleBackColor = false;
             // 
@@ -4373,6 +4817,7 @@
             this.WipCheck.BackColor = System.Drawing.Color.White;
             this.WipCheck.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WipCheck.ForeColor = System.Drawing.Color.Black;
+            this.WipCheck.Image = ((System.Drawing.Image)(resources.GetObject("WipCheck.Image")));
             this.WipCheck.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.WipCheck.Location = new System.Drawing.Point(165, 213);
             this.WipCheck.Name = "WipCheck";
@@ -4389,9 +4834,9 @@
             this.VIEW_CASSATE.Controls.Add(this.OptionCstInfo);
             this.VIEW_CASSATE.Controls.Add(this.pbxCST);
             this.VIEW_CASSATE.Controls.Add(this.label23);
-            this.VIEW_CASSATE.Location = new System.Drawing.Point(196, 397);
+            this.VIEW_CASSATE.Location = new System.Drawing.Point(191, 397);
             this.VIEW_CASSATE.Name = "VIEW_CASSATE";
-            this.VIEW_CASSATE.Size = new System.Drawing.Size(52, 21);
+            this.VIEW_CASSATE.Size = new System.Drawing.Size(57, 21);
             this.VIEW_CASSATE.TabIndex = 1290;
             // 
             // OptionCstInfo
@@ -4433,6 +4878,7 @@
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label25);
+            this.panel3.Controls.Add(this.swCst_SUPPLY);
             this.panel3.Controls.Add(this.label14);
             this.panel3.Controls.Add(this.SETTING_SKIP);
             this.panel3.Controls.Add(this.BTN_RFRead);
@@ -4448,7 +4894,6 @@
             this.panel3.Controls.Add(this.USER_ID_CHANGE);
             this.panel3.Controls.Add(this.PKPickUpStop);
             this.panel3.Controls.Add(this.NGTrayUnloading);
-            this.panel3.Controls.Add(this.EES_DISPLAY);
             this.panel3.Controls.Add(this.lbCurPkr);
             this.panel3.Controls.Add(this.TrayUnloading);
             this.panel3.Controls.Add(this.StripStop);
@@ -4514,7 +4959,7 @@
             this.SETTING_SKIP.Controls.Add(this.lbAIR);
             this.SETTING_SKIP.Location = new System.Drawing.Point(194, 0);
             this.SETTING_SKIP.Name = "SETTING_SKIP";
-            this.SETTING_SKIP.Size = new System.Drawing.Size(56, 18);
+            this.SETTING_SKIP.Size = new System.Drawing.Size(56, 19);
             this.SETTING_SKIP.TabIndex = 1290;
             // 
             // OptionSkip
@@ -4727,7 +5172,7 @@
             this.TrayStop.Size = new System.Drawing.Size(82, 46);
             this.TrayStop.TabIndex = 5;
             this.TrayStop.Tag = "5";
-            this.TrayStop.Text = "TRAY 작업\r\n일시 정지";
+            this.TrayStop.Text = "트레이 작업\r\n일시 정지";
             this.TrayStop.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.TrayStop.UseVisualStyleBackColor = false;
             // 
@@ -4743,7 +5188,7 @@
             this.PKPickUpStop.Size = new System.Drawing.Size(82, 46);
             this.PKPickUpStop.TabIndex = 3;
             this.PKPickUpStop.Tag = "3";
-            this.PKPickUpStop.Text = "UNIT 픽업\r\n일시정지";
+            this.PKPickUpStop.Text = "유닛 픽업\r\n일시정지";
             this.PKPickUpStop.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.PKPickUpStop.UseVisualStyleBackColor = false;
             // 
@@ -4755,10 +5200,11 @@
             this.NGTrayUnloading.Image = ((System.Drawing.Image)(resources.GetObject("NGTrayUnloading.Image")));
             this.NGTrayUnloading.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.NGTrayUnloading.Location = new System.Drawing.Point(83, 350);
+            this.NGTrayUnloading.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.NGTrayUnloading.Name = "NGTrayUnloading";
             this.NGTrayUnloading.Size = new System.Drawing.Size(82, 46);
             this.NGTrayUnloading.TabIndex = 1312;
-            this.NGTrayUnloading.Text = "NG-TRAY\r\n배출";
+            this.NGTrayUnloading.Text = "NG-트레이\r\n배출";
             this.NGTrayUnloading.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.NGTrayUnloading.UseVisualStyleBackColor = false;
             // 
@@ -4770,10 +5216,11 @@
             this.TrayUnloading.Image = ((System.Drawing.Image)(resources.GetObject("TrayUnloading.Image")));
             this.TrayUnloading.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.TrayUnloading.Location = new System.Drawing.Point(1, 350);
+            this.TrayUnloading.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.TrayUnloading.Name = "TrayUnloading";
             this.TrayUnloading.Size = new System.Drawing.Size(82, 46);
             this.TrayUnloading.TabIndex = 1311;
-            this.TrayUnloading.Text = "OK-TRAY\r\n배출";
+            this.TrayUnloading.Text = "OK-트레이\r\n배출";
             this.TrayUnloading.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.TrayUnloading.UseVisualStyleBackColor = false;
             // 
@@ -5100,59 +5547,53 @@
             this.TmrAUTO.Interval = 200;
             this.TmrAUTO.Tick += new System.EventHandler(this.TmrAUTO_Tick);
             // 
-            // RAIL_OVERLAP
+            // digitalDisplayControl1
             // 
-            this.RAIL_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.RAIL_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RAIL_OVERLAP.Location = new System.Drawing.Point(705, 371);
-            this.RAIL_OVERLAP.Name = "RAIL_OVERLAP";
-            this.RAIL_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.RAIL_OVERLAP.TabIndex = 1500;
+            this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
+            this.digitalDisplayControl1.DigitColor = System.Drawing.Color.White;
+            this.digitalDisplayControl1.DigitText = "0000.000";
+            this.digitalDisplayControl1.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.digitalDisplayControl1.Location = new System.Drawing.Point(70, 65);
+            this.digitalDisplayControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.digitalDisplayControl1.Name = "digitalDisplayControl1";
+            this.digitalDisplayControl1.Size = new System.Drawing.Size(47, 14);
+            this.digitalDisplayControl1.TabIndex = 1487;
             // 
-            // STRIP_OVERLAP
+            // digitalDispladDisplay_Stage1Offset_XyControl5
             // 
-            this.STRIP_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.STRIP_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.STRIP_OVERLAP.Location = new System.Drawing.Point(705, 408);
-            this.STRIP_OVERLAP.Name = "STRIP_OVERLAP";
-            this.STRIP_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.STRIP_OVERLAP.TabIndex = 1501;
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.BackColor = System.Drawing.Color.Transparent;
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.DigitColor = System.Drawing.Color.White;
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.DigitText = "00.000";
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.Location = new System.Drawing.Point(132, 124);
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.Name = "digitalDispladDisplay_Stage1Offset_XyControl5";
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.Size = new System.Drawing.Size(47, 11);
+            this.digitalDispladDisplay_Stage1Offset_XyControl5.TabIndex = 1503;
             // 
-            // SAW_OVERLAP
+            // dDisplay_Stage2Offset_X
             // 
-            this.SAW_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.SAW_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SAW_OVERLAP.Location = new System.Drawing.Point(705, 445);
-            this.SAW_OVERLAP.Name = "SAW_OVERLAP";
-            this.SAW_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.SAW_OVERLAP.TabIndex = 1502;
+            this.dDisplay_Stage2Offset_X.BackColor = System.Drawing.Color.Transparent;
+            this.dDisplay_Stage2Offset_X.DigitColor = System.Drawing.Color.White;
+            this.dDisplay_Stage2Offset_X.DigitText = "00.000";
+            this.dDisplay_Stage2Offset_X.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDisplay_Stage2Offset_X.Location = new System.Drawing.Point(132, 124);
+            this.dDisplay_Stage2Offset_X.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDisplay_Stage2Offset_X.Name = "dDisplay_Stage2Offset_X";
+            this.dDisplay_Stage2Offset_X.Size = new System.Drawing.Size(47, 11);
+            this.dDisplay_Stage2Offset_X.TabIndex = 1503;
             // 
-            // UNIT_OVERLAP
+            // dDisplay_Stage2Offset_Y
             // 
-            this.UNIT_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.UNIT_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UNIT_OVERLAP.Location = new System.Drawing.Point(705, 482);
-            this.UNIT_OVERLAP.Name = "UNIT_OVERLAP";
-            this.UNIT_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.UNIT_OVERLAP.TabIndex = 1503;
-            // 
-            // MAPBLOCK1_OVERLAP
-            // 
-            this.MAPBLOCK1_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.MAPBLOCK1_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MAPBLOCK1_OVERLAP.Location = new System.Drawing.Point(705, 519);
-            this.MAPBLOCK1_OVERLAP.Name = "MAPBLOCK1_OVERLAP";
-            this.MAPBLOCK1_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.MAPBLOCK1_OVERLAP.TabIndex = 1504;
-            // 
-            // MAPBLOCK2_OVERLAP
-            // 
-            this.MAPBLOCK2_OVERLAP.BackColor = System.Drawing.Color.White;
-            this.MAPBLOCK2_OVERLAP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MAPBLOCK2_OVERLAP.Location = new System.Drawing.Point(705, 556);
-            this.MAPBLOCK2_OVERLAP.Name = "MAPBLOCK2_OVERLAP";
-            this.MAPBLOCK2_OVERLAP.Size = new System.Drawing.Size(10, 10);
-            this.MAPBLOCK2_OVERLAP.TabIndex = 1505;
+            this.dDisplay_Stage2Offset_Y.BackColor = System.Drawing.Color.Transparent;
+            this.dDisplay_Stage2Offset_Y.DigitColor = System.Drawing.Color.White;
+            this.dDisplay_Stage2Offset_Y.DigitText = "00.000";
+            this.dDisplay_Stage2Offset_Y.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dDisplay_Stage2Offset_Y.Location = new System.Drawing.Point(311, 124);
+            this.dDisplay_Stage2Offset_Y.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dDisplay_Stage2Offset_Y.Name = "dDisplay_Stage2Offset_Y";
+            this.dDisplay_Stage2Offset_Y.Size = new System.Drawing.Size(47, 11);
+            this.dDisplay_Stage2Offset_Y.TabIndex = 1505;
             // 
             // FormAuto
             // 
@@ -5185,10 +5626,10 @@
             this.pnlOP.ResumeLayout(false);
             this.pnlOP.PerformLayout();
             this.gbxOP.ResumeLayout(false);
-            this.gbxOP.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.VIEW_MACHINE_INFO.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
@@ -5213,7 +5654,6 @@
             this.tpgErrorStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tpgMESStatus.ResumeLayout(false);
-            this.tpgMESStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_INFO_BARCODE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridWorkLot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridEndLot)).EndInit();
@@ -5234,11 +5674,9 @@
         private System.Windows.Forms.Button PKPlaceStop;
         private System.Windows.Forms.Button bMAPBLOCK2_WORK_RESET;
         private System.Windows.Forms.Button EES_DISPLAY;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button bMAPBLOCK1_WORK_RESET;
         internal System.Windows.Forms.TextBox editStatus;
         private System.Windows.Forms.GroupBox gbxOP;
-        private System.Windows.Forms.Button Stacker_SUPPLY;
         private System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.DataGridView dgvInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -5495,10 +5933,6 @@
         private System.Windows.Forms.ToolStripStatusLabel th_10;
         private System.Windows.Forms.ToolStripStatusLabel th_11;
         private System.Windows.Forms.ToolStripStatusLabel th_12;
-        private System.Windows.Forms.Label cpT2;
-        private System.Windows.Forms.Label cpHD2;
-        private System.Windows.Forms.Label cpT1;
-        private System.Windows.Forms.Label cpHD1;
         private System.Windows.Forms.Label PowerMeter;
         private System.Windows.Forms.Label Barcode;
         private System.Windows.Forms.Label RFReader;
@@ -5514,8 +5948,6 @@
         private System.Windows.Forms.Label UseHD1;
         private System.Windows.Forms.Panel pMES;
         private System.Windows.Forms.Panel pBARCODE;
-        private System.Windows.Forms.Label lbTEST_POS2;
-        private System.Windows.Forms.Label lbTEST_POS1;
         private System.Windows.Forms.Button BTN_TEST;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbDoorSkipTime;
@@ -5531,17 +5963,12 @@
         private System.Windows.Forms.Label lbX314;
         private System.Windows.Forms.Label lbX401;
         private Owf.Controls.DigitalDisplayControl dcUnitULDCnt;
-        private System.Windows.Forms.Label lbSTAGE2_OFFSET_Y;
-        private System.Windows.Forms.Label lbSTAGE2_OFFSET_X;
-        private System.Windows.Forms.Label lbSTAGE1_OFFSET_Y;
-        private System.Windows.Forms.Label lbSTAGE1_OFFSET_X;
         private System.Windows.Forms.Label lbITS_ID;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label lbLOT_ID;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.DataGridView DGV_INFO_BARCODE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
@@ -5572,12 +5999,27 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label LBL_BRCD_MB_2;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label LBL_BRCD_MB_2_IDX;
+        private System.Windows.Forms.Label LBL_BRCD_MB_1_IDX;
+        private System.Windows.Forms.Label LBL_BRCD_UNIT_PK_IDX;
+        private System.Windows.Forms.Label LBL_BRCD_SAW_IDX;
+        private System.Windows.Forms.Label LBL_BRCD_STRIP_PK_IDX;
+        private System.Windows.Forms.Label LBL_BRCD_RAIL_IDX;
+        private System.Windows.Forms.ListBox LBX_PROC_CONDITION_MESSAGE;
+        private System.Windows.Forms.Panel MAPBLOCK2_OVERLAP;
+        private System.Windows.Forms.Panel MAPBLOCK1_OVERLAP;
+        private System.Windows.Forms.Panel UNIT_OVERLAP;
+        private System.Windows.Forms.Panel SAW_OVERLAP;
+        private System.Windows.Forms.Panel STRIP_OVERLAP;
+        private System.Windows.Forms.Panel RAIL_OVERLAP;
+        private System.Windows.Forms.Label label34;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
@@ -5588,23 +6030,49 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Recipe;
         private System.Windows.Forms.DataGridViewTextBoxColumn LotID;
         private System.Windows.Forms.DataGridViewTextBoxColumn MESCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoadingCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExcludeCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnloadingCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn WorkEnd;
-        private System.Windows.Forms.Label LBL_BRCD_MB_2_IDX;
-        private System.Windows.Forms.Label LBL_BRCD_MB_1_IDX;
-        private System.Windows.Forms.Label LBL_BRCD_UNIT_PK_IDX;
-        private System.Windows.Forms.Label LBL_BRCD_SAW_IDX;
-        private System.Windows.Forms.Label LBL_BRCD_STRIP_PK_IDX;
-        private System.Windows.Forms.Label LBL_BRCD_RAIL_IDX;
+        private System.Windows.Forms.Panel VIEW_MACHINE_INFO;
+        private System.Windows.Forms.Button OptionMachineInfo;
+        private Owf.Controls.DigitalDisplayControl dDly_X1;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.ListBox LBX_PROC_CONDITION_MESSAGE;
-        private System.Windows.Forms.Panel MAPBLOCK2_OVERLAP;
-        private System.Windows.Forms.Panel MAPBLOCK1_OVERLAP;
-        private System.Windows.Forms.Panel UNIT_OVERLAP;
-        private System.Windows.Forms.Panel SAW_OVERLAP;
-        private System.Windows.Forms.Panel STRIP_OVERLAP;
-        private System.Windows.Forms.Panel RAIL_OVERLAP;
+        private Owf.Controls.DigitalDisplayControl dDly_T1;
+        private System.Windows.Forms.Label label38;
+        private Owf.Controls.DigitalDisplayControl dDlyCAXC_X1;
+        private System.Windows.Forms.Label label36;
+        private Owf.Controls.DigitalDisplayControl dDly_T2;
+        private System.Windows.Forms.Label label40;
+        private Owf.Controls.DigitalDisplayControl dDlyCAXC_X2;
+        private System.Windows.Forms.Label label42;
+        private Owf.Controls.DigitalDisplayControl dDly_X2;
+        private System.Windows.Forms.Label label44;
+        private Owf.Controls.DigitalDisplayControl digitalDisplayControl1;
+        private Owf.Controls.DigitalDisplayControl dDly_Stage1Offset_X;
+        private System.Windows.Forms.Label label3;
+        private Owf.Controls.DigitalDisplayControl dDly_Stage1Offset_Y;
+        private System.Windows.Forms.Label label45;
+        private Owf.Controls.DigitalDisplayControl dDly_Stage2Offset_Y;
+        private System.Windows.Forms.Label label46;
+        private Owf.Controls.DigitalDisplayControl dDly_Stage2Offset_X;
+        private System.Windows.Forms.Label label47;
+        private Owf.Controls.DigitalDisplayControl digitalDispladDisplay_Stage1Offset_XyControl5;
+        private Owf.Controls.DigitalDisplayControl dDly_UnitPkPicOffset_X;
+        private System.Windows.Forms.Label label48;
+        private Owf.Controls.DigitalDisplayControl dDisplay_Stage2Offset_X;
+        private Owf.Controls.DigitalDisplayControl dDisplay_Stage2Offset_Y;
+        private System.Windows.Forms.Label LB_DOOR_SKIP;
+        private Owf.Controls.DigitalDisplayControl DDC_STRIP_CNT;
+        private System.Windows.Forms.Label label49;
+        private Owf.Controls.DigitalDisplayControl DDC_MGZ_CNT;
+        private System.Windows.Forms.Label label26;
+        private Owf.Controls.DigitalDisplayControl DDC_REWORK_CNT;
+        private System.Windows.Forms.Label label51;
+        private Owf.Controls.DigitalDisplayControl DDC_GOOD_CNT;
+        private System.Windows.Forms.Label label50;
+        private Owf.Controls.DigitalDisplayControl DDC_REJECT_CNT;
+        private System.Windows.Forms.Label label52;
     }
 }

@@ -146,10 +146,17 @@ namespace LIB_.SubFROMLib{
             }
         }
 
+        void VIEW_STRING() { for (short i = 0; i < CNT_.Memory; i++) gridString.Rows[i].Cells[2].Value = DATA_.IsSTRING[i]; }
+
         void VIEW_INTERLOCK() { for (short i = 0; i < CNT_.INTK; i++) gridInterlock.Rows[i].Cells[2].Value = DATA_.bINTRK[i].ToString(); }
         public void INTERLOCK_(object sender){
             dgv = (DataGridView)sender;
             GET_COLROW(dgv);
+            if (mRow < 0) return;
+            if (mCol == 2){
+                //int num = dgv.CurrentRow.Index;
+                //DATA_.bINTRK[num] = !DATA_.bINTRK[num];
+            }
         }
 
         private void BTN_MOTOR_TEACHING_Click(object sender, EventArgs e)
@@ -174,7 +181,8 @@ namespace LIB_.SubFROMLib{
                 if (tabMemory.SelectedIndex == 0) VIEW_BOOL();
                 else if (tabMemory.SelectedIndex == 1) VIEW_LONG();
                 else if (tabMemory.SelectedIndex == 2) VIEW_FLOAT();
-                else if (tabMemory.SelectedIndex == 3) VIEW_INTERLOCK();
+                else if (tabMemory.SelectedIndex == 3) VIEW_STRING();
+                else if (tabMemory.SelectedIndex == 4) VIEW_INTERLOCK();
             }
             else if (tabMain.SelectedIndex == 1) VIEW_THREAD();
             else if (tabMain.SelectedIndex == 2) VIEW_MTHOME();

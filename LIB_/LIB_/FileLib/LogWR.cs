@@ -33,6 +33,8 @@ public class LogWR_ : DATA_
         mLOG.sCOUNT         = string.Empty;
         mLOG.sPROCESS       = string.Empty;
         mLOG.sTACK          = string.Empty;
+        mLOG.sLOT           = string.Empty;
+        mLOG.sOneCycleTime  = string.Empty;
     }
 
     public static void SAVE_LOG(){
@@ -66,6 +68,9 @@ public class LogWR_ : DATA_
         fn = GET_DirNameDate(PATH_.LogMEASURE) + "MEASURE.log";
         LOG_WRITEFILE(fn, ref mLOG.sMeasure);
 
+        fn = GET_DirNameDate(PATH_.LogLotEnd) + "LOT.log";
+        LOG_WRITEFILE(fn, ref mLOG.sLOT);
+
         //fn = GET_DirNameDate(PATH.LogCount) + "COUNT.log";
         //LOG_WRITEFILE(fn, ref mLOG.sCOUNT);
         if (prMACHINE[USE_LOG_SAVE] == (int)eUSE.USE){
@@ -76,6 +81,9 @@ public class LogWR_ : DATA_
 
         fn = GET_DirNameDate(PATH_.LogCycleTack) + "TACK.log";
         LOG_WRITEFILE(fn, ref mLOG.sTACK);
+
+        fn = GET_DirNameDate(PATH_.LogOneCycleTime) + "TACK.log";
+        LOG_WRITEFILE(fn, ref mLOG.sOneCycleTime);
     }
 
     static public void LOG_WRITEFILE(string fn, ref string s){
@@ -172,13 +180,13 @@ public class LogWR_ : DATA_
         int iHOURS = DateTime.Now.TimeOfDay.Hours;
 
         if (IsSHIFT == eSHIFT.ThreeSHIFT){
-            if (iHOURS > 6 && iHOURS < 14) return "A";
-            else if (iHOURS > 14 && iHOURS < 20) return "B";
-            else return "C";
+            if (iHOURS > 6 && iHOURS < 14)          return "A";
+            else if (iHOURS > 14 && iHOURS < 20)    return "B";
+            else                                    return "C";
         } //3교대조
         else if (IsSHIFT == eSHIFT.TwoSHIFT){
-            if (iHOURS > 6 && iHOURS < 20) return "A";
-            else return "B";
+            if (iHOURS > 6 && iHOURS < 20)  return "A";
+            else                            return "B";
         } //2교대조
         else{
             return "A";
@@ -302,6 +310,7 @@ public class LogWR_ : DATA_
     //}
 
     public static void SaveLogTack(string sLogs, string sID)    { mLOG.sTACK += GET_LOG_TAG(sID) + sLogs + ETC.NewLine; }
+    public static void SaveLogOneCyle(string sLogs, string sID) { mLOG.sOneCycleTime += GET_LOG_TAG(sID) + sLogs + ETC.NewLine; }
     public static void SaveLogLogin(string sLogs, string sID)   { mLOG.sLogin += GET_LOG_TAG(sID) + sLogs + ETC.NewLine; }
     public static void SaveLogProcess(string sLogs, string sID) { mLOG.sPROCESS += GET_LOG_TAG(sID) + sLogs + ETC.NewLine; }
 
@@ -319,7 +328,7 @@ public class LogWR_ : DATA_
         string sLOG;
         for (int i = 0; i < m.Length; i++){
             sLOG = mtSTS[m[i]].CurrentPosition.ToString("0.000") + "->" + mtDATA[m[i], pn[i]].Pos.ToString("0.000");
-            if (i != m.Length) sLOG = sLOG + "/";
+            if (i != m.Length) sLOG += "/";
         }
         sRTN += "]";
         return sRTN;
@@ -329,7 +338,7 @@ public class LogWR_ : DATA_
         string sLOG;
         for (int i = 0; i < m.Length; i++){
             sLOG = mtSTS[m[i]].CurrentPosition.ToString("0.000") + "->" + mi[i].Pos.ToString("0.000");
-            if (i != m.Length) sLOG = sLOG + "/";
+            if (i != m.Length) sLOG += "/";
         }
         sRTN += "]";
         return sRTN;
@@ -392,6 +401,10 @@ public class LogWR_ : DATA_
             return;
         }
         WRLogException(sMSG + ETC.CrLf + "☞" + fn, "Exception");
+    }
+
+    public static void SaveLotEnd(string sLOT_ID, string sITS_ID, int StripCount, int GoodUnit, int ReworkUnit, int NGUnit, int ITSUnit){
+        mLOG.sLOT += GET_LOG_TAG(sLOT_ID) + sITS_ID + "," + StripCount.ToString() + "," + GoodUnit.ToString() + "," + ReworkUnit.ToString() + "," + NGUnit.ToString() + "," + ITSUnit.ToString() + ETC.NewLine;
     }
 
     public static void SAVE_MEASURE_DATA(string sLogs, string sID){

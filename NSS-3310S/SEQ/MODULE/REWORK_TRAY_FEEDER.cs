@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using LIB_.DateType;
+using Object;
 using System;
 
 namespace NSS_3310S.SEQ.MODULE{
@@ -7,11 +8,18 @@ namespace NSS_3310S.SEQ.MODULE{
         long TackStart = 0, TackEnd = 0;
         int nRtnPX = 0, nRtnPY = 0;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
+                if (!CheckRunThread()) continue;
+
                 GetEmptyTray("RE-WORK FEEDER 빈트레이 공급");
                 TrayUnitPlace("RE-WORK 트레이 유닛 플레이스 작업");
                 OutTray("REWORK 트레이 배출");
@@ -76,7 +84,7 @@ namespace NSS_3310S.SEQ.MODULE{
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.Tray3Cycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.Tray3Cycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",REWORK 트레이," + IsDOUBLE[D.Tray3Cycle].ToString(), "");
             TackStart = Environment.TickCount;
         }
 

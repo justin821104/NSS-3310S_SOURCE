@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using LIB_.DateType;
+using Object;
 using System;
 
 namespace NSS_3310S.SEQ.MODULE{
@@ -6,17 +7,23 @@ namespace NSS_3310S.SEQ.MODULE{
         int nThread = T.EmptyStacker;
         long TackStart = 0, TackEnd = 0;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
+                if (!CheckRunThread()) continue;
                 //if (bDRYRUN){
                 //    IsBIT[B.EmptyTrayPicRequest] = true;
                 //    continue;
                 //}
 
-            ReSUPPLY:
+                ReSUPPLY:
                 while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
                 if (eRTN.SUCESS != GetEmptyTray("빈-트레이 공급")) goto ReSUPPLY;
 
@@ -28,14 +35,22 @@ namespace NSS_3310S.SEQ.MODULE{
 
         #region >> SEQ
         public eRTN GetEmptyTray(string comment){
-            if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
+#if _NSS3300
+            if (mIN[I.EMPTY_RAIL_LD_TRAY_CHECK]){
+#else
+            if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){       
+#endif
                 UTIL_.OnERROR(E.emsEmptyTrayRailTrayExist);
                 return eRTN.FAIL;
             }
             while (eRTN.SUCESS != TransferBwd("빈-트레이 피터 트레이 로딩부로 후진")) ;
 
             LogStart(nThread, comment + " 진행");
+#if _NSS3300
+            if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK]){
+#else
             if (mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
+#endif
                 while (eRTN.SUCESS != TransferUnGrip("빈-트레이 피터 트레이 언그립")) ;
             ReCheck:
                 if (!mIN[I.EMPTY_STACKER_NONE] && !bDRYRUN){
@@ -58,7 +73,11 @@ namespace NSS_3310S.SEQ.MODULE{
         ReCHECK_TRAY:
             UTIL_.DELAY(500);
             while (eRTN.SUCESS != TransferGrip("빈-트레이 피터 트레이 그립")) ;
+#if _NSS3300
+            if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !bDRYRUN){
+#else
             if (mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !bDRYRUN){
+#endif
                 UTIL_.OnERROR(E.EmptyTrayLoadingFail);
                 goto ReCHECK_TRAY;
             }
@@ -67,13 +86,13 @@ namespace NSS_3310S.SEQ.MODULE{
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
 
         #region >> Moudle
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.EmptyCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.EmptyCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",EMPTY," + IsDOUBLE[D.EmptyCycle].ToString(), "");
             TackStart = Environment.TickCount;
         }
 

@@ -122,6 +122,8 @@ namespace Object
         public string sCOUNT;
         public string sPROCESS;
         public string sTACK;
+        public string sLOT;
+        public string sOneCycleTime;
     }
 
     /// <summary>

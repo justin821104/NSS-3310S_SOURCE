@@ -37,6 +37,7 @@
             this.btn_Master = new System.Windows.Forms.Button();
             this.btn_Maint = new System.Windows.Forms.Button();
             this.btn_Opp = new System.Windows.Forms.Button();
+            this.LB_MACHINE_INFO = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tmrLogin
@@ -143,12 +144,23 @@
             this.btn_Opp.UseVisualStyleBackColor = false;
             this.btn_Opp.Click += new System.EventHandler(this.LogInLevel_CLICK);
             // 
+            // LB_MACHINE_INFO
+            // 
+            this.LB_MACHINE_INFO.AutoSize = true;
+            this.LB_MACHINE_INFO.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_MACHINE_INFO.Location = new System.Drawing.Point(13, 838);
+            this.LB_MACHINE_INFO.Name = "LB_MACHINE_INFO";
+            this.LB_MACHINE_INFO.Size = new System.Drawing.Size(160, 23);
+            this.LB_MACHINE_INFO.TabIndex = 418;
+            this.LB_MACHINE_INFO.Text = "MACHINE INFO";
+            // 
             // Login
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1261, 831);
+            this.ClientSize = new System.Drawing.Size(1277, 875);
+            this.Controls.Add(this.LB_MACHINE_INFO);
             this.Controls.Add(this.BTN_PasswordChenge);
             this.Controls.Add(this.BTN_LOGIN);
             this.Controls.Add(this.txtPassWord);
@@ -174,5 +186,6 @@
         private System.Windows.Forms.Button btn_Maint;
         private System.Windows.Forms.Button btn_Opp;
         public System.Windows.Forms.Timer tmrLogin;
+        private System.Windows.Forms.Label LB_MACHINE_INFO;
     }
 }

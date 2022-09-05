@@ -40,23 +40,23 @@ using System.Runtime.InteropServices;
 
 public class CAXL
 {
-    //========== 라이브러리 초기화 ========================================================================
+//========== 라이브러리 초기화 ========================================================================
 
     // 라이브러리 초기화
     [DllImport("AXL.dll")] public static extern uint AxlOpen(int lIrqNo);
     // 라이브러리 초기화시 하드웨어 칩에 리셋을 하지 않음.
     [DllImport("AXL.dll")] public static extern uint AxlOpenNoReset(uint lIrqNo);
     // 라이브러리 사용을 종료
-    [DllImport("AXL.dll")] public static extern int AxlClose();
+    [DllImport("AXL.dll")] public static extern int  AxlClose();
     // 라이브러리가 초기화 되어 있는 지 확인
-    [DllImport("AXL.dll")] public static extern int AxlIsOpened();
+    [DllImport("AXL.dll")] public static extern int  AxlIsOpened();
 
     // 인터럽트를 사용한다.
     [DllImport("AXL.dll")] public static extern uint AxlInterruptEnable();
     // 인터럽트를 사용안한다.
     [DllImport("AXL.dll")] public static extern uint AxlInterruptDisable();
 
-    //========== 라이브러리 및 베이스 보드 정보 ===========================================================
+//========== 라이브러리 및 베이스 보드 정보 ===========================================================
 
     // 등록된 베이스 보드의 개수 확인
     [DllImport("AXL.dll")] public static extern uint AxlGetBoardCount(ref int lpBoardCount);
@@ -80,7 +80,7 @@ public class CAXL
     // Network 제품의 ScanTime 상태를 반환한다.
     [DllImport("AXL.dll")]
     public static extern uint AxlGetNetComTime(int nBoardNo, ref byte szNetComTime);
-    //========= 로그 레벨 =================================================================================
+//========= 로그 레벨 =================================================================================
 
     // EzSpy에 출력할 메시지 레벨 설정
     // uLevel : 0 - 3 설정
@@ -92,7 +92,7 @@ public class CAXL
     // EzSpy에 출력할 메시지 레벨 확인
     [DllImport("AXL.dll")] public static extern uint AxlGetLogLevel(ref uint upLevel);
 
-    //========== MLIII =================================================================================
+//========== MLIII =================================================================================
     // Network제품의 각 모듈을 검색을 시작하는 함수
     [DllImport("AXL.dll")] public static extern uint AxlScanStart(int lBoardNo, long lNet);
     // Network제품 각 보드의 모든 모듈을 connect하는 함수
@@ -100,7 +100,7 @@ public class CAXL
     // Network제품 각 보드의 모든 모듈을 Disconnect하는 함수
     [DllImport("AXL.dll")] public static extern uint AxlBoardDisconnect(int lBoardNo, long lNet);
 
-    //========== SIIIH =================================================================================
+//========== SIIIH =================================================================================
     // SIIIH 마스터 보드에 연결된 모듈에 대한 검색을 시작하는 함수(SIIIH 마스터 보드 전용)
     [DllImport("AXL.dll")] public static extern uint AxlScanStartSIIIH(ref _SCAN_RESULT pScanResult);
 }

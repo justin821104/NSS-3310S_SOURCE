@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using LIB_.DateType;
+using Object;
 using System;
 
 namespace NSS_3310S.SEQ.MODULE{
@@ -6,11 +7,19 @@ namespace NSS_3310S.SEQ.MODULE{
         int nThread = T.TrayPk;
         long TackStart = 0, TackEnd = 0;
         int nCurGoodTray = 0;
+
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
+                if (!CheckRunThread()) continue;
+
             RePIC:
                 while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
                 if (!Pic("빈-트레이 픽업")){
@@ -56,9 +65,12 @@ namespace NSS_3310S.SEQ.MODULE{
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "트레이 피커 Z축 대기 위치 이송")) ;
             if (!mIN[I.TRAY_PKR_TRAY_CHECK] && !bDRYRUN){
                 UTIL_.OnERROR(E.emsTrayPkEmtpyTrayPicFail);
+#if _NSS3300
+#else
                 if (mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
                     COM_.SetBit(nThread, B.EmptyTrayPicRequest, false, "빈트레이 레일부에서 트레이 사라져 다시 요청");
                 }
+#endif
                 return false;
             }
             COM_.SetBit(nThread, B.TrayPkPic, false, "트레이 피커 픽업 완료");
@@ -72,8 +84,10 @@ namespace NSS_3310S.SEQ.MODULE{
             while (eRTN.SUCESS != MoveX(P.TrayPlc[(int)TrayFeeder], "", TrayFeeder.ToString() + " 피터 트레이 플레이스 위치 이송")) ;
             if (!mIN[I.TRAY_PKR_TRAY_CHECK] && !bDRYRUN) return false;
             UTIL_.DELAY(1000);
+#if _NSS3300
+#else
             if (!mIN[I.LDTrayFeeder[(int)TrayFeeder]]) goto TrayEXIST;
-
+#endif
             while (eRTN.SUCESS != MoveZ(P.TrayPlc[(int)TrayFeeder], "offset=-5", "트레이 피커 Z축 트레이 플레이스 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.TrayPlc[(int)TrayFeeder], "spd=10", "트레이 피커 Z축 트레이 플레이스 위치 이송")) ;
 
@@ -95,13 +109,13 @@ namespace NSS_3310S.SEQ.MODULE{
             LogEnd(nThread, comment + " 완료");
             return true;
         }
-        #endregion
+#endregion
 
         #region >> Moudle
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.TrayPkCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.TrayPkCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",트레이 피커," + IsDOUBLE[D.TrayPkCycle].ToString(), "");
             COM_.SetBit(nThread, B.TrayPkWorking, false, "트레이 피커 작업 진행 완료");
             TackStart = Environment.TickCount;
         }
@@ -119,27 +133,39 @@ namespace NSS_3310S.SEQ.MODULE{
 
         public eRTN AlignUp(string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
+#if _NSS3300
+#else
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.TrayAlignUpFail, I.TrayAlignUp, I.TrayAlignDn, O.TrayAlignUp, O.TrayAlignDn, (int)prMACHINE[CP.CylinderOverTime], comment)) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
         public eRTN AlignDown(string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
+#if _NSS3300
+#else
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.TrayAlignDnFail, I.TrayAlignDn, I.TrayAlignUp, O.TrayAlignDn, O.TrayAlignUp, (int)prMACHINE[CP.CylinderOverTime], comment)) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
 
         public eRTN AlignFwd(string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
+#if _NSS3300
+#else
             mOUT[O.TRAY_PK_TRAY_ALIGN_FWD] = true;
             mOUT[O.TRAY_PK_TRAY_ALIGN_BWD] = false;
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.TrayAlignFwd, I.TRAY_PK_ALIGN_FWD, I.TRAY_PK_ALIGN_BWD, O.TRAY_PK_TRAY_ALIGN_FWD, O.TRAY_PK_TRAY_ALIGN_BWD, (int)prMACHINE[CP.CylinderOverTime], comment)) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
         public eRTN AlignBwd(string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
+#if _NSS3300
+#else
             mOUT[O.TRAY_PK_TRAY_ALIGN_FWD] = false;
             mOUT[O.TRAY_PK_TRAY_ALIGN_BWD] = true;
             if (eRTN.SUCESS != WRAP_.RunCylinder(nThread, E.TrayAlignBwd, I.TRAY_PK_ALIGN_BWD, I.TRAY_PK_ALIGN_FWD, O.TRAY_PK_TRAY_ALIGN_BWD, O.TRAY_PK_TRAY_ALIGN_FWD, (int)prMACHINE[CP.CylinderOverTime], comment)) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
 

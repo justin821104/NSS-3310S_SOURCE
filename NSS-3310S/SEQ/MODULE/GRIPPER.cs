@@ -6,17 +6,21 @@ using System.IO;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class GRIPPER : BASE{
-        
         int nThread = T.Gripper;
         string cmds;
         long TackStart = 0, TackEnd = 0;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
             do{
                 if (gExit) break;
-                UTIL_.DELAY(10);
-                if (eMCStatus != eMachineStatus.AUTO) continue;
-
+                if (!CheckRunThread()) continue;
                 while (UTIL_.WaitBIT(nThread, B.InRailRequest, false, "레일단 앞단 공급 할때까지 대기")) ;
                 Process("스트립 공급");
                 Tack();
@@ -32,7 +36,7 @@ namespace NSS_3310S.SEQ.MODULE{
             LogStart(nThread, comment + " [" + IsLONG[L.CurSlotCount].ToString("00") + "]");
             COM_.SetBit(nThread, B.GripperWorking, true, "그리퍼 작업 진행");
             while (eRTN.SUCESS != InLET_DOWN("인-렛 테이블 다운")) ;
-            while (eRTN.SUCESS != MoveRail(P.StripIn, "", "")) ;
+            while (eRTN.SUCESS != MoveRail(P.StripIn, "", "인-렛 레일 스트립 받은 위치로 이송")) ;
             while (eRTN.SUCESS != C.Magazine.PusherForward("푸셔 전진")) ;
             while (eRTN.SUCESS != UnGrip("그리퍼 언그립")) ;
 
@@ -74,8 +78,9 @@ namespace NSS_3310S.SEQ.MODULE{
                 }
                 goto ReTrayBarcode;
             }
-            IsLONG[L.StripCnt]++;
+            AddStrip();
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
+                CLOT.GET_LOT.InCnt++;
                 try{
                     string[] CheckOverlap = File.ReadAllText(PATH_.StripOverlap).Split(ETC.CrLf);
                     for (int n = 0; n < CheckOverlap.Length; n++){
@@ -97,8 +102,9 @@ namespace NSS_3310S.SEQ.MODULE{
                     TEACH_.WRITE_STRIP_INFO(CLOT.InfoStrip[nThread].Barcode + "," + CLOT.InfoStrip[nThread].Index);
                 }
                 else{
-                    IsLONG[L.StripCnt] -= 1;
+                    SubTractStrip();
                 }
+                CLOT.GET_LOT.LoadingCount = (int)IsLONG[L.StripCnt];
             }
             while (eRTN.SUCESS != Grip("그리퍼 그립")) ;
             while (eRTN.SUCESS != MoveX(P.StripOpn, "", "그리퍼 X축 스트립 그립 OPEN 위치")) ;
@@ -114,7 +120,6 @@ namespace NSS_3310S.SEQ.MODULE{
                     COM_.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
                     return;
                 }
-
             }//레일에 스트립 유무 확인
 
             while (eRTN.SUCESS != MoveStripAlign("스트립 피커 공급 위치 이송")) ;
@@ -149,7 +154,7 @@ namespace NSS_3310S.SEQ.MODULE{
 
             int nCNT = 0;
             do{
-                UTIL_.DELAY(1);
+                UTIL_.DELAY(2);
                 if (bWriteBarcode) goto BarCodeOk;
             } while (nCNT < (int)prMACHINE[CP.BarcodeReadingCheck]);
         BarCodeOk:
@@ -190,17 +195,25 @@ namespace NSS_3310S.SEQ.MODULE{
                 }    
             }
             //스트립 정보 저장
+            TEACH_.WRITE_INFO_STIP_BARCODE(CLOT.InfoStrip[nThread].Barcode);
             return true;
         }
-
         #endregion
 
         #region>> Moudle
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.GripperCycle] = (TackEnd - TackStart) / 1000;
-            LogWR_.SaveLogTack(sJobName + "/" + IsDOUBLE[D.GripperCycle].ToString(), "");
+            LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",GRIPPER," + IsDOUBLE[D.GripperCycle].ToString(), "");
             TackStart = Environment.TickCount;
+        }
+        void AddStrip(){
+            IsLONG[L.StripCnt]++;
+            IsLONG[L.DayStripCnt]++;
+        }
+        void SubTractStrip(){
+            IsLONG[L.StripCnt] -= 1;
+            IsLONG[L.DayStripCnt] -= 1;
         }
 
         public eRTN Grip(string comment){
@@ -226,15 +239,21 @@ namespace NSS_3310S.SEQ.MODULE{
         }
         public void InLetTableVac(bool bFlog){
             int nDelay = bFlog ? (int)prMACHINE[CP.InletVac] : 50;
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.INLET_TABLE_BACK_VAC, false);
             LAB_.OUTPUT(O.INLET_TABLE_VAC, bFlog);
+#endif
             UTIL_.DELAY(nDelay);
         }
         public void InletTableBlow(){
+#if _NSS3300
+#else
             LAB_.OUTPUT(O.INLET_TABLE_VAC, false);
             LAB_.OUTPUT(O.INLET_TABLE_BACK_VAC, true);
             UTIL_.DELAY((int)prMACHINE[CP.InletBlow]);
             LAB_.OUTPUT(O.INLET_TABLE_BACK_VAC, false);
+#endif
         }
 
         public eRTN MoveRail(int nPos, string cmd, string comment){
@@ -243,7 +262,10 @@ namespace NSS_3310S.SEQ.MODULE{
                 //UTIL_.OnERROR(E.emsInRailStripCheck);
                 //return eRTN.FAIL;
             }
-
+#if _NSS3300
+            IsSTRING[S.GrpMessage] = comment + " " + LogWR_.LogPos(M.Rail, nPos);
+            if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.Rail, nPos, 0.005, false, false, false, cmd, IsSTRING[S.GrpMessage])) return eRTN.FAIL;
+#else
             int[] ps = { nPos, nPos };
             double[] tollers = { 0.005, 0.005 };
             bool[] OnlyStarts = { false, false };
@@ -252,6 +274,7 @@ namespace NSS_3310S.SEQ.MODULE{
             string[] cmds = { cmd, cmd };
             IsSTRING[S.GrpMessage] = comment + " " + LogWR_.LogPos(M.RAIL, ps);
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, M.RAIL, ps, tollers, OnlyStarts, NoChanges, DontStops, cmds, IsSTRING[S.GrpMessage])) return eRTN.FAIL;
+#endif
             return eRTN.SUCESS;
         }
         public eRTN MoveX(int nPos, string cmd, string comment){
@@ -293,7 +316,15 @@ namespace NSS_3310S.SEQ.MODULE{
             if (ChkRunning(nThread)) return eRTN.FAIL;
             //strip pk z 높이 및 in-let table 상태 확인
             if (!C.Interlock.ChkInterlock(E.GripperXNotMove, true)) return eRTN.EMS;
-
+#if _NSS3300
+            int[] ms = { M.GrpX, M.Rail };
+            int[] ps = { P.StripLoad, P.StripAlign };
+            double[] tollers = { 0.005, 0.005 };
+            bool[] OnlyStarts = { false, false };
+            bool[] NoChanges = { true, true };
+            bool[] DontStops = { true, true };
+            string[] cmds = { "spd=5", "spd=5" };
+#else
             int[] ms = { M.GrpX, M.RailF, M.RailR };
             int[] ps = { P.StripLoad, P.StripAlign, P.StripAlign };
             double[] tollers = { 0.005, 0.005, 0.005 };
@@ -302,12 +333,14 @@ namespace NSS_3310S.SEQ.MODULE{
             bool[] DontStops = { true, true, true };
             string[] cmds = { "spd=5", "spd=5", "spd=5" };
 
+#endif
+
             if (prMODEL[RP.UseStripLoadngPos] == (int)ePARA.RECIPE) ps[0] = P.RecipStripLoad;
 
             IsSTRING[S.GrpMessage] = comment + " " + LogWR_.LogPos(ms, ps);
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, ms, ps, tollers, OnlyStarts, NoChanges, DontStops, cmds, IsSTRING[S.GrpMessage])) return eRTN.FAIL;
             return eRTN.SUCESS;
         }
-        #endregion
+#endregion
     }
 }

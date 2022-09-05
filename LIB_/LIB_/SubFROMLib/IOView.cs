@@ -17,6 +17,48 @@ namespace LIB_.SubFROMLib{
 
         public IOView(){
             InitializeComponent();
+
+#if _NSS3300
+            rbnIN_7.Visible = true;
+            rbnIN_8.Visible = true;
+            rbnIN_9.Visible = true;
+            rbnIN_10.Visible = true;
+
+            rbnIN_23.Visible = false;
+            rbnIN_24.Visible = false;
+            rbnIN_25.Visible = false;
+            rbnIN_26.Visible = false;
+
+            rbnOUT_6.Visible = true;
+            rbnOUT_7.Visible = true;
+            rbnOUT_8.Visible = true;
+            rbnOUT_9.Visible = true;
+
+            rbnOUT_22.Visible = false;
+            rbnOUT_23.Visible = false;
+            rbnOUT_24.Visible = false;
+            rbnOUT_25.Visible = false;
+#else
+            rbnIN_7.Visible = false;
+            rbnIN_8.Visible = false;
+            rbnIN_9.Visible = false;
+            rbnIN_10.Visible = false;
+
+            rbnIN_23.Visible = true;
+            rbnIN_24.Visible = true;
+            rbnIN_25.Visible = true;
+            rbnIN_26.Visible = true;
+
+             rbnOUT_6.Visible = false;
+            rbnOUT_7.Visible = false;
+            rbnOUT_8.Visible = false;
+            rbnOUT_9.Visible = false;
+
+            rbnOUT_22.Visible = true;
+            rbnOUT_23.Visible = true;
+            rbnOUT_24.Visible = true;
+            rbnOUT_25.Visible = true;
+#endif
         }
 
         public void INI(){

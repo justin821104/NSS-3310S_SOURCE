@@ -4,14 +4,20 @@ namespace NSS_3310S.SEQ.MODULE{
     public class HEAD_1 : BASE{
         readonly int nThread = T.Head1;
 
+        bool CheckRunThread(){
+            if (eMCStatus != eMachineStatus.AUTO || prMACHINE[CP.SelectHead] == (int)eHD.HD2){
+                UTIL_.DELAY(100);
+                return false;
+            }
+            return true;
+        }
         public void DoAuto(){
-            if (prMACHINE[CP.SelectHead] == (int)eHD.ALL) { 
-                if (!IsBIT[B.X1PicBusy] && !IsBIT[B.X2PicBusy]) IsBIT[B.X1PicBusy] = true;
+            if (prMACHINE[CP.SelectHead] == (int)eHD.ALL) {
+                if (!IsBIT[B.X1PicBusy] && !IsBIT[B.X2PicBusy]) COM_.Bit(nThread, B.X1PicBusy, true, "초기 시작 시 X1 먼저 시작 플러그 ON");
             }
             do{
                 if (gExit) break;
-                UTIL_.DELAY(2);
-                if (eMCStatus != eMachineStatus.AUTO || prMACHINE[CP.SelectHead] == (int)eHD.HD2) continue;
+                if (!CheckRunThread()) continue;
 
                 if (IsBIT[B.X2PicBusy])
                     while (eRTN.SUCESS != MoveXPicReady(nThread, eHD.HD1, (eMAP_BLOCK)IsLONG[L.CurWorkStage], ePK.PKR1, stBIT.NotCAM, "X1 PICKUP 대기 위치 이송")) ;
@@ -35,6 +41,8 @@ namespace NSS_3310S.SEQ.MODULE{
 
                 PkRejectPlc(nThread, eHD.HD1, "UNIT REJECT");
                 COM_.SetBit(nThread, B.X1Working, false, "X1 PIC AND PLC 진행");
+
+                PkVacReset(eHD.HD1);
             } while (true);
         }
     }

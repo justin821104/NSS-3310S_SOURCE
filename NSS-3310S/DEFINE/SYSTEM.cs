@@ -75,7 +75,7 @@
         public const int StageVacOn                     = 69;   // 맵-블록 테이블 진공 ON 대기 시간 (msec)
         public const int StageVacOff                    = 70;   // 맵-블록 테이블 진공 OFF 대기 시간 (msec)
         public const int StageBlowDelay                 = 71;   // 맵-블록 테이블 파기 ON 대기 시간 (msec)
-
+        
         public const int StageAirshowRepeatCnt          = 73;   // 맵-블록 테이블 비전 검사 전 에어블로우 회수 (count)
         public const int UseInspectionStageAir          = 74;   // 유닛 검사시 테이블 에어샤워 사용 유무 (T:사용, F:미사용)
         public const int InpectionMoveEndDelay          = 75;   // 유닛 검사 모션 이송 완료 후 대기 시간 (msec)
@@ -166,6 +166,8 @@
         public const int SelectMotorSpd                 = 160;  // 개별위치값 모터 속도, 가감속 선택 (0:공통 / 1:개별)
         public const int RejectBlowDelay                = 161;  // 피커 REJECT 파기 대기 시간 (msec)
         public const int MGZPitchSpeed                  = 162;  // 매거진 슬롯 피치 이송 속도 (mm/sec)
+        public const int UnitPkPlcBrush                 = 163;  // 유닛 피커 맵블록에 플레이스 후 브러쉬 사용 유무 (T:사용, F:미사용)
+        public const int GoodTrayPushEndDealy           = 164;  // OK 트레이 콘베어로 밀고 나서 대기 시간 (msec)
 
         #region >> ARRAY
         public static int[] UseData = { LogSaveSkip, UseBz, UseAREA,
@@ -176,7 +178,8 @@
                                                     UseStageVacCheck, UseInspectionStageAir, UseWorkedAirshower, UsePkVacCheck,
                                                     UseFlaying, UseUnitPkWorkedAirshower, UseUnitPkWorkedCleaner, UseTrayFeederTrayCheck,
                                                     UseLotStatPkAutoCal, UsePickUpVac, UseLotEnd, UsePlaceCheck, UseStipPkCheck,
-                                                    UseRejectBoxCheck, SelectMotorSpd };
+                                                    UseRejectBoxCheck, SelectMotorSpd,
+                                                    UnitPkPlcBrush };
         public static int[] UseData1 = {    UseMgzCheck1, UseMgzCheck2, UseITSData,
                                             UesBtmInspection, UseBtmInspectionResult, UseMsSQL, UseBarcode, UseMES, UseRFID
         };

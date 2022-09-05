@@ -10,7 +10,7 @@
         public const int EndInitial                                 = 5;    // 초기화 완료  "초기화 완료 되었습니다 !" + etc.CrLf + "INITIALIZE COMPLETE !";
         public const int ManualNotComplete                          = 6;    // 매뉴얼 동작이 끝나지 않았습니다. "매뉴얼 동작이 끝나지 않았습니다 !" + etc.CrLf + "MANUAL RUN NOT FINISH !";
         public const int LotEndComplete                             = 7;    // Lot-End 처리가 끝났습니다. "LOT-END 처리가 끝났습니다. !" + etc.CrLf + "LOT-END SECCUSS !";
-        public const int ChkMessageBox                              = 8;    // 메세지 창이 띄어 있습니다. 메세지 창 닫고 다시 하세요. 
+        public const int ChkMessageBox                              = 8;    //  
         public const int WorkEnd                                    = 9;    // Work Finish ' 설정수량의 작업이 완료되었습니다. "모든 작업이 완료되었습니다 !" + etc.CrLf + "WORK FINISH !";
         public const int DoorOpen                                   = 10;   // 도어가 열렸습니다.+ vbNewLine 도어열림 상태를 확인하세요. "도어가 열려 있습니다 !" + etc.CrLf + "CLOSE DOOR !";
         public const int OldPasswordFail                            = 11;   // [OLD PASSWORD] 비밀번호가 다릅니다. 확인 해 주세요. "OLD PASSWORD가 일치하지 않습니다." + etc.CrLf + "OLD PASSWORD DOES NOT MATCH !";
@@ -29,7 +29,7 @@
         public const int VisionRecipeLoadingFail                    = 24;   // 비전 레스피 open 실패 하였습니다.
         public const int UnitSizeInspectionSkip                     = 25;   // 유닛 사이즈 검사  스킵 상태 입니다. (YES : 스킵 상태로 START 진행 / NO : 설비 STOP)
         public const int UnitSizeReturnValueSkip                    = 26;   // 유닛 사이즈 검사 진행 하지만 비전 검사 결과 무시 하고 모두 OK로 진행 합니다. (YES: 유닛 사이즈 검사 결과 무시 하여 START 진행 / NO : 설비 STOP)
-        public const int LDCst_Requst = 27;   // 로더 콘베어 카세트 공급 하셔야 합니다.   (YES : 매거진 이여서 투입 / NO : LOT 완료 현재 진행 STRIP 완료 후  LOT-END 처리)
+        public const int LDCst_Requst                               = 27;   // 로더 콘베어 카세트 공급 하셔야 합니다.   (YES : 매거진 이여서 투입 / NO : LOT 완료 현재 진행 STRIP 완료 후  LOT-END 처리)
         public const int ULDCst_FullCheck                           = 28;   // 언로더 카세트 제거 하셔야 합니다.
         public const int GripperStripPicFail                        = 29;   // 그리퍼 스트립 로딩 중 스트립 사라짐. (YES:스트립 유무 다시 확인 / NO:다시 로딩)
         public const int StripPk_RePic                              = 30;   // 스트립 피커 픽업 실패 (YES:재픽업 시도 / NO:레일 위에 있는 스트립 제거)
@@ -52,7 +52,7 @@
         public const int Rail_StripRemove                           = 47;   // 레일 위 스트립 바코드 재검사 하시겠습니까. (YES : 스트립 제거 / NO : 바코드 다시 검사)
         public const int ChkForm_LotIn                              = 48;   // LOT 등록창 열려 있습니다. LOT 등록창 닫고 다시 실행 하셔야 합니다.
         public const int ITSReadingFail                             = 49;   // 맵블록 테이블 유닛 ITS 값 리딩 중 에러 발생 (YES : 다시 리딩 / NO : ITS 데이터 무시하고 작업 진행)
-
+        public const int RemoveGoodTray                             = 50;   // ok 트레이 제거 하셔야 합니다.! 
     } //WARNING DEFINE
 
     public class E : DATA_

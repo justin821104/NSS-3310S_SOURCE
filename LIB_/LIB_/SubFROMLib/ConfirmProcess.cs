@@ -55,7 +55,7 @@ namespace LIB_.SubFROMLib{
         public void SET_ACTION(){
             if (DATA_.ConfirmG.bz < 0) return;
             iBZ = DATA_.ConfirmG.bz;
-            for (int i = 0; i < DATA_.oBZ.Length; i++) DATA_.IsBIT[DATA_.oBZ[i]] = false;
+            for (int i = 0; i < DATA_.oBZ.Length; i++) DATA_.mOUT[DATA_.oBZ[i]] = false;
             DATA_.mOUT[iBZ] = true;
             timeStamp.Restart();
             tmrConfirmProcess.Enabled = true;

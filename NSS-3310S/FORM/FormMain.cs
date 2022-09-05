@@ -251,6 +251,7 @@ namespace NSS_3310S{
             TEACH_.WRITE_TRAIN(DATA_.sGroupName + "_" + DATA_.sJobName);
             TEACH_.WRITE_INFO_UNIT_SIZE(DATA_.prMODEL[RP.UnitSizeX], DATA_.prMODEL[RP.UnitSizeY], DATA_.prMODEL[RP.UnitPitchX], DATA_.prMODEL[RP.UnitPitchY]);
             TEACH_.WRITE_INFO_MAP_BLOCK((int)DATA_.prMODEL[RP.GroupCntX], (int)DATA_.prMODEL[RP.GroupCntY], (int)DATA_.prMODEL[RP.UnitX[(int)eMAP_BLOCK.STAGE1]], (int)DATA_.prMODEL[RP.UnitY[(int)eMAP_BLOCK.STAGE1]], (int)DATA_.prMODEL[RP.UnitX[(int)eMAP_BLOCK.STAGE2]], (int)DATA_.prMODEL[RP.UnitY[(int)eMAP_BLOCK.STAGE1]]);
+            TEACH_.WRITE_INFO_PCB_TYPE((int)DATA_.prMODEL[RP.PCB_TYPE]);
         }
         public void SaveDevice(){
             Refresh_Picker();
@@ -321,6 +322,7 @@ namespace NSS_3310S{
             DATA_.MC_DIR    = UTIL_.GET_MACHINE_DIR();         
             if (DATA_.MC_DIR == 1) PATH_.MCDir = "[DIR = REVERSE]";
             CUSER.READ_CURRENT_USER();
+            
             Text = PATH_.VERSION + "/" + PATH_.MCDir;
             lbAppVersion.Text = DEF.MCVersion;
 
@@ -344,6 +346,9 @@ namespace NSS_3310S{
             DEF.ReadName(); SetSplashStatus(20, "READ LABEL");
             DEF.ReadMachine();
 
+            CLOT.CLEAR_FINISH_LOT();
+            CLOT.CLEAR_GET_LOT();
+            UTIL_.GET_LOT_INFO();
             DATA_.sCurrJobName = UTIL_.GET_JOB_FILE_NAME();
             DATA_.sCurrVisionName = UTIL_.GET_VISION_FILE_NAME();
             CMES.CurPPID = UTIL_.GET_PPID_NAME();
@@ -385,24 +390,24 @@ namespace NSS_3310S{
 
             OP(swLogIn);
             LAB_.BIT_OUT(O.PC_POWER_LAMP, true);
+#if _NSS3300
+#else
             DATA_.mOUT[O.PC_VISION_LAMP] = true;
-            DATA_.mOUT[O.BRUSH_WATER] = true;
+#endif
             DATA_.mOUT[O.HANDLER_READY] = true;
+            
+            DATA_.mOUT[O.BRUSH_WATER] = true;
             DEF.ReadSearchRoiUnitCnt();
             DEF.ReadMapBlockPickUp();
             DEF.ReadTrayPlace();
             DEF.ChangeVisionRecipe();
             SetSplashStatus(90, "READ SEARCH ROI AND RECIPE CHANGE FLOG"); //SUCCESS EVENT
-
-
-            SetSplashStatus(100, "SUCCESS EVENT");
             UTIL_.DELAY(100);
-            t.Abort();
             TmrMAIN.Enabled = true;
             DATA_.mNotTeachSave = false;
             DATA_.TW_TIME = Environment.TickCount + ((long)DATA_.prMACHINE[CP.BlinkTime]);
             LogWR_.SaveLogOperate("PROGRAM START", "MC");
-            #endregion
+#endregion
 
             DATA_.cPM.Open((int)DATA_.prMACHINE[CP.PowerMeterComPort], Baudrate.bps19200);
             DATA_.cLightController.OPEN((short)DATA_.prMACHINE[CP.LightComPort]);
@@ -415,11 +420,16 @@ namespace NSS_3310S{
             MsSQL.Open(MsSQL.sIP, MsSQL.sDBName, MsSQL.sID, MsSQL.sPwd);
 
             //잠시
-            string[] aLOTID = File.ReadAllText(PATH_.LOT_ID).Split(ETC.CrLf);
-            CLOT.GET_LOT.LotID = aLOTID[0];
-            string[] sITS_ID = File.ReadAllText(PATH_.ITS_ID).Split(ETC.CrLf);
-            CLOT.GET_LOT.ItsID = sITS_ID[0];
+            CLOT.GET_LOT.LotID = UTIL_.GET_LOT_ID();
+            CLOT.GET_LOT.ItsID = UTIL_.GET_ITS_ID();
             BASE.RD_LOT_INF();
+
+#if _NSS3300
+            DATA_.mOUT[O.POWER_ON_LAMP] = false;
+            DATA_.mOUT[O.POWER_OFF_LAMP] = true;
+#endif
+            SetSplashStatus(100, "SUCCESS EVENT");
+            t.Abort();
 
             LogWR_.SaveLogOperate("PROGRAM START", "MC");
             TmrMAIN.Enabled = true;
@@ -452,7 +462,7 @@ namespace NSS_3310S{
                 //COM_.RESET_DOORLOCK();
                 //SUBFRM_.gSecsGem.SetHMI("0");
                 //
-                #region "EVENT CLOSE"
+#region "EVENT CLOSE"
                 SUBFRM_.gTenkeyList.SEND_TENKEY -= new EventHandler_(GET_TENKEY);
                 SUBFRM_.gLogin.EVENT_OPEN -= new EventHandler_OPEN(OPEN_LOGIN);
                 //
@@ -462,7 +472,7 @@ namespace NSS_3310S{
                 //F.fRecipe.EVENT_LANGUAGE -= new EventHandler_LANGUAGE(SET_LANGUAGE);
                 //F.fMT.EVENT_OPEN -= new EventHandler_DEVICE_OPEN(OpenDevice);
                 //F.fLOTID.EVENT_OPEN -= new EventHandler_DEVICE_OPEN(OpenDevice);
-                #endregion "EVENT CLOSE"
+#endregion "EVENT CLOSE"
 
                 SUBFRM_.cBarcode.Disconnect();
                 DATA_.cPM.Close();
@@ -569,16 +579,34 @@ namespace NSS_3310S{
                 DEF.ReadName();
             }
 
-            if (DATA_.prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP){
-                DATA_.mOUT[O.QUAD_PCB] = false;
-            }
-            else{
-                DATA_.mOUT[O.QUAD_PCB] = true;
-            }
-
+#if _NSS3300
+#else
+            if (DATA_.prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP) DATA_.mOUT[O.QUAD_PCB] = false;
+            else DATA_.mOUT[O.QUAD_PCB] = true;
+#endif
             lbITS.BackColor     = MsSQL.bOpen ? Color.Lime : Color.DarkGreen;
             lbBARCODE.BackColor = SUBFRM_.cBarcode.bOpen ? Color.Lime : Color.DarkGreen;
             lbUDP.BackColor     = DEF.bUDP ? Color.Lime : Color.DarkGreen;
+
+#if _NSS3300
+            if (DATA_.mIN[I.POWER_ON]){
+                DATA_.IsLONG[L.PowerSwitchOnDelayTime]++;
+                if (DATA_.IsLONG[L.PowerSwitchOnDelayTime] > 10){
+                    DATA_.IsLONG[L.PowerSwitchOnDelayTime] = 0;
+                    DEF.SevoPower(stBIT.ON);
+                }
+            }
+            else DATA_.IsLONG[L.PowerSwitchOnDelayTime] = 0;
+
+            if (DATA_.mIN[I.POWER_OFF]){
+                DATA_.IsLONG[L.PowerSwitchOffDelayTime]++;
+                if (DATA_.IsLONG[L.PowerSwitchOffDelayTime] > 20){
+                    DATA_.IsLONG[L.PowerSwitchOffDelayTime] = 0;
+                    DEF.SevoPower(stBIT.OFF);
+                }
+            }
+            else DATA_.IsLONG[L.PowerSwitchOffDelayTime] = 0;
+#endif
 
             //SkipDoorLock
             if (DATA_.eLoginLevel >= eLogLevel.ADMIN){}

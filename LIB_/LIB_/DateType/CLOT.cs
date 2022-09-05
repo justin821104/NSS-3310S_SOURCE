@@ -53,10 +53,8 @@ namespace LIB_.DateType
         public static string CurLotID               = "";
         public static int CurLotStripCnt            = 0;
         public static int nLotType                  = 0;
-        public static int nLotCnt                   = 0;
         public static int nEndLotCnt                = 0;
         public static sLOT_INFO[] FINISH_LOT        = new sLOT_INFO[3]; //완료 LOT 정보
-        public static sLOT_INFO[] WORK_LOT          = new sLOT_INFO[1]; //진행 LOT 정보
         public static sLOT_INFO GET_LOT             = new sLOT_INFO(); //MES에서 받은 LOT 정보
         public static sLOT_INFO DEL_LOT             = new sLOT_INFO(); //MES 삭제
         public static sLOT_INFO CANCEL_LOT          = new sLOT_INFO(); //MES 취소
@@ -88,7 +86,7 @@ namespace LIB_.DateType
                 FINISH_LOT[i].ProcCondition_3       = "";
                 FINISH_LOT[i].ProcCondition_4       = "";
 
-                FINISH_LOT[i].LotType               = -1;   //LOT TYPE => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
+                FINISH_LOT[i].LotType               = -1;   //LOT TYPE => 1:초도, 2:본낫, 3:더미, 4:재초도, 5:재작업
                 FINISH_LOT[i].Qty                   = 0;    //MES 수량
                 FINISH_LOT[i].ProductType           = "";
                 FINISH_LOT[i].ITS                   = 0;    //ITS 사용 유무
@@ -119,64 +117,11 @@ namespace LIB_.DateType
                 FINISH_LOT[i].LoadingCount          = 0;    //투입 매수
                 FINISH_LOT[i].ExceptCount           = 0;    //제외 매수
                 FINISH_LOT[i].UnloadingCount        = 0;    //배출 매수
-                FINISH_LOT[i].WorkSort              = "";   //작업 종류  => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
+                FINISH_LOT[i].WorkSort              = "";   //작업 종류  => 1:초도, 2:본낫, 3:더미, 4:재초도, 5:재작업
             }
             nEndLotCnt = 0;
         }
-        public static void CLEAR_WORK_LOT(int nIndex){
-            WORK_LOT[nIndex].WorkScope              = "";   //대기,진행,완료,강제완료
-            WORK_LOT[nIndex].ItsID                  = "";   //ITS ID
-            WORK_LOT[nIndex].Recipe                 = "";
 
-            WORK_LOT[nIndex].LotID                  = "";   //LOT ID
-            WORK_LOT[nIndex].ToolNo                 = "";   //TOL NUMBER (관리번호 기종)
-            WORK_LOT[nIndex].ProcCD                 = "";
-            WORK_LOT[nIndex].ProcName               = "";
-            WORK_LOT[nIndex].WorkCondition          = "";
-            WORK_LOT[nIndex].ProcCondition_1        = "";
-            WORK_LOT[nIndex].ProcCondition_2        = "";
-            WORK_LOT[nIndex].ProcCondition_3        = "";
-            WORK_LOT[nIndex].ProcCondition_4        = "";
-
-            WORK_LOT[nIndex].LotType                = -1;   //LOT TYPE => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
-            WORK_LOT[nIndex].Qty                    = 0;    //MES 수량
-            WORK_LOT[nIndex].ProductType            = "";
-            WORK_LOT[nIndex].ITS                    = 0;    //ITS 사용 유무
-            WORK_LOT[nIndex].ITS_LotID_IN           = "";   //ITS ID 대덕전자(대덕 번호)
-            WORK_LOT[nIndex].ITS_LotID_CT           = "";   //ITS ID 고객사(고객사 번호)
-
-            WORK_LOT[nIndex].UnitSizeX              = 0;    //사이즈X
-            WORK_LOT[nIndex].UnitSizeY              = 0;    //사이즈Y
-            WORK_LOT[nIndex].UnitSize_USL           = 0;    //사이즈 상한값
-            WORK_LOT[nIndex].UnitSize_LSL           = 0;    //사이즈 하한값
-            WORK_LOT[nIndex].Thick                  = 0;    //두께정보
-            WORK_LOT[nIndex].Thick_USL              = 0;    //두께 상한값
-            WORK_LOT[nIndex].Thick_LSL              = 0;    //두께 하한값
-
-            WORK_LOT[nIndex].ABFMATERIAL            = "";
-            WORK_LOT[nIndex].LANDPKGX               = 0;
-            WORK_LOT[nIndex].LANDPKGX_UPPER         = 0;
-            WORK_LOT[nIndex].LANDPKGX_LOWER         = 0;
-            WORK_LOT[nIndex].LANDPKGY               = 0;
-            WORK_LOT[nIndex].LANDPKGY_UPPER         = 0;
-            WORK_LOT[nIndex].LANDPKGY_LOWER         = 0;
-
-            WORK_LOT[nIndex].InCnt                  = 0;    //panel 투입 수량
-            WORK_LOT[nIndex].OutCnt                 = 0;    //panel 배출 수량
-            WORK_LOT[nIndex].CurCnt                 = 0;    //배출 수량과 동일
-            WORK_LOT[nIndex].PassCnt                = 0;    //제외 매수
-
-            WORK_LOT[nIndex].LoadingCount           = 0;    //투입 매수
-            WORK_LOT[nIndex].ExceptCount            = 0;    //제외 매수
-            WORK_LOT[nIndex].UnloadingCount         = 0;    //배출 매수
-            WORK_LOT[nIndex].WorkSort               = "";   //작업 종류  => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
-        }
-        public static void CLEAR_WORK_LOT(){
-            for (int i = 0; i < WORK_LOT.Length; i++){
-                CLEAR_WORK_LOT(i);
-            }
-            nLotCnt = 0;
-        }
         public static void CLEAR_GET_LOT(){
             GET_LOT.WorkScope                       = "";   //대기,진행,완료,강제완료
             GET_LOT.ItsID                           = "";   //ITS ID
@@ -192,7 +137,7 @@ namespace LIB_.DateType
             GET_LOT.ProcCondition_3                 = "";
             GET_LOT.ProcCondition_4                 = "";
 
-            GET_LOT.LotType                         = -1;   //LOT TYPE => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
+            GET_LOT.LotType                         = -1;   //LOT TYPE => 1:초도, 2:본낫, 3:더미, 4:재초도, 5:재작업
             GET_LOT.Qty                             = 0;    //MES 수량
             GET_LOT.ProductType                     = "";
             GET_LOT.ITS                             = 0;    //ITS 사용 유무
@@ -223,26 +168,18 @@ namespace LIB_.DateType
             GET_LOT.LoadingCount                    = 0;    //투입 매수
             GET_LOT.ExceptCount                     = 0;    //제외 매수
             GET_LOT.UnloadingCount                  = 0;    //배출 매수
-            GET_LOT.WorkSort                        = "";   //작업 종류  => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
+            GET_LOT.WorkSort                        = "";   //작업 종류  => 1:초도, 2:본낫, 3:더미, 4:재초도, 5:재작업
         }
         public static void FinishLot(bool bFLAG){
             for (int i = 0; i < FINISH_LOT.Length; i++){
                 if (i >= (FINISH_LOT.Length - 1)){
-                    FINISH_LOT[(FINISH_LOT.Length - 1) - i]           = WORK_LOT[0];
+                    FINISH_LOT[(FINISH_LOT.Length - 1) - i]           = GET_LOT;
                     FINISH_LOT[(FINISH_LOT.Length - 1) - i].WorkScope = bFLAG ? "강제완료" : "완료";
                 }
                 else { FINISH_LOT[(FINISH_LOT.Length - 1) - i] = FINISH_LOT[(FINISH_LOT.Length - 2) - i]; }
             }
-            for (int i = 0; i < WORK_LOT.Length; i++){
-                if (i >= (WORK_LOT.Length - 1)) { CLEAR_WORK_LOT(i); }
-                else                            { WORK_LOT[i] = WORK_LOT[i + 1]; }
-            }
-            nLotCnt -= 1;
-            nEndLotCnt = (nEndLotCnt >= 10) ? 10 : nEndLotCnt++;
-        }
-        public static void SetLOT(int nIdx){
-            WORK_LOT[nIdx]          = GET_LOT;
-            WORK_LOT[nIdx].WorkSort = "본 LOT"; //MES_FIRST == 0 ? "본 LOT" : "선행 LOT";
+            CLEAR_GET_LOT();
+            nEndLotCnt = (nEndLotCnt >= FINISH_LOT.Length) ? FINISH_LOT.Length : nEndLotCnt++;
         }
 
         public static void CLEAR_RETURN_LOT_CANCEL(){
@@ -250,19 +187,7 @@ namespace LIB_.DateType
             RETURN_CANCEL.RETURN    = "";
             RETURN_CANCEL.MESSAGE   = "";
         }
-        public static void LOT_CANCEL_SORTING(){
-            int nIndex = 0;
-            for (int i = 0; i < WORK_LOT.Length; i++){
-                if (WORK_LOT[i].LotID == "" || WORK_LOT[nIndex].LotID != CANCEL_LOT.LotID){
-                    if (i == (WORK_LOT.Length - 1)) { CLEAR_WORK_LOT(i); }
-                    continue;
-                }
-                if (i == 0) { WORK_LOT[nIndex] = WORK_LOT[i + 1]; }
-                else        { WORK_LOT[nIndex] = WORK_LOT[i]; }
-                nIndex++;
-            }
-        }
-        
+
         //LOT 정보
         public struct sLOT_INFO
         {
@@ -281,7 +206,7 @@ namespace LIB_.DateType
             public string ProcCondition_3;
             public string ProcCondition_4;
             
-            public int LotType;                 //LOT TYPE => 0:초도, 1:본낫, 2:더미, 3:재초도, 4:재작업
+            public int LotType;                 //LOT TYPE => 1:초도, 2:본낫, 3:더미, 4:재초도, 5:재작업
             public int Qty;                     ///MES 수량
             public string ProductType;
             public int ITS;                     //ITS 사용 유무

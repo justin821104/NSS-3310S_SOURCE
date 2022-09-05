@@ -187,6 +187,66 @@ public class UTIL_ : DATA_
         }
     }
 
+    public static string GET_LOT_ID(){
+        if (!File.Exists(PATH_.LOT_ID)) return "";
+        string[] sLINE = File.ReadAllText(PATH_.LOT_ID).Split(ETC.CrLf);
+        try{
+           return sLINE[0];
+        }
+        catch (Exception EX){
+            MessageBox.Show("LotID reading fail !" + ETC.NewLine + EX.ToString());
+            return "";
+        }
+    }
+    public static string GET_ITS_ID(){
+        if (!File.Exists(PATH_.ITS_ID)) return "";
+        string[] sLINE = File.ReadAllText(PATH_.ITS_ID).Split(ETC.CrLf);
+        try{
+            return sLINE[0];
+        }
+        catch (Exception ex){
+            MessageBox.Show("ITS ID reading fail !" + ETC.NewLine + ex.ToString());
+            return "";
+        }
+    }
+
+    public static void DEL_LOT_INFO(){
+        if (File.Exists(PATH_.CurrLot)) File.Delete(PATH_.CurrLot);
+    }
+    public static void GET_LOT_INFO(){
+        if (!File.Exists(PATH_.CurrLot)) return;
+        try {
+            string[] sLine = File.ReadAllText(PATH_.CurrLot).Split(ETC.CrLf);
+            string[] sRslt = sLine[0].Split(',');
+            if (sRslt.Length > 20){
+                CLOT.GET_LOT.LotID          = sRslt[0];
+                CLOT.GET_LOT.LotType        = int.Parse(sRslt[1]);
+                CLOT.GET_LOT.Qty            = int.Parse(sRslt[2]);
+                CLOT.GET_LOT.ProductType    = sRslt[3];
+                CLOT.GET_LOT.ToolNo         = sRslt[4];
+                CLOT.GET_LOT.ITS            = int.Parse(sRslt[5]);
+                CLOT.GET_LOT.ITS_LotID_IN   = sRslt[6];
+                CLOT.GET_LOT.ITS_LotID_CT   = sRslt[7];
+                CLOT.GET_LOT.UnitSizeX      = double.Parse(sRslt[8]);
+                CLOT.GET_LOT.UnitSizeY      = double.Parse(sRslt[9]);
+                CLOT.GET_LOT.UnitSize_USL   = double.Parse(sRslt[10]);
+                CLOT.GET_LOT.UnitSize_LSL   = double.Parse(sRslt[11]);
+                CLOT.GET_LOT.ABFMATERIAL    = sRslt[12];
+                CLOT.GET_LOT.LANDPKGX       = double.Parse(sRslt[13]);
+                CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(sRslt[14]);
+                CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(sRslt[15]);
+                CLOT.GET_LOT.LANDPKGY       = double.Parse(sRslt[16]);
+                CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(sRslt[17]);
+                CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(sRslt[18]);
+                CLOT.GET_LOT.WorkSort       = sRslt[19];
+                CLOT.GET_LOT.WorkScope      = sRslt[20];
+            }
+        }
+        catch(Exception EX){
+            LogWR_.SaveLogException("LOT INFO READING FAIL", EX);
+        }
+    }
+
     public static string GET_JOB_FILE_NAME(){
         if (!File.Exists(PATH_.CurrJOB)) return "";
         return File.ReadAllText(PATH_.CurrJOB);
@@ -568,6 +628,35 @@ public class UTIL_ : DATA_
         catch (Exception ex) { MessageBox.Show(ex.ToString()); }
     }
 
+    public static void PosGridOption1(DataGridView grd, int mt, int[] pos, ref int iHeight){
+        DataGridViewRow row;
+        iHeight = 3 + 26;
+        grd.Rows.Clear();
+        grd.RowCount = pos.Length;
+
+        try{
+            for (int i = 0; i < pos.Length; i++){
+                grd[0, i].Value = pos[i].ToString();
+                grd[1, i].Value = PosName[mt, pos[i]];
+                grd[2, i].Value = mtDATA[mt, pos[i]].Pos;
+                //grd[3, i].Value = mtDATA[mt2, pos[i]].Pos;
+                grd[4, i].Value = "GET";
+                //grd[5, i].Value = "GET";
+                grd[6, i].Value = "GO";
+                row = grd.Rows[i];
+                row.Height = 30;
+                iHeight += row.Height;
+
+                if (pos[i] < CNT_.ComPos){
+                    grd[0, i].Style.BackColor = ComBackColor;
+                    grd[1, i].Style.BackColor = ComBackColor;
+                }
+            }
+            CLEAR_GRID_SELECTED(ref grd);
+        }
+        catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+    }   
+
     public static void PosGridOption(DataGridView grd, int mt1, int mt2, int[] pos, ref int iHeight){
         DataGridViewRow row;
         iHeight = 3 + 26;
@@ -641,7 +730,7 @@ public class UTIL_ : DATA_
     public static bool PRINT_MASSAGE(string Message, bool bDefault, bool bTypeOK, bool bAutoClose){
         try{
             if (SUBFRM_.gMSGBOX.Visible){
-                COM_.ViewWarning(-1, WarningMessageBox);
+                COM_.ViewWarning(-1, WarningMessageBox, "메세지 창이 띄어 있습니다. 메세지 창 닫고 다시 하세요.");
                 return false;
             }
             //517, 187

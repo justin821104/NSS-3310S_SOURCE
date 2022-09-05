@@ -115,7 +115,7 @@ namespace SYSTEM{
                         bBzSTOP = false;
                         bOVER_5MINUTE = false;
                         eMCStatus = eMachineStatus.AUTO;
-                        IsBIT[B.MachineWaitProduct] = false;
+                        COM_.Bit(T.Op, B.MachineWaitProduct, false, "[STOP상태->RUN상태] 자재 없음 플러그 OFF");
                         bPushStart = true;
                         SUBFRM_.gSecsGem.SetPrecessState(CCEID.EQUIPMENT_STATE_RUN);
                         C.SendSaw.SEND("GET_SVID,*");
@@ -190,17 +190,13 @@ namespace SYSTEM{
                     sINIT = "";
                     cMATH.GET_CPU_CLOCK(ref lTimeInitialStartTime);
                     bLotEnd = false;
-                    IsBIT[B.InitFail] = false;
+                    COM_.Bit(T.Op, B.InitFail, false, "[초기화] 전체 초기화 실패 플러그 OFF"); 
                     bInitialComplete = false;
                     iMANUAL.Number = ManualNumber.AllHome;
                     SUBFRM_.gSecsGem.SetPrecessState((int)CCEID.EQUIPMENT_STATE_IDLE);
                     bMF = true;
                     LogWR_.SaveLogOperate("INITIAL START", "MC");
                 }//초기화
-                
-                if (IsBIT[B.Dry]){
-                
-                }
                 
                 if (bLotEndProcess){
                     if (eMCStatus == eMachineStatus.AUTO){
@@ -210,10 +206,7 @@ namespace SYSTEM{
                     else{
                         LogWR_.SaveLogOperate("LOT-END", "MC");
                         bLotEndProcess = false;
-                        bWriteLotInfo = true;
-                        //ResetProgram();
-                        //InitailizeWarnning();
-                        IsBIT[B.LotEnd] = false;
+                        COM_.Bit(T.Op, B.LotEnd, false, "LOT-END 플로그 OFF");
                     }
                 }//LOT-END 후 시퀸스 초기화
                 #endregion
@@ -239,12 +232,11 @@ namespace SYSTEM{
                 return false;
             }
 
-            if (prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP){
-                mOUT[O.QUAD_PCB] = false;
-            }
-            else{
-                mOUT[O.QUAD_PCB] = true;
-            }
+#if _NSS3300
+#else
+            if (prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP)    mOUT[O.QUAD_PCB] = false;
+            else                                            mOUT[O.QUAD_PCB] = true;
+#endif
 
             if (!mIN[I.CAM_CAL_ZIG_BWD] && !bBD){ 
                 UTIL_.OnERROR(E.emsCalZigNotBackPos);
@@ -289,6 +281,35 @@ namespace SYSTEM{
                 //LOT 등록 창 열려 있음 창 닫고 실행 하셔야 합니다. 
 
             }
+
+            if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.STACKER){
+                if (prMACHINE[CP.SelectStackerUnloading] == (int)eGOOD_TRAY.GD1){
+                    // OK2 트레이 피더 클램프 상태 및 트레이 유무 확인
+#if _NSS3300
+                    if (mOUT[O.GOOD_TRAY2_UNGRIP_C] && mOUT[O.GOOD_TRAY2_UNGRIP_S] && !mOUT[O.GOOD_TRAY2_GRIP_C] && !mOUT[O.GOOD_TRAY2_GRIP_S]){
+#else
+                    if (mOUT[O.GOOD_TRAY2_UNGRIP_C] && mOUT[O.GOOD_TRAY2_UNGRIP_S] && !mOUT[O.GOOD_TRAY2_GRIP_C] && !mOUT[O.GOOD_TRAY2_GRIP_S]){
+#endif
+                    }
+                    else{
+                        COM_.ViewWarning(T.Op, W.RemoveGoodTray, "OK 트레이2 피더에 안착 되어 있는 트레이 제거 하거나 피더 클램프 오픈하셔야 합니다 !");
+                        return false;
+                    }
+                }
+                else if (prMACHINE[CP.SelectStackerUnloading] == (int)eGOOD_TRAY.GD2){
+                    // OK1 트레이 피더 클램프 상태 및 트레이 유무 확인
+#if _NSS3300
+                    if (mOUT[O.GOOD_TRAY1_UNGRIP_C] && mOUT[O.GOOD_TRAY1_UNGRIP_S] && !mOUT[O.GOOD_TRAY1_GRIP_C] && !mOUT[O.GOOD_TRAY1_GRIP_S]){
+#else
+                    if (mOUT[O.GOOD_TRAY1_UNGRIP_C] && mOUT[O.GOOD_TRAY1_UNGRIP_S] && !mOUT[O.GOOD_TRAY1_GRIP_C] && !mOUT[O.GOOD_TRAY1_GRIP_S]){
+#endif
+                    }
+                    else { 
+                        COM_.ViewWarning(T.Op, W.RemoveGoodTray, "OK 트레이1 피더에 안착 되어 있는 트레이 제거 하거나 피더 클램프 오픈하셔야 합니다 !");
+                        return false;
+                    }
+                }
+                }
             return true;
         }
 
@@ -356,7 +377,7 @@ namespace SYSTEM{
         void ReCreateManualThread(){
             COM_.RECREATE_THREAD(ref mcTH[T.Manual], C.Manual.Do);
         }
-        #endregion
+#endregion
     }
 
     public class CHECK_STOP_EVENT : DATA_{

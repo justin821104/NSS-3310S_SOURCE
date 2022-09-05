@@ -123,7 +123,10 @@ namespace LIB_.DateType
             LogWR_.DELETE_OLD_LOGs();
             LogWR_.DELETE_LOG_FOLDERs();
 
-            if (BEFORE_TIME != DateTime.Now.Hour && DateTime.Now.Hour == START_HOUR) CLEAN_SPC();
+            if (BEFORE_TIME != DateTime.Now.Hour && DateTime.Now.Hour == START_HOUR){
+                TEACH_.SAVE_DAY_COUNT(ref DATA_.IsLONG[DATA_.DAY_MGZ_CNT], ref DATA_.IsLONG[DATA_.DAY_STRIP_CNT], ref DATA_.IsLONG[DATA_.DAY_GOOD_CNT], ref DATA_.IsLONG[DATA_.DAY_REWORK_CNT], ref DATA_.IsLONG[DATA_.DAY_REJECT_CNT]);
+                CLEAN_SPC();
+            }
             BEFORE_STATE    = eMCStatus;
             BEFORE_TIME     = DateTime.Now.Hour;
         }

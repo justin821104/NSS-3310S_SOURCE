@@ -228,14 +228,27 @@ public class COM_ : DATA_
         bWF                         = true;
         LogWR_.SaveMarsLog(iThread, eLogTYPE.FNC, ConfirmUser[num].msg, "WARNNING");
     }
-
+   
+    public static void Bit(int iThread, int nBIT, bool bSTATE, string comment){
+        if (nBIT == 90){
+            UTIL_.DELAY(1);
+        }
+        IsBIT[nBIT] = bSTATE;
+        LogWR_.SaveMarsLog(iThread, eLogTYPE.FNC, comment + "_" + mBName[nBIT] + " = " + IsBIT[nBIT].ToString(), "BIT");
+    }
     public static void SetBit(int iThread, int nBit, bool bState, string comment){
         if (bMF) return;
+        if (nBit == 90){
+            UTIL_.DELAY(1);
+        }
         IsBIT[nBit] = bState;
         LogWR_.SaveMarsLog(iThread, eLogTYPE.FNC, comment + "_" + mBName[nBit] + " = " + IsBIT[nBit].ToString(), "BIT");
     }
     public static void SetBit(int iThread, int nBit1, int nBit2, bool bState1, bool bState2, string comment){
         if (bMF) return;
+        if (nBit1 == 90 || nBit2 == 90){
+            UTIL_.DELAY(1);
+        }
         LogWR_.SaveMarsLog(iThread, eLogTYPE.FNC, comment, "BIT");
         IsBIT[nBit1] = bState1;
         IsBIT[nBit2] = bState2;
