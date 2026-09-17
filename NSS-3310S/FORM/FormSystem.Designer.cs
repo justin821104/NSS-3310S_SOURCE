@@ -175,6 +175,18 @@
             this.bFREE_04 = new System.Windows.Forms.Button();
             this.bBLOW_04 = new System.Windows.Forms.Button();
             this.gbxUser = new System.Windows.Forms.GroupBox();
+            this.ChkUseNGBoxError = new JCS.ToggleSwitch();
+            this.label50 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.ChkDBRead_3 = new System.Windows.Forms.RadioButton();
+            this.ChkDBRead_2 = new System.Windows.Forms.RadioButton();
+            this.ChkDBRead_1 = new System.Windows.Forms.RadioButton();
+            this.label49 = new System.Windows.Forms.Label();
+            this.ChkSizeNGUnitRejectBox = new JCS.ToggleSwitch();
+            this.label48 = new System.Windows.Forms.Label();
+            this.ChkLogBarcodeHistory = new JCS.ToggleSwitch();
+            this.label47 = new System.Windows.Forms.Label();
+            this.btSave_UseData2 = new System.Windows.Forms.Button();
             this.ChkUnitPlcBrush = new JCS.ToggleSwitch();
             this.label44 = new System.Windows.Forms.Label();
             this.SelectMotorSpd = new JCS.ToggleSwitch();
@@ -267,6 +279,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
+            this.ChkPRSOffsetT = new JCS.ToggleSwitch();
+            this.label51 = new System.Windows.Forms.Label();
+            this.ChkPRSOffset = new JCS.ToggleSwitch();
+            this.lbITSID_LENGTH = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.ChkABF = new JCS.ToggleSwitch();
+            this.label45 = new System.Windows.Forms.Label();
             this.btSave_UseData1 = new System.Windows.Forms.Button();
             this.ChkITSDATA = new JCS.ToggleSwitch();
             this.label43 = new System.Windows.Forms.Label();
@@ -275,6 +295,7 @@
             this.ChkMGZ_1 = new JCS.ToggleSwitch();
             this.label42 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
             this.btnAutoPickerCal = new System.Windows.Forms.Button();
             this.btSave_PkOffsetData = new System.Windows.Forms.Button();
             this.gbxSelectHead = new System.Windows.Forms.GroupBox();
@@ -311,7 +332,6 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label32 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Rot_M270 = new System.Windows.Forms.RadioButton();
             this.Rot_M180 = new System.Windows.Forms.RadioButton();
@@ -333,6 +353,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PIC_USE_7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAIR)).BeginInit();
             this.gbxUser.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1954,6 +1975,14 @@
             // 
             // gbxUser
             // 
+            this.gbxUser.Controls.Add(this.ChkUseNGBoxError);
+            this.gbxUser.Controls.Add(this.label50);
+            this.gbxUser.Controls.Add(this.panel3);
+            this.gbxUser.Controls.Add(this.ChkSizeNGUnitRejectBox);
+            this.gbxUser.Controls.Add(this.label48);
+            this.gbxUser.Controls.Add(this.ChkLogBarcodeHistory);
+            this.gbxUser.Controls.Add(this.label47);
+            this.gbxUser.Controls.Add(this.btSave_UseData2);
             this.gbxUser.Controls.Add(this.ChkUnitPlcBrush);
             this.gbxUser.Controls.Add(this.label44);
             this.gbxUser.Controls.Add(this.SelectMotorSpd);
@@ -2031,6 +2060,175 @@
             this.gbxUser.TabStop = false;
             this.gbxUser.Tag = "26";
             this.gbxUser.Text = "사용 유무 설정";
+            // 
+            // ChkUseNGBoxError
+            // 
+            this.ChkUseNGBoxError.Checked = true;
+            this.ChkUseNGBoxError.Location = new System.Drawing.Point(480, 463);
+            this.ChkUseNGBoxError.Name = "ChkUseNGBoxError";
+            this.ChkUseNGBoxError.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkUseNGBoxError.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkUseNGBoxError.OffText = "미사용";
+            this.ChkUseNGBoxError.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkUseNGBoxError.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkUseNGBoxError.OnText = "사용";
+            this.ChkUseNGBoxError.Size = new System.Drawing.Size(108, 31);
+            this.ChkUseNGBoxError.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkUseNGBoxError.TabIndex = 1383;
+            this.ChkUseNGBoxError.Tag = "MC";
+            // 
+            // label50
+            // 
+            this.label50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label50.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.ForeColor = System.Drawing.Color.Navy;
+            this.label50.Location = new System.Drawing.Point(296, 463);
+            this.label50.Margin = new System.Windows.Forms.Padding(0);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(182, 31);
+            this.label50.TabIndex = 1384;
+            this.label50.Text = "- NG BOX 에러 ";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel3.Controls.Add(this.ChkDBRead_3);
+            this.panel3.Controls.Add(this.ChkDBRead_2);
+            this.panel3.Controls.Add(this.ChkDBRead_1);
+            this.panel3.Controls.Add(this.label49);
+            this.panel3.Location = new System.Drawing.Point(6, 756);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(348, 52);
+            this.panel3.TabIndex = 1382;
+            // 
+            // ChkDBRead_3
+            // 
+            this.ChkDBRead_3.AutoSize = true;
+            this.ChkDBRead_3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkDBRead_3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ChkDBRead_3.Location = new System.Drawing.Point(263, 28);
+            this.ChkDBRead_3.Name = "ChkDBRead_3";
+            this.ChkDBRead_3.Size = new System.Drawing.Size(73, 17);
+            this.ChkDBRead_3.TabIndex = 129;
+            this.ChkDBRead_3.Tag = "0";
+            this.ChkDBRead_3.Text = "OPTION 2";
+            this.ChkDBRead_3.UseVisualStyleBackColor = true;
+            // 
+            // ChkDBRead_2
+            // 
+            this.ChkDBRead_2.AutoSize = true;
+            this.ChkDBRead_2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkDBRead_2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ChkDBRead_2.Location = new System.Drawing.Point(167, 28);
+            this.ChkDBRead_2.Name = "ChkDBRead_2";
+            this.ChkDBRead_2.Size = new System.Drawing.Size(73, 17);
+            this.ChkDBRead_2.TabIndex = 128;
+            this.ChkDBRead_2.Tag = "0";
+            this.ChkDBRead_2.Text = "OPTION 1";
+            this.ChkDBRead_2.UseVisualStyleBackColor = true;
+            // 
+            // ChkDBRead_1
+            // 
+            this.ChkDBRead_1.AutoSize = true;
+            this.ChkDBRead_1.Checked = true;
+            this.ChkDBRead_1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkDBRead_1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ChkDBRead_1.Location = new System.Drawing.Point(59, 28);
+            this.ChkDBRead_1.Name = "ChkDBRead_1";
+            this.ChkDBRead_1.Size = new System.Drawing.Size(79, 17);
+            this.ChkDBRead_1.TabIndex = 127;
+            this.ChkDBRead_1.TabStop = true;
+            this.ChkDBRead_1.Tag = "0";
+            this.ChkDBRead_1.Text = "STANDARD";
+            this.ChkDBRead_1.UseVisualStyleBackColor = true;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.Location = new System.Drawing.Point(6, 6);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(92, 13);
+            this.label49.TabIndex = 0;
+            this.label49.Text = "DB READ OPTION";
+            // 
+            // ChkSizeNGUnitRejectBox
+            // 
+            this.ChkSizeNGUnitRejectBox.Checked = true;
+            this.ChkSizeNGUnitRejectBox.Location = new System.Drawing.Point(187, 495);
+            this.ChkSizeNGUnitRejectBox.Name = "ChkSizeNGUnitRejectBox";
+            this.ChkSizeNGUnitRejectBox.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkSizeNGUnitRejectBox.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkSizeNGUnitRejectBox.OffText = "미사용";
+            this.ChkSizeNGUnitRejectBox.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkSizeNGUnitRejectBox.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkSizeNGUnitRejectBox.OnText = "사용";
+            this.ChkSizeNGUnitRejectBox.Size = new System.Drawing.Size(108, 31);
+            this.ChkSizeNGUnitRejectBox.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkSizeNGUnitRejectBox.TabIndex = 1380;
+            this.ChkSizeNGUnitRejectBox.Tag = "MC";
+            // 
+            // label48
+            // 
+            this.label48.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label48.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.ForeColor = System.Drawing.Color.Navy;
+            this.label48.Location = new System.Drawing.Point(3, 495);
+            this.label48.Margin = new System.Windows.Forms.Padding(0);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(182, 31);
+            this.label48.TabIndex = 1381;
+            this.label48.Text = "- 사이즈불량 유닛 REJECT BOX 배출";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ChkLogBarcodeHistory
+            // 
+            this.ChkLogBarcodeHistory.Checked = true;
+            this.ChkLogBarcodeHistory.Location = new System.Drawing.Point(187, 463);
+            this.ChkLogBarcodeHistory.Name = "ChkLogBarcodeHistory";
+            this.ChkLogBarcodeHistory.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkLogBarcodeHistory.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkLogBarcodeHistory.OffText = "미사용";
+            this.ChkLogBarcodeHistory.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkLogBarcodeHistory.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkLogBarcodeHistory.OnText = "사용";
+            this.ChkLogBarcodeHistory.Size = new System.Drawing.Size(108, 31);
+            this.ChkLogBarcodeHistory.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkLogBarcodeHistory.TabIndex = 1378;
+            this.ChkLogBarcodeHistory.Tag = "MC";
+            // 
+            // label47
+            // 
+            this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label47.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.ForeColor = System.Drawing.Color.Navy;
+            this.label47.Location = new System.Drawing.Point(3, 463);
+            this.label47.Margin = new System.Windows.Forms.Padding(0);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(182, 31);
+            this.label47.TabIndex = 1379;
+            this.label47.Text = "- 바코드 이력 LOG";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btSave_UseData2
+            // 
+            this.btSave_UseData2.BackColor = System.Drawing.Color.White;
+            this.btSave_UseData2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSave_UseData2.ForeColor = System.Drawing.Color.Black;
+            this.btSave_UseData2.Image = ((System.Drawing.Image)(resources.GetObject("btSave_UseData2.Image")));
+            this.btSave_UseData2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btSave_UseData2.Location = new System.Drawing.Point(495, 495);
+            this.btSave_UseData2.Name = "btSave_UseData2";
+            this.btSave_UseData2.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.btSave_UseData2.Size = new System.Drawing.Size(92, 43);
+            this.btSave_UseData2.TabIndex = 1377;
+            this.btSave_UseData2.Text = "저장";
+            this.btSave_UseData2.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btSave_UseData2.UseVisualStyleBackColor = false;
             // 
             // ChkUnitPlcBrush
             // 
@@ -2260,7 +2458,7 @@
             this.label33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label33.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label33.Location = new System.Drawing.Point(5, 501);
+            this.label33.Location = new System.Drawing.Point(5, 541);
             this.label33.Margin = new System.Windows.Forms.Padding(0);
             this.label33.Name = "label33";
             this.label33.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -2272,7 +2470,7 @@
             // ChkMGZDir
             // 
             this.ChkMGZDir.BackColor = System.Drawing.Color.Transparent;
-            this.ChkMGZDir.Location = new System.Drawing.Point(354, 501);
+            this.ChkMGZDir.Location = new System.Drawing.Point(354, 541);
             this.ChkMGZDir.Name = "ChkMGZDir";
             this.ChkMGZDir.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkMGZDir.OffForeColor = System.Drawing.Color.Red;
@@ -2291,7 +2489,7 @@
             this.label30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label30.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label30.Location = new System.Drawing.Point(5, 540);
+            this.label30.Location = new System.Drawing.Point(5, 580);
             this.label30.Margin = new System.Windows.Forms.Padding(0);
             this.label30.Name = "label30";
             this.label30.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -2303,7 +2501,7 @@
             // CHK_SCRAP_VACUUM
             // 
             this.CHK_SCRAP_VACUUM.BackColor = System.Drawing.Color.Transparent;
-            this.CHK_SCRAP_VACUUM.Location = new System.Drawing.Point(354, 672);
+            this.CHK_SCRAP_VACUUM.Location = new System.Drawing.Point(354, 712);
             this.CHK_SCRAP_VACUUM.Name = "CHK_SCRAP_VACUUM";
             this.CHK_SCRAP_VACUUM.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CHK_SCRAP_VACUUM.OffForeColor = System.Drawing.Color.Red;
@@ -2322,7 +2520,7 @@
             this.label28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label28.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label28.Location = new System.Drawing.Point(5, 672);
+            this.label28.Location = new System.Drawing.Point(5, 712);
             this.label28.Margin = new System.Windows.Forms.Padding(0);
             this.label28.Name = "label28";
             this.label28.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -2334,7 +2532,7 @@
             // CHK_SCRAP_ALARM
             // 
             this.CHK_SCRAP_ALARM.BackColor = System.Drawing.Color.Transparent;
-            this.CHK_SCRAP_ALARM.Location = new System.Drawing.Point(354, 634);
+            this.CHK_SCRAP_ALARM.Location = new System.Drawing.Point(354, 674);
             this.CHK_SCRAP_ALARM.Name = "CHK_SCRAP_ALARM";
             this.CHK_SCRAP_ALARM.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CHK_SCRAP_ALARM.OffForeColor = System.Drawing.Color.Red;
@@ -2353,7 +2551,7 @@
             this.label29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label29.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label29.Location = new System.Drawing.Point(5, 634);
+            this.label29.Location = new System.Drawing.Point(5, 674);
             this.label29.Margin = new System.Windows.Forms.Padding(0);
             this.label29.Name = "label29";
             this.label29.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -2366,7 +2564,7 @@
             // 
             this.ChkTrayUnloading.BackColor = System.Drawing.Color.Transparent;
             this.ChkTrayUnloading.Checked = true;
-            this.ChkTrayUnloading.Location = new System.Drawing.Point(354, 540);
+            this.ChkTrayUnloading.Location = new System.Drawing.Point(354, 580);
             this.ChkTrayUnloading.Name = "ChkTrayUnloading";
             this.ChkTrayUnloading.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkTrayUnloading.OffForeColor = System.Drawing.Color.Red;
@@ -2385,7 +2583,7 @@
             this.groupBox2.Controls.Add(this.ChkGoodTray1);
             this.groupBox2.Controls.Add(this.ChkGoodTray2);
             this.groupBox2.Controls.Add(this.label31);
-            this.groupBox2.Location = new System.Drawing.Point(5, 573);
+            this.groupBox2.Location = new System.Drawing.Point(5, 613);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(293, 59);
             this.groupBox2.TabIndex = 1350;
@@ -2437,7 +2635,7 @@
             this.groupBox4.Controls.Add(this.ChkULDTrayMode_GT1);
             this.groupBox4.Controls.Add(this.ChkULDTrayMode_GT2);
             this.groupBox4.Controls.Add(this.label34);
-            this.groupBox4.Location = new System.Drawing.Point(298, 573);
+            this.groupBox4.Location = new System.Drawing.Point(298, 613);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(293, 59);
             this.groupBox4.TabIndex = 1351;
@@ -3143,7 +3341,7 @@
             // ChkUseMsSQL
             // 
             this.ChkUseMsSQL.Checked = true;
-            this.ChkUseMsSQL.Location = new System.Drawing.Point(186, 33);
+            this.ChkUseMsSQL.Location = new System.Drawing.Point(186, 66);
             this.ChkUseMsSQL.Name = "ChkUseMsSQL";
             this.ChkUseMsSQL.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkUseMsSQL.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3162,7 +3360,7 @@
             this.label38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label38.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.Navy;
-            this.label38.Location = new System.Drawing.Point(2, 33);
+            this.label38.Location = new System.Drawing.Point(2, 66);
             this.label38.Margin = new System.Windows.Forms.Padding(0);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(182, 31);
@@ -3173,7 +3371,7 @@
             // ChkBtnInspectionResult
             // 
             this.ChkBtnInspectionResult.Checked = true;
-            this.ChkBtnInspectionResult.Location = new System.Drawing.Point(481, 97);
+            this.ChkBtnInspectionResult.Location = new System.Drawing.Point(481, 163);
             this.ChkBtnInspectionResult.Name = "ChkBtnInspectionResult";
             this.ChkBtnInspectionResult.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkBtnInspectionResult.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3192,7 +3390,7 @@
             this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(297, 97);
+            this.label9.Location = new System.Drawing.Point(297, 163);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(182, 31);
@@ -3203,7 +3401,7 @@
             // ChkBarcode
             // 
             this.ChkBarcode.Checked = true;
-            this.ChkBarcode.Location = new System.Drawing.Point(186, 65);
+            this.ChkBarcode.Location = new System.Drawing.Point(186, 98);
             this.ChkBarcode.Name = "ChkBarcode";
             this.ChkBarcode.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkBarcode.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3222,7 +3420,7 @@
             this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(2, 65);
+            this.label8.Location = new System.Drawing.Point(2, 98);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(182, 31);
@@ -3233,7 +3431,7 @@
             // ChkRFID
             // 
             this.ChkRFID.Checked = true;
-            this.ChkRFID.Location = new System.Drawing.Point(186, 129);
+            this.ChkRFID.Location = new System.Drawing.Point(186, 162);
             this.ChkRFID.Name = "ChkRFID";
             this.ChkRFID.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkRFID.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3252,7 +3450,7 @@
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Navy;
-            this.label7.Location = new System.Drawing.Point(2, 129);
+            this.label7.Location = new System.Drawing.Point(2, 162);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(182, 31);
@@ -3263,7 +3461,7 @@
             // ChkMES
             // 
             this.ChkMES.Checked = true;
-            this.ChkMES.Location = new System.Drawing.Point(186, 97);
+            this.ChkMES.Location = new System.Drawing.Point(186, 130);
             this.ChkMES.Name = "ChkMES";
             this.ChkMES.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkMES.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3282,7 +3480,7 @@
             this.label19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Navy;
-            this.label19.Location = new System.Drawing.Point(2, 97);
+            this.label19.Location = new System.Drawing.Point(2, 130);
             this.label19.Margin = new System.Windows.Forms.Padding(0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(182, 31);
@@ -3293,7 +3491,7 @@
             // ChkBtnInspection
             // 
             this.ChkBtnInspection.Checked = true;
-            this.ChkBtnInspection.Location = new System.Drawing.Point(480, 65);
+            this.ChkBtnInspection.Location = new System.Drawing.Point(480, 66);
             this.ChkBtnInspection.Name = "ChkBtnInspection";
             this.ChkBtnInspection.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkBtnInspection.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3312,7 +3510,7 @@
             this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(296, 65);
+            this.label10.Location = new System.Drawing.Point(296, 66);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(182, 31);
@@ -3367,6 +3565,14 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label52);
+            this.panel1.Controls.Add(this.ChkPRSOffsetT);
+            this.panel1.Controls.Add(this.label51);
+            this.panel1.Controls.Add(this.ChkPRSOffset);
+            this.panel1.Controls.Add(this.lbITSID_LENGTH);
+            this.panel1.Controls.Add(this.label46);
+            this.panel1.Controls.Add(this.ChkABF);
+            this.panel1.Controls.Add(this.label45);
             this.panel1.Controls.Add(this.btSave_UseData1);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.ChkBtnInspectionResult);
@@ -3386,10 +3592,128 @@
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.ChkMES);
             this.panel1.Controls.Add(this.label38);
-            this.panel1.Location = new System.Drawing.Point(664, 586);
+            this.panel1.Location = new System.Drawing.Point(664, 556);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(594, 231);
+            this.panel1.Size = new System.Drawing.Size(594, 261);
             this.panel1.TabIndex = 1173;
+            // 
+            // label52
+            // 
+            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.Color.Navy;
+            this.label52.Location = new System.Drawing.Point(295, 99);
+            this.label52.Margin = new System.Windows.Forms.Padding(0);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(182, 31);
+            this.label52.TabIndex = 1385;
+            this.label52.Text = "- USE PRS OFFSET T";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ChkPRSOffsetT
+            // 
+            this.ChkPRSOffsetT.Checked = true;
+            this.ChkPRSOffsetT.Location = new System.Drawing.Point(479, 99);
+            this.ChkPRSOffsetT.Name = "ChkPRSOffsetT";
+            this.ChkPRSOffsetT.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPRSOffsetT.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkPRSOffsetT.OffText = "미적용";
+            this.ChkPRSOffsetT.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPRSOffsetT.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkPRSOffsetT.OnText = "적용";
+            this.ChkPRSOffsetT.Size = new System.Drawing.Size(108, 31);
+            this.ChkPRSOffsetT.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkPRSOffsetT.TabIndex = 1384;
+            this.ChkPRSOffsetT.Tag = "MC";
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label51.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.Navy;
+            this.label51.Location = new System.Drawing.Point(296, 131);
+            this.label51.Margin = new System.Windows.Forms.Padding(0);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(182, 31);
+            this.label51.TabIndex = 1383;
+            this.label51.Text = "- USE PRS OFFSET VALUE";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ChkPRSOffset
+            // 
+            this.ChkPRSOffset.Checked = true;
+            this.ChkPRSOffset.Location = new System.Drawing.Point(480, 131);
+            this.ChkPRSOffset.Name = "ChkPRSOffset";
+            this.ChkPRSOffset.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPRSOffset.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkPRSOffset.OffText = "미사용";
+            this.ChkPRSOffset.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPRSOffset.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkPRSOffset.OnText = "사용";
+            this.ChkPRSOffset.Size = new System.Drawing.Size(108, 31);
+            this.ChkPRSOffset.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkPRSOffset.TabIndex = 1382;
+            this.ChkPRSOffset.Tag = "MC";
+            // 
+            // lbITSID_LENGTH
+            // 
+            this.lbITSID_LENGTH.BackColor = System.Drawing.Color.White;
+            this.lbITSID_LENGTH.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbITSID_LENGTH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbITSID_LENGTH.Location = new System.Drawing.Point(480, 33);
+            this.lbITSID_LENGTH.Name = "lbITSID_LENGTH";
+            this.lbITSID_LENGTH.Size = new System.Drawing.Size(107, 29);
+            this.lbITSID_LENGTH.TabIndex = 1381;
+            this.lbITSID_LENGTH.Tag = "MC";
+            this.lbITSID_LENGTH.Text = "0";
+            this.lbITSID_LENGTH.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbITSID_LENGTH.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // label46
+            // 
+            this.label46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label46.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.ForeColor = System.Drawing.Color.Navy;
+            this.label46.Location = new System.Drawing.Point(296, 33);
+            this.label46.Margin = new System.Windows.Forms.Padding(0);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(182, 31);
+            this.label46.TabIndex = 1380;
+            this.label46.Text = "- ITS ID 자리수 (0 : 스킵)";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ChkABF
+            // 
+            this.ChkABF.Checked = true;
+            this.ChkABF.Location = new System.Drawing.Point(186, 194);
+            this.ChkABF.Name = "ChkABF";
+            this.ChkABF.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkABF.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ChkABF.OffText = "미사용";
+            this.ChkABF.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkABF.OnForeColor = System.Drawing.Color.Yellow;
+            this.ChkABF.OnText = "사용";
+            this.ChkABF.Size = new System.Drawing.Size(108, 31);
+            this.ChkABF.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
+            this.ChkABF.TabIndex = 1378;
+            this.ChkABF.Tag = "MC";
+            // 
+            // label45
+            // 
+            this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label45.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.ForeColor = System.Drawing.Color.Navy;
+            this.label45.Location = new System.Drawing.Point(2, 194);
+            this.label45.Margin = new System.Windows.Forms.Padding(0);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(182, 31);
+            this.label45.TabIndex = 1379;
+            this.label45.Text = "- ABF 스핀들 바코드 비교";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btSave_UseData1
             // 
@@ -3398,10 +3722,10 @@
             this.btSave_UseData1.ForeColor = System.Drawing.Color.Black;
             this.btSave_UseData1.Image = ((System.Drawing.Image)(resources.GetObject("btSave_UseData1.Image")));
             this.btSave_UseData1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btSave_UseData1.Location = new System.Drawing.Point(491, 173);
+            this.btSave_UseData1.Location = new System.Drawing.Point(491, 214);
             this.btSave_UseData1.Name = "btSave_UseData1";
             this.btSave_UseData1.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
-            this.btSave_UseData1.Size = new System.Drawing.Size(99, 54);
+            this.btSave_UseData1.Size = new System.Drawing.Size(99, 44);
             this.btSave_UseData1.TabIndex = 1377;
             this.btSave_UseData1.Text = "저장";
             this.btSave_UseData1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -3410,7 +3734,7 @@
             // ChkITSDATA
             // 
             this.ChkITSDATA.Checked = true;
-            this.ChkITSDATA.Location = new System.Drawing.Point(480, 33);
+            this.ChkITSDATA.Location = new System.Drawing.Point(480, 1);
             this.ChkITSDATA.Name = "ChkITSDATA";
             this.ChkITSDATA.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkITSDATA.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3429,7 +3753,7 @@
             this.label43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label43.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.Navy;
-            this.label43.Location = new System.Drawing.Point(296, 33);
+            this.label43.Location = new System.Drawing.Point(296, 1);
             this.label43.Margin = new System.Windows.Forms.Padding(0);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(182, 31);
@@ -3440,7 +3764,7 @@
             // ChkMGZ_2
             // 
             this.ChkMGZ_2.Checked = true;
-            this.ChkMGZ_2.Location = new System.Drawing.Point(480, 1);
+            this.ChkMGZ_2.Location = new System.Drawing.Point(186, 33);
             this.ChkMGZ_2.Name = "ChkMGZ_2";
             this.ChkMGZ_2.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkMGZ_2.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -3459,7 +3783,7 @@
             this.label41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label41.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.Navy;
-            this.label41.Location = new System.Drawing.Point(296, 1);
+            this.label41.Location = new System.Drawing.Point(2, 33);
             this.label41.Margin = new System.Windows.Forms.Padding(0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(182, 31);
@@ -3500,6 +3824,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label32);
             this.panel2.Controls.Add(this.btnAutoPickerCal);
             this.panel2.Controls.Add(this.btSave_PkOffsetData);
             this.panel2.Controls.Add(this.gbxSelectHead);
@@ -3525,12 +3850,22 @@
             this.panel2.Controls.Add(this.StagePickup_HD1CamPickerOffsetY);
             this.panel2.Controls.Add(this.StagePickup_HD1CamPickerOffsetX);
             this.panel2.Controls.Add(this.dgvPickerOffsetPitch);
-            this.panel2.Controls.Add(this.label32);
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Location = new System.Drawing.Point(664, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(594, 580);
+            this.panel2.Size = new System.Drawing.Size(594, 550);
             this.panel2.TabIndex = 1172;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label32.Location = new System.Drawing.Point(2, 2);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(79, 13);
+            this.label32.TabIndex = 1239;
+            this.label32.Text = "피커 옵셋 설정";
             // 
             // btnAutoPickerCal
             // 
@@ -3539,10 +3874,9 @@
             this.btnAutoPickerCal.ForeColor = System.Drawing.Color.Black;
             this.btnAutoPickerCal.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoPickerCal.Image")));
             this.btnAutoPickerCal.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAutoPickerCal.Location = new System.Drawing.Point(3, 517);
+            this.btnAutoPickerCal.Location = new System.Drawing.Point(3, 496);
             this.btnAutoPickerCal.Name = "btnAutoPickerCal";
-            this.btnAutoPickerCal.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
-            this.btnAutoPickerCal.Size = new System.Drawing.Size(103, 58);
+            this.btnAutoPickerCal.Size = new System.Drawing.Size(103, 49);
             this.btnAutoPickerCal.TabIndex = 1318;
             this.btnAutoPickerCal.Text = "AUTO CAL\'\r\nSTART";
             this.btnAutoPickerCal.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -3556,10 +3890,9 @@
             this.btSave_PkOffsetData.ForeColor = System.Drawing.Color.Black;
             this.btSave_PkOffsetData.Image = ((System.Drawing.Image)(resources.GetObject("btSave_PkOffsetData.Image")));
             this.btSave_PkOffsetData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btSave_PkOffsetData.Location = new System.Drawing.Point(491, 522);
+            this.btSave_PkOffsetData.Location = new System.Drawing.Point(487, 497);
             this.btSave_PkOffsetData.Name = "btSave_PkOffsetData";
-            this.btSave_PkOffsetData.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
-            this.btSave_PkOffsetData.Size = new System.Drawing.Size(99, 54);
+            this.btSave_PkOffsetData.Size = new System.Drawing.Size(103, 49);
             this.btSave_PkOffsetData.TabIndex = 1317;
             this.btSave_PkOffsetData.Tag = "Data Parameter";
             this.btSave_PkOffsetData.Text = "저장";
@@ -3571,7 +3904,7 @@
             this.gbxSelectHead.Controls.Add(this.rbnHD2);
             this.gbxSelectHead.Controls.Add(this.rbnHD1);
             this.gbxSelectHead.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxSelectHead.Location = new System.Drawing.Point(2, 15);
+            this.gbxSelectHead.Location = new System.Drawing.Point(2, 9);
             this.gbxSelectHead.Name = "gbxSelectHead";
             this.gbxSelectHead.Size = new System.Drawing.Size(118, 44);
             this.gbxSelectHead.TabIndex = 1237;
@@ -3625,7 +3958,7 @@
             this.lbHD2Cam_PkrPlace_OffsetY.BackColor = System.Drawing.Color.White;
             this.lbHD2Cam_PkrPlace_OffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD2Cam_PkrPlace_OffsetY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD2Cam_PkrPlace_OffsetY.Location = new System.Drawing.Point(526, 476);
+            this.lbHD2Cam_PkrPlace_OffsetY.Location = new System.Drawing.Point(526, 459);
             this.lbHD2Cam_PkrPlace_OffsetY.Name = "lbHD2Cam_PkrPlace_OffsetY";
             this.lbHD2Cam_PkrPlace_OffsetY.Size = new System.Drawing.Size(61, 36);
             this.lbHD2Cam_PkrPlace_OffsetY.TabIndex = 1256;
@@ -3639,7 +3972,7 @@
             this.lbHD2Cam_PkrPlace_OffsetX.BackColor = System.Drawing.Color.White;
             this.lbHD2Cam_PkrPlace_OffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD2Cam_PkrPlace_OffsetX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD2Cam_PkrPlace_OffsetX.Location = new System.Drawing.Point(526, 440);
+            this.lbHD2Cam_PkrPlace_OffsetX.Location = new System.Drawing.Point(526, 423);
             this.lbHD2Cam_PkrPlace_OffsetX.Name = "lbHD2Cam_PkrPlace_OffsetX";
             this.lbHD2Cam_PkrPlace_OffsetX.Size = new System.Drawing.Size(61, 36);
             this.lbHD2Cam_PkrPlace_OffsetX.TabIndex = 1254;
@@ -3653,7 +3986,7 @@
             this.lbHD1Cam_PkrPlace_OffsetY.BackColor = System.Drawing.Color.White;
             this.lbHD1Cam_PkrPlace_OffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD1Cam_PkrPlace_OffsetY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD1Cam_PkrPlace_OffsetY.Location = new System.Drawing.Point(526, 403);
+            this.lbHD1Cam_PkrPlace_OffsetY.Location = new System.Drawing.Point(526, 386);
             this.lbHD1Cam_PkrPlace_OffsetY.Name = "lbHD1Cam_PkrPlace_OffsetY";
             this.lbHD1Cam_PkrPlace_OffsetY.Size = new System.Drawing.Size(61, 36);
             this.lbHD1Cam_PkrPlace_OffsetY.TabIndex = 1252;
@@ -3667,7 +4000,7 @@
             this.lbHD1Cam_PkrPlace_OffsetX.BackColor = System.Drawing.Color.White;
             this.lbHD1Cam_PkrPlace_OffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD1Cam_PkrPlace_OffsetX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD1Cam_PkrPlace_OffsetX.Location = new System.Drawing.Point(526, 367);
+            this.lbHD1Cam_PkrPlace_OffsetX.Location = new System.Drawing.Point(526, 350);
             this.lbHD1Cam_PkrPlace_OffsetX.Name = "lbHD1Cam_PkrPlace_OffsetX";
             this.lbHD1Cam_PkrPlace_OffsetX.Size = new System.Drawing.Size(61, 36);
             this.lbHD1Cam_PkrPlace_OffsetX.TabIndex = 1250;
@@ -3681,7 +4014,7 @@
             this.lbHD2Cam_Pkr_OffsetY.BackColor = System.Drawing.Color.White;
             this.lbHD2Cam_Pkr_OffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD2Cam_Pkr_OffsetY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD2Cam_Pkr_OffsetY.Location = new System.Drawing.Point(526, 327);
+            this.lbHD2Cam_Pkr_OffsetY.Location = new System.Drawing.Point(526, 312);
             this.lbHD2Cam_Pkr_OffsetY.Name = "lbHD2Cam_Pkr_OffsetY";
             this.lbHD2Cam_Pkr_OffsetY.Size = new System.Drawing.Size(61, 36);
             this.lbHD2Cam_Pkr_OffsetY.TabIndex = 1248;
@@ -3695,7 +4028,7 @@
             this.lbHD2Cam_Pkr_OffsetX.BackColor = System.Drawing.Color.White;
             this.lbHD2Cam_Pkr_OffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD2Cam_Pkr_OffsetX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD2Cam_Pkr_OffsetX.Location = new System.Drawing.Point(526, 291);
+            this.lbHD2Cam_Pkr_OffsetX.Location = new System.Drawing.Point(526, 276);
             this.lbHD2Cam_Pkr_OffsetX.Name = "lbHD2Cam_Pkr_OffsetX";
             this.lbHD2Cam_Pkr_OffsetX.Size = new System.Drawing.Size(61, 36);
             this.lbHD2Cam_Pkr_OffsetX.TabIndex = 1246;
@@ -3709,7 +4042,7 @@
             this.lbHD1Cam_Pkr_OffsetY.BackColor = System.Drawing.Color.White;
             this.lbHD1Cam_Pkr_OffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD1Cam_Pkr_OffsetY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD1Cam_Pkr_OffsetY.Location = new System.Drawing.Point(526, 254);
+            this.lbHD1Cam_Pkr_OffsetY.Location = new System.Drawing.Point(526, 239);
             this.lbHD1Cam_Pkr_OffsetY.Name = "lbHD1Cam_Pkr_OffsetY";
             this.lbHD1Cam_Pkr_OffsetY.Size = new System.Drawing.Size(61, 36);
             this.lbHD1Cam_Pkr_OffsetY.TabIndex = 1244;
@@ -3723,7 +4056,7 @@
             this.lbPKR_PITCH.BackColor = System.Drawing.Color.White;
             this.lbPKR_PITCH.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPKR_PITCH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbPKR_PITCH.Location = new System.Drawing.Point(526, 176);
+            this.lbPKR_PITCH.Location = new System.Drawing.Point(526, 164);
             this.lbPKR_PITCH.Name = "lbPKR_PITCH";
             this.lbPKR_PITCH.Size = new System.Drawing.Size(62, 36);
             this.lbPKR_PITCH.TabIndex = 1241;
@@ -3737,7 +4070,7 @@
             this.lbHD1Cam_Pkr_OffsetX.BackColor = System.Drawing.Color.White;
             this.lbHD1Cam_Pkr_OffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHD1Cam_Pkr_OffsetX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbHD1Cam_Pkr_OffsetX.Location = new System.Drawing.Point(526, 218);
+            this.lbHD1Cam_Pkr_OffsetX.Location = new System.Drawing.Point(526, 203);
             this.lbHD1Cam_Pkr_OffsetX.Name = "lbHD1Cam_Pkr_OffsetX";
             this.lbHD1Cam_Pkr_OffsetX.Size = new System.Drawing.Size(61, 36);
             this.lbHD1Cam_Pkr_OffsetX.TabIndex = 1242;
@@ -3751,7 +4084,7 @@
             this.Tray.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.Tray.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Tray.ForeColor = System.Drawing.Color.Navy;
-            this.Tray.Location = new System.Drawing.Point(2, 367);
+            this.Tray.Location = new System.Drawing.Point(2, 350);
             this.Tray.Name = "Tray";
             this.Tray.Size = new System.Drawing.Size(104, 145);
             this.Tray.TabIndex = 1260;
@@ -3763,7 +4096,7 @@
             this.Stage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.Stage.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Stage.ForeColor = System.Drawing.Color.Navy;
-            this.Stage.Location = new System.Drawing.Point(2, 218);
+            this.Stage.Location = new System.Drawing.Point(2, 203);
             this.Stage.Name = "Stage";
             this.Stage.Size = new System.Drawing.Size(104, 145);
             this.Stage.TabIndex = 1259;
@@ -3775,7 +4108,7 @@
             this.PickerPitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.PickerPitch.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PickerPitch.ForeColor = System.Drawing.Color.Navy;
-            this.PickerPitch.Location = new System.Drawing.Point(3, 176);
+            this.PickerPitch.Location = new System.Drawing.Point(3, 164);
             this.PickerPitch.Name = "PickerPitch";
             this.PickerPitch.Size = new System.Drawing.Size(522, 36);
             this.PickerPitch.TabIndex = 1258;
@@ -3787,7 +4120,7 @@
             this.TrayPlace_HD2CamPickerOffsetY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.TrayPlace_HD2CamPickerOffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrayPlace_HD2CamPickerOffsetY.ForeColor = System.Drawing.Color.Navy;
-            this.TrayPlace_HD2CamPickerOffsetY.Location = new System.Drawing.Point(107, 476);
+            this.TrayPlace_HD2CamPickerOffsetY.Location = new System.Drawing.Point(107, 459);
             this.TrayPlace_HD2CamPickerOffsetY.Name = "TrayPlace_HD2CamPickerOffsetY";
             this.TrayPlace_HD2CamPickerOffsetY.Size = new System.Drawing.Size(418, 36);
             this.TrayPlace_HD2CamPickerOffsetY.TabIndex = 1257;
@@ -3799,7 +4132,7 @@
             this.TrayPlace_HD2CamPickerOffsetX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.TrayPlace_HD2CamPickerOffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrayPlace_HD2CamPickerOffsetX.ForeColor = System.Drawing.Color.Navy;
-            this.TrayPlace_HD2CamPickerOffsetX.Location = new System.Drawing.Point(107, 440);
+            this.TrayPlace_HD2CamPickerOffsetX.Location = new System.Drawing.Point(107, 423);
             this.TrayPlace_HD2CamPickerOffsetX.Name = "TrayPlace_HD2CamPickerOffsetX";
             this.TrayPlace_HD2CamPickerOffsetX.Size = new System.Drawing.Size(418, 36);
             this.TrayPlace_HD2CamPickerOffsetX.TabIndex = 1255;
@@ -3811,7 +4144,7 @@
             this.TrayPlace_HD1CamPickerOffsetY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.TrayPlace_HD1CamPickerOffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrayPlace_HD1CamPickerOffsetY.ForeColor = System.Drawing.Color.Navy;
-            this.TrayPlace_HD1CamPickerOffsetY.Location = new System.Drawing.Point(107, 403);
+            this.TrayPlace_HD1CamPickerOffsetY.Location = new System.Drawing.Point(107, 386);
             this.TrayPlace_HD1CamPickerOffsetY.Name = "TrayPlace_HD1CamPickerOffsetY";
             this.TrayPlace_HD1CamPickerOffsetY.Size = new System.Drawing.Size(418, 36);
             this.TrayPlace_HD1CamPickerOffsetY.TabIndex = 1253;
@@ -3823,7 +4156,7 @@
             this.TrayPlace_HD1CamPickerOffsetX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.TrayPlace_HD1CamPickerOffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrayPlace_HD1CamPickerOffsetX.ForeColor = System.Drawing.Color.Navy;
-            this.TrayPlace_HD1CamPickerOffsetX.Location = new System.Drawing.Point(107, 367);
+            this.TrayPlace_HD1CamPickerOffsetX.Location = new System.Drawing.Point(107, 350);
             this.TrayPlace_HD1CamPickerOffsetX.Name = "TrayPlace_HD1CamPickerOffsetX";
             this.TrayPlace_HD1CamPickerOffsetX.Size = new System.Drawing.Size(418, 36);
             this.TrayPlace_HD1CamPickerOffsetX.TabIndex = 1251;
@@ -3835,7 +4168,7 @@
             this.StagePickup_HD2CamPickerOffsetY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.StagePickup_HD2CamPickerOffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StagePickup_HD2CamPickerOffsetY.ForeColor = System.Drawing.Color.Navy;
-            this.StagePickup_HD2CamPickerOffsetY.Location = new System.Drawing.Point(107, 327);
+            this.StagePickup_HD2CamPickerOffsetY.Location = new System.Drawing.Point(107, 312);
             this.StagePickup_HD2CamPickerOffsetY.Name = "StagePickup_HD2CamPickerOffsetY";
             this.StagePickup_HD2CamPickerOffsetY.Size = new System.Drawing.Size(418, 36);
             this.StagePickup_HD2CamPickerOffsetY.TabIndex = 1249;
@@ -3847,7 +4180,7 @@
             this.StagePickup_HD2CamPickerOffsetX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.StagePickup_HD2CamPickerOffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StagePickup_HD2CamPickerOffsetX.ForeColor = System.Drawing.Color.Navy;
-            this.StagePickup_HD2CamPickerOffsetX.Location = new System.Drawing.Point(107, 291);
+            this.StagePickup_HD2CamPickerOffsetX.Location = new System.Drawing.Point(107, 276);
             this.StagePickup_HD2CamPickerOffsetX.Name = "StagePickup_HD2CamPickerOffsetX";
             this.StagePickup_HD2CamPickerOffsetX.Size = new System.Drawing.Size(418, 36);
             this.StagePickup_HD2CamPickerOffsetX.TabIndex = 1247;
@@ -3859,7 +4192,7 @@
             this.StagePickup_HD1CamPickerOffsetY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.StagePickup_HD1CamPickerOffsetY.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StagePickup_HD1CamPickerOffsetY.ForeColor = System.Drawing.Color.Navy;
-            this.StagePickup_HD1CamPickerOffsetY.Location = new System.Drawing.Point(107, 254);
+            this.StagePickup_HD1CamPickerOffsetY.Location = new System.Drawing.Point(107, 239);
             this.StagePickup_HD1CamPickerOffsetY.Name = "StagePickup_HD1CamPickerOffsetY";
             this.StagePickup_HD1CamPickerOffsetY.Size = new System.Drawing.Size(418, 36);
             this.StagePickup_HD1CamPickerOffsetY.TabIndex = 1245;
@@ -3871,7 +4204,7 @@
             this.StagePickup_HD1CamPickerOffsetX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.StagePickup_HD1CamPickerOffsetX.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StagePickup_HD1CamPickerOffsetX.ForeColor = System.Drawing.Color.Navy;
-            this.StagePickup_HD1CamPickerOffsetX.Location = new System.Drawing.Point(107, 218);
+            this.StagePickup_HD1CamPickerOffsetX.Location = new System.Drawing.Point(107, 203);
             this.StagePickup_HD1CamPickerOffsetX.Name = "StagePickup_HD1CamPickerOffsetX";
             this.StagePickup_HD1CamPickerOffsetX.Size = new System.Drawing.Size(418, 36);
             this.StagePickup_HD1CamPickerOffsetX.TabIndex = 1243;
@@ -3907,7 +4240,7 @@
             this.Column7,
             this.Column8});
             this.dgvPickerOffsetPitch.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgvPickerOffsetPitch.Location = new System.Drawing.Point(2, 99);
+            this.dgvPickerOffsetPitch.Location = new System.Drawing.Point(2, 90);
             this.dgvPickerOffsetPitch.Name = "dgvPickerOffsetPitch";
             dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Control;
@@ -4012,17 +4345,6 @@
             this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column8.Width = 67;
             // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label32.Location = new System.Drawing.Point(2, 2);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(79, 13);
-            this.label32.TabIndex = 1239;
-            this.label32.Text = "피커 옵셋 설정";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.Rot_M270);
@@ -4033,7 +4355,7 @@
             this.groupBox3.Controls.Add(this.Rot_P90);
             this.groupBox3.Controls.Add(this.Rot_0);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(2, 53);
+            this.groupBox3.Location = new System.Drawing.Point(2, 46);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(587, 44);
             this.groupBox3.TabIndex = 1238;
@@ -4177,6 +4499,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAIR)).EndInit();
             this.gbxUser.ResumeLayout(false);
             this.gbxUser.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -4448,5 +4772,25 @@
         private System.Windows.Forms.Label label24;
         private JCS.ToggleSwitch ChkUnitPlcBrush;
         private System.Windows.Forms.Label label44;
+        private JCS.ToggleSwitch ChkABF;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button btSave_UseData2;
+        private System.Windows.Forms.Label lbITSID_LENGTH;
+        private System.Windows.Forms.Label label46;
+        private JCS.ToggleSwitch ChkLogBarcodeHistory;
+        private System.Windows.Forms.Label label47;
+        private JCS.ToggleSwitch ChkSizeNGUnitRejectBox;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.RadioButton ChkDBRead_3;
+        internal System.Windows.Forms.RadioButton ChkDBRead_2;
+        internal System.Windows.Forms.RadioButton ChkDBRead_1;
+        private System.Windows.Forms.Label label49;
+        private JCS.ToggleSwitch ChkUseNGBoxError;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private JCS.ToggleSwitch ChkPRSOffset;
+        private System.Windows.Forms.Label label52;
+        private JCS.ToggleSwitch ChkPRSOffsetT;
     }
 }

@@ -961,6 +961,7 @@
             // 
             // tmrIO
             // 
+            this.tmrIO.Interval = 150;
             this.tmrIO.Tick += new System.EventHandler(this.TimerIO_Tick);
             // 
             // IOView

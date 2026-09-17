@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LIB_.DateType;
+using NSS_3310S;
 
 namespace LIB_.SubFROMLib{
     public partial class LOG : Form{
@@ -17,6 +18,8 @@ namespace LIB_.SubFROMLib{
         DataGridView DGV;
         private stERR[] cERR = new stERR[10000];
         private stERR[] rERR = new stERR[10000];
+        private stERR[] LotCERR = new stERR[10000];
+        private stERR[] LotRERR = new stERR[10000];
         int pos = 0;
         bool UpdateFlag = false;
         double sm = 0;
@@ -29,6 +32,7 @@ namespace LIB_.SubFROMLib{
         string sUnit = string.Empty;
         double[] yVAL = new double[6];
         //string[] xVAL           = { "RUN TIME", "STOP TIME", "PAUSE TIME", "ERROR TIME", "RUN-READY TIME", "RUN-DOWN TIME" };
+        double[] LotVAL = new double[3];
         string sCALENDAR = string.Empty;
         string sYEAR = string.Empty;
         string sMONTH = string.Empty;
@@ -52,6 +56,11 @@ namespace LIB_.SubFROMLib{
             for (int i = 0; i < gridPara.RowCount; i++){
                 gridPara.Rows[i].Cells[0].Value = i.ToString();
             }
+
+            DGV_LOT_ERROR.RowCount = 1;
+            for (int i = 0; i < DGV_LOT_ERROR.RowCount; i++){
+                DGV_LOT_ERROR.Rows[i].Cells[0].Value = i.ToString();
+            }
         }
 
         public LOG(){
@@ -70,9 +79,12 @@ namespace LIB_.SubFROMLib{
             btnLOG_8.Click += LOG_CLICK;
             btnLOG_9.Click += LOG_CLICK;
             btnLOG_10.Click += LOG_CLICK;
+            btnLOG_11.Click += LOG_CLICK;
+            btnLOG_12.Click += LOG_CLICK;
 
             swLogView.Click += (sender, e) => LogView_Click(swLogView);
             swSave.Click    += (sender, e) => LogSAVE(swSave);
+            swLotInfoSave.Click += (sender, e) => LotInfoLogSAVE();
             #endregion
         }
 
@@ -82,6 +94,24 @@ namespace LIB_.SubFROMLib{
             tmrHISTORY.Enabled = true;
             Show();
             BringToFront();
+        }
+        void LotInfoLogSAVE(){
+            if (LOT_ID.Text == "") return;
+            if (SD.ShowDialog() == DialogResult.Cancel) return;
+            string sPath = SD.FileName + ".txt";
+            string LotInfo = "LOT ID=" + LOT_ID.Text + ETC.NewLine + "SPINDLE1=" + LBL_SPINDLE1_ID.Text + ETC.NewLine + "" + LBL_SPINDLE2_ID.Text + ETC.NewLine;
+            string LotInfoResult = "";
+            foreach (var input_items in LBX_LOTINFO.Items){
+                LotInfoResult += string.Format("{0} ", input_items) + ETC.NewLine;
+            }
+            LotInfo += LotInfoResult;
+           
+            try{
+                FILE_.WRL_File(sPath, LotInfo, false);
+            }
+            catch (Exception e){
+                LogWR_.SaveLogException("LOG LotInfoLogSAVE FAIL", e);
+            }
         }
 
         void LogSAVE(object sender){
@@ -98,6 +128,7 @@ namespace LIB_.SubFROMLib{
             else if (LogPAGE == 8) DGV = gridLocationList;
             else if (LogPAGE == 9) DGV = gridLot;
             else if (LogPAGE == 10) DGV = dgwOneCycle;
+            else if (LogPAGE == 12) DGV = DGV_BLADE_INFO;
             else return;
             if (DGV == null || DGV.RowCount == 0) return;
 
@@ -119,7 +150,7 @@ namespace LIB_.SubFROMLib{
 
             string fname = sPath + ".csv";
             int rowCount = DGV.Rows.Count;
-            if (DGV.AllowUserToAddRows == true) rowCount = rowCount - 1;
+            if (DGV.AllowUserToAddRows == true) rowCount -= 1;
             string strCsvData = "";
             for (int i = 0; i < rowCount; i++){
                 List<string> strList = new List<string>();
@@ -145,7 +176,7 @@ namespace LIB_.SubFROMLib{
         }
 
         void RESET_SCREEN_CHANGE(){
-            for (int i = 0; i < 11; i++){
+            for (int i = 0; i < 15; i++){
                 pBTN = Controls.Find("btnLOG_" + i.ToString(), true).FirstOrDefault() as Button;
                 if (pBTN != null){
                     pBTN.ForeColor = Color.Black;
@@ -180,6 +211,8 @@ namespace LIB_.SubFROMLib{
             if (LogPAGE == 8) VIEW_STRIP_DEFECT_LOCATION_LIST();
             if (LogPAGE == 9) VIEW_LOT();
             if (LogPAGE == 10) VIEW_ONECYCLE();
+            if (LogPAGE == 11) VIEW_LOTLOG();
+            if (LogPAGE == 12) VIEW_BLADELOG();
         }
         string GET_LOG_FILE_PATH(double dDATA){
             dt = DateTime.FromOADate(dDATA);
@@ -207,7 +240,7 @@ namespace LIB_.SubFROMLib{
                 eNUM = DATA_.cMATH.IsGetArrMaxIndex(arrTEMP);
                 if (eNUM < 0) return;
                 gridErrorHisto.Rows[i].Cells[0].Value = eNUM.ToString();
-                gridErrorHisto.Rows[i].Cells[1].Value = UTIL_.GET_ERROR_NAME(eNUM);
+                gridErrorHisto.Rows[i].Cells[1].Value = E.GET_ERROR_NAME(eNUM);
                 gridErrorHisto.Rows[i].Cells[2].Value = arrTEMP[eNUM];
                 arrTEMP[eNUM] = 0;
             }
@@ -235,7 +268,7 @@ namespace LIB_.SubFROMLib{
                 for (int i = 0; i < idx; i++){
                     gridHistory.Rows[i].Cells[0].Value = i.ToString();
                     gridHistory.Rows[i].Cells[1].Value = cERR[i].ErrorNumber;
-                    gridHistory.Rows[i].Cells[2].Value = UTIL_.GET_ERROR_NAME(cERR[i].ErrorNumber);
+                    gridHistory.Rows[i].Cells[2].Value = E.GET_ERROR_NAME(cERR[i].ErrorNumber);
                     gridHistory.Rows[i].Cells[3].Value = cERR[i].BeginTime;
                     gridHistory.Rows[i].Cells[4].Value = cERR[i].EndTime;
                 }
@@ -540,7 +573,7 @@ namespace LIB_.SubFROMLib{
                 }
                 if (dgvManual.RowCount <= 0) return;
             }
-            catch (Exception ex) { LogWR_.SaveLogException("frmLG->MANUALRUN", ex); }
+            catch (Exception ex) { LogWR_.SaveLogException("frmLOG->MANUALRUN", ex); }
         }
         void VIEW_ONECYCLE(){
             string fLOG = "TACK.log";
@@ -553,15 +586,12 @@ namespace LIB_.SubFROMLib{
             if (rbUnitC.Checked) sUnit = "C";
             idx = 0;
             
-            try
-            {
-                for (double i = sDate; i < eDate + 1; i++)
-                {
+            try{
+                for (double i = sDate; i < eDate + 1; i++){
                     string fn = LogWR_.GET_PathOperation(i, PATH_.LogOneCycleTime) + fLOG;
                     if (!File.Exists(fn)) continue;
                     string[] sARR = File.ReadAllLines(fn);
-                    for (int cnt = 0; cnt < sARR.Length; cnt++)
-                    {
+                    for (int cnt = 0; cnt < sARR.Length; cnt++){
                         if (idx > 5000) break;
                         string[] subarr = sARR[cnt].Split(',');
                         if (sUnit != "All" && sUnit != subarr[2]) continue;
@@ -573,8 +603,7 @@ namespace LIB_.SubFROMLib{
                 dgwOneCycle.RowCount = idx;
                 string[] allARR = sAll.Split(ETC.CrLf);
                 int wIdx = 0;
-                for (int i = 0; i < idx; i++)
-                {
+                for (int i = 0; i < idx; i++){
                     string[] subARR = allARR[i].Split(',');
                     if (subARR.Length < 9) continue;
                     dgwOneCycle.Rows[wIdx].Cells[0].Value = i.ToString();
@@ -595,6 +624,302 @@ namespace LIB_.SubFROMLib{
             }
             catch (Exception ex) { LogWR_.SaveLogException("frmLG->ONECYCLE", ex); }
         }
+        void VIEW_LOTLOG(){
+            string fLOG = "LOT.log";
+            sDate = dtBegin.Value.Date.ToOADate();
+            eDate = dtEnd.Value.Date.ToOADate();
+            sAll = "";
+            sUnit = "All";
+            if (rbUnitA.Checked) sUnit = "A";
+            if (rbUnitB.Checked) sUnit = "B";
+            if (rbUnitC.Checked) sUnit = "C";
+            idx = 0;
+
+            try{
+                lvwLOTIDLIST.Items.Clear();
+                for (double i = sDate; i < eDate + 1; i++){
+                    string fn = LogWR_.GET_PathOperation(i, PATH_.LogLotLogList) + fLOG;
+                    if (!File.Exists(fn)) continue;
+                    string[] sARR = File.ReadAllLines(fn);
+                    for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        string[] subarr = sARR[cnt].Split(',');
+                        if (sUnit != "All" && sUnit != subarr[2]) continue;
+                        sAll += sARR[cnt] + ETC.CrLf;
+                        idx += 1;
+                    }
+                }
+                string[] allARR = sAll.Split(ETC.CrLf);
+                for (int i = 0; i < idx; i++){
+                    string[] subARR = allARR[i].Split(',');
+                    if (subARR.Length < 3) continue;
+                    lvwLOTIDLIST.Items.Add(subARR[3].Trim());
+                }
+                lvwLOTIDLIST.EndUpdate();
+            }
+            catch (Exception EX) { LogWR_.SaveLogException("frmLOG->VIEW_LOTLOG", EX); }
+        }
+        void VIEW_BLADELOG(){
+            string fLOG = "BLADE.log";
+            sDate = dtBegin.Value.Date.ToOADate();
+            eDate = dtEnd.Value.Date.ToOADate();
+            sAll = "";
+            sUnit = "All";
+            if (rbUnitA.Checked) sUnit = "A";
+            if (rbUnitB.Checked) sUnit = "B";
+            if (rbUnitC.Checked) sUnit = "C";
+            idx = 0;
+
+            try{
+                for (double i = sDate; i < eDate + 1; i++){
+                    string fn = LogWR_.GET_PathOperation(i, PATH_.LogBladeInfo) + fLOG;
+                    if (!File.Exists(fn)) continue;
+                    string[] sARR = File.ReadAllLines(fn);
+                    for (int cnt = 0; cnt < sARR.Length; cnt++){
+                        if (idx > 7000) break;
+                        string[] subarr = sARR[cnt].Split(',');
+                        if (sUnit != "All" && sUnit != subarr[2]) continue;
+                        sAll += sARR[cnt] + ETC.CrLf;
+                        idx += 1;
+                    }
+                }
+                DGV_BLADE_INFO.RowCount = idx;
+                string[] allARR = sAll.Split(ETC.CrLf);
+                int wIdx = 0;
+                for (int i = 0; i < idx; i++){
+                    string[] subARR = allARR[i].Split(',');
+                    if (subARR.Length < 12) continue;
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[0].Value = wIdx.ToString();
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[1].Value = subARR[4]; //TIME
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[2].Value = subARR[3]; //LOT ID
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[3].Value = subARR[5]; //ABF
+
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[4].Value = subARR[6]; //SP1 BLADE BARCODE
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[5].Value = (subARR.Length - 1) > 12 ? subARR[13] : ""; //SP1 BLADE ID -> 13
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[6].Value = subARR[7]; //SP2 BLADE BARCODE
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[7].Value = (subARR.Length - 1) > 13 ? subARR[14] : ""; //SP2 BLADE ID -> 14
+
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[8].Value = subARR[9]; //상태
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[9].Value = subARR[8]; //소재 바코드
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[10].Value = subARR[10]; //SP1 마모량
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[11].Value = subARR[11]; //SP2 마모량
+                    DGV_BLADE_INFO.Rows[wIdx].Cells[12].Value = subARR[12]; //투입 수량
+                    wIdx++;
+                }
+                if (DGV_BLADE_INFO.RowCount <= 0) return;
+            }
+            catch (Exception ex) { LogWR_.SaveLogException("frmLG->VIEW_BLADELOG", ex); }
+        }
+
+        void VIEW_LOT_ERROR_HISTOGRAM(int idx){
+            CntValid = 0;
+            for (int i = 0; i < idx; i++){
+                if (LotCERR[i].ErrorNumber < 0) break;
+                eNUM = LotCERR[i].ErrorNumber;
+                arrTEMP[eNUM] += 1;
+            }
+            for (int i = 0; i < CNT_.ERR; i++){
+                if (arrTEMP[i] > 0) CntValid += 1;
+            }
+
+            DGV_LOT_ERROR_LIST.RowCount = CntValid;
+            for (int i = 0; i < CntValid; i++){
+                eNUM = DATA_.cMATH.IsGetArrMaxIndex(arrTEMP);
+                if (eNUM < 0) return;
+                DGV_LOT_ERROR_LIST.Rows[i].Cells[0].Value = eNUM.ToString();
+                DGV_LOT_ERROR_LIST.Rows[i].Cells[1].Value = E.GET_ERROR_NAME(eNUM);
+                DGV_LOT_ERROR_LIST.Rows[i].Cells[2].Value = arrTEMP[eNUM];
+                arrTEMP[eNUM] = 0;
+            }
+        } // 발생 빈도.
+        public void AddLotInfo(string Logs){
+            try{
+                if (InvokeRequired){
+                    Invoke((MethodInvoker)delegate(){
+                        AddLotInfo(Logs);
+                    });
+                }
+                else{
+                    LBX_LOTINFO.BeginUpdate();
+                    LBX_LOTINFO.Items.Add(Logs);
+                    LBX_LOTINFO.EndUpdate();
+                }
+            }
+            catch(Exception ex){
+                LogWR_.SaveLogException("frmLOG->AddLotInfo", ex);
+            }
+        }
+        private void BTN_LOTINFO_OPEN_Click(object sender, EventArgs e){
+            try{
+                if (lvwLOTIDLIST.SelectedIndices.Count <= 0){
+                    MessageBox.Show("You must select a LOT ID list !");
+                    return;
+                }
+                string fLOG = "LOT.log";
+                string SelectLotID = lvwLOTIDLIST.SelectedItems[0].Text;
+                sDate = dtBegin.Value.Date.ToOADate();
+                eDate = dtEnd.Value.Date.ToOADate();
+                sAll = "";
+                sUnit = "All";
+                if (rbUnitA.Checked) sUnit = "A";
+                if (rbUnitB.Checked) sUnit = "B";
+                if (rbUnitC.Checked) sUnit = "C";
+                idx = 0;
+                try{
+
+                    for (double i = sDate; i < eDate + 1; i++){
+                        string fn = LogWR_.GET_PathOperation(i, PATH_.LogLotLogList) + fLOG;
+                        if (!File.Exists(fn)) continue;
+                        string[] sARR = File.ReadAllLines(fn);
+                        for (int cnt = 0; cnt < sARR.Length; cnt++){
+                            string[] subarr = sARR[cnt].Split(',');
+                            if (sUnit != "All" && sUnit != subarr[2]) continue;
+                            sAll += sARR[cnt] + ETC.CrLf;
+                            idx += 1;
+                        }
+                    }
+                    string[] allARR = sAll.Split(ETC.CrLf);
+                    string LotLogs = "";
+                    bool LotLogView = false;
+                    for (int i = 0; i < idx; i++){
+                        string[] subARR = allARR[i].Split(',');
+                        if (subARR.Length < 3) continue;
+                        if (subARR[3] == SelectLotID){
+                            LotLogView = true;
+                            LotLogs = allARR[i];
+                            break;
+                        }
+                    }
+                    if (LotLogView){
+                        LBX_LOTINFO.Items.Clear();
+                        string[] LotLogList = LotLogs.Split(',');
+                        if (LotLogList.Length < 55) return;
+                        LOT_ID.Text                 = LotLogList[3];
+                        LOT_ABF.Text                = LotLogList[29];
+                        LBL_SPINDLE1_ID.Text        = LotLogList[54];
+                        LBL_SPINDLE2_ID.Text        = LotLogList[55];
+                        dcLOT_START.Text            = LotLogList[11];
+                        dcLOT_END.Text              = LotLogList[12];
+                        lbLOT_RUN.Text              = DATA_.cMATH.IntToTime(int.Parse(LotLogList[14]));
+                        lbLOT_STOP.Text             = DATA_.cMATH.IntToTime(int.Parse(LotLogList[15]));
+                        lbLOT_ERROR.Text            = DATA_.cMATH.IntToTime(int.Parse(LotLogList[16]));
+
+                        LB_STRIP_CNT.Text           = LotLogList[36];
+                        LB_GOOD_CNT.Text            = LotLogList[46];
+                        LB_ITS_CNT.Text             = LotLogList[49];
+                        LB_GOODTRAY_CNT.Text        = LotLogList[50];
+                        LB_UNIT_CNT.Text            = LotLogList[52];
+                        LB_NG_CNT.Text              = LotLogList[47];
+                        LB_XOUT_CNT.Text            = LotLogList[48];
+                        LB_NGTRAY_CNT.Text          = LotLogList[51];
+
+                        try{
+                            AddLotInfo("RECIPE = " + LotLogList[7]);
+                            AddLotInfo("LOT TYPE = " + LotLogList[19]);
+                            AddLotInfo("PROUDUCT TYPE = " + LotLogList[57]);
+                            AddLotInfo("TOOL NO = " + LotLogList[8]);
+                            AddLotInfo("ITS LOTID IN = " + LotLogList[9]);
+                            AddLotInfo("ITS LOTID CT = " + LotLogList[10]);
+                            AddLotInfo("UNIT SIZE X = " + LotLogList[22]);
+                            AddLotInfo("UNIT SIZE Y = " + LotLogList[23]);
+                            AddLotInfo("UNITSIZE UPPER = " + LotLogList[24]);
+                            AddLotInfo("UNITSIZE LOWER = " + LotLogList[25]);
+                            AddLotInfo("THICK = " + LotLogList[26]);
+                            AddLotInfo("THICK UPPER = " + LotLogList[26]);
+                            AddLotInfo("THICK LOWER = " + LotLogList[27]);
+                            AddLotInfo("ABFMATERIAL = " + LotLogList[29]);
+
+                            //22.1129 HK.PARK 추가
+                            AddLotInfo("BOT LANDTOPKG X = " + LotLogList[59]);
+                            AddLotInfo("BOT CHAMFERLEN TM X = " + LotLogList[59]);
+                            AddLotInfo("BOT CHAMFERLEN TP X = " + LotLogList[60]);
+                            AddLotInfo("BOT LANDTOPKG Y = " + LotLogList[61]);
+                            AddLotInfo("BOT CHAMFERLEN TM Y = " + LotLogList[62]);
+                            AddLotInfo("BOT CHAMFERLEN TP Y = " + LotLogList[63]);
+
+                            AddLotInfo("TOP LANDTOPKG X = " + LotLogList[64]);
+                            AddLotInfo("TOP CHAMFERLEN TM X = " + LotLogList[65]);
+                            AddLotInfo("TOP CHAMFERLEN TP X = " + LotLogList[66]);
+                            AddLotInfo("TOP LANDTOPKG Y = " + LotLogList[67]);
+                            AddLotInfo("TOP CHAMFERLEN TM Y = " + LotLogList[68]);
+                            AddLotInfo("TOP CHAMFERLEN TP Y = " + LotLogList[69]);
+                        }
+                        catch (Exception EX){
+                            LogWR_.SaveLogException("FrmLOG -> BTN_LOTINFO_OPEN_Click Dislay Fail", EX);
+                        }
+
+                        string[] xVAL = { "RUN TIME", "STOP TIME", "ERROR TIME" };
+                        try{
+                            LotVAL[0] = (double)(((double)(int.Parse(LotLogList[14])) / (double)(int.Parse(LotLogList[13]))) * 100);
+                            LotVAL[1] = (double)(((double)(int.Parse(LotLogList[15])) / (double)(int.Parse(LotLogList[13]))) * 100);
+                            LotVAL[2] = (double)(((double)(int.Parse(LotLogList[16])) / (double)(int.Parse(LotLogList[13]))) * 100);
+                            
+                            for (int i = 0; i < xVAL.Length; i++){
+                                xVAL[i] = xVAL[i] + ":" + string.Format("{0:0.00}", LotVAL[i]) + "%";
+                                if (LotVAL[i] < 0.001) xVAL[i] = "0";
+                            }
+                        }
+                        catch (Exception ex) { LogWR_.SaveLogException("frmLOG->DRAW_CHART(1)", ex); }
+
+                        DV.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+                        DV.Series["Series1"]["PieLabelStyle"]   = "inside";
+                        DV.Series["Series1"]["DoughnutRadius"]  = "60";
+                        DV.Series["Series1"]["PieDrawingStyle"] = "Concave";
+                        try{
+                            DV.Series["Series1"].Points.DataBindXY(xVAL, LotVAL);
+                        }
+                        catch (Exception exp) { LogWR_.SaveLogException("frmLOG->DRAW_CHART(2)", exp); }
+                        sm = 0;
+                        for (int i = 0; i < LotVAL.Length; i++){
+                            sm += LotVAL[i];
+                        }
+
+                        idx = 0;
+                        DateTime LotStartTime = DateTime.Parse(dcLOT_START.Text);
+                        DateTime LotEndTime = DateTime.Parse(dcLOT_END.Text);
+                        double LotSDate = LotStartTime.Date.ToOADate();
+                        double LotEDate = LotEndTime.Date.ToOADate();
+                        try{
+                            for (double d = sDate; d < eDate + 1; d++){
+                                sPath = GET_LOG_FILE_PATH(d);
+                                if (!File.Exists(sPath)) continue;
+                                if (LotSDate == d || LotEDate == d){
+                                    int rCNT = FILE_.RDInt(sPath, "ERROR", "COUNT", 0);
+                                    for (int i = 0; i < rCNT; i++){
+                                        LotCERR[idx].BeginTime = FILE_.RDString(sPath, "BEGIN TIME", i.ToString(), "");
+                                        DateTime ErrorTime  = DateTime.Parse(LotCERR[idx].BeginTime);
+                                        long ErrorTicks     = ErrorTime.Ticks;
+                                        long LotStartTicks  = LotStartTime.Ticks;
+                                        long LotEndTicks    = LotEndTime.Ticks;
+
+                                        if (LotStartTicks <= ErrorTicks && LotEndTicks >= ErrorTicks){
+                                            LotCERR[idx].EndTime = FILE_.RDString(sPath, "END TIME", i.ToString(), "");
+                                            LotCERR[idx].ErrorNumber = FILE_.RDInt(sPath, "ERROR NUMBER", i.ToString(), 0);
+                                            idx += 1;
+                                            if (idx >= cERR.Length) break;
+                                        }
+                                    }
+                                }
+                                if (idx >= cERR.Length) break;
+                            }
+
+                            DGV_LOT_ERROR.RowCount = idx;
+                            for (int i = 0; i < idx; i++){
+                                DGV_LOT_ERROR.Rows[i].Cells[0].Value = i.ToString();
+                                DGV_LOT_ERROR.Rows[i].Cells[1].Value = LotCERR[i].ErrorNumber;
+                                DGV_LOT_ERROR.Rows[i].Cells[2].Value = E.GET_ERROR_NAME(LotCERR[i].ErrorNumber);
+                                DGV_LOT_ERROR.Rows[i].Cells[3].Value = LotCERR[i].BeginTime;
+                                DGV_LOT_ERROR.Rows[i].Cells[4].Value = LotCERR[i].EndTime;
+                            }
+                            VIEW_LOT_ERROR_HISTOGRAM(idx);
+                        }
+                        catch (Exception ex) { LogWR_.SaveLogException("frmLG->VIEW_ERROR", ex); }
+                    }
+                }
+                catch (Exception EX) { LogWR_.SaveLogException("frmLOG->VIEW_LOTLOG", EX); }
+            }
+            catch (Exception ex) { LogWR_.SaveLogException("frmLOG->BTN_LOTINFO_OPEN_Click", ex); }
+        }
+
         private void LOG_Load(object sender, EventArgs e){
             arrTEMP = new int[CNT_.ERR];
             if (LogPAGE < 0) LOG_CLICK(btnLOG_0, EventArgs.Empty);
@@ -799,8 +1124,7 @@ namespace LIB_.SubFROMLib{
         }
 
         private void TimerHISTORY_Tick(object sender, EventArgs e){
-            if (DATA_.eMCStatus == eMachineStatus.AUTO) return;
-
+            //if (DATA_.eMCStatus == eMachineStatus.AUTO) return;
             pos = 0;
             UpdateFlag = false;
             for (int i = 0; i < CNT_.ERR; i++){
@@ -815,7 +1139,7 @@ namespace LIB_.SubFROMLib{
                     if (!UpdateFlag) UPDATA_ERROR_HISTORY(i);
                     if (pos < gridError.RowCount){
                         gridError.Rows[pos].Cells[0].Value = i.ToString();
-                        gridError.Rows[pos].Cells[1].Value = UTIL_.GET_ERROR_NAME(i);
+                        gridError.Rows[pos].Cells[1].Value = E.GET_ERROR_NAME(i);
                         pos += 1;
                     }
                 }
@@ -826,17 +1150,16 @@ namespace LIB_.SubFROMLib{
                 pos += 1;
             }
 
+            if (DATA_.eMCStatus == eMachineStatus.AUTO) return;
             if (!bFRM_VIEW) return;
-            //lblStep.Text = LogPAGE.ToString("00");
-
-            dclWORK.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlWorkTime);
-            dclRUN.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunTime);
-            dclSTOP.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlStopTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlStopTime);
-            dclPAUSE.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlPauseTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlPauseTime);
-            dclDOWN.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlErrorTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlErrorTime);
-            dclPRODUCT_WAIT.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunWaitTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunWaitTime);
-            dclRUN_DOWN.DigitText = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunDownTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunDownTime);
-            dclPAUSE_CNT.DigitText = DATA_.viewSPC.mlPauseCount.ToString();
+            lbWorkTime.Text             = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlWorkTime);
+            lbRUNTime.Text              = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunTime);
+            lbSTOPTime.Text             = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlStopTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlStopTime);
+            lbPAUSETime.Text            = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlPauseTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlPauseTime);
+            lbDOWNTime.Text             = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlErrorTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlErrorTime);
+            lbPRODUCT_WAIT_TIME.Text    = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunWaitTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunWaitTime);
+            lbRUN_DOWN_TIME.Text        = DATA_.cMATH.IntToTime(DATA_.viewSPC.mlRunDownTime) + DATA_.cMATH.GetRate(DATA_.viewSPC.mlWorkTime, DATA_.viewSPC.mlRunDownTime);
+            lbPAUSE_COUNT.Text          = DATA_.viewSPC.mlPauseCount.ToString();
 
             try{
                 if (DATA_.viewSPC.mlPauseCount > 0){

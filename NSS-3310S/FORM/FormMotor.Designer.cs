@@ -30,49 +30,49 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMotor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle99 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle100 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle103 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle104 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle106 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle107 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle108 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle109 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle110 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle111 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle112 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle113 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle114 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle115 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle116 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle117 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle118 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle119 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle120 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle121 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle122 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle123 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle124 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle125 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle126 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle127 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle128 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle129 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbxJogSpd = new System.Windows.Forms.GroupBox();
             this.swMotorSelect = new System.Windows.Forms.Button();
             this.btn_Pitch_5 = new System.Windows.Forms.Button();
@@ -89,7 +89,6 @@
             this.rbnJogSpd_Low = new System.Windows.Forms.RadioButton();
             this.bMT_0 = new System.Windows.Forms.Button();
             this.swSave = new System.Windows.Forms.Button();
-            this.pTopPanel = new Owf.Controls.A1Panel();
             this.bMT_6 = new System.Windows.Forms.Button();
             this.bMT_5 = new System.Windows.Forms.Button();
             this.bMT_4 = new System.Windows.Forms.Button();
@@ -98,9 +97,11 @@
             this.bMT_1 = new System.Windows.Forms.Button();
             this.tcMTPAGE = new System.Windows.Forms.TabControl();
             this.RailTeaching = new System.Windows.Forms.TabPage();
+            this.pnGripperLoadingPos = new System.Windows.Forms.Panel();
+            this.rbtGripperLoadingPosCommon = new System.Windows.Forms.RadioButton();
+            this.rbtGripperLoadingPosIndividual = new System.Windows.Forms.RadioButton();
             this.label84 = new System.Windows.Forms.Label();
             this.lblMGZ_Pitch_Spd = new System.Windows.Forms.Label();
-            this.ChkGripperLoadingPos = new JCS.ToggleSwitch();
             this.label83 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
             this.lblMGZClampUpPitch = new System.Windows.Forms.Label();
@@ -254,6 +255,8 @@
             this.uStripPkr_Z = new LIB_.UERCTRL.UCL_JOG();
             this.uStripPkr_X = new LIB_.UERCTRL.UCL_JOG();
             this.MapBlock = new System.Windows.Forms.TabPage();
+            this.label94 = new System.Windows.Forms.Label();
+            this.lblStageErrorMovingSpeed = new System.Windows.Forms.Label();
             this.lbMAPBLOCK_TEACHING = new System.Windows.Forms.Label();
             this.pnlMapBlackTeachingDir1 = new System.Windows.Forms.Panel();
             this.pnlMapBlackTeachingDir0 = new System.Windows.Forms.Panel();
@@ -296,6 +299,18 @@
             this.uMarkVisionZ = new LIB_.UERCTRL.UCL_JOG();
             this.uBtmCamY = new LIB_.UERCTRL.UCL_JOG();
             this.Head = new System.Windows.Forms.TabPage();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.SelectHead = new System.Windows.Forms.Label();
+            this.SavePrsOffset = new System.Windows.Forms.Button();
+            this.lbPrsOffsetPk6 = new System.Windows.Forms.Label();
+            this.lbPrsOffsetPk5 = new System.Windows.Forms.Label();
+            this.lbPrsOffsetPk4 = new System.Windows.Forms.Label();
+            this.lbPrsOffsetPk3 = new System.Windows.Forms.Label();
+            this.lbPrsOffsetPk2 = new System.Windows.Forms.Label();
+            this.lbPrsOffsetPk1 = new System.Windows.Forms.Label();
+            this.chkOptionPRSSpd = new JCS.ToggleSwitch();
+            this.lblPRSStepSpeed = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.lbRejectBlow = new System.Windows.Forms.Label();
             this.label93 = new System.Windows.Forms.Label();
@@ -636,10 +651,11 @@
             this.CovPALLET = new LIB_.UERCTRL.UCL_JOG();
             this.iltDir = new System.Windows.Forms.ImageList(this.components);
             this.TmrMT = new System.Windows.Forms.Timer(this.components);
+            this.panel18 = new System.Windows.Forms.Panel();
             this.gbxJogSpd.SuspendLayout();
-            this.pTopPanel.SuspendLayout();
             this.tcMTPAGE.SuspendLayout();
             this.RailTeaching.SuspendLayout();
+            this.pnGripperLoadingPos.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel9.SuspendLayout();
             this.gbxBARCODE_SETTING.SuspendLayout();
@@ -671,6 +687,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMappingTable)).BeginInit();
             this.pnlSelect_MapBlock.SuspendLayout();
             this.Head.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox5.SuspendLayout();
@@ -732,6 +749,7 @@
             this.groupBox9.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.panel12.SuspendLayout();
+            this.panel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxJogSpd
@@ -752,9 +770,9 @@
             this.gbxJogSpd.Controls.Add(this.rbnJogSpd_Low);
             this.gbxJogSpd.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxJogSpd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.gbxJogSpd.Location = new System.Drawing.Point(2, 524);
+            this.gbxJogSpd.Location = new System.Drawing.Point(4, 509);
             this.gbxJogSpd.Name = "gbxJogSpd";
-            this.gbxJogSpd.Size = new System.Drawing.Size(127, 277);
+            this.gbxJogSpd.Size = new System.Drawing.Size(130, 277);
             this.gbxJogSpd.TabIndex = 1220;
             this.gbxJogSpd.TabStop = false;
             this.gbxJogSpd.Text = "조그 구동 속도";
@@ -769,7 +787,7 @@
             this.swMotorSelect.Location = new System.Drawing.Point(1, 215);
             this.swMotorSelect.Name = "swMotorSelect";
             this.swMotorSelect.Padding = new System.Windows.Forms.Padding(3);
-            this.swMotorSelect.Size = new System.Drawing.Size(124, 60);
+            this.swMotorSelect.Size = new System.Drawing.Size(127, 60);
             this.swMotorSelect.TabIndex = 1321;
             this.swMotorSelect.Text = "조그 \r\n구동창";
             this.swMotorSelect.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -948,10 +966,10 @@
             this.bMT_0.ForeColor = System.Drawing.Color.Black;
             this.bMT_0.Image = ((System.Drawing.Image)(resources.GetObject("bMT_0.Image")));
             this.bMT_0.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_0.Location = new System.Drawing.Point(4, 5);
+            this.bMT_0.Location = new System.Drawing.Point(5, 5);
             this.bMT_0.Name = "bMT_0";
             this.bMT_0.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_0.Size = new System.Drawing.Size(123, 60);
+            this.bMT_0.Size = new System.Drawing.Size(128, 60);
             this.bMT_0.TabIndex = 0;
             this.bMT_0.Tag = "0";
             this.bMT_0.Text = "LOADING";
@@ -965,7 +983,7 @@
             this.swSave.ForeColor = System.Drawing.Color.Black;
             this.swSave.Image = ((System.Drawing.Image)(resources.GetObject("swSave.Image")));
             this.swSave.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swSave.Location = new System.Drawing.Point(1, 804);
+            this.swSave.Location = new System.Drawing.Point(3, 804);
             this.swSave.Name = "swSave";
             this.swSave.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.swSave.Size = new System.Drawing.Size(129, 62);
@@ -974,29 +992,6 @@
             this.swSave.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.swSave.UseVisualStyleBackColor = false;
             // 
-            // pTopPanel
-            // 
-            this.pTopPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pTopPanel.BorderColor = System.Drawing.Color.DarkGray;
-            this.pTopPanel.Controls.Add(this.bMT_6);
-            this.pTopPanel.Controls.Add(this.bMT_5);
-            this.pTopPanel.Controls.Add(this.bMT_4);
-            this.pTopPanel.Controls.Add(this.bMT_3);
-            this.pTopPanel.Controls.Add(this.bMT_2);
-            this.pTopPanel.Controls.Add(this.bMT_1);
-            this.pTopPanel.Controls.Add(this.swSave);
-            this.pTopPanel.Controls.Add(this.bMT_0);
-            this.pTopPanel.Controls.Add(this.gbxJogSpd);
-            this.pTopPanel.GradientEndColor = System.Drawing.Color.Lavender;
-            this.pTopPanel.GradientStartColor = System.Drawing.Color.White;
-            this.pTopPanel.Image = null;
-            this.pTopPanel.ImageLocation = new System.Drawing.Point(3, 6);
-            this.pTopPanel.Location = new System.Drawing.Point(4, 3);
-            this.pTopPanel.Name = "pTopPanel";
-            this.pTopPanel.ShadowOffSet = 2;
-            this.pTopPanel.Size = new System.Drawing.Size(133, 869);
-            this.pTopPanel.TabIndex = 167;
-            // 
             // bMT_6
             // 
             this.bMT_6.BackColor = System.Drawing.Color.White;
@@ -1004,10 +999,10 @@
             this.bMT_6.ForeColor = System.Drawing.Color.Black;
             this.bMT_6.Image = ((System.Drawing.Image)(resources.GetObject("bMT_6.Image")));
             this.bMT_6.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_6.Location = new System.Drawing.Point(5, 388);
+            this.bMT_6.Location = new System.Drawing.Point(6, 388);
             this.bMT_6.Name = "bMT_6";
             this.bMT_6.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_6.Size = new System.Drawing.Size(123, 60);
+            this.bMT_6.Size = new System.Drawing.Size(128, 60);
             this.bMT_6.TabIndex = 6;
             this.bMT_6.Tag = "6";
             this.bMT_6.Text = "EASY\r\nTEACHING";
@@ -1021,10 +1016,10 @@
             this.bMT_5.ForeColor = System.Drawing.Color.Black;
             this.bMT_5.Image = ((System.Drawing.Image)(resources.GetObject("bMT_5.Image")));
             this.bMT_5.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_5.Location = new System.Drawing.Point(5, 323);
+            this.bMT_5.Location = new System.Drawing.Point(6, 323);
             this.bMT_5.Name = "bMT_5";
             this.bMT_5.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_5.Size = new System.Drawing.Size(123, 60);
+            this.bMT_5.Size = new System.Drawing.Size(128, 60);
             this.bMT_5.TabIndex = 5;
             this.bMT_5.Tag = "5";
             this.bMT_5.Text = "TRAY\r\nPICKER";
@@ -1038,10 +1033,10 @@
             this.bMT_4.ForeColor = System.Drawing.Color.Black;
             this.bMT_4.Image = ((System.Drawing.Image)(resources.GetObject("bMT_4.Image")));
             this.bMT_4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_4.Location = new System.Drawing.Point(5, 260);
+            this.bMT_4.Location = new System.Drawing.Point(6, 260);
             this.bMT_4.Name = "bMT_4";
             this.bMT_4.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_4.Size = new System.Drawing.Size(123, 60);
+            this.bMT_4.Size = new System.Drawing.Size(128, 60);
             this.bMT_4.TabIndex = 4;
             this.bMT_4.Tag = "4";
             this.bMT_4.Text = "TRAY";
@@ -1055,10 +1050,10 @@
             this.bMT_3.ForeColor = System.Drawing.Color.Black;
             this.bMT_3.Image = ((System.Drawing.Image)(resources.GetObject("bMT_3.Image")));
             this.bMT_3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_3.Location = new System.Drawing.Point(5, 197);
+            this.bMT_3.Location = new System.Drawing.Point(6, 197);
             this.bMT_3.Name = "bMT_3";
             this.bMT_3.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_3.Size = new System.Drawing.Size(123, 60);
+            this.bMT_3.Size = new System.Drawing.Size(128, 60);
             this.bMT_3.TabIndex = 3;
             this.bMT_3.Tag = "3";
             this.bMT_3.Text = "HEAD";
@@ -1072,10 +1067,10 @@
             this.bMT_2.ForeColor = System.Drawing.Color.Black;
             this.bMT_2.Image = ((System.Drawing.Image)(resources.GetObject("bMT_2.Image")));
             this.bMT_2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_2.Location = new System.Drawing.Point(5, 133);
+            this.bMT_2.Location = new System.Drawing.Point(6, 133);
             this.bMT_2.Name = "bMT_2";
             this.bMT_2.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_2.Size = new System.Drawing.Size(123, 60);
+            this.bMT_2.Size = new System.Drawing.Size(128, 60);
             this.bMT_2.TabIndex = 2;
             this.bMT_2.Tag = "2";
             this.bMT_2.Text = "MAP-BLOCK";
@@ -1089,10 +1084,10 @@
             this.bMT_1.ForeColor = System.Drawing.Color.Black;
             this.bMT_1.Image = ((System.Drawing.Image)(resources.GetObject("bMT_1.Image")));
             this.bMT_1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMT_1.Location = new System.Drawing.Point(4, 69);
+            this.bMT_1.Location = new System.Drawing.Point(5, 69);
             this.bMT_1.Name = "bMT_1";
             this.bMT_1.Padding = new System.Windows.Forms.Padding(3);
-            this.bMT_1.Size = new System.Drawing.Size(123, 60);
+            this.bMT_1.Size = new System.Drawing.Size(128, 60);
             this.bMT_1.TabIndex = 1;
             this.bMT_1.Tag = "1";
             this.bMT_1.Text = "HANDLER\r\nPICKER";
@@ -1120,9 +1115,9 @@
             // RailTeaching
             // 
             this.RailTeaching.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.RailTeaching.Controls.Add(this.pnGripperLoadingPos);
             this.RailTeaching.Controls.Add(this.label84);
             this.RailTeaching.Controls.Add(this.lblMGZ_Pitch_Spd);
-            this.RailTeaching.Controls.Add(this.ChkGripperLoadingPos);
             this.RailTeaching.Controls.Add(this.label83);
             this.RailTeaching.Controls.Add(this.label71);
             this.RailTeaching.Controls.Add(this.lblMGZClampUpPitch);
@@ -1152,15 +1147,52 @@
             this.RailTeaching.TabIndex = 8;
             this.RailTeaching.Text = "RAIL";
             // 
+            // pnGripperLoadingPos
+            // 
+            this.pnGripperLoadingPos.BackColor = System.Drawing.Color.Gray;
+            this.pnGripperLoadingPos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnGripperLoadingPos.Controls.Add(this.rbtGripperLoadingPosCommon);
+            this.pnGripperLoadingPos.Controls.Add(this.rbtGripperLoadingPosIndividual);
+            this.pnGripperLoadingPos.Location = new System.Drawing.Point(943, 266);
+            this.pnGripperLoadingPos.Name = "pnGripperLoadingPos";
+            this.pnGripperLoadingPos.Size = new System.Drawing.Size(182, 29);
+            this.pnGripperLoadingPos.TabIndex = 1524;
+            // 
+            // rbtGripperLoadingPosCommon
+            // 
+            this.rbtGripperLoadingPosCommon.AutoSize = true;
+            this.rbtGripperLoadingPosCommon.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtGripperLoadingPosCommon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.rbtGripperLoadingPosCommon.Location = new System.Drawing.Point(108, 3);
+            this.rbtGripperLoadingPosCommon.Name = "rbtGripperLoadingPosCommon";
+            this.rbtGripperLoadingPosCommon.Size = new System.Drawing.Size(52, 22);
+            this.rbtGripperLoadingPosCommon.TabIndex = 1;
+            this.rbtGripperLoadingPosCommon.Text = "공통";
+            this.rbtGripperLoadingPosCommon.UseVisualStyleBackColor = true;
+            // 
+            // rbtGripperLoadingPosIndividual
+            // 
+            this.rbtGripperLoadingPosIndividual.AutoSize = true;
+            this.rbtGripperLoadingPosIndividual.Checked = true;
+            this.rbtGripperLoadingPosIndividual.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtGripperLoadingPosIndividual.ForeColor = System.Drawing.Color.Yellow;
+            this.rbtGripperLoadingPosIndividual.Location = new System.Drawing.Point(21, 3);
+            this.rbtGripperLoadingPosIndividual.Name = "rbtGripperLoadingPosIndividual";
+            this.rbtGripperLoadingPosIndividual.Size = new System.Drawing.Size(52, 22);
+            this.rbtGripperLoadingPosIndividual.TabIndex = 0;
+            this.rbtGripperLoadingPosIndividual.TabStop = true;
+            this.rbtGripperLoadingPosIndividual.Text = "개별";
+            this.rbtGripperLoadingPosIndividual.UseVisualStyleBackColor = true;
+            // 
             // label84
             // 
             this.label84.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.label84.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label84.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label84.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label84.Location = new System.Drawing.Point(229, 274);
+            this.label84.Location = new System.Drawing.Point(9, 274);
             this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(295, 29);
+            this.label84.Size = new System.Drawing.Size(473, 29);
             this.label84.TabIndex = 1523;
             this.label84.Text = "- 카세트 피치 이송 속도 (mm/sec)";
             this.label84.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1171,9 +1203,9 @@
             this.lblMGZ_Pitch_Spd.BackColor = System.Drawing.Color.White;
             this.lblMGZ_Pitch_Spd.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMGZ_Pitch_Spd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMGZ_Pitch_Spd.Location = new System.Drawing.Point(528, 274);
+            this.lblMGZ_Pitch_Spd.Location = new System.Drawing.Point(487, 274);
             this.lblMGZ_Pitch_Spd.Name = "lblMGZ_Pitch_Spd";
-            this.lblMGZ_Pitch_Spd.Size = new System.Drawing.Size(60, 29);
+            this.lblMGZ_Pitch_Spd.Size = new System.Drawing.Size(95, 29);
             this.lblMGZ_Pitch_Spd.TabIndex = 1522;
             this.lblMGZ_Pitch_Spd.Tag = "MC";
             this.lblMGZ_Pitch_Spd.Text = "00";
@@ -1181,32 +1213,16 @@
             this.lblMGZ_Pitch_Spd.Visible = false;
             this.lblMGZ_Pitch_Spd.Click += new System.EventHandler(this.ParaData_Click);
             // 
-            // ChkGripperLoadingPos
-            // 
-            this.ChkGripperLoadingPos.Checked = true;
-            this.ChkGripperLoadingPos.Location = new System.Drawing.Point(968, 266);
-            this.ChkGripperLoadingPos.Name = "ChkGripperLoadingPos";
-            this.ChkGripperLoadingPos.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkGripperLoadingPos.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.ChkGripperLoadingPos.OffText = "공통";
-            this.ChkGripperLoadingPos.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkGripperLoadingPos.OnForeColor = System.Drawing.Color.Yellow;
-            this.ChkGripperLoadingPos.OnText = "개별";
-            this.ChkGripperLoadingPos.Size = new System.Drawing.Size(164, 29);
-            this.ChkGripperLoadingPos.Style = JCS.ToggleSwitch.ToggleSwitchStyle.OSX;
-            this.ChkGripperLoadingPos.TabIndex = 1520;
-            this.ChkGripperLoadingPos.Tag = "MD";
-            // 
             // label83
             // 
             this.label83.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.label83.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label83.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label83.ForeColor = System.Drawing.Color.Navy;
-            this.label83.Location = new System.Drawing.Point(770, 266);
+            this.label83.Location = new System.Drawing.Point(595, 266);
             this.label83.Margin = new System.Windows.Forms.Padding(0);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(195, 29);
+            this.label83.Size = new System.Drawing.Size(347, 29);
             this.label83.TabIndex = 1521;
             this.label83.Text = "- STRIP 로딩 위치";
             this.label83.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1217,9 +1233,9 @@
             this.label71.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label71.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label71.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label71.Location = new System.Drawing.Point(229, 181);
+            this.label71.Location = new System.Drawing.Point(9, 181);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(295, 29);
+            this.label71.Size = new System.Drawing.Size(473, 29);
             this.label71.TabIndex = 1517;
             this.label71.Text = "- 카세트 클램프 CLOSE시 UP 피치 (mm)";
             this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1229,9 +1245,9 @@
             this.lblMGZClampUpPitch.BackColor = System.Drawing.Color.White;
             this.lblMGZClampUpPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMGZClampUpPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMGZClampUpPitch.Location = new System.Drawing.Point(528, 181);
+            this.lblMGZClampUpPitch.Location = new System.Drawing.Point(487, 181);
             this.lblMGZClampUpPitch.Name = "lblMGZClampUpPitch";
-            this.lblMGZClampUpPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblMGZClampUpPitch.Size = new System.Drawing.Size(95, 29);
             this.lblMGZClampUpPitch.TabIndex = 1516;
             this.lblMGZClampUpPitch.Tag = "MD";
             this.lblMGZClampUpPitch.Text = "00";
@@ -1244,9 +1260,9 @@
             this.label56.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label56.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label56.Location = new System.Drawing.Point(229, 243);
+            this.label56.Location = new System.Drawing.Point(9, 243);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(295, 29);
+            this.label56.Size = new System.Drawing.Size(473, 29);
             this.label56.TabIndex = 1515;
             this.label56.Text = "- 카세트 언로딩 UP 피치 (mm)";
             this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1256,9 +1272,9 @@
             this.lblMGZ_ULD_UDPitch.BackColor = System.Drawing.Color.White;
             this.lblMGZ_ULD_UDPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMGZ_ULD_UDPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMGZ_ULD_UDPitch.Location = new System.Drawing.Point(528, 243);
+            this.lblMGZ_ULD_UDPitch.Location = new System.Drawing.Point(487, 243);
             this.lblMGZ_ULD_UDPitch.Name = "lblMGZ_ULD_UDPitch";
-            this.lblMGZ_ULD_UDPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblMGZ_ULD_UDPitch.Size = new System.Drawing.Size(95, 29);
             this.lblMGZ_ULD_UDPitch.TabIndex = 1514;
             this.lblMGZ_ULD_UDPitch.Tag = "MC";
             this.lblMGZ_ULD_UDPitch.Text = "00";
@@ -1519,8 +1535,8 @@
             // dataGridViewTextBoxColumn54
             // 
             this.dataGridViewTextBoxColumn54.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn54.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn54.DefaultCellStyle = dataGridViewCellStyle87;
             this.dataGridViewTextBoxColumn54.HeaderText = "";
             this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
             this.dataGridViewTextBoxColumn54.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1537,8 +1553,8 @@
             // 
             // dataGridViewTextBoxColumn59
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn59.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn59.DefaultCellStyle = dataGridViewCellStyle88;
             this.dataGridViewTextBoxColumn59.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn59.Name = "dataGridViewTextBoxColumn59";
             this.dataGridViewTextBoxColumn59.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1620,9 +1636,9 @@
             this.label51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label51.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label51.Location = new System.Drawing.Point(229, 212);
+            this.label51.Location = new System.Drawing.Point(9, 212);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(295, 29);
+            this.label51.Size = new System.Drawing.Size(473, 29);
             this.label51.TabIndex = 1417;
             this.label51.Text = "- 카세트 로딩 UP 피치 (mm)";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1632,9 +1648,9 @@
             this.lblMGZ_UDPitch.BackColor = System.Drawing.Color.White;
             this.lblMGZ_UDPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMGZ_UDPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMGZ_UDPitch.Location = new System.Drawing.Point(528, 212);
+            this.lblMGZ_UDPitch.Location = new System.Drawing.Point(487, 212);
             this.lblMGZ_UDPitch.Name = "lblMGZ_UDPitch";
-            this.lblMGZ_UDPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblMGZ_UDPitch.Size = new System.Drawing.Size(95, 29);
             this.lblMGZ_UDPitch.TabIndex = 1416;
             this.lblMGZ_UDPitch.Tag = "MC";
             this.lblMGZ_UDPitch.Text = "00";
@@ -1682,8 +1698,8 @@
             // 
             // dataGridViewTextBoxColumn6
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle89;
             this.dataGridViewTextBoxColumn6.HeaderText = "";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -1699,8 +1715,8 @@
             // 
             // dataGridViewTextBoxColumn8
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle90;
             this.dataGridViewTextBoxColumn8.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1709,8 +1725,8 @@
             // 
             // dataGridViewTextBoxColumn53
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn53.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn53.DefaultCellStyle = dataGridViewCellStyle91;
             this.dataGridViewTextBoxColumn53.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
             this.dataGridViewTextBoxColumn53.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1759,9 +1775,9 @@
             this.label23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label23.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label23.Location = new System.Drawing.Point(770, 235);
+            this.label23.Location = new System.Drawing.Point(595, 235);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(295, 29);
+            this.label23.Size = new System.Drawing.Size(432, 29);
             this.label23.TabIndex = 1281;
             this.label23.Text = "- 그리퍼 소재 확인후 후진 피치(mm)";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1771,9 +1787,9 @@
             this.lblGripperBackPitch.BackColor = System.Drawing.Color.White;
             this.lblGripperBackPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGripperBackPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblGripperBackPitch.Location = new System.Drawing.Point(1069, 234);
+            this.lblGripperBackPitch.Location = new System.Drawing.Point(1031, 234);
             this.lblGripperBackPitch.Name = "lblGripperBackPitch";
-            this.lblGripperBackPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblGripperBackPitch.Size = new System.Drawing.Size(95, 29);
             this.lblGripperBackPitch.TabIndex = 1280;
             this.lblGripperBackPitch.Tag = "MC";
             this.lblGripperBackPitch.Text = "00";
@@ -1822,8 +1838,8 @@
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle92;
             this.dataGridViewTextBoxColumn9.HeaderText = "";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1840,8 +1856,8 @@
             // 
             // dataGridViewTextBoxColumn11
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle93;
             this.dataGridViewTextBoxColumn11.HeaderText = "FRONT";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1850,8 +1866,8 @@
             // 
             // Column10
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle94;
             this.Column10.HeaderText = "REAR";
             this.Column10.Name = "Column10";
             this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1891,9 +1907,9 @@
             this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label20.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label20.Location = new System.Drawing.Point(229, 509);
+            this.label20.Location = new System.Drawing.Point(9, 509);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(295, 29);
+            this.label20.Size = new System.Drawing.Size(473, 29);
             this.label20.TabIndex = 1275;
             this.label20.Text = "- 레일에서 P1피커 소재픽업시 벌려주는 넓이 (mm)";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1903,9 +1919,9 @@
             this.lblRailLoaingOpenPitch.BackColor = System.Drawing.Color.White;
             this.lblRailLoaingOpenPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRailLoaingOpenPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblRailLoaingOpenPitch.Location = new System.Drawing.Point(528, 509);
+            this.lblRailLoaingOpenPitch.Location = new System.Drawing.Point(487, 509);
             this.lblRailLoaingOpenPitch.Name = "lblRailLoaingOpenPitch";
-            this.lblRailLoaingOpenPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblRailLoaingOpenPitch.Size = new System.Drawing.Size(95, 29);
             this.lblRailLoaingOpenPitch.TabIndex = 1274;
             this.lblRailLoaingOpenPitch.Tag = "MC";
             this.lblRailLoaingOpenPitch.Text = "00";
@@ -1952,8 +1968,8 @@
             // dataGridViewTextBoxColumn47
             // 
             this.dataGridViewTextBoxColumn47.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn47.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn47.DefaultCellStyle = dataGridViewCellStyle95;
             this.dataGridViewTextBoxColumn47.HeaderText = "";
             this.dataGridViewTextBoxColumn47.Name = "dataGridViewTextBoxColumn47";
             this.dataGridViewTextBoxColumn47.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1970,8 +1986,8 @@
             // 
             // dataGridViewTextBoxColumn52
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn52.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn52.DefaultCellStyle = dataGridViewCellStyle96;
             this.dataGridViewTextBoxColumn52.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn52.Name = "dataGridViewTextBoxColumn52";
             this.dataGridViewTextBoxColumn52.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2086,9 +2102,9 @@
             this.groupBox3.Controls.Add(this.label68);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(909, 620);
+            this.groupBox3.Location = new System.Drawing.Point(871, 583);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(183, 37);
+            this.groupBox3.Size = new System.Drawing.Size(221, 204);
             this.groupBox3.TabIndex = 1529;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "● UNIT PICKER 작업 완료 후 CLEANER SETTING";
@@ -2359,9 +2375,9 @@
             this.label55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label55.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label55.Location = new System.Drawing.Point(770, 421);
+            this.label55.Location = new System.Drawing.Point(569, 421);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(293, 29);
+            this.label55.Size = new System.Drawing.Size(452, 29);
             this.label55.TabIndex = 1528;
             this.label55.Text = "- 브러쉬 작업 속도 (mm/sec)";
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2371,9 +2387,9 @@
             this.lblUnitWorkBrushSpd.BackColor = System.Drawing.Color.White;
             this.lblUnitWorkBrushSpd.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitWorkBrushSpd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUnitWorkBrushSpd.Location = new System.Drawing.Point(1066, 421);
+            this.lblUnitWorkBrushSpd.Location = new System.Drawing.Point(1026, 421);
             this.lblUnitWorkBrushSpd.Name = "lblUnitWorkBrushSpd";
-            this.lblUnitWorkBrushSpd.Size = new System.Drawing.Size(60, 29);
+            this.lblUnitWorkBrushSpd.Size = new System.Drawing.Size(95, 29);
             this.lblUnitWorkBrushSpd.TabIndex = 1527;
             this.lblUnitWorkBrushSpd.Tag = "MC";
             this.lblUnitWorkBrushSpd.Text = "00";
@@ -2386,9 +2402,9 @@
             this.label54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label54.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label54.Location = new System.Drawing.Point(770, 391);
+            this.label54.Location = new System.Drawing.Point(569, 391);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(293, 29);
+            this.label54.Size = new System.Drawing.Size(452, 29);
             this.label54.TabIndex = 1526;
             this.label54.Text = "- 에어샤워 작업 속도 (mm/sec)";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2398,9 +2414,9 @@
             this.lblUnitWorkAirshowerSpd.BackColor = System.Drawing.Color.White;
             this.lblUnitWorkAirshowerSpd.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitWorkAirshowerSpd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUnitWorkAirshowerSpd.Location = new System.Drawing.Point(1066, 391);
+            this.lblUnitWorkAirshowerSpd.Location = new System.Drawing.Point(1026, 391);
             this.lblUnitWorkAirshowerSpd.Name = "lblUnitWorkAirshowerSpd";
-            this.lblUnitWorkAirshowerSpd.Size = new System.Drawing.Size(60, 29);
+            this.lblUnitWorkAirshowerSpd.Size = new System.Drawing.Size(95, 29);
             this.lblUnitWorkAirshowerSpd.TabIndex = 1525;
             this.lblUnitWorkAirshowerSpd.Tag = "MC";
             this.lblUnitWorkAirshowerSpd.Text = "00";
@@ -2447,8 +2463,8 @@
             // dataGridViewTextBoxColumn60
             // 
             this.dataGridViewTextBoxColumn60.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn60.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn60.DefaultCellStyle = dataGridViewCellStyle97;
             this.dataGridViewTextBoxColumn60.HeaderText = "";
             this.dataGridViewTextBoxColumn60.Name = "dataGridViewTextBoxColumn60";
             this.dataGridViewTextBoxColumn60.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2465,8 +2481,8 @@
             // 
             // dataGridViewTextBoxColumn62
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn62.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn62.DefaultCellStyle = dataGridViewCellStyle98;
             this.dataGridViewTextBoxColumn62.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn62.Name = "dataGridViewTextBoxColumn62";
             this.dataGridViewTextBoxColumn62.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2497,9 +2513,9 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(770, 361);
+            this.label1.Location = new System.Drawing.Point(569, 361);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 29);
+            this.label1.Size = new System.Drawing.Size(452, 29);
             this.label1.TabIndex = 1281;
             this.label1.Text = "- 에어샤워 && 브러쉬 완료 피치 (mm)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2509,9 +2525,9 @@
             this.lblUnitWorkEndPitch.BackColor = System.Drawing.Color.White;
             this.lblUnitWorkEndPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitWorkEndPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUnitWorkEndPitch.Location = new System.Drawing.Point(1066, 361);
+            this.lblUnitWorkEndPitch.Location = new System.Drawing.Point(1026, 361);
             this.lblUnitWorkEndPitch.Name = "lblUnitWorkEndPitch";
-            this.lblUnitWorkEndPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblUnitWorkEndPitch.Size = new System.Drawing.Size(95, 29);
             this.lblUnitWorkEndPitch.TabIndex = 1280;
             this.lblUnitWorkEndPitch.Tag = "MC";
             this.lblUnitWorkEndPitch.Text = "00";
@@ -2524,9 +2540,9 @@
             this.label22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label22.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label22.Location = new System.Drawing.Point(770, 331);
+            this.label22.Location = new System.Drawing.Point(569, 331);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(293, 29);
+            this.label22.Size = new System.Drawing.Size(452, 29);
             this.label22.TabIndex = 1279;
             this.label22.Text = "- 유닛 피커 픽업 후 확인 높이(mm)";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2536,9 +2552,9 @@
             this.lblUnitPickUpCheckPitch.BackColor = System.Drawing.Color.White;
             this.lblUnitPickUpCheckPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitPickUpCheckPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblUnitPickUpCheckPitch.Location = new System.Drawing.Point(1066, 331);
+            this.lblUnitPickUpCheckPitch.Location = new System.Drawing.Point(1026, 331);
             this.lblUnitPickUpCheckPitch.Name = "lblUnitPickUpCheckPitch";
-            this.lblUnitPickUpCheckPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblUnitPickUpCheckPitch.Size = new System.Drawing.Size(95, 29);
             this.lblUnitPickUpCheckPitch.TabIndex = 1278;
             this.lblUnitPickUpCheckPitch.Tag = "MC";
             this.lblUnitPickUpCheckPitch.Text = "00";
@@ -2551,9 +2567,9 @@
             this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label21.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label21.Location = new System.Drawing.Point(207, 208);
+            this.label21.Location = new System.Drawing.Point(6, 208);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(293, 29);
+            this.label21.Size = new System.Drawing.Size(453, 29);
             this.label21.TabIndex = 1277;
             this.label21.Text = "- 스트립 피커 소재 픽업 후 확인 높이(mm)";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2563,9 +2579,9 @@
             this.lblStripPickUpCheckPitch.BackColor = System.Drawing.Color.White;
             this.lblStripPickUpCheckPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStripPickUpCheckPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblStripPickUpCheckPitch.Location = new System.Drawing.Point(503, 208);
+            this.lblStripPickUpCheckPitch.Location = new System.Drawing.Point(463, 208);
             this.lblStripPickUpCheckPitch.Name = "lblStripPickUpCheckPitch";
-            this.lblStripPickUpCheckPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblStripPickUpCheckPitch.Size = new System.Drawing.Size(95, 29);
             this.lblStripPickUpCheckPitch.TabIndex = 1276;
             this.lblStripPickUpCheckPitch.Tag = "MC";
             this.lblStripPickUpCheckPitch.Text = "00";
@@ -2581,9 +2597,9 @@
             this.groupBox7.Controls.Add(this.label44);
             this.groupBox7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox7.ForeColor = System.Drawing.Color.Black;
-            this.groupBox7.Location = new System.Drawing.Point(909, 565);
+            this.groupBox7.Location = new System.Drawing.Point(635, 583);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(165, 49);
+            this.groupBox7.Size = new System.Drawing.Size(230, 235);
             this.groupBox7.TabIndex = 1233;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "● CLEANER SETTING";
@@ -2919,8 +2935,8 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle99;
             this.dataGridViewTextBoxColumn12.HeaderText = "";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2937,8 +2953,8 @@
             // 
             // dataGridViewTextBoxColumn14
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle100;
             this.dataGridViewTextBoxColumn14.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2947,8 +2963,8 @@
             // 
             // dataGridViewTextBoxColumn15
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle101;
             this.dataGridViewTextBoxColumn15.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3034,8 +3050,8 @@
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle102;
             this.dataGridViewTextBoxColumn16.HeaderText = "";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3052,8 +3068,8 @@
             // 
             // dataGridViewTextBoxColumn18
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle103;
             this.dataGridViewTextBoxColumn18.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3062,8 +3078,8 @@
             // 
             // dataGridViewTextBoxColumn19
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle104;
             this.dataGridViewTextBoxColumn19.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3196,6 +3212,8 @@
             // 
             this.MapBlock.BackColor = System.Drawing.Color.WhiteSmoke;
             this.MapBlock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MapBlock.Controls.Add(this.label94);
+            this.MapBlock.Controls.Add(this.lblStageErrorMovingSpeed);
             this.MapBlock.Controls.Add(this.lbMAPBLOCK_TEACHING);
             this.MapBlock.Controls.Add(this.pnlMapBlackTeachingDir1);
             this.MapBlock.Controls.Add(this.pnlMapBlackTeachingDir0);
@@ -3218,6 +3236,33 @@
             this.MapBlock.Size = new System.Drawing.Size(1135, 864);
             this.MapBlock.TabIndex = 2;
             this.MapBlock.Text = "MAP BLOCK / MARK VISION";
+            // 
+            // label94
+            // 
+            this.label94.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label94.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label94.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label94.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label94.Location = new System.Drawing.Point(5, 345);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(433, 29);
+            this.label94.TabIndex = 1533;
+            this.label94.Text = "- 작업 테이블 위에 유닛 존재 할 경우 배출 속도 (mm/sec)";
+            this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblStageErrorMovingSpeed
+            // 
+            this.lblStageErrorMovingSpeed.BackColor = System.Drawing.Color.White;
+            this.lblStageErrorMovingSpeed.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStageErrorMovingSpeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblStageErrorMovingSpeed.Location = new System.Drawing.Point(442, 345);
+            this.lblStageErrorMovingSpeed.Name = "lblStageErrorMovingSpeed";
+            this.lblStageErrorMovingSpeed.Size = new System.Drawing.Size(95, 29);
+            this.lblStageErrorMovingSpeed.TabIndex = 1532;
+            this.lblStageErrorMovingSpeed.Tag = "MC";
+            this.lblStageErrorMovingSpeed.Text = "00";
+            this.lblStageErrorMovingSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStageErrorMovingSpeed.Click += new System.EventHandler(this.ParaData_Click);
             // 
             // lbMAPBLOCK_TEACHING
             // 
@@ -3265,9 +3310,9 @@
             this.label52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label52.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label52.Location = new System.Drawing.Point(188, 280);
+            this.label52.Location = new System.Drawing.Point(5, 313);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(293, 29);
+            this.label52.Size = new System.Drawing.Size(433, 29);
             this.label52.TabIndex = 1528;
             this.label52.Text = "- 에어샤워 완료 피치 (mm)";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3277,9 +3322,9 @@
             this.lblStageWorkEndPitch.BackColor = System.Drawing.Color.White;
             this.lblStageWorkEndPitch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStageWorkEndPitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblStageWorkEndPitch.Location = new System.Drawing.Point(484, 280);
+            this.lblStageWorkEndPitch.Location = new System.Drawing.Point(442, 313);
             this.lblStageWorkEndPitch.Name = "lblStageWorkEndPitch";
-            this.lblStageWorkEndPitch.Size = new System.Drawing.Size(60, 29);
+            this.lblStageWorkEndPitch.Size = new System.Drawing.Size(95, 29);
             this.lblStageWorkEndPitch.TabIndex = 1527;
             this.lblStageWorkEndPitch.Tag = "MC";
             this.lblStageWorkEndPitch.Text = "00";
@@ -3322,9 +3367,9 @@
             // 
             this.gbxPRS_SETTING.Controls.Add(this.dgvPRSVision);
             this.gbxPRS_SETTING.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxPRS_SETTING.Location = new System.Drawing.Point(3, 335);
+            this.gbxPRS_SETTING.Location = new System.Drawing.Point(3, 382);
             this.gbxPRS_SETTING.Name = "gbxPRS_SETTING";
-            this.gbxPRS_SETTING.Size = new System.Drawing.Size(579, 258);
+            this.gbxPRS_SETTING.Size = new System.Drawing.Size(579, 260);
             this.gbxPRS_SETTING.TabIndex = 84;
             this.gbxPRS_SETTING.TabStop = false;
             this.gbxPRS_SETTING.Text = "BOTTOM CAM Y/Z POSITION";
@@ -3360,8 +3405,8 @@
             // dataGridViewTextBoxColumn48
             // 
             this.dataGridViewTextBoxColumn48.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn48.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn48.DefaultCellStyle = dataGridViewCellStyle105;
             this.dataGridViewTextBoxColumn48.HeaderText = "";
             this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
             this.dataGridViewTextBoxColumn48.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3378,8 +3423,8 @@
             // 
             // dataGridViewTextBoxColumn50
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn50.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn50.DefaultCellStyle = dataGridViewCellStyle106;
             this.dataGridViewTextBoxColumn50.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
             this.dataGridViewTextBoxColumn50.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3388,8 +3433,8 @@
             // 
             // Column8
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle107;
             this.Column8.HeaderText = "Z AXIS";
             this.Column8.Name = "Column8";
             this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3429,7 +3474,7 @@
             this.gbxMARK_SETTING.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxMARK_SETTING.Location = new System.Drawing.Point(550, 4);
             this.gbxMARK_SETTING.Name = "gbxMARK_SETTING";
-            this.gbxMARK_SETTING.Size = new System.Drawing.Size(579, 140);
+            this.gbxMARK_SETTING.Size = new System.Drawing.Size(579, 202);
             this.gbxMARK_SETTING.TabIndex = 83;
             this.gbxMARK_SETTING.TabStop = false;
             this.gbxMARK_SETTING.Text = "TOP CAM X/Z POSITION";
@@ -3458,15 +3503,15 @@
             this.dgvMarkVision.RowHeadersVisible = false;
             this.dgvMarkVision.RowHeadersWidth = 55;
             this.dgvMarkVision.RowTemplate.Height = 23;
-            this.dgvMarkVision.Size = new System.Drawing.Size(570, 119);
+            this.dgvMarkVision.Size = new System.Drawing.Size(570, 180);
             this.dgvMarkVision.TabIndex = 1235;
             this.dgvMarkVision.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMarkVision_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle108;
             this.dataGridViewTextBoxColumn1.HeaderText = "";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3483,8 +3528,8 @@
             // 
             // dataGridViewTextBoxColumn39
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle109;
             this.dataGridViewTextBoxColumn39.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
             this.dataGridViewTextBoxColumn39.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3493,8 +3538,8 @@
             // 
             // dataGridViewTextBoxColumn40
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn40.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn40.DefaultCellStyle = dataGridViewCellStyle110;
             this.dataGridViewTextBoxColumn40.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
             this.dataGridViewTextBoxColumn40.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3535,7 +3580,7 @@
             this.gbxIPALLET_SETTING.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxIPALLET_SETTING.Location = new System.Drawing.Point(3, 3);
             this.gbxIPALLET_SETTING.Name = "gbxIPALLET_SETTING";
-            this.gbxIPALLET_SETTING.Size = new System.Drawing.Size(540, 274);
+            this.gbxIPALLET_SETTING.Size = new System.Drawing.Size(541, 307);
             this.gbxIPALLET_SETTING.TabIndex = 79;
             this.gbxIPALLET_SETTING.TabStop = false;
             this.gbxIPALLET_SETTING.Text = "MAP-BLOCK STAGE Y POSITION";
@@ -3562,15 +3607,15 @@
             this.dgvMappingTable.RowHeadersVisible = false;
             this.dgvMappingTable.RowHeadersWidth = 55;
             this.dgvMappingTable.RowTemplate.Height = 23;
-            this.dgvMappingTable.Size = new System.Drawing.Size(529, 208);
+            this.dgvMappingTable.Size = new System.Drawing.Size(529, 240);
             this.dgvMappingTable.TabIndex = 1245;
             this.dgvMappingTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMappingTable_CellClick);
             // 
             // dataGridViewTextBoxColumn42
             // 
             this.dataGridViewTextBoxColumn42.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn42.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn42.DefaultCellStyle = dataGridViewCellStyle111;
             this.dataGridViewTextBoxColumn42.HeaderText = "";
             this.dataGridViewTextBoxColumn42.Name = "dataGridViewTextBoxColumn42";
             this.dataGridViewTextBoxColumn42.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3587,8 +3632,8 @@
             // 
             // dataGridViewTextBoxColumn44
             // 
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle112;
             this.dataGridViewTextBoxColumn44.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
             this.dataGridViewTextBoxColumn44.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3741,6 +3786,10 @@
             // 
             this.Head.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Head.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Head.Controls.Add(this.groupBox13);
+            this.Head.Controls.Add(this.chkOptionPRSSpd);
+            this.Head.Controls.Add(this.lblPRSStepSpeed);
+            this.Head.Controls.Add(this.label96);
             this.Head.Controls.Add(this.groupBox18);
             this.Head.Controls.Add(this.pnlTrayTeachingDir1);
             this.Head.Controls.Add(this.pnlTrayTeachingDir0);
@@ -3777,6 +3826,175 @@
             this.Head.Size = new System.Drawing.Size(1135, 864);
             this.Head.TabIndex = 4;
             this.Head.Text = "HEAD";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.SelectHead);
+            this.groupBox13.Controls.Add(this.SavePrsOffset);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk6);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk5);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk4);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk3);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk2);
+            this.groupBox13.Controls.Add(this.lbPrsOffsetPk1);
+            this.groupBox13.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.groupBox13.Location = new System.Drawing.Point(704, 409);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(425, 68);
+            this.groupBox13.TabIndex = 1541;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "PRS FOCUS OFFSET (대기 위치 기준)";
+            // 
+            // SelectHead
+            // 
+            this.SelectHead.AutoSize = true;
+            this.SelectHead.Location = new System.Drawing.Point(9, 16);
+            this.SelectHead.Name = "SelectHead";
+            this.SelectHead.Size = new System.Drawing.Size(82, 13);
+            this.SelectHead.TabIndex = 1293;
+            this.SelectHead.Text = "HEAD 1 PICKER";
+            // 
+            // SavePrsOffset
+            // 
+            this.SavePrsOffset.BackColor = System.Drawing.Color.White;
+            this.SavePrsOffset.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SavePrsOffset.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.SavePrsOffset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SavePrsOffset.Location = new System.Drawing.Point(364, 30);
+            this.SavePrsOffset.Name = "SavePrsOffset";
+            this.SavePrsOffset.Padding = new System.Windows.Forms.Padding(3, 0, 1, 0);
+            this.SavePrsOffset.Size = new System.Drawing.Size(56, 33);
+            this.SavePrsOffset.TabIndex = 1292;
+            this.SavePrsOffset.Tag = "103";
+            this.SavePrsOffset.Text = "저장";
+            this.SavePrsOffset.UseVisualStyleBackColor = false;
+            this.SavePrsOffset.Click += new System.EventHandler(this.EventClick_SavePrsOffset);
+            // 
+            // lbPrsOffsetPk6
+            // 
+            this.lbPrsOffsetPk6.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk6.Location = new System.Drawing.Point(304, 31);
+            this.lbPrsOffsetPk6.Name = "lbPrsOffsetPk6";
+            this.lbPrsOffsetPk6.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk6.TabIndex = 1289;
+            this.lbPrsOffsetPk6.Tag = "MD";
+            this.lbPrsOffsetPk6.Text = "0";
+            this.lbPrsOffsetPk6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk6.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // lbPrsOffsetPk5
+            // 
+            this.lbPrsOffsetPk5.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk5.Location = new System.Drawing.Point(245, 31);
+            this.lbPrsOffsetPk5.Name = "lbPrsOffsetPk5";
+            this.lbPrsOffsetPk5.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk5.TabIndex = 1288;
+            this.lbPrsOffsetPk5.Tag = "MD";
+            this.lbPrsOffsetPk5.Text = "0";
+            this.lbPrsOffsetPk5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk5.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // lbPrsOffsetPk4
+            // 
+            this.lbPrsOffsetPk4.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk4.Location = new System.Drawing.Point(185, 31);
+            this.lbPrsOffsetPk4.Name = "lbPrsOffsetPk4";
+            this.lbPrsOffsetPk4.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk4.TabIndex = 1287;
+            this.lbPrsOffsetPk4.Tag = "MD";
+            this.lbPrsOffsetPk4.Text = "0";
+            this.lbPrsOffsetPk4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk4.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // lbPrsOffsetPk3
+            // 
+            this.lbPrsOffsetPk3.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk3.Location = new System.Drawing.Point(126, 31);
+            this.lbPrsOffsetPk3.Name = "lbPrsOffsetPk3";
+            this.lbPrsOffsetPk3.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk3.TabIndex = 1286;
+            this.lbPrsOffsetPk3.Tag = "MD";
+            this.lbPrsOffsetPk3.Text = "0";
+            this.lbPrsOffsetPk3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk3.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // lbPrsOffsetPk2
+            // 
+            this.lbPrsOffsetPk2.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk2.Location = new System.Drawing.Point(65, 31);
+            this.lbPrsOffsetPk2.Name = "lbPrsOffsetPk2";
+            this.lbPrsOffsetPk2.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk2.TabIndex = 1285;
+            this.lbPrsOffsetPk2.Tag = "MD";
+            this.lbPrsOffsetPk2.Text = "0";
+            this.lbPrsOffsetPk2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk2.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // lbPrsOffsetPk1
+            // 
+            this.lbPrsOffsetPk1.BackColor = System.Drawing.Color.White;
+            this.lbPrsOffsetPk1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrsOffsetPk1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPrsOffsetPk1.Location = new System.Drawing.Point(6, 31);
+            this.lbPrsOffsetPk1.Name = "lbPrsOffsetPk1";
+            this.lbPrsOffsetPk1.Size = new System.Drawing.Size(54, 29);
+            this.lbPrsOffsetPk1.TabIndex = 1284;
+            this.lbPrsOffsetPk1.Tag = "MD";
+            this.lbPrsOffsetPk1.Text = "0";
+            this.lbPrsOffsetPk1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPrsOffsetPk1.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // chkOptionPRSSpd
+            // 
+            this.chkOptionPRSSpd.Location = new System.Drawing.Point(803, 534);
+            this.chkOptionPRSSpd.Name = "chkOptionPRSSpd";
+            this.chkOptionPRSSpd.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkOptionPRSSpd.OffForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.chkOptionPRSSpd.OffText = "하부 비전 스텝 속도 고정";
+            this.chkOptionPRSSpd.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkOptionPRSSpd.OnForeColor = System.Drawing.Color.Yellow;
+            this.chkOptionPRSSpd.OnText = "하부 비전 스텝 속도 변경";
+            this.chkOptionPRSSpd.Size = new System.Drawing.Size(319, 31);
+            this.chkOptionPRSSpd.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android;
+            this.chkOptionPRSSpd.TabIndex = 1540;
+            this.chkOptionPRSSpd.Tag = "MC";
+            // 
+            // lblPRSStepSpeed
+            // 
+            this.lblPRSStepSpeed.BackColor = System.Drawing.Color.White;
+            this.lblPRSStepSpeed.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPRSStepSpeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPRSStepSpeed.Location = new System.Drawing.Point(1062, 502);
+            this.lblPRSStepSpeed.Name = "lblPRSStepSpeed";
+            this.lblPRSStepSpeed.Size = new System.Drawing.Size(60, 29);
+            this.lblPRSStepSpeed.TabIndex = 1539;
+            this.lblPRSStepSpeed.Tag = "MC";
+            this.lblPRSStepSpeed.Text = "00";
+            this.lblPRSStepSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPRSStepSpeed.Click += new System.EventHandler(this.ParaData_Click);
+            // 
+            // label96
+            // 
+            this.label96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label96.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label96.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label96.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label96.Location = new System.Drawing.Point(802, 502);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(256, 29);
+            this.label96.TabIndex = 1538;
+            this.label96.Text = "- 하부 비전 스탭 속도 (mm/sec)";
+            this.label96.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox18
             // 
@@ -4053,7 +4271,7 @@
             // 
             this.pnlTrayTeachingDir1.BackColor = System.Drawing.Color.Red;
             this.pnlTrayTeachingDir1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlTrayTeachingDir1.Location = new System.Drawing.Point(794, 425);
+            this.pnlTrayTeachingDir1.Location = new System.Drawing.Point(765, 538);
             this.pnlTrayTeachingDir1.Name = "pnlTrayTeachingDir1";
             this.pnlTrayTeachingDir1.Size = new System.Drawing.Size(15, 12);
             this.pnlTrayTeachingDir1.TabIndex = 1537;
@@ -4062,7 +4280,7 @@
             // 
             this.pnlTrayTeachingDir0.BackColor = System.Drawing.Color.Red;
             this.pnlTrayTeachingDir0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlTrayTeachingDir0.Location = new System.Drawing.Point(739, 425);
+            this.pnlTrayTeachingDir0.Location = new System.Drawing.Point(710, 538);
             this.pnlTrayTeachingDir0.Name = "pnlTrayTeachingDir0";
             this.pnlTrayTeachingDir0.Size = new System.Drawing.Size(15, 12);
             this.pnlTrayTeachingDir0.TabIndex = 1536;
@@ -4072,7 +4290,7 @@
             this.lbMAPBLOCK_TEACHING1.BackColor = System.Drawing.Color.Black;
             this.lbMAPBLOCK_TEACHING1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lbMAPBLOCK_TEACHING1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lbMAPBLOCK_TEACHING1.Location = new System.Drawing.Point(596, 389);
+            this.lbMAPBLOCK_TEACHING1.Location = new System.Drawing.Point(572, 503);
             this.lbMAPBLOCK_TEACHING1.Margin = new System.Windows.Forms.Padding(0);
             this.lbMAPBLOCK_TEACHING1.Name = "lbMAPBLOCK_TEACHING1";
             this.lbMAPBLOCK_TEACHING1.Size = new System.Drawing.Size(117, 26);
@@ -4084,7 +4302,7 @@
             // 
             this.pnlMapBlackTeaching1Dir1.BackColor = System.Drawing.Color.Yellow;
             this.pnlMapBlackTeaching1Dir1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMapBlackTeaching1Dir1.Location = new System.Drawing.Point(680, 569);
+            this.pnlMapBlackTeaching1Dir1.Location = new System.Drawing.Point(657, 682);
             this.pnlMapBlackTeaching1Dir1.Name = "pnlMapBlackTeaching1Dir1";
             this.pnlMapBlackTeaching1Dir1.Size = new System.Drawing.Size(16, 15);
             this.pnlMapBlackTeaching1Dir1.TabIndex = 1535;
@@ -4093,7 +4311,7 @@
             // 
             this.pnlMapBlackTeaching1Dir0.BackColor = System.Drawing.Color.Yellow;
             this.pnlMapBlackTeaching1Dir0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMapBlackTeaching1Dir0.Location = new System.Drawing.Point(606, 569);
+            this.pnlMapBlackTeaching1Dir0.Location = new System.Drawing.Point(583, 682);
             this.pnlMapBlackTeaching1Dir0.Name = "pnlMapBlackTeaching1Dir0";
             this.pnlMapBlackTeaching1Dir0.Size = new System.Drawing.Size(16, 15);
             this.pnlMapBlackTeaching1Dir0.TabIndex = 1534;
@@ -4101,7 +4319,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(596, 411);
+            this.pictureBox3.Location = new System.Drawing.Point(572, 524);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(117, 189);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -4331,7 +4549,7 @@
             this.lbTRAY_TEACHING.BackColor = System.Drawing.Color.Black;
             this.lbTRAY_TEACHING.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lbTRAY_TEACHING.ForeColor = System.Drawing.Color.Yellow;
-            this.lbTRAY_TEACHING.Location = new System.Drawing.Point(716, 390);
+            this.lbTRAY_TEACHING.Location = new System.Drawing.Point(688, 503);
             this.lbTRAY_TEACHING.Name = "lbTRAY_TEACHING";
             this.lbTRAY_TEACHING.Size = new System.Drawing.Size(117, 26);
             this.lbTRAY_TEACHING.TabIndex = 1295;
@@ -4370,7 +4588,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(717, 411);
+            this.pictureBox5.Location = new System.Drawing.Point(688, 524);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(117, 189);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -4417,8 +4635,8 @@
             // dataGridViewTextBoxColumn56
             // 
             this.dataGridViewTextBoxColumn56.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle113.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle113;
             this.dataGridViewTextBoxColumn56.HeaderText = "";
             this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
             this.dataGridViewTextBoxColumn56.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4435,8 +4653,8 @@
             // 
             // dataGridViewTextBoxColumn58
             // 
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn58.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle114.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn58.DefaultCellStyle = dataGridViewCellStyle114;
             this.dataGridViewTextBoxColumn58.HeaderText = "T AXIS";
             this.dataGridViewTextBoxColumn58.Name = "dataGridViewTextBoxColumn58";
             this.dataGridViewTextBoxColumn58.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4502,8 +4720,8 @@
             // dataGridViewTextBoxColumn36
             // 
             this.dataGridViewTextBoxColumn36.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn36.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn36.DefaultCellStyle = dataGridViewCellStyle115;
             this.dataGridViewTextBoxColumn36.HeaderText = "";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4520,8 +4738,8 @@
             // 
             // dataGridViewTextBoxColumn38
             // 
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle116.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle116;
             this.dataGridViewTextBoxColumn38.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
             this.dataGridViewTextBoxColumn38.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4640,8 +4858,8 @@
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle117;
             this.dataGridViewTextBoxColumn20.HeaderText = "";
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4658,8 +4876,8 @@
             // 
             // dataGridViewTextBoxColumn22
             // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle118.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle118;
             this.dataGridViewTextBoxColumn22.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
             this.dataGridViewTextBoxColumn22.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4729,7 +4947,7 @@
             this.label155.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label155.ForeColor = System.Drawing.Color.Maroon;
             this.label155.Image = ((System.Drawing.Image)(resources.GetObject("label155.Image")));
-            this.label155.Location = new System.Drawing.Point(339, 794);
+            this.label155.Location = new System.Drawing.Point(310, 801);
             this.label155.Name = "label155";
             this.label155.Size = new System.Drawing.Size(44, 25);
             this.label155.TabIndex = 1254;
@@ -4755,7 +4973,7 @@
             this.label153.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label153.ForeColor = System.Drawing.Color.Maroon;
             this.label153.Image = ((System.Drawing.Image)(resources.GetObject("label153.Image")));
-            this.label153.Location = new System.Drawing.Point(413, 670);
+            this.label153.Location = new System.Drawing.Point(395, 676);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(44, 28);
             this.label153.TabIndex = 1252;
@@ -4768,7 +4986,7 @@
             this.label150.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label150.ForeColor = System.Drawing.Color.Maroon;
             this.label150.Image = ((System.Drawing.Image)(resources.GetObject("label150.Image")));
-            this.label150.Location = new System.Drawing.Point(250, 803);
+            this.label150.Location = new System.Drawing.Point(221, 810);
             this.label150.Name = "label150";
             this.label150.Size = new System.Drawing.Size(44, 25);
             this.label150.TabIndex = 1250;
@@ -4781,7 +4999,7 @@
             this.label89.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label89.ForeColor = System.Drawing.Color.Maroon;
             this.label89.Image = ((System.Drawing.Image)(resources.GetObject("label89.Image")));
-            this.label89.Location = new System.Drawing.Point(398, 518);
+            this.label89.Location = new System.Drawing.Point(379, 518);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(50, 30);
             this.label89.TabIndex = 1246;
@@ -4794,7 +5012,7 @@
             this.label88.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label88.ForeColor = System.Drawing.Color.Maroon;
             this.label88.Image = ((System.Drawing.Image)(resources.GetObject("label88.Image")));
-            this.label88.Location = new System.Drawing.Point(452, 518);
+            this.label88.Location = new System.Drawing.Point(433, 518);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(50, 30);
             this.label88.TabIndex = 1245;
@@ -4807,7 +5025,7 @@
             this.label87.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label87.ForeColor = System.Drawing.Color.Maroon;
             this.label87.Image = ((System.Drawing.Image)(resources.GetObject("label87.Image")));
-            this.label87.Location = new System.Drawing.Point(600, 791);
+            this.label87.Location = new System.Drawing.Point(581, 798);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(44, 28);
             this.label87.TabIndex = 1244;
@@ -4820,7 +5038,7 @@
             this.label86.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label86.ForeColor = System.Drawing.Color.Maroon;
             this.label86.Image = ((System.Drawing.Image)(resources.GetObject("label86.Image")));
-            this.label86.Location = new System.Drawing.Point(556, 558);
+            this.label86.Location = new System.Drawing.Point(520, 554);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(26, 25);
             this.label86.TabIndex = 1243;
@@ -4833,7 +5051,7 @@
             this.label85.Font = new System.Drawing.Font("굴림체", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label85.ForeColor = System.Drawing.Color.Maroon;
             this.label85.Image = ((System.Drawing.Image)(resources.GetObject("label85.Image")));
-            this.label85.Location = new System.Drawing.Point(565, 588);
+            this.label85.Location = new System.Drawing.Point(536, 608);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(26, 25);
             this.label85.TabIndex = 1242;
@@ -4895,7 +5113,7 @@
             // pSORTER
             // 
             this.pSORTER.Image = ((System.Drawing.Image)(resources.GetObject("pSORTER.Image")));
-            this.pSORTER.Location = new System.Drawing.Point(145, 517);
+            this.pSORTER.Location = new System.Drawing.Point(110, 517);
             this.pSORTER.Name = "pSORTER";
             this.pSORTER.Size = new System.Drawing.Size(580, 335);
             this.pSORTER.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -5003,8 +5221,8 @@
             // dataGridViewTextBoxColumn33
             // 
             this.dataGridViewTextBoxColumn33.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn33.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle119.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn33.DefaultCellStyle = dataGridViewCellStyle119;
             this.dataGridViewTextBoxColumn33.HeaderText = "";
             this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
             this.dataGridViewTextBoxColumn33.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5021,8 +5239,8 @@
             // 
             // dataGridViewTextBoxColumn35
             // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn35.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle120.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn35.DefaultCellStyle = dataGridViewCellStyle120;
             this.dataGridViewTextBoxColumn35.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
             this.dataGridViewTextBoxColumn35.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5087,8 +5305,8 @@
             // dataGridViewTextBoxColumn30
             // 
             this.dataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn30.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle121.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn30.DefaultCellStyle = dataGridViewCellStyle121;
             this.dataGridViewTextBoxColumn30.HeaderText = "";
             this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
             this.dataGridViewTextBoxColumn30.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5105,8 +5323,8 @@
             // 
             // dataGridViewTextBoxColumn32
             // 
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle122.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle122;
             this.dataGridViewTextBoxColumn32.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
             this.dataGridViewTextBoxColumn32.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5171,8 +5389,8 @@
             // dataGridViewTextBoxColumn27
             // 
             this.dataGridViewTextBoxColumn27.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn27.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn27.DefaultCellStyle = dataGridViewCellStyle123;
             this.dataGridViewTextBoxColumn27.HeaderText = "";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             this.dataGridViewTextBoxColumn27.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5189,8 +5407,8 @@
             // 
             // dataGridViewTextBoxColumn29
             // 
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn29.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle124.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn29.DefaultCellStyle = dataGridViewCellStyle124;
             this.dataGridViewTextBoxColumn29.HeaderText = "Y AXIS";
             this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
             this.dataGridViewTextBoxColumn29.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5343,8 +5561,8 @@
             // dataGridViewTextBoxColumn41
             // 
             this.dataGridViewTextBoxColumn41.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn41.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle125.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn41.DefaultCellStyle = dataGridViewCellStyle125;
             this.dataGridViewTextBoxColumn41.HeaderText = "";
             this.dataGridViewTextBoxColumn41.Name = "dataGridViewTextBoxColumn41";
             this.dataGridViewTextBoxColumn41.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5361,8 +5579,8 @@
             // 
             // dataGridViewTextBoxColumn46
             // 
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn46.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn46.DefaultCellStyle = dataGridViewCellStyle126;
             this.dataGridViewTextBoxColumn46.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn46.Name = "dataGridViewTextBoxColumn46";
             this.dataGridViewTextBoxColumn46.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5430,8 +5648,8 @@
             // dataGridViewTextBoxColumn23
             // 
             this.dataGridViewTextBoxColumn23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle127.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle127;
             this.dataGridViewTextBoxColumn23.HeaderText = "";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             this.dataGridViewTextBoxColumn23.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5448,8 +5666,8 @@
             // 
             // dataGridViewTextBoxColumn25
             // 
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle128.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle128;
             this.dataGridViewTextBoxColumn25.HeaderText = "X AXIS";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -5458,8 +5676,8 @@
             // 
             // dataGridViewTextBoxColumn26
             // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle129.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle129;
             this.dataGridViewTextBoxColumn26.HeaderText = "Z AXIS";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             this.dataGridViewTextBoxColumn26.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -8259,6 +8477,24 @@
             this.TmrMT.Interval = 200;
             this.TmrMT.Tick += new System.EventHandler(this.TmrMT_Tick);
             // 
+            // panel18
+            // 
+            this.panel18.BackColor = System.Drawing.Color.Lavender;
+            this.panel18.Controls.Add(this.swSave);
+            this.panel18.Controls.Add(this.bMT_6);
+            this.panel18.Controls.Add(this.gbxJogSpd);
+            this.panel18.Controls.Add(this.bMT_0);
+            this.panel18.Controls.Add(this.bMT_5);
+            this.panel18.Controls.Add(this.bMT_1);
+            this.panel18.Controls.Add(this.bMT_4);
+            this.panel18.Controls.Add(this.bMT_2);
+            this.panel18.Controls.Add(this.bMT_3);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel18.Location = new System.Drawing.Point(0, 0);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(138, 875);
+            this.panel18.TabIndex = 169;
+            // 
             // FormMotor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -8266,17 +8502,18 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1277, 875);
             this.ControlBox = false;
+            this.Controls.Add(this.panel18);
             this.Controls.Add(this.tcMTPAGE);
-            this.Controls.Add(this.pTopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMotor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MOTOR TEACHING";
             this.gbxJogSpd.ResumeLayout(false);
             this.gbxJogSpd.PerformLayout();
-            this.pTopPanel.ResumeLayout(false);
             this.tcMTPAGE.ResumeLayout(false);
             this.RailTeaching.ResumeLayout(false);
+            this.pnGripperLoadingPos.ResumeLayout(false);
+            this.pnGripperLoadingPos.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel9.ResumeLayout(false);
@@ -8312,6 +8549,8 @@
             this.pnlSelect_MapBlock.PerformLayout();
             this.Head.ResumeLayout(false);
             this.Head.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox5.ResumeLayout(false);
@@ -8393,6 +8632,7 @@
             this.groupBox11.PerformLayout();
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
+            this.panel18.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -8414,7 +8654,6 @@
         private System.Windows.Forms.Button bMT_0;
         private System.Windows.Forms.Button swMotorSelect;
         private System.Windows.Forms.Button swSave;
-        private Owf.Controls.A1Panel pTopPanel;
         private System.Windows.Forms.TabControl tcMTPAGE;
         private System.Windows.Forms.TabPage StripUnitPkr;
         private System.Windows.Forms.Label label22;
@@ -8953,7 +9192,6 @@
         private System.Windows.Forms.ComboBox cbxZigHoleNum;
         private System.Windows.Forms.Button HD_StageZigViewPos;
         private System.Windows.Forms.Label label79;
-        private JCS.ToggleSwitch ChkGripperLoadingPos;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label lbPlaceCheckDelay;
         private System.Windows.Forms.Label label92;
@@ -8961,5 +9199,23 @@
         private System.Windows.Forms.Label label93;
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label lblMGZ_Pitch_Spd;
+        private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.Label lblStageErrorMovingSpeed;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.Panel pnGripperLoadingPos;
+        private System.Windows.Forms.RadioButton rbtGripperLoadingPosCommon;
+        private System.Windows.Forms.RadioButton rbtGripperLoadingPosIndividual;
+        private System.Windows.Forms.Label lblPRSStepSpeed;
+        private System.Windows.Forms.Label label96;
+        private JCS.ToggleSwitch chkOptionPRSSpd;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Label lbPrsOffsetPk6;
+        private System.Windows.Forms.Label lbPrsOffsetPk5;
+        private System.Windows.Forms.Label lbPrsOffsetPk4;
+        private System.Windows.Forms.Label lbPrsOffsetPk3;
+        private System.Windows.Forms.Label lbPrsOffsetPk2;
+        private System.Windows.Forms.Label lbPrsOffsetPk1;
+        private System.Windows.Forms.Button SavePrsOffset;
+        private System.Windows.Forms.Label SelectHead;
     }
 }

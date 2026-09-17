@@ -1,4 +1,5 @@
 ﻿using LIB_.DateType;
+using NSS_3310S;
 using Object;
 using System;
 using System.Drawing;
@@ -8,10 +9,10 @@ using System.Windows.Forms;
 
 public class TEACH_ : DATA_
 {
-    public static int iOldValue = 0;
-    public static double dOldValue = 0;
-    public static int newStatus = 0;
-    public static int oldStatus = 0;
+    public static int iOldValue     = 0;
+    public static double dOldValue  = 0;
+    public static int newStatus     = 0;
+    public static int oldStatus     = 0;
  
     public static void WRTIE_PRE_ALIGN(double x, double y, double t){
         string sWR = x.ToString() + "," + y.ToString() + "," + t.ToString() + ";";
@@ -745,11 +746,6 @@ public class TEACH_ : DATA_
         if (lbl.Tag.ToString() == "MC" || lbl.Tag.ToString() == "mc")   WR_MCPara(lbl.TabIndex, value);
         else                                                            WR_MDLPara(lbl.TabIndex, value);
     }
-    public static void Write_Parameter(JCS.ToggleSwitch ts){
-        int value = ts.Checked ? 1 : 0;
-        if (ts.Tag.ToString() == "MC" || ts.Tag.ToString() == "mc")     WR_MCPara(ts.TabIndex, value);
-        else                                                            WR_MDLPara(ts.TabIndex, value);
-    }
     public static void Write_Parameter(int nPara, string Para, RadioButton[] rbtn){
         int value = 0;
         for (int i = 0; i < rbtn.Length; i++){
@@ -757,6 +753,10 @@ public class TEACH_ : DATA_
         }
         if (Para == "MC" || Para == "mc")   WR_MCPara(nPara, value);
         else                                WR_MDLPara(nPara, value);
+    }
+    public static void Wirte_Para(int nPara, string Para, double value){
+        if (Para == "MC" || Para == "mc") WR_MCPara(nPara, value);
+        else WR_MDLPara(nPara, value);
     }
 
     public static void Write_MachinePara(int nPara, double dValue)  { WR_MCPara(nPara, dValue); }
@@ -1252,7 +1252,7 @@ public class TEACH_ : DATA_
 
         mi.Pos = FILE_.RDDouble(fn, "MT_" + m.ToString(), "POS_" + p.ToString(), 0.1);
         if (p >= CNT_.ComPos){
-            if (prMACHINE[SelectMTSpd] == (int)ePARA.COM) fn = PATH_.COMMON;
+            if (prMACHINE[CP.SelectMotorSpd] == (int)ePARA.COM) fn = PATH_.COMMON;
         }
         mi.Spd      = FILE_.RDDouble(fn, "MT_" + m.ToString(), "SPD_" + p.ToString(), 10);
         mi.Acc      = FILE_.RDDouble(fn, "MT_" + m.ToString(), "ACC_" + p.ToString(), 1000);
@@ -1306,7 +1306,7 @@ public class TEACH_ : DATA_
 
         FILE_.WRDouble(fn, "MT_" + m.ToString(), "POS_" + p.ToString(), mi.Pos);
         if (p >= CNT_.ComPos){
-            if (prMACHINE[SelectMTSpd] == (int)ePARA.COM) fn = PATH_.COMMON;
+            if (prMACHINE[CP.SelectMotorSpd] == (int)ePARA.COM) fn = PATH_.COMMON;
         }
         FILE_.WRDouble(fn, "MT_" + m.ToString(), "SPD_" + p.ToString(), mi.Spd);
         FILE_.WRDouble(fn, "MT_" + m.ToString(), "ACC_" + p.ToString(), mi.Acc);

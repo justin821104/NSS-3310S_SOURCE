@@ -158,7 +158,7 @@ namespace NSS_3310S{
                                       OKTray1_Unloading, OKTray2_Unloading, OKTray1_Loading, OKTray2_Loading,
                                       NGTray_Unloading, NGTray_Loading,
                                       EmptyLift_TrayLoading, EmptyTrayPickUp,
-                                      btnPkCal, CycleRun_PRS_TEST, RunMarkInspection, btnAllPkCal, Pkr_Pic
+                                      btnPkCal, CycleRun_PRS_TEST, RunMarkInspection, btnAllPkCal, Pkr_Pic, Stage_CalZigCenter
             };
             for (int i = 0; i < CycleRun.Length; i++){
                 CycleRun[i].TabIndex = ManualNumber.MNCycleRun[i];
@@ -629,7 +629,12 @@ namespace NSS_3310S{
 
                     case ManualNumber.Trigger:
                         if (BTN.Name == "TopCam_Trigger") DATA_.iMANUAL.int_1 = (int)eTRIGGER.MARK;
-                        else DATA_.iMANUAL.int_1 = (int)eTRIGGER.BTM;
+                        else if (BTN.Name == "HD1_Trigger"){
+                            DATA_.iMANUAL.int_1 = (int)eTRIGGER.HD1;
+                        }
+                        else{
+                            DATA_.iMANUAL.int_1 = (int)eTRIGGER.HD2;
+                        }
                         break;
 
                     case ManualNumber.PkrVac:
@@ -748,6 +753,12 @@ namespace NSS_3310S{
                         DATA_.iMANUAL.int_7 = cMB_UNIT_Y.SelectedIndex;
 
                         break;
+
+                    case ManualNumber.TopCamCalZigCenter:
+                        DATA_.iMANUAL.iMT1 = mtStage;
+                        DATA_.iMANUAL.int_1 = nStage;
+                        break;
+
                     default: break;
                 }
                 DATA_.iMANUAL.bRESULT = COM_.RUN_MANUAL(DATA_.iMANUAL.Number, DATA_.IsSTRING[S.ManualMessage], !cbkNotMSG.Checked);

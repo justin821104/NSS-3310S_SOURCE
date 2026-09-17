@@ -4,12 +4,11 @@ using System;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class MAGAZINE : BASE{
-        int nThread = T.Magazine;
+        readonly int nThread = T.Magazine;
         string cmds = string.Empty;
         long TackStart = 0, TackEnd = 0;
         eRTN eReturn;
-        string offset;
-
+        
         bool CheckRunThread(){
             if (eMCStatus != eMachineStatus.AUTO /*|| bDRYRUN*/){
                 UTIL_.DELAY(100);
@@ -35,24 +34,34 @@ namespace NSS_3310S.SEQ.MODULE{
 
             LogStart(nThread, comment + " 시작");
             while (eRTN.SUCESS != UnClamp("매거진 언클램프")) ;
+            
+            // 로더 콘베어 매거진 감지 센서 확인
+            //매거진 없음!!!
+
+            //
+
             while (eRTN.SUCESS != MoveY(P.Ready, "", comment + " 엘리베이터 Y축 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.Recive, "", comment + " 엘리베이터 Z축 로딩 매거진 위치 이송")) ;
             while (eRTN.SUCESS != MoveY(P.Recive, "", comment + " 엘리베이터 Y축 로딩 매거진 위치 이송")) ;
         ReCheck:
             eReturn = CcwConveyor("로더 컨베어 매거진 투입");
             if (eReturn != eRTN.SUCESS && !bDRYRUN){
+                if (eReturn == eRTN.AREA_CHECK || eReturn == eRTN.PUSH_STOP){
+                    UTIL_.DELAY(100);
+                    goto ReCheck;
+                }
                 if (bMF) return eRTN.NotLoadingMagazine;
                 AddMessage(nThread, comment + " 매거진 없음 !");
-                COM_.ViewWarning(nThread, W.LDCst_Requst);
+                W.ViewWarning(nThread, W.LDCst_Requst);
                 bWaitProduct = true;
-                while (UTIL_.WaitWarning(nThread, W.LDCst_Requst, "매거진 공급 요청")) ;
-                COM_.SetBit(nThread, B.CstRequest, true, "매거진 공급 확인 플로그");
-                while (UTIL_.WaitBIT(nThread, B.CstRequest, true, "매거진 공급 상태 확인")) ;
+                while (W.WaitWarning(nThread, W.LDCst_Requst, "매거진 공급 요청")) ;
+                B.SetBit(nThread, B.CstRequest, true, "매거진 공급 확인 플로그");
+                while (B.WaitBIT(nThread, B.CstRequest, true, "매거진 공급 상태 확인")) ;
                 UTIL_.DELAY(1000);
                 bWaitProduct = false;
                 goto ReCheck;
             }
-            COM_.SetBit(nThread, B.MGZWorking, true, "엘리베이터 매거진 작업 진행");
+            B.SetBit(nThread, B.MGZWorking, true, "엘리베이터 매거진 작업 진행");
             while (eRTN.SUCESS != MoveY(P.Recive, "", comment + " 엘리베이터 Y축 로딩 매거진 위치 이송")) ;
             
             if (prMACHINE[CP.UseRFID] == (int)eUSE.USE){
@@ -98,24 +107,24 @@ namespace NSS_3310S.SEQ.MODULE{
                 while (eRTN.SUCESS != MoveY(P.FirstSlot, "", comment + "엘리베이터 Y축 매거진 첫번째 슬롯 위치 이송")) ;
                 while (eRTN.SUCESS != MoveMGZSlot((int)IsLONG[L.CurSlotCount], "", "엘리베이터 Z축 매거진 슬롯 " + IsLONG[L.CurSlotCount].ToString("00") + " 위치 이송")) ;
                 MAP_.SET_CstMapSlotWorking(M.ElvZ, (int)IsLONG[L.CurSlotCount]);
-                while (UTIL_.WaitBIT(nThread, B.Dry, true, "스트립 공급 일시 정지")) ;
+                while (B.WaitBIT(nThread, B.Dry, true, "스트립 공급 일시 정지")) ;
                 if (!bDRYRUN){
                     while (!LAB_.INPUT(I.ELV_MZ_EXIST1) || !LAB_.INPUT(I.ELV_MZ_EXIST2)){
-                        UTIL_.OnERROR(E.emsMagazineDisappear);
+                        E.OnERROR(E.emsMagazineDisappear);
                         if (mIN[I.ELV_MZ_UNCLAMP]){
                             MAP_.SET_CstMapAllEmpty(M.ElvZ);
                             return 0;
                         }
                     }
                 }
-                COM_.SetBit(nThread, B.InRailRequest, true, "매거진 스트립 공급 위치");
-                while (UTIL_.WaitBIT(nThread, B.InRailRequest, true, "스트립 인-레일로 공급 완료 때까지 대기")) ;
+                B.SetBit(nThread, B.InRailRequest, true, "매거진 스트립 공급 위치");
+                while (B.WaitBIT(nThread, B.InRailRequest, true, "스트립 인-레일로 공급 완료 때까지 대기")) ;
                 MAP_.SET_CstMapSlotEmpty(M.ElvZ, (int)IsLONG[L.CurSlotCount]);
                 AddMessage(nThread, "매거진 " + IsLONG[L.CurSlotCount].ToString("00") + " 슬롯 투입 완료");
             }
             else{
                 AddMessage(nThread, comment + "CASSETE DISAPPEAR.(카세트 유무 확인 센서 감지 못했음)");
-                UTIL_.OnERROR(E.emsMagazineDisappear);
+                E.OnERROR(E.emsMagazineDisappear);
                 if (mIN[I.ELV_MZ_UNCLAMP]){
                     MAP_.SET_CstMapAllEmpty(M.ElvZ);
                 }
@@ -150,7 +159,7 @@ namespace NSS_3310S.SEQ.MODULE{
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.MGZCycle] = (TackEnd - TackStart) / 1000;
             LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",MGZ," + IsDOUBLE[D.MGZCycle].ToString(), "");
-            COM_.SetBit(nThread, B.MGZWorking, false, "엘리베이터 매거진 작업 진행");
+            B.SetBit(nThread, B.MGZWorking, false, "엘리베이터 매거진 작업 진행");
             TackStart = Environment.TickCount;
         }
         void AddMagazine(){
@@ -181,11 +190,11 @@ namespace NSS_3310S.SEQ.MODULE{
             if (LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK1) || LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK2)){
 #endif
                 AddMessage(nThread, comment + " - 매거진 가득참 !");
-                COM_.ViewWarning(nThread, W.ULDCst_FullCheck);
+                W.ViewWarning(nThread, W.ULDCst_FullCheck);
                 bWaitProduct = true;
-                while (UTIL_.WaitWarning(nThread, W.ULDCst_FullCheck, "매거진 제거 요청")) ;
-                COM_.SetBit(nThread, B.CstRequest, true, "매거진 배출 확인 플로그");
-                while (UTIL_.WaitBIT(nThread, B.CstRequest, true, "언로더 매거진 배출 상태 확인")) ;
+                while (W.WaitWarning(nThread, W.ULDCst_FullCheck, "매거진 제거 요청")) ;
+                B.SetBit(nThread, B.CstRequest, true, "매거진 배출 확인 플로그");
+                while (B.WaitBIT(nThread, B.CstRequest, true, "언로더 매거진 배출 상태 확인")) ;
                 bWaitProduct = false;
                 goto RECHECK_UNLOADING_MGZ;
             }
@@ -225,30 +234,56 @@ namespace NSS_3310S.SEQ.MODULE{
 #endif
             }
         }
-        public eRTN CwConveyor(string comment){ //후진
+        public eRTN CwConveyor(string comment) { //후진
             if (ChkRunning(nThread)) return eRTN.FAIL;
-            if (bDRYRUN){
+            if (bDRYRUN) {
                 Conveyor(eConv.FWD);
                 UTIL_.DELAY(3000);
                 Conveyor(eConv.STOP);
                 return eRTN.SUCESS;
             }
-
+            while (!mIN[I.LD_CONV_AREA_SENSOR]) {
+                if (mtCHK[M.StripPkX].Ev == "STOP" || mtCHK[M.StripPkX].Ev == "stop" || bPushStop) {
+                    UTIL_.DELAY(100);
+                    return eRTN.FAIL;
+                }
+                UTIL_.DELAY(100);
+            }
 
 #if _NSS3300
             int[] OffInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
             int[] OnOutputs = { O.LD_MGZ_CONVEYOR_CCW, O.LD_MGZ_CONVEYOR_BRAKE };
             int[] OffOutputs = { O.LD_MGZ_CONVEYOR_CW };
-            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, I.Null, OffInpts, OnOutputs, OffOutputs, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
+            eRTN RETUTN = WRAP_.RunACMotor(nThread, E.ConverRunCheck, I.Null, OffInpts, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment);
+            if (RETUTN == eRTN.AREA_CHECK) {
+                return eRTN.AREA_CHECK;
+            }
+            else if (RETUTN == eRTN.FAIL) {
                 return eRTN.TimeOver;
             }
+            else if (RETUTN == eRTN.PUSH_STOP){
+                return eRTN.PUSH_STOP;
+            }
+            //if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, I.Null, OffInpts, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR,(int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
+            //    return eRTN.TimeOver;
+            //}
 #else
             int[] OnInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
             int[] OnOutputs = { O.LD_CONV_CW };
             int[] OffOutputs = { O.LD_CONV_CCW, O.LD_CONV_STOP };
-            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
+            eRTN RETUTN = WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment);
+            if (RETUTN == eRTN.AREA_CHECK){
+                return eRTN.AREA_CHECK;
+            }
+            else if (RETUTN == eRTN.FAIL){
                 return eRTN.TimeOver;
             }
+            else if (RETUTN == eRTN.PUSH_STOP){
+                return eRTN.PUSH_STOP;
+            }
+            //if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, (int)prMACHINE[CP.MgzArrivalDelay], prMACHINE[CP.ACMotorRunTime], comment)){
+            //    return eRTN.TimeOver;
+            //}
 #endif
             return eRTN.SUCESS;
         }
@@ -260,19 +295,45 @@ namespace NSS_3310S.SEQ.MODULE{
                 Conveyor(eConv.STOP);
                 return eRTN.SUCESS;
             }
-
+            while (!mIN[I.LD_CONV_AREA_SENSOR]){
+                if (mtCHK[M.StripPkX].Ev == "STOP" || mtCHK[M.StripPkX].Ev == "stop" || bPushStop){
+                    UTIL_.DELAY(100);
+                    return eRTN.FAIL;
+                }
+                UTIL_.DELAY(100);
+            }
 
 #if _NSS3300
             int[] OnInputs = { I.ELV_MZ_EXIST1, I.ELV_MZ_EXIST2 };
             int[] OffInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK };
             int[] OnOutputs = { O.LD_MGZ_CONVEYOR_CW, O.LD_MGZ_CONVEYOR_BRAKE };
             int[] OffOutputs = { O.LD_MGZ_CONVEYOR_CCW };
-            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInputs, OffInpts, OnOutputs, OffOutputs, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+            //if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInputs, OffInpts, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+            eRTN RETUTN = WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInputs, OffInpts, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, 1000, prMACHINE[CP.ACMotorRunTime], comment);
+            if (RETUTN == eRTN.AREA_CHECK){
+                return eRTN.AREA_CHECK;
+            }
+            else if (RETUTN == eRTN.FAIL){
+                return eRTN.TimeOver;
+            }
+            else if (RETUTN == eRTN.PUSH_STOP){
+                return eRTN.PUSH_STOP;
+            }
 #else
             int[] OnInpts = { I.LD_CONV_MZ_ARRIVAL_CHECK/*, I.ELV_MZ_EXIST1, I.ELV_MZ_EXIST2*/ };
             int[] OnOutputs = { O.LD_CONV_CCW };
             int[] OffOutputs = { O.LD_CONV_CW, O.LD_CONV_STOP };
-            if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+            //if (eRTN.SUCESS != WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, 1000, prMACHINE[CP.ACMotorRunTime], comment)) return eRTN.FAIL;
+            eRTN RETUTN = WRAP_.RunACMotor(nThread, E.ConverRunCheck, OnInpts, I.Null, OnOutputs, OffOutputs, I.LD_CONV_AREA_SENSOR, 1000, prMACHINE[CP.ACMotorRunTime], comment, false);
+            if (RETUTN == eRTN.AREA_CHECK){
+                return eRTN.AREA_CHECK;
+            }
+            else if (RETUTN == eRTN.FAIL){
+                return eRTN.TimeOver;
+            }
+            else if (RETUTN == eRTN.PUSH_STOP){
+                return eRTN.PUSH_STOP;
+            }
 #endif
             return eRTN.SUCESS;
         }
@@ -318,6 +379,16 @@ namespace NSS_3310S.SEQ.MODULE{
             return eRTN.SUCESS;
         }
         public eRTN MoveZ(int nPos, string cmd, string comment){
+            if (!bBD) {
+                while (!mIN[I.LD_CONV_AREA_SENSOR]) {
+                    if (mtCHK[M.StripPkX].Ev == "STOP" || mtCHK[M.StripPkX].Ev == "stop" || bPushStop) {
+                        UTIL_.DELAY(100);
+                        return eRTN.FAIL;
+                    }
+                    UTIL_.DELAY(100);
+                }
+            }
+
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (!C.Interlock.ChkInterlock(E.emsPusherNotBwd, true)) return eRTN.EMS;
 
@@ -328,15 +399,17 @@ namespace NSS_3310S.SEQ.MODULE{
         public eRTN MoveMGZSlot(int nSlot, string cmd, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (nSlot < 0 || nSlot > prMODEL[RP.MGZSlotCnt]){
-                UTIL_.OnERROR(E.emsMGZSlotCount);
+                E.OnERROR(E.emsMGZSlotCount);
                 return eRTN.FAIL;
             }
-            if (!mIN[I.RAIL_MOUTH]){
-                UTIL_.OnERROR(E.emsMagazineSlotNotMove);
-                return eRTN.FAIL;
+            if (!bBD) {
+                if (!mIN[I.RAIL_MOUTH]) {
+                    E.OnERROR(E.emsMagazineSlotNotMove);
+                    return eRTN.FAIL;
+                }
             }
 
-            SetMoveInfoRaw(M.ElvZ, P.FirstSlot, P.CAL_);
+            M.SetMoveInfoRaw(M.ElvZ, P.FirstSlot, P.CAL_);
             double dPitch = prMODEL[RP.MGZSlotPitch] * nSlot;
             double dEndPitch = prMODEL[RP.MGZSlotPitch] * (prMODEL[RP.MGZSlotCnt] - 1);
 #if _NSS3300

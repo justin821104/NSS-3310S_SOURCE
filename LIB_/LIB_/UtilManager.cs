@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using LIB_.DateType;
+using NSS_3310S;
 
 public class UTIL_ : DATA_
 {
@@ -16,86 +17,6 @@ public class UTIL_ : DATA_
         if (ms <= 0) return DateTime.Now;
         Thread.Sleep(ms);
         return DateTime.Now;
-    }
-
-    public static bool WaitWarning(int iTH, int nWarning, string comment){
-        LogThread[iTH].sqeSTS = comment;
-        Thread.Sleep(3);
-        string s = "[" + nWarning.ToString() + "] " + ConfirmUser[nWarning].msg + " , " + comment + " = ";
-        if (ConfirmUser[nWarning].useable){
-            LogThread[iTH].waitSTS = s + "WAIT";
-            return true;
-        }
-        LogThread[iTH].waitSTS = s + "END";
-        return false;
-    }
-    public static bool WaitInput(int iTH, int nINPUT, bool bSTS, string comment){
-        if (bDRYRUN && bMF) return false;
-        LogThread[iTH].sqeSTS = comment;
-        Thread.Sleep(3);
-        string s = "[" + nINPUT.ToString() + "] " + InputName[nINPUT] + " = " + bSTS.ToString() + " , " + comment + " = ";
-        if (mIN[nINPUT] == bSTS){
-            LogThread[iTH].waitSTS = s + "WAIT";
-            return true;
-        }
-        LogThread[iTH].waitSTS = s + "END";
-        return false;
-    }
-    public static bool WaitBIT(int iTH, int nBIT, bool bSTS, string comment){
-        if (bMF) return false;
-        LogThread[iTH].sqeSTS = comment;
-        Thread.Sleep(3);
-        string s = "[" + nBIT.ToString() + "] " + mBName[nBIT] + " = " + bSTS.ToString() + " , " + comment + " = ";
-        if (IsBIT[nBIT] == bSTS){
-            LogThread[iTH].waitSTS = s + "WAIT";
-            return true;
-        }
-        LogThread[iTH].waitSTS = s + "END";
-        return false;
-    }
-    public static bool WaitBIT(int iTH, int nBIT1, int nBIT2, bool bSTS1, bool bSTS2, string comment, bool bAND){
-        LogThread[iTH].sqeSTS = comment;
-        Thread.Sleep(3);
-        string s = "[" + nBIT1.ToString() + "] " + mBName[nBIT1] + " = " + bSTS1.ToString()
-                    + "&&" + nBIT2.ToString() + "] " + mBName[nBIT2] + " = " + bSTS2.ToString()
-                    + " , " + comment + " = ";
-
-        if (bAND){
-            if ((IsBIT[nBIT1] == bSTS1) && (IsBIT[nBIT2] == bSTS2)){
-                LogThread[iTH].waitSTS = s + "WAIT";
-                return true;
-            }
-        }
-        else{
-            if ((IsBIT[nBIT1] == bSTS1) || (IsBIT[nBIT2] == bSTS2)){
-                LogThread[iTH].waitSTS = s + "WAIT";
-                return true;
-            }
-        }
-        LogThread[iTH].waitSTS = s + "END";
-        return false;
-    }
-    public static bool WaitBIT(int iTH, int nBIT1, int nBIT2, int nBIT3, bool bSTS1, bool bSTS2, bool bSTS3, string comment, bool bAND){
-        LogThread[iTH].sqeSTS = comment;
-        Thread.Sleep(3);
-        string s = "[" + nBIT1.ToString() + "] " + mBName[nBIT1] + " = " + bSTS1.ToString()
-                    + "&&" + nBIT2.ToString() + "] " + mBName[nBIT2] + " = " + bSTS2.ToString()
-                    + " , " + comment + " = ";
-
-        if (bAND){
-            if ((IsBIT[nBIT1] == bSTS1) && (IsBIT[nBIT2] == bSTS2) && (IsBIT[nBIT3] == bSTS3)){
-                LogThread[iTH].waitSTS = s + "WAIT";
-                return true;
-            }
-        }
-        else{
-            if ((IsBIT[nBIT1] == bSTS1) || (IsBIT[nBIT2] == bSTS2) || (IsBIT[nBIT3] == bSTS3)){
-                LogThread[iTH].waitSTS = s + "WAIT";
-                return true;
-            }
-        }
-        LogThread[iTH].waitSTS = s + "END";
-        return false;
     }
 
     public static bool IsFINGER(int axis){
@@ -187,6 +108,25 @@ public class UTIL_ : DATA_
         }
     }
 
+    public static int GetSqlReading() {
+        int rtnValue = 2;
+        if (!File.Exists(PATH_.SQLRead)) return rtnValue;
+        rtnValue = (int)prMACHINE[CP.DBReadMode];
+        return rtnValue;
+    } 
+    public static void WriteSqlReading() {
+        int value = (int)prMACHINE[CP.DBReadMode];
+        FILE_.WR_File(PATH_.SQLRead, value.ToString(), false);
+    }
+
+    public static void WRITE_LOT_ID_INI(string lotId) {
+        FILE_.WRString(PATH_.LOTID, "LOT_INFO", "LOTID", lotId);
+    }
+    public static string GET_LOT_ID_INI() {
+        if (!File.Exists(PATH_.LOTID)) return "";
+        string lotID = FILE_.RDString(PATH_.LOTID, "LOT_INFO", "LOTID" , "");
+        return lotID;
+    }
     public static string GET_LOT_ID(){
         if (!File.Exists(PATH_.LOT_ID)) return "";
         string[] sLINE = File.ReadAllText(PATH_.LOT_ID).Split(ETC.CrLf);
@@ -210,36 +150,215 @@ public class UTIL_ : DATA_
         }
     }
 
+    public static string GET_MES_ABF() {
+        if (!File.Exists(PATH_.MES_ABFMATERIAL)) return ""; //GZ41R2H
+        string[] sLINE = File.ReadAllText(PATH_.MES_ABFMATERIAL).Split(ETC.CrLf);
+        try {
+            return sLINE[0];
+        }
+        catch (Exception ex) {
+            MessageBox.Show("MES Abfmaterial reading fail !" + ETC.NewLine + ex.ToString());
+            return "";
+        }
+    }
+
+    public static void WR_VISION_RECEIP(){
+        string sVisionRecipe = "";
+        sVisionRecipe += "LOTID:" + CLOT.GET_LOT.LotID + ETC.NewLine;
+        sVisionRecipe += "TOOLNO:" + CLOT.GET_LOT.ToolNo + ETC.NewLine;
+        sVisionRecipe += "ITSLOTID_IN:" + CLOT.GET_LOT.ITS + ETC.NewLine;
+        sVisionRecipe += "UNITSIZEX:" + CLOT.GET_LOT.UnitSizeX.ToString() + ETC.NewLine;
+        sVisionRecipe += "UNITSIZEY:" + CLOT.GET_LOT.UnitSizeY.ToString() + ETC.NewLine;
+        sVisionRecipe += "UNITSIZE_UPPER:" + CLOT.GET_LOT.UnitSize_USL.ToString() + ETC.NewLine;
+        sVisionRecipe += "UNITSIZE_LOWER:" + CLOT.GET_LOT.UnitSize_LSL.ToString() + ETC.NewLine;
+        sVisionRecipe += "THICK:" + CLOT.GET_LOT.Thick.ToString() + ETC.NewLine;
+        sVisionRecipe += "THICK_UPPER:" + CLOT.GET_LOT.Thick_USL.ToString() + ETC.NewLine;
+        sVisionRecipe += "THICK_LOWER:" + CLOT.GET_LOT.Thick_LSL.ToString() + ETC.NewLine;
+        sVisionRecipe += "ABFMATERIAL:" + CLOT.GET_LOT.ABFMATERIAL.ToString() + ETC.NewLine;
+
+        sVisionRecipe += "BOT_LANDTOPKG_X:" + CLOT.GET_LOT.BOT_LANDTOPKG_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "BOT_CHAMFERLEN_TM_X:" + CLOT.GET_LOT.BOT_CHAMFERLEN_TM_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "BOT_CHAMFERLEN_TP_X:" + CLOT.GET_LOT.BOT_CHAMFERLEN_TP_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "BOT_LANDTOPKG_Y:" + CLOT.GET_LOT.BOT_LANDTOPKG_Y.ToString() + ETC.NewLine;
+        sVisionRecipe += "BOT_CHAMFERLEN_TM_Y:" + CLOT.GET_LOT.BOT_CHAMFERLEN_TM_Y.ToString() + ETC.NewLine;
+        sVisionRecipe += "BOT_CHAMFERLEN_TP_Y:" + CLOT.GET_LOT.BOT_CHAMFERLEN_TP_Y.ToString() + ETC.NewLine;
+
+        sVisionRecipe += "TOP_LANDTOPKG_X:" + CLOT.GET_LOT.TOP_LANDTOPKG_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "TOP_CHAMFERLEN_TM_X:" + CLOT.GET_LOT.TOP_CHAMFERLEN_TM_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "TOP_CHAMFERLEN_TP_X:" + CLOT.GET_LOT.TOP_CHAMFERLEN_TP_X.ToString() + ETC.NewLine;
+        sVisionRecipe += "TOP_LANDTOPKG_Y:" + CLOT.GET_LOT.TOP_LANDTOPKG_Y.ToString() + ETC.NewLine;
+        sVisionRecipe += "TOP_CHAMFERLEN_TM_Y:" + CLOT.GET_LOT.TOP_CHAMFERLEN_TM_Y.ToString() + ETC.NewLine;
+        sVisionRecipe += "TOP_CHAMFERLEN_TP_Y:" + CLOT.GET_LOT.TOP_CHAMFERLEN_TP_Y.ToString() + ETC.NewLine;
+
+        FILE_.WR_File(PATH_.VisionReciepe, sVisionRecipe, false);
+    }
+
+    public static bool GET_SPINDLE_BLADE_BARCODE(eSPINDLE SPINDLE){
+        string sFileName = eSPINDLE.SP1 == SPINDLE ? PATH_.NewBladeBarcodeSp1 : PATH_.NewBladeBarcodeSp2;
+        if (!File.Exists(sFileName)){
+            if (eSPINDLE.SP1 == SPINDLE)    CLOT.GET_LOT.BarcodeSp1 = "";
+            else                            CLOT.GET_LOT.BarcodeSp2 = "";
+            return false;
+        }
+        try{
+            string[] sLine = File.ReadAllText(sFileName).Split(ETC.CrLf);
+            string[] sRslt = sLine[0].Split(',');
+            sRslt[0] = sRslt[0].Replace("\n", "");
+            sRslt[0] = sRslt[0].Replace("\r", "");
+            if (sRslt.Length > 1){
+                sRslt[1] = sRslt[1].Replace("\n", "");
+                sRslt[1] = sRslt[1].Replace("\r", "");
+            }
+
+            if (eSPINDLE.SP1 == SPINDLE){
+                SUBFRM_.gSecsGem.SetBladeChange(eSPINDLE.SP1, sRslt[0], CLOT.GET_LOT.BarcodeSp1);
+                CLOT.GET_LOT.BarcodeSp1 = sRslt[0];
+                CLOT.GET_LOT.IDSp1      = (sRslt.Length > 1) ? sRslt[1] : "";
+            }
+            else{
+                SUBFRM_.gSecsGem.SetBladeChange(eSPINDLE.SP2, sRslt[0], CLOT.GET_LOT.BarcodeSp2);
+                CLOT.GET_LOT.BarcodeSp2 = sRslt[0];
+                CLOT.GET_LOT.IDSp2      = (sRslt.Length > 1) ? sRslt[1] : "";
+            }
+            return true;
+        }
+        catch (Exception EX){
+            LogWR_.SaveLogException("GET_SPINDLE_BLADE_BARCODE FAIL", EX);
+            if (eSPINDLE.SP1 == SPINDLE){
+                CLOT.GET_LOT.BarcodeSp1 = "";
+                CLOT.GET_LOT.IDSp1 = "";
+            }
+            else { 
+                CLOT.GET_LOT.BarcodeSp2 = "";
+                CLOT.GET_LOT.IDSp2 = ""; 
+            }
+        }
+        return false;
+    }
+    public static void GET_SPINDLE_OLD_BLADE_BARCODE(eSPINDLE SPINDLE){
+        string sFileName = eSPINDLE.SP1 == SPINDLE ? PATH_.OldBladeBarcodeSp1 : PATH_.OldBladeBarcodeSp2;
+        if (!File.Exists(sFileName)) return;
+        try{
+            string[] sLine = File.ReadAllText(PATH_.CurrLot).Split(ETC.CrLf);
+            string[] sRslt = sLine[0].Split(',');
+        
+        }
+        catch (Exception EX){
+            LogWR_.SaveLogException("GET_SPINDLE_OLD_BLADE_BARCODE FAIL", EX);
+        }
+    }
+
+    public static bool GET_ABF_LIST(){
+        if (!File.Exists(PATH_.ABF)){
+            return false;
+        }
+        try{
+            string[] sLine = File.ReadAllText(PATH_.ABF).Split(ETC.CrLf);
+            if (sLine.Length > 1){
+                for (int i = 0; i < sLine.Length; i++){
+                    if (sLine[i].Length <= 0) continue;
+                    string[] sTitle = sLine[i].Split(':');
+                    string[] sRslt = sTitle[1].Split(',');
+                    if (i == 0){
+                        sRslt[0] = sRslt[0].Replace("\n", "");
+                        sRslt[0] = sRslt[0].Replace("\r", "");
+                        int IDX = int.Parse(sRslt[0]);
+                        CLOT.ABF_LIST = IDX;
+                        CLOT.ABF_TEMP = new string[IDX, IDX];
+                        for (int m = 0; m < IDX; m++){
+                            for (int z = 0; z < IDX; z++){
+                                CLOT.ABF_TEMP[m, z] = string.Empty;
+                            }
+                        }
+                    }
+                    else{
+                        if (sRslt.Length <= 1) continue;
+                        sRslt[0] = sRslt[0].Replace("\n", "");
+                        sRslt[0] = sRslt[0].Replace("\r", "");
+                        sRslt[1] = sRslt[1].Replace("\n", "");
+                        sRslt[1] = sRslt[1].Replace("\r", "");
+                        CLOT.ABF_TEMP[i - 1, 0] = sRslt[0];
+                        CLOT.ABF_TEMP[i - 1, 1] = sRslt[1];
+                    }
+                }
+            }
+            return true;
+        }
+        catch(Exception ex){
+            LogWR_.SaveLogException("GET_ABF_LIST FAIL", ex);
+        }
+        return false;
+    }
+
     public static void DEL_LOT_INFO(){
         if (File.Exists(PATH_.CurrLot)) File.Delete(PATH_.CurrLot);
+    }
+    public static void SET_LOT_INFO(string CurrLotInfoList){
+        FILE_.WR_File(PATH_.CurrLot, CurrLotInfoList, false);
     }
     public static void GET_LOT_INFO(){
         if (!File.Exists(PATH_.CurrLot)) return;
         try {
             string[] sLine = File.ReadAllText(PATH_.CurrLot).Split(ETC.CrLf);
             string[] sRslt = sLine[0].Split(',');
-            if (sRslt.Length > 20){
-                CLOT.GET_LOT.LotID          = sRslt[0];
-                CLOT.GET_LOT.LotType        = int.Parse(sRslt[1]);
-                CLOT.GET_LOT.Qty            = int.Parse(sRslt[2]);
-                CLOT.GET_LOT.ProductType    = sRslt[3];
-                CLOT.GET_LOT.ToolNo         = sRslt[4];
-                CLOT.GET_LOT.ITS            = int.Parse(sRslt[5]);
-                CLOT.GET_LOT.ITS_LotID_IN   = sRslt[6];
-                CLOT.GET_LOT.ITS_LotID_CT   = sRslt[7];
-                CLOT.GET_LOT.UnitSizeX      = double.Parse(sRslt[8]);
-                CLOT.GET_LOT.UnitSizeY      = double.Parse(sRslt[9]);
-                CLOT.GET_LOT.UnitSize_USL   = double.Parse(sRslt[10]);
-                CLOT.GET_LOT.UnitSize_LSL   = double.Parse(sRslt[11]);
-                CLOT.GET_LOT.ABFMATERIAL    = sRslt[12];
-                CLOT.GET_LOT.LANDPKGX       = double.Parse(sRslt[13]);
-                CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(sRslt[14]);
-                CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(sRslt[15]);
-                CLOT.GET_LOT.LANDPKGY       = double.Parse(sRslt[16]);
-                CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(sRslt[17]);
-                CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(sRslt[18]);
-                CLOT.GET_LOT.WorkSort       = sRslt[19];
-                CLOT.GET_LOT.WorkScope      = sRslt[20];
+            if (sRslt.Length > 32){
+                CLOT.GET_LOT.LotID                  = sRslt[0];
+                CLOT.GET_LOT.LotType                = int.Parse(sRslt[1]);
+                CLOT.GET_LOT.Qty                    = int.Parse(sRslt[2]);
+                CLOT.GET_LOT.ProductType            = sRslt[3];
+                CLOT.GET_LOT.ToolNo                 = sRslt[4];
+                CLOT.GET_LOT.ITS                    = int.Parse(sRslt[5]);
+                CLOT.GET_LOT.ITS_LotID_IN           = sRslt[6];
+                CLOT.GET_LOT.ITS_LotID_CT           = sRslt[7];
+                CLOT.GET_LOT.UnitSizeX              = double.Parse(sRslt[8]);
+                CLOT.GET_LOT.UnitSizeY              = double.Parse(sRslt[9]);
+                CLOT.GET_LOT.UnitSize_USL           = double.Parse(sRslt[10]);
+                CLOT.GET_LOT.UnitSize_LSL           = double.Parse(sRslt[11]);
+                CLOT.GET_LOT.ABFMATERIAL            = sRslt[12];
+                CLOT.GET_LOT.LANDPKGX               = double.Parse(sRslt[13]);
+                CLOT.GET_LOT.LANDPKGX_UPPER         = double.Parse(sRslt[14]);
+                CLOT.GET_LOT.LANDPKGX_LOWER         = double.Parse(sRslt[15]);
+                CLOT.GET_LOT.LANDPKGY               = double.Parse(sRslt[16]);
+                CLOT.GET_LOT.LANDPKGY_UPPER         = double.Parse(sRslt[17]);
+                CLOT.GET_LOT.LANDPKGY_LOWER         = double.Parse(sRslt[18]);
+                CLOT.GET_LOT.WorkSort               = sRslt[19];
+                CLOT.GET_LOT.WorkScope              = sRslt[20];
+                CLOT.GET_LOT.BarcodeSp1             = sRslt[21];
+                CLOT.GET_LOT.BarcodeSp2             = sRslt[22];
+
+                //22.0927 HK.PARK 추가
+                CLOT.GET_LOT.Thick                  = double.Parse(sRslt[23]);
+                CLOT.GET_LOT.Thick_USL              = double.Parse(sRslt[24]);
+                CLOT.GET_LOT.Thick_LSL              = double.Parse(sRslt[25]);
+
+                CLOT.GET_LOT.ProcCD                 = sRslt[26];
+                CLOT.GET_LOT.ProcName               = sRslt[27];
+                CLOT.GET_LOT.WorkCondition          = sRslt[28];
+                CLOT.GET_LOT.ProcCondition_1        = sRslt[29];
+                CLOT.GET_LOT.ProcCondition_2        = sRslt[30];
+                CLOT.GET_LOT.ProcCondition_3        = sRslt[31];
+                CLOT.GET_LOT.ProcCondition_4        = sRslt[32];
+
+                //22.1121 HK.PARK 추가
+                CLOT.GET_LOT.BeginTime              = sRslt[33];
+
+                //22.1128 HK.PARK 추가
+                CLOT.GET_LOT.BOT_LANDTOPKG_X        = double.Parse(sRslt[34]);
+                CLOT.GET_LOT.BOT_CHAMFERLEN_TM_X    = double.Parse(sRslt[35]);
+                CLOT.GET_LOT.BOT_CHAMFERLEN_TP_X    = double.Parse(sRslt[36]);
+                CLOT.GET_LOT.BOT_LANDTOPKG_Y        = double.Parse(sRslt[37]);
+                CLOT.GET_LOT.BOT_CHAMFERLEN_TM_Y    = double.Parse(sRslt[38]);
+                CLOT.GET_LOT.BOT_CHAMFERLEN_TP_Y    = double.Parse(sRslt[39]);
+
+                CLOT.GET_LOT.TOP_LANDTOPKG_X        = double.Parse(sRslt[40]);
+                CLOT.GET_LOT.TOP_CHAMFERLEN_TM_X    = double.Parse(sRslt[41]);
+                CLOT.GET_LOT.TOP_CHAMFERLEN_TP_X    = double.Parse(sRslt[42]);
+                CLOT.GET_LOT.TOP_LANDTOPKG_Y        = double.Parse(sRslt[43]);
+                CLOT.GET_LOT.TOP_CHAMFERLEN_TM_Y    = double.Parse(sRslt[44]);
+                CLOT.GET_LOT.TOP_CHAMFERLEN_TP_Y    = double.Parse(sRslt[45]);
+
+                CLOT.GET_LOT.IDSp1                  = sRslt[46];
+                CLOT.GET_LOT.IDSp2                  = sRslt[47];
             }
         }
         catch(Exception EX){
@@ -247,6 +366,190 @@ public class UTIL_ : DATA_
         }
     }
 
+    public static void SAVE_WORKED_LOT_INFO(){
+        try{
+            for (int n = 0; n < CLOT.FINISH_LOT.Length; n++){
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "LotID_" + n.ToString(), CLOT.FINISH_LOT[n].LotID);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "LotType_" + n.ToString(), CLOT.FINISH_LOT[n].LotType);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "Qty_" + n.ToString(), CLOT.FINISH_LOT[n].Qty);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProductType_" + n.ToString(), CLOT.FINISH_LOT[n].ProductType);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ToolNo_" + n.ToString(), CLOT.FINISH_LOT[n].ToolNo);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "ITS_" + n.ToString(), CLOT.FINISH_LOT[n].ITS);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ITS_LotID_IN_" + n.ToString(), CLOT.FINISH_LOT[n].ITS_LotID_IN);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ITS_LotID_CT_" + n.ToString(), CLOT.FINISH_LOT[n].ITS_LotID_CT);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSizeX_" + n.ToString(), CLOT.FINISH_LOT[n].UnitSizeX);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSizeY_" + n.ToString(), CLOT.FINISH_LOT[n].UnitSizeY);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSize_USL_" + n.ToString(), CLOT.FINISH_LOT[n].UnitSize_USL);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSize_LSL_" + n.ToString(), CLOT.FINISH_LOT[n].UnitSize_LSL);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ABFMATERIAL_" + n.ToString(), CLOT.FINISH_LOT[n].ABFMATERIAL);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGX);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_UPPER_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGX_UPPER);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_LOWER_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGX_LOWER);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGY);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_UPPER_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGY_UPPER);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_LOWER_" + n.ToString(), CLOT.FINISH_LOT[n].LANDPKGY_LOWER);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "WorkSort_" + n.ToString(), CLOT.FINISH_LOT[n].WorkSort);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "WorkScope_" + n.ToString(), CLOT.FINISH_LOT[n].WorkScope);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp1_" + n.ToString(), CLOT.FINISH_LOT[n].BarcodeSp1);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp2_" + n.ToString(), CLOT.FINISH_LOT[n].BarcodeSp2);
+
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "IDSp1_" + n.ToString(), CLOT.FINISH_LOT[n].IDSp1);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "IDSp2_" + n.ToString(), CLOT.FINISH_LOT[n].IDSp2);
+
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_" + n.ToString(), CLOT.FINISH_LOT[n].Thick);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_USL_" + n.ToString(), CLOT.FINISH_LOT[n].Thick_USL);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_LSL_" + n.ToString(), CLOT.FINISH_LOT[n].Thick_LSL);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcCD_" + n.ToString(), CLOT.FINISH_LOT[n].ProcCD);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcName_" + n.ToString(), CLOT.FINISH_LOT[n].ProcName);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "WorkCondition_" + n.ToString(), CLOT.FINISH_LOT[n].WorkCondition);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_1_" + n.ToString(), CLOT.FINISH_LOT[n].ProcCondition_1);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_2_" + n.ToString(), CLOT.FINISH_LOT[n].ProcCondition_2);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_3_" + n.ToString(), CLOT.FINISH_LOT[n].ProcCondition_3);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_4_" + n.ToString(), CLOT.FINISH_LOT[n].ProcCondition_4);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "InCnt_" + n.ToString(), CLOT.FINISH_LOT[n].InCnt);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "OutCnt_" + n.ToString(), CLOT.FINISH_LOT[n].OutCnt);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "CurCnt_" + n.ToString(), CLOT.FINISH_LOT[n].CurCnt);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "PassCnt_" + n.ToString(), CLOT.FINISH_LOT[n].PassCnt);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "LoadingCount_" + n.ToString(), CLOT.FINISH_LOT[n].LoadingCount);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "ExceptCount_" + n.ToString(), CLOT.FINISH_LOT[n].ExceptCount);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "UnloadingCount_" + n.ToString(), CLOT.FINISH_LOT[n].UnloadingCount);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "WorkSort_" + n.ToString(), CLOT.FINISH_LOT[n].WorkSort);
+
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp1_" + n.ToString(), CLOT.FINISH_LOT[n].BarcodeSp1);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp2_" + n.ToString(), CLOT.FINISH_LOT[n].BarcodeSp2);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "LotCnt_" + n.ToString(), CLOT.FINISH_LOT[n].LotCnt);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "StripCnt_" + n.ToString(), CLOT.FINISH_LOT[n].StripCnt);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "UnitCnt_" + n.ToString(), CLOT.FINISH_LOT[n].UnitCnt);
+                
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "GoodUnit_" + n.ToString(), CLOT.FINISH_LOT[n].GoodUnit);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "ReworkUnit_" + n.ToString(), CLOT.FINISH_LOT[n].ReworkUnit);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "NGUnit_" + n.ToString(), CLOT.FINISH_LOT[n].NGUnit);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "ITSCount_" + n.ToString(), CLOT.FINISH_LOT[n].ITSCount);
+
+                //22.1121 HK.PARK 추가
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "BeginTime_" + n.ToString(), CLOT.FINISH_LOT[n].BeginTime);
+                FILE_.WRString(PATH_.WorkedLot, "FINISH_LOT", "EndTime_" + n.ToString(), CLOT.FINISH_LOT[n].EndTime);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "GoodTray_" + n.ToString(), CLOT.FINISH_LOT[n].GoodTray);
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "NGTray_" + n.ToString(), CLOT.FINISH_LOT[n].NGTray);
+
+                FILE_.WRInt(PATH_.WorkedLot, "FINISH_LOT", "TotalUnit_" + n.ToString(), CLOT.FINISH_LOT[n].TotalUnit);
+
+                //22.1128 HK.PARK 추가
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_LANDTOPKG_X_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_LANDTOPKG_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TM_X_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TM_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TP_X_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TP_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_LANDTOPKG_Y_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_LANDTOPKG_Y);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TM_Y_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TM_Y);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TP_Y_" + n.ToString(), CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TP_Y);
+
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_LANDTOPKG_X_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_LANDTOPKG_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TM_X_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TM_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TP_X_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TP_X);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_LANDTOPKG_Y_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_LANDTOPKG_Y);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TM_Y_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TM_Y);
+                FILE_.WRDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TP_Y_" + n.ToString(), CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TP_Y);
+            }
+        }
+        catch(Exception EX){
+            LogWR_.SaveLogException("WORKED LOT INFO WRITE FAIL", EX);
+        }        
+    }
+
+    public static void READ_WORKED_LOT_INFO(){
+        try{
+            for (int n = 0; n < CLOT.FINISH_LOT.Length; n++){
+                CLOT.FINISH_LOT[n].LotID                = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "LotID_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].LotType              = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "LotType_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].Qty                  = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "Qty_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].ProductType          = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProductType_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ToolNo               = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ToolNo_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ITS                  = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "ITS_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].ITS_LotID_IN         = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ITS_LotID_IN_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ITS_LotID_CT         = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ITS_LotID_CT_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].UnitSizeX            = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSizeX_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].UnitSizeY            = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSizeY_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].UnitSize_USL         = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSize_USL_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].UnitSize_LSL         = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "UnitSize_LSL_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].ABFMATERIAL          = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ABFMATERIAL_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].LANDPKGX             = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].LANDPKGX_UPPER       = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_UPPER_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].LANDPKGX_LOWER       = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGX_LOWER_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].LANDPKGY             = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].LANDPKGY_UPPER       = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_UPPER_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].LANDPKGY_LOWER       = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "LANDPKGY_LOWER_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].WorkSort             = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "WorkSort_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].WorkScope            = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "WorkScope_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].BarcodeSp1           = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp1_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].BarcodeSp2           = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp2_" + n.ToString(), "");
+
+                CLOT.FINISH_LOT[n].IDSp1                = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "IDSp1_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].IDSp2                = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "IDSp2_" + n.ToString(), "");
+                
+                CLOT.FINISH_LOT[n].Thick                = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].Thick_USL            = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_USL_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].Thick_LSL            = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "Thick_LSL_" + n.ToString(), 0.0);
+                CLOT.FINISH_LOT[n].ProcCD               = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcCD_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ProcName             = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcName_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].WorkCondition        = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "WorkCondition_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ProcCondition_1      = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_1_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ProcCondition_2      = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_2_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ProcCondition_3      = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_3_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].ProcCondition_4      = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "ProcCondition_4_" + n.ToString(), "");
+
+                CLOT.FINISH_LOT[n].InCnt                = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "InCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].OutCnt               = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "OutCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].CurCnt               = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "CurCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].PassCnt              = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "PassCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].LoadingCount         = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "LoadingCount_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].ExceptCount          = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "ExceptCount_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].UnloadingCount       = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "UnloadingCount_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].WorkSort             = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "WorkSort_" + n.ToString(), "");
+
+                CLOT.FINISH_LOT[n].BarcodeSp1           = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp1_" + n.ToString(), "");
+                CLOT.FINISH_LOT[n].BarcodeSp2           = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "BarcodeSp2_" + n.ToString(), "");
+
+                CLOT.FINISH_LOT[n].LotCnt               = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "LotCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].StripCnt             = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "StripCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].UnitCnt              = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "UnitCnt_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].GoodUnit             = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "GoodUnit_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].ReworkUnit           = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "ReworkUnit_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].NGUnit               = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "NGUnit_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].ITSCount             = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "ITSCount_" + n.ToString(), 0);
+
+                //22.1121 HK.PARK 추가
+                CLOT.FINISH_LOT[n].BeginTime            = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "BeginTime_" + n.ToString(), DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+                CLOT.FINISH_LOT[n].EndTime              = FILE_.RDString(PATH_.WorkedLot, "FINISH_LOT", "EndTime_" + n.ToString(), DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+
+                CLOT.FINISH_LOT[n].GoodTray             = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "GoodTray_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].NGTray               = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "NGTray_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TotalUnit            = FILE_.RDInt(PATH_.WorkedLot, "FINISH_LOT", "TotalUnit_" + n.ToString(), 0);
+
+                //22.1128 HK.PARK 추가
+                CLOT.FINISH_LOT[n].BOT_LANDTOPKG_X      = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_LANDTOPKG_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TM_X  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TM_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TP_X  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TP_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].BOT_LANDTOPKG_Y      = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_LANDTOPKG_Y_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TM_Y  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TM_Y_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].BOT_CHAMFERLEN_TP_Y  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "BOT_CHAMFERLEN_TP_Y_" + n.ToString(), 0);
+
+                CLOT.FINISH_LOT[n].TOP_LANDTOPKG_X      = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_LANDTOPKG_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TM_X  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TM_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TP_X  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TP_X_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TOP_LANDTOPKG_Y      = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_LANDTOPKG_Y_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TM_Y  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TM_Y_" + n.ToString(), 0);
+                CLOT.FINISH_LOT[n].TOP_CHAMFERLEN_TP_Y  = FILE_.RDDouble(PATH_.WorkedLot, "FINISH_LOT", "TOP_CHAMFERLEN_TP_Y_" + n.ToString(), 0);
+            }
+        }
+        catch (Exception EX){
+            LogWR_.SaveLogException("WORKED LOT INFO READ FAIL", EX);
+        }
+    }
+    
     public static string GET_JOB_FILE_NAME(){
         if (!File.Exists(PATH_.CurrJOB)) return "";
         return File.ReadAllText(PATH_.CurrJOB);
@@ -326,12 +629,11 @@ public class UTIL_ : DATA_
     }
     public static void GetWorkGroup(ListView lv){
         lv.Items.Clear();
-        string sFullName = string.Empty;
         DirectoryInfo di = new DirectoryInfo(PATH_.DATA);
         if (di.Exists){
             DirectoryInfo[] gInfo = di.GetDirectories("*", SearchOption.AllDirectories);
             foreach (DirectoryInfo fn in gInfo){
-                sFullName       = fn.FullName;
+                string sFullName = fn.FullName;
                 string[] sArr   = sFullName.Split('\\');
                 int nArr        = sArr.Length - 1;
                 lv.Items.Add(sArr[nArr].Trim());
@@ -381,13 +683,71 @@ public class UTIL_ : DATA_
         }
         return true;
     }
-    public static bool GetSomeWorkDevice(string recipe, string newrecipe){
-        string[] s = Directory.GetFiles(PATH_.DATA + recipe);
+    public static bool GetSomeWorkDevice(string group, string newrecipe){
+        string[] s = Directory.GetFiles(PATH_.DATA + group);
         for (int i = 0; i <= s.Length - 1; i++){
             string[] arr    = s[i].Split('\\');
             int idx         = arr.Length - 1;
             string temp     = arr[idx].Replace(".jog", "");
             if (newrecipe == temp) return false;
+        }
+        return true;
+    }
+
+    public static void GetABF(ListView LV){
+        LV.Items.Clear();
+        DirectoryInfo di = new DirectoryInfo(PATH_.ABF_LIST);
+        if (di.Exists){
+            DirectoryInfo[] gInfo = di.GetDirectories("*", SearchOption.AllDirectories);
+            foreach (DirectoryInfo fn in gInfo){
+                string sFullName = fn.FullName;
+                string[] sArr = sFullName.Split('\\');
+                int nArr = sArr.Length - 1;
+                LV.Items.Add(sArr[nArr].Trim());
+            }
+        }
+    }
+    public static bool GetSomeABF(string newABF){
+        string sFullName;
+        string sABF;
+
+        DirectoryInfo DI = new DirectoryInfo(PATH_.ABF_LIST);
+        if (DI.Exists){
+            DirectoryInfo[] CurDI = DI.GetDirectories("*", SearchOption.AllDirectories);
+            foreach (DirectoryInfo di in CurDI){
+                sFullName = di.FullName;
+                string[] sARR = sFullName.Split('\\');
+                int iARR = sARR.Length - 1;
+                sABF = sARR[iARR].Trim();
+                if (newABF == sABF) return false;
+            }
+        }
+        return true;
+    }
+
+    public static void GetBladeBarcode(ListView lvABF, ListView lvBlade, string sABF, bool DelFile){
+        lvBlade.Items.Clear();
+        string[] s = Directory.GetFiles(PATH_.ABF_LIST + sABF);
+        if (s.Length == 0){
+            if (DelFile) GetABF(lvABF);
+            return;
+        }
+        for (int i = 0; i < s.Length; i++){
+            string[] arr    = s[i].Split('\\');
+            int idx         = arr.Length - 1;
+            string temp     = arr[idx].Replace(".jog", "");
+            string tmep1    = $"{ Path.GetFileNameWithoutExtension(arr[idx])}";
+            lvBlade.Items.Add(/*arr[idx].Trim()*/tmep1);
+        }
+        lvBlade.EndUpdate();
+    }
+    public static bool GetSomeBladeBarcode(string abf, string newblade){
+        string[] s = Directory.GetFiles(PATH_.ABF_LIST + abf);
+        for (int i = 0; i <= s.Length - 1; i++){
+            string[] arr = s[i].Split('\\');
+            int idx = arr.Length - 1;
+            string temp = arr[idx].Replace(".jog", "");
+            if (newblade == temp) return false;
         }
         return true;
     }
@@ -480,9 +840,8 @@ public class UTIL_ : DATA_
     }
     public static bool CLEAR_GRID_MOTOR_SELECTED(DataGridView g, int Row, double[] posdata){
         bool bRtn = true;
-        double dvalue = 0.0;
         for (int i = 0; i < posdata.Length; i++){
-            dvalue = Convert.ToDouble(g[2 + i, Row].Value);
+            double dvalue = Convert.ToDouble(g[2 + i, Row].Value);
             if (dvalue != posdata[i]) bRtn = false;
         }
         CLEAR_GRID_SELECTED(ref g);
@@ -697,7 +1056,7 @@ public class UTIL_ : DATA_
     public static bool SYSTEM_MESSAGE(int nERR, bool b){
         sSystemMessage += DateTime.Now.ToString() + " ▶ " + "<" + nERR.ToString() + ">" + ErrName[nERR] + ETC.CrLf;
         LAB_.MT_ALL_STOP(false, "mUTIL -> SYSTEM_MESSAGE()" + ETC.CrLf + sSystemMessage);
-        mIN[VT_STOP]    = true;
+        mIN[I.vtStop]    = true;
         bSystemMessage  = true;
         //try{
         //    string sLOG = DateTime.Now.ToString() + " ▶ " + " < " + nERR.ToString() + " > " + ErrName[nERR];
@@ -709,7 +1068,7 @@ public class UTIL_ : DATA_
         return b;
     }
     public static bool SYSTEM_MESSAGE(string Message, bool b){
-        mIN[VT_STOP] = true;
+        mIN[I.vtStop] = true;
         Thread.Sleep(1000);
         sSystemMessage += DateTime.Now.ToString() + " ▶ " + Message + ETC.CrLf;
         bSystemMessage = true;
@@ -730,7 +1089,7 @@ public class UTIL_ : DATA_
     public static bool PRINT_MASSAGE(string Message, bool bDefault, bool bTypeOK, bool bAutoClose){
         try{
             if (SUBFRM_.gMSGBOX.Visible){
-                COM_.ViewWarning(-1, WarningMessageBox, "메세지 창이 띄어 있습니다. 메세지 창 닫고 다시 하세요.");
+                W.ViewWarning(-1, W.ChkMessageBox, "메세지 창이 띄어 있습니다. 메세지 창 닫고 다시 하세요.");
                 return false;
             }
             //517, 187
@@ -806,106 +1165,6 @@ public class UTIL_ : DATA_
         SUBFRM_.gTENKEY.editValue.Text      = GET_GRID_ITEM(gDmy, row, cel);
         SUBFRM_.gTENKEY.INI();
         SET_GRID_ITEM(ref gDmy, row, cel, mTenkeyResult);
-    }
-
-    public static void OnERROR_MOTION(int m, int kind, int OnERR_DELAY){
-        OnERROR((eMTBegin + (eMTGap * m) + kind), OnERR_DELAY);
-    }
-    public static void OnERROR(int num){
-        if (!IsERR[num]){
-            //mes alarm 보고
-            SUBFRM_.gSecsGem.OnAlarmSet(CMES.eER + num);
-        }
-        IsERR[num] = true;
-        COM_.STOP_ACMOTOR();
-        DELAY(500);
-    }
-    public static void OnERROR(int num, int OnERR_DELAY){
-        if (!IsERR[num]){
-            //mes alarm 보고
-            SUBFRM_.gSecsGem.OnAlarmSet(CMES.eER + num);
-        }
-        IsERR[num] = true;
-        COM_.STOP_ACMOTOR();
-        DELAY(OnERR_DELAY);
-    }
-    public static void OnERROR_MESSAGE(int Num, string Message, int Delay)
-    {
-        ErrName[Num] = Message;
-        IsERR[Num] = true;
-        COM_.STOP_ACMOTOR();
-        DELAY(Delay);
-    }
-    public static void OnERROR_EXCEPT(string message, int delay){
-        int eNUM        = CNT_.ERR;
-        ErrName[eNUM]   = message;
-        IsERR[eNUM]     = true;
-        COM_.STOP_ACMOTOR();
-        DELAY(delay);
-    }
-    public static void CLEAR_ERROR(){
-        for (int i = 0; i < CNT_.ERR; i++){
-            if (IsERR[i]){
-                if (eLoginLevel >= ErrINFO[i].rstLevel){
-                    if (IsERR[i]){
-                        // MES 에러 보고
-                        SUBFRM_.gSecsGem.OnAlarmClear(CMES.eER + i);
-                    }
-                    IsERR[i] = false;
-                }
-            }
-        }
-        bOnERROR = false;
-        COM_.BZ_OFF();
-    }
-    public static int CHK_ERR(){
-        for (int i = 0; i < CNT_.ERR; i++){
-            if (IsERR[i]) return i;
-        }
-        return -1;
-    }
-    public static string GET_ERROR_NAME(int iERR){
-        try{
-            return ErrName[iERR];
-        }
-        catch (Exception ex) { LogWR_.SaveLogException("mUTIL -> GET_ERROR_NAME", ex); }
-        return "";
-    }
-    public static string GET_ERROR_TITLE_1(int iERR){
-        try{
-            return ErrTitle_1[iERR];
-        }
-        catch (Exception ex) { LogWR_.SaveLogException("mUTIL -> GET_ERROR_TITLE_1", ex); }
-        return "";
-    }
-    public static string GET_ERROR_TITLE_2(int iERR){
-        try{
-            return ErrTitle_2[iERR];
-        }
-        catch (Exception ex) { LogWR_.SaveLogException("mUTIL -> GET_ERROR_TITLE_2", ex); }
-        return "";
-    }
-
-    public static bool OnINTERLOCK(int iNUM, bool WithError){
-        if (bINTRK[iNUM - eEMSBegin]){
-            if (bINTRK[iNUM - eEMSBegin]){
-                //if (iNUM == 482 || iNUM == 483 || iNUM == 484){
-                //    double dCP = LAB_.GET_ACTPOS(9);
-                //    LogWR_.DEBUG_PRINT("유닛 피커 에러 " + iNUM.ToString() + " - " + dCP.ToString());
-                //}
-                if (WithError) OnERROR(iNUM, 500);
-                return true; // 인터락 발생 구동 금지
-            }
-        }
-        return false; // 정상
-    }
-    public static bool OnINTERLOCK(int iNUM, eCHK_INTERLOCK CHK){
-        if (bINTRK[iNUM - eEMSBegin]){
-            if (bINTRK[iNUM - eEMSBegin]){
-
-            }
-        }
-        return false;   // 정상
     }
 
     /// <summary>

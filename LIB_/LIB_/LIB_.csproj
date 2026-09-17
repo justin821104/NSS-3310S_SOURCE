@@ -18,11 +18,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_GEM;_NSS3300;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_GEM;_nNSS3300;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -75,6 +75,10 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cognex.DataMan.CogNamer.PC, Version=5.6.3.122, Culture=neutral, PublicKeyToken=9f98866f2a3a2e78, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -96,17 +100,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Crevis.VirtualFG40Library.dll</HintPath>
     </Reference>
-    <Reference Include="EZGemPlusCS_32, Version=1.0.8026.25734, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="EZGemPlusCS_64, Version=1.0.7926.34246, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\WORK\OUTPUT\NEONTECH\NSS-3310S\EZGemPlusCS_32.dll</HintPath>
-    </Reference>
-    <Reference Include="freeLicence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-4310S\freeLicence.dll</HintPath>
-    </Reference>
-    <Reference Include="GlassButton, Version=1.3.2.12831, Culture=neutral, PublicKeyToken=2e983e6e44d23a4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\GlassButton.dll</HintPath>
+      <HintPath>..\..\..\..\WORK\OUTPUT\NEONTECH\NSS-3310S\EZGemPlusCS_64.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualC" />
@@ -122,14 +118,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\Open_eVision_NetApi_2_12.dll</HintPath>
     </Reference>
-    <Reference Include="Owf.Controls.A1Panel, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-4310S\Owf.Controls.A1Panel.dll</HintPath>
-    </Reference>
-    <Reference Include="Owf.Controls.DigitalDisplayControl, Version=1.0.6088.12830, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Owf.Controls.DigitalDisplayControl.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -140,15 +128,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ToggleSwitch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ToggleSwitch.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateType\CLOT.cs" />
     <Compile Include="DateType\MES.cs" />
     <Compile Include="DateType\USER.cs" />
+    <Compile Include="DEFINE\DI.cs" />
+    <Compile Include="DEFINE\DM.cs" />
+    <Compile Include="DEFINE\DO.cs" />
+    <Compile Include="DEFINE\ERR.cs" />
+    <Compile Include="DEFINE\MOTOR.cs" />
+    <Compile Include="DEFINE\PATH.cs" />
+    <Compile Include="DEFINE\SYSTEM.cs" />
     <Compile Include="SerialCommunication\LightController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -249,8 +240,7 @@
     <Compile Include="Vision\MultiCam.cs" />
     <Compile Include="COMMON_.cs" />
     <Compile Include="FileLib\cDATA_READ_WRITE.cs" />
-    <Compile Include="DataManager.cs" />
-    <Compile Include="FileLib\AccDB.cs" />
+    <Compile Include="DEFINE\DataManager.cs" />
     <Compile Include="FileLib\FileIO.cs" />
     <Compile Include="FileLib\FileManager.cs" />
     <Compile Include="FileLib\LogWR.cs" />
@@ -264,9 +254,6 @@
     <Compile Include="MotionLib\AZIN\AXHS.cs" />
     <Compile Include="MotionLib\AZIN\AXL.cs" />
     <Compile Include="MotionLib\AZIN\AXM.cs" />
-    <Compile Include="MotionLib\EzSERVO\EziSERVOPlusR.cs" />
-    <Compile Include="MotionLib\EzSERVO\FAS_EziMOTIONPlusR.cs" />
-    <Compile Include="MotionLib\T1\T1.cs" />
     <Compile Include="Object\cEnumLib.cs" />
     <Compile Include="Object\StructLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -416,10 +403,8 @@
     </Compile>
     <Compile Include="UtilManager.cs" />
     <Compile Include="Vision\NeptuneC_Interface.cs" />
-    <Compile Include="WIN32\Win32API.cs" />
     <Compile Include="MotionLib\WRAP.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -540,6 +525,9 @@
   <ItemGroup>
     <Content Include="DOCUMENT\C#.txt" />
     <Content Include="DOCUMENT\REFERENCE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -146,7 +146,7 @@
             // tmrBarcode
             // 
             this.tmrBarcode.Enabled = true;
-            this.tmrBarcode.Interval = 70;
+            this.tmrBarcode.Interval = 150;
             this.tmrBarcode.Tick += new System.EventHandler(this.tmrBarcode_Tick);
             // 
             // CogBarcoder

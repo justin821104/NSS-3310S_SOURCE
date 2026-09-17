@@ -66,6 +66,7 @@
             // 
             // tmrIOCheck
             // 
+            this.tmrIOCheck.Interval = 150;
             this.tmrIOCheck.Tick += new System.EventHandler(this.TimerIOCheck_Tick);
             // 
             // panMenu

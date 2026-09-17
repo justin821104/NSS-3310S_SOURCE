@@ -230,6 +230,8 @@ namespace SYSTEM{
 
         public const int PkrPic = 229;
 
+        public const int TopCamCalZigCenter = 300;
+
 
         public static int[] MNSol = { MGZClamp, Pusher, InLetTable, Gripper,
                                       StripVac, StripBlow, UnitVac, UnitBlow, ScrapVac, ScrapBlow, CleanerWater, CleanerAir, CleanerSwing,
@@ -254,7 +256,7 @@ namespace SYSTEM{
                                            RunGoodTray1Unloading, RunGoodTray2Unloading, RunGoodTray1Loaidng, RunGoodTray2Loaidng,
                                            RunReworkTrayUnloading, RunReworkTrayLoading,
                                            RunEmptyTrayLoading, RunEmptyTrayPic,
-                                           RunPickerCal, RunPRS, RunPRS, AllPickerAutoCal, PkrPic
+                                           RunPickerCal, RunPRS, RunPRS, AllPickerAutoCal, PkrPic, TopCamCalZigCenter
         };
         public static int[] MTMotor = { TopCamStaeView, TopCamStaeView,
                                         StageHDCamView, StageHDCamView,
@@ -278,9 +280,9 @@ namespace SYSTEM{
                 if (gExit) break;
                 UTIL_.DELAY(10);
                 if (eMCStatus == eMachineStatus.DRY || eMCStatus == eMachineStatus.AUTO || !bMF) continue;
-                if (!COM_.CHK_DOOR()){
-                    COM_.ViewWarning(nThread, W.ChkDoor, sWarnningMessage);
-                    COM_.RESET_DOORLOCK();
+                if (!I.CHK_DOOR()){
+                    W.ViewWarning(nThread, W.ChkDoor, sWarnningMessage);
+                    O.RESET_DOORLOCK();
                     EndManual();
                     mIN[I.vtStop] = true;
                     continue;
@@ -310,15 +312,15 @@ namespace SYSTEM{
                             break;
                         }
                         if (!CheckInitailSensor()){
-                            COM_.ViewWarning(nThread, W.ProductRemove);
-                            COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (InitialSensor Fail)");
+                            W.ViewWarning(nThread, W.ProductRemove);
+                            B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (InitialSensor Fail)");
                             break;
                         }
                         if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.CONVEYOR && !bDRYRUN){
                             if (!mIN[I.ULD_CONV_READY]){
                                 ConfirmUser[W.ProductRemove].msg = "초기화 실패! = 배출 콘베어 런 상태 아닙니다. (READY 신호 안들어옴)";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (콘베어 설비 런 상태 아님)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (콘베어 설비 런 상태 아님)");
                                 break;
                             }
                         }
@@ -326,26 +328,26 @@ namespace SYSTEM{
                         LAB_.TriggerOutput((int)eTRIGGER.HD2, uVAL.Low);
                         B.Initial();
                         if (!InitialMachine()){
-                            COM_.ViewWarning(nThread, W.ProductRemove);
-                            COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (InitalMachine Fail)");
+                            W.ViewWarning(nThread, W.ProductRemove);
+                            B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (InitalMachine Fail)");
                             break;
                         }
                         if (eRTN.SUCESS != BASE.MoveAllPkRdy(nThread, "", "모든 피커 대기 위치 이송")){
                             ConfirmUser[W.ProductRemove].msg = "모든 피커 대기 위치 이송 실패";
-                            COM_.ViewWarning(nThread, W.ProductRemove);
-                            COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (All Picker Ready Position Move Fail)");
+                            W.ViewWarning(nThread, W.ProductRemove);
+                            B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (All Picker Ready Position Move Fail)");
                             break;
                         }
                         if (eRTN.SUCESS != MoveFirstStandbyPos(nThread, "초기화 완료 후 첫번째 모터 그룹 대기 위치 이송")){
                             ConfirmUser[W.ProductRemove].msg = "초기화 완료 후 첫번째 모터 그룹 대기 위치 이송 실패";
-                            COM_.ViewWarning(nThread, W.ProductRemove);
-                            COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (모터 홈 동작 후 첫번째 그룹 대기 위치 이송 실패)");
+                            W.ViewWarning(nThread, W.ProductRemove);
+                            B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (모터 홈 동작 후 첫번째 그룹 대기 위치 이송 실패)");
                             break;
                         }
                         if (eRTN.SUCESS != MoveSecondStandbyPos(nThread, "초기화 완료 후 두번째 모터 그룹 대기 위치 이송")){
                             ConfirmUser[W.ProductRemove].msg = "초기화 완료 후 두번째 모터 그룹 대기 위치 이송 실패";
-                            COM_.ViewWarning(nThread, W.ProductRemove);
-                            COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (모터 홈 동작 후 두번째 그룹 대기 위치 이송 실패)");
+                            W.ViewWarning(nThread, W.ProductRemove);
+                            B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (모터 홈 동작 후 두번째 그룹 대기 위치 이송 실패)");
                             break;
                         }
                         CheckPicker();
@@ -358,16 +360,16 @@ namespace SYSTEM{
 #endif
                             if (!UnloaidngReWorkTray("RE-WORK 트레이 배출")){
                                 ConfirmUser[W.ProductRemove].msg = "RE-WORK 트레이 배출 실패";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (RE-WORK 트레이 배출 실패)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (RE-WORK 트레이 배출 실패)");
                                 break;
                             }
                         }
                         else{
                             if (eRTN.SUCESS != C.ReworkTrayFeeder.UnGrip("RE-WORK 트레이 언그립")){
                                 ConfirmUser[W.ProductRemove].msg = "RE-WORK 트레이 피더 언그립 실패";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (RE-WORK 트레이 언그립 실패)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (RE-WORK 트레이 언그립 실패)");
                             }
                         }
 
@@ -375,14 +377,14 @@ namespace SYSTEM{
                         if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.CONVEYOR && !bDRYRUN){
                             if (!mIN[I.ULD_CONV_READY]){
                                 ConfirmUser[W.ProductRemove].msg = "초기화 실패! = 배출 콘베어 런 상태 아닙니다. (READY 신호 안들어옴)";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (배출 콘베어 런 상태 아님)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (배출 콘베어 런 상태 아님)");
                                 break;
                             }
                             if (!RunPlaceZoneConveryorUnloading()){
                                 ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 레일부 TRAY 제거 실패! (GOOD TRAY 레일부에 트레이 모두 제거 하셔야 합니다.)";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
                                 break;
                             }
 #if _NSS3300
@@ -391,15 +393,15 @@ namespace SYSTEM{
                                 if (mIN[I.ULD_CONV_READY]){
                                     if (!RunTrayConveyorUnloading()){
                                         ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 레일부 TRAY 제거 실패! (GOOD TRAY 레일부에 트레이 모두 제거 하셔야 합니다.)";
-                                        COM_.ViewWarning(nThread, W.ProductRemove);
-                                        COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
+                                        W.ViewWarning(nThread, W.ProductRemove);
+                                        B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
                                         break;
                                     }
                                 } //배출 콘베어 트레이 받을 준비 되어 있으면 배출
                                 else{
                                     ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 레일부 TRAY 제거 실패! (GOOD TRAY 레일부에 트레이 모두 제거 하셔야 합니다.)";
-                                    COM_.ViewWarning(nThread, W.ProductRemove);
-                                    COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
+                                    W.ViewWarning(nThread, W.ProductRemove);
+                                    B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (TRAY 레일부 트레이 있음)");
                                     break;
                                 } //
                             } // GOOD TRAY LOADING 위치에 트레이 감지하고 있으면 무조건
@@ -411,13 +413,13 @@ namespace SYSTEM{
                             if (mIN[I.GOOD_RAIL_STACKER_CHECK]){
                                 if (eRTN.SUCESS != BASE.GoodTrayStackerUp(nThread, "GOOD TRAY 스태커 테이블 업")){
                                     ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 스태커 테이블 업 실패!";
-                                    COM_.ViewWarning(nThread, W.ProductRemove);
+                                    W.ViewWarning(nThread, W.ProductRemove);
                                     IsBIT[B.InitFail] = true;
                                     break;
                                 }
                                 if (eRTN.SUCESS != BASE.GoodTrayStackerDown(nThread, "GOOD TRAY 스태커 테이블 다운")){
                                     ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 스태커 테이블 다운 실패!";
-                                    COM_.ViewWarning(nThread, W.ProductRemove);
+                                    W.ViewWarning(nThread, W.ProductRemove);
                                     IsBIT[B.InitFail] = true;
                                     break;
                                 }
@@ -426,21 +428,21 @@ namespace SYSTEM{
                             if (!mIN[I.GOOD_RAIL_STACKER_CHECK]){
                                 if (eRTN.SUCESS != BASE.GoodTrayStackerUp(nThread, "GOOD TRAY 스태커 테이블 업")){
                                     ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 스태커 테이블 업 실패!";
-                                    COM_.ViewWarning(nThread, W.ProductRemove);
-                                    COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (GOOD 트레이 스태커 테이블 업 실패)");
+                                    W.ViewWarning(nThread, W.ProductRemove);
+                                    B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (GOOD 트레이 스태커 테이블 업 실패)");
                                     break;
                                 }
                                 if (eRTN.SUCESS != BASE.GoodTrayStackerDown(nThread, "GOOD TRAY 스태커 테이블 다운")){
                                     ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 스태커 테이블 다운 실패!";
-                                    COM_.ViewWarning(nThread, W.ProductRemove);
-                                    COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (GOOD 트레이 스태커 테이블 다운 실패)");
+                                    W.ViewWarning(nThread, W.ProductRemove);
+                                    B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (GOOD 트레이 스태커 테이블 다운 실패)");
                                     break;
                                 }
                             }//스택커에 트레이 유무 확인 
                             if (!mIN[I.GOOD_RAIL_TRAY_LOADING_CHECK] || !mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK]){
                                 ConfirmUser[W.ProductRemove].msg = "초기화 실패! = GOOD TRAY 레일부 TRAY 제거 실패! (GOOD TRAY 레일부에 트레이 모두 제거 하셔야 합니다.)";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (레일부 트레이 제거 실패)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (레일부 트레이 제거 실패)");
                                 break;
                             }
 #endif
@@ -449,8 +451,8 @@ namespace SYSTEM{
                         if (mIN[I.ELV_MZ_EXIST1] || mIN[I.ELV_MZ_EXIST2]){
                             if (eRTN.SUCESS != C.Magazine.OutCassate("매거진 배출")){
                                 ConfirmUser[W.ProductRemove].msg = "초기화 실패! = 매거진 배출 실패";
-                                COM_.ViewWarning(nThread, W.ProductRemove);
-                                COM_.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (매거진 배출 실패)");
+                                W.ViewWarning(nThread, W.ProductRemove);
+                                B.Bit(nThread, B.InitFail, true, "초기화 진행 중 실패 (매거진 배출 실패)");
                                 break;
                             }
                         }
@@ -779,6 +781,7 @@ namespace SYSTEM{
                         LAB_.TriggerOutput(iMANUAL.int_1, uVAL.High);
                         LAB_.ONE_SHOT(iMANUAL.int_1);
                         LAB_.TriggerOutput(iMANUAL.int_1, uVAL.Low);
+                        UTIL_.DELAY((int)prMACHINE[CP.TriggerEnd]);
 #endif
                         break;
 
@@ -956,6 +959,7 @@ namespace SYSTEM{
                         BASE.MoveX(nThread, (eHD)iMANUAL.int_1, P.PkCenter, "", ((eHD)iMANUAL.int_1).ToString() + " X축 카메라 하부 카메라 중심 위치 이송");
                         break;
                     case ManualNumber.HDXReject:
+                        iMANUAL.int_1 = iMANUAL.iMT1 == M.TRIGGER1 ? (int)eHD.HD1 : (int)eHD.HD2;
                         if (eRTN.SUCESS != BASE.MoveHDPkRdy(nThread, (eHD)iMANUAL.int_1, "", ((eHD)iMANUAL.int_1).ToString() + " 피커 대기 위치 이송")) break;
                         BASE.MoveX(nThread, (eHD)iMANUAL.int_1, P.Reject, "", ((eHD)iMANUAL.int_1).ToString() + " X축 유닛 버리는 위치 이송");
                         break;
@@ -991,6 +995,22 @@ namespace SYSTEM{
                     case ManualNumber.HDPkCenter:
                         //DATA_.iMANUAL.bool_1 T:PK CAL Z / F:UNIT INSPECTION Z
                         BASE.MoveHDPkCenter(nThread, (eHD)iMANUAL.int_1, iMANUAL.int_2, iMANUAL.bool_1, "", ((eHD)iMANUAL.int_1).ToString() + " 피커 중심 위치 이송");
+                        if (prMACHINE[CP.UseFlaying] != (int)InspectionMode.Flying && !iMANUAL.bool_1) {
+                            int pkZNum;
+                            double pkZOffset;
+                            string pkZCmd;
+                            if (eHD.HD1 == (eHD)iMANUAL.int_1) {
+                                pkZNum = M.HD1Pk[iMANUAL.int_2];
+                                pkZOffset = prMODEL[RP.HD1_PRS_OFFSET[iMANUAL.int_2]];
+                                pkZCmd = pkZOffset == 0 ? "" : "offset=" + pkZOffset.ToString();
+                            }
+                            else {
+                                pkZNum = M.HD2Pk[iMANUAL.int_2];
+                                pkZOffset = prMODEL[RP.HD2_PRS_OFFSET[iMANUAL.int_2]];
+                                pkZCmd = pkZOffset == 0 ? "" : "offset=" + pkZOffset.ToString();
+                            }
+                            BASE.MovePk(nThread, pkZNum, P.Ready, pkZCmd, "PRS Z OFFSET - " + ((eHD)iMANUAL.int_1).ToString() + " PK" + (iMANUAL.int_2 + 1).ToString() + pkZCmd);
+                        } //PRS 검사 STEP이면 피커 Z축 옵셋 값 적용함!
                         break;
 
                     case ManualNumber.AllPkZRdy:
@@ -1130,7 +1150,7 @@ namespace SYSTEM{
                         if (IsBIT[B.ElvULDLocation]){
                             if (mIN[I.ELV_MZ_EXIST1] || mIN[I.ELV_MZ_EXIST2]){
                                 if (LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK1) || !LAB_.INPUT(I.ULD_CONV_MZ_FULL_CHECK2)){
-                                    COM_.ViewWarning(nThread, W.ManualErrMassage, "매거진 레일 배출 레일에 가득차 있음!");
+                                    W.ViewWarning(nThread, W.ManualErrMassage, "매거진 레일 배출 레일에 가득차 있음!");
                                     break;
                                 }
                                 if (eRTN.SUCESS != C.Magazine.OutCassate("메뉴얼 매거진 언로딩")) break;
@@ -1140,11 +1160,11 @@ namespace SYSTEM{
                         if (iMANUAL.eRESULT != eRTN.SUCESS){
                             if (iMANUAL.eRESULT == eRTN.NotLoadingMagazine){
                                 if (eRTN.SUCESS != C.Magazine.MoveY(P.FirstSlot, "", "엘리베이터 Y축 매거진 첫번째 슬롯 위치 이송")) break;
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "로딩 레일에 매거진 없음!");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "로딩 레일에 매거진 없음!");
                                 break;
                             }
                             else{
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 실패!");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 실패!");
                                 break;
                             }
                         }
@@ -1155,7 +1175,7 @@ namespace SYSTEM{
 #else
                         if (mIN[I.ULD_CONV_MZ_FULL_CHECK1] || mIN[I.ULD_CONV_MZ_FULL_CHECK2]){
 #endif
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "매거진 배출 레일에 가득차 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "매거진 배출 레일에 가득차 있음!");
                             break;
                         }
                         if (mIN[I.ELV_MZ_EXIST1] || mIN[I.ELV_MZ_EXIST2]){
@@ -1181,11 +1201,15 @@ namespace SYSTEM{
                                 break;
                             }
                         }
+                        if (!mIN[I.RAIL_MOUTH]) {
+                            W.ViewWarning(nThread, W.ManualErrMassage, "매거진에서 PCB 돌출되어 있음!");
+                            break;
+                        }
                         iMANUAL.eRESULT = C.Magazine.OutCassate("메뉴얼 매거진 언로딩");
                         break;
                     case ManualNumber.RunMGZSlotLocation:
                         if (!mIN[I.ELV_MZ_EXIST1] && !mIN[I.ELV_MZ_EXIST2]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 되어 있지 않음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 되어 있지 않음!");
                             break;
                         }
                         if (IsBIT[B.ElvLDLocation]){
@@ -1200,9 +1224,8 @@ namespace SYSTEM{
                         }
                         if (IsBIT[B.ElvULDLocation]){
                             if (eRTN.SUCESS != C.Magazine.OutCassate("메뉴얼 매거진 언로딩")) break;
-                            if (!mIN[I.ELV_MZ_EXIST1] && !mIN[I.ELV_MZ_EXIST2])
-                            {
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 되어 있지 않음!");
+                            if (!mIN[I.ELV_MZ_EXIST1] && !mIN[I.ELV_MZ_EXIST2]){
+                                W.ViewWarning(nThread, W.ManualErrMassage, "매거진 로딩 되어 있지 않음!");
                             }
                             break;
                         }
@@ -1212,34 +1235,34 @@ namespace SYSTEM{
 
                     case ManualNumber.RunStripLoading:
                         if (!mIN[I.RAIL_EXIST1]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "레일 위에 스트립 없음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "레일 위에 스트립 없음!");
                             break;
                         }
                         if (mIN[I.RAIL_EXIST2]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "레일 픽업 위치에 스트립 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "레일 픽업 위치에 스트립 있음!");
                             break;
                         }
                         if (mIN[I.INLET_TABLE_UP] && !mIN[I.INLET_TABLE_DN]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "인-레일 테이블 다운 상태인지 확인!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "인-레일 테이블 다운 상태인지 확인!");
                             break;
                         }
                         C.Gripper.Process("스트립 로딩");
                         break;
                     case ManualNumber.RunStripPic:
                         if (!mIN[I.RAIL_EXIST2]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "레일 위에 스트립 업습니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "레일 위에 스트립 업습니다!");
                             break;
                         }
                         if (mtDATA[M.GrpX, P.Ready].Pos + 1 < mtSTS[M.GrpX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "그리퍼 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "그리퍼 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
                         if (mIN[I.STRIP_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 진공 센서 ON 상태 확인 바랍니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 진공 센서 ON 상태 확인 바랍니다!");
                             break;
                         }
                         if (prMACHINE[CP.UnitPkSafetyPosition] < mtSTS[M.UnitPkX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
 
@@ -1250,19 +1273,19 @@ namespace SYSTEM{
                         break;
                     case ManualNumber.RunStripPlc:
                         if (!mIN[I.STRIP_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (!mIN[I.SAW_LD_REQ]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "다이싱에서 스트립 공급 요청 비트 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "다이싱에서 스트립 공급 요청 비트 OFF 되어 있음!");
                             break;
                         }
                         if (prMACHINE[CP.UnitPkSafetyPosition] < mtSTS[M.UnitPkX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
                         if (IsBIT[B.StripPlacStop]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "다이싱 테이블 스트립 공급 일시 정지 중 입니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "다이싱 테이블 스트립 공급 일시 정지 중 입니다!");
                             break;
                         }
 
@@ -1275,19 +1298,19 @@ namespace SYSTEM{
                     case ManualNumber.RunUnitPic:
                         iMANUAL.bool_1 = true;
                         if (mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 ON 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 ON 되어 있음!");
                             break;
                         }
                         if (!mIN[I.SAW_ULD_REQ]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "다이싱에서 유닛 배출 요청 비트 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "다이싱에서 유닛 배출 요청 비트 OFF 되어 있음!");
                             break;
                         }
                         if (prMACHINE[CP.StripPkSafetyPosition] < mtSTS[M.StripPkX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
                         if (IsBIT[B.UnitPickupStop]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "다이싱 테이블 유닛 배출 일시 정지 중 입니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "다이싱 테이블 유닛 배출 일시 정지 중 입니다!");
                             break;
                         }
 
@@ -1296,16 +1319,16 @@ namespace SYSTEM{
                         if (eRTN.SUCESS != C.UnitPk.MoveX(P.Ready, "", "유닛 피커 X축 대기 위치 이송")) break;
 
                         if (iMANUAL.bool_1) { if (IsBIT[B.SawManualRun]) C.ReceiveSaw.ManualSecuss(); }
-                        else COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 픽업 실패!");
+                        else W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 픽업 실패!");
                         break;
                     case ManualNumber.RunScrap:
                         iMANUAL.bool_1 = true;
                         if (prMACHINE[CP.StripPkSafetyPosition] < mtSTS[M.StripPkX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
                         if (prMACHINE[CP.UseScrapVacCheck] == (int)eUSE.USE && (!mIN[I.SCRAP_VAC1] || !mIN[I.SCRAP_VAC2])){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스크랩 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스크랩 진공 OFF 되어 있음!");
                             break;
                         }
 
@@ -1314,11 +1337,11 @@ namespace SYSTEM{
                         if (eRTN.SUCESS != C.UnitPk.MoveX(P.Ready, "", "유닛 피커 X축 대기 위치 이송")) break;
 
                         if (iMANUAL.bool_1) { if (IsBIT[B.SawManualRun]) C.ReceiveSaw.ManualSecuss(); }
-                        else COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 픽업 실패!");
+                        else W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 픽업 실패!");
                         break;
                     case ManualNumber.RunCleaner:
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         C.UnitPk.Cleaner("유닛 클리닝");
@@ -1328,7 +1351,7 @@ namespace SYSTEM{
                         break;
                     case ManualNumber.RunBrush:
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (eRTN.SUCESS != C.UnitPk.MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) break;
@@ -1348,21 +1371,21 @@ namespace SYSTEM{
                         break;
                     case ManualNumber.RunUnitCleaning:
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (prMACHINE[CP.StripPkSafetyPosition] < mtSTS[M.StripPkX].CurrentPosition){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스트립 피커 X축 대기 위치로 보내 주셔야 합니다!");
                             break;
                         }
                         if (prMACHINE[CP.UseScrapVacCheck] == (int)eUSE.USE && (!mIN[I.SCRAP_VAC1] || !mIN[I.SCRAP_VAC2])){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "스크랩 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "스크랩 진공 OFF 되어 있음!");
                             break;
                         }
                         if (!C.UnitPk.Scrap("스크랩 제거")) break;
 
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (eRTN.SUCESS != C.UnitPk.MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) break;
@@ -1370,7 +1393,7 @@ namespace SYSTEM{
                         if (!C.UnitPk.Brush("유닛 브러쉬 작업")) break;
 
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (!C.UnitPk.Cleaner("유닛 클리닝")) break;
@@ -1385,23 +1408,23 @@ namespace SYSTEM{
 
                     case ManualNumber.RunUnitPlc:
                         if (!mIN[I.UNIT_PK_VAC]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "유닛 피커 진공 OFF 되어 있음!");
                             break;
                         }
                         if (mIN[I.StageVac[iMANUAL.int_1]]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, DATA_.InputName[I.StageVac[iMANUAL.int_1]] + " 진공 ON 상태 !");
+                            W.ViewWarning(nThread, W.ManualErrMassage, DATA_.InputName[I.StageVac[iMANUAL.int_1]] + " 진공 ON 상태 !");
                             break;
                         }
                         if (IsBIT[B.Stage_Pic[iMANUAL.int_1]]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 픽업 작업 중 !");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 픽업 작업 중 !");
                             break;
                         }
                         if (IsBIT[B.UnitInspection[iMANUAL.int_1]] || IsBIT[B.StageBusy[iMANUAL.int_1]]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 작업 중 !");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 작업 중 !");
                             break;
                         }
                         if (0 == MAP_.GetPalletPocket((eMAP_BLOCK)iMANUAL.int_1, (int)prMODEL[RP.GroupCntX], (int)prMODEL[RP.GroupCntY], (int)prMODEL[RP.UnitX[iMANUAL.int_1]], (int)prMODEL[RP.UnitY[iMANUAL.int_1]], ref iMANUAL.int_5, ref iMANUAL.int_6, ref iMANUAL.int_7, ref iMANUAL.int_8)){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 유닛 정보 남아 있음 !");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 유닛 정보 남아 있음 !");
                             break;
                         }
 
@@ -1413,11 +1436,11 @@ namespace SYSTEM{
 
                     case ManualNumber.RunStageAirshower:
                         if (!mIN[I.StageVac[iMANUAL.int_1]] && !bDRYRUN){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + "번 테이블 진공 센서 OFF 되어 있음");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + "번 테이블 진공 센서 OFF 되어 있음");
                             break;
                         }
                         if (IsBIT[B.StageAirshowerWait]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "테이블 에어샤워 작업 일시 정지 플로그 ON 상태!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "테이블 에어샤워 작업 일시 정지 플로그 ON 상태!");
                             break;
                         }
                         if (eRTN.SUCESS != BASE.MoveAllPkRdy(nThread, "", "모든 헤드 피커 안전 위치로 이송")) break;
@@ -1425,20 +1448,18 @@ namespace SYSTEM{
                         break;
                     case ManualNumber.RunUnitInspection:
                         if (!mIN[I.StageVac[iMANUAL.int_1]] && !bDRYRUN){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + "번 테이블 진공 센서 OFF 되어 있음");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + "번 테이블 진공 센서 OFF 되어 있음");
                             break;
                         }
                         //유닛 데이터 확인
                         if (eRTN.SUCESS != BASE.MoveAllPkRdy(nThread, "", "모든 헤드 피커 안전 위치로 이송")) break;
-                        if (eMAP_BLOCK.STAGE1  == (eMAP_BLOCK)iMANUAL.int_1)    iMANUAL.CMD = CLOT.InfoStrip[T.DryTable1].Barcode;
-                        else                                                    iMANUAL.CMD = CLOT.InfoStrip[T.DryTable2].Barcode;
-
-                        BASE.SeqUnitInspection(nThread, (eMAP_BLOCK)iMANUAL.int_1, iMANUAL.CMD, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 유닛 검사 진행");
+                        
+                        BASE.SeqUnitInspection(nThread, (eMAP_BLOCK)iMANUAL.int_1, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + " 유닛 검사 진행");
                         break;
 
                     case ManualNumber.RunPickerCal:
                         if (!mIN[I.VisionRdy]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "비전 RUN 상태에서 동작 가능 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "비전 RUN 상태에서 동작 가능 합니다!");
                             break;
                         }
                         BASE.ResetPkrCal(nThread);
@@ -1449,8 +1470,8 @@ namespace SYSTEM{
                         }//먼저이송                        
                         if (eRTN.SUCESS != BASE.PkrOnSHOT(nThread)) break;
                         if (eRTN.SUCESS != BASE.ReadPkCal(nThread)){
-                            COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
-                            COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                            O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
+                            O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                             if (mOUT[O.UsePkCal]) BASE.PK_CAL_LIGHT(nThread, false);
                             break;
                         }
@@ -1460,8 +1481,8 @@ namespace SYSTEM{
 
                         if (eRTN.SUCESS != BASE.PkrOnSHOT(nThread)) break;
                         if (eRTN.SUCESS != BASE.ReadPkCal(nThread)){
-                            COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
-                            COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                            O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
+                            O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                             if (mOUT[O.UsePkCal]) BASE.PK_CAL_LIGHT(nThread, false);
                             break;
                         }
@@ -1470,7 +1491,7 @@ namespace SYSTEM{
                             iMANUAL.double_1 = mtSTS[iMANUAL.iMT2].CurrentPosition;
                             iMANUAL.ManualCmd = BASE.GetPkOffsetLabel(iMANUAL.double_1);
                             if (iMANUAL.ManualCmd == ""){
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "피커 회전 위치 확인 후 다시 CAL' 진행!");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "피커 회전 위치 확인 후 다시 CAL' 진행!");
                                 break;
                             }
 
@@ -1486,8 +1507,8 @@ namespace SYSTEM{
 
                                 if (eRTN.SUCESS != BASE.PkrOnSHOT(nThread)) break;
                                 if (eRTN.SUCESS != BASE.ReadPkCal(nThread)){
-                                    COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
-                                    COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                                    O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
+                                    O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                                     if (mOUT[O.UsePkCal]) BASE.PK_CAL_LIGHT(nThread, false);
                                     break;
                                 }
@@ -1501,7 +1522,7 @@ namespace SYSTEM{
                             }
                             BASE.ResetPkrCal(nThread);
                             if (Math.Abs(IsDOUBLE[D.PkCal_OffsetX]) > 0.01 && Math.Abs(IsDOUBLE[D.PkCal_OffsetY]) > 0.01){
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "스팩 OUT!" + "[X:" + IsDOUBLE[D.PkCal_OffsetX].ToString() + "/Y:" + IsDOUBLE[D.PkCal_OffsetY].ToString() + "]");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "스팩 OUT!" + "[X:" + IsDOUBLE[D.PkCal_OffsetX].ToString() + "/Y:" + IsDOUBLE[D.PkCal_OffsetY].ToString() + "]");
                                 break;
                             } //spec out
                         } //피커 옵셋 적용
@@ -1509,11 +1530,11 @@ namespace SYSTEM{
 
                     case ManualNumber.RunPickerAutoCal:
                         if (!mIN[I.VisionRdy]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "비전 RUN 상태에서 동작 가능 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "비전 RUN 상태에서 동작 가능 합니다!");
                             break;
                         }
                         if (iMANUAL.ManualCmd == ""){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "피커 회전 위치 확인 후 다시 CAL' 진행!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "피커 회전 위치 확인 후 다시 CAL' 진행!");
                             break;
                         }
 
@@ -1526,8 +1547,8 @@ namespace SYSTEM{
                             if (eRTN.SUCESS != BASE.MoveHDPkCenter(nThread, (eHD)iMANUAL.int_1, p, true, "", ((eHD)iMANUAL.int_1).ToString() + " 피커 중심 위치 이송")) break;
                             if (eRTN.SUCESS != BASE.PkrOnSHOT(nThread)) break;
                             if (eRTN.SUCESS != BASE.ReadPkCal(nThread)){
-                                COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
-                                COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                                O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
+                                O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                                 if (mOUT[O.UsePkCal]) BASE.PK_CAL_LIGHT(nThread, false);
                                 break;
                             }
@@ -1547,8 +1568,8 @@ namespace SYSTEM{
 
                                 if (eRTN.SUCESS != BASE.PkrOnSHOT(nThread)) break;
                                 if (eRTN.SUCESS != BASE.ReadPkCal(nThread)){
-                                    COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
-                                    COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                                    O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 실패");
+                                    O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                                     if (mOUT[O.UsePkCal]) BASE.PK_CAL_LIGHT(nThread, false);
                                     break;
                                 }
@@ -1561,24 +1582,24 @@ namespace SYSTEM{
                                 iMANUAL.XY_1.y = IsDOUBLE[D.PkCal_OffsetY];
                             }
                             if (!iMANUAL.bool_1){
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, ((eHD)iMANUAL.int_1).ToString() + "-피커 " + (p + 1).ToString() + " CALIBRATION 실패 피커 상태 확인 후 다시 실행 하셔야 합니다 !");
+                                W.ViewWarning(nThread, W.ManualErrMassage, ((eHD)iMANUAL.int_1).ToString() + "-피커 " + (p + 1).ToString() + " CALIBRATION 실패 피커 상태 확인 후 다시 실행 하셔야 합니다 !");
                                 break;
                             }
                         } //picker
                         BASE.ResetPkrCal(nThread);
                         if (iMANUAL.bool_1)
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, ((eHD)iMANUAL.int_1).ToString() + " CALIBRATION 완료하였습니다. !");
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eHD)iMANUAL.int_1).ToString() + " CALIBRATION 완료하였습니다. !");
 
-                        COM_.Bit(nThread, B.ManualPkrAutoCalView, true, "피커 오토켈리브레이션 뷰어 플로그 ON");
+                        B.Bit(nThread, B.ManualPkrAutoCalView, true, "피커 오토켈리브레이션 뷰어 플로그 ON");
                         break;
 
                     case ManualNumber.AllPickerAutoCal:
                         iMANUAL.eRESULT = BASE.Seq_HeadPkrAutoCal(nThread);
                         if (iMANUAL.eRESULT == eRTN.SUCESS){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "ALL HEAD PICKER PICK-UP / PLACE 위치 AUTO CALIBRATION 성공!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "ALL HEAD PICKER PICK-UP / PLACE 위치 AUTO CALIBRATION 성공!");
                         }
                         else{
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "ALL HEAD PICKER PICK-UP / PLACE 위치 AUTO CALIBRATION 실패!" + ETC.NewLine + "다시 CALIBRATION 진행 하셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "ALL HEAD PICKER PICK-UP / PLACE 위치 AUTO CALIBRATION 실패!" + ETC.NewLine + "다시 CALIBRATION 진행 하셔야 합니다!");
                         }
                         break;
 
@@ -1590,11 +1611,11 @@ namespace SYSTEM{
 
                     case ManualNumber.RunPRS:
                         if (!mIN[I.VisionRdy]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "비전 실행 후 다시 실행 하셔야 합니다!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "비전 실행 후 다시 실행 하셔야 합니다!");
                             break;
                         }
                         if (prMACHINE[CP.UesBtmInspection] == (int)eUSE.NotUSE){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "MARK 검사 모드 설정 되어 있지 않음!");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "MARK 검사 모드 설정 되어 있지 않음!");
                             break;
                         }
 
@@ -1604,17 +1625,17 @@ namespace SYSTEM{
 
                     case ManualNumber.RunReworkTrayLoading:
                         if (!mIN[I.TRAY_PKR_TRAY_CHECK]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "트레이 피커 트레이 없음.");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "트레이 피커 트레이 없음.");
                             break;
                         }
 #if _NSS3300
 #else
                         if (!mIN[I.NG_RAIL_LOADING_TRAY_CHECK] || !mIN[I.NG_RAIL_HEAD1_TRAY_CHECK] || !mIN[I.NG_RAIL_HEAD2_TRAY_CHECK]){
                             if (IsBIT[B.ReWorkTrayWork]){
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 작업 중.");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 작업 중.");
                                 break;
                             }
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 있음.");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 있음.");
                             break;
                         }
 #endif
@@ -1625,20 +1646,20 @@ namespace SYSTEM{
 #if _NSS3300
 #else
                         if (mIN[I.NG_RAIL_LOADING_TRAY_CHECK] && mIN[I.NG_RAIL_HEAD1_TRAY_CHECK] && mIN[I.NG_RAIL_HEAD2_TRAY_CHECK]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 없음.");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 이송부에 트레이 없음.");
                             break;
                         }
 #endif
                         if (mtSTS[M.TrayFeeder3].CurrentPosition < 900){
                             if (!mIN[I.NG_RAIL_STACKER_TRAY_CHECK]){
-                                COM_.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 배출 스태커 아래 레일에 스태커 감지 됨.");
+                                W.ViewWarning(nThread, W.ManualErrMassage, "NG 트레이 배출 스태커 아래 레일에 스태커 감지 됨.");
                                 break;
                             }
                         }
                         if (eRTN.SUCESS != BASE.MoveAllPkRdy(nThread, "", "모든 헤드 피커 안전 위치로 이송")) break;
                         C.ReworkTrayFeeder.OutTray("메뉴얼 REWORK 트레이 스태커로 배출");
                         if (IsBIT[B.ReWorkTrayWork]){
-                            COM_.Bit(nThread, B.ReWorkTrayWork, false, "메뉴얼 REWORK 트레이 배출 플러그 OFF");
+                            B.Bit(nThread, B.ReWorkTrayWork, false, "메뉴얼 REWORK 트레이 배출 플러그 OFF");
                             MAP_.TrayMap_Reset(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY]);
                         }
                         break;
@@ -1650,18 +1671,18 @@ namespace SYSTEM{
                         if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] || !mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
 #endif
 
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "빈-트레이 이송부에 트레이 있음");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "빈-트레이 이송부에 트레이 있음");
                             break;
                         }
                         if (!mIN[I.EMPTY_STACKER_NONE]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "빈-트레이 스태커에 트레이 없음");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "빈-트레이 스태커에 트레이 없음");
                             break;
                         }
                         C.EmptyStacker.GetEmptyTray("메뉴얼 빈-트레이 공급");
                         break;
                     case ManualNumber.RunEmptyTrayPic:
                         if (mIN[I.TRAY_PKR_TRAY_CHECK]){
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "트레이 피커 트레이 잡고 있음.");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "트레이 피커 트레이 잡고 있음.");
                             break;
                         }
 #if _NSS3300
@@ -1669,8 +1690,7 @@ namespace SYSTEM{
 #else
                         if (mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
 #endif
-
-                            COM_.ViewWarning(nThread, W.ManualErrMassage, "EMPTY TRANSFER TABLE TRAY 없음");
+                            W.ViewWarning(nThread, W.ManualErrMassage, "EMPTY TRANSFER TABLE TRAY 없음");
                             break;
                         }
                         if (eRTN.SUCESS != C.EmptyStacker.TransferGrip("Lock tray transfer grip")) break;
@@ -1681,7 +1701,15 @@ namespace SYSTEM{
                     case ManualNumber.StringBarcodeReading:
                         C.Gripper.ReadBarcode();
                         break;
-#endregion
+                    #endregion
+
+                    case ManualNumber.TopCamCalZigCenter:
+                        if (!mIN[I.StageVac[iMANUAL.int_1]] && !bDRYRUN){
+                            W.ViewWarning(nThread, W.ManualErrMassage, ((eMAP_BLOCK)iMANUAL.int_1).ToString() + "번 테이블 진공 센서 OFF 되어 있음");
+                            break;
+                        }
+                        BASE.MoveCalZigCenter(nThread, (eMAP_BLOCK)DATA_.iMANUAL.int_1, (eMAP_BLOCK)DATA_.iMANUAL.int_1 + "번 켈리브레이션 지그 중심 위치로 이송");
+                        break;
 
                     default: break;
                 }
@@ -1718,14 +1746,14 @@ namespace SYSTEM{
         bool InitialMachine(){
             iMANUAL.Message = "전체 초기화 : MACHINE INITIALIZE (InitialMachine) ";
             BASE.AddMessage(nThread, iMANUAL.Message);
-            if (!COM_.CHK_EMO()) return false;
+            if (!I.CHK_EMO()) return false;
             if (!Cyclinder_1st()) return false;
             if (!Sensor_1st()) return false;
 
             bAllHomeComplete = false;
             bInitialComplete = false;
             for (int i = 0; i < CNT_.THREAD; i++) UseThread[i] = true; //디버깅 완료 후 쓰레드 활성화 삭제
-            IniHomeBuffer();
+            M.IniHomeBuffer();
             LAB_.ALL_ALARMCLEAR();
             UTIL_.DELAY(100);
             if (!LAB_.AlarmStatus(nThread, "iMANUAL.Message")){
@@ -1865,11 +1893,11 @@ namespace SYSTEM{
             BASE.AddMessage(nThread, iMANUAL.Message);
             if (MAP_.CheckStageStatus(eMAP_BLOCK.STAGE1, (int)prMODEL[RP.GroupCntX], (int)prMODEL[RP.GroupCntY], (int)prMODEL[RP.UnitCntX], (int)prMODEL[RP.UnitCntY])){
                 BASE.StageVac(eMAP_BLOCK.STAGE1, stBIT.ON);
-                COM_.SetBit(nThread, B.Stage1PickUp, true, "맵-블록 테이블1번 픽업 중에 초기화 진행하여 이여서 픽업 진행 플로그 ON");
+                B.SetBit(nThread, B.Stage1PickUp, true, "맵-블록 테이블1번 픽업 중에 초기화 진행하여 이여서 픽업 진행 플로그 ON");
             }
             if (MAP_.CheckStageStatus(eMAP_BLOCK.STAGE2, (int)prMODEL[RP.GroupCntX], (int)prMODEL[RP.GroupCntY], (int)prMODEL[RP.UnitCntX], (int)prMODEL[RP.UnitCntY])){
                 BASE.StageVac(eMAP_BLOCK.STAGE2, stBIT.ON);
-                COM_.SetBit(nThread, B.Stage2PickUp, true, "맵-블록 테이블2번 픽업 중에 초기화 진행하여 이여서 픽업 진행 플로그 ON");
+                B.SetBit(nThread, B.Stage2PickUp, true, "맵-블록 테이블2번 픽업 중에 초기화 진행하여 이여서 픽업 진행 플로그 ON");
             }
             if ((mIN[I.ELV_MZ_EXIST1] || mIN[I.ELV_MZ_EXIST2]) /*&& 로더 매거진 콘베어 투입단 센서*/){
                 //if (eRTN.SUCESS != C.Magazine.UnClamp("매거진 언클램프")) return false;
@@ -2048,7 +2076,7 @@ namespace SYSTEM{
                         PICKER[(int)eHD.HD1].finger[i].iResult = (int)eSTATUS.NG;
                     }
                     BASE.PkVac(eHD.HD1, (ePK)i, stBIT.ON, false, "");
-                    COM_.Bit(nThread, B.X1PkPlc, true, "초기화 진행 후 X1 피커에 유닛 잡고 있어 REJECT BOX에 버리라고 요청 플러그 ON");
+                    B.Bit(nThread, B.X1PkPlc, true, "초기화 진행 후 X1 피커에 유닛 잡고 있어 REJECT BOX에 버리라고 요청 플러그 ON");
                 } //진공 ON됨
                 else{
                     PICKER[(int)eHD.HD1].finger[i].valid = false;
@@ -2063,7 +2091,7 @@ namespace SYSTEM{
                         PICKER[(int)eHD.HD2].finger[i].iResult = (int)eSTATUS.NG;
                     }
                     BASE.PkVac(eHD.HD2, (ePK)i, stBIT.ON, false, "");
-                    COM_.Bit(nThread, B.X2PkPlc, true, "초기화 진행 후 X2 피커에 유닛 잡고 있어 REJECT BOX에 버리라고 요청 플러그 ON");
+                    B.Bit(nThread, B.X2PkPlc, true, "초기화 진행 후 X2 피커에 유닛 잡고 있어 REJECT BOX에 버리라고 요청 플러그 ON");
                 } //진공 ON됨
                 else{
                     PICKER[(int)eHD.HD2].finger[i].valid = false;

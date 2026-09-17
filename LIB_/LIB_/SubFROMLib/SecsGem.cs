@@ -1,4 +1,5 @@
 ﻿using LIB_.DateType;
+using Object;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,7 +19,6 @@ namespace LIB_.SubFROMLib
         public string[] strPPID1 = new string[1000];
         public string[] strPARA;
 
-        public bool bIni                = false;    // gem 초기화 진행 여부
         public string strContiReadCstId = "";  //TCP/IP를 통해 계속들어옴
         public bool isReceivedTrackIn   = false; //상위로부터 START 호스트커맨드를 받았다.
         public bool isLotStartEnable    = false; //Lot Start 해도 되는 조건성립
@@ -241,7 +241,7 @@ namespace LIB_.SubFROMLib
                 btnStop.Enabled = true;
                 //---------------------------------------------------------
             }
-            bIni = true;
+            CMES.bIni = true;
         }
 
         public void AddSVID(){
@@ -270,6 +270,17 @@ namespace LIB_.SubFROMLib
                             //strFormat = "";
 
                             m_gem.AddSVID(int.Parse(strId), strName, strType, ""); // ALID, ptr, strALCD
+
+                            try{
+                                int nVID = int.Parse(strId);
+                                if (nVID < 0 || nVID < CSVID.Name.Length - 1){
+                                    CSVID.Name[nVID] = strName;
+                                    CSVID.Type[nVID] = strType;
+                                }
+                            }
+                            catch (Exception ex){
+                                LogWR_.DEBUG_PRINT("SVID READING FAIL! => " + ex.ToString());
+                            }
                             nCount++;
                         }
                     }
@@ -300,6 +311,17 @@ namespace LIB_.SubFROMLib
                             strType = SplitNum[1];
 
                             m_gem.AddSVID(int.Parse(strId), strName, strType, ""); // ALID, ptr, strALCD
+
+                            try{
+                                int nVID = int.Parse(strId);
+                                if (nVID < 0 || nVID < CSVID.Name.Length - 1){
+                                    CSVID.Name[nVID] = strName;
+                                    CSVID.Type[nVID] = strType;
+                                }
+                            }
+                            catch (Exception ex){
+                                LogWR_.DEBUG_PRINT("SVID READING FAIL! => " + ex.ToString());
+                            }
                             nCount++;
                         }
                     }
@@ -330,6 +352,17 @@ namespace LIB_.SubFROMLib
                             strType = SplitNum[1];
 
                             SUBFRM_.gSecsGem.m_gem.AddSVID(int.Parse(strId), strName, strType, ""); // ALID, ptr, strALCD
+
+                            try{
+                                int nVID = int.Parse(strId);
+                                if (nVID < 0 || nVID < CSVID.Name.Length - 1){
+                                    CSVID.Name[nVID] = strName;
+                                    CSVID.Type[nVID] = strType;
+                                }
+                            }
+                            catch (Exception ex){
+                                LogWR_.DEBUG_PRINT("SVID READING FAIL! => " + ex.ToString());
+                            }
                             nCount++;
                         }
                     }
@@ -534,7 +567,8 @@ namespace LIB_.SubFROMLib
                 CMES.m_nPrevControlState    = CMES.m_nControlState;
                 CMES.m_nControlState        = CMES.ControlValue.CONTROL_EQ_OFFLINE;
 
-                m_gem.SetSVIDValue(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
+                //m_gem.SetSVIDValue(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
+                SetSVID(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
                 //m_gem.SetSVIDValue(CSVID.PREV_CONTROL_STATE, DATA_.m_nPrevControlState.ToString());
                 //m_gem.SendEventReport(CEID.CONTROL_STATE_CHANGE);
             }
@@ -931,7 +965,7 @@ namespace LIB_.SubFROMLib
                 CLOT.bEqpChange = false;
 
                 //CANCEL 사유 없음 ?? TC 요청하야 함 !
-                SUBFRM_.gGemMessage.sMESSAGE_1 = "LOT " + CLOT.GET_LOT.LotID + " 등록 실패 상위단 확인 필요 !!" + ETC.NewLine + "[임시 실행 하려면 EES OFF 후 LOT 등록 후 실행하셔야 합니다!] ";
+                SUBFRM_.gGemMessage.sMESSAGE_1 = "LOT " + CLOT.GET_LOT.LotID + " 등록 실패 상위단 확인 필요 !!" + ETC.NewLine + "[임시 실행 하려면 EES OFF 후 LOT 등록 후 실행하셔야 합니다!] " + ETC.NewLine + "RCMD:{0}" + strCommand;
                 SUBFRM_.gGemMessage.INI();
                 CLOT.bLotCanceled = true;
                 nHCACK = 0;
@@ -939,87 +973,137 @@ namespace LIB_.SubFROMLib
             else if (strCommand == RCMD.LOT_INFO){
                 AddGemLog(string.Format("RCMD:{0}", strCommand));
                 nParamCount = m_gem.GetListItemOpen(lMsgId);
-                for (int n = 0; n < nParamCount; n++){
+                for (int n = 0; n < nParamCount; n++) {
                     m_gem.GetRemoteCommandParam(lMsgId, n, ref strCPName, ref strCPValue, ref nFormat);
-                    if (strCPName == CPNAME.LOTID)          CLOT.GET_LOT.LotID          = strCPValue;
-                    if (strCPName == CPNAME.LOTTYPE)        CLOT.GET_LOT.LotType        = int.Parse(strCPValue);
-                    if (strCPName == CPNAME.QTY)            CLOT.GET_LOT.Qty            = int.Parse(strCPValue);
-                    if (strCPName == CPNAME.PRODUCTTYPE)    CLOT.GET_LOT.ProductType    = strCPValue;
-                    if (strCPName == CPNAME.TOOLNO)         CLOT.GET_LOT.ToolNo         = strCPValue;
-                    if (strCPName == CPNAME.ITS)            CLOT.GET_LOT.ITS            = int.Parse(strCPValue);
-                    if (strCPName == CPNAME.ITSLOTID_IN)    CLOT.GET_LOT.ITS_LotID_IN   = strCPValue;
-                    if (strCPName == CPNAME.ITSLOTID_CT)    CLOT.GET_LOT.ITS_LotID_CT   = strCPValue;
-                    if (strCPName == CPNAME.UNITSIZEX)      CLOT.GET_LOT.UnitSizeX      = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.UNITSIZEY)      CLOT.GET_LOT.UnitSizeY      = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.UNITSIZE_UPPER) CLOT.GET_LOT.UnitSize_USL   = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.UNITSIZE_LOWER) CLOT.GET_LOT.UnitSize_LSL   = double.Parse(strCPValue);
-                    if (strCPName == CPNAME.ABFMATERIAL)    CLOT.GET_LOT.ABFMATERIAL    = strCPValue;
+                    if (strCPName == CPNAME.LOTID)          CLOT.GET_LOT.LotID = strCPValue;
+                    if (strCPName == CPNAME.LOTTYPE)        CLOT.GET_LOT.LotType = int.Parse(strCPValue);
+                    if (strCPName == CPNAME.QTY)            CLOT.GET_LOT.Qty = int.Parse(strCPValue);
+                    if (strCPName == CPNAME.PRODUCTTYPE)    CLOT.GET_LOT.ProductType = strCPValue;
+                    if (strCPName == CPNAME.TOOLNO)         CLOT.GET_LOT.ToolNo = strCPValue;
+                    if (strCPName == CPNAME.ITS)            CLOT.GET_LOT.ITS = int.Parse(strCPValue);
+                    if (strCPName == CPNAME.ITSLOTID_IN)    CLOT.GET_LOT.ITS_LotID_IN = strCPValue;
+                    if (strCPName == CPNAME.ITSLOTID_CT)    CLOT.GET_LOT.ITS_LotID_CT = strCPValue;
+                    if (strCPName == CPNAME.UNITSIZEX)      CLOT.GET_LOT.UnitSizeX = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.UNITSIZEY)      CLOT.GET_LOT.UnitSizeY = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.UNITSIZE_UPPER) CLOT.GET_LOT.UnitSize_USL = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.UNITSIZE_LOWER) CLOT.GET_LOT.UnitSize_LSL = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.THICK)          CLOT.GET_LOT.Thick = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.THICK_UPPER)    CLOT.GET_LOT.Thick_USL = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.THICK_LOWER)    CLOT.GET_LOT.Thick_LSL = double.Parse(strCPValue);
+                    if (strCPName == CPNAME.ABFMATERIAL) {
+                        CLOT.GET_LOT.ABFMATERIAL = strCPValue;
+                        try {
+                            FILE_.WR_File(PATH_.ITS_ID, CLOT.GET_LOT.ABFMATERIAL, false);  // 공유폴더 안에 저장
+                        }
+                        catch { }
+                    }
                     if (strCPName == CPNAME.LANDPKGX) {
-                        try{
-                            CLOT.GET_LOT.LANDPKGX = double.Parse(strCPValue);
-                        }
-                        catch{
-                            CLOT.GET_LOT.LANDPKGX = 0;
-                        }
+                        try { CLOT.GET_LOT.LANDPKGX = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGX = 0; }
                     }
                     if (strCPName == CPNAME.LANDPKGX_UPPER) {
-                        try{
-                            CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(strCPValue);
-                        }
-                        catch{
-                            CLOT.GET_LOT.LANDPKGX_UPPER = 0;
-                        }
+                        try { CLOT.GET_LOT.LANDPKGX_UPPER = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGX_UPPER = 0; }
                     }
-                    if (strCPName == CPNAME.LANDPKGX_LOWER){
-                        try{
-                            CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(strCPValue);
-                        }
-                        catch{
-                            CLOT.GET_LOT.LANDPKGX_LOWER = 0;
-                        }
+                    if (strCPName == CPNAME.LANDPKGX_LOWER) {
+                        try { CLOT.GET_LOT.LANDPKGX_LOWER = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGX_LOWER = 0; }
                     }
-                    if (strCPName == CPNAME.LANDPKGY){
-                        try{
-                            CLOT.GET_LOT.LANDPKGY = double.Parse(strCPValue);
-                        }
-                        catch{
-                            CLOT.GET_LOT.LANDPKGY = 0;
-                        }
+                    if (strCPName == CPNAME.LANDPKGY) {
+                        try { CLOT.GET_LOT.LANDPKGY = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGY = 0; }
                     }
                     if (strCPName == CPNAME.LANDPKGY_UPPER) {
-                        try{
-                            CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(strCPValue);
-                        }
-                        catch {
-                            CLOT.GET_LOT.LANDPKGY_UPPER = 0;
-                        } 
+                        try { CLOT.GET_LOT.LANDPKGY_UPPER = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGY_UPPER = 0; }
                     }
-                    if (strCPName == CPNAME.LANDPKGY_LOWER){
-                        try{
-                            CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(strCPValue);
-                        }
-                        catch{
-                            CLOT.GET_LOT.LANDPKGY_LOWER = 0;
-                        }
+                    if (strCPName == CPNAME.LANDPKGY_LOWER) {
+                        try { CLOT.GET_LOT.LANDPKGY_LOWER = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.LANDPKGY_LOWER = 0; }
                     }
+
+                    // >> 22.1128 HK.PARK 추가
+                    if (strCPName == CPNAME.BOT_LANDTOPKG_X){
+                        try { CLOT.GET_LOT.BOT_LANDTOPKG_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_LANDTOPKG_X = 0; }
+                    }
+                    if (strCPName == CPNAME.BOT_CHAMFERLEN_TM_X){
+                        try { CLOT.GET_LOT.BOT_CHAMFERLEN_TM_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_CHAMFERLEN_TM_X = 0; }
+                    }
+                    if (strCPName == CPNAME.BOT_CHAMFERLEN_TP_X){
+                        try { CLOT.GET_LOT.BOT_CHAMFERLEN_TP_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_CHAMFERLEN_TP_X = 0; }
+                    }
+                    if (strCPName == CPNAME.BOT_LANDTOPKG_Y){
+                        try { CLOT.GET_LOT.BOT_LANDTOPKG_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_LANDTOPKG_Y = 0; }
+                    }
+                    if (strCPName == CPNAME.BOT_CHAMFERLEN_TM_Y){
+                        try { CLOT.GET_LOT.BOT_CHAMFERLEN_TM_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_CHAMFERLEN_TM_Y = 0; }
+                    }
+                    if (strCPName == CPNAME.BOT_CHAMFERLEN_TP_Y){
+                        try { CLOT.GET_LOT.BOT_CHAMFERLEN_TP_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.BOT_CHAMFERLEN_TP_Y = 0; }
+                    }
+
+                    if (strCPName == CPNAME.TOP_LANDTOPKG_X){
+                        try { CLOT.GET_LOT.TOP_LANDTOPKG_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_LANDTOPKG_X = 0; }
+                    }
+                    if (strCPName == CPNAME.TOP_CHAMFERLEN_TM_X){
+                        try { CLOT.GET_LOT.TOP_CHAMFERLEN_TM_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_CHAMFERLEN_TM_X = 0; }
+                    }
+                    if (strCPName == CPNAME.TOP_CHAMFERLEN_TP_X){
+                        try { CLOT.GET_LOT.TOP_CHAMFERLEN_TP_X = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_CHAMFERLEN_TP_X = 0; }
+                    }
+                    if (strCPName == CPNAME.TOP_LANDTOPKG_Y){
+                        try { CLOT.GET_LOT.TOP_LANDTOPKG_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_LANDTOPKG_Y = 0; }
+                    }
+                    if (strCPName == CPNAME.TOP_CHAMFERLEN_TM_Y){
+                        try { CLOT.GET_LOT.TOP_CHAMFERLEN_TM_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_CHAMFERLEN_TM_Y = 0; }
+                    }
+                    if (strCPName == CPNAME.TOP_CHAMFERLEN_TP_Y){
+                        try { CLOT.GET_LOT.TOP_CHAMFERLEN_TP_Y = double.Parse(strCPValue); }
+                        catch { CLOT.GET_LOT.TOP_CHAMFERLEN_TP_Y = 0; }
+                    }
+                    // << 22.1128 HK.PARK 추가
+
                     AddGemLog(string.Format("CPNAME:{0}", strCPName));
                     AddGemLog(string.Format("CPVALUE:{0}", strCPValue));
 
                     // LOT INFO 저장
-                    CLOT.GET_LOT.WorkScope = "진행";
-                    CLOT.GET_LOT.WorkSort = "";
+                    CLOT.GET_LOT.WorkScope  = "진행";
+                    CLOT.GET_LOT.WorkSort   = "";
                     if (CLOT.GET_LOT.LotType == 1)      CLOT.GET_LOT.WorkSort = "초도";
                     else if (CLOT.GET_LOT.LotType == 2) CLOT.GET_LOT.WorkSort = "본낫";
                     else if (CLOT.GET_LOT.LotType == 3) CLOT.GET_LOT.WorkSort = "더미";
                     else if (CLOT.GET_LOT.LotType == 4) CLOT.GET_LOT.WorkSort = "재초도";
                     else if (CLOT.GET_LOT.LotType == 5) CLOT.GET_LOT.WorkSort = "재작업";
-                    
+
+                    //SAW 설비 장착 블레이드 정보 가지고와야함!
+                    CLOT.bBladeInfo_Sp1 = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP1);
+                    CLOT.bBladeInfo_Sp2 = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP2);
+                    CLOT.GET_LOT.BeginTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
                     string sCurLotInfo = CLOT.GET_LOT.LotID + "," + CLOT.GET_LOT.LotType + "," + CLOT.GET_LOT.Qty + "," + CLOT.GET_LOT.ProductType + "," + CLOT.GET_LOT.ToolNo + "," +
-                                        CLOT.GET_LOT.ITS + "," + CLOT.GET_LOT.ITS_LotID_IN + "," + CLOT.GET_LOT.ITS_LotID_CT + "," + 
+                                        CLOT.GET_LOT.ITS + "," + CLOT.GET_LOT.ITS_LotID_IN + "," + CLOT.GET_LOT.ITS_LotID_CT + "," +
                                         CLOT.GET_LOT.UnitSizeX + "," + CLOT.GET_LOT.UnitSizeY + "," + CLOT.GET_LOT.UnitSize_USL + "," + CLOT.GET_LOT.UnitSize_LSL + "," + CLOT.GET_LOT.ABFMATERIAL + "," +
                                         CLOT.GET_LOT.LANDPKGX + "," + CLOT.GET_LOT.LANDPKGX_UPPER + "," + CLOT.GET_LOT.LANDPKGX_LOWER + "," + CLOT.GET_LOT.LANDPKGY + "," + CLOT.GET_LOT.LANDPKGY_UPPER + "," + CLOT.GET_LOT.LANDPKGY_LOWER + "," +
-                                        CLOT.GET_LOT.WorkSort + "," + CLOT.GET_LOT.WorkScope; 
-                    FILE_.WR_File(PATH_.CurrLot, sCurLotInfo, false);
+                                        CLOT.GET_LOT.WorkSort + "," + CLOT.GET_LOT.WorkScope + "," + CLOT.GET_LOT.BarcodeSp1 + "," + CLOT.GET_LOT.BarcodeSp2 + "," +
+                                        CLOT.GET_LOT.Thick + "," + CLOT.GET_LOT.Thick_USL + "," + CLOT.GET_LOT.Thick_LSL + "," +
+                                        CLOT.GET_LOT.ProcCD + "," + CLOT.GET_LOT.ProcName + "," + CLOT.GET_LOT.WorkCondition + "," + CLOT.GET_LOT.ProcCondition_1 + "," + CLOT.GET_LOT.ProcCondition_2 + "," + CLOT.GET_LOT.ProcCondition_3 + "," + CLOT.GET_LOT.ProcCondition_4 + "," + 
+                                        CLOT.GET_LOT.BeginTime + "," +
+                                        CLOT.GET_LOT.BOT_LANDTOPKG_X + "," + CLOT.GET_LOT.BOT_CHAMFERLEN_TM_X + "," + CLOT.GET_LOT.BOT_CHAMFERLEN_TP_X + "," + CLOT.GET_LOT.BOT_LANDTOPKG_Y + "," + CLOT.GET_LOT.BOT_CHAMFERLEN_TM_Y + "," + CLOT.GET_LOT.BOT_CHAMFERLEN_TP_Y + "," +
+                                        CLOT.GET_LOT.TOP_LANDTOPKG_X + "," + CLOT.GET_LOT.TOP_CHAMFERLEN_TM_X + "," + CLOT.GET_LOT.TOP_CHAMFERLEN_TP_X + "," + CLOT.GET_LOT.TOP_LANDTOPKG_Y + "," + CLOT.GET_LOT.TOP_CHAMFERLEN_TM_Y + "," + CLOT.GET_LOT.TOP_CHAMFERLEN_TP_Y + "," +
+                                        CLOT.GET_LOT.IDSp1 + "," + CLOT.GET_LOT.IDSp2 ;
+                    UTIL_.SET_LOT_INFO(sCurLotInfo);
+                    UTIL_.WR_VISION_RECEIP();
 
                     m_gem.GetListItemClose(lMsgId);
                 }
@@ -1065,7 +1149,6 @@ namespace LIB_.SubFROMLib
             int nECID = 0;
             string strNewValue = "";
 
-            nECCount = 0;
             while (nECCount > -1){
                 nECCount = m_gem.GetHostSetECID(lMsgId, ref nECID, ref strNewValue); // HOST에서 전송한 ECID, ECVALUE를 가져옴.
                 if (nECCount < 0) break;
@@ -1083,7 +1166,6 @@ namespace LIB_.SubFROMLib
             string strMessage = "";
             string strMessage2 = "";
 
-            nCount = 0;
             while (nCount > -1){
                 nCount = m_gem.GetTerminalMsg(lMsgId, ref nTID, ref strMessage);
                 AddGemLog(string.Format("TID={0},MESSAGE={1}", nTID, strMessage));
@@ -1100,8 +1182,8 @@ namespace LIB_.SubFROMLib
         }
 
         public void OnOtherEvent(short nEventId, int lParam){
-            short nEnable = 0;
-            int nAck = 0;
+            short nEnable;
+            int nAck;
             AddGemLog(string.Format("EVENT={0},lPARAM={1}", nEventId, lParam));
 
             if (nEventId == 501){ //S2F37
@@ -1134,6 +1216,7 @@ namespace LIB_.SubFROMLib
             m_gem.GetMsgInfo(lMsgId, ref nStream, ref nFunction, ref nWbit, ref nLength);
 
             if (nStream == 1 && nFunction == 1){ // S1F1 직접 처리 (대덕전자 요청)
+                AddGemLog("S1F1");
                 int rMsgId = m_gem.CreateReplyMsg(lMsgId);
                 m_gem.OpenListItem(rMsgId);
                 {
@@ -1504,9 +1587,9 @@ namespace LIB_.SubFROMLib
         } //설비 알람 리셋
 
         public void SetControlState(int nCEID){
-            m_gem.SetSVIDValue(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
-            m_gem.SetSVIDValue(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
-            m_gem.SetSVIDValue(CSVID.USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
+            SetSVID(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
+            SetSVID(CSVID.USER_ID, CUSER.Current.ID);
             SendEvent(nCEID);
         } //GEM 상태 보고
         public void SetPrecessState(int nProcessState){
@@ -1520,164 +1603,186 @@ namespace LIB_.SubFROMLib
             if (nProcessState == CCEID.EQUIPMENT_STATE_MANUAL)  CMES.m_nEqpState = CMES.EquipmentValue.EQUIPMENT_MANUAL;
 
             CMES.m_nPrevEqpState    = CMES.m_nEqpState;
-            m_gem.SetSVIDValue(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
-            m_gem.SetSVIDValue(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
+            SetSVID(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
+            SetSVID(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
             SendEvent(nCEID);
         } // 설비 상태 보고
         public void SetEquipmentStatePM(){
-            m_gem.SetSVIDValue(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
-            m_gem.SetSVIDValue(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
-            m_gem.SendEventReport(CCEID.EQUIPMENT_STATE_IDLE/*CEID.EQUIPMENT_STATE_PM*/);
+            SetSVID(CSVID.EQUIPMENT_STATE, CMES.m_nEqpState.ToString());
+            SetSVID(CSVID.CONTROL_STATE, CMES.m_nControlState.ToString());
+            //m_gem.SendEventReport(CCEID.EQUIPMENT_STATE_IDLE/*CEID.EQUIPMENT_STATE_PM*/);
             SendEvent(CCEID.EQUIPMENT_STATE_IDLE); // << [변경 됨]CCEID.EQUIPMENT_STATE_PM
         } // 설비 PM 모드 보고
 
         public void SetLotRequest(string sLotID, int nLotType, int nLotCnt){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, sLotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName); //필요 없음? lot validation 완료 후 recipe 변경 
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, nLotType.ToString());
-            m_gem.SetSVIDValue(CSVID.RESERVE_PANEL_QTY, nLotCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, sLotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName); //필요 없음? lot validation 완료 후 recipe 변경 
+            SetSVID(CSVID.LOT_TYPE, nLotType.ToString());
+            SetSVID(CSVID.RESERVE_PANEL_QTY, nLotCnt.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.LOT_REQUEST);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> LOT_REQUEST", "");
         } // LOT CARD READING 시 보고 RECIPE VALIDATION 보고
         public void SetPopCondition(){
             //DATA_.GET_LOT.LotID = txtLotID.Text;
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.POP_CONDITION_COMPLETE);
         } // Pop Condition 확인 완료 보고
         public void SetLotCanceled(string sLotID, int nLotType){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, sLotID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, nLotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, sLotID);
+            SetSVID(CSVID.LOT_TYPE, nLotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.LOT_CANCELED);
         }
         public void SetLotLoss(string LossCode, string LossMessae){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.START_TIME, CLOT.LotLossStartTime);
-            m_gem.SetSVIDValue(CSVID.END_TIME, CLOT.LotLossEndTime);
-            m_gem.SetSVIDValue(CSVID.OPERATION_LOSS_COMMENT, LossMessae);
-            m_gem.SetSVIDValue(CSVID.OPERATION_LOSS_CODE, LossCode);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.START_TIME, CLOT.LotLossStartTime);
+            SetSVID(CSVID.END_TIME, CLOT.LotLossEndTime);
+            SetSVID(CSVID.OPERATION_LOSS_COMMENT, LossMessae);
+            SetSVID(CSVID.OPERATION_LOSS_CODE, LossCode);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.LOT_EQP_LOSS_COMPLETE);
         }
         public void SetLotEqpChangeComplete(int nCode, string sComment){
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            m_gem.SetSVIDValue(CSVID.EQP_CHANGE_COMMENT, sComment);
-            m_gem.SetSVIDValue(CSVID.EQP_CHANGE_CODE, nCode.ToString());
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.EQP_CHANGE_COMMENT, sComment);
+            SetSVID(CSVID.EQP_CHANGE_CODE, nCode.ToString());
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+
             SendEvent(CCEID.LOT_EQP_CHANGE_COMPLETE);
         }
         public void SetPPSelect(){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            //m_gem.SendEventReport(CEID.PP_SELECTED);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
 
+            //m_gem.SendEventReport(CEID.PP_SELECTED);
             m_gem.SendEventReportEx(CCEID.PP_SELECTED, CCEID.PP_SELECTED);
             CCEID.m_nPPSelected = m_gem.GetSysByteEx(CCEID.PP_SELECTED);
             AddGemLog(string.Format("m_nPPSelected:{0}", CCEID.m_nPPSelected));
         }
-        
-        public void SetUpperDFKitting(string OldBladeBarcode, string NewBaldeBarcode){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.CUR_LEFT_BLADE, NewBaldeBarcode);
-            m_gem.SetSVIDValue(CSVID.OLD_LEFT_BLADE, OldBladeBarcode);
-            SendEvent(CCEID.UPPER_DF_KITTING);
+
+        public void SetBladeChange(eSPINDLE eSp, string NewBladeBarcode, string OldBladeBarcode){
+            int nOldVID = CSVID.OLD_LEFT_BLADE;
+            int nVID    = CSVID.CUR_LEFT_BLADE;
+            if (eSp == eSPINDLE.SP2){
+                nOldVID = CSVID.OLD_RIGHT_BLADE;
+                nVID = CSVID.CUR_RIGHT_BLADE;
+            }
+            SetSVID(nOldVID, OldBladeBarcode);
+            SetSVID(nVID, NewBladeBarcode);
         }
-        public void SetLowerDFKitting(string OldBladeBarcode, string NewBaldeBarcode){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.CUR_RIGHT_BLADE, NewBaldeBarcode);
-            m_gem.SetSVIDValue(CSVID.OLD_RIGHT_BLADE, OldBladeBarcode);
-            SendEvent(CCEID.LOWER_DF_KITTING);
-        }
-        
+
         public void SetLotStartRequest(){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.LOT_START_REQUEST);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> LOT_START_REQUEST", "");
         }
         public void SetLotStarted(){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            SendEvent(CCEID.LOT_STARTED);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
 
+            SendEvent(CCEID.LOT_STARTED);
             //lot validation 완료 -> 설비 run 진행 !
             CLOT.bLotValidationSusses = true;
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> LOT_STARTED", "");
         }
         public void SetLotLoading(){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.RESERVE_PANEL_QTY, CLOT.GET_LOT.Qty.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.RESERVE_PANEL_QTY, CLOT.GET_LOT.Qty.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+
             SendEvent(CCEID.LOT_LOADING);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> LOT_LOADING", "");
         }
         
         public void SetPanelLineIn(int nPanelCnt, string sStripBarcode){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.PANEL_INDEX, nPanelCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_ID, sStripBarcode);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.PANEL_INDEX, nPanelCnt.ToString());
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PANEL_ID, sStripBarcode);
+
             SendEvent(CCEID.PANEL_LINE_IN);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> PANEL_LINE_IN : " + sStripBarcode, "");
         }
         public void SetPanelModuleIn(int nPanelCnt, string sStripBarcode, int sModuleID){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.MODULE_ID, sModuleID.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_INDEX, nPanelCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_ID, sStripBarcode);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.MODULE_ID, sModuleID.ToString());
+            SetSVID(CSVID.PANEL_INDEX, nPanelCnt.ToString());
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PANEL_ID, sStripBarcode);
+
             SendEvent(CCEID.PANEL_MODULE_IN);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> PANEL_MODULE_IN : " + sStripBarcode + " / MODULE ID : " + sModuleID.ToString(), "");
         }
         public void SetPanelModuleOut(int nPanelCnt, string sStripBarcode, int sModuleID){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.MODULE_ID, sModuleID.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_INDEX, nPanelCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_ID, sStripBarcode);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.MODULE_ID, sModuleID.ToString());
+            SetSVID(CSVID.PANEL_INDEX, nPanelCnt.ToString());
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PANEL_ID, sStripBarcode);
+
             SendEvent(CCEID.PANEL_MODULE_OUT);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> PANEL_MODULE_OUT : " + sStripBarcode + " / MODULE ID : " + sModuleID.ToString(), "");
         }
         public void SetPanelLineOut(int nPanelCnt, string sStripBarcode){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.PANEL_INDEX, nPanelCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.PANEL_ID, sStripBarcode);
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.PANEL_INDEX, nPanelCnt.ToString());
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.PANEL_ID, sStripBarcode);
+
             SendEvent(CCEID.PANEL_LINE_OUT);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> PANEL_LINE_OUT : " + sStripBarcode, "");
         }
         
         public void SetLotComplete(int nPanelCnt){
-            m_gem.SetSVIDValue(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
-            m_gem.SetSVIDValue(CSVID.RECIPE_ID, DATA_.sJobName);
-            m_gem.SetSVIDValue(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
-            m_gem.SetSVIDValue(CSVID.RESERVE_PANEL_QTY, CLOT.GET_LOT.Qty.ToString());
-            m_gem.SetSVIDValue(CSVID.COMPLETE_PANEL_QTY, nPanelCnt.ToString());
-            m_gem.SetSVIDValue(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
-            SendEvent(CCEID.LOT_COMPLETE);
-        }
+            SetSVID(CSVID.LOT_ID, CLOT.GET_LOT.LotID);
+            SetSVID(CSVID.RECIPE_ID, DATA_.sJobName);
+            SetSVID(CSVID.LOT_TYPE, CLOT.GET_LOT.LotType.ToString());
+            SetSVID(CSVID.RESERVE_PANEL_QTY, CLOT.GET_LOT.Qty.ToString());
+            SetSVID(CSVID.COMPLETE_PANEL_QTY, nPanelCnt.ToString());
+            SetSVID(CSVID.PROCESS_USER_ID, CUSER.Current.ID);
 
+            SendEvent(CCEID.LOT_COMPLETE);
+            LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> LOT_COMPLETE", "");
+        }
         #endregion CEID 이벤트 처리
 
         public int SetSVID(int nSVID, string strValue)  {
-            if (!bIni) return -1; // gem 초기화 진행 안하고 event 보내면 log 폴더 안에 폴더들 삭제 함 (엔비아 버그) 추후 엔비아 수정 시 까지 임시 적용!
-            return m_gem.SetSVIDValue(nSVID, strValue); 
+            if (!CMES.bIni) return -1; // gem 초기화 진행 안하고 event 보내면 log 폴더 안에 폴더들 삭제 함 (엔비아 버그) 추후 엔비아 수정 시 까지 임시 적용!
+            int nValue = m_gem.SetSVIDValue(nSVID, strValue);
+            if (nSVID < 0 || nSVID < CSVID.Value.Length - 1){
+                CSVID.Value[nSVID] = strValue;
+            }
+            return nValue;
         }
         public int SendEvent(int nCEID)                 {
-            if (!bIni) return -1; // gem 초기화 진행 안하고 event 보내면 log 폴더 안에 폴더들 삭제 함 (엔비아 버그) 추후 엔비아 수정 시 까지 임시 적용!
+            if (!CMES.bIni) return -1; // gem 초기화 진행 안하고 event 보내면 log 폴더 안에 폴더들 삭제 함 (엔비아 버그) 추후 엔비아 수정 시 까지 임시 적용!
             return m_gem.SendEventReport(nCEID); 
         }
         public void RefreshSVID(){
@@ -1687,6 +1792,10 @@ namespace LIB_.SubFROMLib
 
         private void timer1_Tick(object sender, EventArgs e){
 
+        }
+
+        private void lblTerminalMsg_DoubleClick(object sender, EventArgs e){
+            lblTerminalMsg.Text = "";
         }
     }
 }

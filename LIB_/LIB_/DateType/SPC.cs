@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using NSS_3310S;
+using Object;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -61,6 +62,7 @@ namespace LIB_.DateType
             oSPC.mlRunDownTime  = 0;
             oSPC.mlPauseCount   = 0;
         }
+
         public void LD_SPC_DATA(DateTime dt, string WorkUnit){
             double sDATE    = dt.ToOADate();
             string fn       = LogWR_.GET_PathOperation(sDATE, PATH_.LogSPC) + WorkUnit + "_SPC.csv";
@@ -85,6 +87,7 @@ namespace LIB_.DateType
         public void RUN_SPC(){
             STATE = eMCStatus;
             oSPC.mlWorkTime += 1;
+            CLOT.GET_LOT.WorkTime += 1;
             if ((STATE == eMachineStatus.EMSSTOP || STATE == eMachineStatus.ERRSTOP) && (BEFORE_STATE != eMachineStatus.EMSSTOP && BEFORE_STATE != eMachineStatus.ERRSTOP)){
                 oSPC.mlPauseCount += 1;
                 ERR_OVERTIME = 0;
@@ -92,6 +95,7 @@ namespace LIB_.DateType
             if (STATE == eMachineStatus.AUTO){
                 ERR_OVERTIME = 0;
                 oSPC.mlRunTime += 1;
+                CLOT.GET_LOT.RunTime += 1;
                 if (!bWaitProduct) WAIT_RUNTIME = 0;
                 else{
                     WAIT_RUNTIME += 1;
@@ -99,11 +103,15 @@ namespace LIB_.DateType
                     else oSPC.mlRunWaitTime += 1;
                 }
             } // AUTO-RUN 상태
-            else oSPC.mlStopTime += 1;
+            else { 
+                oSPC.mlStopTime += 1;
+                CLOT.GET_LOT.StopTime += 1;
+            }
             if (STATE == eMachineStatus.EMSSTOP || STATE == eMachineStatus.ERRSTOP){
                 ERR_OVERTIME += 1;
                 if (ERR_OVERTIME > (60 * 5)) oSPC.mlErrorTime += 1; //5분초과
                 else oSPC.mlPauseTime += 1;
+                CLOT.GET_LOT.ErrorTime += 1;
             } // 에러 발생
 
             //SPC 결과
@@ -120,12 +128,13 @@ namespace LIB_.DateType
             SAVE_SPC();
             LogWR_.SAVE_LOG();
 
-            LogWR_.DELETE_OLD_LOGs();
-            LogWR_.DELETE_LOG_FOLDERs();
-
             if (BEFORE_TIME != DateTime.Now.Hour && DateTime.Now.Hour == START_HOUR){
-                TEACH_.SAVE_DAY_COUNT(ref DATA_.IsLONG[DATA_.DAY_MGZ_CNT], ref DATA_.IsLONG[DATA_.DAY_STRIP_CNT], ref DATA_.IsLONG[DATA_.DAY_GOOD_CNT], ref DATA_.IsLONG[DATA_.DAY_REWORK_CNT], ref DATA_.IsLONG[DATA_.DAY_REJECT_CNT]);
+                TEACH_.SAVE_DAY_COUNT(ref IsLONG[L.DayMGZCnt], ref IsLONG[L.DayStripCnt], ref IsLONG[L.DayGoodUnit], ref IsLONG[L.DayReworkUnit], ref IsLONG[L.DayRejectUnit]);
                 CLEAN_SPC();
+
+                LogWR_.DelectAccessFile(PATH_.PathSeqLog);
+                LogWR_.DELETE_OLD_LOGs();
+                //LogWR_.DELETE_LOG_FOLDERs();
             }
             BEFORE_STATE    = eMCStatus;
             BEFORE_TIME     = DateTime.Now.Hour;

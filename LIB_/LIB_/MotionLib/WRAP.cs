@@ -1,9 +1,10 @@
-﻿using Object;
+﻿using NSS_3310S;
+using Object;
 using System;
 
 public class WRAP_ : DATA_
 {
-    public static eRTN RunACMotor(int nThread, int[] nERR, int[] OnINPUT, int[] OffINPUT, int[] OnOUTPUT, int[] OffOUTPUT, int delay, double Timeover, string comment){
+    public static eRTN RunACMotor(int nThread, int[] nERR, int[] OnINPUT, int[] OffINPUT, int[] OnOUTPUT, int[] OffOUTPUT, int iSTOPBIT, int delay, double Timeover, string comment, bool bError = true){
         long sTIME = Environment.TickCount;
         double eTIME;
         string sResult = "RunTime";
@@ -51,6 +52,29 @@ public class WRAP_ : DATA_
                 if (OffINPUT[j] < 0) continue;
                 if (LAB_.INPUT((short)OffINPUT[j])) bFLAG = false;
             }
+            if (bPushStop){
+                for (int j = 0; j < OnOUTPUT.Length; j++){
+                    if (OnOUTPUT[j] < 0) continue;
+                    LAB_.BIT_OUT((short)OnOUTPUT[j], false);
+                } //ON OUTPUT
+                UTIL_.DELAY(10);
+                eTIME = (Environment.TickCount - sTIME) / 1000;
+                sResult += "(" + string.Format("{0:0.000}", eTIME) + " Sec)";
+                LogWR_.SaveMarsLog(nThread, eLogTYPE.FNC, comment + "[" + sResult + "]", "AREA_CHECK");
+                return eRTN.PUSH_STOP;
+            }
+
+            if (!mIN[iSTOPBIT]) {
+                for (int j = 0; j < OnOUTPUT.Length; j++){
+                    if (OnOUTPUT[j] < 0) continue;
+                    LAB_.BIT_OUT((short)OnOUTPUT[j], false);
+                } //ON OUTPUT
+                UTIL_.DELAY(10);
+                eTIME = (Environment.TickCount - sTIME) / 1000;
+                sResult += "(" + string.Format("{0:0.000}", eTIME) + " Sec)";
+                LogWR_.SaveMarsLog(nThread, eLogTYPE.FNC, comment + "[" + sResult + "]", "AREA_CHECK");
+                return eRTN.AREA_CHECK;
+            }
 
             if (bFLAG){
                 UTIL_.DELAY((int)ScanTime);
@@ -65,6 +89,17 @@ public class WRAP_ : DATA_
             if (OnOUTPUT[j] < 0) continue;
             LAB_.BIT_OUT((short)OnOUTPUT[j], false);
         } //ON OUTPUT
+
+        if (bError){
+            for (int i = 0; i < OnINPUT.Length; i++){
+                if (OnINPUT[i] < 0) continue;
+                if (!LAB_.INPUT((short)OnINPUT[i]) && nERR.Length - 1 >= i) E.OnERROR(nERR[i], 100);
+            }
+            for (int i = 0; i < OffINPUT.Length; i++){
+                if (OffINPUT[i] < 0) continue;
+                if (LAB_.INPUT((short)OffINPUT[i]) && nERR.Length - 1 >= i) E.OnERROR(nERR[i], 100);
+            }
+        }
         UTIL_.DELAY(10);
         eTIME   = (Environment.TickCount - sTIME) / 1000;
         sResult += "(" + string.Format("{0:0.000}", eTIME) + " Sec)";
@@ -109,7 +144,7 @@ public class WRAP_ : DATA_
         }
 
         ScanTime *= 1000;
-        for (int i = 0; i < prMACHINE[CYLINDER_OVERTIME]; i += (int)ScanTime){
+        for (int i = 0; i < prMACHINE[CP.CylinderOverTime]; i += (int)ScanTime){
             if (gExit) return eRTN.FAIL;
             UTIL_.DELAY((int)ScanTime);
 
@@ -127,11 +162,11 @@ public class WRAP_ : DATA_
 
         for (int i = 0; i < OnINPUT.Length; i++){
             if (OnINPUT[i] < 0) continue;
-            if (!LAB_.INPUT((short)OnINPUT[i]) && nERR.Length - 1 >= i) UTIL_.OnERROR(nERR[i], 100);
+            if (!LAB_.INPUT((short)OnINPUT[i]) && nERR.Length - 1 >= i) E.OnERROR(nERR[i], 100);
         }
         for (int i = 0; i < OffINPUT.Length; i++){
             if (OffINPUT[i] < 0) continue;
-            if (LAB_.INPUT((short)OffINPUT[i]) && nERR.Length - 1 >= i) UTIL_.OnERROR(nERR[i], 100);
+            if (LAB_.INPUT((short)OffINPUT[i]) && nERR.Length - 1 >= i) E.OnERROR(nERR[i], 100);
         }
         UTIL_.DELAY(10);
         eTIME   = (Environment.TickCount - sTIME) / 1000;
@@ -169,13 +204,13 @@ public class WRAP_ : DATA_
             }
             for (int i = 0; i < OffINPUT.Length; i++){
                 if (OffINPUT[i] < 0) continue;
-                int iNUM = OnINPUT[i];
+                int iNUM = OffINPUT[i];
                 mIN[iNUM] = (chkIN[iNUM].ContactB) ? true : false;
             }
             goto Sucess;
         }
 
-        for (int i = 0; i < prMACHINE[CYLINDER_OVERTIME]; i += 2){
+        for (int i = 0; i < prMACHINE[CP.CylinderOverTime]; i += 2){
             if (gExit) return eRTN.FAIL;
             UTIL_.DELAY(2);
 
@@ -194,14 +229,14 @@ public class WRAP_ : DATA_
         for (int i = 0; i < OnINPUT.Length; i++){
             if (OnINPUT[i] < 0) continue;
             if (!LAB_.INPUT((short)OnINPUT[i]) && nERR.Length - 1 >= i){
-                UTIL_.OnERROR(nERR[i], 100);
+                E.OnERROR(nERR[i], 100);
                 goto Fail;
             }
         }
         for (int i = 0; i < OffINPUT.Length; i++){
             if (OffINPUT[i] < 0) continue;
             if (LAB_.INPUT((short)OffINPUT[i]) && nERR.Length - 1 >= i){
-                UTIL_.OnERROR(nERR[i], 100);
+                E.OnERROR(nERR[i], 100);
                 goto Fail;
             }
         }
@@ -241,7 +276,7 @@ public class WRAP_ : DATA_
         }
 
         //CHECK INPUT
-        for (int i = 0; i < prMACHINE[CYLINDER_OVERTIME]; i += 2){
+        for (int i = 0; i < prMACHINE[CP.CylinderOverTime]; i += 2){
             if (gExit) return eRTN.FAIL;
             UTIL_.DELAY(1);
             bool bFLAG = true;
@@ -255,13 +290,13 @@ public class WRAP_ : DATA_
         }
         if (OnINPUT > -1){
             if (!LAB_.INPUT((short)OnINPUT)){
-                UTIL_.OnERROR(nERR, 100);
+                E.OnERROR(nERR, 100);
                 goto Fail;
             }
         }
         if (OffINPUT > -1){
             if (LAB_.INPUT((short)OffINPUT)){
-                UTIL_.OnERROR(nERR, 100);
+                E.OnERROR(nERR, 100);
                 goto Fail;
             }
         }
@@ -300,7 +335,7 @@ public class WRAP_ : DATA_
         }
 
         //CHECK INPUT
-        for (int i = 0; i < prMACHINE[CYLINDER_OVERTIME]; i += 2){
+        for (int i = 0; i < prMACHINE[CP.CylinderOverTime]; i += 2){
             if (gExit) return eRTN.FAIL;
             UTIL_.DELAY(1);
             bool bFLAG = true;
@@ -315,14 +350,14 @@ public class WRAP_ : DATA_
                 if (LAB_.INPUT((short)ChkOverloadINPUT)){
                     if (OnOUTPUT > -1) LAB_.BIT_OUT((short)OnOUTPUT, false);
                     if (OffOUTPUT > -1) LAB_.BIT_OUT((short)OffOUTPUT, true);
-                    UTIL_.OnERROR(nERR_OVERLOAD, 100);
+                    E.OnERROR(nERR_OVERLOAD, 100);
                     goto Fail;
                 }
 #else
                 if (!LAB_.INPUT((short)ChkOverloadINPUT)){
                     if (OnOUTPUT > -1)  LAB_.BIT_OUT((short)OnOUTPUT, false);
                     if (OffOUTPUT > -1) LAB_.BIT_OUT((short)OffOUTPUT, true);
-                    UTIL_.OnERROR(nERR_OVERLOAD, 100);
+                    E.OnERROR(nERR_OVERLOAD, 100);
                     goto Fail;
                 }
 #endif
@@ -331,13 +366,13 @@ public class WRAP_ : DATA_
         }
         if (OnINPUT > -1){
             if (!LAB_.INPUT((short)OnINPUT)){
-                UTIL_.OnERROR(nERR, 100);
+                E.OnERROR(nERR, 100);
                 goto Fail;
             }
         }
         if (OffINPUT > -1){
             if (LAB_.INPUT((short)OffINPUT)){
-                UTIL_.OnERROR(nERR, 100);
+                E.OnERROR(nERR, 100);
                 goto Fail;
             }
         }
@@ -376,7 +411,7 @@ public class WRAP_ : DATA_
         return spd;
     }
     public static eRTN MOVE(int nThread, int m, int pos, double toller, bool OnlyStart, bool NoChange, bool DontStop, string cmd, string comment){
-        stMoveInfo mv   = GetMoveInfo(m, pos);
+        stMoveInfo mv   = M.GetMoveInfo(m, pos);
         mv.Pos          += GetOffset(cmd);
         double spd      = GetSpeed(cmd);
         if (spd != 0)               mv.Spd = spd;
@@ -416,7 +451,7 @@ public class WRAP_ : DATA_
         for (int i = 0; i < cMT; i++){
             int mt      = m[i];
             int nPos    = pos[i];
-            mi[i]       = GetMoveInfo(mt, nPos);
+            mi[i]       = M.GetMoveInfo(mt, nPos);
             mi[i].Pos   += GetOffset(cmd[i]);
             double spd  = GetSpeed(cmd[i]);
             if (spd != 0) mi[i].Spd = spd;
@@ -442,7 +477,7 @@ public class WRAP_ : DATA_
         for (int i = 0; i < cMT; i++){
             int mt      = m[i];
             int ipos    = pos[i];
-            mi[i]       = GetMoveInfo(mt, ipos);
+            mi[i]       = M.GetMoveInfo(mt, ipos);
             mi[i].Pos   += GetOffset(cmd[i]);
             double spd  = GetSpeed(cmd[i]);
             if (spd != 0) mi[i].Spd = spd;

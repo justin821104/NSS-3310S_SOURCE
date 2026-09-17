@@ -19,7 +19,7 @@ namespace LIB_.SubFROMLib{
             strElapsedTime = String.Format("{0:00}", tSTAMP.Elapsed.Hours) + ":";
             strElapsedTime += (String.Format("{0:00}", tSTAMP.Elapsed.Minutes) + ":");
             strElapsedTime += (String.Format("{0:00}", tSTAMP.Elapsed.Seconds));
-            dTxtElap.DigitText = strElapsedTime;
+            lbTxtElap.Text = strElapsedTime;
         }
         private void Close_Click(object sender, EventArgs e) { Visible = false; }
         private void PM_Load(object sender, EventArgs e) { tmrPM.Enabled = true; }

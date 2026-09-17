@@ -53,17 +53,11 @@ public class CMATH : DATA_
         QueryPerformanceFrequency(ref lspd);
         spd = lspd;
     }
-    public void GetCPUSpeed(ref long speed){
-        Dll_.GetCpuSpeed(ref speed);
-    }
 
     public void GET_CPU_CLOCK(ref long clock){
         long lclock = 0;
         QueryPerformanceCounter(ref lclock);
         clock = lclock;
-    }
-    public void GetCPUClock(ref long clock){
-        Dll_.GetCpuClock(ref clock);
     }
 
     /// <summary>
@@ -977,7 +971,7 @@ public class CMATH : DATA_
     }
 
 
-    public double Get2PointAlign(dxy Pos1, dxy Pos2, dxy CPos, ref dxy rPos1, ref dxy rPos2, bool bAlignDir){
+    public double Get2PointAlign(dxy Pos1, dxy Pos2, dxy CPos, ref dxy rPos1, ref dxy rPos2, bool bAlignDir = false){
         double dHeight;
         double dBaseLine; // 밑변 
         double dTH;
@@ -1010,8 +1004,8 @@ public class CMATH : DATA_
 
         rPos1.x = Math.Round((Point1.x * Cosin) + (Point1.y * Sin), 3);
         rPos1.y = Math.Round((-Point1.x * Sin) + (Point1.y * Cosin), 3);
-        rPos1.x = rPos1.x + CPos.x;
-        rPos1.y = rPos1.y + CPos.y;
+        rPos1.x += CPos.x;
+        rPos1.y += CPos.y;
 
         Point2.x = Pos2.x - CPos.x;
         Point2.y = Pos2.y - CPos.y;
@@ -1020,9 +1014,10 @@ public class CMATH : DATA_
         Sin = Math.Sin(Point2.t);
         rPos2.x = Math.Round((Point2.x * Cosin) + (Point2.y * Sin), 3);
         rPos2.y = Math.Round((-Point2.x * Sin) + (Point2.y * Cosin), 3);
-        rPos2.x = rPos2.x + CPos.x;
-        rPos2.y = rPos2.y + CPos.y;
-
+        rPos2.x += CPos.x;
+        rPos2.y += CPos.y;
+        
+        if (bAlignDir) return dTH *= -1;
         return dTH;
     }
 
@@ -1034,7 +1029,7 @@ public class CMATH : DATA_
         double dZero = 0.00000000001;
         bool isFWD; //모타 방향
 
-        double dTangent = 0;
+        double dTangent;
         double dRadianAngle, dDegreeAngle;
         dxy CenterDistance1 = new dxy();
         dxy CenterDistance2 = new dxy();

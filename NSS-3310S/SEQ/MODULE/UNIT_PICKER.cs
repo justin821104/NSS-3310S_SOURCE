@@ -5,10 +5,11 @@ using LIB_.DateType;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class UNIT_PICKER : BASE{
-        int nThread = T.UnitPk;
+        readonly int nThread = T.UnitPk;
         string cmds = string.Empty;
         long TackStart = 0, TackEnd = 0;
         bool bPicSignel = false;
+        int ChkUldPkrPic;
 
         bool CheckRunThread(){
             if (eMCStatus != eMachineStatus.AUTO){
@@ -23,30 +24,31 @@ namespace NSS_3310S.SEQ.MODULE{
                 if (!CheckRunThread()) continue;
 
             RePIC:
-                while (UTIL_.WaitInput(nThread, I.SAW_ULD_REQ, false, "다이싱에서 유닛 배출 요청 할때까지 대기")){
+                while (I.WaitInput(nThread, I.SAW_ULD_REQ, false, "다이싱에서 유닛 배출 요청 할때까지 대기")){
                     if (mIN[I.UNIT_PK_VAC] /*|| bDRYRUN*/){
-                        while (UTIL_.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 스크랩 파기 작업 대기", stBIT.OR)) ;
-                        COM_.SetBit(nThread, B.UnitPkPic, B.UnitPkMask, true, true, "유닛 피커 작업 스크랩 파기 작업 진행");
+                        while (B.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 스크랩 파기 작업 대기", stBIT.OR)) ;
+                        B.SetBit(nThread, B.UnitPkPic, B.UnitPkMask, true, true, "유닛 피커 작업 스크랩 파기 작업 진행");
                         goto UnitPlace;
                     }
-                    if (prMACHINE[CP.UseLotEnd] == (int)eUSE.USE && IsBIT[B.CstRequest] && !IsBIT[B.InRailRequest] && !IsBIT[B.GripperWorking] && !IsBIT[B.StripPkRequest] && !mIN[I.SAW_CUTTING] && !IsBIT[B.Stage1Working] && !IsBIT[B.Stage2Working] && !IsBIT[B.X1Working] && !IsBIT[B.X2Working] && !IsBIT[B.TrayPkWorking]){
-                        COM_.ViewWarning(nThread, W.LotEndComplete);
-                        while (UTIL_.WaitWarning(nThread, W.LotEndComplete, "LOT-END 처리")) ;
+                    if (prMACHINE[CP.UseLotEnd] == (int)eUSE.USE && IsBIT[B.CstRequest] && !IsBIT[B.InRailRequest] && !IsBIT[B.GripperWorking] && !IsBIT[B.StripPkRequest] && !IsBIT[B.StripPkMask] && !mIN[I.SAW_CUTTING] && !IsBIT[B.Stage1Working] && !IsBIT[B.Stage2Working] && !IsBIT[B.X1Working] && !IsBIT[B.X2Working] && !IsBIT[B.TrayPkWorking]){
+                        W.ViewWarning(nThread, W.LotEndComplete);
+                        while (W.WaitWarning(nThread, W.LotEndComplete, "LOT-END 처리")) ;
                         if (ConfirmUser[W.LotEndComplete].result) {
+                            IsBIT[B.WaitLotEndProcessing] = true;
                             // lot count 저장!
                             TEACH_.DEL_STRIP_INFO();
                             MsSQL.bITSDataReading = false;
-                            COM_.SetBit(nThread, B.LotEnd, true, "LOT-END 처리 진행");
+                            B.SetBit(nThread, B.LotEnd, true, "LOT-END 처리 진행");
                         ChkTrayPk:
                             if (IsBIT[B.TrayPkPic] || IsBIT[B.TrayPkWorking]){
                                 UTIL_.DELAY(500);
                                 goto ChkTrayPk;
                             }
                             if (IsBIT[B.GoodTrayWork]) {
-                                COM_.Bit(nThread, B.GoodTrayUnloadingMode, true, "LOT-END 진행 GOOD 트레이 배출 플로그 ON");
-                                COM_.Bit(nThread, B.GoodTrayWork, false, "LOT-END 진행 중 GOOD 트레이 작업 플러그 OFF");
+                                B.Bit(nThread, B.GoodTrayUnloadingMode, true, "LOT-END 진행 GOOD 트레이 배출 플로그 ON");
+                                B.Bit(nThread, B.GoodTrayWork, false, "LOT-END 진행 중 GOOD 트레이 작업 플러그 OFF");
                             }
-                            if (IsBIT[B.ReWorkTrayWork]) COM_.Bit(nThread, B.ReWorkTrayWork, false, "REWORK 트레이 작업 플러그 OFF");
+                            if (IsBIT[B.ReWorkTrayWork]) B.Bit(nThread, B.ReWorkTrayWork, false, "REWORK 트레이 작업 플러그 OFF");
                         ChkTrayUnlaoading:
                             if (IsBIT[B.GoodTray1Place] || IsBIT[B.GoodTray2Place] || IsBIT[B.ReWorkTrayWork] || IsBIT[B.GoodTray1Unloading] || IsBIT[B.GoodTray2Unloading]){
                                 UTIL_.DELAY(500);
@@ -55,30 +57,38 @@ namespace NSS_3310S.SEQ.MODULE{
                             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                                 SUBFRM_.gSecsGem.SetLotComplete((int)IsLONG[L.StripCnt]);
                             }
+                            LogWR_.WriteLotStrip();
                             LogWR_.SaveLotEnd(CLOT.GET_LOT.LotID, CLOT.GET_LOT.ItsID, (int)IsLONG[L.StripCnt], (int)IsLONG[L.GoodCnt], (int)IsLONG[L.ReworkCnt], (int)IsLONG[L.NGCnt], (int)IsLONG[L.ITSCount]);
+                            Info_LotCount();
+                            CLOT.GET_LOT.ExceptCount = CLOT.GET_LOT.Qty - CLOT.GET_LOT.OutCnt;
                             CLOT.FinishLot(false);
                             UTIL_.DEL_LOT_INFO();
                             bWriteLotInfo = true; // LOT 수량 정보 리셋 !
                             mIN[I.vtStop] = true;
+                            IsBIT[B.WaitLotEndProcessing] = false;
                             LogWR_.SaveLogOperate("LOT-END SIGNAL ON-OFF", "MC");
                             UTIL_.DELAY(2000);
                             bLotEndProcess = true;
                             while (bLotEndProcess) UTIL_.DELAY(100);
-                            COM_.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
+                            B.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
                         } //LOT-END 처리!
                         else{
-                            COM_.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
+                            B.Bit(nThread, B.CstRequest, false, "카세트 공급/배출 플러그 OFF");
                         } //매거진 투입!
                     } //LOT-END 처리
+                    if (bBD && IsBIT[B.Simulation_Sawing]) {
+                        break;
+                    }
                 }
-                while (UTIL_.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 다이싱 유닛 픽업 작업 대기", stBIT.OR)) ;
-                COM_.SetBit(nThread, B.UnitPkPic, true, "유닛 피커 작업 유닛 픽업 작업 진행");
+                while (B.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 다이싱 유닛 픽업 작업 대기", stBIT.OR)) ;
+                B.SetBit(nThread, B.UnitPkPic, true, "유닛 피커 작업 유닛 픽업 작업 진행");
                 if (!Pic("다이싱에서 유닛 픽업")) goto RePIC;
             UnitPlace:
                 if (!Scrap("스크랩 제거")){
-                    COM_.SetBit(nThread, B.UnitPkMask, false, "유닛 피커 작업 진행");
+                    B.SetBit(nThread, B.UnitPkMask, false, "유닛 피커 작업 진행");
                     goto RePIC;
                 }
+                if (bBD && IsBIT[B.Simulation_Sawing]) IsBIT[B.Simulation_Sawing] = false;
                 Brush("유닛 브러쉬 작업");
                 Cleaner("하부 세척 작업");
                 AirShower("유닛 에어샤워 작업");
@@ -89,36 +99,70 @@ namespace NSS_3310S.SEQ.MODULE{
         #region >> SEQ
         public bool Pic(string comment){
             if (mIN[I.UNIT_PK_VAC]){
-                while (UTIL_.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 스크랩 파기 작업 대기", stBIT.OR)) ;
+                while (B.WaitBIT(nThread, B.UnitPickupStop, B.StripPkPlc, true, true, "유닛 피커 스크랩 파기 작업 대기", stBIT.OR)) ;
                 return true;
             }
 
             LogStart(nThread, comment + " 진행");
+            C.SendSaw.SEND("GET_SVID,*");
+            B.SetBit(nThread, B.DirectUnitPlace, false, "유닛 피커 바로 맵블록에 안착 플러그 OFF");
             while (eRTN.SUCESS != MoveX(P.UnitPckUp, "", "유닛 피커 X축 유닛 픽업 위치 이송")){
+                if (bBD) break;
                 if (bPicSignel){
                     bPicSignel = false;
                     while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
                     while (eRTN.SUCESS != MoveX(P.Ready, "", "유닛 피커 X축 대기 위치 이송")) ;
-                    COM_.SetBit(nThread, B.UnitPkPic, false, "다이싱 유닛 픽업 요청 신호 OFF됨");
+                    B.SetBit(nThread, B.UnitPkPic, false, "다이싱 유닛 픽업 요청 신호 OFF됨");
                     return false;
                 }
             }
-            while (UTIL_.WaitInput(nThread, I.SAW_ULD_POS, false, "다이싱 언로더 위치에 와있을때까지 대기")) ;
+            while (I.WaitInput(nThread, I.SAW_ULD_POS, false, "다이싱 언로더 위치에 와있을때까지 대기")){
+                if (bBD) break;
+                if (bPicSignel){
+                    bPicSignel = false;
+                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
+                    while (eRTN.SUCESS != MoveX(P.Ready, "", "유닛 피커 X축 대기 위치 이송")) ;
+                    W.ViewWarning(nThread, W.UnitPlaceSignelOff);
+                    while (W.WaitWarning(nThread, W.UnitPlaceSignelOff, "맵-블록 테이블에 유닛 전달 중 신호 OFF 됨")) ;
+                    B.SetBit(nThread, B.UnitPkPic, false, "다이싱 유닛 픽업 요청 신호 OFF됨");
+                    return false;
+                }
+            }
             IsDOUBLE[D.UnitPk_PicOffsetX] = TEACH_.READ_OFFSET_FILE();
-            while (eRTN.SUCESS != MoveX(P.UnitPckUp, "offset=" + string.Format("{0:0.000}", IsDOUBLE[D.UnitPk_PicOffsetX] /** -1*/), comment + "UNIT PICKER X AXIS SAW STAGE PICKUP POSITION MOVING"));
-
+            if (!bBD) {
+                while (eRTN.SUCESS != MoveX(P.UnitPckUp, "offset=" + string.Format("{0:0.000}", IsDOUBLE[D.UnitPk_PicOffsetX] /** -1*/), comment + "UNIT PICKER X AXIS SAW STAGE PICKUP POSITION MOVING")) ;
+            }
             while (eRTN.SUCESS != MoveZ(P.UnitPckUp, "offset=-10", "유닛 피커 Z축 유닛 픽업 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.UnitPckUp, "spd=10", "유닛 피커 Z축 유닛 픽업 위치 이송")) ;
-            if (prMODEL[RP.ScrapVacuum] == (int)eScrapVacuum.USE) AllVac(stBIT.ON);
-            else Vac(stBIT.ON);
-            while (UTIL_.WaitInput(nThread, I.SAW_STAGE_BLOW, false, "다이싱 테이블 블로우 ")) ;
-            RePick:
+            if (prMODEL[RP.ScrapVacuum] == (int)eScrapVacuum.USE)   AllVac(stBIT.ON);
+            else                                                    Vac(stBIT.ON);
+            while (I.WaitInput(nThread, I.SAW_STAGE_BLOW, false, "다이싱 테이블 블로우 ")) {
+                if (bBD) break;
+            }
+        RePick:
             if (!mIN[I.UNIT_PK_VAC] && !bDRYRUN){
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "Move unit picker z reaady position (unit pickup fail!)")) ;
                 if (bMF) return false;
-                COM_.ViewWarning(nThread, W.UnitPkrPickUpReCheck);
-                while (UTIL_.WaitWarning(nThread, W.UnitPkrPickUpReCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
+                W.ViewWarning(nThread, W.UnitPkrPickUpReCheck, true, "바로 맵블록 테이블에 안착 여부 판단 플러그!");
+                while (W.WaitWarning(nThread, W.UnitPkrPickUpReCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
                 if (ConfirmUser[W.UnitPkrPickUpReCheck].result){
+                    if (ConfirmUser[W.UnitPkrPickUpReCheck].CheckBoxResult){
+                        while (eRTN.SUCESS != MoveZ(P.Ready, "", "Move unit picker z reaady position (unit pickup fail!)")) ;
+                        B.SetBit(nThread, B.DirectUnitPlace, true, "유닛 피커 바로 맵블록에 안착 플러그 ON");
+                        while (eRTN.SUCESS != MoveX(P.Ready, "", "Move unit picker ready position")) ;
+
+                        //22.1108 HK.PARK 추가!
+                        O.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "다이싱 설비에 유닛 픽업 완료 신호 ON");
+                        ChkUldPkrPic = 0;
+                        while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS]){
+                            UTIL_.DELAY(1);
+                            ChkPicSawStageState(ref ChkUldPkrPic);
+                        }
+                        //22.1108 
+
+                        ResetInterface();
+                        goto DirectPlace;
+                    } //바로 맵블록에 내려놓음 플러그 ON
                     if (mIN[I.UNIT_PK_VAC]) goto RePick;
                     while (eRTN.SUCESS != MoveX(P.UnitPckUp, "", "MOVE UNIT PICKER X AXIS SAW STAGE PICK-UP POS")){
                         if (bPicSignel){
@@ -156,13 +200,17 @@ namespace NSS_3310S.SEQ.MODULE{
                     UTIL_.DELAY(500);
                     LAB_.BIT_OUT(O.HANDLER_SCRAP_CHECK, false);
                     while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
-                    COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "유닛 피커 유닛 픽업 중 유닛 유실되어 다시 처음부터 픽업");
-                    while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS] || mIN[I.SAW_STAGE_BLOW]) ;
+                    O.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "유닛 피커 유닛 픽업 중 유닛 유실되어 다시 처음부터 픽업");
+                    ChkUldPkrPic = 0;
+                    while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS]){
+                        UTIL_.DELAY(1);
+                        ChkPicSawStageState(ref ChkUldPkrPic);
+                    }
                     ResetInterface();
                     while (mOUT[O.UNIT_PK_VAC] || mOUT[O.SCRAP_VAC_1] || mOUT[O.SCRAP_VAC_2]){
-                        UTIL_.OnERROR(E.emsNotUnitPk_VacOff, 500);
+                        E.OnERROR(E.emsNotUnitPk_VacOff, 500);
                     }
-                    COM_.Bit(nThread, B.UnitPkPic, false, "유닛 피커 픽업 유실 처리됨");
+                    B.Bit(nThread, B.UnitPkPic, false, "유닛 피커 픽업 유실 처리됨");
                     return false;
                 } //유실 처리 처음 부터.
             }
@@ -173,25 +221,45 @@ namespace NSS_3310S.SEQ.MODULE{
 
         ReCHECK_UNITPKR:
             if (!mIN[I.UNIT_PK_VAC] && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.UnitPkrPickUnitCheck);
-                while (UTIL_.WaitWarning(nThread, W.UnitPkrPickUnitCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
-                if (ConfirmUser[W.UnitPkrPickUnitCheck].result) goto ReCHECK_UNITPKR;
+                W.ViewWarning(nThread, W.UnitPkrPickUnitCheck, true, "바로 맵블록 테이블에 안착 여부 판단 플러그!");
+                while (W.WaitWarning(nThread, W.UnitPkrPickUnitCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
+                if (ConfirmUser[W.UnitPkrPickUnitCheck].result){
+                    if (ConfirmUser[W.UnitPkrPickUnitCheck].CheckBoxResult){
+                        while (eRTN.SUCESS != MoveZ(P.Ready, "", "Move unit picker z reaady position (unit pickup fail!)")) ;
+                        B.SetBit(nThread, B.DirectUnitPlace, true, "유닛 피커 바로 맵블록에 안착 플러그 ON");
+                        while (eRTN.SUCESS != MoveX(P.Ready, "", "Move unit picker ready position")) ;
+                        //22.1108 HK.PARK 추가!
+                        O.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "다이싱 설비에 유닛 픽업 완료 신호 ON");
+                        ChkUldPkrPic = 0;
+                        while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS]){
+                            UTIL_.DELAY(1);
+                            ChkPicSawStageState(ref ChkUldPkrPic);
+                        }
+                        //22.1108 
+                        ResetInterface();
+                        goto DirectPlace;
+                    }
+                    goto ReCHECK_UNITPKR;
+                }
                 else{
                     while (eRTN.SUCESS != MoveX(P.Ready, "", "Move unit picker ready position")) ;
                     if (mIN[I.UNIT_PK_VAC]) goto ReCHECK_UNITPKR;
                     while (mOUT[O.UNIT_PK_VAC] || mOUT[O.SCRAP_VAC_1] || mOUT[O.SCRAP_VAC_2]){
-                        UTIL_.OnERROR(E.emsNotUnitPk_VacOff, 500);
+                        E.OnERROR(E.emsNotUnitPk_VacOff, 500);
                     }
                     return false;
                 }
             }
-            COM_.SetBit(nThread, B.UnitPkMask, true, "유닛 피커 작업 진행");
-            CLOT.SEND_SAW_STRIP_INFO(nThread);
+        DirectPlace:
+            B.SetBit(nThread, B.UnitPkMask, true, "유닛 피커 작업 진행");
+            CLOT.SEND_SAW_STRIP_INFO(eSeqBacode.UnitPk, nThread);
             LogOneCycle(CLOT.InfoStrip[nThread].Barcode);
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.SawStageStripIndex, CLOT.SawStageStripBarcode, CMES.ModuleID.SAW_STAGE);
                 SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.UNIT_PK);
             }
+            LogWR_.SaveBladeInfo(CLOT.InfoStrip[nThread].Barcode, "Out", CLOT.InfoStrip[nThread].Index);
+            LogWR_.WriteInStrip(CLOT.InfoStrip[nThread].Barcode); 
             CLOT.RESET_SAW_STRIP_INFO();
             IsLONG[L.UnitCnt]++;
             LogEnd(nThread, comment + " 완료");
@@ -200,15 +268,19 @@ namespace NSS_3310S.SEQ.MODULE{
 
         public bool Scrap(string comment){
             bool bReturn = true;
+            if (IsBIT[B.DirectUnitPlace]){
+                B.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 유닛 픽업 완료");
+                return bReturn;
+            }
         //if (prMACHINE[CP.UseScrapVacCheck] != (int)eUSE.USE){
-        //    COM_.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 유닛 픽업 완료");
+        //    B.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 유닛 픽업 완료");
         //    while (eRTN.SUCESS != MoveX(P.BrushStart, "", "유닛 피커 X축 브러쉬 시작 위치 이송")) ;
         //    return bReturn;
         //}
         ReCHECK_UNITPKR:
             if (!mIN[I.UNIT_PK_VAC] && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.UnitPkrPickUnitCheck);
-                while (UTIL_.WaitWarning(nThread, W.UnitPkrPickUnitCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
+                W.ViewWarning(nThread, W.UnitPkrPickUnitCheck);
+                while (W.WaitWarning(nThread, W.UnitPkrPickUnitCheck, "유닛피커 픽업 재시도 할 것지 자재 유실 처리로 종료 할 것지 선택 기다림")) ;
                 if (ConfirmUser[W.UnitPkrPickUnitCheck].result) goto ReCHECK_UNITPKR;
                 else return false;
             }
@@ -217,7 +289,7 @@ namespace NSS_3310S.SEQ.MODULE{
         //ReCheck_Scrap:
             if (!bDRYRUN){
                 if (prMACHINE[CP.UseScrapVacCheck] == (int)eUSE.USE && (!mIN[I.SCRAP_VAC1] || !mIN[I.SCRAP_VAC2])){
-                    UTIL_.OnERROR(E.ScrapPickUpFail);
+                    E.OnERROR(E.ScrapPickUpFail);
                     //goto ReCheck_Scrap;
                 }
             }
@@ -228,7 +300,7 @@ namespace NSS_3310S.SEQ.MODULE{
                 while (eRTN.SUCESS != MoveZ(P.SCRAP[i], "", "유닛 피커 Z축 스크랩 버리는 " + (i + 1).ToString("00") + " 위치 이송")) ;
                 ReCheck_ScrapBox:
                 if (prMACHINE[CP.UseScrapBoxCheck] == (int)eUSE.USE && mIN[I.SCRAP_BOX]){
-                    UTIL_.OnERROR(E.ScrapBoxVanish);
+                    E.OnERROR(E.ScrapBoxVanish);
                     goto ReCheck_ScrapBox;
                 }
                 for (int j = 0; j < (int)prMACHINE[CP.ScrapBlowRepeatCnt]; j++){
@@ -236,7 +308,7 @@ namespace NSS_3310S.SEQ.MODULE{
                     UTIL_.DELAY(18);
                 }
                 if (i == 0){
-                    COM_.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 유닛 픽업 완료");
+                    B.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 유닛 픽업 완료");
                 }
             }
             ScrapBlow(eSCRAP.All);
@@ -244,7 +316,7 @@ namespace NSS_3310S.SEQ.MODULE{
             ReCheck_UnitPk:
             if ((!mIN[I.UNIT_PK_VAC] || !mOUT[O.UNIT_PK_VAC]) && !bDRYRUN){
                 if (bMF) return false;
-                UTIL_.OnERROR(E.UnitPkUnitVanish);
+                E.OnERROR(E.UnitPkUnitVanish);
                 bReturn = false;
                 goto ReCheck_UnitPk;
             }
@@ -253,7 +325,7 @@ namespace NSS_3310S.SEQ.MODULE{
         }
 
         public bool Brush(string comment){
-            if (prMACHINE[CP.UseBrush] != (int)eUSE.USE){
+            if (prMACHINE[CP.UseBrush] != (int)eUSE.USE || IsBIT[B.DirectUnitPlace]){
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
                 return true;
             }
@@ -274,7 +346,7 @@ namespace NSS_3310S.SEQ.MODULE{
         }
 
         public bool Cleaner(string comment){
-            if (prMACHINE[CP.UseUnitClear] != (int)eUSE.USE){
+            if (prMACHINE[CP.UseUnitClear] != (int)eUSE.USE || IsBIT[B.DirectUnitPlace]){
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
                 return true;
             }
@@ -309,7 +381,7 @@ namespace NSS_3310S.SEQ.MODULE{
         }
 
         public bool AirShower(string comment){
-            if (prMACHINE[CP.UseUnitAirshower] != (int)eUSE.USE){
+            if (prMACHINE[CP.UseUnitAirshower] != (int)eUSE.USE || IsBIT[B.DirectUnitPlace]){
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
                 return true;
             }
@@ -336,44 +408,42 @@ namespace NSS_3310S.SEQ.MODULE{
             AddMessage(nThread, comment + " 진행");
         RePlace:
             if (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.ALL){
-                while (UTIL_.WaitBIT(nThread, B.Stage1Working, B.Stage2Working, true, true, "맵-블록 테이블 1/2 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기", stBIT.AND)) ;
+                while (B.WaitBIT(nThread, B.Stage1Working, B.Stage2Working, true, true, "맵-블록 테이블 1/2 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기", stBIT.AND)) ;
             }
             else if (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.STAGE1){
-                while (UTIL_.WaitBIT(nThread, B.Stage1Working, true, "맵-블록 테이블 1 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기")) ;
+                while (B.WaitBIT(nThread, B.Stage1Working, true, "맵-블록 테이블 1 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기")) ;
             }
             else{
-                while (UTIL_.WaitBIT(nThread, B.Stage2Working, true, "맵-블록 테이블 2 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기")) ;
+                while (B.WaitBIT(nThread, B.Stage2Working, true, "맵-블록 테이블 2 - 유닛 피커 받을 준비가 되어 있지 않아 준비 할때까지 대기")) ;
             }
 
             if (!IsBIT[B.Stage1Working] && (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.ALL || prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.STAGE1)){
-                COM_.SetBit(nThread, B.Stage1_UnitReceive, true, "유닛 피커 맵-블록 테이블1에 유닛 공급");
-                while (UTIL_.WaitBIT(nThread, B.Stage1_UnitReceive, true, "맵-블록 테이블1 유닛 전달 완료 돨때까지 대기")) ;
+                B.SetBit(nThread, B.Stage1_UnitReceive, true, "유닛 피커 맵-블록 테이블1에 유닛 공급");
+                while (B.WaitBIT(nThread, B.Stage1_UnitReceive, true, "맵-블록 테이블1 유닛 전달 완료 돨때까지 대기")) ;
                 //CLOT.SEND_STRIP_INFO(nThread, T.DryTable1);
             }
             else if (!IsBIT[B.Stage2Working] && (prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.ALL || prMACHINE[CP.SelectStage] == (int)eMAP_BLOCK.STAGE2)){
-                COM_.SetBit(nThread, B.Stage2_UnitReceive, true, "유닛 피커 맵-블록 테이블2에 유닛 공급");
-                while (UTIL_.WaitBIT(nThread, B.Stage2_UnitReceive, true, "맵-블록 테이블2 유닛 전달 완료 돨때까지 대기")) ;
+                B.SetBit(nThread, B.Stage2_UnitReceive, true, "유닛 피커 맵-블록 테이블2에 유닛 공급");
+                while (B.WaitBIT(nThread, B.Stage2_UnitReceive, true, "맵-블록 테이블2 유닛 전달 완료 돨때까지 대기")) ;
                 //CLOT.SEND_STRIP_INFO(nThread, T.DryTable2);
             }
             else{
-                COM_.ViewWarning(nThread, W.UnitPlaceSignelOff);
-                while (UTIL_.WaitWarning(nThread, W.UnitPlaceSignelOff, "맵-블록 테이블에 유닛 전달 중 신호 OFF 됨")) ;
+                W.ViewWarning(nThread, W.UnitPlaceSignelOff);
+                while (W.WaitWarning(nThread, W.UnitPlaceSignelOff, "맵-블록 테이블에 유닛 전달 중 신호 OFF 됨")) ;
                 goto RePlace;
             }
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.UNIT_PK);
             }
-            CLOT.RESET_STRIP_INFO(nThread);
-            //strip barcode 정보 저장
             Tack();
-            WorkedAirShower("유닛 피커 플레이스 후 바닥면 에어 샤워");
+
+            //23.1115 정용태과장 요청해서 수정함!
             WorkedCleaner("유닛 피커 플레이스 후 클리너 박스 클린");
-            //UnitPkPlcBrush
             if (prMACHINE[CP.UnitPkPlcBrush] == (int)eUSE.USE){
                 for (int i = 0; i < (int)prMACHINE[CP.BrushRepeatCnt]; i++){
                     if (i == 0) cmds = "";
-                    else        cmds = "spd=" + string.Format("{0:0}", prMACHINE[CP.BrushSpd]);
+                    else cmds = "spd=" + string.Format("{0:0}", prMACHINE[CP.BrushSpd]);
                     while (eRTN.SUCESS != MoveX(P.BrushStart, cmds, "유닛 피커 X축 브러쉬 시작 위치 이송")) ;
                     while (eRTN.SUCESS != MoveZ(P.BrushStart, "", "유닛 피커 Z축 브러쉬 시작 위치 이송")) ;
                     cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.UnitKitWidthPitch]) + ":spd=" + string.Format("{0:0}", prMACHINE[CP.BrushSpd]);
@@ -381,7 +451,7 @@ namespace NSS_3310S.SEQ.MODULE{
                 }
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
             }
-
+            WorkedAirShower("유닛 피커 플레이스 후 바닥면 에어 샤워");
             if (mIN[I.SAW_ULD_REQ] && mIN[I.SAW_LD_REQ] && !IsBIT[B.StripPkPlc] && !IsBIT[B.UnitPickupStop])
                 while (eRTN.SUCESS != MoveX(P.UnitPckUp, "", "유닛 피커 X축 유닛 픽업 위치 이송")) ;
             else { 
@@ -445,12 +515,41 @@ namespace NSS_3310S.SEQ.MODULE{
         #endregion
 
         #region >> Moudle
+        public void Info_LotCount(){
+            CLOT.GET_LOT.LotCnt     = (int)IsLONG[L.LotCnt];
+            CLOT.GET_LOT.StripCnt   = (int)IsLONG[L.StripCnt];
+            CLOT.GET_LOT.UnitCnt    = (int)IsLONG[L.UnitCnt];
+
+            CLOT.GET_LOT.GoodUnit   = (int)IsLONG[L.GoodCnt];
+            CLOT.GET_LOT.ReworkUnit = (int)IsLONG[L.ReworkCnt];
+            CLOT.GET_LOT.NGUnit     = (int)IsLONG[L.NGCnt];
+
+            CLOT.GET_LOT.ITSCount   = (int)IsLONG[L.ITSCount];
+
+            CLOT.GET_LOT.GoodTray   = (int)IsLONG[L.GoodTrayCnt];
+            CLOT.GET_LOT.NGTray     = (int)IsLONG[L.ReworkCnt];
+        }
+        
         void Tack(){
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.UnitPkCycle] = (TackEnd - TackStart) / 1000;
             LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",유닛 피커," + IsDOUBLE[D.UnitPkCycle].ToString(), "");
-            COM_.SetBit(nThread, B.UnitPkMask, false, "유닛 피커 작업 진행");
+            B.SetBit(nThread, B.UnitPkMask, false, "유닛 피커 작업 진행");
             TackStart = Environment.TickCount;
+        }
+
+        bool ChkPicSawStageState(ref int nCnt, bool bCheckStageBlow = false){
+            if ((int)prMACHINE[CP.UnitPkrPicCheckDelay] <= 0) return true;
+            if (nCnt > (int)prMACHINE[CP.UnitPkrPicCheckDelay]){
+                if (mIN[I.SAW_ULD_REQ]) E.OnERROR(E.emsSawUldReqSignalFail);
+                if (mIN[I.SAW_ULD_POS]) E.OnERROR(E.emsSawUldPosSignalFail);
+                if (bCheckStageBlow){
+                    if (mIN[I.SAW_STAGE_BLOW]) E.OnERROR(E.emsSawStageBlowSignalFail);
+                }
+                nCnt = 0;
+            }
+            nCnt++;
+            return true;
         }
 
         void ChkPic(){
@@ -462,14 +561,17 @@ namespace NSS_3310S.SEQ.MODULE{
                 }
             }
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
-            COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "다이싱 설비에 유닛 픽업 완료 신호 ON");
-            while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS] || mIN[I.SAW_STAGE_BLOW]) UTIL_.DELAY(10);
-            COM_.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, false, "다이싱 설비에 유닛 픽업 완료 신호 OFF");
+            O.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, true, "다이싱 설비에 유닛 픽업 완료 신호 ON");
+            ChkUldPkrPic = 0;
+            while (mIN[I.SAW_ULD_REQ] || mIN[I.SAW_ULD_POS] || mIN[I.SAW_STAGE_BLOW]){
+                UTIL_.DELAY(1);
+                ChkPicSawStageState(ref ChkUldPkrPic, true);
+            }
+            O.SetOutput(nThread, O.HANDLER_UNIT_COMPLETE, false, "다이싱 설비에 유닛 픽업 완료 신호 OFF");
         }
         public void ResetInterface(){
             mOUT[O.HANDLER_UNIT_COMPLETE] = false;
-            COM_.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 ");
-            
+            B.SetBit(nThread, B.UnitPkPic, false, "유닛 피커 ");
         }
 
         public void AllVac(bool bFlog){
@@ -623,7 +725,7 @@ namespace NSS_3310S.SEQ.MODULE{
 
             if (bFlog){
                 if (!mtDATA[M.UnitPkX, P.Cleaner].bPOS || !mtDATA[M.UnitPkZ, P.Cleaner].bPOS){
-                    UTIL_.OnERROR(E.emsCleanerWaterFail);
+                    E.OnERROR(E.emsCleanerWaterFail);
                     return false;
                 }
             }
@@ -661,6 +763,14 @@ namespace NSS_3310S.SEQ.MODULE{
         }
 
         public eRTN MoveX(int nPos, string cmd, string comment){
+            while (!mIN[I.DOOR_SAW_FRONT_RIGHT] || !mIN[I.DOOR_SAW_FRONT_LEFT]){
+                if (mtCHK[M.UnitPkX].Ev == "STOP" || mtCHK[M.UnitPkX].Ev == "stop" || bPushStop){
+                    UTIL_.DELAY(100);
+                    return eRTN.FAIL;
+                }
+                UTIL_.DELAY(100);
+                if (bBD) break;
+            }
             if (ChkRunning(nThread)) return eRTN.FAIL;
             bPicSignel = false;
 
@@ -678,7 +788,12 @@ namespace NSS_3310S.SEQ.MODULE{
             }
 
             IsSTRING[S.UnitPkMessage] = comment + " " + LogWR_.LogPos(M.UnitPkX, nPos);
-            if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.UnitPkX, nPos, 0.005, false, false, false, cmd, IsSTRING[S.UnitPkMessage])) return eRTN.FAIL;
+            mOUT[O.HANDLER_PK_MOVING] = true;
+            if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.UnitPkX, nPos, 0.005, false, false, false, cmd, IsSTRING[S.UnitPkMessage])){
+                mOUT[O.HANDLER_PK_MOVING] = false;
+                return eRTN.FAIL;
+            }
+            mOUT[O.HANDLER_PK_MOVING] = false;
             return eRTN.SUCESS;
         }
         public eRTN MoveZ(int nPos, string cmd, string comment){

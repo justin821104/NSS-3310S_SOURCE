@@ -34,8 +34,8 @@
             this.JogCcw = new System.Windows.Forms.Button();
             this.imgArrow = new System.Windows.Forms.ImageList(this.components);
             this.pINRAIL = new System.Windows.Forms.Panel();
-            this.CurPOS = new Owf.Controls.DigitalDisplayControl();
             this.lblMotor = new System.Windows.Forms.Label();
+            this.lbCurPOS = new System.Windows.Forms.Label();
             this.pINRAIL.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,22 +92,11 @@
             // pINRAIL
             // 
             this.pINRAIL.BackColor = System.Drawing.Color.Black;
-            this.pINRAIL.Controls.Add(this.CurPOS);
+            this.pINRAIL.Controls.Add(this.lbCurPOS);
             this.pINRAIL.Location = new System.Drawing.Point(1, 20);
             this.pINRAIL.Name = "pINRAIL";
             this.pINRAIL.Size = new System.Drawing.Size(138, 23);
             this.pINRAIL.TabIndex = 1202;
-            // 
-            // CurPOS
-            // 
-            this.CurPOS.BackColor = System.Drawing.Color.Black;
-            this.CurPOS.DigitColor = System.Drawing.Color.White;
-            this.CurPOS.DigitText = "0000.0000";
-            this.CurPOS.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CurPOS.Location = new System.Drawing.Point(5, 3);
-            this.CurPOS.Name = "CurPOS";
-            this.CurPOS.Size = new System.Drawing.Size(128, 16);
-            this.CurPOS.TabIndex = 1187;
             // 
             // lblMotor
             // 
@@ -122,14 +111,26 @@
             this.lblMotor.Text = "MOTOR (모터)";
             this.lblMotor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ucJOG
+            // lbCurPOS
+            // 
+            this.lbCurPOS.BackColor = System.Drawing.Color.Black;
+            this.lbCurPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurPOS.ForeColor = System.Drawing.Color.White;
+            this.lbCurPOS.Location = new System.Drawing.Point(5, 3);
+            this.lbCurPOS.Name = "lbCurPOS";
+            this.lbCurPOS.Size = new System.Drawing.Size(129, 17);
+            this.lbCurPOS.TabIndex = 1205;
+            this.lbCurPOS.Text = "0000.000";
+            this.lbCurPOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UCL_JOG
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.JogCw);
             this.Controls.Add(this.JogCcw);
             this.Controls.Add(this.pINRAIL);
             this.Controls.Add(this.lblMotor);
-            this.Name = "ucJOG";
+            this.Name = "UCL_JOG";
             this.Size = new System.Drawing.Size(140, 106);
             this.pINRAIL.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -141,8 +142,8 @@
         private System.Windows.Forms.Button JogCw;
         private System.Windows.Forms.Button JogCcw;
         private System.Windows.Forms.Panel pINRAIL;
-        private Owf.Controls.DigitalDisplayControl CurPOS;
         private System.Windows.Forms.Label lblMotor;
         private System.Windows.Forms.ImageList imgArrow;
+        private System.Windows.Forms.Label lbCurPOS;
     }
 }

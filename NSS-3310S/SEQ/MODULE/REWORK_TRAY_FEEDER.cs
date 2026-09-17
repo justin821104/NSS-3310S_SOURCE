@@ -4,7 +4,7 @@ using System;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class REWORK_TRAY_FEEDER : BASE{
-        int nThread = T.ReworkTrayFeeder;
+        readonly int nThread = T.ReworkTrayFeeder;
         long TackStart = 0, TackEnd = 0;
         int nRtnPX = 0, nRtnPY = 0;
 
@@ -33,8 +33,8 @@ namespace NSS_3310S.SEQ.MODULE{
             //트레이 유무 확인
 
             while (eRTN.SUCESS != UnGrip("RE-WORK TRAY FEEDER 언그립")) ;
-            COM_.SetBit(nThread, B.ReWorkTrayRequest, true, "RE-WORK TRAY FEEDER 트레이 공급 요청");
-            while (UTIL_.WaitBIT(nThread, B.ReWorkTrayRequest, true, "트레이 피커에서 트레이 공급 할때까지 대기")) ;
+            B.SetBit(nThread, B.ReWorkTrayRequest, true, "RE-WORK TRAY FEEDER 트레이 공급 요청");
+            while (B.WaitBIT(nThread, B.ReWorkTrayRequest, true, "트레이 피커에서 트레이 공급 할때까지 대기")) ;
             while (eRTN.SUCESS != Grip("RE-WORK TRAY FEEDER 그립")) ;
             MAP_.TrayMap_Reset(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY]);
             LogEnd(nThread, comment + " 완료");
@@ -46,8 +46,8 @@ namespace NSS_3310S.SEQ.MODULE{
             while (eRTN.SUCESS != MoveY(P.Tray_Place[(int)IsLONG[L.CurWorkXPlc]], "", "RE-WORK TRAY FEEDER 유닛 플레이스 대기 위치 이송")) ;
 
             if (-1 != MAP_.GetTrayPocket(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref nRtnPX, ref nRtnPY)){
-                COM_.SetBit(nThread, B.ReWorkTrayWork, true, "RE-WORK 트레이 유닛 플레이스 작업 진행");
-                while (UTIL_.WaitBIT(nThread, B.ReWorkTrayWork, true, "REWORK 트레이 유닛 플레이스 완료 할때까지 대기")) ;
+                B.SetBit(nThread, B.ReWorkTrayWork, true, "RE-WORK 트레이 유닛 플레이스 작업 진행");
+                while (B.WaitBIT(nThread, B.ReWorkTrayWork, true, "REWORK 트레이 유닛 플레이스 완료 할때까지 대기")) ;
             }
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
@@ -73,9 +73,9 @@ namespace NSS_3310S.SEQ.MODULE{
 
         void TraySupply(string comment){
             LogStart(nThread, comment + " 진행");
-            COM_.ViewWarning(nThread, W.ReworkTrayFull);
-            COM_.SetBit(nThread, B.ReWorkTrayStackerUldRequest, true, "RE-WORK 스태커 트레이 배출 할대 까지 대기");
-            while (UTIL_.WaitBIT(nThread, B.ReWorkTrayStackerUldRequest, true, "RE-WORK STACKER 트레이 배출 대기")) ;
+            W.ViewWarning(nThread, W.ReworkTrayFull);
+            B.SetBit(nThread, B.ReWorkTrayStackerUldRequest, true, "RE-WORK 스태커 트레이 배출 할대 까지 대기");
+            while (B.WaitBIT(nThread, B.ReWorkTrayStackerUldRequest, true, "RE-WORK STACKER 트레이 배출 대기")) ;
             LogEnd(nThread, comment + " 완료");
         }
         #endregion

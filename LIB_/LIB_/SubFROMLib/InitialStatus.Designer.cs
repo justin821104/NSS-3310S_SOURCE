@@ -34,17 +34,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InitialStatus));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InitialStatus));
             this.gridMotor = new System.Windows.Forms.DataGridView();
+            this.DataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.swClose = new System.Windows.Forms.Button();
             this.lbMsg = new System.Windows.Forms.Label();
             this.lbInitSts = new System.Windows.Forms.Label();
             this.tmrInitialStatus = new System.Windows.Forms.Timer(this.components);
             this.editLOG = new System.Windows.Forms.RichTextBox();
-            this.DataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridMotor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,6 +110,28 @@
             this.gridMotor.StandardTab = true;
             this.gridMotor.TabIndex = 843;
             // 
+            // DataGridViewTextBoxColumn5
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DataGridViewTextBoxColumn5.HeaderText = "MOTOR NAME";
+            this.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5";
+            this.DataGridViewTextBoxColumn5.ReadOnly = true;
+            this.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DataGridViewTextBoxColumn5.Width = 278;
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column2.HeaderText = "STATUS";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 120;
+            // 
             // swClose
             // 
             this.swClose.BackColor = System.Drawing.Color.White;
@@ -157,6 +179,7 @@
             // 
             // tmrInitialStatus
             // 
+            this.tmrInitialStatus.Interval = 200;
             this.tmrInitialStatus.Tick += new System.EventHandler(this.TimerInitialStatus_Tick);
             // 
             // editLOG
@@ -169,28 +192,6 @@
             this.editLOG.Size = new System.Drawing.Size(417, 69);
             this.editLOG.TabIndex = 844;
             this.editLOG.Text = "LOG(로그)";
-            // 
-            // DataGridViewTextBoxColumn5
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DataGridViewTextBoxColumn5.HeaderText = "MOTOR NAME";
-            this.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5";
-            this.DataGridViewTextBoxColumn5.ReadOnly = true;
-            this.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DataGridViewTextBoxColumn5.Width = 278;
-            // 
-            // Column2
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column2.HeaderText = "STATUS";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 120;
             // 
             // InitialStatus
             // 

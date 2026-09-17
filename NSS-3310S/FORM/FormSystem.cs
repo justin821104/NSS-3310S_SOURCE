@@ -19,6 +19,8 @@ namespace NSS_3310S{
         double dValue = 0.0;
         RadioButton[] StackerUnloadMode = null;
         RadioButton[] ConveyorUnloadMode = null;
+        RadioButton[] DBReadMode = null;
+
         Label[] PKOffsetXY = null;
         bool bChagePkOffsetView = false;
         int nSelectOffsetHD = 0;
@@ -46,6 +48,7 @@ namespace NSS_3310S{
             btSave_AnalogData.Click += (sender, e) => SAVE(btSave_AnalogData);
             btSave_UseData.Click += (sender, e) => SAVE(btSave_UseData);
             btSave_UseData1.Click += (sender, e) => SAVE(btSave_UseData1);
+            btSave_UseData2.Click += (sender, e) => SAVE(btSave_UseData2);
             btSave_PkOffsetData.Click += (sender, e) => SAVE(btSave_PkOffsetData);
 
             T_LampMode0.Click += (sender, e) => ReadTowerLamp(T_LampMode0);
@@ -87,14 +90,14 @@ namespace NSS_3310S{
                                             ChkXMarkInspectionMode, ChkUseUnitPkWorkedAirshower, ChkUseUnitPkWorkedCleaner, ChkUseTrayFeederTrayCheck, 
                                             ChkUseLotStartPkAutoCal, ChkUsePickUpVac, ChkLotEnd, ChkUsePlaceCheck, ChkUseStripPkrCheck, 
                                             ChkUseCheckRejectBox, SelectMotorSpd,
-                                            ChkUnitPlcBrush
+                                            ChkUnitPlcBrush, ChkLogBarcodeHistory, ChkSizeNGUnitRejectBox, ChkUseNGBoxError
             };
             for (int i = 0; i < tUse.Length; i++){
                 tUse[i].TabIndex = CP.UseData[i];
             }
 
             tUse1 = new JCS.ToggleSwitch[] { ChkMGZ_1, ChkMGZ_2, ChkITSDATA,
-                ChkBtnInspection, ChkBtnInspectionResult, ChkUseMsSQL, ChkBarcode, ChkMES, ChkRFID
+                ChkBtnInspection, ChkBtnInspectionResult, ChkUseMsSQL, ChkBarcode, ChkMES, ChkRFID, ChkABF, ChkPRSOffset, ChkPRSOffsetT
             };
             for (int i = 0; i < tUse1.Length; i++){
                 tUse1[i].TabIndex = CP.UseData1[i];
@@ -113,6 +116,7 @@ namespace NSS_3310S{
 
             StackerUnloadMode = new RadioButton[] { ChkGoodTray1, ChkGoodTray2 };
             ConveyorUnloadMode = new RadioButton[] { ChkULDTrayMode_GT1, ChkULDTrayMode_GT2, ChkULDTrayMode_All };
+            DBReadMode = new RadioButton[] { ChkDBRead_1, ChkDBRead_2, ChkDBRead_3 };
 
             PKOffsetXY = new Label[] {
                     lbPKR_PITCH, 
@@ -125,8 +129,9 @@ namespace NSS_3310S{
 
             COM_.MakePickerOffset(dgvPickerOffsetPitch, 3);
 
-            btnAutoPickerCal.TabIndex = ManualNumber.RunPickerAutoCal;
-            lbUnitPlaceCheckVac.TabIndex = CP.PlaceCheckVac;
+            btnAutoPickerCal.TabIndex       = ManualNumber.RunPickerAutoCal;
+            lbUnitPlaceCheckVac.TabIndex    = CP.PlaceCheckVac;
+            lbITSID_LENGTH.TabIndex         = CP.ITSLength;
 
             cbxModule.SelectedIndex = 0;
 
@@ -168,6 +173,11 @@ namespace NSS_3310S{
 
         }
 
+        public static void Write_ParaToggleSwitch(JCS.ToggleSwitch ts) {
+            int value = ts.Checked ? 1 : 0;
+            if (ts.Tag.ToString() == "MC" || ts.Tag.ToString() == "mc") TEACH_.WR_MCPara(ts.TabIndex, value);
+            else                                                        TEACH_.WR_MDLPara(ts.TabIndex, value);
+        }
         void SAVE(object sender){
             btn = (Button)sender;
             if (btn.Name == "btSave_DataPara" || btn.Name == "btSave_DelayPara"){
@@ -236,46 +246,53 @@ namespace NSS_3310S{
             if (btn.Name == "btSave_UseData"){
                 try{
                     if (DialogResult.OK != MessageBox.Show("SAVE USE SKIP DATA ?", "SELECT", MessageBoxButtons.OKCancel)) return;
-                    int nOldSelectMtSpd = (int)DATA_.prMACHINE[CP.SelectMotorSpd];
-                    for (int i = 0; i < tUse.Length; i++){
-                        //tUse[i].TabIndex = CP.UseData[i];
-                        nValue = tUse[i].Checked ? 1 : 0;
-                        if (tUse[i].Tag.ToString() == "MC") TEACH_.WR_MCPara(tUse[i].TabIndex, nValue);
-                        else TEACH_.WR_MDLPara(tUse[i].TabIndex, nValue);
-                    }
-                    TEACH_.Write_Parameter(ChkMGZDir);
-
+                    Write_ParaToggleSwitch(ChkMGZDir);
                     if (!ChkTrayUnloading.Checked){ // ok 트레이 스태커로 배출 선택시 확인
                         if (DATA_.IsBIT[B.GoodTray1Place]){
                             if (!ChkGoodTray2.Checked){
-                                COM_.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 1 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이1 선택하여 저장 후 다시 선택 하셔야 합니다!");
+                                W.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 1 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이1 선택하여 저장 후 다시 선택 하셔야 합니다!");
                                 return;
                             }
                         } // ok 트레이1 작업 진행 중
                         if (DATA_.IsBIT[B.GoodTray2Place]){
                             if (!ChkGoodTray1.Checked){
-                                COM_.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 2 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이2 선택하여 저장 후 다시 선택 하셔야 합니다!");
+                                W.ViewWarning(T.Manual, W.ChkMessageBox, "OK 트레이 2 작업 진행 중입니다." + ETC.NewLine + "'트레이 배출 모드가 STACKER 일 경우' 굿 트레이2 선택하여 저장 후 다시 선택 하셔야 합니다!");
                                 return;
                             }
                         } // ok 트레이2 작업 진행 중
                     }
-                    TEACH_.Write_Parameter(ChkTrayUnloading);
-                    TEACH_.Write_Parameter(CHK_SCRAP_ALARM);
-                    TEACH_.Write_Parameter(CHK_SCRAP_VACUUM);
+                    Write_ParaToggleSwitch(ChkTrayUnloading);
+                    Write_ParaToggleSwitch(CHK_SCRAP_ALARM);
+                    Write_ParaToggleSwitch(CHK_SCRAP_VACUUM);
 
                     TEACH_.Write_Parameter(CP.SelectStackerUnloading, "MC", StackerUnloadMode);
                     TEACH_.Write_Parameter(CP.SelectConveyorUnloading, "MC", ConveyorUnloadMode);
-
-                    if (nOldSelectMtSpd != DATA_.prMACHINE[CP.SelectMotorSpd]){
-                        TEACH_.RD_MTDATA();
-                        DATA_.mTeachChanged = true;
-                    }
+                    
+                    TEACH_.Write_Parameter(CP.DBReadMode, "MC", DBReadMode);
+                    UTIL_.WriteSqlReading();
+                    
                     ReadUsePara();
                     MessageBox.Show(btn.Tag + " Save Success");
                 }
                 catch (Exception ex){
                     MessageBox.Show(btn.Tag + " Save Fail" + ETC.CrLf + ex.Message);
                 }
+            }
+            if (btn.Name == "btSave_UseData2"){
+                if (DialogResult.OK != MessageBox.Show("SAVE USE SKIP DATA ?", "SELECT", MessageBoxButtons.OKCancel)) return;
+                int nOldSelectMtSpd = (int)DATA_.prMACHINE[CP.SelectMotorSpd];
+                for (int i = 0; i < tUse.Length; i++){
+                    //tUse[i].TabIndex = CP.UseData[i];
+                    nValue = tUse[i].Checked ? 1 : 0;
+                    if (tUse[i].Tag.ToString() == "MC") TEACH_.WR_MCPara(tUse[i].TabIndex, nValue);
+                    else TEACH_.WR_MDLPara(tUse[i].TabIndex, nValue);
+                }
+                if (nOldSelectMtSpd != DATA_.prMACHINE[CP.SelectMotorSpd]){
+                    TEACH_.RD_MTDATA();
+                    DATA_.mTeachChanged = true;
+                }
+                ReadUsePara();
+                MessageBox.Show(btn.Tag + " Save Success");
             }
             if (btn.Name == "btSave_UseData1"){
                 if (DialogResult.OK != MessageBox.Show("SAVE USE SKIP DATA ?", "SELECT", MessageBoxButtons.OKCancel)) return;
@@ -284,6 +301,8 @@ namespace NSS_3310S{
                     if (tUse1[i].Tag.ToString() == "MC")    TEACH_.WR_MCPara(tUse1[i].TabIndex, nValue);
                     else                                    TEACH_.WR_MDLPara(tUse1[i].TabIndex, nValue);
                 }
+                //lbITSID_LENGTH.TabIndex
+                TEACH_.Write_Parameter(lbITSID_LENGTH);
                 ReadUsePara();
                 MessageBox.Show(btn.Tag + " Save Success");
             }
@@ -452,6 +471,8 @@ namespace NSS_3310S{
             sLabel += "M," + CP.BarcodeReadingCheck.ToString() + "," + DATA_.MCParaName[CP.BarcodeReadingCheck] + ETC.CrLf;
             sLabel += "MD," + RP.ULDConvWaitTime.ToString() + "," + DATA_.MDParaName[RP.ULDConvWaitTime] + ETC.CrLf;
             sLabel += "M," + CP.GoodTrayPushEndDealy + "," + DATA_.MCParaName[CP.GoodTrayPushEndDealy] + ETC.CrLf;
+            sLabel += "M," + CP.UnitPkrPicCheckDelay + "," + DATA_.MCParaName[CP.UnitPkrPicCheckDelay] + ETC.CrLf;
+            sLabel += "M," + CP.PrsStapInspectionDelay.ToString() + "," + DATA_.MCParaName[CP.PrsStapInspectionDelay] + ETC.CrLf;
             return sLabel;
         }
         void ReadDataGridViewPara(eGridDataViewPara ePara){
@@ -546,10 +567,13 @@ namespace NSS_3310S{
 
             StackerUnloadMode[(int)DATA_.prMACHINE[CP.SelectStackerUnloading]].Checked = true;
             ConveyorUnloadMode[(int)DATA_.prMACHINE[CP.SelectConveyorUnloading]].Checked = true;
-        
+            DBReadMode[(int)DATA_.prMACHINE[CP.DBReadMode]].Checked = true;
+
             for (int i = 0; i < tUse1.Length; i++){
                 tUse1[i].Checked = DATA_.prMACHINE[CP.UseData1[i]] == (int)eUSE.USE ? true : false;
             }
+
+            lbITSID_LENGTH.Text = DATA_.prMACHINE[CP.ITSLength].ToString();
         }
 
         void ReadPkrOffsetPara(){
@@ -707,6 +731,15 @@ namespace NSS_3310S{
                     OUT1[i].BackColor = DATA_.mOUT[O.HD2PkRej[i]] ? Color.Yellow : Color.White;
                     OUT2[i].BackColor = DATA_.mOUT[O.HD2PkVac[i]] ? Color.Yellow : Color.White;
                 }
+            }
+
+            if (DATA_.eLoginLevel >= eLogLevel.ENG) {
+                //gbxUser.Enabled = true;
+                panel1.Enabled = true;
+            }
+            else {
+                //gbxUser.Enabled = false;
+                panel1.Enabled = false;
             }
 
             if (bChagePkOffsetView){

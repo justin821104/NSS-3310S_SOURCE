@@ -1,15 +1,16 @@
-﻿using LIB_.SubFROMLib;
+﻿using LIB_.DateType;
+using LIB_.SubFROMLib;
+using NSS_3310S.ITS;
 using NSS_3310S.SEQ;
 using Object;
 using System;
 using System.Drawing;
-using System.IO;
+using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
-using NSS_3310S.ITS;
-using LIB_.DateType;
 
-namespace NSS_3310S{
+namespace NSS_3310S
+{
     public partial class FormMain : Form{
         Multimedia.Timer mmTimer = new Multimedia.Timer();
         Label LBL;
@@ -19,6 +20,7 @@ namespace NSS_3310S{
         private bool bChageLabel = false;
         int isDryOn = 0, isDryOff = 0;
         int nSendPVIDCont = 0;
+        int nBLADE_CHANGE_RESET = 0;
         public FormMain(){
             InitializeComponent();
 
@@ -144,6 +146,7 @@ namespace NSS_3310S{
             SUBFRM_.gTenkeyList.Hide();
 
             F.Auto.TmrAUTO.Enabled = false;
+            F.Auto.TRearTime.Enabled = false;
             F.Manual.TmrMANUAL.Enabled = false;
             F.Motor.TmrMT.Enabled = false;
             F.Device.TmrRECIPE.Enabled = false;
@@ -200,11 +203,12 @@ namespace NSS_3310S{
 
         //TOP PANEL
         void TopPanel(){
-            lbLoginStatus.Text = DATA_.eLoginLevel.ToString();
-            editGroup.Text = DATA_.sGroupName;
-            editRecipe.Text = DATA_.sJobName;
-            editPPID.Text =  CMES.CurPPID;
-            lbSpeed.Text = "SPEED " + DATA_.prMACHINE[CP.RunRate].ToString() + " %";
+            lbLoginStatus.Text  = DATA_.eLoginLevel.ToString();
+            editPCBType.Text    = ((ePCB)(int)DATA_.prMODEL[RP.PCB_TYPE]).ToString();
+            editGroup.Text      = DATA_.sGroupName;
+            editRecipe.Text     = DATA_.sJobName;
+            editPPID.Text       =  CMES.CurPPID;
+            lbSpeed.Text        = "SPEED " + DATA_.prMACHINE[CP.RunRate].ToString() + " %";
         }
 
         //OP SWITCH
@@ -235,7 +239,7 @@ namespace NSS_3310S{
 
             if (DATA_.eLevelMainSw == eMainLevel.LOGIN)                                             { SetOPPanel(true, false, false, false, false, false, false, false, false); }
             else{
-                if (DATA_.eLoginLevel == eLogLevel.OP)                                              { SetOPPanel(true, true, true, true, true, false, false, false, false); }
+                if (DATA_.eLoginLevel == eLogLevel.OP)                                              { SetOPPanel(true, true, true, true, true, true, true, false, true); }
                 if (DATA_.eLoginLevel == eLogLevel.ENG)                                             { SetOPPanel(true, true, true, true, true, true, true, true, true); }
                 if (DATA_.eLoginLevel == eLogLevel.ADMIN || DATA_.eLoginLevel == eLogLevel.SOFT)    { SetOPPanel(true, true, true, true, true, true, true, true, true); }
             }
@@ -304,7 +308,7 @@ namespace NSS_3310S{
             DATA_.SPLASH_PROGRESS = nPercent;
             DATA_.SPLASH_STATUS = sMessage;
         }
-
+        
         private void FormMain_Load(object sender, EventArgs e){
             //1293, 1037
             if (!UTIL_.ChkAllReadyRun(PATH_.EXE_NAME)){
@@ -315,9 +319,11 @@ namespace NSS_3310S{
                 return;
             }
 
+            DEF.MCProcess += Environment.Is64BitProcess ? "64Bit" : "32Bit";
             Thread t = new Thread(new ThreadStart(Splash_Screen));
             t.Start();
             CNT_.IniMemory();
+            DATA_.SET_MACINE_INFO();
             DATA_.EQPCode   = UTIL_.GET_EQCode();
             DATA_.MC_DIR    = UTIL_.GET_MACHINE_DIR();         
             if (DATA_.MC_DIR == 1) PATH_.MCDir = "[DIR = REVERSE]";
@@ -327,18 +333,15 @@ namespace NSS_3310S{
             lbAppVersion.Text = DEF.MCVersion;
 
             if ("" == UTIL_.GET_MSSQL_ADD(ref MsSQL.sIP, ref MsSQL.sDBName, ref MsSQL.sID, ref MsSQL.sPwd)) { }
-
-            DEF.SendDllDefine();
-            DEF.CHK_MCDIR();
-
-            I.GET_MODULE_START_END();
-            O.GET_MODULE_START_END();
-
-            DATA_.INI_PICKER_INFO();
+            I.SET_INI();
+            O.SET_INI();
+            E.SET_INI();
+            M.SET_INI();
+            P.INI_PICKER_INFO();
             DATA_.cMATH.GET_CPU_SPEED(ref DATA_.lCPUSpeed);
 
             mmTimer.Start(); SetSplashStatus(0, "MULTIMEDIA TIMER RUN");
-            DATA_.InitailizeWarnning();
+            W.InitailizeWarnning();
 
             PATH_.Make_Folders(); SetSplashStatus(10, "MAEK FOLDER");
             DATA_.IniCleanData();
@@ -348,10 +351,18 @@ namespace NSS_3310S{
 
             CLOT.CLEAR_FINISH_LOT();
             CLOT.CLEAR_GET_LOT();
+            CLOT.GET_LOT.ABFMATERIAL = UTIL_.GET_MES_ABF();
+            
+            CLOT.ClearStripBarcodeInfo();
             UTIL_.GET_LOT_INFO();
-            DATA_.sCurrJobName = UTIL_.GET_JOB_FILE_NAME();
-            DATA_.sCurrVisionName = UTIL_.GET_VISION_FILE_NAME();
-            CMES.CurPPID = UTIL_.GET_PPID_NAME();
+            UTIL_.READ_WORKED_LOT_INFO();
+            CLOT.bABF               = UTIL_.GET_ABF_LIST();
+            CLOT.bBladeInfo_Sp1     = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP1);
+            CLOT.bBladeInfo_Sp2     = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP2);
+            DATA_.sCurrJobName      = UTIL_.GET_JOB_FILE_NAME();
+            DATA_.sCurrVisionName   = UTIL_.GET_VISION_FILE_NAME();
+            CMES.CurPPID            = UTIL_.GET_PPID_NAME();
+            //UTIL_.READ_WORKED_LOT_INFO();  //완료 낫 정보 읽어오기
 
             if (UTIL_.OpenJobFile()){
                 OpenDevice();
@@ -370,7 +381,8 @@ namespace NSS_3310S{
             SetSplashStatus(50, "READ PALLET & TRAY POS");
 
             InitializeFrom();
-            COM_.INI_OnlyCheckArray();
+            I.INI_OnlyCheckArray();
+            O.INI_OnlyCheckArray();
             SetSplashStatus(55, "INITIALIZE AZIN");
             if (DEF.CreateClass()) lbTime.BackColor = Color.Lime;
             else lbTime.BackColor = Color.Red;
@@ -380,7 +392,6 @@ namespace NSS_3310S{
             SUBFRM_.gTenkeyList.SEND_TENKEY += new EventHandler_(GET_TENKEY);
             SUBFRM_.gLogin.EVENT_OPEN += new EventHandler_OPEN(OPEN_LOGIN);
             F.Device.EVENT_OPEN += new EventHandler_DEVICE_OPEN(OpenDevice);
-
             SetSplashStatus(70, "INITAIL EVENT");
 
             DATA_.cSPC.LOAD_SPC();
@@ -389,14 +400,7 @@ namespace NSS_3310S{
             UTIL_.DELAY(100);
 
             OP(swLogIn);
-            LAB_.BIT_OUT(O.PC_POWER_LAMP, true);
-#if _NSS3300
-#else
-            DATA_.mOUT[O.PC_VISION_LAMP] = true;
-#endif
-            DATA_.mOUT[O.HANDLER_READY] = true;
             
-            DATA_.mOUT[O.BRUSH_WATER] = true;
             DEF.ReadSearchRoiUnitCnt();
             DEF.ReadMapBlockPickUp();
             DEF.ReadTrayPlace();
@@ -407,27 +411,35 @@ namespace NSS_3310S{
             DATA_.mNotTeachSave = false;
             DATA_.TW_TIME = Environment.TickCount + ((long)DATA_.prMACHINE[CP.BlinkTime]);
             LogWR_.SaveLogOperate("PROGRAM START", "MC");
-#endregion
+
+            DATA_.IsAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+            lbVersion.ForeColor = DATA_.IsAdmin ? Color.FromArgb(255, 192, 192) : Color.FromArgb(192, 255, 192);
+            #endregion
 
             DATA_.cPM.Open((int)DATA_.prMACHINE[CP.PowerMeterComPort], Baudrate.bps19200);
             DATA_.cLightController.OPEN((short)DATA_.prMACHINE[CP.LightComPort]);
             SUBFRM_.gRFID.Conntect();
             //SUBFRM_.cBarcode.Conect();
 
-            DEF.Power(stBIT.ON);
+            F.Auto.bMC_DISPLY = true;
+           
+            O.POWER(stBIT.ON);
             P.GetHandlerPkZSafetyPos();
             
             MsSQL.Open(MsSQL.sIP, MsSQL.sDBName, MsSQL.sID, MsSQL.sPwd);
 
             //잠시
-            CLOT.GET_LOT.LotID = UTIL_.GET_LOT_ID();
+            CLOT.GET_LOT.LotID = UTIL_.GET_LOT_ID_INI(); //UTIL_.GET_LOT_ID(); 
             CLOT.GET_LOT.ItsID = UTIL_.GET_ITS_ID();
             BASE.RD_LOT_INF();
 
-#if _NSS3300
-            DATA_.mOUT[O.POWER_ON_LAMP] = false;
-            DATA_.mOUT[O.POWER_OFF_LAMP] = true;
-#endif
+
+            LAB_.BIT_OUT(O.PC_POWER_LAMP, true);
+            DATA_.mOUT[O.HANDLER_READY] = true;
+            DATA_.mOUT[O.BRUSH_WATER] = true;
+
+            DATA_.prMACHINE[CP.DBReadMode] = UTIL_.GetSqlReading();
+
             SetSplashStatus(100, "SUCCESS EVENT");
             t.Abort();
 
@@ -454,6 +466,7 @@ namespace NSS_3310S{
                     return;
                 }
                 BASE.WR_LOT_INF();
+                UTIL_.SAVE_WORKED_LOT_INFO();
 
                 //Base.SAVE_CURRENT_COUNT();
                 //LogWR_.SaveLogOperate("PROGRAM EXIT", "MC");
@@ -462,7 +475,7 @@ namespace NSS_3310S{
                 //COM_.RESET_DOORLOCK();
                 //SUBFRM_.gSecsGem.SetHMI("0");
                 //
-#region "EVENT CLOSE"
+                #region "EVENT CLOSE"
                 SUBFRM_.gTenkeyList.SEND_TENKEY -= new EventHandler_(GET_TENKEY);
                 SUBFRM_.gLogin.EVENT_OPEN -= new EventHandler_OPEN(OPEN_LOGIN);
                 //
@@ -487,6 +500,15 @@ namespace NSS_3310S{
                     if (DATA_.mcTH[i] == null) continue;
                     try{
                         DATA_.mcTH[i].Abort();
+
+                        //// 검증 필요 
+                        //if (DATA_.mcTH[i].IsAlive) {
+                        //    if ((DATA_.mcTH[i].ThreadState & ThreadState.AbortRequested) == 0) {
+                        //        DATA_.mcTH[i].Abort();
+                        //        DATA_.mcTH[i].Join(1000);
+                        //    }
+                        //}
+                        //// 검증 필요
                     }
                     catch (Exception ex){
                         LogWR_.SaveLogException("MAIN_FORM->FrmMain_FormClosing", ex);
@@ -507,8 +529,8 @@ namespace NSS_3310S{
         void Invoke(){
             TopPanel();
             ViewOPPanel();
-            COM_.ScenCheckSensing();
-            COM_.GetTowerLamp();
+            I.ScenCheckSensing();
+            O.GetTowerLamp();
             pblTowerR.BackColor = DATA_.mOUT[O.TOWER_RED] ? Color.Red : Color.Maroon;
             pnlTowerY.BackColor = DATA_.mOUT[O.TOWER_YELLOW] ? Color.Yellow : Color.DarkGoldenrod;
             pnlTowerG.BackColor = DATA_.mOUT[O.TOWER_GREEN] ? Color.Lime : Color.DarkGreen;
@@ -534,17 +556,17 @@ namespace NSS_3310S{
 
             if (DATA_.bEndInitial){
                 DATA_.bEndInitial = false;
-                COM_.ViewWarning(-1, W.EndInitial);
+                W.ViewWarning(-1, W.EndInitial);
             }
 
-            nERR = UTIL_.CHK_ERR();
+            nERR = E.CHK_ERR();
             if (nERR > -1){
                 F.Auto.tclAUTOVIEW.SelectedIndex = 1;
                 editErrCode.Text = nERR.ToString();
-                editErrName.Text = UTIL_.GET_ERROR_NAME(nERR);
+                editErrName.Text = E.GET_ERROR_NAME(nERR);
                 DATA_.editErrName = editErrName.Text;
-                DATA_.editErrTitle_1 = UTIL_.GET_ERROR_TITLE_1(nERR);
-                DATA_.editErrTitle_2 = UTIL_.GET_ERROR_TITLE_2(nERR);
+                DATA_.editErrTitle_1 = E.GET_ERROR_TITLE_1(nERR);
+                DATA_.editErrTitle_2 = E.GET_ERROR_TITLE_2(nERR);
 
                 if (!DATA_.bOnERROR) SUBFRM_.gErrPopUp.VIEW_ERROR_POPUP();
                 DATA_.bOnERROR = true;
@@ -557,7 +579,13 @@ namespace NSS_3310S{
                 DATA_.editErrTitle_2 = "NONE";
 
                 if (F.Auto.bEES_DISPLY) F.Auto.tclAUTOVIEW.SelectedIndex = 2;
-                else F.Auto.tclAUTOVIEW.SelectedIndex = 0;
+                else if (F.Auto.bEES_FDC) F.Auto.tclAUTOVIEW.SelectedIndex = 3;
+                else{
+                    F.Auto.bEES_DISPLY  = false;
+                    F.Auto.bEES_FDC     = false;
+                    F.Auto.bMC_DISPLY   = true;
+                    F.Auto.tclAUTOVIEW.SelectedIndex = 0;
+                }
             }
 
             if (DATA_.prMACHINE[CP.RunRate] > 80) lbSpeed.BackColor = Color.Red;
@@ -565,9 +593,9 @@ namespace NSS_3310S{
             else lbSpeed.BackColor = Color.Green;
 
             for (int i = 0; i < CNT_.THREAD; i++) COM_.GetInfoThread(i);
-            COM_.CHK_EMO();
-            COM_.CHK_AIR();
-            COM_.CHK_TRIP();
+            I.CHK_EMO();
+            I.CHK_AIR();
+            I.CHK_TRIP();
 
             PALLET.Text = ((eMAP_BLOCK)((int)DATA_.prMACHINE[CP.SelectStage])).ToString();
             HEAD.Text = ((eHD)((int)DATA_.prMACHINE[CP.SelectHead])).ToString();
@@ -578,15 +606,6 @@ namespace NSS_3310S{
                 bChageLabel = false;
                 DEF.ReadName();
             }
-
-#if _NSS3300
-#else
-            if (DATA_.prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP) DATA_.mOUT[O.QUAD_PCB] = false;
-            else DATA_.mOUT[O.QUAD_PCB] = true;
-#endif
-            lbITS.BackColor     = MsSQL.bOpen ? Color.Lime : Color.DarkGreen;
-            lbBARCODE.BackColor = SUBFRM_.cBarcode.bOpen ? Color.Lime : Color.DarkGreen;
-            lbUDP.BackColor     = DEF.bUDP ? Color.Lime : Color.DarkGreen;
 
 #if _NSS3300
             if (DATA_.mIN[I.POWER_ON]){
@@ -606,8 +625,10 @@ namespace NSS_3310S{
                 }
             }
             else DATA_.IsLONG[L.PowerSwitchOffDelayTime] = 0;
+#else
+            if (DATA_.prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP) DATA_.mOUT[O.QUAD_PCB] = false;
+            else DATA_.mOUT[O.QUAD_PCB] = true;
 #endif
-
             //SkipDoorLock
             if (DATA_.eLoginLevel >= eLogLevel.ADMIN){}
             else DATA_.IsBIT[B.SkipDoorLock] = false;
@@ -636,8 +657,7 @@ namespace NSS_3310S{
             SPC.Enabled = false;
             lbTime.Text = DateTime.Now.ToString("yy.MM.dd HH:mm:ss");
             DATA_.cSPC.RUN_SPC();
-            if (DATA_.TW_TIME >= DATA_.prMACHINE[CP.BlinkTime])
-            {
+            if (DATA_.TW_TIME >= DATA_.prMACHINE[CP.BlinkTime]){
                 DATA_.TW_TIME = 0;
                 DATA_.mCheckFlag = !DATA_.mCheckFlag;
             }
@@ -649,13 +669,21 @@ namespace NSS_3310S{
             BeforTime = DateTime.Now.Hour;
             
             if (DATA_.mIN[I.SAW_READY]){
-                if (nSendPVIDCont > 10){
+                if (nSendPVIDCont > 60){
                     nSendPVIDCont = 0;
-                    C.SendSaw.SEND("GET_PVID,*");
                     DEF.CurDataFDC();
+                    C.SendSaw.SEND("GET_PVID,*");
                 }
                 else nSendPVIDCont++;
             }
+
+            if (DATA_.mOUT[O.HANDLER_BLADE_CHANGE_RESET]){
+                nBLADE_CHANGE_RESET++;
+                if (nBLADE_CHANGE_RESET > 5){
+                    DATA_.mOUT[O.HANDLER_BLADE_CHANGE_RESET] = false;
+                }
+            }
+            else nBLADE_CHANGE_RESET = 0;
             SPC.Enabled = true;
         }
     }

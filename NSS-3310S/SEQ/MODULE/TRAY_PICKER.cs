@@ -4,7 +4,7 @@ using System;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class TRAY_PICKER : BASE{
-        int nThread = T.TrayPk;
+        readonly int nThread = T.TrayPk;
         long TackStart = 0, TackEnd = 0;
         int nCurGoodTray = 0;
 
@@ -21,29 +21,29 @@ namespace NSS_3310S.SEQ.MODULE{
                 if (!CheckRunThread()) continue;
 
             RePIC:
-                while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
+                while (B.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
                 if (!Pic("빈-트레이 픽업")){
-                    COM_.SetBit(nThread, B.TrayPkPic, false, "트레이 피커 픽업 실패");
+                    B.SetBit(nThread, B.TrayPkPic, false, "트레이 피커 픽업 실패");
                     goto RePIC;
                 }
-                while (UTIL_.WaitBIT(nThread, B.GoodTray1TrayRequest, B.GoodTray2TrayRequest, B.ReWorkTrayRequest, false, false, false, "트레이 피터에서 트레이 달라고 요청 할때까지 대기", stBIT.AND)) ;
-                while (UTIL_.WaitBIT(nThread, B.TrayStop, true, "트레이 공급 일시 정지")) ;
-                while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
-                COM_.SetBit(nThread, B.TrayPkWorking, true, "트레이 피커 작업 진행");
+                while (B.WaitBIT(nThread, B.GoodTray1TrayRequest, B.GoodTray2TrayRequest, B.ReWorkTrayRequest, false, false, false, "트레이 피터에서 트레이 달라고 요청 할때까지 대기", stBIT.AND)) ;
+                while (B.WaitBIT(nThread, B.TrayStop, true, "트레이 공급 일시 정지")) ;
+                while (B.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
+                B.SetBit(nThread, B.TrayPkWorking, true, "트레이 피커 작업 진행");
                 if (IsBIT[B.GoodTray1TrayRequest]){
                     nCurGoodTray = (int)eTRAY.GOOD1;
                     if (!Plc(eTRAY.GOOD1, "GOOD TRAY1 FEEDER에 트레이 플레이스")) goto RePIC;
-                    COM_.SetBit(nThread, B.GoodTray1TrayRequest, false, "GOOD TRAY1 TRANSFER에 트레이 전달 완료 함.");
+                    B.SetBit(nThread, B.GoodTray1TrayRequest, false, "GOOD TRAY1 TRANSFER에 트레이 전달 완료 함.");
                 }
                 else if (IsBIT[B.GoodTray2TrayRequest]){
                     nCurGoodTray = (int)eTRAY.GOOD2;
                     if (!Plc(eTRAY.GOOD2, "GOOD TRAY2 FEEDER에 트레이 플레이스")) goto RePIC;
-                    COM_.SetBit(nThread, B.GoodTray2TrayRequest, false, "GOOD TRAY2 TRANSFER에 트레이 전달 완료 함.");
+                    B.SetBit(nThread, B.GoodTray2TrayRequest, false, "GOOD TRAY2 TRANSFER에 트레이 전달 완료 함.");
                 }
                 else if (IsBIT[B.ReWorkTrayRequest]){
                     nCurGoodTray = (int)eTRAY.REWORK;
                     if (!Plc(eTRAY.REWORK, "REWORK TRAY FEEDER에 트레이 플레이스")) goto RePIC;
-                    COM_.SetBit(nThread, B.ReWorkTrayRequest, false, "REWORK TRANSFER에 트레이 전달 완료 함.");
+                    B.SetBit(nThread, B.ReWorkTrayRequest, false, "REWORK TRANSFER에 트레이 전달 완료 함.");
                 }
                 Tack();
             } while (true);
@@ -52,9 +52,9 @@ namespace NSS_3310S.SEQ.MODULE{
         #region >> SEQ
         public bool Pic(string comment){
             if (mIN[I.TRAY_PKR_TRAY_CHECK]) return true;
-            while (UTIL_.WaitBIT(nThread, B.EmptyTrayPicRequest, false, "빈-트레이 피터 트레이 픽업 준비 완료 시 까지 대기")) ;
+            while (B.WaitBIT(nThread, B.EmptyTrayPicRequest, false, "빈-트레이 피터 트레이 픽업 준비 완료 시 까지 대기")) ;
             LogStart(nThread, comment + " 진행");
-            COM_.SetBit(nThread, B.TrayPkPic, true, "트레이 피커 픽업 완료");
+            B.SetBit(nThread, B.TrayPkPic, true, "트레이 피커 픽업 완료");
             while (eRTN.SUCESS != MoveX(P.TrayPckUp, "", "트레이 피커 X축 빈-트레이 픽업 위치 이송")) ;
             while (eRTN.SUCESS != UnClamp("트레이 피커 언클램프")) ;
             while (eRTN.SUCESS != MoveZ(P.TrayPckUp, "offset=-5", "트레이 피커 Z축 빈-트레이 픽업 대기 위치 이송")) ;
@@ -64,17 +64,17 @@ namespace NSS_3310S.SEQ.MODULE{
             while (eRTN.SUCESS != MoveZ(P.TrayPckUp, "offset=-5:spd=5", "트레이 피커 Z축 빈-트레이 픽업 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "트레이 피커 Z축 대기 위치 이송")) ;
             if (!mIN[I.TRAY_PKR_TRAY_CHECK] && !bDRYRUN){
-                UTIL_.OnERROR(E.emsTrayPkEmtpyTrayPicFail);
+                E.OnERROR(E.emsTrayPkEmtpyTrayPicFail);
 #if _NSS3300
 #else
                 if (mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){
-                    COM_.SetBit(nThread, B.EmptyTrayPicRequest, false, "빈트레이 레일부에서 트레이 사라져 다시 요청");
+                    B.SetBit(nThread, B.EmptyTrayPicRequest, false, "빈트레이 레일부에서 트레이 사라져 다시 요청");
                 }
 #endif
                 return false;
             }
-            COM_.SetBit(nThread, B.TrayPkPic, false, "트레이 피커 픽업 완료");
-            COM_.SetBit(nThread, B.EmptyTrayPicRequest, false, "빈-트레이 픽업 완료");
+            B.SetBit(nThread, B.TrayPkPic, false, "트레이 피커 픽업 완료");
+            B.SetBit(nThread, B.EmptyTrayPicRequest, false, "빈-트레이 픽업 완료");
             LogEnd(nThread, comment + " 완료");
             return true;
         }
@@ -105,7 +105,7 @@ namespace NSS_3310S.SEQ.MODULE{
             TrayEXIST:
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "트레이 피커 Z축 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveX(P.TrayPckUp, "", "트레이 피커 X축 트레이 픽업 위치 이송")) ;
-            COM_.SetBit(nThread, B.TrayRequest[(int)TrayFeeder], false, TrayFeeder.ToString() + " 피터에 트레이 공곱");
+            B.SetBit(nThread, B.TrayRequest[(int)TrayFeeder], false, TrayFeeder.ToString() + " 피터에 트레이 공곱");
             LogEnd(nThread, comment + " 완료");
             return true;
         }
@@ -116,7 +116,7 @@ namespace NSS_3310S.SEQ.MODULE{
             TackEnd = Environment.TickCount;
             IsDOUBLE[D.TrayPkCycle] = (TackEnd - TackStart) / 1000;
             LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + ",트레이 피커," + IsDOUBLE[D.TrayPkCycle].ToString(), "");
-            COM_.SetBit(nThread, B.TrayPkWorking, false, "트레이 피커 작업 진행 완료");
+            B.SetBit(nThread, B.TrayPkWorking, false, "트레이 피커 작업 진행 완료");
             TackStart = Environment.TickCount;
         }
 

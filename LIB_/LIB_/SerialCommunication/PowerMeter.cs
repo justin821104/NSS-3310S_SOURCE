@@ -16,7 +16,7 @@ namespace WSTECH_{
     public class PowerMeter{
         #region Values
         private SerialPort cSerial = null;
-        public string reciveData { get; private set; }
+        public string ReciveData { get; private set; }
 
         private Thread th_reader = null;
         private bool th_bit = false;
@@ -103,7 +103,7 @@ namespace WSTECH_{
         }
 
         #region Command
-        private int baudConvert(Baudrate baud){
+        private int BaudConvert(Baudrate baud){
             int result = 9600;
             switch (baud){
                 case Baudrate.bps9600: result = 9600; break;
@@ -129,7 +129,7 @@ namespace WSTECH_{
                 InitData();
                 cSerial = new SerialPort(strCom);
                 cSerial.PortName = strCom;
-                cSerial.BaudRate = baudConvert(baud);
+                cSerial.BaudRate = BaudConvert(baud);
                 cSerial.DataBits = 8;
                 cSerial.StopBits = StopBits.One;
                 cSerial.Parity = Parity.None;
@@ -187,7 +187,8 @@ namespace WSTECH_{
                 //string dsfsdgf = ConvertAsciiToHex(reciveData);
             }
             catch (Exception ex){
-                string exceptionData = ex.Message;
+                //string exceptionData = ex.Message;
+                LogWR_.DEBUG_PRINT(ex.Message);
             }
         }
 
@@ -195,20 +196,20 @@ namespace WSTECH_{
             if (data.Length <= 0){
                 return string.Empty;
             }
-            string result = "";
+
             int reg = 0xffff;
             for (int i = 0; i < data.Length; i++){
                 reg ^= data[i];
                 for (int j = 0; j < 8; j++){
                     if ((reg & 0x01) == 0){
-                        reg = reg >> 1;
+                        reg >>= 1;
                     }
                     else{
                         reg = (reg >> 1) ^ 0xa001; //0x8005 //Ox1021;
                     }
                 }
             }
-            result = reg.ToString("X4");
+            string result = reg.ToString("X4");
             result = result.Substring(2, 2) + result.Substring(0, 2);
             return result;
         }
@@ -239,7 +240,8 @@ namespace WSTECH_{
                 return ascii;
             }
             catch (Exception ex){
-                string exceptionMsg = ex.Message;
+                //string exceptionMsg = ex.Message;
+                LogWR_.DEBUG_PRINT(ex.Message);
                 return string.Empty;
             }
         }
@@ -254,7 +256,8 @@ namespace WSTECH_{
                 return result;
             }
             catch (Exception ex){
-                string exceptionMsg = ex.Message;
+                //string exceptionMsg = ex.Message;
+                LogWR_.DEBUG_PRINT(ex.Message);
                 return string.Empty;
             }
         }
@@ -268,7 +271,8 @@ namespace WSTECH_{
                 return true;
             }
             catch (Exception ex){
-                string exceptionMsg = ex.Message;
+                //string exceptionMsg = ex.Message;
+                LogWR_.DEBUG_PRINT(ex.Message);
                 return false;
             }
         }
@@ -282,14 +286,12 @@ namespace WSTECH_{
             string command = "0103" + startAdd + addCount;
             //string command = "0103" + "0000" + "001E";
             string CRC = GetCheckSum(ConvertHexToAscii(command));
-            string recive = "";
-
             if (IsOpen() == false) return false;
             try{
                 if (SendHex(command + CRC) == false) return false;
                 
                 Thread.Sleep(100);
-                recive = cSerial.ReadExisting();
+                string recive = cSerial.ReadExisting();
                 recive = ConvertAsciiToHex(recive);
 
                 if (recive.Length >=
@@ -465,7 +467,8 @@ namespace WSTECH_{
                 }
             }
             catch (Exception ex){
-                string exceptionMsg = ex.Message;
+                //string exceptionMsg = ex.Message;
+                LogWR_.DEBUG_PRINT(ex.Message);
                 return false;
             }
             return true;

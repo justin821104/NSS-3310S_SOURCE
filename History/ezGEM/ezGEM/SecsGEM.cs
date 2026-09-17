@@ -232,9 +232,9 @@ namespace ezGEM{
             public const string PROCCD              = "PROCCD";
             public const string PROCNAME            = "PROCNAME";
             public const string WORKCONDITION       = "WORKCONDITION";
-            public const string PROCESSCONDITION_1 = /*"WORK INSTRUCTION#";//*/"LOT ID#공정명#이벤트명#메세지 타입#작업지침#팝업여부#FILE_ATTACH#생성자#생성자명#생성 일자#등록자#등록자명#수정일자#FILE_GRP_ID";
-            public const string PROCESSCONDITION_2 = /*"CREATOR#";//*/"LOT ID#작업/액티비티 번호#공정명#시작/종료층#이벤트명#보류 코드#보류명#특이사항#생성자#생성자명#생성 일자";
-            public const string PROCESSCONDITION_3 = /*"Hole To Hole X##Hole To Hole Y;//*/"공정순서#공정코드#공정명#Hole To Hole X#공차 -#공차 +#Hole To Hole Y#공차 -#공차 +";
+            public const string PROCESSCONDITION_1  = /*"WORK INSTRUCTION#";//*/"LOT ID#공정명#이벤트명#메세지 타입#작업지침#팝업여부#FILE_ATTACH#생성자#생성자명#생성 일자#등록자#등록자명#수정일자#FILE_GRP_ID";
+            public const string PROCESSCONDITION_2  = /*"CREATOR#";//*/"LOT ID#작업/액티비티 번호#공정명#시작/종료층#이벤트명#보류 코드#보류명#특이사항#생성자#생성자명#생성 일자";
+            public const string PROCESSCONDITION_3  = /*"Hole To Hole X##Hole To Hole Y;//*/"공정순서#공정코드#공정명#Hole To Hole X#공차 -#공차 +#Hole To Hole Y#공차 -#공차 +";
 
             public const string LOT_EQP_LOSSREASON_ = "LOT_EQP_LOSSREASON_";    //LOSSREASON NAME (n개)
             public const string PARAMETER_          = "PARAMETER_";             //PARAMETER NAME (n개)

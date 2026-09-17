@@ -153,6 +153,7 @@
             this.LB_MACHINE_INFO.Size = new System.Drawing.Size(160, 23);
             this.LB_MACHINE_INFO.TabIndex = 418;
             this.LB_MACHINE_INFO.Text = "MACHINE INFO";
+            this.LB_MACHINE_INFO.Click += new System.EventHandler(this.LB_MACHINE_INFO_Click);
             // 
             // Login
             // 

@@ -30,12 +30,12 @@ namespace LIB_.SubFROMLib{
         public SystemK_RFReader(){
             InitializeComponent();
 
-            btnConnect.Click += (sender, e) => Conntect();
+            btnConnect.Click    += (sender, e) => Conntect();
             btnDisconnect.Click += (sender, e) => DisConntect();
-            BtnRead.Click += (sender, e) => Read();
+            BtnRead.Click       += (sender, e) => Read();
 
-            IP_ADD.Text = IP;
-            PORT_NO.Text = Port;
+            IP_ADD.Text         = IP;
+            PORT_NO.Text        = Port;
         }
 
         public void LOG(string msg){

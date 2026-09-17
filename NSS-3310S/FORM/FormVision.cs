@@ -55,7 +55,7 @@ namespace NSS_3310S{
             tLedBright_0.ValueChanged += (sender, e) => tSendLight(tLedBright_0);
             bLedBright_0.ValueChanged += (sender, e) => bSendLight(bLedBright_0);
 
-            btnSave.Click += (sender, e) => Save(btnSave);
+            btSave.Click += (sender, e) => Save(btSave);
         }
 
         public void Initailize_View(){
@@ -148,7 +148,7 @@ namespace NSS_3310S{
 
         void Save(object sender){
             btn = (Button)sender;
-            if (btn.Name == "btnSave"){
+            if (btn.Name == "btSave") {
                 if (DialogResult.OK == MessageBox.Show("데이터 값 저장 하시겠습니까 ?", "Select", MessageBoxButtons.OKCancel)){
                     TEACH_.SaveMotorPos(M.StripPkX, P.FirstTrigger, double.Parse(Pre_X1.Text));
                     TEACH_.SaveMotorPos(M.StripPkX, P.SecondTrigger, double.Parse(Pre_X2.Text));
@@ -253,17 +253,16 @@ namespace NSS_3310S{
         }
 
         void Invoke(){
-            dtxMT_X.DigitText = DATA_.mtSTS[M.StripPkX].CurrentPosition.ToString();
+            lbMT_X.Text         = DATA_.mtSTS[M.StripPkX].CurrentPosition.ToString();
             lblRefPos_X.Text = string.Format("{0:0.###}", DATA_.mtSTS[M.StripPkX].CurrentPosition - dRefCurPos_X);
             lblRefHalfPos_X.Text = string.Format("{0:0.###}", (DATA_.mtSTS[M.StripPkX].CurrentPosition - dRefCurPos_X) / 2);
 #if _NSS3300
 #else
-            dtxMT_Y.DigitText = DATA_.mtSTS[M.PreAlign].CurrentPosition.ToString();
+            lbMT_Y.Text         = DATA_.mtSTS[M.PreAlign].CurrentPosition.ToString();
             lblRefPos_Y.Text = string.Format("{0:0.###}", DATA_.mtSTS[M.PreAlign].CurrentPosition - dRefCurPos_Y);
             lblRefHalfPos_Y.Text = string.Format("{0:0.###}", (DATA_.mtSTS[M.PreAlign].CurrentPosition - dRefCurPos_Y) / 2);
 #endif
-            dtxMT_Z.DigitText = DATA_.mtSTS[M.StripPkZ].CurrentPosition.ToString();
-
+            lbMT_Z.Text = DATA_.mtSTS[M.StripPkZ].CurrentPosition.ToString();
         }
     }
 }

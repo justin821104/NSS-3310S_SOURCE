@@ -102,17 +102,17 @@ namespace SYSTEM{
         }
 
         public void ManualSecuss(){
-            COM_.Bit(T.ReceiveVision, B.VisionManualRun, false, "[SECUSS] 메뉴얼 동작 플러그 OFF");
+            B.Bit(T.ReceiveVision, B.VisionManualRun, false, "[SECUSS] 메뉴얼 동작 플러그 OFF");
             C.SendVision.SEND("OK,*");
         }
         public void ManualFail(string msg){
-            COM_.Bit(T.ReceiveVision, B.VisionManualRun, false, "[FAIL] 메뉴얼 동작 플러그 OFF");
+            B.Bit(T.ReceiveVision, B.VisionManualRun, false, "[FAIL] 메뉴얼 동작 플러그 OFF");
             C.SendVision.SEND("FAIL," + msg + ",*");
         }
     }
 
     public class SEND_VISION{
-        void SEND_EVENT(UdpClient SockSend, byte[] Buffer, int BufferLength){
+        public void SEND_EVENT(UdpClient SockSend, byte[] Buffer, int BufferLength){
             SockSend.Send(Buffer, BufferLength);
             SockSend.Close();
         }

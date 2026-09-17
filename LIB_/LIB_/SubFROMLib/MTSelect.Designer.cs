@@ -703,6 +703,7 @@
             // 
             // tmrMTSELECT
             // 
+            this.tmrMTSELECT.Interval = 150;
             this.tmrMTSELECT.Tick += new System.EventHandler(this.TimerMTSELECT_Tick);
             // 
             // MTSelect

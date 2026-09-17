@@ -5,16 +5,17 @@ using NSS_3310S.SEQ.MODULE;
 using nTENKEY;
 using Object;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using SYSTEM;
+using System.Globalization;
 
 namespace NSS_3310S
 {
     public class DEF : DATA_ 
     {
-        public const string MCVersion   = "0825.22";
-        public const string UpdataMemo  = "PCB TYPE";
+        public const string MCVersion       = "0813.26";    // 0715.26 
+        public const string UpdataMemo      = "64B";    //
+        public static string MCProcess = "MC";
 
         public static int Ux, Uy            = 0; //검사 ROI X,Y 개수
         public static int[] Utx             = new int[2];
@@ -23,6 +24,7 @@ namespace NSS_3310S
         public static double[] UpY          = new double[2];
         public static int[] CNT_UNIT_TRI    = new int[2]; //0;
         public static bool TenKeyOption     = false;
+        public static int AutoLog           = -1;
         public static int ManualPage        = -1;
         public static int MotorPage         = -1;
         public static long sUph, eUph, cntUph, tmNow, tmOld;
@@ -30,13 +32,8 @@ namespace NSS_3310S
 
 #region >>UDP DEFINE
 #if _UDP
-#if _NSS3300 //추후 통합 IP ADDRESS
-        public static string SawIP              = "192.168.1.101";  //saw pc ip
-        public static string HandlerIP          = "192.168.1.100";  //handler pc ip
-#else
         public static string SawIP              = "192.168.1.2";  //saw pc ip
         public static string HandlerIP          = "192.168.1.1";  //handler pc ip
-#endif
         public static string SorterIP           = "192.168.1.110"; //sorter pc ip
         public static string VisionIP           = "192.168.1.111"; //vision pc ip
 
@@ -57,170 +54,6 @@ namespace NSS_3310S
         public static int VisionPort            = 6002;
 #endregion
 
-        public static void SendDllDefine() {
-            VT_START            = I.vtStart;
-            VT_STOP             = I.vtStop;
-            VT_RESET            = I.vtReset;
-            STOP                = I.STOP;
-            START               = I.START;
-            RESET               = I.RESET;
-
-            TOWER_RED           = O.TOWER_RED;
-            TOWER_YELLOW        = O.TOWER_YELLOW;
-            TOWER_GREEN         = O.TOWER_GREEN;
-            TOWER_BLUE          = -1;
-
-            CYLINDER_OVERTIME   = CP.CylinderOverTime;
-            BZOffTime           = CP.BzOffTime;
-            USE_LOG_SAVE        = CP.LogSaveSkip;
-            UseLotEnd           = CP.UseLotEnd;
-            SelectMTSpd         = CP.SelectMotorSpd;
-            UseMES              = CP.UseMES;
-
-            DllWarningMessage   = W.DllWarnning;
-            WarningMessageBox   = W.ChkMessageBox;
-            WAR_EndInitial      = W.EndInitial;
-
-            MANUAL_REPEAT_DLAY  = D.ManualRepeat_Interval;
-            DAY_MGZ_CNT         = L.DayMGZCnt;
-            DAY_STRIP_CNT       = L.DayStripCnt;
-            DAY_GOOD_CNT        = L.DayGoodUnit;
-            DAY_REWORK_CNT      = L.DayReworkUnit;
-            DAY_REJECT_CNT      = L.DayRejectUnit;
-
-#if _NSS3300
-            MachineInfo = "NSS-3300";
-
-            //0(0123)SAW[63], 1(0123456)SORTER[175], 2(01234567)HD1PICKER(303), 3(01234567)HD2PICKER[431] 
-            inModNum        = new int[] { 0, 1, 2, 3 };
-            InputNum        = new int[] { 63, 175, 303, 431 };
-            InputModule     = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
-
-            //0(0123)SAW[63], 1(012345)HD1PICKER[159], 2(01234567)HD1PICKER[287], 3(01234567)HD2PICKER[415] 
-            outModNum       = new int[] { 0, 1, 2, 3 };
-            OutputNum       = new int[] { 63, 159, 287, 415 };
-            OutputModule    = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
-
-            //1HD1PICKER(128), 2HD2PICKER(128)
-            aiModNum        = new int[] { 2, 3 };
-            aoModNum        = new int[] { 2, 3 };
-
-            mtSPARE         = new int[] { M.SPARE1, M.SPARE2 };
-            MT_GROUP_0      = new int[] { M.ElvY, M.ElvZ, M.Rail, M.GrpX, M.Barcode, M.StripPkX, M.StripPkZ, M.UnitPkX, M.UnitPkZ };
-
-            iDOOR           = new short[] { /*I.DOOR_SAW_FRONT_LEFT, */I.DOOR_SAW_FRONT_RIGHT, I.DOOR_SORTER_FRONT_LEFT, I.DOOR_SORTER_FRONT_RIGHT, I.DOOR_SORTER_RIGHT_SIDE_LEFT, I.DOOR_SORTER_RIGHT_SIDE_RIGHT, I.DOOR_SORTER_BACK_LEFT, I.DOOR_SORTER_BACK_RIGHT };
-            eDOOR           = new short[] { /*E.DOOR_SAW_FRONT_LEFT, */E.DOOR_SAW_FRONT_RIGHT, E.DOOR_SORTER_FRONT_LEFT, E.DOOR_SORTER_FRONT_RIGHT, E.DOOR_SORTER_RIGHT_SIDE_LEFT, E.DOOR_SORTER_RIGHT_SIDE_RIGHT, E.DOOR_SORTER_BACK_LEFT, E.DOOR_SORTER_BACK_RIGHT };
-
-            iTRIP           = new short[] { I.SERVO1_SAW, I.SERVO2_SAW, I.SERVO3_SAW, I.SERVO1_SORTER, I.SERVO3_SORTER };
-            eTRIP           = new short[] { E.SERVO1_SAW, E.SERVO2_SAW, E.SERVO3_SAW, E.SERVO1_SORTER, E.SERVO3_SORTER };
-
-            oDOOR           = new short[] { O.DOOR_LOCK };
-#else
-            MachineInfo = "NSS-3320";
-
-            //0(0123456)SORTER[128], 1HD1PICKER(128), 2HD2PICKER(128), 3(01)HANDLER1[32], 4(01)HANDLER2[32] 
-            inModNum            = new int[] { 0, 1, 2, 3, 4 };
-            InputNum            = new int[] { 111, 239, 367, 399, 431 };
-            InputModule         = new int[] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4 };
-
-            //0(012345)SORTER[96], 1HD1PICKER(128), 2HD2PICKER(128), 5(01)HANDLER1[32], 6(01)HANDLER2[32] 
-            outModNum           = new int[] { 0, 1, 2, 5, 6 };
-            OutputNum           = new int[] { 95, 223, 351, 383, 415 };
-            OutputModule        = new int[] { 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 6, 6 };
-
-            //1HD1PICKER(128), 2HD2PICKER(128)
-            aiModNum            = new int[] { 1, 2 };
-            aoModNum            = new int[] { 1, 2 };
-
-            MT_GROUP_0          = new int[] { M.ElvY, M.ElvZ, M.RailF, M.RailR, M.GrpX, M.Barcode, M.StripPkX, M.StripPkZ, M.PreAlign, M.UnitPkX, M.UnitPkZ };            
-
-            iDOOR               = new short[] { I.DOOR_SAW_FRONT_LEFT, I.DOOR_SAW_FRONT_RIGHT, I.DOOR_SAW_SIDE_LEFT, I.DOOR_SORTER_FRONT_LEFT, I.DOOR_SORTER_FRONT_RIGHT, I.DOOR_SORTER_RIGHT_SIDE_LEFT, I.DOOR_SORTER_RIGHT_SIDE_RIGHT, I.DOOR_SORTER_BACK_LEFT, I.DOOR_SORTER_BACK_RIGHT };
-            eDOOR               = new short[] { E.DOOR_SAW_FRONT_LEFT, E.DOOR_SAW_FRONT_RIGHT, E.DOOR_SAW_SIDE_LEFT, E.DOOR_SORTER_FRONT_LEFT, E.DOOR_SORTER_FRONT_RIGHT, E.DOOR_SORTER_RIGHT_SIDE_LEFT, E.DOOR_SORTER_RIGHT_SIDE_RIGHT, E.DOOR_SORTER_BACK_LEFT, E.DOOR_SORTER_BACK_RIGHT };
-
-            iTRIP               = new short[] { I.SERVO1_SAW, I.SERVO2_SAW, I.SERVO3_SAW, I.SERVO4_SAW, I.CONV_TRIP, I.SERVO1_SORTER, I.SERVO2_SORTER, I.SERVO3_SORTER };
-            eTRIP               = new short[] { E.SERVO1_SAW, E.SERVO2_SAW, E.SERVO3_SAW, E.SERVO4_SAW, E.CONV_TRIP, E.SERVO1_SORTER, E.SERVO2_SORTER, E.SERVO3_SORTER };
-
-            oDOOR               = new short[] { O.DOOR_LOCK, O.SAW_DOOR_LOCK };
-#endif
-
-            for (int i = 0; i < mAI_READ_WORD.Length; i++){
-                mAI_READ_WORD[i] = new List<uint>();
-            }
-
-            MT_GROUP_1      = new int[] { M.TopVisionX, M.TopVisionZ, M.BtnVisionY, M.BtnVisionZ };
-            MT_GROUP_2      = new int[] { M.Table1, M.Table2 };
-            MT_GROUP_3      = new int[] { M.TRIGGER1, M.X1Z12, M.X1Z34, M.X1Z56, M.X1T, M.TRIGGER2, M.X2Z12, M.X2Z34, M.X2Z56, M.X2T };
-            MT_GROUP_4      = new int[] { M.TrayFeeder1, M.TrayFeeder2, M.TrayFeeder3, M.TrayPickerX, M.TrayPickerZ, M.EmptyElv };
-
-            MT_GROUP_0_NAME = "HANDER ZONE";
-            MT_GROUP_1_NAME = "VISION ZONE";
-            MT_GROUP_2_NAME = "DAY-BLOCK ZONE";
-            MT_GROUP_3_NAME = "HEAD ZONE";
-            MT_GROUP_4_NAME = "TRY ZONE";
-
-            mtTrigger           = new int[] { M.TRIGGER1, M.TRIGGER2 };
-            SubTrigger          = new int[] { (int)eTRIGGER.HD1, (int)eTRIGGER.HD2 };
-
-            iEMO                = new short[] { I.EMO_SAW_FRONT, I.EMO_SAW_REAR, I.EMO_SORTER_FRONT, I.EMO_SORTER_RIGHT, I.EMO_SORTER_BACK };
-            eEMO                = new short[] { E.EMO_SAW_FRONT, E.EMO_SAW_REAR, E.EMO_SORTER_FRONT, E.EMO_SORTER_RIGHT, E.EMO_SORTER_BACK };
-
-            iAEAR               = new short[] { I.LD_CONV_AREA_SENSOR };
-            eAEAR               = new short[] { E.LD_CONV_AREA_SENSOR };
-
-            iAIR                = new short[] { I.DRIVER_AIR_PRESSURE, I.BLOW_AIR_PRESSURE, I.STAGE_AIR_PRESSURE, I.PICKER_AIR_PRESSURE };
-            eAIR                = new short[] { E.DRIVER_AIR_PRESSURE, E.BLOW_AIR_PRESSURE, E.STAGE_AIR_PRESSURE, E.PICKER_AIR_PRESSURE };
-            
-            iVAC                = new short[] { I.STRIP_PK_VAC, I.UNIT_PK_VAC, I.SCRAP_VAC1,  I.SCRAP_VAC2, I.STAGE_VACUUM1,   I.STAGE_VACUUM2 };
-
-            oACMT               = new short[] { };
-            oVAC                = new short[] { };
-            oREJ                = new short[] { };
-            oBZ                 = new short[] { O.BUZZER_ERR, O.BUZZER_END };
-
-            mtHD                = new int[] { M.TRIGGER1, M.TRIGGER2 };
-            mtHD1_PK            = new int[] { M.X1Z12, M.X1Z34, M.X1Z56 };
-            mtHD2_PK            = new int[] { M.X2Z12, M.X2Z34, M.X2Z56 };
-        }
-
-        public static void CHK_MCDIR() {
-            if (MC_DIR == 0) {
-#if _NSS3300
-                //0(0123)SAW[63], 1(0123456)SORTER[175], 2(01234567)HD1PICKER(303), 3(01234567)HD2PICKER[431] 
-                //0(0123)SAW[63], 1(012345)HD1PICKER[159], 2(01234567)HD1PICKER[287], 3(01234567)HD2PICKER[415]
-                InputOffset     = new int[] { 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 };  //0:정(STANDARD)
-                OutputOffset    = new int[] { 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 }; //0:정(STANDARD)
-                //진공모듈
-                aiOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };  //0:정(STANDARD)
-                aoOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };  //0:정
-                O.HD1PkVac      = new int[] { O.X1_VAC1, O.X1_VAC2, O.X1_VAC3, O.X1_VAC4, O.X1_VAC5, O.X1_VAC6, O.X1_VAC7, O.X1_VAC8 };
-                O.HD1PkRej      = new int[] { O.X1_BLOW1, O.X1_BLOW2, O.X1_BLOW3, O.X1_BLOW4, O.X1_BLOW5, O.X1_BLOW6, O.X1_BLOW7, O.X1_BLOW8 };
-                O.HD2PkVac      = new int[] { O.X2_VAC1, O.X2_VAC2, O.X2_VAC3, O.X2_VAC4, O.X2_VAC5, O.X2_VAC6, O.X2_VAC7, O.X2_VAC8 };
-                O.HD2PkRej      = new int[] { O.X2_BLOW1, O.X2_BLOW2, O.X2_BLOW3, O.X2_BLOW4, O.X2_BLOW5, O.X2_BLOW6, O.X2_BLOW7, O.X2_BLOW8 };
-#else
-                InputOffset     = new int[] { 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 0, 1 };  //0:정(STANDARD)
-                OutputOffset    = new int[] { 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 0, 1 }; //0:정(STANDARD)
-                //진공모듈
-                aiOffset        = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 };  //0:정(STANDARD)
-                aoOffset        = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 7, 6, 5, 4, 3, 2, 1, 0 };  //0:정
-                O.HD1PkVac      = new int[] { O.X1_VAC1, O.X1_VAC2, O.X1_VAC3, O.X1_VAC4, O.X1_VAC5, O.X1_VAC6, O.X1_VAC7, O.X1_VAC8 };
-                O.HD1PkRej      = new int[] { O.X1_BLOW1, O.X1_BLOW2, O.X1_BLOW3, O.X1_BLOW4, O.X1_BLOW5, O.X1_BLOW6, O.X1_BLOW7, O.X1_BLOW8 };
-                O.HD2PkVac      = new int[] { O.X2_VAC8, O.X2_VAC7, O.X2_VAC6, O.X2_VAC5, O.X2_VAC4, O.X2_VAC3, O.X2_VAC2, O.X2_VAC1 };
-                O.HD2PkRej      = new int[] { O.X2_BLOW8, O.X2_BLOW7, O.X2_BLOW6, O.X2_BLOW5, O.X2_BLOW4, O.X2_BLOW3, O.X2_BLOW2, O.X2_BLOW1 };
-#endif
-            } //정방향 (자재 투입 방향 : 왼쪽 -> 오른쪽)
-            else {
-                InputOffset     = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 0, 1 };  //1:역
-                OutputOffset    = new int[] { 0, 1, 2, 3, 4, 5, 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 0, 1 }; //1:역
-                //진공모듈
-                aiOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };    //1:역
-                aoOffset        = new int[] { 7, 6, 5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7 };    //1:역
-                O.HD1PkVac      = new int[] { O.X1_VAC8, O.X1_VAC7, O.X1_VAC6, O.X1_VAC5, O.X1_VAC4, O.X1_VAC3, O.X1_VAC2, O.X1_VAC1 };
-                O.HD1PkRej      = new int[] { O.X1_BLOW8, O.X1_BLOW7, O.X1_BLOW6, O.X1_BLOW5, O.X1_BLOW4, O.X1_BLOW3, O.X1_BLOW2, O.X1_BLOW1 };
-                O.HD2PkVac      = new int[] { O.X2_VAC1, O.X2_VAC2, O.X2_VAC3, O.X2_VAC4, O.X2_VAC5, O.X2_VAC6, O.X2_VAC7, O.X2_VAC8 };
-                O.HD2PkRej      = new int[] { O.X2_BLOW1, O.X2_BLOW2, O.X2_BLOW3, O.X2_BLOW4, O.X2_BLOW5, O.X2_BLOW6, O.X2_BLOW7, O.X2_BLOW8 };
-            } //역방향 (자재 투입 방향 : 오른쪽 -> 왼쪽)
-        }
-
         public static void ReadName() {
             T.Label();
             S.Label();
@@ -235,7 +68,7 @@ namespace NSS_3310S
             TEACH_.Read_MachineParaLabel();
             TEACH_.Read_ModelParaLabel();
             TEACH_.Read_MotorLabel();
-            COM_.LabelDEFINE_MOTION_ERR();
+            E.LabelDEFINE_MOTION_ERR();
             TEACH_.Read_ErrorLabel();
             TEACH_.Read_InterlockErrorLabel();
             TEACH_.Read_WarningLabel();
@@ -304,38 +137,60 @@ namespace NSS_3310S
                 return false;
             }
 
-            if (nThread == T.ReceiveSaw)    COM_.Bit(nThread, B.SawManualRun, true, "SAW PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
-            else                            COM_.Bit(nThread, B.VisionManualRun, true, "VISION PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
+            if (nThread == T.ReceiveSaw) B.Bit(nThread, B.SawManualRun, true, "SAW PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
+            else B.Bit(nThread, B.VisionManualRun, true, "VISION PROGRAM에서 HANDLER 메뉴얼 동작 실행 플러그 ON");
             return true;
         }
 
-        public static void ChkEndMassage(string sMsg) {
-            if (IsBIT[B.SawManualRun]) {
-
+        public static bool CheckingABFInterlock(){
+            for (int I = 0; I < CLOT.ABF_LIST; I++){
+                if (CLOT.ABF_TEMP[I, 0] == CLOT.GET_LOT.ABFMATERIAL){
+                    if (CLOT.ABF_TEMP[I, 1] == CLOT.GET_LOT.BarcodeSp1 && CLOT.ABF_TEMP[I, 1] == CLOT.GET_LOT.BarcodeSp2){
+                        return true;
+                    } //블레이드 정보 정상
+                    else{
+                        return false;
+                    } //블레이드 정보 다름!
+                }   
             }
-            if (IsBIT[B.VisionManualRun]) {
 
+            for (int I = 0; I < CLOT.ABF_LIST; I++){
+                if (CLOT.ABF_TEMP[I, 1] == CLOT.GET_LOT.BarcodeSp1 || CLOT.ABF_TEMP[I, 1] == CLOT.GET_LOT.BarcodeSp2){
+                    return false;
+                } // 인터락 블레이드 자재 아닌데 블레이드 바코드 동일한거 사용 하고 있음
             }
+            return true;
         }
-
-        public static void Power(bool bFlog) {
-#if _NSS3300
-#else
-            mOUT[O.LD_CONV_INVERTER_POWER]  = bFlog;
-#endif
-            mOUT[O.FLUORESENT_LIGHT]        = bFlog;
+        public static bool CheckABFBlade(){
+            string FullName;
+            string AbfName;
+            DirectoryInfo di = new DirectoryInfo(PATH_.ABF_LIST);
+            if (di.Exists){
+                DirectoryInfo[] FolderList = di.GetDirectories("*", SearchOption.AllDirectories);
+                foreach(DirectoryInfo folder in FolderList){
+                    FullName = folder.FullName;
+                    string[] sarr = FullName.Split('\\');
+                    int idx = sarr.Length - 1;
+                    AbfName = sarr[idx].Trim();
+                    if (CLOT.GET_LOT.ABFMATERIAL == AbfName) return true;
+                }
+            }
+            return false;
         }
-
-        public static void SevoPower(bool bFlog){
-#if _NSS3300
-            mOUT[O.SERVO_POWER_1] = bFlog;
-            mOUT[O.SERVO_POWER_2] = bFlog;
-            mOUT[O.SERVO_POWER_3] = bFlog;
-            mOUT[O.SERVO_POWER_4] = bFlog;
-
-            mOUT[O.POWER_ON_LAMP] = bFlog;
-            mOUT[O.POWER_OFF_LAMP] = !bFlog;
-#endif
+        //공급 자재명 블레이드 확인 함수
+        public static bool InterlockBladeBarcode(){
+            bool bSP1 = false;
+            bool bSP2 = false;
+            string[] s = Directory.GetFiles(PATH_.ABF_LIST + CLOT.GET_LOT.ABFMATERIAL);
+            for (int i = 0; i < s.Length; i++){
+                string[] arr = s[i].Split('\\');
+                int idx = arr.Length - 1;
+                string temp = arr[idx].Replace(".job", "");
+                if (CLOT.GET_LOT.BarcodeSp1 == temp) bSP1 = true;
+                if (CLOT.GET_LOT.BarcodeSp2 == temp) bSP2 = true;
+                if (bSP1 && bSP2) return true;
+            }
+            return false;
         }
 
         public static bool ChkUsePicker() {
@@ -571,7 +426,7 @@ namespace NSS_3310S
 
             if (!File.Exists(PATH_.UNIT))           return eRTN.NotDataFile;
             if (!File.Exists(PATH_.UNIT_OFFSET))    return eRTN.NotDataFile;
-
+            UTIL_.DELAY(300); 
             string[] sLine      = File.ReadAllText(PATH_.UNIT).Split(ETC.CrLf);
             string[] sOFFSET    = File.ReadAllText(PATH_.UNIT_OFFSET).Split(ETC.CrLf);
             try {
@@ -603,7 +458,10 @@ namespace NSS_3310S
                         nSX = sRslt.Length - 1 - x;
                         nSY = (int)prMODEL[RP.UnitY[(int)eSTAGE]] - 1 - nUY;
 
-                        if (int.Parse(sRslt[x]) == (int)eSTATUS.NG)                     IsLONG[L.UnitSizeNgCnt]++;
+                        if (int.Parse(sRslt[x]) == (int)eSTATUS.NG){
+                            if (prMACHINE[CP.UseSizeNGRejectBox] == (int)eUSE.USE) sRslt[x] = "3"; // 25.0320 HK.PARK 사이즈 불량 강제로 reject box로 버리는 옵션   X_MARK      = 3, //불량 (X MARK)
+                            IsLONG[L.UnitSizeNgCnt]++;
+                        }
                         if (prMACHINE[CP.UseTopInspectionResult] == (int)eUSE.NotUSE)   sRslt[x] = "1";
                         PALLET[(int)eSTAGE, nGX, nGY, /*nSX*/x, nSY/*nUY*/]     = int.Parse(sRslt[x]); //TOP-PICKUP(nUY),BTM-PICKUP(setY)
                         string[] sOffsetXY                                      = sOffset[x].Split(',');
@@ -616,7 +474,7 @@ namespace NSS_3310S
                 LogWR_.SaveLogException("MapBlock_Unit Write Fail", exp);
                 return eRTN.ReadingDataFail;
             }
-            COM_.SetOutput(nThread, O.UnitReading, true, "UNIT 데이터 읽었다고 비전에 신호 보냄.");
+            O.SetOutput(nThread, O.UnitReading, true, "UNIT 데이터 읽었다고 비전에 신호 보냄.");
             if (prMACHINE[CP.UseTopInspection] == (int)eUSE.USE && bDRYRUN) {
                 while (mIN[I.UnitDataWrite]) {
                     for (int t = 0; t < (int)prMACHINE[CP.VisionReponseOverTime]; t++) {
@@ -626,13 +484,66 @@ namespace NSS_3310S
                     if (mIN[I.UnitDataWrite]) return eRTN.ResponseOverTime;
                 }
             }
-            COM_.SetOutput(nThread, O.UnitReading, false, "UNIT 데이터 읽었다고 비전에 신호 OFF.");
+            O.SetOutput(nThread, O.UnitReading, false, "UNIT 데이터 읽었다고 비전에 신호 OFF.");
             if (/*prMODEL[RP.UnitSizeNGOverCount]*/10 > 0 && eMCStatus == eMachineStatus.AUTO) {
                 if (IsLONG[L.UnitSizeNgCnt] >= /*prMODEL[RP.UnitSizeNGOverCount]*/10) return eRTN.NGOverCnt;
             }
+            if (prMACHINE[CP.UseSizeNGRejectBox] == (int)eUSE.USE){
+                if (IsLONG[L.UnitSizeNgCnt] > 0){
+                    IsLONG[L.StageNgCount[(int)eSTAGE]] = IsLONG[L.UnitSizeNgCnt];
+                    AddSizeNgUnit((int)IsLONG[L.UnitSizeNgCnt]);
+                }
+            }
             return eRTN.SUCESS;
         }
+        static void AddSizeNgUnit(int cnt){
+            IsLONG[L.ReworkCnt] += cnt;
+            IsLONG[L.DayReworkUnit] += cnt;
+            IsLONG[L.OutCnt] += cnt;
+        }
 
+        /// <summary>
+        /// ITS 좌표값 정렬
+        /// 역방향<REVERSE>
+        /// 피커 654321 ←
+        /// X 픽업 방향 ←
+        /// x x x x x o
+        /// ㅁㅁㅁㅁㅁㅁ
+        /// Y 픽업 방향 ↑
+        /// xㅁ
+        /// xㅁ
+        /// xㅁ
+        /// oㅁ
+        /// 테이블
+        /// 987
+        /// 654
+        /// 321
+        /// 바코드 하단 뒤면
+        /// 
+        /// 정방향<FORWARD>
+        /// 피커 123456 →
+        /// X 픽업 방향 →
+        /// o x x x x x 
+        /// ㅁㅁㅁㅁㅁㅁ
+        /// Y 픽업 방향 ↑
+        /// xㅁ
+        /// xㅁ
+        /// xㅁ
+        /// oㅁ
+        /// 테이블 방향
+        /// 789
+        /// 456
+        /// 123
+        /// 바코드 상단 뒤면
+        /// 
+        /// ui 방향 정/역 동일 
+        /// 789
+        /// 456
+        /// 123
+        /// </smmary>
+        /// <param name="eSTAGE"></param>
+        /// <param name="sBARCODE"></param>
+        /// <returns></returns>
         public static eRTN ReadITSResult(eMAP_BLOCK eSTAGE, string sBARCODE) {
             if (sBARCODE == null || sBARCODE == "") return eRTN.NothingBarcode;
             if (!File.Exists(PATH_.ITSCount))       return eRTN.NotITSCountFile;
@@ -660,7 +571,8 @@ namespace NSS_3310S
                 LogWR_.SaveLogException("ITS count infomation write fail", E);
                 return eRTN.FailITSCountDataParsingFail;
             }
-         Search:
+        Search:
+            L.IsLONG[L.Stage_ITS[(int)eSTAGE]] = nCount;
             if (!bSerch)        return eRTN.NothingBarcode; //바코드 정보 없음
             if (nCount <= 0)    return eRTN.SUCESS; // 불량 하나도 없음!
             string[] InfoLocation   = new string[nCount];
@@ -707,19 +619,26 @@ namespace NSS_3310S
                                 if (MC_DIR == 0){
                                     if (prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP){
                                     
-                                    }//strip 투입
+                                    }//STRIP 투입 (X,Y 방향 반전 ?)
+                                    else if (prMODEL[RP.PCB_TYPE] == (int)ePCB.B1_QUAD){
+                                        nX = ux;
+                                        nY = uy;
+                                    }//B1 QUARD (Y방향 반전 ?)
                                     else{
                                         nX = ux;
                                         nY = uy;
-                                    }//quad 투입
+                                    }//QUAD 투입
                                 } //정방향 설비
                                 else{
                                     if (prMODEL[RP.PCB_TYPE] == (int)ePCB.STRIP){
                                         nY = uy;
-                                    }//strip 투입
+                                    }//STRIP 투입 (X방향 반전 ?)
+                                    else if (prMODEL[RP.PCB_TYPE] == (int)ePCB.B1_QUAD){
+                                        nX = ux;
+                                    }//B1 QUAD
                                     else{
                                         nX = ux;
-                                    }//quad 투입
+                                    }//QUAD 투입 (Y방향 반전 ?)
                                 } //역방향 설비
 
                                 if (ux == (X - 1)){
@@ -862,40 +781,40 @@ namespace NSS_3310S
         public static void SetParaFDC(){
             int nVALUE;
             SUBFRM_.gSecsGem.SetSVID(CSVID.MGZ_SLOT_CNT, prMODEL[RP.MGZSlotCnt].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MGZ_SLOT_PITCH, prMODEL[RP.MGZSlotPitch].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet1_Unit].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.TopVision_Unit].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet1].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.HD1_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MGZ_SLOT_PITCH, prMODEL[RP.MGZSlotPitch].ToString(CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet1_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.TopVision_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet1].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK1_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table1, P.HD1_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
 
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet2_Unit].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.TopVision_Unit].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet2].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.HD1_Unit].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_X, mtDATA[M.TopVisionX, P.Pallet2_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_TOP_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.TopVision_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Pallet2].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK2_HEAD_CAM_FIRST_POS_Y, mtDATA[M.Table2, P.HD1_Unit].Pos.ToString("F3", CultureInfo.InvariantCulture));
 
             //HEAD 2번 추가 필요!
 
             SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_SIZE_X, prMODEL[RP.UnitSizeX].ToString());
             SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_SIZE_Y, prMODEL[RP.UnitSizeY].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_THICKNES, prMODEL[RP.UnitThickess].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_THICKNES, prMODEL[RP.UnitThickess].ToString("F3", CultureInfo.InvariantCulture));
 
-            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_X, prMODEL[RP.TrayCntX].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_Y, prMODEL[RP.TrayCntY].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_X, prMODEL[RP.TrayPitchX].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_Y, prMODEL[RP.TrayPitchY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_X, prMODEL[RP.TrayCntX].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_CNT_Y, prMODEL[RP.TrayCntY].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_X, prMODEL[RP.TrayPitchX].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.TRAY_PITCH_Y, prMODEL[RP.TrayPitchY].ToString("F3", CultureInfo.InvariantCulture));
 
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_X, prMODEL[RP.UnitCntX].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_Y, prMODEL[RP.UnitCntY].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_X, prMODEL[RP.UnitPitchX].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_Y, prMODEL[RP.UnitPitchY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_X, prMODEL[RP.UnitCntX].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_CNT_Y, prMODEL[RP.UnitCntY].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_X, prMODEL[RP.UnitPitchX].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_PITCH_Y, prMODEL[RP.UnitPitchY].ToString("F3", CultureInfo.InvariantCulture));
 
             SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_CNT_X, prMODEL[RP.GroupCntX].ToString());
             SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_CNT_Y, prMODEL[RP.GroupCntY].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_X, prMODEL[RP.GroupPitchX].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_Y, prMODEL[RP.GroupPitchY].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_X, prMODEL[RP.GroupPitchX].ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_GROUP_PITCH_Y, prMODEL[RP.GroupPitchY].ToString("F3", CultureInfo.InvariantCulture));
 
             SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_BLOW_PICKUP_CNT, prMODEL[RP.StageBlowUnitPickUpCnt].ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_VAC_ON_PICKUP, prMACHINE[CP.StagePickupMovingVac].ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.MAP_BLOCK_VAC_ON_PICKUP, prMACHINE[CP.StagePickupMovingVac].ToString("F3", CultureInfo.InvariantCulture));
             SUBFRM_.gSecsGem.SetSVID(CSVID.UNIT_INSPECTION_NG_COUNT, prMODEL[RP.SizeNGOverCnt].ToString());
 
             SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_MAP_BLOCK, prMACHINE[CP.SelectStage].ToString());
@@ -931,12 +850,12 @@ namespace NSS_3310S
             SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_TRAY_STACKER_MODE, prMACHINE[CP.SelectStackerUnloading].ToString());
             SUBFRM_.gSecsGem.SetSVID(CSVID.SELECT_TRAY_CONV_MODE, prMACHINE[CP.SelectConveyorUnloading].ToString());
 
-            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder1].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_Y, mtDATA[M.TrayFeeder1, P.HD1TrayPocket].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder2].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_Y, mtDATA[M.TrayFeeder2, P.HD1TrayPocket].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder3].Pos.ToString());
-            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_Y, mtDATA[M.TrayFeeder3, P.HD1TrayPocket].Pos.ToString());
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder1].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY1_FIRST_POS_Y, mtDATA[M.TrayFeeder1, P.HD1TrayPocket].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder2].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.GOOD_TRAY2_FIRST_POS_Y, mtDATA[M.TrayFeeder2, P.HD1TrayPocket].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_X, mtDATA[M.TRIGGER1, P.Feeder3].Pos.ToString("F3", CultureInfo.InvariantCulture));
+            SUBFRM_.gSecsGem.SetSVID(CSVID.REWORK_TRAY_FIRST_POS_Y, mtDATA[M.TrayFeeder3, P.HD1TrayPocket].Pos.ToString("F3", CultureInfo.InvariantCulture));
 
             //HEAD 2번 추가 필요!
 
@@ -963,32 +882,20 @@ namespace NSS_3310S
             nVALUE = mIN[I.PICKER_AIR_PRESSURE] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.PICKER_AIR, nVALUE.ToString());
 
-            nVALUE = mAI[0] > mSET_AI[0] ? 1 : 0;
+            //nVALUE = mAI[0] > mSET_AI[0] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK1_VAC, mAI[0].ToString());
-            nVALUE = mAI[1] > mSET_AI[1] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK2_VAC, mAI[1].ToString());
-            nVALUE = mAI[2] > mSET_AI[2] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK3_VAC, mAI[2].ToString());
-            nVALUE = mAI[3] > mSET_AI[3] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK4_VAC, mAI[3].ToString());
-            nVALUE = mAI[4] > mSET_AI[4] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK5_VAC, mAI[4].ToString());
-            nVALUE = mAI[5] > mSET_AI[5] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD1_PK6_VAC, mAI[5].ToString());
             
-            nVALUE = mAI[8] > mSET_AI[8] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK1_VAC, mAI[8].ToString());
-            nVALUE = mAI[9] > mSET_AI[9] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK2_VAC, mAI[9].ToString());
-            nVALUE = mAI[10] > mSET_AI[10] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK3_VAC, mAI[10].ToString());
-            nVALUE = mAI[11] > mSET_AI[11] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK4_VAC, mAI[11].ToString());
-            nVALUE = mAI[12] > mSET_AI[12] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK5_VAC, mAI[12].ToString());
-            nVALUE = mAI[13] > mSET_AI[13] ? 1 : 0;
             SUBFRM_.gSecsGem.SetSVID(CSVID.HD2_PK6_VAC, mAI[13].ToString());
-            
         }
     } //DEFINE
 
@@ -1062,27 +969,27 @@ namespace NSS_3310S
 #endregion
 
 #region >>OPTION 
-        public const int Picker                             = 14;
+        //public const int Picker                             = 14;
 #endregion
 
 #region >>SEQUENCE
-        public const int Magazine                           = 15;
-        public const int Gripper                            = 16;
-        public const int StripPk                            = 17;
-        public const int UnitPk                             = 18;
-        public const int DryTable1                          = 19;
-        public const int DryTable2                          = 20;
-        public const int Head1                              = 21;
-        public const int Head2                              = 22;
-        public const int EmptyStacker                       = 23;
-        public const int TrayPk                             = 24;
-        public const int GoodTrayFeeder1                    = 25;
-        public const int GoodTrayFeeder2                    = 26;
-        public const int ReworkTrayFeeder                   = 27;
+        public const int Magazine                           = 14;
+        public const int Gripper                            = 15;
+        public const int StripPk                            = 16;
+        public const int UnitPk                             = 17;
+        public const int DryTable1                          = 18;
+        public const int DryTable2                          = 19;
+        public const int Head1                              = 20;
+        public const int Head2                              = 21;
+        public const int EmptyStacker                       = 22;
+        public const int TrayPk                             = 23;
+        public const int GoodTrayFeeder1                    = 24;
+        public const int GoodTrayFeeder2                    = 25;
+        public const int ReworkTrayFeeder                   = 26; //-> 27
 #endregion
 
         public static void Label(){
-            thNotSeqThread  = new int[] { Motion1, Motion2, MotorLocation, Homming, Input, Output, PkVac, Warnning, Manual, ManualRepeat, Op, StopEvent, ReceiveSaw, ReceiveVision, Picker };
+            thNotSeqThread  = new int[] { Motion1, Motion2, MotorLocation, Homming, Input, Output, PkVac, Warnning, Manual, ManualRepeat, Op, StopEvent, ReceiveSaw, ReceiveVision/*, Picker*/ };
             thSeqThrad      = new int[] { Magazine, Gripper, StripPk, UnitPk, DryTable1, DryTable2, Head1, Head2, EmptyStacker, TrayPk, GoodTrayFeeder1, GoodTrayFeeder2, ReworkTrayFeeder };
 
             ThreadName[Motion1]                             = "MOTOR MODULE1";
@@ -1100,7 +1007,7 @@ namespace NSS_3310S
             ThreadName[ReceiveSaw]                          = "RECEIVE SAW";
             ThreadName[ReceiveVision]                       = "REVEIVE VISION";
 
-            ThreadName[Picker]                              = "PICKER";
+            //ThreadName[Picker]                              = "PICKER";
 
             ThreadName[Magazine]                            = "MAGAZINE";
             ThreadName[Gripper]                             = "GRIPPER";

@@ -41,6 +41,7 @@
             // tmrSplash
             // 
             this.tmrSplash.Enabled = true;
+            this.tmrSplash.Interval = 200;
             this.tmrSplash.Tick += new System.EventHandler(this.TimerSplash_Tick);
             // 
             // lblMsg

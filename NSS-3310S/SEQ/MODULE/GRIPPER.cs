@@ -6,7 +6,7 @@ using System.IO;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class GRIPPER : BASE{
-        int nThread = T.Gripper;
+        readonly int nThread = T.Gripper;
         string cmds;
         long TackStart = 0, TackEnd = 0;
 
@@ -21,7 +21,7 @@ namespace NSS_3310S.SEQ.MODULE{
             do{
                 if (gExit) break;
                 if (!CheckRunThread()) continue;
-                while (UTIL_.WaitBIT(nThread, B.InRailRequest, false, "레일단 앞단 공급 할때까지 대기")) ;
+                while (B.WaitBIT(nThread, B.InRailRequest, false, "레일단 앞단 공급 할때까지 대기")) ;
                 Process("스트립 공급");
                 Tack();
             } while (true);
@@ -34,14 +34,14 @@ namespace NSS_3310S.SEQ.MODULE{
             }//레일 위에 스트립 공급 되어 있으면
 
             LogStart(nThread, comment + " [" + IsLONG[L.CurSlotCount].ToString("00") + "]");
-            COM_.SetBit(nThread, B.GripperWorking, true, "그리퍼 작업 진행");
+            B.SetBit(nThread, B.GripperWorking, true, "그리퍼 작업 진행");
             while (eRTN.SUCESS != InLET_DOWN("인-렛 테이블 다운")) ;
             while (eRTN.SUCESS != MoveRail(P.StripIn, "", "인-렛 레일 스트립 받은 위치로 이송")) ;
             while (eRTN.SUCESS != C.Magazine.PusherForward("푸셔 전진")) ;
             while (eRTN.SUCESS != UnGrip("그리퍼 언그립")) ;
 
             while (mIN[I.RAIL_EXIST2]){
-                UTIL_.OnERROR(E.emsInLetTableStripCheck, 500);
+                E.OnERROR(E.emsInLetTableStripCheck, 500);
             }
 
             cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.GripperBackPitch]);
@@ -54,16 +54,16 @@ namespace NSS_3310S.SEQ.MODULE{
             if (!bDRYRUN){
                 if (!LAB_.INPUT(I.RAIL_EXIST1) && !LAB_.INPUT(I.GRIPPER_DETECT)){
                     while (eRTN.SUCESS != UnGrip("그리퍼 언그립")) ;
-                    COM_.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
-                    COM_.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
+                    B.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
+                    B.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
                     return;
                 } // 레일 앞단 센서 && 그리퍼 스트립 그립 확인 센서 CHECK 
             }
         ReTrayBarcode:
             if (!ReadBarcode()){
                 //STRIP 제거 할건지 다시 바코드 검사 할건지 CHECK
-                COM_.ViewWarning(nThread, W.Rail_StripRemove);
-                while (UTIL_.WaitWarning(nThread, W.Rail_StripRemove, "바코드 검사 실패")) ;
+                W.ViewWarning(nThread, W.Rail_StripRemove);
+                while (W.WaitWarning(nThread, W.Rail_StripRemove, "바코드 검사 실패")) ;
                 if (ConfirmUser[W.Rail_StripRemove].result){ //스트립 제거
                     while (eRTN.SUCESS != Grip("그리퍼 그립")) ;
                     while (eRTN.SUCESS != MoveX(P.StripOpn, "", "그리퍼 X축 스트립 그립 OPEN 위치")) ;
@@ -71,9 +71,9 @@ namespace NSS_3310S.SEQ.MODULE{
                     while (eRTN.SUCESS != MoveX(P.Ready, "", "그리퍼 X축 대기 위치 이송")) ;
                     //레일 위에 스트립 존재 확인 !
                     while (LAB_.INPUT(I.RAIL_EXIST1) || LAB_.INPUT(I.RAIL_EXIST2)){
-                        UTIL_.OnERROR(E.emsRailStrpRemove);
+                        E.OnERROR(E.emsRailStrpRemove);
                     }
-                    COM_.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
+                    B.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
                     goto StripRemove;
                 }
                 goto ReTrayBarcode;
@@ -82,14 +82,16 @@ namespace NSS_3310S.SEQ.MODULE{
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 CLOT.GET_LOT.InCnt++;
                 try{
-                    string[] CheckOverlap = File.ReadAllText(PATH_.StripOverlap).Split(ETC.CrLf);
-                    for (int n = 0; n < CheckOverlap.Length; n++){
-                        string[] sRslt = CheckOverlap[n].Split(',');
-                        if (sRslt.Length <= 1) continue;
-                        if (CLOT.InfoStrip[nThread].Barcode == sRslt[0]){
-                            CLOT.InfoStrip[nThread].Overlap = true;
-                            CLOT.InfoStrip[nThread].Index = int.Parse(sRslt[1]);
-                            break;
+                    if (File.Exists(PATH_.StripOverlap)){
+                        string[] CheckOverlap = File.ReadAllText(PATH_.StripOverlap).Split(ETC.CrLf);
+                        for (int n = 0; n < CheckOverlap.Length; n++) {
+                            string[] sRslt = CheckOverlap[n].Split(',');
+                            if (sRslt.Length <= 1) continue;
+                            if (CLOT.InfoStrip[nThread].Barcode == sRslt[0]){
+                                CLOT.InfoStrip[nThread].Overlap = true;
+                                CLOT.InfoStrip[nThread].Index = int.Parse(sRslt[1]);
+                                break;
+                            }
                         }
                     }
                 }
@@ -102,22 +104,27 @@ namespace NSS_3310S.SEQ.MODULE{
                     TEACH_.WRITE_STRIP_INFO(CLOT.InfoStrip[nThread].Barcode + "," + CLOT.InfoStrip[nThread].Index);
                 }
                 else{
+                    LogWR_.SaveBarcodeHistory("LOT-VALIDATION -> [PANEL_LINE_IN] not send overlap true " + CLOT.InfoStrip[nThread].Barcode, "");
                     SubTractStrip();
                 }
                 CLOT.GET_LOT.LoadingCount = (int)IsLONG[L.StripCnt];
+
+                if (CLOT.GET_LOT.LoadingCount <= 1){
+                    CLOT.GET_LOT.Recipe = sGroupName + "/" + sJobName;
+                }
             }
             while (eRTN.SUCESS != Grip("그리퍼 그립")) ;
             while (eRTN.SUCESS != MoveX(P.StripOpn, "", "그리퍼 X축 스트립 그립 OPEN 위치")) ;
-            COM_.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
+            B.SetBit(nThread, B.InRailRequest, false, "매거진 스트립 요청");
 
         StripReCheck:
             while (eRTN.SUCESS != UnGrip("그리퍼 언그립")) ;
             if (!LAB_.INPUT(I.RAIL_EXIST2) && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.GripperStripPicFail);
-                while (UTIL_.WaitWarning(nThread, W.GripperStripPicFail, "그리퍼 스트립 로딩 중 스트립 사라짐")) ;
+                W.ViewWarning(nThread, W.GripperStripPicFail);
+                while (W.WaitWarning(nThread, W.GripperStripPicFail, "그리퍼 스트립 로딩 중 스트립 사라짐")) ;
                 if (ConfirmUser[W.GripperStripPicFail].result) goto StripReCheck; 
                 else {
-                    COM_.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
+                    B.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
                     return;
                 }
             }//레일에 스트립 유무 확인
@@ -131,18 +138,19 @@ namespace NSS_3310S.SEQ.MODULE{
                     SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.IN_LET);
             }
             if (bMF) return;
-            COM_.SetBit(nThread, B.StripPkRequest, true, "레일 위 스트립 공급");
-            while (UTIL_.WaitBIT(nThread, B.StripPkRequest, true, "스트립 픽업 해 갈때까지 대기")) ;
+            B.SetBit(nThread, B.StripPkRequest, true, "레일 위 스트립 공급");
+            while (B.WaitBIT(nThread, B.StripPkRequest, true, "스트립 픽업 해 갈때까지 대기")) ;
         StripRemove:
-            COM_.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
+            B.SetBit(nThread, B.GripperWorking, false, "그리퍼 작업 진행");
             LogEnd(nThread, comment + " 완료");
         }
 
         public bool ReadBarcode() {
+        //ReCheckBarcodeReading:
             SUBFRM_.cBarcode.ReadResult = "";
             bWriteBarcode = false;
             if (prMACHINE[CP.UseBarcode] == (int)eUSE.NotUSE) {
-                CLOT.RESET_STRIP_INFO(nThread);
+                CLOT.WriteBackupInfoBarcode(eSeqBacode.Gripper, CLOT.InfoStrip[nThread].Barcode, CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Overlap);
                 return true;
             }
 
@@ -155,20 +163,26 @@ namespace NSS_3310S.SEQ.MODULE{
             int nCNT = 0;
             do{
                 UTIL_.DELAY(2);
+                nCNT++;
                 if (bWriteBarcode) goto BarCodeOk;
             } while (nCNT < (int)prMACHINE[CP.BarcodeReadingCheck]);
+            //if (!bBD) {
+                W.ViewWarning(nThread, W.BarcodeReadingTimeOver, "바코드 리딩 시간 오버 되었습니다. 바코드 연결 상태 및 바코드 상태 확인 바랍니다."); //ConfirmUser[nWAR].msg = ;
+                while (W.WaitWarning(nThread, W.BarcodeReadingTimeOver, "바코드 리딩 타임 오버")) ;
+                //goto ReCheckBarcodeReading;
+            //} // 바코드 리딩 시간 초과 되어 알람 발생 
         BarCodeOk:
             if ((!bWriteBarcode && prMACHINE[CP.UseBarcode] == (int)eUSE.USE) || (SUBFRM_.cBarcode.ReadResult == "" && prMACHINE[CP.UseBarcode] == (int)eUSE.USE)){
                 while (eRTN.SUCESS != UnGrip("그리퍼 언그립")) ;
-                COM_.ViewWarning(nThread, W.BarcoderReadingFail);
-                while (UTIL_.WaitWarning(nThread, W.BarcoderReadingFail, "스트립 바코드 리딩 알람 발생"));
+                W.ViewWarning(nThread, W.BarcoderReadingFail);
+                while (W.WaitWarning(nThread, W.BarcoderReadingFail, "스트립 바코드 리딩 알람 발생"));
                 if (ConfirmUser[W.BarcoderReadingFail].result){
                     return false;
                 }
                 else{
                     string sValue = UTIL_.INPUT_MESSAGE("BARCODE", "스트립 바코드 수동 입력", "", false);
                     if (sValue == ""){
-                        UTIL_.OnERROR(E.BarcoderWriteFail);
+                        E.OnERROR(E.BarcoderWriteFail);
                         return false;
                     }
                     CLOT.InfoStrip[nThread].Barcode = sValue;
@@ -190,11 +204,13 @@ namespace NSS_3310S.SEQ.MODULE{
             }
             if (CLOT.GET_LOT.LotID != sList[0]){
                 if (CLOT.GET_LOT.ItsID != sits){
-                    UTIL_.OnERROR(E.emsLotIDFail);
+                    E.OnERROR(E.emsLotIDFail);
                     return false;
                 }    
             }
             //스트립 정보 저장
+            TEACH_.WRITE_BARCODE_FILE(CLOT.InfoStrip[nThread].Barcode);
+            CLOT.WriteBackupInfoBarcode(eSeqBacode.Gripper, CLOT.InfoStrip[nThread].Barcode, CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Overlap);
             TEACH_.WRITE_INFO_STIP_BARCODE(CLOT.InfoStrip[nThread].Barcode);
             return true;
         }

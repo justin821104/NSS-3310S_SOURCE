@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NSS_3310S;
+using System;
 using System.Windows.Forms;
 
 namespace LIB_.SubFROMLib{
@@ -12,7 +13,7 @@ namespace LIB_.SubFROMLib{
 
         private void Close_Click(object sender, EventArgs e){
             tmrError.Enabled = false;
-            COM_.BZ_OFF();
+            O.BZ_OFF();
             Hide();
         }
 
@@ -32,9 +33,9 @@ namespace LIB_.SubFROMLib{
             gridError.RowCount = 5;
             tmrError.Enabled = true;
             Show();
-            iERR = UTIL_.CHK_ERR();
+            iERR = E.CHK_ERR();
             gridError.Rows[0].Cells[0].Value = iERR;
-            gridError.Rows[0].Cells[1].Value = UTIL_.GET_ERROR_NAME(iERR);
+            gridError.Rows[0].Cells[1].Value = E.GET_ERROR_NAME(iERR);
         }
     }
 }

@@ -30,23 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PM));
-            this.dTxtElap = new Owf.Controls.DigitalDisplayControl();
             this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tmrPM = new System.Windows.Forms.Timer(this.components);
+            this.lbTxtElap = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // dTxtElap
-            // 
-            this.dTxtElap.BackColor = System.Drawing.Color.Transparent;
-            this.dTxtElap.DigitColor = System.Drawing.Color.LightGray;
-            this.dTxtElap.DigitText = "0000:00:00";
-            this.dTxtElap.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dTxtElap.Location = new System.Drawing.Point(385, 397);
-            this.dTxtElap.Name = "dTxtElap";
-            this.dTxtElap.Size = new System.Drawing.Size(515, 187);
-            this.dTxtElap.TabIndex = 50;
             // 
             // btnClose
             // 
@@ -93,18 +82,28 @@
             this.tmrPM.Interval = 500;
             this.tmrPM.Tick += new System.EventHandler(this.TimerPM_Tick);
             // 
-            // fPM
+            // lbTxtElap
+            // 
+            this.lbTxtElap.Font = new System.Drawing.Font("Bernard MT Condensed", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTxtElap.Location = new System.Drawing.Point(366, 355);
+            this.lbTxtElap.Name = "lbTxtElap";
+            this.lbTxtElap.Size = new System.Drawing.Size(515, 187);
+            this.lbTxtElap.TabIndex = 51;
+            this.lbTxtElap.Text = "0000:00:00";
+            this.lbTxtElap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PM
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1280, 1020);
-            this.Controls.Add(this.dTxtElap);
+            this.Controls.Add(this.lbTxtElap);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "fPM";
+            this.Name = "PM";
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PM MODE";
@@ -116,11 +115,10 @@
         }
 
         #endregion
-
-        private Owf.Controls.DigitalDisplayControl dTxtElap;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Timer tmrPM;
+        private System.Windows.Forms.Label lbTxtElap;
     }
 }

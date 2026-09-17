@@ -31,9 +31,9 @@ namespace LIB_.UERCTRL{
         }
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         public double CurPosValue{
-            get { return double.Parse(CurPOS.DigitText); }
+            get { return double.Parse(lbCurPOS.Text); }
             set{
-                CurPOS.DigitText = value.ToString();
+                lbCurPOS.Text = value.ToString();
                 this.Invalidate();
             }
         }
@@ -65,9 +65,9 @@ namespace LIB_.UERCTRL{
         public Color StateMotor { set; get; }
 
         public double CurPosition{
-            set { CurPOS.DigitText = value.ToString("0.000"); }
+            set { lbCurPOS.Text = value.ToString("0.000"); }
             get{
-                return double.Parse(CurPOS.DigitText);
+                return double.Parse(lbCurPOS.Text);
                 //Invalidate();
             }
         }

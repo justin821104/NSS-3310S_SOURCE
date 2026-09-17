@@ -40,12 +40,12 @@ namespace OMRON_{
         }
 
         public void TEMP_DataReceived(object sender, SerialDataReceivedEventArgs args){
-            string sTemp = "";
-            try{
+            try
+            {
                 if (cTEMP.BytesToRead < 7) return;
                 UTIL_.DELAY(10);
                 sRESULT = cTEMP.ReadLine().ToString();
-                sTemp = cTEMP.ReadExisting();
+                string sTemp = cTEMP.ReadExisting();
                 string[] sLine = sRESULT.Split('\r');
                 //foreach (string sline in sLine){
                 //    sRESULT = sline;

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace NSS_3310S.SEQ{
     public class BASE : DATA_{
-        public static dxy PkOffset;
+        public static dxy Pkr_Offset;
         public static dxy Distance;
         public static bool[] isPrsErr = new bool[8];
 
@@ -70,9 +70,10 @@ namespace NSS_3310S.SEQ{
         }
 
         public static bool Trigger(int Ch){
+
             if (eMCStatus == eMachineStatus.AUTO){
                 if (!mIN[I.VisionRdy] && !bDRYRUN){
-                    UTIL_.OnERROR(E.emsNotVisionReady);
+                    E.OnERROR(E.emsNotVisionReady);
                     return false;
                 }
             }
@@ -89,7 +90,7 @@ namespace NSS_3310S.SEQ{
 
         public static bool SawStageVac(int nTHREAD, bool bFlog){
             string sValue = bFlog ? "1" : "0";
-            COM_.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 진공 인터페이스 플러그 OFF");
+            B.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 진공 인터페이스 플러그 OFF");
             C.SendSaw.SEND("VACUUM," + sValue + ",*");
             for (int i = 0; i < 2000; i++){
                 UTIL_.DELAY(1);
@@ -100,7 +101,7 @@ namespace NSS_3310S.SEQ{
         }
         public static bool SawStageBlow(int nTHREAD, bool bFlog){
             string sValue = bFlog ? "1" : "0";
-            COM_.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 파기 인터페이스 플러그 OFF");
+            B.Bit(nTHREAD, B.SawVacuumInterface, false, "다이싱 테이블 파기 인터페이스 플러그 OFF");
             C.SendSaw.SEND("BLOW," + sValue + ",*");
             for (int i = 0; i < 2000; i++){
                 UTIL_.DELAY(1);
@@ -207,7 +208,7 @@ namespace NSS_3310S.SEQ{
 
             if (nPos == P.RecieveUnit){
                 if (mtDATA[M.UnitPkX, P.PLACE_PALLET[(int)eSTAGE]].bPOS && ((mtDATA[M.UnitPkZ, P.PLACE_PALLET[(int)eSTAGE]].Pos - 5) < mtSTS[M.UnitPkZ].CurrentPosition)){
-                    UTIL_.OnERROR(E.UnitPlaceFail[(int)eSTAGE]);
+                    E.OnERROR(E.UnitPlaceFail[(int)eSTAGE]);
                     return eRTN.EMS;
                 }
             }
@@ -235,8 +236,8 @@ namespace NSS_3310S.SEQ{
             bool[] bDontStop    = { true, true };
             double[] toller     = { 0.005, 0.005 };
 
-            stMoveInfo sx = GetMoveInfo(mt[0], P.RecieveUnit);
-            stMoveInfo sy = GetMoveInfo(mt[1], P.PLACE_PALLET[(int)eSTAGE]);
+            stMoveInfo sx = M.GetMoveInfo(mt[0], P.RecieveUnit);
+            stMoveInfo sy = M.GetMoveInfo(mt[1], P.PLACE_PALLET[(int)eSTAGE]);
 
             stMoveInfo[] ps = { sx, sy };
             string sLocation = LogWR_.LogPos(mt, ps);
@@ -261,9 +262,9 @@ namespace NSS_3310S.SEQ{
             bool[] bOnlyStop = { false, false, false };
             bool[] bDontStop = { true, true, true };
             double[] toller = { 0.005, 0.005, 0.005 };
-            stMoveInfo sx = GetMoveInfo(mt[0], P.TopCam_Pallet[(int)eSTAGE]);
-            stMoveInfo sz = GetMoveInfo(mt[1], P.TopCam_Pallet[(int)eSTAGE]);
-            stMoveInfo sy = GetMoveInfo(mt[2], P.TopVision_Unit);
+            stMoveInfo sx = M.GetMoveInfo(mt[0], P.TopCam_Pallet[(int)eSTAGE]);
+            stMoveInfo sz = M.GetMoveInfo(mt[1], P.TopCam_Pallet[(int)eSTAGE]);
+            stMoveInfo sy = M.GetMoveInfo(mt[2], P.TopVision_Unit);
 
             int idx;
             if ((Y + 1) > 1) idx = (int)(DEF.Utx[(int)eSTAGE] * Y) + (X + 1);
@@ -291,20 +292,21 @@ namespace NSS_3310S.SEQ{
 
         public static eRTN UnitReceive(int nThread, eMAP_BLOCK eSTAGE, string comment){
             AddMessage(nThread, "");
-            COM_.SetBit(nThread, B.Stage_Work[(int)eSTAGE], true, eSTAGE.ToString() + " 유닛 공급");
+            B.SetBit(nThread, B.Stage_Work[(int)eSTAGE], true, eSTAGE.ToString() + " 유닛 공급");
             LogStart(nThread, comment + " 진행");
+            if (!bMF) L.ResetStageUnitInfo(eSTAGE);
         RePLACE:
             //while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, "", eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
             //while (eRTN.SUCESS != C.UnitPk.MoveX(P.PLACE_PALLET[(int)eSTAGE], "", "유닛 피커 X축 " + eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
             while (eRTN.SUCESS != MoveUnitPlaceXY(nThread, eSTAGE, eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
-            if (!mIN[I.UNIT_PK_VAC] && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.UnitPkUnit_Vanish);
-                while (UTIL_.WaitWarning(nThread, W.UnitPkUnit_Vanish, "유닛 피커 유닛 중간에 사라져 대기")) ;
+            if (!mIN[I.UNIT_PK_VAC] && !bDRYRUN && !IsBIT[B.DirectUnitPlace]){
+                W.ViewWarning(nThread, W.UnitPkUnit_Vanish);
+                while (W.WaitWarning(nThread, W.UnitPkUnit_Vanish, "유닛 피커 유닛 중간에 사라져 대기")) ;
                 if (ConfirmUser[W.UnitPkUnit_Vanish].result) goto RePLACE;
                 while (mOUT[O.UNIT_PK_VAC] || mOUT[O.SCRAP_VAC_1] || mOUT[O.SCRAP_VAC_2]){
-                    UTIL_.OnERROR(E.emsUnitPkVacNotOff);
+                    E.OnERROR(E.emsUnitPkVacNotOff);
                 }
-                COM_.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 중 유닛 사라짐");
+                B.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 중 유닛 사라짐");
                 LogEnd(nThread, comment + " 중 유닛 사라짐");
                 return eRTN.VANISH;
             }
@@ -329,13 +331,29 @@ namespace NSS_3310S.SEQ{
             LAB_.OUTPUT(O.SCRAP_BLOW_2, false);
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.PLACE_PALLET[(int)eSTAGE], "offset=-10:spd=5", "유닛 피커 Z축 테이블에 유닛 내려놓고 대기 위치 이송")) ;
             while (eRTN.SUCESS != C.UnitPk.MoveZ(P.Ready, "", "유닛 피커 Z축 대기 위치 이송")) ;
-            
-            int nThreadNum;
-            if (eMAP_BLOCK.STAGE1 == eSTAGE)    nThreadNum = T.DryTable1;
-            else                                nThreadNum = T.DryTable2;                     
-            CLOT.SEND_STRIP_INFO(T.UnitPk, nThreadNum);
+
+            eSeqBacode nGetBarcode = eSeqBacode.MapBlock1;
+            int nThreadNum = T.DryTable1;
+            if (eMAP_BLOCK.STAGE2 == eSTAGE) {
+                nGetBarcode = eSeqBacode.MapBlock2;
+                nThreadNum = T.DryTable2;
+            }
+            CLOT.SEND_STRIP_INFO(eSeqBacode.UnitPk, T.UnitPk, nGetBarcode, nThreadNum);
             TEACH_.WRITE_INFO_MAPBLOCK_STIP_BARCODE(eSTAGE, CLOT.InfoStrip[nThreadNum].Barcode);
-            COM_.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 완료");
+
+            if (IsBIT[B.DirectUnitPlace]){
+                IsBIT[B.DirectUnitPlace] = false;
+                while (eRTN.SUCESS != C.UnitPk.MoveX(P.Ready, "", "유닛 피커 X축 대기 위치 이송")) ;
+                mIN[I.vtStop] = true;
+                UTIL_.DELAY(2000);
+                mIN[I.vtStop] = true;
+                UTIL_.DELAY(1000);
+                if (IsBIT[B.JobCancel[(int)eSTAGE]]){
+                    B.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
+                    return eRTN.JOB_CANCEL;
+                }
+            }
+            B.SetBit(nThread, B.Stage_Receive[(int)eSTAGE], false, "유닛 피커 유닛 공급 완료");
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
         }
@@ -343,13 +361,13 @@ namespace NSS_3310S.SEQ{
         public static eRTN StageAirshower(int nThread, eMAP_BLOCK eSTAGE, string comment){
             string cmds;
             while (!mIN[I.StageVac[(int)eSTAGE]] && !bDRYRUN){
-                UTIL_.OnERROR(E.StageVacuum[(int)eSTAGE]);
+                E.OnERROR(E.StageVacuum[(int)eSTAGE]);
                 if (IsBIT[B.JobCancel[(int)eSTAGE]]){
-                    COM_.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
+                    B.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
                     return eRTN.JOB_CANCEL;
                 }
             }
-            while (UTIL_.WaitBIT(nThread, B.StageAirshowerWait, true, eSTAGE.ToString() + " 에어샤워 일시정지")) ;
+            while (B.WaitBIT(nThread, B.StageAirshowerWait, true, eSTAGE.ToString() + " 에어샤워 일시정지")) ;
             LogStart(nThread, comment + " 진행");
             for (int i = 0; i < (int)prMODEL[RP.StageAirshowerCnt]; i++){
                 StageAirshower(eSTAGE, stBIT.ON);
@@ -368,18 +386,18 @@ namespace NSS_3310S.SEQ{
             return eRTN.SUCESS;
         }
 
-        public static eRTN UnitInspection(int nThread, eMAP_BLOCK eSTAGE, string sBarcode, string comment){
+        public static eRTN UnitInspection(int nThread, eMAP_BLOCK eSTAGE, string comment){
             eRTN Result;
             while (!mIN[I.StageVac[(int)eSTAGE]] && !bDRYRUN){
-                UTIL_.OnERROR(E.StageVacuum[(int)eSTAGE]);
+                E.OnERROR(E.StageVacuum[(int)eSTAGE]);
                 if (IsBIT[B.JobCancel[(int)eSTAGE]]){
-                    COM_.SetBit(nThread, B.UnitInspection[(int)eSTAGE], false, comment + " 취소됨");
-                    COM_.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, comment + " 취소됨");
+                    B.SetBit(nThread, B.UnitInspection[(int)eSTAGE], false, comment + " 취소됨");
+                    B.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, comment + " 취소됨");
                     return eRTN.JOB_CANCEL;
                 }
             }
-            Result = SeqUnitInspection(nThread, eSTAGE, sBarcode, eSTAGE.ToString() + " 유닛 검사 진행");
-            COM_.SetBit(nThread, B.UnitInspection[(int)eSTAGE], false, eSTAGE.ToString() + " 유닛 검사 진행 완료");
+            Result = SeqUnitInspection(nThread, eSTAGE, eSTAGE.ToString() + " 유닛 검사 진행");
+            B.SetBit(nThread, B.UnitInspection[(int)eSTAGE], false, eSTAGE.ToString() + " 유닛 검사 진행 완료");
             if (Result == eRTN.JOB_CANCEL) return eRTN.JOB_CANCEL;
             return eRTN.SUCESS;
         }
@@ -394,8 +412,9 @@ namespace NSS_3310S.SEQ{
             IsDOUBLE[D.UnitOffsetY[(int)eSTAGE]] = 0;
             IsDOUBLE[D.UnitOffsetT[(int)eSTAGE]] = 0;
         }
-        public static eRTN SeqUnitInspection(int nThread, eMAP_BLOCK eSTAGE, string sBarcode, string comment){
+        public static eRTN SeqUnitInspection(int nThread, eMAP_BLOCK eSTAGE, string comment){
             eRTN Result;
+            string StageBarcode;
         RePLAY:
             int nDelayCnt = 0;
             SetStage(eSTAGE);
@@ -403,7 +422,7 @@ namespace NSS_3310S.SEQ{
             //비전 사이즈 검사 재검사 요청 신호 ON시 대기 t초 기다리고 off 안되면 에러 처리!
             while (mIN[I.UnitInspectionReStart]){
                 if (nDelayCnt > 2000){
-                    UTIL_.OnERROR(E.emsUnitInspectionReTrayTimeOut);
+                    E.OnERROR(E.emsUnitInspectionReTrayTimeOut);
                     mOUT[O.UnitReStart] = true;
                     goto RePLAY;
                 }
@@ -429,7 +448,7 @@ namespace NSS_3310S.SEQ{
                                 while (!Trigger((int)eTRIGGER.MARK)) ;
                                 if (IsBIT[B.JobCancel[(int)eSTAGE]]){
                                     VisionBlow(eSTAGE, stBIT.OFF);
-                                    COM_.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
+                                    B.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
                                     return eRTN.JOB_CANCEL;
                                 }
                             }
@@ -439,48 +458,77 @@ namespace NSS_3310S.SEQ{
             }
             VisionBlow(eSTAGE, stBIT.OFF);
             Result = DEF.ReadInspectionResult(nThread, eSTAGE);
-            COM_.SetOutput(nThread, O.UnitReading, false, "UNIT 데이터 읽었다고 비전에 신호 OFF.");
+            O.SetOutput(nThread, O.UnitReading, false, "UNIT 데이터 읽었다고 비전에 신호 OFF.");
             if (Result == eRTN.NGOverCnt && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.UnitInspectionNgCountOver);
-                while (UTIL_.WaitWarning(nThread, W.UnitInspectionNgCountOver, "유닛 검사 후 NG 수량 오버 하여 경고 발생")) ;
+                W.ViewWarning(nThread, W.UnitInspectionNgCountOver);
+                while (W.WaitWarning(nThread, W.UnitInspectionNgCountOver, "유닛 검사 후 NG 수량 오버 하여 경고 발생")) ;
                 if (ConfirmUser[W.UnitInspectionNgCountOver].result) goto RePLAY;
             }
             if (Result == eRTN.ResponseOverTime){
-                UTIL_.OnERROR(E.TopVisionResponseOverTime);
+                E.OnERROR(E.TopVisionResponseOverTime);
                 goto RePLAY;
             }
             if (Result == eRTN.NotDataFile){
-                UTIL_.OnERROR(E.NotTopVisionDataFile);
+                E.OnERROR(E.NotTopVisionDataFile);
                 goto RePLAY;
             }
             if (Result == eRTN.ReadingDataFail){
-                UTIL_.OnERROR(E.TopVaisionDataReadingFail);
+                E.OnERROR(E.TopVaisionDataReadingFail);
                 goto RePLAY;
             }
             if (Result == eRTN.IndexFail) goto RePLAY;
 
         ReCheckITS:
-            if (prMACHINE[CP.UseITSData] == (int)eUSE.USE){
-                Result = DEF.ReadITSResult(eSTAGE, sBarcode);
+            if (prMACHINE[CP.UseITSData] == (int)eUSE.USE && prMACHINE[CP.UseMsSQL] == (int)eUSE.USE){
+                ////잠시테스트
+                //for (int idxY = 0; idxY < (int)prMODEL[RP.UnitCntY]; idxY++){
+                //    for (int idxX = 0; idxX < (int)prMODEL[RP.UnitCntX]; idxX++){
+                //        PALLET[(int)eSTAGE, 0, 0, idxX, idxY] = (int)eSTATUS.MARK;
+                //    }
+                //}
+                ////잠시테스트
+
+                if (eMAP_BLOCK.STAGE1 == eSTAGE)    StageBarcode = CLOT.InfoStrip[T.DryTable1].Barcode;
+                else                                StageBarcode = CLOT.InfoStrip[T.DryTable2].Barcode;
+                Result = DEF.ReadITSResult(eSTAGE, StageBarcode);
                 if (Result != eRTN.SUCESS){
-                    if (Result == eRTN.NothingBarcode) UTIL_.OnERROR(E.emsDesertUnitBarcodeMemory);
-                    else if (Result == eRTN.NotITSCountFile) UTIL_.OnERROR(E.emsNotFindITSCountFile);
-                    else if (Result == eRTN.NotITSLocationFile) UTIL_.OnERROR(E.emsNotFindITSLocationFile);
-                    else if (Result == eRTN.FailITSCountDataParsingFail) UTIL_.OnERROR(E.emsITSCountDataParsingFail);
-                    else if (Result == eRTN.FailITSLocationDataParsingFail) UTIL_.OnERROR(E.emsITSLocationDataParsingFail);
+                    if (Result == eRTN.NothingBarcode)                      E.OnERROR(E.emsDesertUnitBarcodeMemory);
+                    else if (Result == eRTN.NotITSCountFile)                E.OnERROR(E.emsNotFindITSCountFile);
+                    else if (Result == eRTN.NotITSLocationFile)             E.OnERROR(E.emsNotFindITSLocationFile);
+                    else if (Result == eRTN.FailITSCountDataParsingFail)    E.OnERROR(E.emsITSCountDataParsingFail);
+                    else if (Result == eRTN.FailITSLocationDataParsingFail) E.OnERROR(E.emsITSLocationDataParsingFail);
                     else{
-                        UTIL_.OnERROR(E.emsFailITSDataReading);
+                        E.OnERROR(E.emsFailITSDataReading);
                         UTIL_.DELAY(1000);
                     }
                     if (IsBIT[B.JobCancel[(int)eSTAGE]]){
                         VisionBlow(eSTAGE, stBIT.OFF);
-                        COM_.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
+                        B.SetBit(nThread, B.JobCancel[(int)eSTAGE], false, eSTAGE.ToString() + " 작업 취소됨");
                         return eRTN.JOB_CANCEL;
                     }
                     goto ReCheckITS;
                 }
             }
+            else{
+                //if (prMACHINE[CP.UseMsSQL] == (int)eUSE.NotUSE){
+                //    if (prMACHINE[CP.UesBtmInspection] == (int)eUSE.NotUSE){
+                //        E.OnERROR(E.emsBtmCamNotUse);
+                //        UTIL_.DELAY(100);
+                //        goto ReCheckITS;
+                //    }
+                //} // 무조건 하부 카메라 사용모드로 전환 후 진행 하셔야 합니다.
+                //else{
+                //    if (prMACHINE[CP.UseITSData] == (int)eUSE.NotUSE && prMACHINE[CP.UesBtmInspection] == (int)eUSE.NotUSE){
+                //        E.OnERROR(E.emsBtmCamAndITSDataNotUse);
+                //        UTIL_.DELAY(100);
+                //        goto ReCheckITS;
+                //    }
+                //} // 
+            }
             MAP_.PalletMap_ChkMarkCam(eSTAGE, (eMAP_DATA)IsLONG[L.ReverseMode[(int)eSTAGE]], (int)prMODEL[RP.GroupCntX], (int)prMODEL[RP.GroupCntY], (int)prMODEL[RP.UnitCntX], (int)prMODEL[RP.UnitCntY]);
+            //TEST
+            //UTIL_.DELAY(3000);
+            //TEST
             return eRTN.SUCESS;
         }
 
@@ -489,21 +537,24 @@ namespace NSS_3310S.SEQ{
             IsLONG[L.CurWorkStage] = (int)eSTAGE;
 
             if (-1 != MAP_.GetPalletPocket(eSTAGE, (int)prMODEL[RP.GroupX[(int)eSTAGE]], (int)prMODEL[RP.GroupY[(int)eSTAGE]], (int)prMODEL[RP.UnitX[(int)eSTAGE]], (int)prMODEL[RP.UnitY[(int)eSTAGE]], ref gx, ref gy, ref x, ref y)){
-                COM_.SetBit(nThread, B.Stage_Pic[(int)eSTAGE], true, eSTAGE.ToString() + " 테이블 픽업");
-                while (UTIL_.WaitBIT(nThread, B.Stage_Pic[(int)eSTAGE], true, eSTAGE.ToString() + " 픽업 작업 완료 할때 까지 대기")) ;
+                B.SetBit(nThread, B.Stage_Pic[(int)eSTAGE], true, eSTAGE.ToString() + " 테이블 픽업");
+                while (B.WaitBIT(nThread, B.Stage_Pic[(int)eSTAGE], true, eSTAGE.ToString() + " 픽업 작업 완료 할때 까지 대기")) ;
             }
 
             if (IsBIT[B.StageUnitExist[(int)eSTAGE]]){
-                COM_.Bit(nThread, B.StageUnitExist[(int)eSTAGE], false, "맵블록 작업 완료 후 유닛 제거 진행 비트 FALSE");
-                while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, "", eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
-                UTIL_.OnERROR(E.StageUnitExist[(int)eSTAGE]);
+                B.Bit(nThread, B.StageUnitExist[(int)eSTAGE], false, "맵블록 작업 완료 후 유닛 제거 진행 비트 FALSE");
+                double dMovingSped = prMACHINE[CP.MapBlockErrorMoveing] <= 0 ? 10 : prMACHINE[CP.MapBlockErrorMoveing];
+                string cmds = "spd=" + dMovingSped.ToString();
+                while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, cmds, eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
+                E.OnERROR(E.StageUnitExist[(int)eSTAGE]);
             }
             DEF.ResetPallet(eSTAGE);
-            COM_.SetBit(nThread, B.StageBusy[(int)eSTAGE], false, eSTAGE.ToString() + " 픽업 작업 진행");
+            B.SetBit(nThread, B.StageBusy[(int)eSTAGE], false, eSTAGE.ToString() + " 픽업 작업 진행");
             return true;
         }
 
         public static eRTN StageUnloadingAirshower(int nThread, eMAP_BLOCK eSTAGE, string comment){
+            //if (!bMF) LogWR_.SavePCBUnitInfo(nThread, eSTAGE);
             if (prMACHINE[CP.UseWorkedAirshower] == (int)eUSE.NotUSE){
                 while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, "", "유닛 받는 위치 이송")) ;
                 return eRTN.SUCESS;
@@ -527,13 +578,13 @@ namespace NSS_3310S.SEQ{
 
         public static void StageWorkCencel(int nThread, eMAP_BLOCK eSTAGE, string comment){
             ConfirmUser[W.WorkingCancel].msg = eSTAGE.ToString() + " 작업 취소 되었습니다";
-            COM_.ViewWarning(nThread, W.WorkingCancel);
-            while (UTIL_.WaitWarning(nThread, W.WorkingCancel, "작업 취소 대기")) ;
+            W.ViewWarning(nThread, W.WorkingCancel);
+            while (W.WaitWarning(nThread, W.WorkingCancel, "작AAAAAA업 취소 대기")) ;
             StageAirshower(eSTAGE, stBIT.OFF);
             while (eRTN.SUCESS != MoveStageY(nThread, eSTAGE, P.RecieveUnit, "", eSTAGE.ToString() + " 유닛 받는 위치 이송")) ;
 
-            mIN[VT_STOP] = true;
-            COM_.SetBit(nThread, B.Stage_Work[(int)eSTAGE], false, comment);
+            mIN[I.vtStop] = true;
+            B.SetBit(nThread, B.Stage_Work[(int)eSTAGE], false, comment);
             UTIL_.DELAY(1000);
         }
 
@@ -543,7 +594,28 @@ namespace NSS_3310S.SEQ{
             LogWR_.SaveLogTack(sJobName + "," + CLOT.GET_LOT.LotID + "," + eSTAGE.ToString() + "," + IsDOUBLE[D.StageTack[(int)eSTAGE]].ToString(), "");
             IsLONG[L.StageTackNow[(int)eSTAGE]] = Environment.TickCount;
         }
-#endregion
+
+        public static eRTN MoveCalZigCenter(int nThread, eMAP_BLOCK eSTAGE, string comment){
+            if (ChkRunning(nThread)) return eRTN.FAIL;
+
+            int[] mt = { M.DRY_TABLE[(int)eSTAGE], M.TopVisionX, M.TopVisionZ };
+            string[] cmds = { "", "", "" };
+            bool[] bNoChange = { true, true, true };
+            bool[] bOnlyStop = { false, false, false };
+            bool[] bDontStop = { true, true, true };
+            double[] toller = { 0.005, 0.005, 0.005 };
+
+            stMoveInfo sy = M.GetMoveInfo(mt[0], P.CalZigCenter);
+            stMoveInfo sx = M.GetMoveInfo(mt[1], P.TopCamCalZigCenter[(int)eSTAGE]);
+            stMoveInfo sz = M.GetMoveInfo(mt[2], P.TopCamCalZigCenter[(int)eSTAGE]);
+
+            stMoveInfo[] ps = { sy, sx, sz };
+            string sLocation = LogWR_.LogPos(mt, ps);
+            string sLog = comment + " " + sLocation;
+            if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, mt, ps, toller, bOnlyStop, bNoChange, bDontStop, cmds, sLog)) return eRTN.FAIL;
+            return eRTN.SUCESS;
+        }
+        #endregion
 
 #region >> GOOD TRAY FEEDER 1/2
         public static eRTN GoodTrayFeederFrontGrip(int nThread, eTRAY Tray, string comment){
@@ -654,7 +726,7 @@ namespace NSS_3310S.SEQ{
                     if (!mtDATA[M.TrayFeeder1, P.TrayLoad].bPOS){
                         if (mtDATA[M.TrayFeeder2, P.TrayLoad].bPOS){
                             if (!mIN[I.GOOD_TRAY2_UNGRIP_C] && !mIN[I.GOOD_TRAY2_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray1Loading_GoodTray2Clamp);
+                                E.OnERROR(E.emsNotGoodTray1Loading_GoodTray2Clamp);
                                 return eRTN.EMS;
                             } 
                         }
@@ -668,7 +740,7 @@ namespace NSS_3310S.SEQ{
                     if (!mtDATA[M.TrayFeeder2, P.TrayLoad].bPOS){
                         if (mtDATA[M.TrayFeeder1, P.TrayLoad].bPOS){
                             if (!mIN[I.GOOD_TRAY1_UNGRIP_C] && !mIN[I.GOOD_TRAY1_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray2Loading_GoodTray1Clamp);
+                                E.OnERROR(E.emsNotGoodTray2Loading_GoodTray1Clamp);
                                 return eRTN.EMS;
                             }
                         }
@@ -709,14 +781,14 @@ namespace NSS_3310S.SEQ{
                         if (mtDATA[M.TrayFeeder1, P.TrayLoad].Pos + 200 < mtSTS[M.TrayFeeder1].CurrentPosition){
                             if (!C.Interlock.ChkInterlock(E.emsGoodLoadingLocationSensing, true)) return eRTN.EMS;
                             if (!mIN[I.GOOD_TRAY2_UNGRIP_C] && !mIN[I.GOOD_TRAY2_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray1Place_GoodTray2Clamp);
+                                E.OnERROR(E.emsNotGoodTray1Place_GoodTray2Clamp);
                                 return eRTN.EMS;
                             }
                         }
                     }
                     if (prMACHINE[CP.GoodTray2PlaceFirstLine] > mtSTS[M.TrayFeeder2].CurrentPosition && prMACHINE[CP.GoodTray2PlaceLastLine] < mtSTS[M.TrayFeeder2].CurrentPosition){
                         if (!mIN[I.GOOD_TRAY2_UNGRIP_C] && !mIN[I.GOOD_TRAY2_UNGRIP_S] && eMachineStatus.AUTO != eMCStatus){
-                            UTIL_.OnERROR(E.emsNotGoodTray1Place_GoodTray2Clamp);
+                            E.OnERROR(E.emsNotGoodTray1Place_GoodTray2Clamp);
                             return eRTN.EMS;
                         }
                     }
@@ -729,14 +801,14 @@ namespace NSS_3310S.SEQ{
                         if (mtDATA[M.TrayFeeder2, P.TrayLoad].Pos + 200 < mtSTS[M.TrayFeeder2].CurrentPosition){
                             if (!C.Interlock.ChkInterlock(E.emsGoodLoadingLocationSensing, true)) return eRTN.EMS;
                             if (!mIN[I.GOOD_TRAY1_UNGRIP_C] && !mIN[I.GOOD_TRAY1_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray2Place_GoodTray1Clamp);
+                                E.OnERROR(E.emsNotGoodTray2Place_GoodTray1Clamp);
                                 return eRTN.EMS;
                             }
                         }
                     }
                     if (prMACHINE[CP.GoodTray1PlaceFirstLine] > mtSTS[M.TrayFeeder1].CurrentPosition && prMACHINE[CP.GoodTray1PlaceLastLine] < mtSTS[M.TrayFeeder1].CurrentPosition){
                         if (!mIN[I.GOOD_TRAY1_UNGRIP_C] && !mIN[I.GOOD_TRAY1_UNGRIP_S] && eMachineStatus.AUTO != eMCStatus){
-                            UTIL_.OnERROR(E.emsNotGoodTray2Place_GoodTray1Clamp);
+                            E.OnERROR(E.emsNotGoodTray2Place_GoodTray1Clamp);
                             return eRTN.EMS;
                         }
                     }
@@ -764,7 +836,7 @@ namespace NSS_3310S.SEQ{
                     if (!mtDATA[M.TrayFeeder1, P.Staker].bPOS){
                         if (mtDATA[M.TrayFeeder2, P.Staker].bPOS){
                             if (!mIN[I.GOOD_TRAY2_UNGRIP_C] && !mIN[I.GOOD_TRAY2_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray1Stacker_GoodTray2Clamp);
+                                E.OnERROR(E.emsNotGoodTray1Stacker_GoodTray2Clamp);
                                 return eRTN.EMS;
                             }
                         }
@@ -780,7 +852,7 @@ namespace NSS_3310S.SEQ{
                     if (!mtDATA[M.TrayFeeder2, P.Staker].bPOS){
                         if (mtDATA[M.TrayFeeder1, P.Staker].bPOS){
                             if (!mIN[I.GOOD_TRAY1_UNGRIP_C] && !mIN[I.GOOD_TRAY1_UNGRIP_S]){
-                                UTIL_.OnERROR(E.emsNotGoodTray2Stacker_GoodTray1Clamp);
+                                E.OnERROR(E.emsNotGoodTray2Stacker_GoodTray1Clamp);
                                 return eRTN.EMS;
                             }
                         }
@@ -807,11 +879,11 @@ namespace NSS_3310S.SEQ{
 
         public static eRTN GetEmptyTray(int nThread, eTRAY Tray, string comment){
             LogStart(nThread, comment + " 진행");
-            COM_.SetBit(nThread, B.TrayLoading[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 진행");
+            B.SetBit(nThread, B.TrayLoading[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 진행");
             while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.TrayLoad, "", Tray.ToString() + " 빈-트레이 공급 위치 이송")) ;
             while (eRTN.SUCESS != GoodTrayFeederUnGrip(nThread, Tray, Tray.ToString() + " 피터 언그립")) ;
-            COM_.SetBit(nThread, B.TrayRequest[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 요청");
-            while (UTIL_.WaitBIT(nThread, B.TrayRequest[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 완료 할때까지 대기")) ;
+            B.SetBit(nThread, B.TrayRequest[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 요청");
+            while (B.WaitBIT(nThread, B.TrayRequest[(int)Tray], true, Tray.ToString() + " 빈-트레이 공급 완료 할때까지 대기")) ;
             while (eRTN.SUCESS != GoodTrayFeederGrip(nThread, Tray, Tray.ToString() + " 트레이 그립")) ;
             MAP_.TrayMap_Reset(Tray, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY]);
             LogEnd(nThread, comment + " 완료");
@@ -819,7 +891,7 @@ namespace NSS_3310S.SEQ{
         }
         public static eRTN TrayUnitPlace(int nThread, eTRAY Tray, string comment){
             int nRtnPX = 0, nRtnPY = 0;
-            while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중 대기")) ;
+            while (B.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중 대기")) ;
 
             if (prMACHINE[CP.SelectStackerUnloading] == (int)eGOOD_TRAY.GD1 && Tray == eTRAY.GOOD2 && prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.STACKER){
                 return eRTN.UnloadingStacker;
@@ -829,25 +901,25 @@ namespace NSS_3310S.SEQ{
             }
         
             LogStart(nThread, comment + " 진행");
-            COM_.SetBit(nThread, B.TrayPlc[(int)Tray], true, Tray.ToString() + " PLACE");
+            B.SetBit(nThread, B.TrayPlc[(int)Tray], true, Tray.ToString() + " PLACE");
             IsLONG[L.CurWorkTray] = (int)Tray;
             if (IsBIT[B.GoodTrayAutoUnloading]){
-                while (UTIL_.WaitBIT(nThread, B.WaitTrayUldConv[(int)Tray], true, "콘베어 배출 진행 중 대기")) ;
-                COM_.Bit(nThread, B.GoodTrayAutoUnloading, false, "구동 중 트레이 언로딩 진행 플로그 FALSE");
+                while (B.WaitBIT(nThread, B.WaitTrayUldConv[(int)Tray], true, "콘베어 배출 진행 중 대기")) ;
+                B.Bit(nThread, B.GoodTrayAutoUnloading, false, "구동 중 트레이 언로딩 진행 플로그 FALSE");
             }
             while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.Tray_Place[(int)Tray], "", Tray.ToString() + " Feeder Y축 유닛 플레이스 위치 이송")) ;
-            COM_.SetBit(nThread, B.TrayLoading[(int)Tray], false, Tray.ToString() + " 빈-트레이 공급 완료");
+            B.SetBit(nThread, B.TrayLoading[(int)Tray], false, Tray.ToString() + " 빈-트레이 공급 완료");
 
             if (-1 != MAP_.GetTrayPocket(Tray, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref nRtnPX, ref nRtnPY)){
-                COM_.SetBit(nThread, B.GoodTrayWork, true, Tray.ToString() + " 트레이 유닛 플레이스 작업 진행");
-                while (UTIL_.WaitBIT(nThread, B.GoodTrayWork, true, Tray.ToString() + " 트레이 유닛 플레이스 완료 할때까지 대기")) ;
+                B.SetBit(nThread, B.GoodTrayWork, true, Tray.ToString() + " 트레이 유닛 플레이스 작업 진행");
+                while (B.WaitBIT(nThread, B.GoodTrayWork, true, Tray.ToString() + " 트레이 유닛 플레이스 완료 할때까지 대기")) ;
             }
-            while (UTIL_.WaitBIT(nThread, B.WaitTrayUldConv[(int)Tray], true, "트레이 푸셔 콘베어로 밀어내기 전까지 대기")) ;
+            while (B.WaitBIT(nThread, B.WaitTrayUldConv[(int)Tray], true, "트레이 푸셔 콘베어로 밀어내기 전까지 대기")) ;
             if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.CONVEYOR){
-                COM_.SetBit(nThread, B.WaitTrayUldConv[(int)Tray], true, Tray.ToString() + "피터 콘베어 배출");
+                B.SetBit(nThread, B.WaitTrayUldConv[(int)Tray], true, Tray.ToString() + "피터 콘베어 배출");
             }
-            COM_.SetBit(nThread, B.GoodTrayUnlaidng[(int)Tray], true, Tray.ToString() + "언로딩 진행");
-            COM_.SetBit(nThread, B.TrayPlc[(int)Tray], false, Tray.ToString() + " 트레이 작업 완료");
+            B.SetBit(nThread, B.GoodTrayUnlaidng[(int)Tray], true, Tray.ToString() + "언로딩 진행");
+            B.SetBit(nThread, B.TrayPlc[(int)Tray], false, Tray.ToString() + " 트레이 작업 완료");
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
         }
@@ -857,17 +929,19 @@ namespace NSS_3310S.SEQ{
             int nCNT = 0;
             LogStart(nThread, comment + " 진행");
             if (prMACHINE[CP.TrayUnloadingMode] == (int)eULD_TRAY.CONVEYOR){
-                COM_.SetBit(nThread, B.TrayConveyorUnloadingWork, true, "굿 트레이 콘베어 배출 작업 진행");
+                B.SetBit(nThread, B.TrayConveyorUnloadingWork, true, "굿 트레이 콘베어 배출 작업 진행");
             ReTrayUnloading:
 #if _NSS3300
                 if (mIN[I.GOOD_RAIL_CONVEYOR_CHECK]){
-                    UTIL_.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
+                    E.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
                     goto ReTrayUnloading;
                 }
 #else
-                if (!mIN[I.GOOD_RAIL_CONVEYOR_CHECK]){
-                    UTIL_.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
-                    goto ReTrayUnloading;
+                if (!bBD) {
+                    if (!mIN[I.GOOD_RAIL_CONVEYOR_CHECK]) {
+                        E.OnERROR(E.emsNotTrayUnloading_ConveyorUnloadingCheck, 500);
+                        goto ReTrayUnloading;
+                    }
                 }
 #endif
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.FastPsh, "", Tray.ToString() + " 언로딩 푸셔 위치 이송")) ;
@@ -878,11 +952,11 @@ namespace NSS_3310S.SEQ{
                 //언로더 콘베어 트레이 투입 신호 확인
                 int WaitTime = prMODEL[RP.ULDConvWaitTime] <= 0 ? 5000 : (int)prMODEL[RP.ULDConvWaitTime];
                 if (!bDRYRUN){
-                    while (UTIL_.WaitInput(nThread, I.ULD_CONV_READY, false, "언로더 콘베어 투입 허가 신호 기다림")){
+                    while (I.WaitInput(nThread, I.ULD_CONV_READY, false, "언로더 콘베어 투입 허가 신호 기다림")){
                         if (nCNT > WaitTime){
                             bWaitProduct = true;
-                            COM_.ViewWarning(nThread, W.WaitUnloaderConveyor);
-                            while (UTIL_.WaitWarning(nThread, W.WaitUnloaderConveyor, "콘베어 배출 신호 기다림")) ;
+                            W.ViewWarning(nThread, W.WaitUnloaderConveyor);
+                            while (W.WaitWarning(nThread, W.WaitUnloaderConveyor, "콘베어 배출 신호 기다림")) ;
                             bWaitProduct = false;
                             nCNT = 0;
                             goto ChkConveyor;
@@ -890,9 +964,9 @@ namespace NSS_3310S.SEQ{
                         nCNT++;
                     }
                 }
-                COM_.SetBit(nThread, B.GoodTrayUldEnd[(int)Tray], true, Tray.ToString() + " 콘베어 투입 확인");
+                B.SetBit(nThread, B.GoodTrayUldEnd[(int)Tray], true, Tray.ToString() + " 콘베어 투입 확인");
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.TrayUnload, "", Tray.ToString() + " 콘베어 배출 위치 이송")) ;
-                COM_.SetBit(nThread, B.WaitTrayUldConv[(int)Tray], false, Tray.ToString() + " 콘베어 배출 완료");
+                B.SetBit(nThread, B.WaitTrayUldConv[(int)Tray], false, Tray.ToString() + " 콘베어 배출 완료");
                 UTIL_.DELAY((int)prMACHINE[CP.GoodTrayPushEndDealy]);
                 while (eRTN.SUCESS != GoodTrayFeederUnGrip(nThread, Tray, Tray.ToString() + " 트레이 언그립")) ;
                 while (eRTN.SUCESS != MoveFeederY(nThread, Tray, P.TrayLoad, "", Tray.ToString() + " 콘베어 배출 위치 이송")) ;
@@ -900,8 +974,8 @@ namespace NSS_3310S.SEQ{
                 mOUT[O.UldConveyorTrayUnloading] = true;
                 UTIL_.DELAY(100);
                 mOUT[O.UldConveyorTrayUnloading] = false;
-                COM_.SetBit(nThread, B.GoodTrayUldEnd[(int)Tray], false, Tray.ToString() + " 콘베어 투입 확인");
-                COM_.SetBit(nThread, B.TrayConveyorUnloadingWork, false, "굿 트레이 콘베어 배출 작업 진행 완료");
+                B.SetBit(nThread, B.GoodTrayUldEnd[(int)Tray], false, Tray.ToString() + " 콘베어 투입 확인");
+                B.SetBit(nThread, B.TrayConveyorUnloadingWork, false, "굿 트레이 콘베어 배출 작업 진행 완료");
             } //트레이 콘베어로 배출
             else{
                 while (eRTN.SUCESS != GoodTrayStackerDown(nThread, "GOOD TRAY 스태커 테이블 다운")) ;
@@ -919,14 +993,14 @@ namespace NSS_3310S.SEQ{
                 TraySupply(nThread, "GOOD TRAY 스태커 트레이 배출 요청");
                 goto ReCHECK;
             }
-            COM_.SetBit(nThread, B.GoodTrayUnlaidng[(int)Tray], false, Tray.ToString() + "언로딩 진행 완료");
+            B.SetBit(nThread, B.GoodTrayUnlaidng[(int)Tray], false, Tray.ToString() + "언로딩 진행 완료");
             return eRTN.SUCESS;
         }
         public static void TraySupply(int nThread, string comment){
             LogStart(nThread, comment + " 진행");
-            COM_.ViewWarning(nThread, W.ReworkTrayFull);
-            COM_.SetBit(nThread, B.GoodTrayStackerUldRequest, true, "GOOD 스태커 트레이 배출 할대 까지 대기");
-            while (UTIL_.WaitBIT(nThread, B.GoodTrayStackerUldRequest, true, "GOOD STACKER 트레이 배출 대기")) ;
+            W.ViewWarning(nThread, W.ReworkTrayFull);
+            B.SetBit(nThread, B.GoodTrayStackerUldRequest, true, "GOOD 스태커 트레이 배출 할대 까지 대기");
+            while (B.WaitBIT(nThread, B.GoodTrayStackerUldRequest, true, "GOOD STACKER 트레이 배출 대기")) ;
             LogEnd(nThread, comment + " 완료");
         }
 
@@ -950,8 +1024,7 @@ namespace NSS_3310S.SEQ{
                 iOUT1 = O.HD1PkRej[(int)nPK];
                 iOUT2 = O.HD1PkVac[(int)nPK];
             }
-            else
-            {
+            else{
                 iOUT1 = O.HD2PkRej[(int)nPK];
                 iOUT2 = O.HD2PkVac[(int)nPK];
             }
@@ -1113,6 +1186,8 @@ namespace NSS_3310S.SEQ{
             bool[] bDontStop = { true, true, true, true };
             string[] cmds = { cmd, "", "", "" };
 
+           
+
             string sLogPos = LogWR_.LogPos(mt, pos);
             string sLog = comment + " " + sLogPos;
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, mt, pos, dToller, bOnlyStart, bNoChange, bDontStop, cmds, sLog)) return eRTN.FAIL;
@@ -1153,7 +1228,7 @@ namespace NSS_3310S.SEQ{
             if (ChkRunning(nThread)) return eRTN.FAIL;
             //피커 다운 위치에서 회전 X 인터락 추가 필요~!
 
-            stMoveInfo mT = GetMoveInfo(mHT, P.Ready);
+            stMoveInfo mT = M.GetMoveInfo(mHT, P.Ready);
             mT.Pos = dLocation;
 
             stMoveInfo[] ms = { mT };
@@ -1196,24 +1271,40 @@ namespace NSS_3310S.SEQ{
             if (eRTN.SUCESS != WRAP_.MUTI_MOVE(nThread, mt, pos, dToller, bOnlyStart, bNoChange, bDontStop, cmds, sLog)) return eRTN.FAIL;
             return eRTN.SUCESS;
         }
-        public static eRTN MoveHDPkCenter(int nThread, eHD nX, int nPk, bool bBtmPkCalZ, string cmd, string comment){
+        public static eRTN MoveHDPkCenter(int nThread, eHD nX, int nPk, bool bBtmPkCalZ, string cmd, string comment, bool prsXspd = false){
             if (ChkRunning(nThread)) return eRTN.FAIL;
 
-            stMoveInfo mX = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
-            stMoveInfo mY = GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
-            stMoveInfo mT = GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
-            stMoveInfo mZ = GetMoveInfo(M.BtnVisionZ, P.BtmCam_Pk[(int)nX]);
+            stMoveInfo mX = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+            stMoveInfo mY = M.GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
+            stMoveInfo mT = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
+            stMoveInfo mZ = M.GetMoveInfo(M.BtnVisionZ, P.BtmCam_Pk[(int)nX]);
 
             double PkPitch = prMACHINE[CP.PickerPitch] * nPk;
             if (bMF) mT.Pos = mtSTS[M.HD_TH[(int)nX]].CurrentPosition;
-            GetPkOffset(nX, (ePK)nPk, mT.Pos, ref PkOffset);
-            mX.Pos += PkPitch + PkOffset.x; //hd1/2 x 방향 검증 완료
-            mY.Pos += PkOffset.y; //hd1/2 y 방향 검증 완료
+            if (prsXspd) {
+                mT.Pos = mtDATA[M.HD_TH[(int)nX], P.PkPlc].Pos;
+                mT.Spd = 500;
+                mT.Acc = mT.Spd * 10;
+                mT.Dec = mT.Spd * 10;
+
+                double PRSSpd = prMACHINE[CP.PRSStepSpeed] <= 1 ? 100 : prMACHINE[CP.PRSStepSpeed];
+                if (nPk != 0) {
+                    if (prMACHINE[CP.PRSStepSpeedHalf] == 1) PRSSpd /= 2;
+                }
+                mX.Spd = PRSSpd;
+                mX.Acc = mX.Spd * 10;
+                mX.Dec = mX.Spd * 10;
+            }
+
+            GetPkOffset(nX, (ePK)nPk, mT.Pos, ref Pkr_Offset);
+            mX.Pos += PkPitch + Pkr_Offset.x; //hd1/2 x 방향 검증 완료
+            mY.Pos += Pkr_Offset.y; //hd1/2 y 방향 검증 완료
 
             if (bBtmPkCalZ){
                 mZ.Pos = mtDATA[M.BtnVisionZ, P.BtmCam_PkCal[(int)nX]].Pos;
             }
 
+            
             stMoveInfo[] ms = { mX, mY, mT, mZ };
             int[] aMotors = { M.HD[(int)nX], M.BtnVisionY, M.HD_TH[(int)nX], M.BtnVisionZ };
             double[] toller = { 0.1, 0.1, 0.1, 0.1 };
@@ -1231,16 +1322,16 @@ namespace NSS_3310S.SEQ{
         public static eRTN MoveHDPkCenter(int nThread, eHD nX, int nPk, double dTh, bool bBtmPkCalZ, string cmd, string comment){
             if (ChkRunning(nThread)) return eRTN.FAIL;
 
-            stMoveInfo mX = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
-            stMoveInfo mY = GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
-            stMoveInfo mT = GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
-            stMoveInfo mZ = GetMoveInfo(M.BtnVisionZ, P.BtmCam_Pk[(int)nX]);
+            stMoveInfo mX = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+            stMoveInfo mY = M.GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
+            stMoveInfo mT = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
+            stMoveInfo mZ = M.GetMoveInfo(M.BtnVisionZ, P.BtmCam_Pk[(int)nX]);
 
             double PkPitch = prMACHINE[CP.PickerPitch] * nPk;
             mT.Pos = dTh;
-            GetPkOffset(nX, (ePK)nPk, mT.Pos, ref PkOffset);
-            mX.Pos += PkPitch + PkOffset.x; //hd1/2 x 방향 검증 완료
-            mY.Pos += PkOffset.y; //hd1/2 y 방향 검증 완료
+            GetPkOffset(nX, (ePK)nPk, mT.Pos, ref Pkr_Offset);
+            mX.Pos += PkPitch + Pkr_Offset.x; //hd1/2 x 방향 검증 완료
+            mY.Pos += Pkr_Offset.y; //hd1/2 y 방향 검증 완료
 
             if (bBtmPkCalZ){
                 mZ.Pos = mtDATA[M.BtnVisionZ, P.BtmCam_PkCal[(int)nX]].Pos;
@@ -1276,8 +1367,8 @@ namespace NSS_3310S.SEQ{
         {
             if (ChkRunning(nThread)) return eRTN.FAIL;
 
-            stMoveInfo mX = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
-            stMoveInfo mY = GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
+            stMoveInfo mX = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+            stMoveInfo mY = M.GetMoveInfo(M.BtnVisionY, P.BtmCam_Pk[(int)nX]);
 
             mX.Pos = mtSTS[M.HD[(int)nX]].CurrentPosition + IsDOUBLE[D.PkCal_OffsetX];
             mY.Pos = mtSTS[M.BtnVisionY].CurrentPosition - IsDOUBLE[D.PkCal_OffsetY];
@@ -1327,15 +1418,15 @@ namespace NSS_3310S.SEQ{
                 mz3 = M.X2Z56;
             }
             
-            stMoveInfo sx = GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)nSTAGE]);
-            stMoveInfo sz1 = GetMoveInfo(mz1, P.Ready);
-            stMoveInfo sz2 = GetMoveInfo(mz2, P.Ready);
-            stMoveInfo sz3 = GetMoveInfo(mz3, P.Ready);
-            stMoveInfo st = GetMoveInfo(mt, P.PkPckUp);
+            stMoveInfo sx   = M.GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)nSTAGE]);
+            stMoveInfo sz1  = M.GetMoveInfo(mz1, P.Ready);
+            stMoveInfo sz2  = M.GetMoveInfo(mz2, P.Ready);
+            stMoveInfo sz3  = M.GetMoveInfo(mz3, P.Ready);
+            stMoveInfo st   = M.GetMoveInfo(mt, P.PkPckUp);
 
-            GetPkOffset(nX, nPK, st.Pos, ref PkOffset);
+            GetPkOffset(nX, nPK, st.Pos, ref Pkr_Offset);
             double PKPitch = prMACHINE[CP.PickerPitch] * (int)nPK;
-            sx.Pos = MapCalPos_[(int)nX, (int)nSTAGE, 0].x + PKPitch + PkOffset.x;
+            sx.Pos = MapCalPos_[(int)nX, (int)nSTAGE, 0].x + PKPitch + Pkr_Offset.x;
             sx.Spd = 2000;
             sx.Acc = sx.Spd * 7;
             sx.Dec = sx.Spd * 7;
@@ -1374,11 +1465,11 @@ namespace NSS_3310S.SEQ{
             double PkOffsetX    = prMACHINE[CP.PkPicOffsetX[(int)nX]];
             double PkOffsetY    = prMACHINE[CP.PkPicOffsetY[(int)nX]];
 
-            stMoveInfo mx = GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)prMACHINE[CP.ZigAttachStage]]);
-            stMoveInfo mt = GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
-            stMoveInfo my = GetMoveInfo(M.DRY_TABLE[(int)prMACHINE[CP.ZigAttachStage]], P.HD_Pallet[(int)nX]);
-            stMoveInfo mz = GetMoveInfo(mtZ, P.Ready);
-            GetPkOffset(nX, (ePK)/*nPK*/0, mt.Pos, ref PkOffset);
+            stMoveInfo mx = M.GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)prMACHINE[CP.ZigAttachStage]]);
+            stMoveInfo mt = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
+            stMoveInfo my = M.GetMoveInfo(M.DRY_TABLE[(int)prMACHINE[CP.ZigAttachStage]], P.HD_Pallet[(int)nX]);
+            stMoveInfo mz = M.GetMoveInfo(mtZ, P.Ready);
+            GetPkOffset(nX, (ePK)/*nPK*/0, mt.Pos, ref Pkr_Offset);
 
             mx.Pos = prMACHINE[CP.ZigPosHD1_X[nHole]];
             my.Pos = prMACHINE[CP.ZigPosHD1_Y[nHole]];
@@ -1388,9 +1479,9 @@ namespace NSS_3310S.SEQ{
             }
 
             if (!CamView){
-                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + PkOffset.x;
-                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + PkOffsetY + PkOffset.y;
-                else                    my.Pos = my.Pos + Distance.y + PkOffsetY + PkOffset.y;
+                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + Pkr_Offset.x;
+                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + PkOffsetY + Pkr_Offset.y;
+                else                    my.Pos = my.Pos + Distance.y + PkOffsetY + Pkr_Offset.y;
             }
 
             if (Math.Abs(mx.Pos - mtSTS[M.HD[(int)nX]].CurrentPosition) < 70){
@@ -1414,51 +1505,64 @@ namespace NSS_3310S.SEQ{
         }
 
         public static void ResetHeadBuffer(int nThread, eHD nX){
-            COM_.Bit(nThread, B.HD_NG[(int)nX], false, "유닛 NG 플러그 초기화");
-            COM_.Bit(nThread, B.HD_REJECT[(int)nX], false, "유닛 REJECT 플러그 초기화");
-            COM_.Bit(nThread, B.HD_INSPECTION[(int)nX], false, "유닛 INSPECTION 플러그 초기화");
+            B.Bit(nThread, B.HD_NG[(int)nX], false, "유닛 NG 플러그 초기화");
+            B.Bit(nThread, B.HD_REJECT[(int)nX], false, "유닛 REJECT 플러그 초기화");
+            B.Bit(nThread, B.HD_INSPECTION[(int)nX], false, "유닛 INSPECTION 플러그 초기화");
         }
         public static eRTN UnitPic(int nThread, eHD nX, string comment){
             int gX = 0, gY = 0, pocketX = 0, pocketY = 0, nIndex = 0;
             eRTN ePIC;
-            while (UTIL_.WaitBIT(nThread, B.Stage1Busy, B.Stage2Busy, false, false, "STAGE1 또는 STAGE2 - 유닛 공급 할때까지 대기", true)) ;
-            COM_.SetBit(nThread, B.XWorking[(int)nX], true, nX.ToString() + " PIC AND PLC 진행");
-            while (UTIL_.WaitBIT(nThread, B.PkrUnitPickUpStop, true, nX.ToString() + " 픽업 일시 정지")) ;
+            while (B.WaitBIT(nThread, B.Stage1Busy, B.Stage2Busy, false, false, "STAGE1 또는 STAGE2 - 유닛 공급 할때까지 대기", true)) ;
+            B.SetBit(nThread, B.XWorking[(int)nX], true, nX.ToString() + " PIC AND PLC 진행");
+            while (B.WaitBIT(nThread, B.PkrUnitPickUpStop, true, nX.ToString() + " 픽업 일시 정지")) ;
             LogStart(nThread, comment + " 진행");
+            
             ResetHeadBuffer(nThread, nX);
             for (int z = 0; z < CNT_.PKR; z++){
             NextUnit:
                 if (PK_Z[z + (CNT_.PKR * (int)nX)] == eSTATUS.NONE) continue; // 피커 스킵 상태 확인
                 if (IsBIT[B.JobCancel[(int)IsLONG[L.CurWorkStage]]]){
-                    COM_.Bit(nThread, B.JobCancel[(int)IsLONG[L.CurWorkStage]], false, "작업 취소 실행 플러그 OFF");
+                    B.Bit(nThread, B.JobCancel[(int)IsLONG[L.CurWorkStage]], false, "작업 취소 실행 플러그 OFF");
                     MAP_.CancelPalletData((eMAP_BLOCK)IsLONG[L.CurWorkStage], eMAP_DATA.FULL, (int)prMODEL[RP.GroupX[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.GroupY[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.UnitX[(int)IsLONG[L.CurWorkStage]]], (int)prMODEL[RP.UnitY[(int)IsLONG[L.CurWorkStage]]]);
-                    COM_.SetBit(nThread, B.StageUnitExist[(int)IsLONG[L.CurWorkStage]], true, ((eMAP_BLOCK)IsLONG[L.CurWorkStage]).ToString() + " 작업 완료 후 유닛 유무 확인 플러그");
+                    B.SetBit(nThread, B.StageUnitExist[(int)IsLONG[L.CurWorkStage]], true, ((eMAP_BLOCK)IsLONG[L.CurWorkStage]).ToString() + " 작업 완료 후 유닛 유무 확인 플러그");
                 }
                 if (!DEF.GetPallet((eMAP_BLOCK)IsLONG[L.CurWorkStage], ref gX, ref gY, ref pocketX, ref pocketY, ref nIndex)){
-                    COM_.SetBit(nThread, B.Stage_Pic[(int)IsLONG[L.CurWorkStage]], false, ((eMAP_BLOCK)IsLONG[L.CurWorkStage]).ToString() + " 유닛 픽업 완료");
+                    B.SetBit(nThread, B.Stage_Pic[(int)IsLONG[L.CurWorkStage]], false, ((eMAP_BLOCK)IsLONG[L.CurWorkStage]).ToString() + " 유닛 픽업 완료");
                     break;
                 }
                 PICKER[(int)nX].finger[z].OffsetX = OFFSET[(int)IsLONG[L.CurWorkStage], gX, gY, pocketX, pocketY].x;
                 PICKER[(int)nX].finger[z].OffsetY = OFFSET[(int)IsLONG[L.CurWorkStage], gX, gY, pocketX, pocketY].y;
+                bool bCheckPicPos       = false;
+                double dOldHeadXCurPos  = 0.0;
             RePIC:
                 while (eRTN.SUCESS != MoveXUnitPic(nThread, nX, (eMAP_BLOCK)IsLONG[L.CurWorkStage], z, gX, gY, pocketX, pocketY, stBIT.NotCAM, stBIT.UnitOffset, "", nX.ToString() + "-" + (z + 1).ToString() + " 피커 [" + gX.ToString() + "/" + gY.ToString() + "/" + pocketX.ToString() + "/" + pocketY.ToString() + "] 유닛 픽업 위치 이송")) ;
+                double dHeadXCurPos = mtSTS[M.HD[(int)nX]].CurrentPosition; 
                 ePIC = PKPic(nThread, nX, (eMAP_BLOCK)IsLONG[L.CurWorkStage], z, nIndex, gX, gY, pocketX, pocketY, "UNIT PICKUP");
                 MAP_.mapPallet[(int)IsLONG[L.CurWorkStage], gX, gY, pocketY, pocketX] = false;
                 if (ePIC != eRTN.SUCESS){
                     ConfirmUser[W.PickUpFail].msg = nX.ToString() + " 피커" + (z + 1).ToString() + " 픽업 실패!" + ETC.CrLf + "(YES : RE-PICKUP || NO : NEXT UNIT PICKUP)";
-                    COM_.ViewWarning(nThread, W.PickUpFail);
-                    while (UTIL_.WaitWarning(nThread, W.PickUpFail, "PICK-UP 실패로 인하여 경고 메세지 발생")) ;
-                    if (ConfirmUser[W.PickUpFail].result) goto RePIC; //YES-재픽업 
+                    W.ViewWarning(nThread, W.PickUpFail);
+                    while (W.WaitWarning(nThread, W.PickUpFail, "PICK-UP 실패로 인하여 경고 메세지 발생")) ;
+                    if (ConfirmUser[W.PickUpFail].result){
+                        if (bCheckPicPos){
+                            LogWR_.SaveLogOperate("리픽업 진행 -> OLD POS : " + dOldHeadXCurPos.ToString() + " / NEW POS : " + dHeadXCurPos.ToString(), "MC");
+                        } //로그 추가
+                        dOldHeadXCurPos = dHeadXCurPos;
+                        bCheckPicPos = true;
+                        goto RePIC; //YES-재픽업 
+                    }
                     else{
                         MAP_.ARR_PALLET[(int)IsLONG[L.CurWorkStage], gX, (int)prMODEL[RP.GroupCntY] - 1 - gY, pocketX, (int)(prMODEL[RP.UnitY[(int)IsLONG[L.CurWorkStage]]] - 1) - pocketY] = eSTATUS.PICFAIL;
-                        COM_.SetBit(nThread, B.StageUnitExist[(int)IsLONG[L.CurWorkStage]], true, "스테이즈 유닉 픽업 실패함");
+                        B.SetBit(nThread, B.StageUnitExist[(int)IsLONG[L.CurWorkStage]], true, "스테이즈 유닉 픽업 실패함");
                         goto NextUnit;
                     }
                 }
                 MAP_.ARR_PALLET[(int)IsLONG[L.CurWorkStage], gX, (int)prMODEL[RP.GroupCntY] - 1 - gY, pocketX, (int)(prMODEL[RP.UnitY[(int)IsLONG[L.CurWorkStage]]] - 1) - pocketY] = eSTATUS.EMPTY;
+                IsLONG[L.StageUnit[IsLONG[L.CurWorkStage]]]++;
                 IsLONG[L.InCnt]++;
+                IsLONG[L.PicCnt]++;
             }
-            COM_.SetBit(nThread, B.XPicBusy[(int)nX], false, nX.ToString() + " 유닛 픽업 완료");
+            B.SetBit(nThread, B.XPicBusy[(int)nX], false, nX.ToString() + " 유닛 픽업 완료");
             while (eRTN.SUCESS != MovePlcRdy(nThread, nX, "", nX.ToString() + " 피커 Z축 플레이스 대기 위치")) ;
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
@@ -1517,20 +1621,20 @@ namespace NSS_3310S.SEQ{
             if ((uy + 1) > 1) idx = (int)(prMODEL[RP.UnitX[(int)nSTAGE]] * uy) + (ux + 1);
             else idx = (uy + 1) * (ux + 1);
 
-            stMoveInfo mx = GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)nSTAGE]);
-            stMoveInfo mt = GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
-            stMoveInfo my = GetMoveInfo(M.DRY_TABLE[(int)nSTAGE], P.HD_Pallet[(int)nX]);
-            stMoveInfo mz = GetMoveInfo(mtZ, P.PK_PIC[nPK]);
-            GetPkOffset(nX, (ePK)nPK, mt.Pos, ref PkOffset);
+            stMoveInfo mx = M.GetMoveInfo(M.HD[(int)nX], P.HD_PIC[(int)nSTAGE]);
+            stMoveInfo mt = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
+            stMoveInfo my = M.GetMoveInfo(M.DRY_TABLE[(int)nSTAGE], P.HD_Pallet[(int)nX]);
+            stMoveInfo mz = M.GetMoveInfo(mtZ, P.PK_PIC[nPK]);
+            GetPkOffset(nX, (ePK)nPK, mt.Pos, ref Pkr_Offset);
 
             mx.Pos = MapCalPos_[(int)nX, (int)nSTAGE, idx - 1].x + UnitOffsetX;
             if (nX == (int)eHD.HD1) my.Pos = MapCalPos_[(int)nX, (int)nSTAGE, idx - 1].y + UnitOffsetY;
             else                    my.Pos = MapCalPos_[(int)nX, (int)nSTAGE, idx - 1].y + UnitOffsetY;
 
             if (!CamView){ //블레이드 폭이 0.3mm
-                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + PkOffset.x + /*0.15*/BladeOffsetX;
-                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + PkOffsetY + PkOffset.y - /*0.15*/BladeOffsetY;
-                else                    my.Pos = my.Pos + Distance.y + PkOffsetY + PkOffset.y - /*0.15*/BladeOffsetY;
+                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + Pkr_Offset.x + /*0.15*/BladeOffsetX;
+                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + PkOffsetY + Pkr_Offset.y - /*0.15*/BladeOffsetY;
+                else                    my.Pos = my.Pos + Distance.y + PkOffsetY + Pkr_Offset.y - /*0.15*/BladeOffsetY;
                 //검증!
                 if (prMACHINE[CP.UseTopInspectionOffset] == (int)eUSE.USE && !bMF){
                     mx.Pos += PICKER[(int)nX].finger[nPK].OffsetX;
@@ -1552,7 +1656,7 @@ namespace NSS_3310S.SEQ{
 
             if (nPK == (int)ePK.PKR1 || nPK == (int)ePK.PKR3 || nPK == (int)ePK.PKR5 || nPK == (int)ePK.PKR7) mz.Pos += PicChkPitch; //1,3,5,7 -
             else mz.Pos -= PicChkPitch; //2,4,6,8 +
-            if (nPK == (int)ePK.PKR1 || eMCStatus != eMachineStatus.AUTO || mtDATA[M.HD[(int)nX], P.PkCenter].Pos > mtSTS[M.HD[(int)nX]].CurrentPosition) mz.Pos = GetPosData(mtZ, P.Ready); //
+            if (nPK == (int)ePK.PKR1 || eMCStatus != eMachineStatus.AUTO || mtDATA[M.HD[(int)nX], P.PkCenter].Pos > mtSTS[M.HD[(int)nX]].CurrentPosition) mz.Pos = M.GetPosData(mtZ, P.Ready); //
 
             stMoveInfo[] ms = { mx, mt, my, mz };
             int[] mot = { M.HD[(int)nX], M.HD_TH[(int)nX], M.DRY_TABLE[(int)nSTAGE], mtZ };
@@ -1594,7 +1698,7 @@ namespace NSS_3310S.SEQ{
             string sOffset;
             if (nPK == (int)ePK.PKR1 || nPK == (int)ePK.PKR3 || nPK == (int)ePK.PKR5 || nPK == (int)ePK.PKR7) sOffset = "offset=" + prMODEL[RP.UnitThickess].ToString(); //1,3,5,7 -
             else sOffset = "offset=-" + prMODEL[RP.UnitThickess].ToString(); //2,4,6,8 +
-            COM_.SetBit(nThread, B.StageAirshowerWait, false, "테이블 에어샤워 일시정지 플로그 OFF");
+            B.SetBit(nThread, B.StageAirshowerWait, false, "테이블 에어샤워 일시정지 플로그 OFF");
             for (int i = 0; i < (int)prMACHINE[CP.RePick]; i++){
                 if (prMACHINE[CP.UsePickUpVac] == (int)eUSE.USE) PkVac(nX, (ePK)nPK, stBIT.ON, stBIT.NotDelay, "");
                 while (eRTN.SUCESS != MovePK(nThread, nX, nPK, P.PK_PIC[nPK], sOffset, nX.ToString() + " 피커" + (nPK + 1).ToString() + comment + " 위치 이송")) ;
@@ -1604,11 +1708,12 @@ namespace NSS_3310S.SEQ{
                     if (bMF) return eRTN.SUCESS;
 
                     PK_Z[nPK + (CNT_.PKR * (int)nX)] = eSTATUS.MARK;
-                    PICKER[(int)nX].finger[nPK].valid = true;
+                    PICKER[(int)nX].finger[nPK].valid   = true;
                     PICKER[(int)nX].finger[nPK].iResult = PALLET[(int)nSTAGE, GX, GY, UX, UY];
-                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.NG)                                                                     IsBIT[B.HD_NG[(int)nX]] = true; //사이즈 불량 rework
-                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.FAIL)                                                                   IsBIT[B.HD_REJECT[(int)nX]] = true; //x마크 불량 reject
-                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.FIRST || PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.SECOND)    IsBIT[B.HD_INSPECTION[(int)nX]] = true; //샘플링 검사 유닛
+                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.NG)                                                                     IsBIT[B.HD_NG[(int)nX]]         = true; // 사이즈 불량 rework
+                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.FAIL)                                                                   IsBIT[B.HD_REJECT[(int)nX]]     = true; // x마크 불량 reject
+                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.FIRST || PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.SECOND)    IsBIT[B.HD_INSPECTION[(int)nX]] = true; // 샘플링 검사 유닛
+                    if (PICKER[(int)nX].finger[nPK].iResult == (int)eSTATUS.TOP_FAIL)                                                               IsBIT[B.HD_REJECT[(int)nX]]    = true; // top 카메라에서 불량 처리 reject
                     return eRTN.SUCESS;
                 }
             }
@@ -1616,8 +1721,8 @@ namespace NSS_3310S.SEQ{
         }
 
         public static void PK_CAL_LIGHT(int nThread, bool bFLOG){
-            COM_.SetOutput(nThread, O.UsePkCal, bFLOG, "피커 CAL' 조명 값 변경 ON 플러그");
-            COM_.SetOutput(nThread, O.NotUsePkCal, !bFLOG, "피커 CAL' 조명 값 변경 OFF 플로그");
+            O.SetOutput(nThread, O.UsePkCal, bFLOG, "피커 CAL' 조명 값 변경 ON 플러그");
+            O.SetOutput(nThread, O.NotUsePkCal, !bFLOG, "피커 CAL' 조명 값 변경 OFF 플로그");
             UTIL_.DELAY(500);
         }
         public static eRTN PRS(int nThread, eHD nX, string comment){
@@ -1628,7 +1733,7 @@ namespace NSS_3310S.SEQ{
             mOUT[O.BTM_VISION_BLOW] = true;
             while (eRTN.SUCESS != MovePkTh(nThread, M.HD_TH[(int)nX], P.PkPlc, "", MtName[M.HD_TH[(int)nX]] + " 플레이스 위치 이송")) ;
             if (1 < Math.Abs(mtSTS[M.HD_TH[(int)nX]].CurrentPosition - mtDATA[M.HD_TH[(int)nX], P.PkPlc].Pos)){
-                UTIL_.OnERROR(E.PkThNotPlcPos[(int)nX], 500);
+                E.OnERROR(E.PkThNotPlcPos[(int)nX], 500);
                 goto ReCHCK;
             }
 
@@ -1636,65 +1741,100 @@ namespace NSS_3310S.SEQ{
             LogStart(nThread, comment + " 진행");
             while (eRTN.SUCESS != MoveBtmY(nThread, P.BtmCam_Pk[(int)nX], "", "하부 카메라 " + nX.ToString() + " 피커 중심 위치 이송")) ;
             while (eRTN.SUCESS != MoveHDPkRdy(nThread, nX, "", nX.ToString() + " 피커 대기 위치 이송")) ;
-            while (UTIL_.WaitBIT(nThread, B.PkrUnitPlaceStop, true, nX.ToString() + " 플레이스 일시 정지")) ;
+            while (B.WaitBIT(nThread, B.PkrUnitPlaceStop, true, nX.ToString() + " 플레이스 일시 정지")) ;
 
             if (!mIN[I.VisionRdy] && !bDRYRUN){
-                UTIL_.OnERROR(E.emsNotVisionReady);
+                E.OnERROR(E.emsNotVisionReady);
                 goto ReCHCK;
             }
-            COM_.SetOutput(nThread, O.PRSStart, true, ThreadName[nThread] + " PRS 시작");
+            O.SetOutput(nThread, O.PRSStart, true, ThreadName[nThread] + " PRS 시작");
             double dFingerPitch = prMACHINE[CP.PickerPitch];
 
             if (prMACHINE[CP.UseFlaying] == (int)InspectionMode.Flying){ //FLYNG 검사
                 while (eRTN.SUCESS != MoveOnTheFlying(nThread, nX, "", "플라잉 이송")) ;
             } //FLYING
             else{ //STEP으로 검사
-                LAB_.TriggerOutput((int)eTRIGGER.BTM, uVAL.High);
-                stMoveInfo mv = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+                //double PRSSpd;
+                LAB_.TriggerOutput((int)/*eTRIGGER.BTM*/nX, uVAL.High);
+                stMoveInfo mv = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
                 for (int p = 0; p < 6; p++){
                     if (!mIN[I.VisionRdy] && !bDRYRUN){
-                        UTIL_.OnERROR(E.emsNotVisionReady);
+                        E.OnERROR(E.emsNotVisionReady);
                         goto ReCHCK;
                     }
-                    mv = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
-                    mv.Pos += dFingerPitch * (5 - p);
-                    mv.Spd = 1000;
-                    mv.Acc = 10000;
-                    mv.Dec = 10000;
 
-                    while (eRTN.SUCESS != WRAP_.MOVE(nThread, M.HD[(int)nX], mv, 0.01, false, true, true, "", comment)) ;
-                    LAB_.ONE_SHOT((int)eTRIGGER.BTM);
+                    //mv      = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+                    //mv.Pos  += dFingerPitch * (5 - p);
+                    //PRSSpd  = prMACHINE[CP.PRSStepSpeed] <= 1 ? 100 : prMACHINE[CP.PRSStepSpeed];
+                    //if (p != 0) {
+                    //    if (prMACHINE[CP.PRSStepSpeedHalf] == 1) PRSSpd /= 2;
+                    //}
+                    //mv.Spd = PRSSpd;
+                    //mv.Acc = mv.Spd * 10;
+                    //mv.Dec = mv.Spd * 10;
+                    //while (eRTN.SUCESS != WRAP_.MOVE(nThread, M.HD[(int)nX], mv, 0.01, false, true, true, "", comment)) ;
+
+                    int pkNum = 5 - p;
+                    while (eRTN.SUCESS != MoveHDPkCenter(nThread, nX, pkNum, true, "", "PRS " + nX.ToString(), true)) ;
+                    int pkZNum;
+                    double pkZOffset;
+                    string pkZCmd;
+                    if (eHD.HD1 == nX) {
+                        pkZNum = M.HD1Pk[p];
+                        pkZOffset = prMODEL[RP.HD1_PRS_OFFSET[p]];
+                        pkZCmd = pkZOffset == 0 ? "" : "offset=" + pkZOffset.ToString();  
+                    }
+                    else {
+                        pkZNum = M.HD2Pk[p];
+                        pkZOffset = prMODEL[RP.HD2_PRS_OFFSET[p]];
+                        pkZCmd = pkZOffset == 0 ? "" : "offset=" + pkZOffset.ToString();
+                    }
+                    while (eRTN.SUCESS != MovePk(nThread, pkZNum, P.Ready, pkZCmd, "PRS Z OFFSET - " + nX.ToString() + " PK" + (p + 1).ToString() + pkZCmd)) ;
+                    UTIL_.DELAY((int)prMACHINE[CP.PrsStapInspectionDelay]);
+
+                    //LAB_.TriggerOutput((int)/*eTRIGGER.BTM*/nX, uVAL.High); //test
+                    LAB_.ONE_SHOT((int)/*eTRIGGER.BTM*/nX);
+                    //LAB_.TriggerOutput((int)nX, uVAL.Low); //test
                     UTIL_.DELAY(100);
                 }
+                LAB_.TriggerOutput((int)nX, uVAL.Low);
             } //STEP
-            LAB_.TriggerOutput((int)eTRIGGER.HD1, uVAL.Low);
-            LAB_.TriggerOutput((int)eTRIGGER.HD2, uVAL.Low);
+            //UTIL_.DELAY(100);
+            //LAB_.TriggerOutput((int)eTRIGGER.HD1, uVAL.Low);
+            //LAB_.TriggerOutput((int)eTRIGGER.HD2, uVAL.Low);
 
             //if (eRTN.SUCESS != ReadPRS(nThread, nX)) goto ReCHCK; 
             eRETURN = ReadPRS(nThread, nX);
             if (eRTN.SUCESS != eRETURN){
-                if (eRETURN == eRTN.PRS_MATCH_FAIL){
+                if (eRETURN == eRTN.PRS_MATCH_FAIL)
+                {
                     //UTIL_.OnERROR(E.XMarkReTrain[(int)nX]);
                     ConfirmUser[W.XMarkInspectionFail].msg = nX.ToString() + " X-MARK 검사 실패 하였습니다." + ETC.NewLine + "YES : 다시 검사 / NO : REWORK 트레이로 배출";
-                    COM_.ViewWarning(nThread, W.XMarkInspectionFail);
-                    while (UTIL_.WaitWarning(nThread, W.XMarkInspectionFail, "X-MARK 검사 실패 메세지 발생")) ;
-                    if (ConfirmUser[W.XMarkInspectionFail].result) goto ReCHCK;
+                    W.ViewWarning(nThread, W.XMarkInspectionFail);
+                    while (W.WaitWarning(nThread, W.XMarkInspectionFail, "X-MARK 검사 실패 메세지 발생")) ;
+                    if (ConfirmUser[W.XMarkInspectionFail].result){
+                        if (bMF) return eRTN.FAIL;
+                        goto ReCHCK;
+                    }
                     else{
                         for (int n = 0; n < isPrsErr.Length; n++){
                             if (isPrsErr[n]){
                                 PICKER[(int)nX].finger[n].iResult = (int)eSTATUS.NG;
-                                COM_.Bit(nThread, B.HD_NG[(int)nX], true, "유닛 NG 결과 플러그 ON");
+                                B.Bit(nThread, B.HD_NG[(int)nX], true, "유닛 NG 결과 플러그 ON");
                             }
                         }
                     } //rework 트레이로 배출
                 }
-                else goto ReCHCK;
+                else{
+                    if (bMF) return eRTN.FAIL;
+                    goto ReCHCK;
+                }
             }
 
             LogEnd(nThread, comment + " 완료");
         Pass:
             mOUT[O.BTM_VISION_BLOW] = false;
-            COM_.SetBit(nThread, B.XPRSBusy[(int)nX], false, "PRS 작업 진행 완료");
+            B.SetBit(nThread, B.XPRSBusy[(int)nX], false, "PRS 작업 진행 완료");
             return eRTN.SUCESS;
         }
         public static eRTN MoveOnTheFlying(int nThread, eHD nX, string cmd, string comment){
@@ -1715,7 +1855,7 @@ namespace NSS_3310S.SEQ{
                 if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.HD[(int)nX], P.CAL_, 0.001, false, false, false, "", nX.ToString() + " 플라잉  시작 위치 이송")) return eRTN.FAIL;
             }
 
-            stMoveInfo mv = GetMoveInfo(M.HD[(int)nX], P.PkCenter);
+            stMoveInfo mv = M.GetMoveInfo(M.HD[(int)nX], P.PkCenter);
             double[] dAbsTrargetPos = {
                                         mv.Pos + (dFingerPitch * 5),
                                         mv.Pos + (dFingerPitch * 4),
@@ -1755,6 +1895,8 @@ namespace NSS_3310S.SEQ{
             string sLog = comment + " " + sLogPos;
             //속도변경 하지 않는다. 
             if (eRTN.SUCESS != WRAP_.MOVE(nThread, M.HD[(int)nX], mv, 0.01, false, true, true, cmd, sLog)) return eRTN.FAIL;
+            UTIL_.DELAY(100);
+            LAB_.TriggerOutput((int)nX, uVAL.Low);
             return eRTN.SUCESS;
         }
         public static eRTN ReadPRS(int nThread, eHD nX){
@@ -1764,15 +1906,15 @@ namespace NSS_3310S.SEQ{
                     if (mIN[I.PRSVisionWirte]) break;
                 }
                 if (!mIN[I.PRSVisionWirte]){
-                    COM_.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
-                    COM_.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 리셋");
-                    UTIL_.OnERROR(E.emsPRSReadingTimeOver); // prs 결과 값 없음!
+                    O.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
+                    O.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 리셋");
+                    E.OnERROR(E.emsPRSReadingTimeOver); // prs 결과 값 없음!
                     return eRTN.TimeOver;
                 }
             }
             //PRS 데이터 파일 읽고 삭제
             if (!File.Exists(PATH_.PRS)){
-                UTIL_.OnERROR(E.emsNotPRSFile);
+                E.OnERROR(E.emsNotPRSFile);
                 return eRTN.NotDataFile;
             }
             Array.Clear(isPrsErr, 0, isPrsErr.Length);
@@ -1790,9 +1932,9 @@ namespace NSS_3310S.SEQ{
                         double py = double.Parse(sRslt[2]);
                         double pth = double.Parse(sRslt[3]);
                         if (iResult == (int)eSTATUS.X_MARK) PICKER[(int)nX].finger[idxFinger].iResult = iResult;
-                        PICKER[(int)nX].finger[idxFinger].prsX = Math.Abs(px) > 0.1 ? 0 : px;
-                        PICKER[(int)nX].finger[idxFinger].prsY = Math.Abs(py) > 0.1 ? 0 : py;
-                        PICKER[(int)nX].finger[idxFinger].prsR = Math.Abs(pth) > 0.1 ? 0 : pth;
+                        PICKER[(int)nX].finger[idxFinger].prsX = Math.Abs(px) > 3 ? 0 : px;
+                        PICKER[(int)nX].finger[idxFinger].prsY = Math.Abs(py) > 3 ? 0 : py;
+                        PICKER[(int)nX].finger[idxFinger].prsR = Math.Abs(pth) > 3 ? 0 : pth;
                     }
                     else{
                         if (iResult == (int)eSTATUS.X_MARK) PICKER[(int)nX].finger[idxFinger].iResult = iResult;
@@ -1810,25 +1952,25 @@ namespace NSS_3310S.SEQ{
             }
             catch (Exception exp){
                 LogWR_.SaveLogException("ChipPkr_PRS", exp);
-                UTIL_.OnERROR(E.emsPRSReadingFail, 500);
-                COM_.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
-                COM_.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
+                E.OnERROR(E.emsPRSReadingFail, 500);
+                O.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
+                O.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
                 return eRTN.ReadingDataFail;
             }
-            COM_.SetOutput(nThread, O.PRSReading, true, "PRS 데이터 읽었다고 비전에 신호 ON");
+            O.SetOutput(nThread, O.PRSReading, true, "PRS 데이터 읽었다고 비전에 신호 ON");
             for (int i = 0; i < (int)prMACHINE[CP.VisionReponseOverTime]; i++){
                 if (!mIN[I.PRSVisionWirte]) break;
                 UTIL_.DELAY(1);
             }
             UTIL_.DELAY(100);
             if (mIN[I.PRSVisionWirte]){
-                COM_.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
-                COM_.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
-                UTIL_.OnERROR(E.emsPRSReadedFail); // 결과 값 리딩 후 비전 prs data result 신호 off 안됨
+                O.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 읽었다고 비전에 신호 OFF");
+                O.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
+                E.OnERROR(E.emsPRSReadedFail); // 결과 값 리딩 후 비전 prs data result 신호 off 안됨
                 return eRTN.TimeOver;
             }
-            COM_.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 리딩 완료");
-            COM_.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
+            O.SetOutput(nThread, O.PRSReading, false, "PRS 데이터 리딩 완료");
+            O.SetOutput(nThread, O.PRSStart, false, ThreadName[nThread] + " PRS 완료");
 
             for (int n = 0; n < isPrsErr.Length; n++){
                 if (isPrsErr[n]){
@@ -1849,13 +1991,13 @@ namespace NSS_3310S.SEQ{
         }
         public static eRTN PkrOnSHOT(int nThread){
             if (!mIN[I.VisionRdy] && !bDRYRUN){
-                UTIL_.OnERROR(E.emsNotVisionReady);
+                E.OnERROR(E.emsNotVisionReady);
                 return eRTN.EMS;
             }
-            COM_.SetOutput(nThread, O.PkCalStart, true, ThreadName[nThread] + " PICKER CALIBRATION START");
+            O.SetOutput(nThread, O.PkCalStart, true, ThreadName[nThread] + " PICKER CALIBRATION START");
             if (!mOUT[O.UsePkCal]) PK_CAL_LIGHT(nThread, true);
             if (!Trigger((int)eTRIGGER.BTM)){
-                COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
+                O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 실패");
                 return eRTN.FAIL;
             }
             return eRTN.SUCESS;
@@ -1867,14 +2009,14 @@ namespace NSS_3310S.SEQ{
                     if (mIN[I.PRSCalWrite]) break;
                 }
                 if (!mIN[I.PRSCalWrite]){
-                    UTIL_.OnERROR(E.emsPkCalReadingTimeOver);
+                    E.OnERROR(E.emsPkCalReadingTimeOver);
                     return eRTN.TimeOver;
                 }
             }
 
             //PRS 데이터 파일 읽고 삭제
             if (!File.Exists(PATH_.PkCAL)){
-                UTIL_.OnERROR(E.emsNotPkCalFile);
+                E.OnERROR(E.emsNotPkCalFile);
                 return eRTN.NotDataFile;
             }
             string[] sLine = File.ReadAllText(PATH_.PkCAL).Split(ETC.CrLf);
@@ -1887,39 +2029,39 @@ namespace NSS_3310S.SEQ{
                     IsDOUBLE[D.PkCal_OffsetY] = double.Parse(sRslt[1]);
                 } //OK
                 else{
-                    COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
-                    COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 검사 실패");
-                    UTIL_.OnERROR(E.emsPkCalFail);
+                    O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
+                    O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 검사 실패");
+                    E.OnERROR(E.emsPkCalFail);
                     return eRTN.FAIL;
                 } //FAIL
             }
             catch (Exception e){
                 LogWR_.SaveLogException("PK_CAL FAIL", e);
-                UTIL_.OnERROR(E.emsPkCalReadingFail, 500);
-                COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
-                COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 데이터 값 오류");
+                E.OnERROR(E.emsPkCalReadingFail, 500);
+                O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
+                O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 데이터 값 오류");
                 return eRTN.ReadingDataFail;
             }
-            COM_.SetOutput(nThread, O.PkCalReading, true, "피커 CAL' 데이터 읽었다고 비전에 신호 ON");
+            O.SetOutput(nThread, O.PkCalReading, true, "피커 CAL' 데이터 읽었다고 비전에 신호 ON");
             for (int i = 0; i < (int)prMACHINE[CP.VisionReponseOverTime]; i++){
                 if (!mIN[I.PRSCalWrite]) break;
                 UTIL_.DELAY(1);
             }
             if (mIN[I.PRSCalWrite]){
-                COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
-                COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " PRS 완료");
-                UTIL_.OnERROR(E.emsPkCalREadingFail); // pk cal결과값 리딩 실패
+                O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 읽었다고 비전에 신호 OFF");
+                O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " PRS 완료");
+                E.OnERROR(E.emsPkCalREadingFail); // pk cal결과값 리딩 실패
                 return eRTN.TimeOver;
             }
-            COM_.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 완료");
-            COM_.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 완료");
+            O.SetOutput(nThread, O.PkCalReading, false, "피커 CAL' 데이터 리딩 완료");
+            O.SetOutput(nThread, O.PkCalStart, false, ThreadName[nThread] + " 피커 CAL' 완료");
             return eRTN.SUCESS;
         }
 
         public static eRTN Seq_HeadPkrAutoCal(int nThread){
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (!mIN[I.VisionRdy]){
-                UTIL_.OnERROR(E.emsNotVisionReady);
+                E.OnERROR(E.emsNotVisionReady);
                 goto CalFail;
             }
 
@@ -2007,22 +2149,22 @@ namespace NSS_3310S.SEQ{
         public static eRTN UnitPlc(int nThread, eHD nX, string comment){
             int pocketX = 0, pocketY = 0;
             
-            while (UTIL_.WaitBIT(nThread, B.GoodTrayWork, false, "GOOD 트레이 공급 중이면 대기")) ;
-            while (UTIL_.WaitBIT(nThread, B.PkrUnitPlaceStop, true, nX.ToString() + " 플레이스 일시 정지")) ;
+            while (B.WaitBIT(nThread, B.GoodTrayWork, false, "GOOD 트레이 공급 중이면 대기")) ;
+            while (B.WaitBIT(nThread, B.PkrUnitPlaceStop, true, nX.ToString() + " 플레이스 일시 정지")) ;
             IsLONG[L.CurWorkXPlc] = (int)nX;
             LogStart(nThread, comment + " 진행");
             for (int z = 0; z < CNT_.PKR; z++) {
             RePLACE:
                 if (PK_Z[z + (CNT_.PKR * (int)nX)] == eSTATUS.NONE || !PICKER[(int)nX].finger[z].valid || IsBIT[B.HD_INSPECTION[(int)nX]] || PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.NG) continue; // 피커 스킵 상태 확인.
-                if (PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.X_MARK) {
-                    COM_.Bit(nThread, B.HD_REJECT[(int)nX], true, "유닛 REJECT 결과 플러그 ON");
+                if (PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.X_MARK || PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.TOP_FAIL) {
+                    B.Bit(nThread, B.HD_REJECT[(int)nX], true, "유닛 REJECT 결과 플러그 ON");
                     continue;
                 }
 
             ReChekTray:
                 if (prMACHINE[CP.UseTrayFeederTrayCheck] == (int)eUSE.USE) {
                     if (!mIN[I.TrayCheck[IsLONG[L.CurWorkTray]]]) {  //
-                        UTIL_.OnERROR(E.TrayFeederTrayVanish[IsLONG[L.CurWorkTray]], 500);
+                        E.OnERROR(E.TrayFeederTrayVanish[IsLONG[L.CurWorkTray]], 500);
                         goto ReChekTray;
                     }
                 }
@@ -2036,6 +2178,8 @@ namespace NSS_3310S.SEQ{
                     PK_Z[z + (CNT_.PKR * (int)nX)] = eSTATUS.EMPTY;
                     MAP_.TrayMap_Work((int)IsLONG[L.CurWorkTray], (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], pocketX, pocketY);
                     MAP_.mapTray[(int)IsLONG[L.CurWorkTray], pocketY, pocketX] = true;
+                    IsLONG[L.StageUnitGood[PICKER[(int)nX].StagePnP]]++;
+                    LogWR_.DEBUG_PRINT(PICKER[(int)nX].StagePnP.ToString() + " GOOD");
                     DEF.UPH();
 
                     if (prMACHINE[CP.UsePlaceCheck] == (int)eUSE.USE){
@@ -2046,27 +2190,27 @@ namespace NSS_3310S.SEQ{
                             while (eRTN.SUCESS != MoveX(nThread, nX, P.Reject, "", nX.ToString() + " 유닛 버리는 위치 이송")) ;
 
                             ConfirmUser[W.PlaceFail].msg = nX.ToString() + " 피커" + (z + 1).ToString() + " 플레이스 실패!" + ETC.CrLf + "피커 상태 확인 후 진행 하십시오!";
-                            COM_.ViewWarning(nThread, W.PlaceFail);
-                            while (UTIL_.WaitWarning(nThread, W.PlaceFail, "PLACE 실패로 인하여 경고 메세지 발생")) ;
+                            W.ViewWarning(nThread, W.PlaceFail);
+                            while (W.WaitWarning(nThread, W.PlaceFail, "PLACE 실패로 인하여 경고 메세지 발생")) ;
                         }
                         PkBlow(nX, (ePK)z, stBIT.ON, stBIT.NotDelay);
                     }
                 }
                 else{
-                    COM_.SetBit(nThread, B.GoodTrayAutoUnloading, true, "설비 RUNNING 중 GOOD TRAY 배출 모드 플로그 ON");
-                    COM_.SetBit(nThread, B.GoodTrayWork, false, "GOOD TRAY 배출 신호 보냄");
-                    while (UTIL_.WaitBIT(nThread, B.GoodTrayWork, false, "GOOD TRAY 준비 될 동안 대기")) ;
+                    B.SetBit(nThread, B.GoodTrayAutoUnloading, true, "설비 RUNNING 중 GOOD TRAY 배출 모드 플로그 ON");
+                    B.SetBit(nThread, B.GoodTrayWork, false, "GOOD TRAY 배출 신호 보냄");
+                    while (B.WaitBIT(nThread, B.GoodTrayWork, false, "GOOD TRAY 준비 될 동안 대기")) ;
                     goto RePLACE;
                 }
 
                 if (-1 == MAP_.GetTrayPocket((eTRAY)IsLONG[L.CurWorkTray], (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref pocketX, ref pocketY)){
-                    COM_.SetBit(nThread, B.GoodTrayWork, false, "GOOD TRAY 가득참");
+                    B.SetBit(nThread, B.GoodTrayWork, false, "GOOD TRAY 가득참");
                     if (z == CNT_.PKR - 1) break;  // 마지막 핑거면 빠져나가
-                    while (UTIL_.WaitBIT(nThread, B.GoodTrayWork, false, "트레이 트레스퍼 준비 될 동안 대기")) ;
+                    while (B.WaitBIT(nThread, B.GoodTrayWork, false, "트레이 트레스퍼 준비 될 동안 대기")) ;
                 }
             }
             //while (eRTN.SUCESS != MovePicRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 픽업 대기 위치")) ;
-            COM_.SetBit(nThread, B.XPlcBusy[(int)nX], false, nX.ToString() + " 유닛 플레이스 완료");
+            B.SetBit(nThread, B.XPlcBusy[(int)nX], false, nX.ToString() + " 유닛 플레이스 완료");
             while (eRTN.SUCESS != MoveHDPkRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 대기 위치")) ;
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
@@ -2074,21 +2218,21 @@ namespace NSS_3310S.SEQ{
         public static eRTN MoveUnitPlc(int nThread, eHD nX, int nPK, ref int nPocketX, ref int nPocketY){
             MAP_.GetTrayPocket((eTRAY)IsLONG[L.CurWorkTray], (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref nPocketX, ref nPocketY);
             if (nPocketY >= 1){
-                while (UTIL_.WaitBIT(nThread, B.GoodTray1ULDConv, B.GoodTray2ULDConv, true, true, "콘베어 언로딩 대기 중 대기", stBIT.OR)) ;
+                while (B.WaitBIT(nThread, B.GoodTray1ULDConv, B.GoodTray2ULDConv, true, true, "콘베어 언로딩 대기 중 대기", stBIT.OR)) ;
             }
         ReCHECK:
             if (!mOUT[O.GoodTrayFrontGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]] || !mOUT[O.GoodTrayBackGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]] ||
                     mOUT[O.GoodTrayFrontUnGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]] || mOUT[O.GoodTrayBackUnGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]] ||
                     mIN[I.GoodTrayFrontUnGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]] || mIN[I.GoodTrayBackUnGrip[(int)(eTRAY)IsLONG[L.CurWorkTray]]])
             {
-                UTIL_.OnERROR(E.ChkGoodTrayTransfer[(int)(eTRAY)IsLONG[L.CurWorkTray]]);
+                E.OnERROR(E.ChkGoodTrayTransfer[(int)(eTRAY)IsLONG[L.CurWorkTray]]);
                 goto ReCHECK;
             } //그리퍼 그립 안되어 있음.
             if (prMACHINE[CP.UseTrayCheckSensor] == (int)eUSE.USE){
                 if (!mIN[I.TrayCheck[(int)(eTRAY)IsLONG[L.CurWorkTray]]]){
                     ConfirmUser[W.TrayDisappear].msg = "GOOD TRAY TRANSFER " + ((int)(eTRAY)IsLONG[L.CurWorkTray] + 1).ToString() + "번  트레이 사라짐. 트레이 안착 상태 확인 바랍니다." + ETC.CrLf + "(YES : 트레이 배출 후 새로운 트레이 로딩 후 작업 진행 || NO : 트레이 안착 상태 재확인)";
-                    COM_.ViewWarning(nThread, W.TrayDisappear);
-                    while (UTIL_.WaitWarning(nThread, W.TrayDisappear, "HEAD2 PICK-UP 실패로 인하여 경고 메세지 발생")) ;
+                    W.ViewWarning(nThread, W.TrayDisappear);
+                    while (W.WaitWarning(nThread, W.TrayDisappear, "HEAD2 PICK-UP 실패로 인하여 경고 메세지 발생")) ;
                     if (ConfirmUser[W.TrayDisappear].result){
                         DEF.ResetTray((eTRAY)IsLONG[L.CurWorkTray]);
                         return eRTN.VANISH; //yes : 트레이 
@@ -2096,7 +2240,7 @@ namespace NSS_3310S.SEQ{
                     else goto ReCHECK;  //no : 트레이 안착 상태 재확인
                 }
             }
-            while (eRTN.SUCESS != MoveXPlc(nThread, nX, nPK, (eTRAY)IsLONG[L.CurWorkTray], nPocketX, nPocketY, stBIT.NotCAM, nX.ToString() + " -> " + ((eTRAY)IsLONG[L.CurWorkTray]).ToString() + " [" + nPocketX.ToString() + "/" + nPocketY.ToString() + "] 위치 이송")) ;
+            while (eRTN.SUCESS != MoveXPlc(nThread, nX, nPK, (eTRAY)IsLONG[L.CurWorkTray], nPocketX, nPocketY, stBIT.NotCAM, nX.ToString() + " -> " + ((eTRAY)IsLONG[L.CurWorkTray]).ToString() + " [" + nPocketX.ToString() + "/" + nPocketY.ToString() + "] 위치 이송", true)) ;
             return eRTN.SUCESS;
         }
 
@@ -2108,13 +2252,13 @@ namespace NSS_3310S.SEQ{
         public static eRTN PkNGPlc(int nThread, eHD nX, string comment){
             int pocketX = 0, pocketY = 0;
             if (!IsBIT[B.HD_NG[(int)nX]] && !IsBIT[B.HD_INSPECTION[(int)nX]]){
-                COM_.SetBit(nThread, B.NGPlcBusy[(int)nX], false, nX.ToString() + "  NG 유닛 플레이스 없음");
+                B.SetBit(nThread, B.NGPlcBusy[(int)nX], false, nX.ToString() + "  NG 유닛 플레이스 없음");
                 return eRTN.SUCESS;
             }
 
-            while (UTIL_.WaitBIT(nThread, B.ReWorkTrayWork, false, "NG 트레이 공급 중이면 대기")) ;
+            while (B.WaitBIT(nThread, B.ReWorkTrayWork, false, "NG 트레이 공급 중이면 대기")) ;
             LogStart(nThread, comment + " 진행");
-            for (int z = 0; z < CNT_.PKR; z++){
+            for (int z = 0; z < CNT_.PKR; z++) {
                 if (PK_Z[z + (CNT_.PKR * (int)nX)] == eSTATUS.NONE || !PICKER[(int)nX].finger[z].valid ||
                     !(PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.NG || /*PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.X_MARK ||*/
                     PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.FIRST || PICKER[(int)nX].finger[z].iResult == (int)eSTATUS.SECOND)) continue;
@@ -2122,13 +2266,13 @@ namespace NSS_3310S.SEQ{
                 MAP_.GetTrayPocket(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref pocketX, ref pocketY);
 
             ReChekTray:
-                if (prMACHINE[CP.UseTrayFeederTrayCheck] == (int)eUSE.USE){
-                    if (!mIN[I.NG_TRAY_FEEDER_TRAY_CHECK]){
-                        UTIL_.OnERROR(E.emsReworkTrayVanish, 500);
+                if (prMACHINE[CP.UseTrayFeederTrayCheck] == (int)eUSE.USE) {
+                    if (!mIN[I.NG_TRAY_FEEDER_TRAY_CHECK]) {
+                        E.OnERROR(E.emsReworkTrayVanish, 500);
                         goto ReChekTray;
                     }
                 }
-                while (eRTN.SUCESS != MoveXPlc(nThread, nX, z, eTRAY.REWORK, pocketX, pocketY, stBIT.NotCAM, nX.ToString() + " -> " + (eTRAY.REWORK).ToString() + " [" + pocketX.ToString() + "/" + pocketY.ToString() + "] 위치 이송")) ;
+                while (eRTN.SUCESS != MoveXPlc(nThread, nX, z, eTRAY.REWORK, pocketX, pocketY, stBIT.NotCAM, nX.ToString() + " -> " + (eTRAY.REWORK).ToString() + " [" + pocketX.ToString() + "/" + pocketY.ToString() + "] 위치 이송", true)) ;
                 while (eRTN.SUCESS != MovePK(nThread, nX, z, P.PK_PLC[z], "", nX.ToString() + " 피커" + (z + 1).ToString() + " 플레이스 위치 이송")) ;
                 PkBlow(nX, (ePK)z, stBIT.ON, stBIT.Delay);
                 UTIL_.DELAY((int)prMODEL[RP.PlaceDelay]);
@@ -2137,15 +2281,16 @@ namespace NSS_3310S.SEQ{
                 PICKER[(int)nX].finger[z].valid = false;
                 MAP_.TrayMap_Reject((int)eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], pocketX, pocketY);
                 MAP_.mapTray[(int)eTRAY.REWORK, pocketY, pocketX] = true;
+                IsLONG[L.StageUnitNG[PICKER[(int)nX].StagePnP]] ++;
                 AddReworkUnit();
                 if (-1 == MAP_.GetTrayPocket(eTRAY.REWORK, (int)prMODEL[RP.TrayCntX], (int)prMODEL[RP.TrayCntY], ref pocketX, ref pocketY)){
-                    COM_.SetBit(nThread, B.ReWorkTrayWork, false, "REWORK TRAY 가득참");
+                    B.SetBit(nThread, B.ReWorkTrayWork, false, "REWORK TRAY 가득참");
                     if (z == CNT_.PKR - 1) break;  // 마지막 핑거면 빠져나가
-                    while (UTIL_.WaitBIT(nThread, B.ReWorkTrayWork, false, "REWORK 트레이 준비 될 동안 대기")) ;
+                    while (B.WaitBIT(nThread, B.ReWorkTrayWork, false, "REWORK 트레이 준비 될 동안 대기")) ;
                 }
             }
             //while (eRTN.SUCESS != MovePicRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 픽업 대기 위치")) ;
-            COM_.SetBit(nThread, B.NGPlcBusy[(int)nX], false, nX.ToString() + "  NG 유닛 플레이스 완료");
+            B.SetBit(nThread, B.NGPlcBusy[(int)nX], false, nX.ToString() + "  NG 유닛 플레이스 완료");
             while (eRTN.SUCESS != MoveHDPkRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 대기 위치")) ;
             LogEnd(nThread, comment + " 완료");
             return eRTN.SUCESS;
@@ -2156,17 +2301,19 @@ namespace NSS_3310S.SEQ{
             IsLONG[L.DayRejectUnit]++;
             IsLONG[L.OutCnt]++;
         }
-        public static eRTN PkRejectPlc(int nThread, eHD nX, string comment){
+        public static eRTN PkRejectPlc(int nThread, eHD nX, eMAP_BLOCK nStage, string comment){
             //while (eRTN.SUCESS != MovePicRdy(nThread, nX, "", nX.ToString() + "  피커 Z축 픽업 대기 위치")) ;
         ReCheck:
             if (prMACHINE[CP.UseRejectBoxCheck] == (int)eUSE.USE){
                 if (!mIN[I.REJECT_BOX]){
-                    UTIL_.OnERROR(E.emsRejectBoxVanish, 500);
+                    E.OnERROR(E.emsRejectBoxVanish, 500);
                     goto ReCheck;
                 }
                 if (!mIN[I.REJECT_BOX_FULL_CHECK1] || !mIN[I.REJECT_BOX_FULL_CHECK2]){
-                    UTIL_.OnERROR(E.emsRejectBoxFullCheck, 500);
-                    goto ReCheck;
+                    if (prMACHINE[CP.UseNGBoxError] == (int)eUSE.USE) {
+                        E.OnERROR(E.emsRejectBoxFullCheck, 500);
+                        goto ReCheck;
+                    }
                 }
             }
         
@@ -2177,7 +2324,17 @@ namespace NSS_3310S.SEQ{
                 if (PK_Z[i + (CNT_.PKR * (int)nX)] == eSTATUS.NONE || !PICKER[(int)nX].finger[i].valid) continue;
                 PK_Z[i + (CNT_.PKR * (int)nX)] = eSTATUS.EMPTY;
                 PICKER[(int)nX].finger[i].valid = false;
-                AddRejectUnit();
+                IsLONG[L.StageUnitXOut[PICKER[(int)nX].StagePnP]]++;
+                LogWR_.DEBUG_PRINT(PICKER[(int)nX].StagePnP.ToString() + " NG");
+                if (prMACHINE[CP.UseSizeNGRejectBox] == (int)eUSE.USE){ 
+                    if (IsLONG[L.StageNgCount[(int)nStage]] > 0){
+                        IsLONG[L.StageNgCount[(int)nStage]]--;
+                    }
+                    else{
+                        AddRejectUnit();
+                    }
+                }
+                else AddRejectUnit();
             }
             PkBlow(nX, true);
             UTIL_.DELAY((int)prMACHINE[CP.RejectBlowDelay]);
@@ -2196,7 +2353,7 @@ namespace NSS_3310S.SEQ{
             }
         }
 
-        public static eRTN MoveXPlc(int nThread, eHD nX, int nPK, eTRAY nFeeder, int nPocketX, int nPocketY, bool CamView, string comment){
+        public static eRTN MoveXPlc(int nThread, eHD nX, int nPK, eTRAY nFeeder, int nPocketX, int nPocketY, bool CamView, string comment, bool PRSOffset = false){
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (!C.Interlock.ChkInterlock(E.emsCalZigNotBackPos, true)) return eRTN.EMS;
 
@@ -2214,7 +2371,7 @@ namespace NSS_3310S.SEQ{
 #if _NSS3300
 #else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK]){
-                                        UTIL_.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
+                                        E.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
 #endif
@@ -2225,7 +2382,7 @@ namespace NSS_3310S.SEQ{
 #else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK] || !mIN[I.GOOD_TRAY2_UNGRIP_C]){
 #endif
-                                        UTIL_.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
+                                        E.OnERROR(E.emsNotMoveFeeder1PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
                                 }
@@ -2239,7 +2396,7 @@ namespace NSS_3310S.SEQ{
 #if _NSS3300
 #else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK]){
-                                        UTIL_.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
+                                        E.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
 #endif
@@ -2250,7 +2407,7 @@ namespace NSS_3310S.SEQ{
 #else
                                     if (!mIN[I.GOOD_RAIL_HEAD1_CHECK] || !mIN[I.GOOD_RAIL_HEAD2_CHECK] || !mIN[I.GOOD_TRAY1_UNGRIP_C]){
 #endif
-                                        UTIL_.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
+                                        E.OnERROR(E.emsNotMoveFeeder2PlcPos, 500);
                                         return eRTN.FAIL;
                                     }
                                 }
@@ -2277,24 +2434,36 @@ namespace NSS_3310S.SEQ{
             double dPkrOffsetY = prMACHINE[CP.PkPlcOffsetY[(int)nX]];
             GetDistanceBetweenHDCamAndPkr(nX, ref Distance);
 
-            stMoveInfo mx = GetMoveInfo(M.HD[(int)nX], P.HD_PLC[(int)nFeeder]);
-            stMoveInfo mt = GetMoveInfo(M.HD_TH[(int)nX], P.PkPlc);
-            stMoveInfo mz = GetMoveInfo(mtZ, P.PK_PLC[nPK]);
-            stMoveInfo my = GetMoveInfo(M.TRAY_FEEDER[(int)nFeeder], P.Tray_Place[(int)nX]);
-            GetPkOffset(nX, (ePK)nPK, mt.Pos, ref PkOffset);
+            stMoveInfo mx = M.GetMoveInfo(M.HD[(int)nX], P.HD_PLC[(int)nFeeder]);
+            stMoveInfo mt = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPlc);
+            stMoveInfo mz = M.GetMoveInfo(mtZ, P.PK_PLC[nPK]);
+            stMoveInfo my = M.GetMoveInfo(M.TRAY_FEEDER[(int)nFeeder], P.Tray_Place[(int)nX]);
+            GetPkOffset(nX, (ePK)nPK, mt.Pos, ref Pkr_Offset);
 
             mx.Pos = TryCalPos_[(int)nX, (int)nFeeder, index - 1].x;
             my.Pos = TryCalPos_[(int)nX, (int)nFeeder, index - 1].y;
             if (!CamView){
-                mx.Pos = mx.Pos + Distance.x + dPkrPitch + dPkrOffsetX + PkOffset.x;
-                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + dPkrOffsetY + PkOffset.y;
-                else my.Pos = my.Pos + Distance.y + dPkrOffsetY + PkOffset.y;
+                mx.Pos = mx.Pos + Distance.x + dPkrPitch + dPkrOffsetX + Pkr_Offset.x;
+                if (nX == (int)eHD.HD1) my.Pos = my.Pos + Distance.y + dPkrOffsetY + Pkr_Offset.y;
+                else                    my.Pos = my.Pos + Distance.y + dPkrOffsetY + Pkr_Offset.y;
+
+                if (PRSOffset && prMACHINE[CP.UesBtmInspection] == (int)eUSE.USE) {
+                    LogWR_.SavePRSLog("PLACE - " + nX.ToString() + " Pkr" + nPK.ToString() + " x = " + mx.Pos.ToString() + "[" + PICKER[(int)nX].finger[nPK].prsX.ToString() + "] y = " + my.Pos + " [" + PICKER[(int)nX].finger[nPK].prsY.ToString() +  "] t = " + mt.Pos.ToString() + " [" + PICKER[(int)nX].finger[nPK].prsR + " ]", "");
+                    if (prMACHINE[CP.UsePRSOffset] == (int)eUSE.USE) {
+                        mx.Pos = mx.Pos + (PICKER[(int)nX].finger[nPK].prsX * -1);
+                        my.Pos = my.Pos + PICKER[(int)nX].finger[nPK].prsY;
+                        if (prMACHINE[CP.UsePRSOffsetT] == (int)eUSE.USE) {
+                            mt.Pos = mt.Pos + PICKER[(int)nX].finger[nPK].prsR;
+                        }
+                        LogWR_.SavePRSLog("[PLACE] x = " + mx.Pos.ToString() + " y = " + my.Pos + " t = " + mt.Pos.ToString(), "");
+                    }
+                } //x축은 부호 반대!/  t축은 방향 맞음 / y축 방향 맞음
             } //검증!
 
             if (nPK == (int)ePK.PKR1 || nPK == (int)ePK.PKR3 || nPK == (int)ePK.PKR5 || nPK == (int)ePK.PKR7) mz.Pos += prMACHINE[CP.PlaceCheckPitch];//1,3,5,7 -
             else mz.Pos -= prMACHINE[CP.PlaceCheckPitch]; //HD2 //2,4,6,8 +
 
-            if (nPK == 0 || eMCStatus != eMachineStatus.AUTO || mtDATA[M.HD[(int)nX], P.BTMCamCenter].Pos < mtSTS[M.HD[(int)nX]].CurrentPosition) mz.Pos = GetPosData(mtZ, P.Ready); // 만약 TRAY TRANSFER에서 PALLET로 이송하면 (첫번째 구동 조건)
+            if (nPK == 0 || eMCStatus != eMachineStatus.AUTO || mtDATA[M.HD[(int)nX], P.BTMCamCenter].Pos < mtSTS[M.HD[(int)nX]].CurrentPosition) mz.Pos = M.GetPosData(mtZ, P.Ready); // 만약 TRAY TRANSFER에서 PALLET로 이송하면 (첫번째 구동 조건)
             if (index > 1){
                 my.Spd = prMODEL[RP.TrayWorkSpeed];
                 my.Acc = my.Spd * 10;
@@ -2324,7 +2493,7 @@ namespace NSS_3310S.SEQ{
 
             int motZ = M.HD1Pk[nPK];
             if (nX == eHD.HD2) motZ = M.HD2Pk[nPK];
-            stMoveInfo mZ = GetMoveInfo(motZ, nPos);
+            stMoveInfo mZ = M.GetMoveInfo(motZ, nPos);
 
             if (cmd == "ReCheckZ"){
                 double PicChkPitch = (prMACHINE[CP.PicUpCheckPitch] + prMODEL[RP.UnitThickess]) < (prMODEL[RP.UnitThickess] + 1) ? (prMODEL[RP.UnitThickess] + 1) : prMACHINE[CP.PicUpCheckPitch] + prMODEL[RP.UnitThickess];
@@ -2346,15 +2515,15 @@ namespace NSS_3310S.SEQ{
             double PkOffsetX = prMACHINE[CP.PkPicOffsetX[(int)nX]];
             double PkOffsetY = prMACHINE[CP.PkPicOffsetY[(int)nX]];
 
-            stMoveInfo mx = GetMoveInfo(M.HD[(int)nX], P.HDMasterZig[(int)nStage]);
-            stMoveInfo mt = GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
-            stMoveInfo my = GetMoveInfo(M.DRY_TABLE[(int)nStage], P.StageMasterZig[(int)nX]);
-            GetPkOffset(nX, nPk, mt.Pos, ref PkOffset);
+            stMoveInfo mx = M.GetMoveInfo(M.HD[(int)nX], P.HDMasterZig[(int)nStage]);
+            stMoveInfo mt = M.GetMoveInfo(M.HD_TH[(int)nX], P.PkPckUp);
+            stMoveInfo my = M.GetMoveInfo(M.DRY_TABLE[(int)nStage], P.StageMasterZig[(int)nX]);
+            GetPkOffset(nX, nPk, mt.Pos, ref Pkr_Offset);
 
             if (!CamView){
-                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + PkOffset.x;
-                if (nX == (int)eHD.HD1) my.Pos = my.Pos - Distance.y + PkOffsetY + PkOffset.y;
-                else my.Pos = my.Pos + Distance.y + PkOffsetY + PkOffset.y;
+                mx.Pos = mx.Pos + Distance.x + PkPitch + PkOffsetX + Pkr_Offset.x;
+                if (nX == (int)eHD.HD1) my.Pos = my.Pos - Distance.y + PkOffsetY + Pkr_Offset.y;
+                else my.Pos = my.Pos + Distance.y + PkOffsetY + Pkr_Offset.y;
             }
 
             stMoveInfo[] ms = { mx, mt, my };

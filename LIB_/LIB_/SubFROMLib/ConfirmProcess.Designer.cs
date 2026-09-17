@@ -36,6 +36,7 @@
             this.swNo1 = new System.Windows.Forms.Button();
             this.swYes1 = new System.Windows.Forms.Button();
             this.tmrConfirmProcess = new System.Windows.Forms.Timer(this.components);
+            this.CheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblMESSAGE
@@ -120,12 +121,27 @@
             this.tmrConfirmProcess.Interval = 500;
             this.tmrConfirmProcess.Tick += new System.EventHandler(this.TimerConfirmProcess_Tick);
             // 
+            // CheckBox
+            // 
+            this.CheckBox.BackColor = System.Drawing.Color.Maroon;
+            this.CheckBox.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBox.Location = new System.Drawing.Point(1, 153);
+            this.CheckBox.Name = "CheckBox";
+            this.CheckBox.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.CheckBox.Size = new System.Drawing.Size(493, 21);
+            this.CheckBox.TabIndex = 54;
+            this.CheckBox.Text = "OPTION CHECK BOX";
+            this.CheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CheckBox.UseVisualStyleBackColor = false;
+            this.CheckBox.Visible = false;
+            // 
             // ConfirmProcess
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(496, 174);
             this.ControlBox = false;
+            this.Controls.Add(this.CheckBox);
             this.Controls.Add(this.lblMESSAGE);
             this.Controls.Add(this.lbNum);
             this.Controls.Add(this.swOk);
@@ -152,5 +168,6 @@
         internal System.Windows.Forms.Button swNo1;
         internal System.Windows.Forms.Button swYes1;
         public System.Windows.Forms.Timer tmrConfirmProcess;
+        private System.Windows.Forms.CheckBox CheckBox;
     }
 }

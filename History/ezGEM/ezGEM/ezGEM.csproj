@@ -33,9 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EZGemPlusCS_64, Version=1.0.7926.34246, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="EZGemPlusCS_32, Version=1.0.8082.32611, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\WORK\OUTPUT\NEONTECH\NSS-3310S\EZGemPlusCS_64.dll</HintPath>
+      <HintPath>bin\Debug\EZGemPlusCS_32.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

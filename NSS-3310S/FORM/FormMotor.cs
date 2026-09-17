@@ -14,6 +14,7 @@ namespace NSS_3310S{
         UCL_JOG[] uMT               = null;
         Label[] lbMC                = null;
         Label[] lbMD                = null;
+        Label[] lbPrsOffset         = null;
         ComboBox[] CleanMode        = null;
         Label[] CleanRepeat         = null;
         ComboBox[] WorkedCleanMode  = null;
@@ -247,8 +248,9 @@ namespace NSS_3310S{
                              lblMGZ_UDPitch, lblMGZ_ULD_UDPitch, lblGripperBackPitch, lblRailLoaingOpenPitch,
                              lblStripPickUpCheckPitch, lblUnitPickUpCheckPitch, lblUnitWorkEndPitch,lblUnitWorkAirshowerSpd, lblUnitWorkBrushSpd,
                              BrushRepeatCnt, AirShowerRepeatCnt,
-                             lblStageWorkEndPitch,
-                             lblPickUpCheckUpPitch, lblPlaceCheckUpPitch, WorkedAirShowerRepeatCnt, lblMGZ_Pitch_Spd
+                             lblStageWorkEndPitch,lblStageErrorMovingSpeed,
+                             lblPickUpCheckUpPitch, lblPlaceCheckUpPitch, WorkedAirShowerRepeatCnt, lblMGZ_Pitch_Spd,
+                             lblPRSStepSpeed
             };
             lbMD = new[] {
                              lbFirstPickUpVacDelay, lbFirstLinePickUpVacDelay, lbPickUpVacDelay, lbPlaceBlowDelay, lbPlaceDelay,
@@ -265,6 +267,12 @@ namespace NSS_3310S{
             for (int i = 0; i < lbMD.Length; i++){
                 lbMD[i].TabIndex = RP.MTPara[i];
             }
+
+            lbPrsOffset = new[] { 
+                                lbPrsOffsetPk1, lbPrsOffsetPk2, lbPrsOffsetPk3, lbPrsOffsetPk4, lbPrsOffsetPk5, lbPrsOffsetPk6
+            };
+
+            chkOptionPRSSpd.TabIndex = CP.PRSStepSpeedHalf;
 
             CleanMode = new ComboBox[] { cbxCLEAN_MODE_0, cbxCLEAN_MODE_1, cbxCLEAN_MODE_2 };
             CleanRepeat = new Label[] { lblCLEAN_REPEAT_0, lblCLEAN_REPEAT_1, lblCLEAN_REPEAT_2 };
@@ -289,7 +297,6 @@ namespace NSS_3310S{
             cbxZigHoleNum.SelectedIndex = 0;
             HD_StageZigViewPos.TabIndex = ManualNumber.StageZigView;
 
-            ChkGripperLoadingPos.TabIndex   = RP.UseStripLoadngPos;
             lbPlaceCheckDelay.TabIndex      = CP.PlaceCheckDalay;
             lbRejectBlow.TabIndex           = CP.RejectBlowDelay;
 
@@ -320,13 +327,35 @@ namespace NSS_3310S{
 
         }
 
+        public void SetPrsOffsetZ() {
+            if (SelectX1.Checked) {
+                for (int i = 0; i < lbPrsOffset.Length; i++) {
+                    lbPrsOffset[i].TabIndex = RP.HD1_PRS_OFFSET[i];
+                }
+                SelectHead.Text = "HEAD1 PICKER";
+            }
+            else {
+                for (int i = 0; i < lbPrsOffset.Length; i++) {
+                    lbPrsOffset[i].TabIndex = RP.HD2_PRS_OFFSET[i];
+                }
+                SelectHead.Text = "HEAD2 PICKER";
+            }
+        }
+        private void EventClick_SavePrsOffset(object sender, EventArgs e) {
+            if (MessageBox.Show(SelectHead.Text + "  PRS 검사 Z축 옵셋 값을 저장 하시겠습니까 ?", "Save", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            for (int i = 0; i < lbPrsOffset.Length; i++) {
+                TEACH_.Write_Parameter(lbPrsOffset[i]);
+            }
+        }
+
         public void Initailize_View(){
             if (DEF.MotorPage < 0) ScreenChange(bMT_0);
+            SetPrsOffsetZ();
             InfoDataGridView();
             InfoComboBox();
             SetMTData();
             ReadPara();
-
+            
             lbMAPBLOCK_TEACHING.Text = DATA_.MC_DIR == 0 ? "맵블록 좌하단 위치" : "맵블록 우하단 위치";
             lbMAPBLOCK_TEACHING1.Text = lbMAPBLOCK_TEACHING.Text;
             lbTRAY_TEACHING.Text = DATA_.MC_DIR == 0 ? "트레이 좌상단 위치" : "트레이 우상단 위치";
@@ -651,6 +680,11 @@ namespace NSS_3310S{
             }
         }
 
+        public static void Write_ParaToggleSwitch(JCS.ToggleSwitch ts) {
+            int value = ts.Checked ? 1 : 0;
+            if (ts.Tag.ToString() == "MC" || ts.Tag.ToString() == "mc") TEACH_.WR_MCPara(ts.TabIndex, value);
+            else TEACH_.WR_MDLPara(ts.TabIndex, value);
+        }
         void SAVE(object sender){
             if (MessageBox.Show("Do you want to save teaching data ?", "Save", MessageBoxButtons.YesNo) == DialogResult.No) return;
             if (DEF.MotorPage == (long)ePage.Loading){
@@ -665,7 +699,7 @@ namespace NSS_3310S{
                 TEACH_.Write_Parameter(lblRailLoaingOpenPitch);
                 TEACH_.Write_Parameter(lblGripperBackPitch);
 
-                DATA_.iMANUAL.int_1 = ChkGripperLoadingPos.Checked ? (int)ePARA.RECIPE : (int)ePARA.COM;
+                DATA_.iMANUAL.int_1 = rbtGripperLoadingPosIndividual.Checked ? (int)ePARA.RECIPE : (int)ePARA.COM;
                 TEACH_.Write_ModelPara(RP.UseStripLoadngPos, DATA_.iMANUAL.int_1);
             }
             if (DEF.MotorPage == (long)ePage.HandlerPk){
@@ -714,6 +748,7 @@ namespace NSS_3310S{
                 TEACH_.Write_MotorPos(dgvPRSVision, M.BTM_CAM);
 
                 TEACH_.Write_Parameter(lblStageWorkEndPitch);
+                TEACH_.Write_Parameter(lblStageErrorMovingSpeed);
 
                 DEF.ReadSearchRoiUnitCnt();
                 DEF.ReadMapBlockPickUp();
@@ -722,6 +757,9 @@ namespace NSS_3310S{
                 TEACH_.Write_MotorPos(dgvHeadX, mtHead);
                 TEACH_.Write_MotorPos(dgvPkrZ, mtPk);
                 TEACH_.Write_MotorPos(dgvPkrTh, mtPkTh);
+
+                TEACH_.Write_Parameter(lblPRSStepSpeed);
+                Write_ParaToggleSwitch(chkOptionPRSSpd);
 
                 TEACH_.Write_Parameter(lblPickUpCheckUpPitch);
                 TEACH_.Write_Parameter(lblPlaceCheckUpPitch);
@@ -910,6 +948,7 @@ namespace NSS_3310S{
                 SelectX1.ForeColor = Color.White;
                 SelectX2.ForeColor = Color.Lime;
             }
+            SetPrsOffsetZ();
 
             if (RBTN.Name == "SelectPkr12"){
                 pPK = RBTN.TabIndex;
@@ -1063,7 +1102,14 @@ namespace NSS_3310S{
             COM_.SetGridData(dgvTrayPkrXZ, M.TrayPickerX, M.TrayPickerZ);
             COM_.SetGridData(dgvEmptyTrayLift, M.EmptyElv);
 
-            ChkGripperLoadingPos.Checked = DATA_.prMODEL[RP.UseStripLoadngPos] == (int)ePARA.RECIPE ? true : false;
+            if (DATA_.prMODEL[RP.UseStripLoadngPos] == (int)ePARA.RECIPE) {
+                rbtGripperLoadingPosIndividual.Checked = true;
+                rbtGripperLoadingPosCommon.Checked = false;
+            }
+            else {
+                rbtGripperLoadingPosIndividual.Checked = false;
+                rbtGripperLoadingPosCommon.Checked = true;
+            }
 
             //cleaner para
             for (int i = 0; i < CleanMode.Length; i++){
@@ -1106,6 +1152,17 @@ namespace NSS_3310S{
             for (int i = 0; i < lbMD.Length; i++){
                 lbMD[i].Text = DATA_.prMODEL[RP.MTPara[i]].ToString();
             }
+
+            for (int i = 0; i < lbPrsOffset.Length; i++) {
+                if (SelectX1.Checked){
+                    lbPrsOffset[i].Text = DATA_.prMODEL[RP.HD1_PRS_OFFSET[i]].ToString();
+                }
+                else {
+                    lbPrsOffset[i].Text = DATA_.prMODEL[RP.HD2_PRS_OFFSET[i]].ToString();
+                }
+            }
+
+            chkOptionPRSSpd.Checked = DATA_.prMACHINE[CP.PRSStepSpeedHalf] == (int)eUSE.USE ? true : false;
 
             lbPlaceCheckDelay.Text = DATA_.prMACHINE[CP.PlaceCheckDalay].ToString();
             lbRejectBlow.Text = DATA_.prMACHINE[CP.RejectBlowDelay].ToString();
@@ -1602,7 +1659,7 @@ namespace NSS_3310S{
                 if (UTIL_.PRINT_MASSAGE(DATA_.IsSTRING[S.MotorMessage], false, false, false)){
                     DATA_.iMANUAL.iMT1 = mtHead;
                     DATA_.iMANUAL.int_1 = (int)ePK.PKR1;
-
+                   
                     if (nRow == 0) DATA_.iMANUAL.RunManual = ManualNumber.HDXRdy;
                     if (nRow == 1) DATA_.iMANUAL.RunManual = ManualNumber.HDXCamCenter;
                     if (nRow == 2) DATA_.iMANUAL.RunManual = ManualNumber.HDXPkCenter;

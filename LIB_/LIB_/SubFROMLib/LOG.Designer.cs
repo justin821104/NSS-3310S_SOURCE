@@ -119,6 +119,28 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle99 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle100 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle103 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle104 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tmrHISTORY = new System.Windows.Forms.Timer(this.components);
             this.tcMTPAGE = new System.Windows.Forms.TabControl();
             this.tpg_0 = new System.Windows.Forms.TabPage();
@@ -159,29 +181,29 @@
             this.rbNow = new System.Windows.Forms.RadioButton();
             this.gbxTIME = new System.Windows.Forms.GroupBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dclPAUSE_CNT = new Owf.Controls.DigitalDisplayControl();
+            this.lbPAUSE_COUNT = new System.Windows.Forms.Label();
             this.lbPAUSE_CNT = new System.Windows.Forms.Label();
             this.lbRUN_DOWN = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.dclRUN_DOWN = new Owf.Controls.DigitalDisplayControl();
+            this.lbRUN_DOWN_TIME = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.dclPRODUCT_WAIT = new Owf.Controls.DigitalDisplayControl();
+            this.lbPRODUCT_WAIT_TIME = new System.Windows.Forms.Label();
             this.lbPRODUCT_WAIT = new System.Windows.Forms.Label();
             this.lbDOWN = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.dclDOWN = new Owf.Controls.DigitalDisplayControl();
+            this.lbDOWNTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dclPAUSE = new Owf.Controls.DigitalDisplayControl();
+            this.lbPAUSETime = new System.Windows.Forms.Label();
             this.lbPAUSE = new System.Windows.Forms.Label();
             this.lbSTOP = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dclSTOP = new Owf.Controls.DigitalDisplayControl();
+            this.lbSTOPTime = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dclRUN = new Owf.Controls.DigitalDisplayControl();
+            this.lbRUNTime = new System.Windows.Forms.Label();
             this.lbRUN = new System.Windows.Forms.Label();
             this.lbWORK = new System.Windows.Forms.Label();
             this.pRUN = new System.Windows.Forms.Panel();
-            this.dclWORK = new Owf.Controls.DigitalDisplayControl();
+            this.lbWorkTime = new System.Windows.Forms.Label();
             this.tpg_3 = new System.Windows.Forms.TabPage();
             this.dgvManual = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -247,13 +269,98 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpg_10 = new System.Windows.Forms.TabPage();
             this.dgwOneCycle = new System.Windows.Forms.DataGridView();
-            this.a1Panel1 = new Owf.Controls.A1Panel();
+            this.dataGridViewTextBoxColumn52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RECIPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tpg_11 = new System.Windows.Forms.TabPage();
+            this.swLotInfoSave = new System.Windows.Forms.Button();
+            this.LOT_ABF = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.LOT_ID = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.LBL_SPINDLE2_ID = new System.Windows.Forms.Label();
+            this.lbLED_BLADLE_BARCODE_SP2 = new System.Windows.Forms.Label();
+            this.LBL_SPINDLE1_ID = new System.Windows.Forms.Label();
+            this.lbLED_BLADLE_BARCODE_SP1 = new System.Windows.Forms.Label();
+            this.LBX_LOTINFO = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.DV = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.dcLOT_END = new System.Windows.Forms.Label();
+            this.dcLOT_START = new System.Windows.Forms.Label();
+            this.lbERROR = new System.Windows.Forms.Label();
+            this.pERROR = new System.Windows.Forms.Panel();
+            this.lbLOT_ERROR = new System.Windows.Forms.Label();
+            this.pSTOP = new System.Windows.Forms.Panel();
+            this.lbLOT_STOP = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.lbLOT_RUN = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.LB_NGTRAY_CNT = new System.Windows.Forms.Label();
+            this.LB_XOUT_CNT = new System.Windows.Forms.Label();
+            this.LB_NG_CNT = new System.Windows.Forms.Label();
+            this.LB_UNIT_CNT = new System.Windows.Forms.Label();
+            this.LB_GOODTRAY_CNT = new System.Windows.Forms.Label();
+            this.LB_ITS_CNT = new System.Windows.Forms.Label();
+            this.LB_GOOD_CNT = new System.Windows.Forms.Label();
+            this.LB_STRIP_CNT = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.BTN_LOTINFO_OPEN = new System.Windows.Forms.Button();
+            this.lvwLOTIDLIST = new System.Windows.Forms.ListView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.DGV_LOT_ERROR_LIST = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn63 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn64 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn65 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DGV_LOT_ERROR = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn59 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn62 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tpg_12 = new System.Windows.Forms.TabPage();
+            this.DGV_BLADE_INFO = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn66 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn67 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn68 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn69 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn70 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn71 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn72 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn73 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn74 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn75 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLOG_12 = new System.Windows.Forms.Button();
+            this.btnLOG_11 = new System.Windows.Forms.Button();
             this.btnLOG_10 = new System.Windows.Forms.Button();
             this.btnLOG_9 = new System.Windows.Forms.Button();
             this.btnLOG_8 = new System.Windows.Forms.Button();
             this.btnLOG_7 = new System.Windows.Forms.Button();
             this.btnLOG_5 = new System.Windows.Forms.Button();
-            this.lblStep = new System.Windows.Forms.Label();
             this.btnLOG_0 = new System.Windows.Forms.Button();
             this.btnLOG_6 = new System.Windows.Forms.Button();
             this.btnLOG_4 = new System.Windows.Forms.Button();
@@ -273,16 +380,8 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.SD = new System.Windows.Forms.SaveFileDialog();
-            this.dataGridViewTextBoxColumn52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RECIPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pnLogSwitch = new System.Windows.Forms.Panel();
             this.tcMTPAGE.SuspendLayout();
             this.tpg_0.SuspendLayout();
             this.gbxCUR_ERROR.SuspendLayout();
@@ -321,9 +420,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLot)).BeginInit();
             this.tpg_10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwOneCycle)).BeginInit();
-            this.a1Panel1.SuspendLayout();
+            this.tpg_11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DV)).BeginInit();
+            this.panel8.SuspendLayout();
+            this.pERROR.SuspendLayout();
+            this.pSTOP.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_LOT_ERROR_LIST)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_LOT_ERROR)).BeginInit();
+            this.tpg_12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_BLADE_INFO)).BeginInit();
             this.pnlInfo.SuspendLayout();
             this.GroupBox1.SuspendLayout();
+            this.pnLogSwitch.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrHISTORY
@@ -346,11 +456,13 @@
             this.tcMTPAGE.Controls.Add(this.tpg_8);
             this.tcMTPAGE.Controls.Add(this.tpg_9);
             this.tcMTPAGE.Controls.Add(this.tpg_10);
+            this.tcMTPAGE.Controls.Add(this.tpg_11);
+            this.tcMTPAGE.Controls.Add(this.tpg_12);
             this.tcMTPAGE.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcMTPAGE.Location = new System.Drawing.Point(136, 73);
+            this.tcMTPAGE.Location = new System.Drawing.Point(130, 66);
             this.tcMTPAGE.Name = "tcMTPAGE";
             this.tcMTPAGE.SelectedIndex = 0;
-            this.tcMTPAGE.Size = new System.Drawing.Size(1139, 802);
+            this.tcMTPAGE.Size = new System.Drawing.Size(1144, 806);
             this.tcMTPAGE.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcMTPAGE.TabIndex = 165;
             // 
@@ -365,7 +477,7 @@
             this.tpg_0.Location = new System.Drawing.Point(4, 5);
             this.tpg_0.Name = "tpg_0";
             this.tpg_0.Padding = new System.Windows.Forms.Padding(3);
-            this.tpg_0.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_0.Size = new System.Drawing.Size(1136, 797);
             this.tpg_0.TabIndex = 0;
             this.tpg_0.Text = "MAG/IN RAIL";
             // 
@@ -701,7 +813,7 @@
             this.tpg_1.Location = new System.Drawing.Point(4, 5);
             this.tpg_1.Name = "tpg_1";
             this.tpg_1.Padding = new System.Windows.Forms.Padding(3);
-            this.tpg_1.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_1.Size = new System.Drawing.Size(1136, 797);
             this.tpg_1.TabIndex = 1;
             this.tpg_1.Text = "STRIP / UNIT PICKER";
             // 
@@ -838,7 +950,7 @@
             this.tpg_2.Location = new System.Drawing.Point(4, 5);
             this.tpg_2.Name = "tpg_2";
             this.tpg_2.Padding = new System.Windows.Forms.Padding(3);
-            this.tpg_2.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_2.Size = new System.Drawing.Size(1136, 797);
             this.tpg_2.TabIndex = 2;
             this.tpg_2.Text = "MAP BLOCK / MARK VISION";
             // 
@@ -977,22 +1089,23 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.dclPAUSE_CNT);
+            this.panel4.Controls.Add(this.lbPAUSE_COUNT);
             this.panel4.Location = new System.Drawing.Point(128, 221);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(52, 28);
+            this.panel4.Size = new System.Drawing.Size(108, 28);
             this.panel4.TabIndex = 1186;
             // 
-            // dclPAUSE_CNT
+            // lbPAUSE_COUNT
             // 
-            this.dclPAUSE_CNT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclPAUSE_CNT.DigitColor = System.Drawing.Color.White;
-            this.dclPAUSE_CNT.DigitText = "0000";
-            this.dclPAUSE_CNT.Location = new System.Drawing.Point(3, 4);
-            this.dclPAUSE_CNT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclPAUSE_CNT.Name = "dclPAUSE_CNT";
-            this.dclPAUSE_CNT.Size = new System.Drawing.Size(44, 17);
-            this.dclPAUSE_CNT.TabIndex = 0;
+            this.lbPAUSE_COUNT.BackColor = System.Drawing.Color.Black;
+            this.lbPAUSE_COUNT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPAUSE_COUNT.ForeColor = System.Drawing.Color.White;
+            this.lbPAUSE_COUNT.Location = new System.Drawing.Point(17, 3);
+            this.lbPAUSE_COUNT.Name = "lbPAUSE_COUNT";
+            this.lbPAUSE_COUNT.Size = new System.Drawing.Size(71, 21);
+            this.lbPAUSE_COUNT.TabIndex = 1530;
+            this.lbPAUSE_COUNT.Text = "00000";
+            this.lbPAUSE_COUNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbPAUSE_CNT
             // 
@@ -1018,43 +1131,45 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.dclRUN_DOWN);
+            this.panel5.Controls.Add(this.lbRUN_DOWN_TIME);
             this.panel5.Location = new System.Drawing.Point(128, 192);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(108, 28);
             this.panel5.TabIndex = 1183;
             // 
-            // dclRUN_DOWN
+            // lbRUN_DOWN_TIME
             // 
-            this.dclRUN_DOWN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclRUN_DOWN.DigitColor = System.Drawing.Color.Yellow;
-            this.dclRUN_DOWN.DigitText = "00:00:00";
-            this.dclRUN_DOWN.Location = new System.Drawing.Point(3, 4);
-            this.dclRUN_DOWN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclRUN_DOWN.Name = "dclRUN_DOWN";
-            this.dclRUN_DOWN.Size = new System.Drawing.Size(99, 17);
-            this.dclRUN_DOWN.TabIndex = 0;
+            this.lbRUN_DOWN_TIME.BackColor = System.Drawing.Color.Black;
+            this.lbRUN_DOWN_TIME.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRUN_DOWN_TIME.ForeColor = System.Drawing.Color.Yellow;
+            this.lbRUN_DOWN_TIME.Location = new System.Drawing.Point(2, 2);
+            this.lbRUN_DOWN_TIME.Name = "lbRUN_DOWN_TIME";
+            this.lbRUN_DOWN_TIME.Size = new System.Drawing.Size(100, 21);
+            this.lbRUN_DOWN_TIME.TabIndex = 1529;
+            this.lbRUN_DOWN_TIME.Text = "00:00:00";
+            this.lbRUN_DOWN_TIME.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.dclPRODUCT_WAIT);
+            this.panel6.Controls.Add(this.lbPRODUCT_WAIT_TIME);
             this.panel6.Location = new System.Drawing.Point(128, 163);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(108, 28);
             this.panel6.TabIndex = 1182;
             // 
-            // dclPRODUCT_WAIT
+            // lbPRODUCT_WAIT_TIME
             // 
-            this.dclPRODUCT_WAIT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclPRODUCT_WAIT.DigitColor = System.Drawing.Color.Yellow;
-            this.dclPRODUCT_WAIT.DigitText = "00:00:00";
-            this.dclPRODUCT_WAIT.Location = new System.Drawing.Point(3, 4);
-            this.dclPRODUCT_WAIT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclPRODUCT_WAIT.Name = "dclPRODUCT_WAIT";
-            this.dclPRODUCT_WAIT.Size = new System.Drawing.Size(99, 17);
-            this.dclPRODUCT_WAIT.TabIndex = 0;
+            this.lbPRODUCT_WAIT_TIME.BackColor = System.Drawing.Color.Black;
+            this.lbPRODUCT_WAIT_TIME.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPRODUCT_WAIT_TIME.ForeColor = System.Drawing.Color.Yellow;
+            this.lbPRODUCT_WAIT_TIME.Location = new System.Drawing.Point(2, 2);
+            this.lbPRODUCT_WAIT_TIME.Name = "lbPRODUCT_WAIT_TIME";
+            this.lbPRODUCT_WAIT_TIME.Size = new System.Drawing.Size(100, 21);
+            this.lbPRODUCT_WAIT_TIME.TabIndex = 1528;
+            this.lbPRODUCT_WAIT_TIME.Text = "00:00:00";
+            this.lbPRODUCT_WAIT_TIME.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbPRODUCT_WAIT
             // 
@@ -1080,43 +1195,45 @@
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.dclDOWN);
+            this.panel7.Controls.Add(this.lbDOWNTime);
             this.panel7.Location = new System.Drawing.Point(128, 134);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(108, 28);
             this.panel7.TabIndex = 1179;
             // 
-            // dclDOWN
+            // lbDOWNTime
             // 
-            this.dclDOWN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclDOWN.DigitColor = System.Drawing.Color.Red;
-            this.dclDOWN.DigitText = "00:00:00";
-            this.dclDOWN.Location = new System.Drawing.Point(3, 4);
-            this.dclDOWN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclDOWN.Name = "dclDOWN";
-            this.dclDOWN.Size = new System.Drawing.Size(99, 17);
-            this.dclDOWN.TabIndex = 0;
+            this.lbDOWNTime.BackColor = System.Drawing.Color.Black;
+            this.lbDOWNTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDOWNTime.ForeColor = System.Drawing.Color.Red;
+            this.lbDOWNTime.Location = new System.Drawing.Point(2, 2);
+            this.lbDOWNTime.Name = "lbDOWNTime";
+            this.lbDOWNTime.Size = new System.Drawing.Size(100, 21);
+            this.lbDOWNTime.TabIndex = 1527;
+            this.lbDOWNTime.Text = "00:00:00";
+            this.lbDOWNTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.dclPAUSE);
+            this.panel2.Controls.Add(this.lbPAUSETime);
             this.panel2.Location = new System.Drawing.Point(128, 105);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(108, 28);
             this.panel2.TabIndex = 1178;
             // 
-            // dclPAUSE
+            // lbPAUSETime
             // 
-            this.dclPAUSE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclPAUSE.DigitColor = System.Drawing.Color.Red;
-            this.dclPAUSE.DigitText = "00:00:00";
-            this.dclPAUSE.Location = new System.Drawing.Point(3, 4);
-            this.dclPAUSE.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclPAUSE.Name = "dclPAUSE";
-            this.dclPAUSE.Size = new System.Drawing.Size(99, 17);
-            this.dclPAUSE.TabIndex = 0;
+            this.lbPAUSETime.BackColor = System.Drawing.Color.Black;
+            this.lbPAUSETime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPAUSETime.ForeColor = System.Drawing.Color.Red;
+            this.lbPAUSETime.Location = new System.Drawing.Point(2, 2);
+            this.lbPAUSETime.Name = "lbPAUSETime";
+            this.lbPAUSETime.Size = new System.Drawing.Size(100, 21);
+            this.lbPAUSETime.TabIndex = 1526;
+            this.lbPAUSETime.Text = "00:00:00";
+            this.lbPAUSETime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbPAUSE
             // 
@@ -1142,43 +1259,45 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.dclSTOP);
+            this.panel3.Controls.Add(this.lbSTOPTime);
             this.panel3.Location = new System.Drawing.Point(128, 76);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(108, 28);
             this.panel3.TabIndex = 1175;
             // 
-            // dclSTOP
+            // lbSTOPTime
             // 
-            this.dclSTOP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclSTOP.DigitColor = System.Drawing.Color.Red;
-            this.dclSTOP.DigitText = "00:00:00";
-            this.dclSTOP.Location = new System.Drawing.Point(3, 4);
-            this.dclSTOP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclSTOP.Name = "dclSTOP";
-            this.dclSTOP.Size = new System.Drawing.Size(99, 17);
-            this.dclSTOP.TabIndex = 0;
+            this.lbSTOPTime.BackColor = System.Drawing.Color.Black;
+            this.lbSTOPTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSTOPTime.ForeColor = System.Drawing.Color.Red;
+            this.lbSTOPTime.Location = new System.Drawing.Point(2, 2);
+            this.lbSTOPTime.Name = "lbSTOPTime";
+            this.lbSTOPTime.Size = new System.Drawing.Size(100, 21);
+            this.lbSTOPTime.TabIndex = 1525;
+            this.lbSTOPTime.Text = "00:00:00";
+            this.lbSTOPTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.dclRUN);
+            this.panel1.Controls.Add(this.lbRUNTime);
             this.panel1.Location = new System.Drawing.Point(128, 47);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(108, 28);
             this.panel1.TabIndex = 1174;
             // 
-            // dclRUN
+            // lbRUNTime
             // 
-            this.dclRUN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclRUN.DigitColor = System.Drawing.Color.Lime;
-            this.dclRUN.DigitText = "00:00:00";
-            this.dclRUN.Location = new System.Drawing.Point(3, 4);
-            this.dclRUN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclRUN.Name = "dclRUN";
-            this.dclRUN.Size = new System.Drawing.Size(99, 17);
-            this.dclRUN.TabIndex = 0;
+            this.lbRUNTime.BackColor = System.Drawing.Color.Black;
+            this.lbRUNTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRUNTime.ForeColor = System.Drawing.Color.Lime;
+            this.lbRUNTime.Location = new System.Drawing.Point(2, 2);
+            this.lbRUNTime.Name = "lbRUNTime";
+            this.lbRUNTime.Size = new System.Drawing.Size(100, 21);
+            this.lbRUNTime.TabIndex = 1524;
+            this.lbRUNTime.Text = "00:00:00";
+            this.lbRUNTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbRUN
             // 
@@ -1204,22 +1323,23 @@
             // 
             this.pRUN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.pRUN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pRUN.Controls.Add(this.dclWORK);
+            this.pRUN.Controls.Add(this.lbWorkTime);
             this.pRUN.Location = new System.Drawing.Point(128, 18);
             this.pRUN.Name = "pRUN";
             this.pRUN.Size = new System.Drawing.Size(108, 28);
             this.pRUN.TabIndex = 1171;
             // 
-            // dclWORK
+            // lbWorkTime
             // 
-            this.dclWORK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.dclWORK.DigitColor = System.Drawing.SystemColors.ButtonFace;
-            this.dclWORK.DigitText = "00:00:00";
-            this.dclWORK.Location = new System.Drawing.Point(3, 4);
-            this.dclWORK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dclWORK.Name = "dclWORK";
-            this.dclWORK.Size = new System.Drawing.Size(99, 17);
-            this.dclWORK.TabIndex = 0;
+            this.lbWorkTime.BackColor = System.Drawing.Color.Black;
+            this.lbWorkTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbWorkTime.ForeColor = System.Drawing.Color.White;
+            this.lbWorkTime.Location = new System.Drawing.Point(2, 2);
+            this.lbWorkTime.Name = "lbWorkTime";
+            this.lbWorkTime.Size = new System.Drawing.Size(100, 21);
+            this.lbWorkTime.TabIndex = 1523;
+            this.lbWorkTime.Text = "00:00:00";
+            this.lbWorkTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tpg_3
             // 
@@ -1228,7 +1348,7 @@
             this.tpg_3.Controls.Add(this.dgvManual);
             this.tpg_3.Location = new System.Drawing.Point(4, 5);
             this.tpg_3.Name = "tpg_3";
-            this.tpg_3.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_3.Size = new System.Drawing.Size(1136, 797);
             this.tpg_3.TabIndex = 3;
             this.tpg_3.Text = "BOTTOM VISION";
             // 
@@ -1290,7 +1410,7 @@
             this.dgvManual.ShowCellErrors = false;
             this.dgvManual.ShowEditingIcon = false;
             this.dgvManual.ShowRowErrors = false;
-            this.dgvManual.Size = new System.Drawing.Size(1129, 791);
+            this.dgvManual.Size = new System.Drawing.Size(1134, 795);
             this.dgvManual.StandardTab = true;
             this.dgvManual.TabIndex = 14;
             // 
@@ -1361,7 +1481,7 @@
             this.tpg_4.Controls.Add(this.dgvWarning);
             this.tpg_4.Location = new System.Drawing.Point(4, 5);
             this.tpg_4.Name = "tpg_4";
-            this.tpg_4.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_4.Size = new System.Drawing.Size(1136, 797);
             this.tpg_4.TabIndex = 4;
             this.tpg_4.Text = "TRAY TRANSFER";
             // 
@@ -1423,7 +1543,7 @@
             this.dgvWarning.ShowCellErrors = false;
             this.dgvWarning.ShowEditingIcon = false;
             this.dgvWarning.ShowRowErrors = false;
-            this.dgvWarning.Size = new System.Drawing.Size(1129, 791);
+            this.dgvWarning.Size = new System.Drawing.Size(1134, 795);
             this.dgvWarning.StandardTab = true;
             this.dgvWarning.TabIndex = 15;
             // 
@@ -1494,7 +1614,7 @@
             this.tpg_5.Controls.Add(this.dgvProcess);
             this.tpg_5.Location = new System.Drawing.Point(4, 5);
             this.tpg_5.Name = "tpg_5";
-            this.tpg_5.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_5.Size = new System.Drawing.Size(1136, 797);
             this.tpg_5.TabIndex = 5;
             this.tpg_5.Text = "TRAY PICKER";
             // 
@@ -1556,7 +1676,7 @@
             this.dgvProcess.ShowCellErrors = false;
             this.dgvProcess.ShowEditingIcon = false;
             this.dgvProcess.ShowRowErrors = false;
-            this.dgvProcess.Size = new System.Drawing.Size(1129, 791);
+            this.dgvProcess.Size = new System.Drawing.Size(1134, 795);
             this.dgvProcess.StandardTab = true;
             this.dgvProcess.TabIndex = 16;
             // 
@@ -1627,7 +1747,7 @@
             this.tpg_6.Controls.Add(this.dgwEvent);
             this.tpg_6.Location = new System.Drawing.Point(4, 5);
             this.tpg_6.Name = "tpg_6";
-            this.tpg_6.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_6.Size = new System.Drawing.Size(1136, 797);
             this.tpg_6.TabIndex = 6;
             this.tpg_6.Text = "MACHINE EVENT";
             // 
@@ -1689,7 +1809,7 @@
             this.dgwEvent.ShowCellErrors = false;
             this.dgwEvent.ShowEditingIcon = false;
             this.dgwEvent.ShowRowErrors = false;
-            this.dgwEvent.Size = new System.Drawing.Size(1129, 791);
+            this.dgwEvent.Size = new System.Drawing.Size(1134, 795);
             this.dgwEvent.StandardTab = true;
             this.dgwEvent.TabIndex = 16;
             // 
@@ -1760,7 +1880,7 @@
             this.tpg_7.Controls.Add(this.gridDefectCount);
             this.tpg_7.Location = new System.Drawing.Point(4, 5);
             this.tpg_7.Name = "tpg_7";
-            this.tpg_7.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_7.Size = new System.Drawing.Size(1136, 797);
             this.tpg_7.TabIndex = 7;
             this.tpg_7.Text = "STRIP DEFECT COUNT";
             // 
@@ -1869,7 +1989,7 @@
             this.tpg_8.Controls.Add(this.gridLocationList);
             this.tpg_8.Location = new System.Drawing.Point(4, 5);
             this.tpg_8.Name = "tpg_8";
-            this.tpg_8.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_8.Size = new System.Drawing.Size(1136, 797);
             this.tpg_8.TabIndex = 8;
             this.tpg_8.Text = "tabPage1";
             // 
@@ -2020,7 +2140,7 @@
             this.tpg_9.Controls.Add(this.gridLot);
             this.tpg_9.Location = new System.Drawing.Point(4, 5);
             this.tpg_9.Name = "tpg_9";
-            this.tpg_9.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_9.Size = new System.Drawing.Size(1136, 797);
             this.tpg_9.TabIndex = 9;
             this.tpg_9.Text = "tabPage1";
             // 
@@ -2088,7 +2208,7 @@
             this.gridLot.ShowCellErrors = false;
             this.gridLot.ShowEditingIcon = false;
             this.gridLot.ShowRowErrors = false;
-            this.gridLot.Size = new System.Drawing.Size(1129, 791);
+            this.gridLot.Size = new System.Drawing.Size(1134, 795);
             this.gridLot.StandardTab = true;
             this.gridLot.TabIndex = 17;
             // 
@@ -2181,7 +2301,7 @@
             // 
             // Column12
             // 
-            this.Column12.HeaderText = "REWORK";
+            this.Column12.HeaderText = "NG";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
             this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2190,7 +2310,7 @@
             // 
             // Column13
             // 
-            this.Column13.HeaderText = "NG";
+            this.Column13.HeaderText = "X-OUT";
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
             this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2213,7 +2333,7 @@
             this.tpg_10.Controls.Add(this.dgwOneCycle);
             this.tpg_10.Location = new System.Drawing.Point(4, 5);
             this.tpg_10.Name = "tpg_10";
-            this.tpg_10.Size = new System.Drawing.Size(1131, 793);
+            this.tpg_10.Size = new System.Drawing.Size(1136, 797);
             this.tpg_10.TabIndex = 10;
             this.tpg_10.Text = "tabPage1";
             // 
@@ -2279,37 +2399,1166 @@
             this.dgwOneCycle.ShowCellErrors = false;
             this.dgwOneCycle.ShowEditingIcon = false;
             this.dgwOneCycle.ShowRowErrors = false;
-            this.dgwOneCycle.Size = new System.Drawing.Size(1129, 791);
+            this.dgwOneCycle.Size = new System.Drawing.Size(1134, 795);
             this.dgwOneCycle.StandardTab = true;
             this.dgwOneCycle.TabIndex = 17;
             // 
-            // a1Panel1
+            // dataGridViewTextBoxColumn52
             // 
-            this.a1Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.a1Panel1.BorderColor = System.Drawing.Color.DarkGray;
-            this.a1Panel1.Controls.Add(this.btnLOG_10);
-            this.a1Panel1.Controls.Add(this.btnLOG_9);
-            this.a1Panel1.Controls.Add(this.btnLOG_8);
-            this.a1Panel1.Controls.Add(this.btnLOG_7);
-            this.a1Panel1.Controls.Add(this.btnLOG_5);
-            this.a1Panel1.Controls.Add(this.lblStep);
-            this.a1Panel1.Controls.Add(this.btnLOG_0);
-            this.a1Panel1.Controls.Add(this.btnLOG_6);
-            this.a1Panel1.Controls.Add(this.btnLOG_4);
-            this.a1Panel1.Controls.Add(this.btnLOG_2);
-            this.a1Panel1.Controls.Add(this.btnLOG_1);
-            this.a1Panel1.Controls.Add(this.btnLOG_3);
-            this.a1Panel1.Controls.Add(this.swLogView);
-            this.a1Panel1.Controls.Add(this.swSave);
-            this.a1Panel1.GradientEndColor = System.Drawing.Color.Lavender;
-            this.a1Panel1.GradientStartColor = System.Drawing.Color.White;
-            this.a1Panel1.Image = null;
-            this.a1Panel1.ImageLocation = new System.Drawing.Point(3, 6);
-            this.a1Panel1.Location = new System.Drawing.Point(2, 71);
-            this.a1Panel1.Name = "a1Panel1";
-            this.a1Panel1.ShadowOffSet = 2;
-            this.a1Panel1.Size = new System.Drawing.Size(133, 803);
-            this.a1Panel1.TabIndex = 1523;
+            this.dataGridViewTextBoxColumn52.HeaderText = "NO";
+            this.dataGridViewTextBoxColumn52.Name = "dataGridViewTextBoxColumn52";
+            this.dataGridViewTextBoxColumn52.ReadOnly = true;
+            this.dataGridViewTextBoxColumn52.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn52.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn52.Width = 32;
+            // 
+            // dataGridViewTextBoxColumn53
+            // 
+            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn53.DefaultCellStyle = dataGridViewCellStyle81;
+            this.dataGridViewTextBoxColumn53.HeaderText = "TIME";
+            this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
+            this.dataGridViewTextBoxColumn53.ReadOnly = true;
+            this.dataGridViewTextBoxColumn53.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn53.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn53.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn54
+            // 
+            this.dataGridViewTextBoxColumn54.HeaderText = "LOGIN";
+            this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
+            this.dataGridViewTextBoxColumn54.ReadOnly = true;
+            this.dataGridViewTextBoxColumn54.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn54.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn54.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn55
+            // 
+            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle82;
+            this.dataGridViewTextBoxColumn55.HeaderText = "MC Sts";
+            this.dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
+            this.dataGridViewTextBoxColumn55.ReadOnly = true;
+            this.dataGridViewTextBoxColumn55.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn55.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn55.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn56
+            // 
+            dataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle83;
+            this.dataGridViewTextBoxColumn56.HeaderText = "SHIFT";
+            this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
+            this.dataGridViewTextBoxColumn56.ReadOnly = true;
+            this.dataGridViewTextBoxColumn56.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn56.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn56.Width = 55;
+            // 
+            // RECIPE
+            // 
+            this.RECIPE.HeaderText = "RECIPE";
+            this.RECIPE.Name = "RECIPE";
+            this.RECIPE.ReadOnly = true;
+            this.RECIPE.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.RECIPE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.RECIPE.Width = 195;
+            // 
+            // dataGridViewTextBoxColumn57
+            // 
+            this.dataGridViewTextBoxColumn57.HeaderText = "LOD ID";
+            this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
+            this.dataGridViewTextBoxColumn57.ReadOnly = true;
+            this.dataGridViewTextBoxColumn57.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn57.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn57.Width = 195;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "STRIP ID";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column15.Width = 195;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "TACK";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            this.Column16.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column16.Width = 82;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "ONE-CYCLE";
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            this.Column17.Width = 83;
+            // 
+            // tpg_11
+            // 
+            this.tpg_11.BackColor = System.Drawing.Color.Silver;
+            this.tpg_11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tpg_11.Controls.Add(this.swLotInfoSave);
+            this.tpg_11.Controls.Add(this.LOT_ABF);
+            this.tpg_11.Controls.Add(this.label13);
+            this.tpg_11.Controls.Add(this.LOT_ID);
+            this.tpg_11.Controls.Add(this.label12);
+            this.tpg_11.Controls.Add(this.LBL_SPINDLE2_ID);
+            this.tpg_11.Controls.Add(this.lbLED_BLADLE_BARCODE_SP2);
+            this.tpg_11.Controls.Add(this.LBL_SPINDLE1_ID);
+            this.tpg_11.Controls.Add(this.lbLED_BLADLE_BARCODE_SP1);
+            this.tpg_11.Controls.Add(this.LBX_LOTINFO);
+            this.tpg_11.Controls.Add(this.label10);
+            this.tpg_11.Controls.Add(this.DV);
+            this.tpg_11.Controls.Add(this.panel8);
+            this.tpg_11.Controls.Add(this.panel9);
+            this.tpg_11.Controls.Add(this.label6);
+            this.tpg_11.Controls.Add(this.BTN_LOTINFO_OPEN);
+            this.tpg_11.Controls.Add(this.lvwLOTIDLIST);
+            this.tpg_11.Controls.Add(this.label5);
+            this.tpg_11.Controls.Add(this.label3);
+            this.tpg_11.Controls.Add(this.label11);
+            this.tpg_11.Controls.Add(this.DGV_LOT_ERROR_LIST);
+            this.tpg_11.Controls.Add(this.DGV_LOT_ERROR);
+            this.tpg_11.Location = new System.Drawing.Point(4, 5);
+            this.tpg_11.Name = "tpg_11";
+            this.tpg_11.Size = new System.Drawing.Size(1136, 797);
+            this.tpg_11.TabIndex = 11;
+            this.tpg_11.Text = "tabPage1";
+            // 
+            // swLotInfoSave
+            // 
+            this.swLotInfoSave.BackColor = System.Drawing.Color.White;
+            this.swLotInfoSave.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swLotInfoSave.ForeColor = System.Drawing.Color.Black;
+            this.swLotInfoSave.Image = ((System.Drawing.Image)(resources.GetObject("swLotInfoSave.Image")));
+            this.swLotInfoSave.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.swLotInfoSave.Location = new System.Drawing.Point(651, 454);
+            this.swLotInfoSave.Name = "swLotInfoSave";
+            this.swLotInfoSave.Padding = new System.Windows.Forms.Padding(3);
+            this.swLotInfoSave.Size = new System.Drawing.Size(477, 55);
+            this.swLotInfoSave.TabIndex = 1521;
+            this.swLotInfoSave.Tag = "0";
+            this.swLotInfoSave.Text = "SAVE";
+            this.swLotInfoSave.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.swLotInfoSave.UseVisualStyleBackColor = false;
+            // 
+            // LOT_ABF
+            // 
+            this.LOT_ABF.BackColor = System.Drawing.Color.Black;
+            this.LOT_ABF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LOT_ABF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LOT_ABF.ForeColor = System.Drawing.Color.Lime;
+            this.LOT_ABF.Location = new System.Drawing.Point(544, 2);
+            this.LOT_ABF.Name = "LOT_ABF";
+            this.LOT_ABF.Size = new System.Drawing.Size(74, 29);
+            this.LOT_ABF.TabIndex = 1520;
+            this.LOT_ABF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Image = ((System.Drawing.Image)(resources.GetObject("label13.Image")));
+            this.label13.Location = new System.Drawing.Point(487, 2);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(58, 29);
+            this.label13.TabIndex = 1519;
+            this.label13.Text = "ABF";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LOT_ID
+            // 
+            this.LOT_ID.BackColor = System.Drawing.Color.Black;
+            this.LOT_ID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LOT_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LOT_ID.ForeColor = System.Drawing.Color.Lime;
+            this.LOT_ID.Location = new System.Drawing.Point(296, 2);
+            this.LOT_ID.Name = "LOT_ID";
+            this.LOT_ID.Size = new System.Drawing.Size(190, 29);
+            this.LOT_ID.TabIndex = 1518;
+            this.LOT_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Image = ((System.Drawing.Image)(resources.GetObject("label12.Image")));
+            this.label12.Location = new System.Drawing.Point(239, 2);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(58, 29);
+            this.label12.TabIndex = 1517;
+            this.label12.Text = "LOT";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LBL_SPINDLE2_ID
+            // 
+            this.LBL_SPINDLE2_ID.BackColor = System.Drawing.Color.Black;
+            this.LBL_SPINDLE2_ID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LBL_SPINDLE2_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBL_SPINDLE2_ID.ForeColor = System.Drawing.Color.Lime;
+            this.LBL_SPINDLE2_ID.Location = new System.Drawing.Point(931, 2);
+            this.LBL_SPINDLE2_ID.Name = "LBL_SPINDLE2_ID";
+            this.LBL_SPINDLE2_ID.Size = new System.Drawing.Size(197, 29);
+            this.LBL_SPINDLE2_ID.TabIndex = 1516;
+            this.LBL_SPINDLE2_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbLED_BLADLE_BARCODE_SP2
+            // 
+            this.lbLED_BLADLE_BARCODE_SP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbLED_BLADLE_BARCODE_SP2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLED_BLADLE_BARCODE_SP2.Image = ((System.Drawing.Image)(resources.GetObject("lbLED_BLADLE_BARCODE_SP2.Image")));
+            this.lbLED_BLADLE_BARCODE_SP2.Location = new System.Drawing.Point(874, 2);
+            this.lbLED_BLADLE_BARCODE_SP2.Name = "lbLED_BLADLE_BARCODE_SP2";
+            this.lbLED_BLADLE_BARCODE_SP2.Size = new System.Drawing.Size(58, 29);
+            this.lbLED_BLADLE_BARCODE_SP2.TabIndex = 1515;
+            this.lbLED_BLADLE_BARCODE_SP2.Text = "SPINDLE2";
+            this.lbLED_BLADLE_BARCODE_SP2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LBL_SPINDLE1_ID
+            // 
+            this.LBL_SPINDLE1_ID.BackColor = System.Drawing.Color.Black;
+            this.LBL_SPINDLE1_ID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LBL_SPINDLE1_ID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBL_SPINDLE1_ID.ForeColor = System.Drawing.Color.Lime;
+            this.LBL_SPINDLE1_ID.Location = new System.Drawing.Point(676, 2);
+            this.LBL_SPINDLE1_ID.Name = "LBL_SPINDLE1_ID";
+            this.LBL_SPINDLE1_ID.Size = new System.Drawing.Size(197, 29);
+            this.LBL_SPINDLE1_ID.TabIndex = 1514;
+            this.LBL_SPINDLE1_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbLED_BLADLE_BARCODE_SP1
+            // 
+            this.lbLED_BLADLE_BARCODE_SP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbLED_BLADLE_BARCODE_SP1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLED_BLADLE_BARCODE_SP1.Image = ((System.Drawing.Image)(resources.GetObject("lbLED_BLADLE_BARCODE_SP1.Image")));
+            this.lbLED_BLADLE_BARCODE_SP1.Location = new System.Drawing.Point(619, 2);
+            this.lbLED_BLADLE_BARCODE_SP1.Name = "lbLED_BLADLE_BARCODE_SP1";
+            this.lbLED_BLADLE_BARCODE_SP1.Size = new System.Drawing.Size(58, 29);
+            this.lbLED_BLADLE_BARCODE_SP1.TabIndex = 1513;
+            this.lbLED_BLADLE_BARCODE_SP1.Text = "SPINDLE1";
+            this.lbLED_BLADLE_BARCODE_SP1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LBX_LOTINFO
+            // 
+            this.LBX_LOTINFO.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBX_LOTINFO.FormattingEnabled = true;
+            this.LBX_LOTINFO.ItemHeight = 14;
+            this.LBX_LOTINFO.Location = new System.Drawing.Point(651, 57);
+            this.LBX_LOTINFO.Name = "LBX_LOTINFO";
+            this.LBX_LOTINFO.Size = new System.Drawing.Size(477, 396);
+            this.LBX_LOTINFO.TabIndex = 1342;
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Image = ((System.Drawing.Image)(resources.GetObject("label10.Image")));
+            this.label10.Location = new System.Drawing.Point(651, 33);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(477, 23);
+            this.label10.TabIndex = 1341;
+            this.label10.Text = "LOT INFO";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DV
+            // 
+            this.DV.BackColor = System.Drawing.SystemColors.Control;
+            this.DV.BorderlineColor = System.Drawing.Color.Black;
+            chartArea2.BackColor = System.Drawing.SystemColors.Control;
+            chartArea2.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea2.Name = "ChartArea1";
+            this.DV.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.DV.Legends.Add(legend2);
+            this.DV.Location = new System.Drawing.Point(241, 235);
+            this.DV.Name = "DV";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.DV.Series.Add(series2);
+            this.DV.Size = new System.Drawing.Size(408, 273);
+            this.DV.TabIndex = 1340;
+            this.DV.Text = "chart2";
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.Black;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.dcLOT_END);
+            this.panel8.Controls.Add(this.dcLOT_START);
+            this.panel8.Controls.Add(this.lbERROR);
+            this.panel8.Controls.Add(this.pERROR);
+            this.panel8.Controls.Add(this.pSTOP);
+            this.panel8.Controls.Add(this.label8);
+            this.panel8.Controls.Add(this.panel10);
+            this.panel8.Controls.Add(this.label9);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Controls.Add(this.label18);
+            this.panel8.Location = new System.Drawing.Point(239, 57);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(411, 78);
+            this.panel8.TabIndex = 1339;
+            // 
+            // dcLOT_END
+            // 
+            this.dcLOT_END.BackColor = System.Drawing.Color.Transparent;
+            this.dcLOT_END.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dcLOT_END.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dcLOT_END.ForeColor = System.Drawing.Color.Gold;
+            this.dcLOT_END.Location = new System.Drawing.Point(146, 25);
+            this.dcLOT_END.Name = "dcLOT_END";
+            this.dcLOT_END.Size = new System.Drawing.Size(258, 24);
+            this.dcLOT_END.TabIndex = 1331;
+            this.dcLOT_END.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dcLOT_START
+            // 
+            this.dcLOT_START.BackColor = System.Drawing.Color.Transparent;
+            this.dcLOT_START.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dcLOT_START.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dcLOT_START.ForeColor = System.Drawing.Color.Gold;
+            this.dcLOT_START.Location = new System.Drawing.Point(146, 2);
+            this.dcLOT_START.Name = "dcLOT_START";
+            this.dcLOT_START.Size = new System.Drawing.Size(258, 24);
+            this.dcLOT_START.TabIndex = 1330;
+            this.dcLOT_START.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbERROR
+            // 
+            this.lbERROR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbERROR.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbERROR.ForeColor = System.Drawing.Color.Red;
+            this.lbERROR.Image = ((System.Drawing.Image)(resources.GetObject("lbERROR.Image")));
+            this.lbERROR.Location = new System.Drawing.Point(270, 51);
+            this.lbERROR.Name = "lbERROR";
+            this.lbERROR.Size = new System.Drawing.Size(64, 24);
+            this.lbERROR.TabIndex = 1328;
+            this.lbERROR.Text = "ERR";
+            this.lbERROR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pERROR
+            // 
+            this.pERROR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.pERROR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pERROR.Controls.Add(this.lbLOT_ERROR);
+            this.pERROR.Location = new System.Drawing.Point(333, 51);
+            this.pERROR.Name = "pERROR";
+            this.pERROR.Size = new System.Drawing.Size(70, 24);
+            this.pERROR.TabIndex = 1329;
+            // 
+            // lbLOT_ERROR
+            // 
+            this.lbLOT_ERROR.BackColor = System.Drawing.Color.Black;
+            this.lbLOT_ERROR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLOT_ERROR.ForeColor = System.Drawing.Color.Red;
+            this.lbLOT_ERROR.Location = new System.Drawing.Point(1, 2);
+            this.lbLOT_ERROR.Name = "lbLOT_ERROR";
+            this.lbLOT_ERROR.Size = new System.Drawing.Size(64, 18);
+            this.lbLOT_ERROR.TabIndex = 1524;
+            this.lbLOT_ERROR.Text = "00:00:00";
+            this.lbLOT_ERROR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pSTOP
+            // 
+            this.pSTOP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.pSTOP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pSTOP.Controls.Add(this.lbLOT_STOP);
+            this.pSTOP.Location = new System.Drawing.Point(200, 51);
+            this.pSTOP.Name = "pSTOP";
+            this.pSTOP.Size = new System.Drawing.Size(70, 24);
+            this.pSTOP.TabIndex = 1327;
+            // 
+            // lbLOT_STOP
+            // 
+            this.lbLOT_STOP.BackColor = System.Drawing.Color.Black;
+            this.lbLOT_STOP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLOT_STOP.ForeColor = System.Drawing.Color.White;
+            this.lbLOT_STOP.Location = new System.Drawing.Point(2, 2);
+            this.lbLOT_STOP.Name = "lbLOT_STOP";
+            this.lbLOT_STOP.Size = new System.Drawing.Size(64, 18);
+            this.lbLOT_STOP.TabIndex = 1523;
+            this.lbLOT_STOP.Text = "00:00:00";
+            this.lbLOT_STOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Image = ((System.Drawing.Image)(resources.GetObject("label8.Image")));
+            this.label8.Location = new System.Drawing.Point(137, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 24);
+            this.label8.TabIndex = 1326;
+            this.label8.Text = "STOP";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.lbLOT_RUN);
+            this.panel10.Location = new System.Drawing.Point(64, 51);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(73, 24);
+            this.panel10.TabIndex = 1324;
+            // 
+            // lbLOT_RUN
+            // 
+            this.lbLOT_RUN.BackColor = System.Drawing.Color.Black;
+            this.lbLOT_RUN.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLOT_RUN.ForeColor = System.Drawing.Color.Lime;
+            this.lbLOT_RUN.Location = new System.Drawing.Point(3, 2);
+            this.lbLOT_RUN.Name = "lbLOT_RUN";
+            this.lbLOT_RUN.Size = new System.Drawing.Size(64, 18);
+            this.lbLOT_RUN.TabIndex = 1522;
+            this.lbLOT_RUN.Text = "00:00:00";
+            this.lbLOT_RUN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Image = ((System.Drawing.Image)(resources.GetObject("label9.Image")));
+            this.label9.Location = new System.Drawing.Point(1, 51);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(64, 24);
+            this.label9.TabIndex = 1325;
+            this.label9.Text = "RUN";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Gold;
+            this.label7.Location = new System.Drawing.Point(1, 25);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(147, 24);
+            this.label7.TabIndex = 1322;
+            this.label7.Text = "END";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Gold;
+            this.label18.Location = new System.Drawing.Point(1, 2);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(147, 24);
+            this.label18.TabIndex = 1320;
+            this.label18.Text = "START";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.Black;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.LB_NGTRAY_CNT);
+            this.panel9.Controls.Add(this.LB_XOUT_CNT);
+            this.panel9.Controls.Add(this.LB_NG_CNT);
+            this.panel9.Controls.Add(this.LB_UNIT_CNT);
+            this.panel9.Controls.Add(this.LB_GOODTRAY_CNT);
+            this.panel9.Controls.Add(this.LB_ITS_CNT);
+            this.panel9.Controls.Add(this.LB_GOOD_CNT);
+            this.panel9.Controls.Add(this.LB_STRIP_CNT);
+            this.panel9.Controls.Add(this.label62);
+            this.panel9.Controls.Add(this.label61);
+            this.panel9.Controls.Add(this.label60);
+            this.panel9.Controls.Add(this.label59);
+            this.panel9.Controls.Add(this.label58);
+            this.panel9.Controls.Add(this.label57);
+            this.panel9.Controls.Add(this.label56);
+            this.panel9.Controls.Add(this.label55);
+            this.panel9.Location = new System.Drawing.Point(239, 134);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(411, 100);
+            this.panel9.TabIndex = 1337;
+            // 
+            // LB_NGTRAY_CNT
+            // 
+            this.LB_NGTRAY_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_NGTRAY_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_NGTRAY_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_NGTRAY_CNT.Location = new System.Drawing.Point(342, 71);
+            this.LB_NGTRAY_CNT.Name = "LB_NGTRAY_CNT";
+            this.LB_NGTRAY_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_NGTRAY_CNT.TabIndex = 1530;
+            this.LB_NGTRAY_CNT.Text = "-";
+            this.LB_NGTRAY_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_XOUT_CNT
+            // 
+            this.LB_XOUT_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_XOUT_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_XOUT_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_XOUT_CNT.Location = new System.Drawing.Point(341, 47);
+            this.LB_XOUT_CNT.Name = "LB_XOUT_CNT";
+            this.LB_XOUT_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_XOUT_CNT.TabIndex = 1529;
+            this.LB_XOUT_CNT.Text = "-";
+            this.LB_XOUT_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_NG_CNT
+            // 
+            this.LB_NG_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_NG_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_NG_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_NG_CNT.Location = new System.Drawing.Point(341, 24);
+            this.LB_NG_CNT.Name = "LB_NG_CNT";
+            this.LB_NG_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_NG_CNT.TabIndex = 1528;
+            this.LB_NG_CNT.Text = "-";
+            this.LB_NG_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_UNIT_CNT
+            // 
+            this.LB_UNIT_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_UNIT_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_UNIT_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_UNIT_CNT.Location = new System.Drawing.Point(341, 2);
+            this.LB_UNIT_CNT.Name = "LB_UNIT_CNT";
+            this.LB_UNIT_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_UNIT_CNT.TabIndex = 1527;
+            this.LB_UNIT_CNT.Text = "-";
+            this.LB_UNIT_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_GOODTRAY_CNT
+            // 
+            this.LB_GOODTRAY_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_GOODTRAY_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_GOODTRAY_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_GOODTRAY_CNT.Location = new System.Drawing.Point(133, 71);
+            this.LB_GOODTRAY_CNT.Name = "LB_GOODTRAY_CNT";
+            this.LB_GOODTRAY_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_GOODTRAY_CNT.TabIndex = 1526;
+            this.LB_GOODTRAY_CNT.Text = "-";
+            this.LB_GOODTRAY_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_ITS_CNT
+            // 
+            this.LB_ITS_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_ITS_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_ITS_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_ITS_CNT.Location = new System.Drawing.Point(133, 47);
+            this.LB_ITS_CNT.Name = "LB_ITS_CNT";
+            this.LB_ITS_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_ITS_CNT.TabIndex = 1525;
+            this.LB_ITS_CNT.Text = "-";
+            this.LB_ITS_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_GOOD_CNT
+            // 
+            this.LB_GOOD_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_GOOD_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_GOOD_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_GOOD_CNT.Location = new System.Drawing.Point(133, 24);
+            this.LB_GOOD_CNT.Name = "LB_GOOD_CNT";
+            this.LB_GOOD_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_GOOD_CNT.TabIndex = 1524;
+            this.LB_GOOD_CNT.Text = "-";
+            this.LB_GOOD_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LB_STRIP_CNT
+            // 
+            this.LB_STRIP_CNT.BackColor = System.Drawing.Color.Black;
+            this.LB_STRIP_CNT.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_STRIP_CNT.ForeColor = System.Drawing.Color.White;
+            this.LB_STRIP_CNT.Location = new System.Drawing.Point(133, 2);
+            this.LB_STRIP_CNT.Name = "LB_STRIP_CNT";
+            this.LB_STRIP_CNT.Size = new System.Drawing.Size(62, 19);
+            this.LB_STRIP_CNT.TabIndex = 1523;
+            this.LB_STRIP_CNT.Text = "-";
+            this.LB_STRIP_CNT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label62
+            // 
+            this.label62.BackColor = System.Drawing.Color.Transparent;
+            this.label62.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.ForeColor = System.Drawing.Color.Gold;
+            this.label62.Location = new System.Drawing.Point(204, 70);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(100, 20);
+            this.label62.TabIndex = 1354;
+            this.label62.Text = "NG TRAY";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label61
+            // 
+            this.label61.BackColor = System.Drawing.Color.Transparent;
+            this.label61.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label61.ForeColor = System.Drawing.Color.Yellow;
+            this.label61.Location = new System.Drawing.Point(7, 70);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(100, 20);
+            this.label61.TabIndex = 1352;
+            this.label61.Text = "GOOD TRAY";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label60
+            // 
+            this.label60.BackColor = System.Drawing.Color.Transparent;
+            this.label60.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.ForeColor = System.Drawing.Color.Gold;
+            this.label60.Location = new System.Drawing.Point(204, 47);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(100, 20);
+            this.label60.TabIndex = 1351;
+            this.label60.Text = "X-OUT UNIT";
+            this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label59
+            // 
+            this.label59.BackColor = System.Drawing.Color.Transparent;
+            this.label59.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.ForeColor = System.Drawing.Color.Yellow;
+            this.label59.Location = new System.Drawing.Point(7, 47);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(100, 20);
+            this.label59.TabIndex = 1348;
+            this.label59.Text = "ITS";
+            this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label58
+            // 
+            this.label58.BackColor = System.Drawing.Color.Transparent;
+            this.label58.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.Yellow;
+            this.label58.Location = new System.Drawing.Point(204, 24);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(100, 20);
+            this.label58.TabIndex = 1346;
+            this.label58.Text = "NG UNIT";
+            this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label57
+            // 
+            this.label57.BackColor = System.Drawing.Color.Transparent;
+            this.label57.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.ForeColor = System.Drawing.Color.Yellow;
+            this.label57.Location = new System.Drawing.Point(7, 24);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(100, 20);
+            this.label57.TabIndex = 1344;
+            this.label57.Text = "GOOD UNIT";
+            this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label56
+            // 
+            this.label56.BackColor = System.Drawing.Color.Transparent;
+            this.label56.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.ForeColor = System.Drawing.Color.Gold;
+            this.label56.Location = new System.Drawing.Point(204, 1);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(100, 20);
+            this.label56.TabIndex = 1342;
+            this.label56.Text = "UNIT";
+            this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label55
+            // 
+            this.label55.BackColor = System.Drawing.Color.Transparent;
+            this.label55.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.ForeColor = System.Drawing.Color.Gold;
+            this.label55.Location = new System.Drawing.Point(7, 1);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(100, 20);
+            this.label55.TabIndex = 1340;
+            this.label55.Text = "STRIP";
+            this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
+            this.label6.Location = new System.Drawing.Point(2, 2);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(236, 29);
+            this.label6.TabIndex = 1335;
+            this.label6.Text = "LOT LIST";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BTN_LOTINFO_OPEN
+            // 
+            this.BTN_LOTINFO_OPEN.BackColor = System.Drawing.Color.White;
+            this.BTN_LOTINFO_OPEN.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_LOTINFO_OPEN.ForeColor = System.Drawing.Color.Black;
+            this.BTN_LOTINFO_OPEN.Image = ((System.Drawing.Image)(resources.GetObject("BTN_LOTINFO_OPEN.Image")));
+            this.BTN_LOTINFO_OPEN.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.BTN_LOTINFO_OPEN.Location = new System.Drawing.Point(2, 455);
+            this.BTN_LOTINFO_OPEN.Name = "BTN_LOTINFO_OPEN";
+            this.BTN_LOTINFO_OPEN.Padding = new System.Windows.Forms.Padding(3);
+            this.BTN_LOTINFO_OPEN.Size = new System.Drawing.Size(237, 54);
+            this.BTN_LOTINFO_OPEN.TabIndex = 1334;
+            this.BTN_LOTINFO_OPEN.Tag = "0";
+            this.BTN_LOTINFO_OPEN.Text = "OPEN";
+            this.BTN_LOTINFO_OPEN.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BTN_LOTINFO_OPEN.UseVisualStyleBackColor = false;
+            this.BTN_LOTINFO_OPEN.Click += new System.EventHandler(this.BTN_LOTINFO_OPEN_Click);
+            // 
+            // lvwLOTIDLIST
+            // 
+            this.lvwLOTIDLIST.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvwLOTIDLIST.HideSelection = false;
+            this.lvwLOTIDLIST.Location = new System.Drawing.Point(2, 33);
+            this.lvwLOTIDLIST.Name = "lvwLOTIDLIST";
+            this.lvwLOTIDLIST.Size = new System.Drawing.Size(236, 421);
+            this.lvwLOTIDLIST.TabIndex = 1333;
+            this.lvwLOTIDLIST.UseCompatibleStateImageBehavior = false;
+            this.lvwLOTIDLIST.View = System.Windows.Forms.View.List;
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
+            this.label5.Location = new System.Drawing.Point(239, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(411, 23);
+            this.label5.TabIndex = 1332;
+            this.label5.Text = "TIME";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
+            this.label3.Location = new System.Drawing.Point(715, 510);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(413, 23);
+            this.label3.TabIndex = 1330;
+            this.label3.Text = "ERROR HISTOGRAM";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
+            this.label11.Location = new System.Drawing.Point(3, 510);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(710, 23);
+            this.label11.TabIndex = 1329;
+            this.label11.Text = "ERROR";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DGV_LOT_ERROR_LIST
+            // 
+            this.DGV_LOT_ERROR_LIST.AllowUserToAddRows = false;
+            this.DGV_LOT_ERROR_LIST.AllowUserToDeleteRows = false;
+            this.DGV_LOT_ERROR_LIST.AllowUserToResizeColumns = false;
+            this.DGV_LOT_ERROR_LIST.AllowUserToResizeRows = false;
+            dataGridViewCellStyle87.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle87.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle87.ForeColor = System.Drawing.Color.Black;
+            this.DGV_LOT_ERROR_LIST.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle87;
+            this.DGV_LOT_ERROR_LIST.BackgroundColor = System.Drawing.Color.FloralWhite;
+            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle88.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle88.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle88.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle88.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle88.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.DGV_LOT_ERROR_LIST.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle88;
+            this.DGV_LOT_ERROR_LIST.ColumnHeadersHeight = 30;
+            this.DGV_LOT_ERROR_LIST.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn63,
+            this.dataGridViewTextBoxColumn64,
+            this.dataGridViewTextBoxColumn65});
+            this.DGV_LOT_ERROR_LIST.GridColor = System.Drawing.Color.Silver;
+            this.DGV_LOT_ERROR_LIST.Location = new System.Drawing.Point(715, 534);
+            this.DGV_LOT_ERROR_LIST.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.DGV_LOT_ERROR_LIST.MultiSelect = false;
+            this.DGV_LOT_ERROR_LIST.Name = "DGV_LOT_ERROR_LIST";
+            this.DGV_LOT_ERROR_LIST.ReadOnly = true;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle90.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle90.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle90.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle90.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle90.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle90.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_LOT_ERROR_LIST.RowHeadersDefaultCellStyle = dataGridViewCellStyle90;
+            this.DGV_LOT_ERROR_LIST.RowHeadersVisible = false;
+            this.DGV_LOT_ERROR_LIST.RowHeadersWidth = 25;
+            dataGridViewCellStyle91.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle91.ForeColor = System.Drawing.Color.Black;
+            this.DGV_LOT_ERROR_LIST.RowsDefaultCellStyle = dataGridViewCellStyle91;
+            this.DGV_LOT_ERROR_LIST.RowTemplate.Height = 23;
+            this.DGV_LOT_ERROR_LIST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGV_LOT_ERROR_LIST.ShowCellErrors = false;
+            this.DGV_LOT_ERROR_LIST.ShowEditingIcon = false;
+            this.DGV_LOT_ERROR_LIST.ShowRowErrors = false;
+            this.DGV_LOT_ERROR_LIST.Size = new System.Drawing.Size(413, 256);
+            this.DGV_LOT_ERROR_LIST.StandardTab = true;
+            this.DGV_LOT_ERROR_LIST.TabIndex = 30;
+            // 
+            // dataGridViewTextBoxColumn63
+            // 
+            this.dataGridViewTextBoxColumn63.HeaderText = "CODE";
+            this.dataGridViewTextBoxColumn63.Name = "dataGridViewTextBoxColumn63";
+            this.dataGridViewTextBoxColumn63.ReadOnly = true;
+            this.dataGridViewTextBoxColumn63.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn64
+            // 
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn64.DefaultCellStyle = dataGridViewCellStyle89;
+            this.dataGridViewTextBoxColumn64.HeaderText = "ERROR NAME";
+            this.dataGridViewTextBoxColumn64.Name = "dataGridViewTextBoxColumn64";
+            this.dataGridViewTextBoxColumn64.ReadOnly = true;
+            this.dataGridViewTextBoxColumn64.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn64.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn64.Width = 297;
+            // 
+            // dataGridViewTextBoxColumn65
+            // 
+            this.dataGridViewTextBoxColumn65.HeaderText = "CNT";
+            this.dataGridViewTextBoxColumn65.Name = "dataGridViewTextBoxColumn65";
+            this.dataGridViewTextBoxColumn65.ReadOnly = true;
+            this.dataGridViewTextBoxColumn65.Width = 50;
+            // 
+            // DGV_LOT_ERROR
+            // 
+            this.DGV_LOT_ERROR.AllowUserToAddRows = false;
+            this.DGV_LOT_ERROR.AllowUserToDeleteRows = false;
+            this.DGV_LOT_ERROR.AllowUserToResizeColumns = false;
+            this.DGV_LOT_ERROR.AllowUserToResizeRows = false;
+            dataGridViewCellStyle92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle92.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle92.ForeColor = System.Drawing.Color.Black;
+            this.DGV_LOT_ERROR.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle92;
+            this.DGV_LOT_ERROR.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle93.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle93.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle93.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle93.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle93.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.DGV_LOT_ERROR.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle93;
+            this.DGV_LOT_ERROR.ColumnHeadersHeight = 30;
+            this.DGV_LOT_ERROR.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn58,
+            this.dataGridViewTextBoxColumn59,
+            this.dataGridViewTextBoxColumn60,
+            this.dataGridViewTextBoxColumn61,
+            this.dataGridViewTextBoxColumn62});
+            dataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle97.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle97.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle97.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle97.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle97.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle97.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_LOT_ERROR.DefaultCellStyle = dataGridViewCellStyle97;
+            this.DGV_LOT_ERROR.GridColor = System.Drawing.Color.Silver;
+            this.DGV_LOT_ERROR.Location = new System.Drawing.Point(3, 534);
+            this.DGV_LOT_ERROR.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.DGV_LOT_ERROR.MultiSelect = false;
+            this.DGV_LOT_ERROR.Name = "DGV_LOT_ERROR";
+            this.DGV_LOT_ERROR.ReadOnly = true;
+            dataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle98.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle98.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle98.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle98.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle98.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle98.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_LOT_ERROR.RowHeadersDefaultCellStyle = dataGridViewCellStyle98;
+            this.DGV_LOT_ERROR.RowHeadersVisible = false;
+            this.DGV_LOT_ERROR.RowHeadersWidth = 30;
+            dataGridViewCellStyle99.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle99.ForeColor = System.Drawing.Color.Black;
+            this.DGV_LOT_ERROR.RowsDefaultCellStyle = dataGridViewCellStyle99;
+            this.DGV_LOT_ERROR.RowTemplate.Height = 23;
+            this.DGV_LOT_ERROR.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGV_LOT_ERROR.ShowCellErrors = false;
+            this.DGV_LOT_ERROR.ShowEditingIcon = false;
+            this.DGV_LOT_ERROR.ShowRowErrors = false;
+            this.DGV_LOT_ERROR.Size = new System.Drawing.Size(710, 256);
+            this.DGV_LOT_ERROR.StandardTab = true;
+            this.DGV_LOT_ERROR.TabIndex = 29;
+            // 
+            // dataGridViewTextBoxColumn58
+            // 
+            this.dataGridViewTextBoxColumn58.HeaderText = "NO";
+            this.dataGridViewTextBoxColumn58.Name = "dataGridViewTextBoxColumn58";
+            this.dataGridViewTextBoxColumn58.ReadOnly = true;
+            this.dataGridViewTextBoxColumn58.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn58.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn58.Width = 32;
+            // 
+            // dataGridViewTextBoxColumn59
+            // 
+            this.dataGridViewTextBoxColumn59.HeaderText = "CODE";
+            this.dataGridViewTextBoxColumn59.Name = "dataGridViewTextBoxColumn59";
+            this.dataGridViewTextBoxColumn59.ReadOnly = true;
+            this.dataGridViewTextBoxColumn59.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn59.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn59.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn60
+            // 
+            dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn60.DefaultCellStyle = dataGridViewCellStyle94;
+            this.dataGridViewTextBoxColumn60.HeaderText = "ERROR NAME";
+            this.dataGridViewTextBoxColumn60.Name = "dataGridViewTextBoxColumn60";
+            this.dataGridViewTextBoxColumn60.ReadOnly = true;
+            this.dataGridViewTextBoxColumn60.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn60.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn60.Width = 332;
+            // 
+            // dataGridViewTextBoxColumn61
+            // 
+            dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn61.DefaultCellStyle = dataGridViewCellStyle95;
+            this.dataGridViewTextBoxColumn61.HeaderText = "BEGIN TIME";
+            this.dataGridViewTextBoxColumn61.Name = "dataGridViewTextBoxColumn61";
+            this.dataGridViewTextBoxColumn61.ReadOnly = true;
+            this.dataGridViewTextBoxColumn61.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn61.Width = 134;
+            // 
+            // dataGridViewTextBoxColumn62
+            // 
+            dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn62.DefaultCellStyle = dataGridViewCellStyle96;
+            this.dataGridViewTextBoxColumn62.HeaderText = "RESET TIME";
+            this.dataGridViewTextBoxColumn62.Name = "dataGridViewTextBoxColumn62";
+            this.dataGridViewTextBoxColumn62.ReadOnly = true;
+            this.dataGridViewTextBoxColumn62.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn62.Width = 134;
+            // 
+            // tpg_12
+            // 
+            this.tpg_12.BackColor = System.Drawing.Color.Silver;
+            this.tpg_12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tpg_12.Controls.Add(this.DGV_BLADE_INFO);
+            this.tpg_12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tpg_12.Location = new System.Drawing.Point(4, 5);
+            this.tpg_12.Name = "tpg_12";
+            this.tpg_12.Size = new System.Drawing.Size(1136, 797);
+            this.tpg_12.TabIndex = 12;
+            this.tpg_12.Text = "tpg_12";
+            // 
+            // DGV_BLADE_INFO
+            // 
+            this.DGV_BLADE_INFO.AllowUserToAddRows = false;
+            this.DGV_BLADE_INFO.AllowUserToDeleteRows = false;
+            this.DGV_BLADE_INFO.AllowUserToResizeColumns = false;
+            this.DGV_BLADE_INFO.AllowUserToResizeRows = false;
+            dataGridViewCellStyle100.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle100.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_BLADE_INFO.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle100;
+            this.DGV_BLADE_INFO.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle101.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle101.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle101.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle101.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle101.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.DGV_BLADE_INFO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle101;
+            this.DGV_BLADE_INFO.ColumnHeadersHeight = 30;
+            this.DGV_BLADE_INFO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DGV_BLADE_INFO.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn66,
+            this.dataGridViewTextBoxColumn67,
+            this.dataGridViewTextBoxColumn68,
+            this.dataGridViewTextBoxColumn69,
+            this.dataGridViewTextBoxColumn70,
+            this.Column19,
+            this.dataGridViewTextBoxColumn71,
+            this.Column20,
+            this.dataGridViewTextBoxColumn72,
+            this.Column18,
+            this.dataGridViewTextBoxColumn73,
+            this.dataGridViewTextBoxColumn74,
+            this.dataGridViewTextBoxColumn75});
+            this.DGV_BLADE_INFO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV_BLADE_INFO.GridColor = System.Drawing.Color.Silver;
+            this.DGV_BLADE_INFO.Location = new System.Drawing.Point(0, 0);
+            this.DGV_BLADE_INFO.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.DGV_BLADE_INFO.MultiSelect = false;
+            this.DGV_BLADE_INFO.Name = "DGV_BLADE_INFO";
+            this.DGV_BLADE_INFO.ReadOnly = true;
+            this.DGV_BLADE_INFO.RowHeadersVisible = false;
+            this.DGV_BLADE_INFO.RowHeadersWidth = 25;
+            dataGridViewCellStyle105.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_BLADE_INFO.RowsDefaultCellStyle = dataGridViewCellStyle105;
+            this.DGV_BLADE_INFO.RowTemplate.Height = 23;
+            this.DGV_BLADE_INFO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGV_BLADE_INFO.ShowCellErrors = false;
+            this.DGV_BLADE_INFO.ShowEditingIcon = false;
+            this.DGV_BLADE_INFO.ShowRowErrors = false;
+            this.DGV_BLADE_INFO.Size = new System.Drawing.Size(1134, 795);
+            this.DGV_BLADE_INFO.StandardTab = true;
+            this.DGV_BLADE_INFO.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn66
+            // 
+            this.dataGridViewTextBoxColumn66.HeaderText = "NO";
+            this.dataGridViewTextBoxColumn66.Name = "dataGridViewTextBoxColumn66";
+            this.dataGridViewTextBoxColumn66.ReadOnly = true;
+            this.dataGridViewTextBoxColumn66.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn66.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn66.Width = 32;
+            // 
+            // dataGridViewTextBoxColumn67
+            // 
+            dataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn67.DefaultCellStyle = dataGridViewCellStyle102;
+            this.dataGridViewTextBoxColumn67.HeaderText = "TIME";
+            this.dataGridViewTextBoxColumn67.Name = "dataGridViewTextBoxColumn67";
+            this.dataGridViewTextBoxColumn67.ReadOnly = true;
+            this.dataGridViewTextBoxColumn67.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn67.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn67.Width = 115;
+            // 
+            // dataGridViewTextBoxColumn68
+            // 
+            this.dataGridViewTextBoxColumn68.HeaderText = "LOTID";
+            this.dataGridViewTextBoxColumn68.Name = "dataGridViewTextBoxColumn68";
+            this.dataGridViewTextBoxColumn68.ReadOnly = true;
+            this.dataGridViewTextBoxColumn68.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn68.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn68.Width = 97;
+            // 
+            // dataGridViewTextBoxColumn69
+            // 
+            dataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn69.DefaultCellStyle = dataGridViewCellStyle103;
+            this.dataGridViewTextBoxColumn69.HeaderText = "ABF";
+            this.dataGridViewTextBoxColumn69.Name = "dataGridViewTextBoxColumn69";
+            this.dataGridViewTextBoxColumn69.ReadOnly = true;
+            this.dataGridViewTextBoxColumn69.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn69.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn69.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn70
+            // 
+            dataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn70.DefaultCellStyle = dataGridViewCellStyle104;
+            this.dataGridViewTextBoxColumn70.HeaderText = "SP1 BLADE SERIAL";
+            this.dataGridViewTextBoxColumn70.Name = "dataGridViewTextBoxColumn70";
+            this.dataGridViewTextBoxColumn70.ReadOnly = true;
+            this.dataGridViewTextBoxColumn70.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn70.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn70.Width = 115;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "SP1 BLADE ID";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            this.Column19.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column19.Width = 110;
+            // 
+            // dataGridViewTextBoxColumn71
+            // 
+            this.dataGridViewTextBoxColumn71.HeaderText = "SP2 BLADE SERIAL";
+            this.dataGridViewTextBoxColumn71.Name = "dataGridViewTextBoxColumn71";
+            this.dataGridViewTextBoxColumn71.ReadOnly = true;
+            this.dataGridViewTextBoxColumn71.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn71.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn71.Width = 115;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "SP2 BLADE ID";
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            this.Column20.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column20.Width = 110;
+            // 
+            // dataGridViewTextBoxColumn72
+            // 
+            this.dataGridViewTextBoxColumn72.HeaderText = "상태";
+            this.dataGridViewTextBoxColumn72.Name = "dataGridViewTextBoxColumn72";
+            this.dataGridViewTextBoxColumn72.ReadOnly = true;
+            this.dataGridViewTextBoxColumn72.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn72.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn72.Width = 37;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "소재 바코드";
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            this.Column18.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column18.Width = 113;
+            // 
+            // dataGridViewTextBoxColumn73
+            // 
+            this.dataGridViewTextBoxColumn73.HeaderText = "SP1 마모량";
+            this.dataGridViewTextBoxColumn73.Name = "dataGridViewTextBoxColumn73";
+            this.dataGridViewTextBoxColumn73.ReadOnly = true;
+            this.dataGridViewTextBoxColumn73.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn73.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn73.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn74
+            // 
+            this.dataGridViewTextBoxColumn74.HeaderText = "SP2 마모량";
+            this.dataGridViewTextBoxColumn74.Name = "dataGridViewTextBoxColumn74";
+            this.dataGridViewTextBoxColumn74.ReadOnly = true;
+            this.dataGridViewTextBoxColumn74.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn74.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn74.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn75
+            // 
+            this.dataGridViewTextBoxColumn75.HeaderText = "투입번호";
+            this.dataGridViewTextBoxColumn75.Name = "dataGridViewTextBoxColumn75";
+            this.dataGridViewTextBoxColumn75.ReadOnly = true;
+            this.dataGridViewTextBoxColumn75.Width = 58;
+            // 
+            // btnLOG_12
+            // 
+            this.btnLOG_12.BackColor = System.Drawing.Color.White;
+            this.btnLOG_12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLOG_12.ForeColor = System.Drawing.Color.Black;
+            this.btnLOG_12.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_12.Image")));
+            this.btnLOG_12.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnLOG_12.Location = new System.Drawing.Point(2, 575);
+            this.btnLOG_12.Name = "btnLOG_12";
+            this.btnLOG_12.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLOG_12.Size = new System.Drawing.Size(123, 53);
+            this.btnLOG_12.TabIndex = 12;
+            this.btnLOG_12.Tag = "12";
+            this.btnLOG_12.Text = "BLADE LOG\r\nVIEW";
+            this.btnLOG_12.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnLOG_12.UseVisualStyleBackColor = false;
+            // 
+            // btnLOG_11
+            // 
+            this.btnLOG_11.BackColor = System.Drawing.Color.White;
+            this.btnLOG_11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLOG_11.ForeColor = System.Drawing.Color.Black;
+            this.btnLOG_11.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_11.Image")));
+            this.btnLOG_11.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnLOG_11.Location = new System.Drawing.Point(2, 627);
+            this.btnLOG_11.Name = "btnLOG_11";
+            this.btnLOG_11.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLOG_11.Size = new System.Drawing.Size(123, 53);
+            this.btnLOG_11.TabIndex = 11;
+            this.btnLOG_11.Tag = "11";
+            this.btnLOG_11.Text = "LOT LOG\r\nVIEW";
+            this.btnLOG_11.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnLOG_11.UseVisualStyleBackColor = false;
             // 
             // btnLOG_10
             // 
@@ -2318,10 +3567,10 @@
             this.btnLOG_10.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_10.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_10.Image")));
             this.btnLOG_10.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_10.Location = new System.Drawing.Point(5, 474);
+            this.btnLOG_10.Location = new System.Drawing.Point(2, 419);
             this.btnLOG_10.Name = "btnLOG_10";
             this.btnLOG_10.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_10.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_10.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_10.TabIndex = 10;
             this.btnLOG_10.Tag = "10";
             this.btnLOG_10.Text = "ONE-CYCLE\r\nVIEW";
@@ -2335,10 +3584,10 @@
             this.btnLOG_9.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_9.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_9.Image")));
             this.btnLOG_9.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_9.Location = new System.Drawing.Point(3, 416);
+            this.btnLOG_9.Location = new System.Drawing.Point(2, 366);
             this.btnLOG_9.Name = "btnLOG_9";
             this.btnLOG_9.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_9.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_9.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_9.TabIndex = 9;
             this.btnLOG_9.Tag = "9";
             this.btnLOG_9.Text = "LOT\r\nVIEW";
@@ -2352,10 +3601,10 @@
             this.btnLOG_8.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_8.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_8.Image")));
             this.btnLOG_8.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_8.Location = new System.Drawing.Point(5, 592);
+            this.btnLOG_8.Location = new System.Drawing.Point(2, 523);
             this.btnLOG_8.Name = "btnLOG_8";
             this.btnLOG_8.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_8.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_8.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_8.TabIndex = 8;
             this.btnLOG_8.Tag = "8";
             this.btnLOG_8.Text = "LOCATION\r\nLIST\r\nVIEW";
@@ -2369,10 +3618,10 @@
             this.btnLOG_7.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_7.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_7.Image")));
             this.btnLOG_7.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_7.Location = new System.Drawing.Point(5, 533);
+            this.btnLOG_7.Location = new System.Drawing.Point(2, 471);
             this.btnLOG_7.Name = "btnLOG_7";
             this.btnLOG_7.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_7.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_7.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_7.TabIndex = 7;
             this.btnLOG_7.Tag = "7";
             this.btnLOG_7.Text = "DEFECT\r\nCOUNT\r\nVIEW";
@@ -2386,28 +3635,15 @@
             this.btnLOG_5.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_5.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_5.Image")));
             this.btnLOG_5.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_5.Location = new System.Drawing.Point(3, 357);
+            this.btnLOG_5.Location = new System.Drawing.Point(2, 314);
             this.btnLOG_5.Name = "btnLOG_5";
             this.btnLOG_5.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_5.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_5.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_5.TabIndex = 5;
             this.btnLOG_5.Tag = "5";
             this.btnLOG_5.Text = "PROCESS\r\nVIEW";
             this.btnLOG_5.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnLOG_5.UseVisualStyleBackColor = false;
-            // 
-            // lblStep
-            // 
-            this.lblStep.AutoSize = true;
-            this.lblStep.BackColor = System.Drawing.Color.Transparent;
-            this.lblStep.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStep.ForeColor = System.Drawing.Color.Red;
-            this.lblStep.Location = new System.Drawing.Point(105, 787);
-            this.lblStep.Name = "lblStep";
-            this.lblStep.Size = new System.Drawing.Size(25, 13);
-            this.lblStep.TabIndex = 0;
-            this.lblStep.Text = "000";
-            this.lblStep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnLOG_0
             // 
@@ -2416,10 +3652,10 @@
             this.btnLOG_0.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_0.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_0.Image")));
             this.btnLOG_0.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_0.Location = new System.Drawing.Point(3, 3);
+            this.btnLOG_0.Location = new System.Drawing.Point(2, 2);
             this.btnLOG_0.Name = "btnLOG_0";
             this.btnLOG_0.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_0.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_0.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_0.TabIndex = 0;
             this.btnLOG_0.Tag = "0";
             this.btnLOG_0.Text = "ERROR\r\nLOG";
@@ -2433,10 +3669,10 @@
             this.btnLOG_6.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_6.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_6.Image")));
             this.btnLOG_6.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_6.Location = new System.Drawing.Point(3, 298);
+            this.btnLOG_6.Location = new System.Drawing.Point(2, 262);
             this.btnLOG_6.Name = "btnLOG_6";
             this.btnLOG_6.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_6.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_6.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_6.TabIndex = 6;
             this.btnLOG_6.Tag = "6";
             this.btnLOG_6.Text = "MACHINE\r\nEVENT\r\nLOG";
@@ -2450,10 +3686,10 @@
             this.btnLOG_4.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_4.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_4.Image")));
             this.btnLOG_4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_4.Location = new System.Drawing.Point(3, 62);
+            this.btnLOG_4.Location = new System.Drawing.Point(2, 54);
             this.btnLOG_4.Name = "btnLOG_4";
             this.btnLOG_4.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_4.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_4.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_4.TabIndex = 4;
             this.btnLOG_4.Tag = "4";
             this.btnLOG_4.Text = "WARNING\r\nLOG";
@@ -2467,10 +3703,10 @@
             this.btnLOG_2.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_2.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_2.Image")));
             this.btnLOG_2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_2.Location = new System.Drawing.Point(3, 239);
+            this.btnLOG_2.Location = new System.Drawing.Point(2, 210);
             this.btnLOG_2.Name = "btnLOG_2";
             this.btnLOG_2.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_2.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_2.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_2.TabIndex = 2;
             this.btnLOG_2.Tag = "2";
             this.btnLOG_2.Text = "SPC\r\nVIEW";
@@ -2484,10 +3720,10 @@
             this.btnLOG_1.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_1.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_1.Image")));
             this.btnLOG_1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_1.Location = new System.Drawing.Point(3, 121);
+            this.btnLOG_1.Location = new System.Drawing.Point(2, 106);
             this.btnLOG_1.Name = "btnLOG_1";
             this.btnLOG_1.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_1.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_1.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_1.TabIndex = 1;
             this.btnLOG_1.Tag = "1";
             this.btnLOG_1.Text = "CHAGE\r\nTEACHING\r\nLOG";
@@ -2501,10 +3737,10 @@
             this.btnLOG_3.ForeColor = System.Drawing.Color.Black;
             this.btnLOG_3.Image = ((System.Drawing.Image)(resources.GetObject("btnLOG_3.Image")));
             this.btnLOG_3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLOG_3.Location = new System.Drawing.Point(3, 180);
+            this.btnLOG_3.Location = new System.Drawing.Point(2, 158);
             this.btnLOG_3.Name = "btnLOG_3";
             this.btnLOG_3.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLOG_3.Size = new System.Drawing.Size(123, 58);
+            this.btnLOG_3.Size = new System.Drawing.Size(123, 53);
             this.btnLOG_3.TabIndex = 3;
             this.btnLOG_3.Tag = "3";
             this.btnLOG_3.Text = "MANUAL-RUN\r\nLOG";
@@ -2517,11 +3753,11 @@
             this.swLogView.Font = new System.Drawing.Font("맑은 고딕", 8.25F);
             this.swLogView.Image = ((System.Drawing.Image)(resources.GetObject("swLogView.Image")));
             this.swLogView.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swLogView.Location = new System.Drawing.Point(5, 655);
+            this.swLogView.Location = new System.Drawing.Point(2, 687);
             this.swLogView.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.swLogView.Name = "swLogView";
             this.swLogView.Padding = new System.Windows.Forms.Padding(5);
-            this.swLogView.Size = new System.Drawing.Size(123, 65);
+            this.swLogView.Size = new System.Drawing.Size(123, 55);
             this.swLogView.TabIndex = 964;
             this.swLogView.Text = "VIEW";
             this.swLogView.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -2533,10 +3769,10 @@
             this.swSave.Font = new System.Drawing.Font("맑은 고딕", 8.25F);
             this.swSave.Image = ((System.Drawing.Image)(resources.GetObject("swSave.Image")));
             this.swSave.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swSave.Location = new System.Drawing.Point(5, 722);
+            this.swSave.Location = new System.Drawing.Point(2, 742);
             this.swSave.Name = "swSave";
             this.swSave.Padding = new System.Windows.Forms.Padding(5);
-            this.swSave.Size = new System.Drawing.Size(123, 65);
+            this.swSave.Size = new System.Drawing.Size(123, 55);
             this.swSave.TabIndex = 958;
             this.swSave.Text = "CSV FILE\r\nSAVE";
             this.swSave.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -2547,9 +3783,10 @@
             this.pnlInfo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pnlInfo.Controls.Add(this.GroupBox1);
-            this.pnlInfo.Location = new System.Drawing.Point(3, 5);
+            this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlInfo.Location = new System.Drawing.Point(0, 0);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(1266, 67);
+            this.pnlInfo.Size = new System.Drawing.Size(1277, 67);
             this.pnlInfo.TabIndex = 163;
             // 
             // GroupBox1
@@ -2664,99 +3901,46 @@
             this.Label1.TabIndex = 1;
             this.Label1.Text = "BEGIN";
             // 
-            // dataGridViewTextBoxColumn52
+            // button1
             // 
-            this.dataGridViewTextBoxColumn52.HeaderText = "NO";
-            this.dataGridViewTextBoxColumn52.Name = "dataGridViewTextBoxColumn52";
-            this.dataGridViewTextBoxColumn52.ReadOnly = true;
-            this.dataGridViewTextBoxColumn52.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn52.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn52.Width = 32;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.button1.Location = new System.Drawing.Point(3, 575);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(3);
+            this.button1.Size = new System.Drawing.Size(123, 53);
+            this.button1.TabIndex = 965;
+            this.button1.Tag = "11";
+            this.button1.Text = "BLADE LOG\r\nVIEW";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.button1.UseVisualStyleBackColor = false;
             // 
-            // dataGridViewTextBoxColumn53
+            // pnLogSwitch
             // 
-            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn53.DefaultCellStyle = dataGridViewCellStyle81;
-            this.dataGridViewTextBoxColumn53.HeaderText = "TIME";
-            this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
-            this.dataGridViewTextBoxColumn53.ReadOnly = true;
-            this.dataGridViewTextBoxColumn53.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn53.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn53.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn54
-            // 
-            this.dataGridViewTextBoxColumn54.HeaderText = "LOGIN";
-            this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
-            this.dataGridViewTextBoxColumn54.ReadOnly = true;
-            this.dataGridViewTextBoxColumn54.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn54.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn54.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn55
-            // 
-            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle82;
-            this.dataGridViewTextBoxColumn55.HeaderText = "MC Sts";
-            this.dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
-            this.dataGridViewTextBoxColumn55.ReadOnly = true;
-            this.dataGridViewTextBoxColumn55.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn55.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn55.Width = 85;
-            // 
-            // dataGridViewTextBoxColumn56
-            // 
-            dataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle83;
-            this.dataGridViewTextBoxColumn56.HeaderText = "SHIFT";
-            this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
-            this.dataGridViewTextBoxColumn56.ReadOnly = true;
-            this.dataGridViewTextBoxColumn56.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn56.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn56.Width = 55;
-            // 
-            // RECIPE
-            // 
-            this.RECIPE.HeaderText = "RECIPE";
-            this.RECIPE.Name = "RECIPE";
-            this.RECIPE.ReadOnly = true;
-            this.RECIPE.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.RECIPE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.RECIPE.Width = 195;
-            // 
-            // dataGridViewTextBoxColumn57
-            // 
-            this.dataGridViewTextBoxColumn57.HeaderText = "LOD ID";
-            this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
-            this.dataGridViewTextBoxColumn57.ReadOnly = true;
-            this.dataGridViewTextBoxColumn57.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn57.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn57.Width = 195;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "STRIP ID";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column15.Width = 195;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "TACK";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            this.Column16.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column16.Width = 82;
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "ONE-CYCLE";
-            this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
-            this.Column17.Width = 83;
+            this.pnLogSwitch.BackColor = System.Drawing.Color.Lavender;
+            this.pnLogSwitch.Controls.Add(this.swLogView);
+            this.pnLogSwitch.Controls.Add(this.swSave);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_12);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_0);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_11);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_3);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_10);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_8);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_1);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_7);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_9);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_2);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_4);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_6);
+            this.pnLogSwitch.Controls.Add(this.btnLOG_5);
+            this.pnLogSwitch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnLogSwitch.Location = new System.Drawing.Point(0, 67);
+            this.pnLogSwitch.Name = "pnLogSwitch";
+            this.pnLogSwitch.Size = new System.Drawing.Size(129, 808);
+            this.pnLogSwitch.TabIndex = 1524;
             // 
             // LOG
             // 
@@ -2764,7 +3948,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1277, 875);
-            this.Controls.Add(this.a1Panel1);
+            this.Controls.Add(this.pnLogSwitch);
             this.Controls.Add(this.tcMTPAGE);
             this.Controls.Add(this.pnlInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -2816,11 +4000,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLot)).EndInit();
             this.tpg_10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwOneCycle)).EndInit();
-            this.a1Panel1.ResumeLayout(false);
-            this.a1Panel1.PerformLayout();
+            this.tpg_11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DV)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.pERROR.ResumeLayout(false);
+            this.pSTOP.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_LOT_ERROR_LIST)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_LOT_ERROR)).EndInit();
+            this.tpg_12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_BLADE_INFO)).EndInit();
             this.pnlInfo.ResumeLayout(false);
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
+            this.pnLogSwitch.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2851,29 +4045,21 @@
         internal System.Windows.Forms.RadioButton rbNow;
         internal System.Windows.Forms.GroupBox gbxTIME;
         private System.Windows.Forms.Panel panel4;
-        private Owf.Controls.DigitalDisplayControl dclPAUSE_CNT;
         private System.Windows.Forms.Label lbPAUSE_CNT;
         private System.Windows.Forms.Label lbRUN_DOWN;
         private System.Windows.Forms.Panel panel5;
-        private Owf.Controls.DigitalDisplayControl dclRUN_DOWN;
         private System.Windows.Forms.Panel panel6;
-        private Owf.Controls.DigitalDisplayControl dclPRODUCT_WAIT;
         private System.Windows.Forms.Label lbPRODUCT_WAIT;
         private System.Windows.Forms.Label lbDOWN;
         private System.Windows.Forms.Panel panel7;
-        private Owf.Controls.DigitalDisplayControl dclDOWN;
         private System.Windows.Forms.Panel panel2;
-        private Owf.Controls.DigitalDisplayControl dclPAUSE;
         private System.Windows.Forms.Label lbPAUSE;
         private System.Windows.Forms.Label lbSTOP;
         private System.Windows.Forms.Panel panel3;
-        private Owf.Controls.DigitalDisplayControl dclSTOP;
         private System.Windows.Forms.Panel panel1;
-        private Owf.Controls.DigitalDisplayControl dclRUN;
         private System.Windows.Forms.Label lbRUN;
         private System.Windows.Forms.Label lbWORK;
         private System.Windows.Forms.Panel pRUN;
-        private Owf.Controls.DigitalDisplayControl dclWORK;
         private System.Windows.Forms.TabPage tpg_3;
         private System.Windows.Forms.TabPage tpg_4;
         private System.Windows.Forms.TabPage tpg_5;
@@ -2899,8 +4085,6 @@
         private System.Windows.Forms.SaveFileDialog SD;
         private System.Windows.Forms.TabPage tpg_6;
         internal System.Windows.Forms.DataGridView dgwEvent;
-        private Owf.Controls.A1Panel a1Panel1;
-        private System.Windows.Forms.Label lblStep;
         private System.Windows.Forms.Button btnLOG_0;
         private System.Windows.Forms.Button btnLOG_6;
         private System.Windows.Forms.Button btnLOG_4;
@@ -2965,18 +4149,6 @@
         private System.Windows.Forms.Button btnLOG_9;
         private System.Windows.Forms.TabPage tpg_9;
         internal System.Windows.Forms.DataGridView gridLot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn51;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.Button btnLOG_10;
         private System.Windows.Forms.TabPage tpg_10;
         internal System.Windows.Forms.DataGridView dgwOneCycle;
@@ -2990,5 +4162,104 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn51;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.TabPage tpg_11;
+        internal System.Windows.Forms.DataGridView DGV_LOT_ERROR_LIST;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn63;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn64;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn65;
+        internal System.Windows.Forms.DataGridView DGV_LOT_ERROR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn58;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn59;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn60;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn61;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn62;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListView lvwLOTIDLIST;
+        private System.Windows.Forms.Button BTN_LOTINFO_OPEN;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.DataVisualization.Charting.Chart DV;
+        private System.Windows.Forms.Label lbERROR;
+        private System.Windows.Forms.Panel pERROR;
+        private System.Windows.Forms.Panel pSTOP;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ListBox LBX_LOTINFO;
+        private System.Windows.Forms.Button btnLOG_11;
+        private System.Windows.Forms.Label LOT_ID;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label LBL_SPINDLE2_ID;
+        private System.Windows.Forms.Label lbLED_BLADLE_BARCODE_SP2;
+        private System.Windows.Forms.Label LBL_SPINDLE1_ID;
+        private System.Windows.Forms.Label lbLED_BLADLE_BARCODE_SP1;
+        private System.Windows.Forms.Label dcLOT_END;
+        private System.Windows.Forms.Label dcLOT_START;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label LOT_ABF;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Button swLotInfoSave;
+        private System.Windows.Forms.Button btnLOG_12;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tpg_12;
+        internal System.Windows.Forms.DataGridView DGV_BLADE_INFO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn66;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn67;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn68;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn69;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn70;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn71;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn72;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn73;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn74;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn75;
+        private System.Windows.Forms.Label lbLOT_RUN;
+        private System.Windows.Forms.Label lbLOT_STOP;
+        private System.Windows.Forms.Label lbLOT_ERROR;
+        private System.Windows.Forms.Label LB_STRIP_CNT;
+        private System.Windows.Forms.Label LB_GOOD_CNT;
+        private System.Windows.Forms.Label LB_ITS_CNT;
+        private System.Windows.Forms.Label LB_GOODTRAY_CNT;
+        private System.Windows.Forms.Label LB_UNIT_CNT;
+        private System.Windows.Forms.Label LB_NG_CNT;
+        private System.Windows.Forms.Label LB_XOUT_CNT;
+        private System.Windows.Forms.Label LB_NGTRAY_CNT;
+        private System.Windows.Forms.Label lbWorkTime;
+        private System.Windows.Forms.Label lbRUNTime;
+        private System.Windows.Forms.Label lbSTOPTime;
+        private System.Windows.Forms.Label lbPAUSETime;
+        private System.Windows.Forms.Label lbDOWNTime;
+        private System.Windows.Forms.Label lbPRODUCT_WAIT_TIME;
+        private System.Windows.Forms.Label lbRUN_DOWN_TIME;
+        private System.Windows.Forms.Label lbPAUSE_COUNT;
+        private System.Windows.Forms.Panel pnLogSwitch;
     }
 }

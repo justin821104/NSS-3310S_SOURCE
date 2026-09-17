@@ -35,8 +35,8 @@ namespace LIB_.UERCTRL{
         public Color StateMotor { set; get; }
 
         public double CurPosition{
-            set { CurPOS.DigitText = value.ToString("0.000"); }
-            get { return double.Parse(CurPOS.DigitText); }
+            set { lbCurPOS.Text = value.ToString("0.000"); }
+            get { return double.Parse(lbCurPOS.Text); }
         }
 
         public Color StateLimit_M { set { LIMIT_M.BackColor = value; } }

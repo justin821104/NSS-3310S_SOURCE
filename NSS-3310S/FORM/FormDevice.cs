@@ -22,6 +22,7 @@ namespace NSS_3310S{
         Label lbl = null;
         Label[] MCRecipe = null;
         Label[] MDRecipe = null;
+        RadioButton[] SetPCBType = null;
         RadioButton[] SetHead = null;
         RadioButton[] StageStatus = null;
         RadioButton[] StackerUnloadMode = null;
@@ -38,7 +39,9 @@ namespace NSS_3310S{
         int nValue = 0;
         dxy PkOffset;
         public string mSubItem = string.Empty;
-        public string mSelectedItem, mSelectedItem_Job = string.Empty;
+        public string mSelectedItem_Job = string.Empty;
+        public string mSubABF = string.Empty;
+        public string mSelectBladeBarcode = string.Empty;
         int nSelectOffsetHD = 0;
         int nSelectHDTh = 0;
         bool bChagePkOffsetView = false;
@@ -53,21 +56,30 @@ namespace NSS_3310S{
         enum TYPE_MAKE{
             Device = 0,
             Group = 1,
+            ABF = 2,
+            BLADE =3
         }
 
         public FormDevice(){
             InitializeComponent();
 
             #region EVENT
-            lvwGROUP.SelectedIndexChanged   += (sender, e) => SelectedIndex(lvwGROUP);
-            lvwDEVICE.SelectedIndexChanged  += (sender, e) => SelectedIndex(lvwDEVICE);
+            lvwGROUP.SelectedIndexChanged           += (sender, e) => SelectedIndex(lvwGROUP);
+            lvwDEVICE.SelectedIndexChanged          += (sender, e) => SelectedIndex(lvwDEVICE);
+            lvwABF.SelectedIndexChanged             += (sender, e) => SelectedIndex(lvwABF);
+            lvwBLADE_BARCODE.SelectedIndexChanged   += (sender, e) => SelectedIndex(lvwBLADE_BARCODE);
+
             DGV_PPID_LIST.CellClick         += (sender, e) => SelectedPPID(DGV_PPID_LIST);
 
             btnGroup.Click                  += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.Group, "NEW GROUP"); };
             btnSaveAs.Click                 += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.Device, "NEW RECIPE"); };
+            btnABF.Click                    += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.ABF, "NEW ABF"); };
+            btnBladeSaveAs.Click            += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) ViewFrame((int)TYPE_MAKE.BLADE, "NEW BLADE BARCODE"); };
+
             btnNewMake.Click                += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) NewMake(); };
             btnNewReturn.Click              += (sender, e) => { gNEW_DEVICE.Visible = false; };
 
+            btnDEL_ABF.Click                += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) RecipeSwitch(btnDEL_ABF); };
             btnDEL.Click                    += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) RecipeSwitch(btnDEL); };
             btnOPEN.Click                   += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) RecipeSwitch(btnOPEN); };
             swSave.Click                    += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) RecipeSwitch(swSave); };
@@ -79,13 +91,14 @@ namespace NSS_3310S{
             swMODIFY.Click                  += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) EventDetailed_Information(swMODIFY); };
             swDELETE.Click                  += (sender, e) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) EventDetailed_Information(swDELETE); };
 
+            btnABFandBLADE_COMPARISON.Click += (sender, E) => { if (DATA_.eMCStatus != eMachineStatus.AUTO) Event_BladeInterlock(btnABFandBLADE_COMPARISON); };
+
             MCRecipe = new Label[] { lblGripper_ReCatchCnt,
                                      lbPKR_PITCH, lbHD1Cam_Pkr_OffsetX,lbHD1Cam_Pkr_OffsetY, lbHD2Cam_Pkr_OffsetX,lbHD2Cam_Pkr_OffsetY,
                                      lbHD1Cam_PkrPlace_OffsetX, lbHD1Cam_PkrPlace_OffsetY, lbHD2Cam_PkrPlace_OffsetX, lbHD2Cam_PkrPlace_OffsetY,
                                      BrushRepeatCnt, AirShowerRepeatCnt, WorkedAirShowerRepeatCnt, lblMGZ_Pitch_Spd
             };
-            for (int i = 0; i < MCRecipe.Length; i++)
-            {
+            for (int i = 0; i < MCRecipe.Length; i++){
                 MCRecipe[i].TabIndex = CP.DVPara[i];
             }
 
@@ -96,8 +109,7 @@ namespace NSS_3310S{
                                      lblMAP_BLOCK_GROUP_CNT_X, lblMAP_BLOCK_GROUP_CNT_Y, lblMAP_BLOCK_GROUP_PITCH_X, lblMAP_BLOCK_GROUP_PITCH_Y,
                                      lblMAP_BLOCK_REJ_INDEX_NUM, lblMAP_BLOCK_SLOW_SPEED, lblMAP_BLOCK_AIRSLOWER_SHOW_SPEED,lblMAP_BLOCK_AIRSLOWER_SHOW_CNT,lblUnitNGOverCnt
             };
-            for (int i = 0; i < MDRecipe.Length; i++)
-            {
+            for (int i = 0; i < MDRecipe.Length; i++){
                 MDRecipe[i].TabIndex = RP.DVPara[i];
             }
 
@@ -106,20 +118,18 @@ namespace NSS_3310S{
             lblX1UnitPic.TabIndex = P.PkPckUp;
             lblX2UnitPic.TabIndex = P.PkPckUp;
 
-            lblX1UnitPlace.Tag = M.X1T.ToString();
-            lblX2UnitPlace.Tag = M.X2T.ToString();
-            lblX1UnitPlace.TabIndex = P.PkPlc;
-            lblX2UnitPlace.TabIndex = P.PkPlc;
+            lblX1UnitPlace.Tag              = M.X1T.ToString();
+            lblX2UnitPlace.Tag              = M.X2T.ToString();
+            lblX1UnitPlace.TabIndex         = P.PkPlc;
+            lblX2UnitPlace.TabIndex         = P.PkPlc;
 
-            btnAutoPickerCal.TabIndex = ManualNumber.RunPickerAutoCal;
+            btnAutoPickerCal.TabIndex       = ManualNumber.RunPickerAutoCal;
 
-            chkPCBTYPE.TabIndex = RP.PCB_TYPE;
-            chkPickUpMabBlockVac.TabIndex = CP.StageUnitPickupVac;
-            chkMabBlockVac.TabIndex = CP.StagePickupMovingVac;
+            SetPCBType = new RadioButton[] { RBN_PCBTYPE_STRIP, RBN_PCBTYPE_QUAD, RBN_PCBTYPE_B1QUAD };
 
-            ChkTrayUnloading.TabIndex = CP.TrayUnloadingMode;
-            CHK_SCRAP_ALARM.TabIndex = RP.ScrapAlarm;
-            CHK_SCRAP_VACUUM.TabIndex = RP.ScrapVacuum;
+            ChkTrayUnloading.TabIndex       = CP.TrayUnloadingMode;
+            CHK_SCRAP_ALARM.TabIndex        = RP.ScrapAlarm;
+            CHK_SCRAP_VACUUM.TabIndex       = RP.ScrapVacuum;
 
             StageStatus = new RadioButton[] { ChkPALLET1, ChkPALLET2, ChkPALLET_ALL };
             SetHead = new RadioButton[] { ChkHEAD_HD1, ChkHEAD_HD2, ChkHEAD_ALL };
@@ -153,21 +163,35 @@ namespace NSS_3310S{
 
             if (lv.Name == "lvwGROUP"){
                 try{
-                    if (lvwGROUP.SelectedIndices.Count <= 0) return;
-                    mSubItem = lvwGROUP.SelectedItems[0].Text;
-                    mSelectedItem = string.Empty;
+                    if (lv.SelectedIndices.Count <= 0) return;
+                    mSubItem = lv.SelectedItems[0].Text;
                     lbWorkGroup.Text = "WORK GROUP : " + mSubItem;
-                    UTIL_.GetWorkRecipe(lvwGROUP, lvwDEVICE, GRD_DEVICE, mSubItem, bDeleteFoler);
+                    UTIL_.GetWorkRecipe(lv, lvwDEVICE, GRD_DEVICE, mSubItem, bDeleteFoler);
                 }
-                catch (Exception ex) { MessageBox.Show("WORK GROUP 속성 변경 에러 (listbox1_SelectedUndexChanged) " + ex.ToString()); }
+                catch (Exception ex) { MessageBox.Show("WORK GROUP 속성 변경 에러 (lvwGROUP_SelectedUndexChanged) " + ex.ToString()); }
             }
-            else{
+            else if (lv.Name == "lvwDEVICE"){
                 try{
-                    if (lvwDEVICE.SelectedIndices.Count <= 0) return;
-                    mSelectedItem = lvwDEVICE.SelectedItems[0].Text;
-                    lbWorkDevice.Text = "WORK RECIPE : " + mSelectedItem;
+                    if (lv.SelectedIndices.Count <= 0) return;
+                    mSelectedItem_Job = lv.SelectedItems[0].Text;
+                    lbWorkDevice.Text = "WORK RECIPE : " + mSelectedItem_Job;
                 }
-                catch (Exception exc) { MessageBox.Show("WORK RECIPE CHANGE PROPERTIES ERROR (listView1_SelectedIndexChanged) " + exc.ToString()); }
+                catch (Exception exc) { MessageBox.Show("WORK RECIPE CHANGE PROPERTIES ERROR (lvwDEVICE_SelectedIndexChanged) " + exc.ToString()); }
+            }
+            else if (lv.Name == "lvwABF"){
+                try{
+                    if (lv.SelectedIndices.Count <= 0) return;
+                    mSubABF = lv.SelectedItems[0].Text;
+                    UTIL_.GetBladeBarcode(lv, lvwBLADE_BARCODE, mSubABF, false);
+                }
+                catch (Exception ex) { MessageBox.Show("자재 리스트 속성 변경 에러 (lvwABF_SelectedUndexChanged) " + ex.ToString()); }
+            }
+            else if (lv.Name == "lvwBLADE_BARCODE"){
+                try{
+                    if (lv.SelectedIndices.Count <= 0) return;
+                    mSelectBladeBarcode = lv.SelectedItems[0].Text;
+                }
+                catch (Exception ex) { MessageBox.Show("자재 리스트 속성 변경 에러 (lvwABF_SelectedUndexChanged) " + ex.ToString()); }
             }
         }
         void NewMake(){
@@ -210,7 +234,7 @@ namespace NSS_3310S{
                     LogWR_.SAVE_ChangeDataEvent("MAKE NEW DEVICE -> " + txNAME.Text);
                     MessageBox.Show("SUCCESS MAKE NEW DEVICE !");
                 }
-                else{ //Make group
+                else if (nIndex == (int)TYPE_MAKE.Group){ //Make group
                     if (!UTIL_.GetSomeWorkGroup(txNAME.Text)){
                         MessageBox.Show("Already Exist Same GROUP. Use Differnt GROUP Name." + ETC.NewLine + "(동일한 GROUP명이 있습니다.)");
                         txNAME.Text = "";
@@ -221,9 +245,44 @@ namespace NSS_3310S{
                     LogWR_.SAVE_ChangeDataEvent("MAKE NEW GROUP -> " + txNAME.Text);
                     MessageBox.Show("SUCCESS MAKE NEW GROUP FOLDER !");
                 }
+                else if (nIndex == (int)TYPE_MAKE.ABF){ //Make  자재명
+                    if (!UTIL_.GetSomeABF(txNAME.Text)){
+                        MessageBox.Show("Already Exist Same ABF. Use Differnt ABF Name." + ETC.NewLine + "(동일한 자재명이 있습니다.)");
+                        txNAME.Text = "";
+                        return;
+                    }
+                    Directory.CreateDirectory(PATH_.ABF_LIST + txNAME.Text); // 폴더 만듬.
+                    UTIL_.GetABF(lvwABF);
+                    LogWR_.SAVE_ChangeDataEvent("MAKE NEW ABF -> " + txNAME.Text);
+                    MessageBox.Show("SUCCESS MAKE NEW ABF !");
+                }
+                else if (nIndex == (int)TYPE_MAKE.BLADE){ //Make 블레이드 바코드
+                    if (mSubABF == "" || mSubABF == null) {
+                        MessageBox.Show("Select ABF!" + ETC.NewLine + "(자재명 리스트를 먼저 선택하셔야 합니다 !)");
+                        txNAME.Text = "";
+                        gNEW_DEVICE.Visible = false;
+                        return;
+                    }
+                    if (!UTIL_.GetSomeBladeBarcode(mSubABF, txNAME.Text)){
+                        MessageBox.Show("Already Exist Same blade barcode. Use Differnt blade barcode." + ETC.NewLine + "(동일한 블레이드 바코드 넘버가 있습니다.)");
+                        txNAME.Text = "";
+                        return;
+                    }
+                    string AddBarcode = PATH_.ABF_LIST + mSubABF + "\\" + txNAME.Text + ".job";
+                    FILE_.WR_File(AddBarcode, txNAME.Text, false);
+                    UTIL_.GetBladeBarcode(lvwABF, lvwBLADE_BARCODE, mSubABF, false);
+                    LogWR_.SAVE_ChangeDataEvent("MAKE NEW BLADE BARCODE -> " + txNAME.Text);
+                    MessageBox.Show("SUCCESS MAKE NEW BLADE BARCODE !");
+                }
                 gNEW_DEVICE.Visible = false;
             }
             catch (Exception ex) { MessageBox.Show("New make file fail !" + ETC.NewLine + ex.ToString()); }
+        }
+
+        public static void Write_ParaToggleSwitch(JCS.ToggleSwitch ts) {
+            int value = ts.Checked ? 1 : 0;
+            if (ts.Tag.ToString() == "MC" || ts.Tag.ToString() == "mc") TEACH_.WR_MCPara(ts.TabIndex, value);
+            else TEACH_.WR_MDLPara(ts.TabIndex, value);
         }
         void RecipeSwitch(object sender){
             btn = (Button)sender;
@@ -234,7 +293,7 @@ namespace NSS_3310S{
                         return;
                     }
                     string sSelectGroup = mSubItem;
-                    string sSelectJob = mSelectedItem.Substring(0, mSelectedItem.Length - 4);
+                    string sSelectJob = mSelectedItem_Job.Substring(0, mSelectedItem_Job.Length - 4);
                     string sOldGroupName = /*DATA_.sGroupName*/mSubItem;
                     string sOldCurName = DATA_.sCurrJobName;
                     string sOldJobName = DATA_.sJobName;
@@ -243,7 +302,7 @@ namespace NSS_3310S{
                         MessageBox.Show("This work device is currently open !");
                         return;
                     }
-                    DATA_.sCurrJobName = PATH_.DATA + mSubItem.Trim() + "\\" + mSelectedItem.Trim();
+                    DATA_.sCurrJobName = PATH_.DATA + mSubItem.Trim() + "\\" + mSelectedItem_Job.Trim();
                     FILE_.WR_File(PATH_.CurrJOB, DATA_.sCurrJobName, false);
                     if (UTIL_.OpenJobFile()){
                         UTIL_.LD_JOB_FILE();
@@ -253,7 +312,7 @@ namespace NSS_3310S{
                     ReadData();
                     //F.fVisionSet.LoadFinePattern();
                     UTIL_.DELAY(500);
-                    LogWR_.SAVE_ChangeDataEvent("OPEN WORK DEVICE - " + sOldCurName + " -> " + mSelectedItem);
+                    LogWR_.SAVE_ChangeDataEvent("OPEN WORK DEVICE - " + sOldCurName + " -> " + mSelectedItem_Job);
                     DEF.ChangeSawRecipe();
                     lbl_DEVICE.Text = "CURRENT DEVICE : " + DATA_.sCurrJobName;
                     //SUBFRM_.gSecsGem.SetRecipeIDChage(CMES.MES_LOT_ID, sSelectJob);
@@ -266,7 +325,7 @@ namespace NSS_3310S{
                 try{
                     if (DATA_.eLoginLevel < eLogLevel.ENG) return;
                     string sGroup = mSubItem;
-                    string sDevice = mSelectedItem;
+                    string sDevice = mSelectedItem_Job;
                     COM_.CheckDevice(ref CheckGroup, ref CheckLastDevice);
 
                     if (sGroup == "" && sDevice == ""){
@@ -277,7 +336,7 @@ namespace NSS_3310S{
                         MessageBox.Show("Cannot Delete Current Group");
                         return;
                     }
-                    if (mSelectedItem == null || mSelectedItem == ""){
+                    if (mSelectedItem_Job == null || mSelectedItem_Job == ""){
                         if (DialogResult.OK == MessageBox.Show(sGroup + " Group Folder Delete ?", "Select", MessageBoxButtons.OKCancel)){
                             //FileIO_.FolderCopy(PATH_.DATA + mSubItem, mSubItem);//백업?
 
@@ -292,10 +351,10 @@ namespace NSS_3310S{
                         if (DialogResult.OK == MessageBox.Show(sDevice + " Device Delete ?", "Select", MessageBoxButtons.OKCancel)){
                             //FileIO_.FileCopy(PATH_.DATA + mSubItem, mSubItem);//백업?
 
-                            File.Delete(PATH_.DATA + mSubItem + "\\" + mSelectedItem);
-                            LogWR_.SaveLogOperate("DELETE DEVCIE FILE -> " + mSelectedItem, "SCREEN");
+                            File.Delete(PATH_.DATA + mSubItem + "\\" + mSelectedItem_Job);
+                            LogWR_.SaveLogOperate("DELETE DEVCIE FILE -> " + mSelectedItem_Job, "SCREEN");
                             MessageBox.Show("Success Delete Device File");
-                            mSelectedItem = "";
+                            mSelectedItem_Job = "";
                         }
                     } // delete device
                     UTIL_.GetWorkRecipe(lvwGROUP, lvwDEVICE, GRD_DEVICE, mSubItem, bDeleteFoler);
@@ -311,13 +370,19 @@ namespace NSS_3310S{
                 for (int i = 0; i < MDRecipe.Length; i++){
                     TEACH_.Write_Parameter(MDRecipe[i]);
                 }
-                TEACH_.Write_Parameter(chkPCBTYPE);
-                TEACH_.Write_Parameter(chkPickUpMabBlockVac);
-                TEACH_.Write_Parameter(chkMabBlockVac);
+                TEACH_.Write_Parameter(RP.PCB_TYPE, "MD", SetPCBType);
 
-                TEACH_.Write_Parameter(ChkTrayUnloading);
-                TEACH_.Write_Parameter(CHK_SCRAP_ALARM);
-                TEACH_.Write_Parameter(CHK_SCRAP_VACUUM);
+                TEACH_.WR_MCPara(CP.StageUnitPickupVac, chkPickUpMabBlockVacOn.Checked ? 1 : 0);
+
+                TEACH_.WR_MCPara(CP.StagePickupMovingVac, chkMabBlockVacOn.Checked ? 1 : 0);
+
+                //Write_ParaToggleSwitch(ChkSmartLocationDir);
+                TEACH_.WR_MCPara(CP.SmartLoction_Dir, rdbSmartLocationDir_1.Checked ? 1 : 0);
+
+                Write_ParaToggleSwitch(ChkTrayUnloading);
+
+                Write_ParaToggleSwitch(CHK_SCRAP_ALARM);
+                Write_ParaToggleSwitch(CHK_SCRAP_VACUUM);
 
                 TEACH_.Write_Parameter(CP.SelectStage, "MC", StageStatus);
                 TEACH_.Write_Parameter(CP.SelectHead, "MC", SetHead);
@@ -392,6 +457,38 @@ namespace NSS_3310S{
                 EVENT_OPEN();
                 MessageBox.Show("OK SAVE");
             }
+            
+            if (btn.Name == "btnDEL_ABF"){
+                try{
+                    if (DATA_.eLoginLevel < eLogLevel.ENG) return;
+                    string sABF = mSubABF;
+                    string sBlade = mSelectBladeBarcode;
+
+                    if (sABF == ""){
+                        MessageBox.Show("You need to select the ABF you want to delete.");
+                        return;
+                    }
+                    if (sBlade == ""){
+                        if (DialogResult.OK == MessageBox.Show(sABF + " Delete ?", "Select", MessageBoxButtons.OKCancel)){
+                            Directory.Delete(PATH_.ABF_LIST + mSubABF, true);
+                            LogWR_.SaveLogOperate("DELETE ABF FOLDER -> " + mSubABF, "SCREEN");
+                            MessageBox.Show("Success Delete ABF Folder");
+                            mSubABF = "";
+                        }
+                        UTIL_.GetABF(lvwABF);
+                    } //자재명 삭제
+                    else{
+                        if (DialogResult.OK == MessageBox.Show(sABF + " BLADE BARCODE " +sBlade + " Delete ?", "Select", MessageBoxButtons.OKCancel)){
+                            File.Delete(PATH_.ABF_LIST + mSubABF + "\\" + mSelectBladeBarcode);
+                            LogWR_.SaveLogOperate("DELETE DEVCIE FILE -> " + mSelectBladeBarcode, "SCREEN");
+                            MessageBox.Show("Success Delete blade barcode File");
+                            mSelectBladeBarcode = "";
+                        }
+                    } //자재명 안에 블레이드 바코드 정보 삭제
+                    UTIL_.GetBladeBarcode(lvwABF, lvwBLADE_BARCODE, mSubABF, false);
+                }
+                catch (Exception ex) { MessageBox.Show("" + ETC.NewLine + ex.ToString()); }
+            }
             C.SendSaw.SEND("GET_SVID,*");
             DEF.SetParaFDC();
         }
@@ -445,7 +542,7 @@ namespace NSS_3310S{
 
                 DEF.ChangeSawRecipe();
                 if (DEF.SawRecipeOpen()){
-                    COM_.ViewWarning(-1, W.SawRecipeLoadingFail);
+                    W.ViewWarning(-1, W.SawRecipeLoadingFail);
                 }
 
                 string GetRecipe = sLine[1].Replace(".job", "");
@@ -510,6 +607,39 @@ namespace NSS_3310S{
             }
         }
 
+        void Event_BladeInterlock(object sender){
+            btn = (Button)sender;
+            if (btn.Name == "btnABFandBLADE_COMPARISON"){
+                
+                if (CLOT.GET_LOT.ABFMATERIAL == ""){
+                    W.ViewWarning(T.Op, W.ABF_MESSAGE, "현재 LOT 리스트에 자재명이 존재 하지 않습니다. !" + ETC.NewLine + "LOT VALIDATION 진행 하였는지 MES 사용 중 인지 확인 바랍니다.", true);
+                    return;
+                }
+                else{
+                    if (UTIL_.GetSomeABF(CLOT.GET_LOT.ABFMATERIAL)){
+                        W.ViewWarning(T.Op, W.ABF_MESSAGE, "설비 자재명 존재하지 않습니다. 자재명을 등록 하셔야 합니다 !" + ETC.NewLine + "(" + CLOT.GET_LOT.ABFMATERIAL.ToString() + " 해당 자재명이 등록이 되어 있지 않습니다 !.)", true);
+                        return;
+                    }
+                    //동일한 자재명은 있음 => 블레이드 정보 확인 !!
+                    if (CLOT.bBladeInfo_Sp1 && CLOT.bBladeInfo_Sp2 || CLOT.GET_LOT.BarcodeSp1 != "" || CLOT.GET_LOT.BarcodeSp2 != ""){
+                        if (!DEF.CheckABFBlade()){
+                            W.ViewWarning(T.Op, W.ABF_MESSAGE, "현재 진행 LOT 자재명과 동일한 자재명이 존재 하지 않습니다.!" + ETC.NewLine + "설비에 자재 등록 하셔야 합니다. !", true);
+                            return;
+                        }
+                        if (!DEF.InterlockBladeBarcode()){
+                            W.ViewWarning(T.Op, W.ABF_MESSAGE, "자재명 " + CLOT.GET_LOT.ABFMATERIAL + " 블레이드 바코드 정보와 현재 스핀들1 바코드 또는 스핀들2 바코드 정보와 동일 하지 않습니다.!" + ETC.NewLine + "해당 자재 스핀들 바코드 정보 또는 현재 설비 장착 스핀들 바코드 정보 확인 바랍니다. !", true);
+                            return;
+                        }
+                    }
+                    else{
+                        W.ViewWarning(T.Op, W.ABF_MESSAGE, "다이싱 쏘 설비에서 스핀들 블레이드 정보 리딩 되어 있지 않습니다 !" + ETC.NewLine + "확인 후 다시 진행 하셔야 합니다 !", true);
+                        return;
+                    }
+                    MessageBox.Show("현재 자재명의 스핀들 바코드 정상입니다. !");
+                }
+            }
+        }
+
         private void ChkOffsetHead(object sender, EventArgs e){
             if (rbnHD1.Checked) nSelectOffsetHD = 0;
             else if (rbnHD2.Checked) nSelectOffsetHD = 1;
@@ -566,6 +696,7 @@ namespace NSS_3310S{
             if (DATA_.sCurrJobName != null) lbl_DEVICE.Text = "CURRENT DEVICE : " + DATA_.sCurrJobName;
             COM_.SetFrame(gNEW_DEVICE, false, 80, 290, 380, 260);
             UTIL_.GetWorkGroup(lvwGROUP);
+            UTIL_.GetABF(lvwABF);
             COM_.CheckDevice(ref CheckGroup, ref CheckLastDevice);
             UTIL_.GetPPID(DGV_PPID_LIST);
             COM_.SetDetailedInfomation();
@@ -587,18 +718,52 @@ namespace NSS_3310S{
 
         }
 
-        public void ReadData(){
-            for (int i = 0; i < MCRecipe.Length; i++){
+        public void ReadData() {
+            for (int i = 0; i < MCRecipe.Length; i++) {
                 MCRecipe[i].Text = DATA_.prMACHINE[CP.DVPara[i]].ToString();
             }
-            for (int i = 0; i < MDRecipe.Length; i++){
+            for (int i = 0; i < MDRecipe.Length; i++) {
                 MDRecipe[i].Text = DATA_.prMODEL[RP.DVPara[i]].ToString();
             }
-            chkPCBTYPE.Checked = DATA_.prMODEL[RP.PCB_TYPE] == (int)eUSE.USE ? true : false;
-            chkPickUpMabBlockVac.Checked = DATA_.prMACHINE[CP.StageUnitPickupVac] == (int)eUSE.USE ? true : false;
-            chkMabBlockVac.Checked = DATA_.prMACHINE[CP.StagePickupMovingVac] == (int)eUSE.USE ? true : false;
 
+            SetPCBType[(int)DATA_.prMODEL[RP.PCB_TYPE]].Checked = true;
+
+            if (DATA_.prMACHINE[CP.StageUnitPickupVac] == (int)eUSE.USE) {
+                chkPickUpMabBlockVacOn.Checked = true;
+                chkPickUpMabBlockVacOff.Checked = false;
+            }
+            else {
+                chkPickUpMabBlockVacOn.Checked = false;
+                chkPickUpMabBlockVacOff.Checked = true;
+            }
+
+            if (DATA_.prMACHINE[CP.StagePickupMovingVac] == (int)eUSE.USE) {
+                chkMabBlockVacOn.Checked = true;
+                chkMabBlockVacOff.Checked = false;
+            }
+            else {
+                chkMabBlockVacOn.Checked = false;
+                chkMabBlockVacOff.Checked = true;
+            }
+
+            if (DATA_.prMACHINE[CP.SmartLoction_Dir] == (int)eUSE.USE) {
+                rdbSmartLocationDir_1.Checked = true;
+                rdbSmartLocationDir.Checked = false; 
+            }
+            else {
+                rdbSmartLocationDir_1.Checked = false;
+                rdbSmartLocationDir.Checked = true;
+            }
             ChkTrayUnloading.Checked = DATA_.prMACHINE[CP.TrayUnloadingMode] == (int)eUSE.USE ? true : false;
+            if (DATA_.prMACHINE[CP.TrayUnloadingMode] == (int)eUSE.USE) {
+                rbTrayUnloadingConveyor.Checked = false;
+                rbTrayUnloadingStacker.Checked = true;
+            }
+            else {
+                rbTrayUnloadingConveyor.Checked = true;
+                rbTrayUnloadingStacker.Checked = false;
+            }
+
             CHK_SCRAP_ALARM.Checked = DATA_.prMODEL[RP.ScrapAlarm] == (int)eScrapAlarm.USE ? false : true;
             CHK_SCRAP_VACUUM.Checked = DATA_.prMODEL[RP.ScrapVacuum] == (int)eScrapVacuum.USE ? true : false;
 
@@ -667,6 +832,18 @@ namespace NSS_3310S{
             DATA_.iMANUAL.bRESULT = COM_.RUN_MANUAL(DATA_.iMANUAL.Number, DATA_.IsSTRING[S.ManualMessage], true);
         }
 
+        private void btnSpindleBladeInfo_Click(object sender, EventArgs e){
+            CLOT.bBladeInfo_Sp1 = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP1);
+            CLOT.bBladeInfo_Sp2 = UTIL_.GET_SPINDLE_BLADE_BARCODE(eSPINDLE.SP2);
+
+            if (CLOT.bBladeInfo_Sp1 && CLOT.bBladeInfo_Sp2){
+                MessageBox.Show("다이싱 쏘 설비에서 블레이드 바코드 정보 읽어왔습니다 !");
+            }
+            else{
+                W.ViewWarning(T.Op, W.ABF_MESSAGE, "다이싱 쏘 설비에서 스핀들 블레이드 정보 리딩 되어 있지 않습니다 !" + ETC.NewLine + "공유 폴더 블레이드 정보 없습니다 !", true);
+            }
+        }
+
         private void TmrRECIPE_Tick(object sender, EventArgs e){
             TmrRECIPE.Enabled = false;
             Invoke();
@@ -678,6 +855,16 @@ namespace NSS_3310S{
             SELECT_VISION.Text = CMES.SELECT_VISION;
             SELECT_SAW.Text = CMES.SELECT_SAW;
             SELECT_LOADER.Text = "-";
+
+            CUR_GROUP.Text  = mSubItem;
+            CUR_RECIPE.Text = mSelectedItem_Job;
+            CUR_ABF.Text    = mSubABF;
+            CUR_BLADE.Text  = mSelectBladeBarcode;
+
+            LB_BLADE_BARCODE_SP1.Visible = true;
+            LB_BLADE_BARCODE_SP2.Visible = true;
+            LB_BLADE_BARCODE_SP1.Text = "SPINDLE1 BLADE : " + CLOT.GET_LOT.BarcodeSp1;
+            LB_BLADE_BARCODE_SP2.Text = "SPINDLE2 BLADE : " + CLOT.GET_LOT.BarcodeSp2;
 
             if (bRecipeCreate){
                 bRecipeCreate = false;

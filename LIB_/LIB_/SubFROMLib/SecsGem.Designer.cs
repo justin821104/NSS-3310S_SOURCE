@@ -113,6 +113,7 @@
             this.lblTerminalMsg.Tag = "24";
             this.lblTerminalMsg.Text = "TERMINAL MESSAGAE";
             this.lblTerminalMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTerminalMsg.DoubleClick += new System.EventHandler(this.lblTerminalMsg_DoubleClick);
             // 
             // lstLog
             // 
@@ -456,7 +457,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(457, 220);
+            this.ClientSize = new System.Drawing.Size(456, 220);
             this.ControlBox = false;
             this.Controls.Add(this.lbCommRequest);
             this.Controls.Add(this.label18);

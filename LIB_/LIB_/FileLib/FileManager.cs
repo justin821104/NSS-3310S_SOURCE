@@ -58,6 +58,7 @@ public class FILE_ : DATA_
     public static double RDDouble(String FileName, String Section, String key, double Value){
         StringBuilder sb = new StringBuilder(255);
         GetPrivateProfileString(Section, key, "", sb, 255, FileName);
+        if (sb.Length <= 0) return Value;
         if (double.TryParse(sb.ToString(), out double dValue)) dValue = double.Parse(sb.ToString());
         return dValue;
     }
@@ -83,7 +84,7 @@ public class FILE_ : DATA_
     public static String RDString(String FileName, String Section, String key, String Value){
         StringBuilder sb = new StringBuilder(255);
         GetPrivateProfileString(Section, key, "", sb, 255, FileName);
-
+        if (sb.Length <= 0) return Value;
         string sValue;
         sValue = sb.ToString();
         return sValue;
@@ -114,6 +115,7 @@ public class FILE_ : DATA_
         StringBuilder sb = new StringBuilder(255);
         GetPrivateProfileString(Section, key, "", sb, 255, FileName);
 
+        if (sb.Length <= 0) return Value;  //23.0908 HK.PARK 추가함~
         if (int.TryParse(sb.ToString(), out int iValue)) iValue = int.Parse(sb.ToString());
         return iValue == 1 ? true : false;
     }
@@ -138,7 +140,6 @@ public class FILE_ : DATA_
             sw.Close();
         }
         catch (Exception e) { LogWR_.SaveLogException("WR FILE FAIL [" + path + "]", e); }
-
     }
     public static void WRL_File(string path, string s, bool appeded){
         int fm = (int)FileMode.Create;          // 파일 만듬. 같은 이름 파일이 있으면 이전 파일 지우고 만듬.
@@ -151,6 +152,54 @@ public class FILE_ : DATA_
             sw.Close();
         }
         catch (Exception e) { LogWR_.SaveLogException("WR FILE FAIL [" + path + "]", e); }
+    }
+    public static void WRL_InStrip(string path, string s, bool appeded) {
+        int fm = (int)FileMode.Create;          // 파일 만듬. 같은 이름 파일이 있으면 이전 파일 지우고 만듬.
+        if (appeded) fm = (int)FileMode.Append; // 추가모드로 OPEN. 파일 없으면 만듬.
+        try {
+            var enconding = new UTF8Encoding(false); // 텍스트 파일 저장시에 확장자 형식 UTF8-(BOM) -> UTF8로 변경!
+            FileStream fs = new FileStream(path, (FileMode)fm);
+            StreamWriter sw = new StreamWriter(fs, /*Encoding.UTF8*/enconding);
+            sw.WriteLine(s);
+            sw.Flush();
+            sw.Close();
+        }
+        catch (Exception e) { LogWR_.SaveLogException("WR FILE FAIL [" + path + "]", e); }
+    }
+    public static bool WR_LotInfo(string path, string lotid){
+        int fm = (int)FileMode.Create;          // 파일 만듬. 같은 이름 파일이 있으면 이전 파일 지우고 만듬.
+        try{
+            FileStream fs = new FileStream(path, (FileMode)fm);
+            StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
+            sw.WriteLine(lotid);
+            sw.Flush();
+            sw.Close();
+            return true;
+        }
+        catch (Exception e) {  LogWR_.SaveLogException("WR FILE FAIL [" + path + "]", e); }
+        return false;
+    }
+    public static void WRL_Csv(string path, string s, bool appeded)
+    {
+        bool bNewFile = false;
+        int fm = (int)FileMode.Create;          // 파일 만듬. 같은 이름 파일이 있으면 이전 파일 지우고 만듬.
+        if (appeded) fm = (int)FileMode.Append; // 추가모드로 OPEN. 파일 없으면 만듬.
+        try
+        {
+            FileInfo fi = new FileInfo(path);
+            if (!fi.Exists) bNewFile = true;
+            
+
+            FileStream fs = new FileStream(path, (FileMode)fm);
+            StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
+            if (bNewFile){
+                //sw.WriteLine("BARCODE" + ETC.cspTab + "STIP" + ETC.cspTab + "UNIT" + ETC.cspTab + "GOOD" + ETC.cspTab + "NG" + ETC.cspTab + "X-OUT" + ETC.cspTab + "ITS");
+            }
+            sw.WriteLine(s); //"{0}", "\"" + s + "\""
+            sw.Flush();
+            sw.Close();
+        }
+        catch (Exception e) { LogWR_.SaveLogException("WR CSV FAIL [" + path + "]", e); }
     }
 
     public static void WR_ASCLL_FILE(string path, string msg){

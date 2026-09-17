@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using NSS_3310S;
+using Object;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -53,6 +54,9 @@ namespace LIB_.SubFROMLib{
         }
 
         public void SET_ACTION(){
+            CheckBox.Checked    = false;
+            CheckBox.Visible    = DATA_.ConfirmG.CheckBox;
+            CheckBox.Text       = DATA_.ConfirmG.CheckBoxTitle;
             if (DATA_.ConfirmG.bz < 0) return;
             iBZ = DATA_.ConfirmG.bz;
             for (int i = 0; i < DATA_.oBZ.Length; i++) DATA_.mOUT[DATA_.oBZ[i]] = false;
@@ -69,14 +73,17 @@ namespace LIB_.SubFROMLib{
         }
 
         void Click_(){
-            DATA_.ConfirmG.useable = false;
-            meLive = false;
-            DATA_.bWF = false;
+            DATA_.ConfirmG.useable  = false;
+            meLive                  = false;
+            DATA_.bWF               = false;
+            DATA_.ConfirmG.CheckBox = false;
             OffBz();
             Hide();
         }
 
         public void YES_(){
+            if (DATA_.ConfirmG.CheckBox)    DATA_.ConfirmG.CheckBoxResult = CheckBox.Checked;
+            else                            DATA_.ConfirmG.CheckBoxResult = false;
             DATA_.ConfirmG.result = true;
             Click_();
         }
@@ -85,7 +92,7 @@ namespace LIB_.SubFROMLib{
             Click_();
         }
         public void OK_(){
-            if (DATA_.eMCStatus == eMachineStatus.WAITRUN && DATA_.ConfirmUser[DATA_.WAR_EndInitial].useable){
+            if (DATA_.eMCStatus == eMachineStatus.WAITRUN && DATA_.ConfirmUser[W.EndInitial].useable){
                 SUBFRM_.gIni.tmrInitialStatus.Enabled = false;
                 SUBFRM_.gIni.Hide();
             }
@@ -95,7 +102,7 @@ namespace LIB_.SubFROMLib{
 
         private void TimerConfirmProcess_Tick(object sender, EventArgs e){
             if (!DATA_.ConfirmG.useable) Hide();
-            if (timeStamp.ElapsedMilliseconds > (DATA_.prMACHINE[DATA_.BZOffTime] * 1000)){
+            if (timeStamp.ElapsedMilliseconds > (DATA_.prMACHINE[CP.BzOffTime] * 1000)){
                 if (DATA_.ConfirmG.AllBzNum != null){
                     for (int i = 0; i < DATA_.ConfirmG.AllBzNum.Length; i++){
                         int iBz = DATA_.ConfirmG.AllBzNum[i];

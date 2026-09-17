@@ -4,7 +4,7 @@ using System;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class EMPTY : BASE{
-        int nThread = T.EmptyStacker;
+        readonly int nThread = T.EmptyStacker;
         long TackStart = 0, TackEnd = 0;
 
         bool CheckRunThread(){
@@ -24,11 +24,11 @@ namespace NSS_3310S.SEQ.MODULE{
                 //}
 
                 ReSUPPLY:
-                while (UTIL_.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
+                while (B.WaitBIT(nThread, B.LotEnd, true, "LOT-END 처리 진행 중")) ;
                 if (eRTN.SUCESS != GetEmptyTray("빈-트레이 공급")) goto ReSUPPLY;
 
-                COM_.SetBit(nThread, B.EmptyTrayPicRequest, true, "빈-트레이 픽업 요청");
-                while (UTIL_.WaitBIT(nThread, B.EmptyTrayPicRequest, true, "트레이 피커 빈-트레이 픽업 할때까지 대기")) ;
+                B.SetBit(nThread, B.EmptyTrayPicRequest, true, "빈-트레이 픽업 요청");
+                while (B.WaitBIT(nThread, B.EmptyTrayPicRequest, true, "트레이 피커 빈-트레이 픽업 할때까지 대기")) ;
                 Tack();
             } while (true);
         }
@@ -40,8 +40,10 @@ namespace NSS_3310S.SEQ.MODULE{
 #else
             if (!mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !mIN[I.EMPTY_RAIL_ULD_TRAY_CHECK]){       
 #endif
-                UTIL_.OnERROR(E.emsEmptyTrayRailTrayExist);
-                return eRTN.FAIL;
+                if (!bBD) {
+                    E.OnERROR(E.emsEmptyTrayRailTrayExist);
+                    return eRTN.FAIL;
+                } // 보드 없을 경우 패스 (노트북 확인)
             }
             while (eRTN.SUCESS != TransferBwd("빈-트레이 피터 트레이 로딩부로 후진")) ;
 
@@ -55,10 +57,10 @@ namespace NSS_3310S.SEQ.MODULE{
             ReCheck:
                 if (!mIN[I.EMPTY_STACKER_NONE] && !bDRYRUN){
                     bWaitProduct = true;
-                    COM_.ViewWarning(nThread, W.EmptyTray);
-                    while (UTIL_.WaitWarning(nThread, W.EmptyTray, "빈-트레이 공급 요청")) ;
-                    COM_.SetBit(nThread, B.EmptyStackerSupply, true, "빈-트레이 공급 플로그");
-                    while (UTIL_.WaitBIT(nThread, B.EmptyStackerSupply, true, "빈-트레이 공급 대기")) ;
+                    W.ViewWarning(nThread, W.EmptyTray);
+                    while (W.WaitWarning(nThread, W.EmptyTray, "빈-트레이 공급 요청")) ;
+                    B.SetBit(nThread, B.EmptyStackerSupply, true, "빈-트레이 공급 플로그");
+                    while (B.WaitBIT(nThread, B.EmptyStackerSupply, true, "빈-트레이 공급 대기")) ;
                     bWaitProduct = false;
                     goto ReCheck;
                 }
@@ -78,7 +80,7 @@ namespace NSS_3310S.SEQ.MODULE{
 #else
             if (mIN[I.EMPTY_RAIL_LD_TRAY_CHECK] && !bDRYRUN){
 #endif
-                UTIL_.OnERROR(E.EmptyTrayLoadingFail);
+                E.OnERROR(E.EmptyTrayLoadingFail);
                 goto ReCHECK_TRAY;
             }
             while (eRTN.SUCESS != TransferFwd("빈-트레이 피터 트레이 픽업부로 전진")) ;

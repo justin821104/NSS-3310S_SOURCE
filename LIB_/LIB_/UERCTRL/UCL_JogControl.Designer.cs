@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCL_JogControl));
             this.lblMotorName = new System.Windows.Forms.Label();
             this.pINRAIL = new System.Windows.Forms.Panel();
-            this.CurPOS = new Owf.Controls.DigitalDisplayControl();
             this.JogCw = new System.Windows.Forms.Button();
             this.imgArrow = new System.Windows.Forms.ImageList(this.components);
             this.JogCcw = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.LIMIT_P = new System.Windows.Forms.Label();
             this.INPOS = new System.Windows.Forms.Label();
             this.tmr = new System.Windows.Forms.Timer(this.components);
+            this.lbCurPOS = new System.Windows.Forms.Label();
             this.pINRAIL.SuspendLayout();
             this.groupBoxIncMove.SuspendLayout();
             this.SuspendLayout();
@@ -75,22 +75,11 @@
             // pINRAIL
             // 
             this.pINRAIL.BackColor = System.Drawing.Color.Black;
-            this.pINRAIL.Controls.Add(this.CurPOS);
+            this.pINRAIL.Controls.Add(this.lbCurPOS);
             this.pINRAIL.Location = new System.Drawing.Point(1, 24);
             this.pINRAIL.Name = "pINRAIL";
             this.pINRAIL.Size = new System.Drawing.Size(138, 27);
             this.pINRAIL.TabIndex = 1198;
-            // 
-            // CurPOS
-            // 
-            this.CurPOS.BackColor = System.Drawing.Color.Black;
-            this.CurPOS.DigitColor = System.Drawing.Color.White;
-            this.CurPOS.DigitText = "0000.0000";
-            this.CurPOS.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CurPOS.Location = new System.Drawing.Point(6, 4);
-            this.CurPOS.Name = "CurPOS";
-            this.CurPOS.Size = new System.Drawing.Size(126, 19);
-            this.CurPOS.TabIndex = 1187;
             // 
             // JogCw
             // 
@@ -368,9 +357,22 @@
             // tmr
             // 
             this.tmr.Enabled = true;
+            this.tmr.Interval = 150;
             this.tmr.Tick += new System.EventHandler(this.TMR_Tick);
             // 
-            // ucJogControl
+            // lbCurPOS
+            // 
+            this.lbCurPOS.BackColor = System.Drawing.Color.Black;
+            this.lbCurPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurPOS.ForeColor = System.Drawing.Color.White;
+            this.lbCurPOS.Location = new System.Drawing.Point(6, 3);
+            this.lbCurPOS.Name = "lbCurPOS";
+            this.lbCurPOS.Size = new System.Drawing.Size(129, 20);
+            this.lbCurPOS.TabIndex = 1213;
+            this.lbCurPOS.Text = "0000.000";
+            this.lbCurPOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UCL_JogControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -391,7 +393,7 @@
             this.Controls.Add(this.JogCcw);
             this.Controls.Add(this.pINRAIL);
             this.Controls.Add(this.lblMotorName);
-            this.Name = "ucJogControl";
+            this.Name = "UCL_JogControl";
             this.Size = new System.Drawing.Size(349, 113);
             this.pINRAIL.ResumeLayout(false);
             this.groupBoxIncMove.ResumeLayout(false);
@@ -405,7 +407,6 @@
 
         private System.Windows.Forms.Label lblMotorName;
         private System.Windows.Forms.Panel pINRAIL;
-        private Owf.Controls.DigitalDisplayControl CurPOS;
         private System.Windows.Forms.Button JogCw;
         private System.Windows.Forms.Button JogCcw;
         private System.Windows.Forms.ImageList imgArrow;
@@ -428,5 +429,6 @@
         private System.Windows.Forms.Label LIMIT_P;
         private System.Windows.Forms.Label INPOS;
         private System.Windows.Forms.Timer tmr;
+        private System.Windows.Forms.Label lbCurPOS;
     }
 }

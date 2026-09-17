@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManual));
-            this.pTopPanel = new Owf.Controls.A1Panel();
             this.lblManualRunning = new System.Windows.Forms.Label();
             this.lbRunManual = new System.Windows.Forms.Label();
             this.swRepeat = new System.Windows.Forms.Button();
@@ -124,6 +123,7 @@
             this.X_712 = new Bulb.LedBulb();
             this.pINDEX = new System.Windows.Forms.PictureBox();
             this.MapBlockAndCam = new System.Windows.Forms.TabPage();
+            this.Stage_CalZigCenter = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
             this.panel22 = new System.Windows.Forms.Panel();
             this.BtmCam_CalZig_FB = new System.Windows.Forms.Button();
@@ -487,11 +487,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.FlyingSpeed = new System.Windows.Forms.Label();
             this.CycleRun_PRS_TEST = new System.Windows.Forms.Button();
-            this.a1Panel1 = new Owf.Controls.A1Panel();
             this.TmrMANUAL = new System.Windows.Forms.Timer(this.components);
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.pTopPanel.SuspendLayout();
+            this.panel28 = new System.Windows.Forms.Panel();
+            this.panel29 = new System.Windows.Forms.Panel();
             this.gbxJogSpd.SuspendLayout();
             this.tcMLPAGE.SuspendLayout();
             this.StripAndUnitPicker.SuspendLayout();
@@ -532,34 +532,16 @@
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.a1Panel1.SuspendLayout();
+            this.panel28.SuspendLayout();
+            this.panel29.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pTopPanel
-            // 
-            this.pTopPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pTopPanel.BorderColor = System.Drawing.Color.DarkGray;
-            this.pTopPanel.Controls.Add(this.lblManualRunning);
-            this.pTopPanel.Controls.Add(this.lbRunManual);
-            this.pTopPanel.Controls.Add(this.swRepeat);
-            this.pTopPanel.Controls.Add(this.editREPEAT_TIME);
-            this.pTopPanel.Controls.Add(this.lbTIME);
-            this.pTopPanel.GradientEndColor = System.Drawing.Color.Lavender;
-            this.pTopPanel.GradientStartColor = System.Drawing.Color.White;
-            this.pTopPanel.Image = null;
-            this.pTopPanel.ImageLocation = new System.Drawing.Point(3, 6);
-            this.pTopPanel.Location = new System.Drawing.Point(3, 3);
-            this.pTopPanel.Name = "pTopPanel";
-            this.pTopPanel.ShadowOffSet = 2;
-            this.pTopPanel.Size = new System.Drawing.Size(1272, 49);
-            this.pTopPanel.TabIndex = 165;
             // 
             // lblManualRunning
             // 
             this.lblManualRunning.BackColor = System.Drawing.Color.White;
             this.lblManualRunning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblManualRunning.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblManualRunning.Location = new System.Drawing.Point(1147, 8);
+            this.lblManualRunning.Location = new System.Drawing.Point(1150, 7);
             this.lblManualRunning.Name = "lblManualRunning";
             this.lblManualRunning.Size = new System.Drawing.Size(117, 35);
             this.lblManualRunning.TabIndex = 1454;
@@ -572,7 +554,7 @@
             this.lbRunManual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbRunManual.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRunManual.ForeColor = System.Drawing.Color.White;
-            this.lbRunManual.Location = new System.Drawing.Point(203, 7);
+            this.lbRunManual.Location = new System.Drawing.Point(206, 6);
             this.lbRunManual.Name = "lbRunManual";
             this.lbRunManual.Size = new System.Drawing.Size(943, 35);
             this.lbRunManual.TabIndex = 1238;
@@ -585,7 +567,7 @@
             this.swRepeat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.swRepeat.Image = ((System.Drawing.Image)(resources.GetObject("swRepeat.Image")));
             this.swRepeat.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swRepeat.Location = new System.Drawing.Point(121, 6);
+            this.swRepeat.Location = new System.Drawing.Point(124, 5);
             this.swRepeat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.swRepeat.Name = "swRepeat";
             this.swRepeat.Padding = new System.Windows.Forms.Padding(2, 2, 1, 1);
@@ -600,7 +582,7 @@
             this.editREPEAT_TIME.BackColor = System.Drawing.Color.White;
             this.editREPEAT_TIME.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.editREPEAT_TIME.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.editREPEAT_TIME.Location = new System.Drawing.Point(53, 7);
+            this.editREPEAT_TIME.Location = new System.Drawing.Point(56, 6);
             this.editREPEAT_TIME.Name = "editREPEAT_TIME";
             this.editREPEAT_TIME.Size = new System.Drawing.Size(65, 34);
             this.editREPEAT_TIME.TabIndex = 158;
@@ -613,7 +595,7 @@
             this.lbTIME.BackColor = System.Drawing.Color.Transparent;
             this.lbTIME.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTIME.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.lbTIME.Location = new System.Drawing.Point(3, 17);
+            this.lbTIME.Location = new System.Drawing.Point(6, 16);
             this.lbTIME.Name = "lbTIME";
             this.lbTIME.Size = new System.Drawing.Size(45, 26);
             this.lbTIME.TabIndex = 0;
@@ -643,7 +625,7 @@
             this.bMN_5.ForeColor = System.Drawing.Color.Black;
             this.bMN_5.Image = ((System.Drawing.Image)(resources.GetObject("bMN_5.Image")));
             this.bMN_5.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_5.Location = new System.Drawing.Point(4, 313);
+            this.bMN_5.Location = new System.Drawing.Point(5, 313);
             this.bMN_5.Name = "bMN_5";
             this.bMN_5.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_5.Size = new System.Drawing.Size(123, 60);
@@ -660,7 +642,7 @@
             this.bMN_3.ForeColor = System.Drawing.Color.Black;
             this.bMN_3.Image = ((System.Drawing.Image)(resources.GetObject("bMN_3.Image")));
             this.bMN_3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_3.Location = new System.Drawing.Point(4, 251);
+            this.bMN_3.Location = new System.Drawing.Point(5, 251);
             this.bMN_3.Name = "bMN_3";
             this.bMN_3.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_3.Size = new System.Drawing.Size(123, 60);
@@ -677,7 +659,7 @@
             this.bMN_2.ForeColor = System.Drawing.Color.Black;
             this.bMN_2.Image = ((System.Drawing.Image)(resources.GetObject("bMN_2.Image")));
             this.bMN_2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_2.Location = new System.Drawing.Point(4, 189);
+            this.bMN_2.Location = new System.Drawing.Point(5, 189);
             this.bMN_2.Name = "bMN_2";
             this.bMN_2.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_2.Size = new System.Drawing.Size(123, 60);
@@ -694,7 +676,7 @@
             this.bMN_1.ForeColor = System.Drawing.Color.Black;
             this.bMN_1.Image = ((System.Drawing.Image)(resources.GetObject("bMN_1.Image")));
             this.bMN_1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_1.Location = new System.Drawing.Point(4, 127);
+            this.bMN_1.Location = new System.Drawing.Point(5, 127);
             this.bMN_1.Name = "bMN_1";
             this.bMN_1.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_1.Size = new System.Drawing.Size(123, 60);
@@ -711,7 +693,7 @@
             this.bMN_0.ForeColor = System.Drawing.Color.Black;
             this.bMN_0.Image = ((System.Drawing.Image)(resources.GetObject("bMN_0.Image")));
             this.bMN_0.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_0.Location = new System.Drawing.Point(4, 66);
+            this.bMN_0.Location = new System.Drawing.Point(5, 66);
             this.bMN_0.Name = "bMN_0";
             this.bMN_0.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_0.Size = new System.Drawing.Size(123, 60);
@@ -728,7 +710,7 @@
             this.bMN_4.ForeColor = System.Drawing.Color.Black;
             this.bMN_4.Image = ((System.Drawing.Image)(resources.GetObject("bMN_4.Image")));
             this.bMN_4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.bMN_4.Location = new System.Drawing.Point(4, 5);
+            this.bMN_4.Location = new System.Drawing.Point(5, 5);
             this.bMN_4.Name = "bMN_4";
             this.bMN_4.Padding = new System.Windows.Forms.Padding(3);
             this.bMN_4.Size = new System.Drawing.Size(123, 60);
@@ -756,9 +738,9 @@
             this.gbxJogSpd.Controls.Add(this.rbnJogSpd_Low);
             this.gbxJogSpd.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxJogSpd.ForeColor = System.Drawing.Color.Black;
-            this.gbxJogSpd.Location = new System.Drawing.Point(3, 472);
+            this.gbxJogSpd.Location = new System.Drawing.Point(3, 456);
             this.gbxJogSpd.Name = "gbxJogSpd";
-            this.gbxJogSpd.Size = new System.Drawing.Size(126, 277);
+            this.gbxJogSpd.Size = new System.Drawing.Size(127, 277);
             this.gbxJogSpd.TabIndex = 1221;
             this.gbxJogSpd.TabStop = false;
             this.gbxJogSpd.Text = "조그 구동 속도";
@@ -935,7 +917,7 @@
             this.lbMANUAL_NUM.BackColor = System.Drawing.Color.Transparent;
             this.lbMANUAL_NUM.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMANUAL_NUM.ForeColor = System.Drawing.Color.Red;
-            this.lbMANUAL_NUM.Location = new System.Drawing.Point(3, 804);
+            this.lbMANUAL_NUM.Location = new System.Drawing.Point(6, 802);
             this.lbMANUAL_NUM.Name = "lbMANUAL_NUM";
             this.lbMANUAL_NUM.Size = new System.Drawing.Size(32, 16);
             this.lbMANUAL_NUM.TabIndex = 0;
@@ -948,7 +930,7 @@
             this.cbkNotMSG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cbkNotMSG.ForeColor = System.Drawing.Color.Red;
             this.cbkNotMSG.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cbkNotMSG.Location = new System.Drawing.Point(3, 748);
+            this.cbkNotMSG.Location = new System.Drawing.Point(3, 742);
             this.cbkNotMSG.Name = "cbkNotMSG";
             this.cbkNotMSG.Padding = new System.Windows.Forms.Padding(7, 0, 2, 0);
             this.cbkNotMSG.Size = new System.Drawing.Size(127, 54);
@@ -1970,6 +1952,7 @@
             // 
             this.MapBlockAndCam.BackColor = System.Drawing.Color.WhiteSmoke;
             this.MapBlockAndCam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MapBlockAndCam.Controls.Add(this.Stage_CalZigCenter);
             this.MapBlockAndCam.Controls.Add(this.label45);
             this.MapBlockAndCam.Controls.Add(this.panel22);
             this.MapBlockAndCam.Controls.Add(this.label43);
@@ -1987,6 +1970,24 @@
             this.MapBlockAndCam.Size = new System.Drawing.Size(1131, 812);
             this.MapBlockAndCam.TabIndex = 2;
             this.MapBlockAndCam.Text = "MAP BLOCK / MARK VISION";
+            // 
+            // Stage_CalZigCenter
+            // 
+            this.Stage_CalZigCenter.BackColor = System.Drawing.Color.White;
+            this.Stage_CalZigCenter.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.Stage_CalZigCenter.Image = ((System.Drawing.Image)(resources.GetObject("Stage_CalZigCenter.Image")));
+            this.Stage_CalZigCenter.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.Stage_CalZigCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Stage_CalZigCenter.Location = new System.Drawing.Point(261, 369);
+            this.Stage_CalZigCenter.Name = "Stage_CalZigCenter";
+            this.Stage_CalZigCenter.Padding = new System.Windows.Forms.Padding(5);
+            this.Stage_CalZigCenter.Size = new System.Drawing.Size(144, 91);
+            this.Stage_CalZigCenter.TabIndex = 1520;
+            this.Stage_CalZigCenter.Tag = "1013";
+            this.Stage_CalZigCenter.Text = "켈리브레이션\r\n중심위치 이송";
+            this.Stage_CalZigCenter.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.Stage_CalZigCenter.UseVisualStyleBackColor = false;
+            this.Stage_CalZigCenter.Click += new System.EventHandler(this.ManualRun_Click);
             // 
             // label45
             // 
@@ -7443,29 +7444,6 @@
             this.CycleRun_PRS_TEST.Visible = false;
             this.CycleRun_PRS_TEST.Click += new System.EventHandler(this.ManualRun_Click);
             // 
-            // a1Panel1
-            // 
-            this.a1Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.a1Panel1.BorderColor = System.Drawing.Color.DarkGray;
-            this.a1Panel1.Controls.Add(this.lbMANUAL_NUM);
-            this.a1Panel1.Controls.Add(this.gbxJogSpd);
-            this.a1Panel1.Controls.Add(this.cbkNotMSG);
-            this.a1Panel1.Controls.Add(this.bMN_4);
-            this.a1Panel1.Controls.Add(this.bMN_5);
-            this.a1Panel1.Controls.Add(this.bMN_0);
-            this.a1Panel1.Controls.Add(this.bMN_3);
-            this.a1Panel1.Controls.Add(this.bMN_1);
-            this.a1Panel1.Controls.Add(this.bMN_2);
-            this.a1Panel1.GradientEndColor = System.Drawing.Color.Lavender;
-            this.a1Panel1.GradientStartColor = System.Drawing.Color.White;
-            this.a1Panel1.Image = null;
-            this.a1Panel1.ImageLocation = new System.Drawing.Point(3, 6);
-            this.a1Panel1.Location = new System.Drawing.Point(2, 51);
-            this.a1Panel1.Name = "a1Panel1";
-            this.a1Panel1.ShadowOffSet = 2;
-            this.a1Panel1.Size = new System.Drawing.Size(133, 823);
-            this.a1Panel1.TabIndex = 1522;
-            // 
             // TmrMANUAL
             // 
             this.TmrMANUAL.Interval = 200;
@@ -7508,21 +7486,51 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // panel28
+            // 
+            this.panel28.BackColor = System.Drawing.Color.Lavender;
+            this.panel28.Controls.Add(this.lblManualRunning);
+            this.panel28.Controls.Add(this.lbTIME);
+            this.panel28.Controls.Add(this.lbRunManual);
+            this.panel28.Controls.Add(this.editREPEAT_TIME);
+            this.panel28.Controls.Add(this.swRepeat);
+            this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel28.Location = new System.Drawing.Point(0, 0);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(1277, 49);
+            this.panel28.TabIndex = 1523;
+            // 
+            // panel29
+            // 
+            this.panel29.BackColor = System.Drawing.Color.Lavender;
+            this.panel29.Controls.Add(this.lbMANUAL_NUM);
+            this.panel29.Controls.Add(this.bMN_4);
+            this.panel29.Controls.Add(this.cbkNotMSG);
+            this.panel29.Controls.Add(this.gbxJogSpd);
+            this.panel29.Controls.Add(this.bMN_2);
+            this.panel29.Controls.Add(this.bMN_1);
+            this.panel29.Controls.Add(this.bMN_3);
+            this.panel29.Controls.Add(this.bMN_5);
+            this.panel29.Controls.Add(this.bMN_0);
+            this.panel29.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel29.Location = new System.Drawing.Point(0, 49);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(133, 826);
+            this.panel29.TabIndex = 1524;
+            // 
             // FormManual
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1277, 875);
-            this.Controls.Add(this.a1Panel1);
+            this.Controls.Add(this.panel29);
+            this.Controls.Add(this.panel28);
             this.Controls.Add(this.tcMLPAGE);
-            this.Controls.Add(this.pTopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormManual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MANUAL";
-            this.pTopPanel.ResumeLayout(false);
-            this.pTopPanel.PerformLayout();
             this.gbxJogSpd.ResumeLayout(false);
             this.gbxJogSpd.PerformLayout();
             this.tcMLPAGE.ResumeLayout(false);
@@ -7572,15 +7580,15 @@
             this.panel5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.a1Panel1.ResumeLayout(false);
-            this.a1Panel1.PerformLayout();
+            this.panel28.ResumeLayout(false);
+            this.panel28.PerformLayout();
+            this.panel29.ResumeLayout(false);
+            this.panel29.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Owf.Controls.A1Panel pTopPanel;
         private System.Windows.Forms.Label lblManualRunning;
         private System.Windows.Forms.Label lbRunManual;
         internal System.Windows.Forms.Button swRepeat;
@@ -7945,7 +7953,6 @@
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Panel panel23;
-        private Owf.Controls.A1Panel a1Panel1;
         public System.Windows.Forms.Timer TmrMANUAL;
         private System.Windows.Forms.Label label45;
         private LIB_.UERCTRL.UCL_JOG uElv_Z;
@@ -8041,5 +8048,8 @@
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.Label LBL_UNCLEMP_DELAY;
         private System.Windows.Forms.Button Pkr_Pic;
+        private System.Windows.Forms.Button Stage_CalZigCenter;
+        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.Panel panel29;
     }
 }

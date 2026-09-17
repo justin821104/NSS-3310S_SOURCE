@@ -36,7 +36,6 @@
             this.gbxLedBright = new System.Windows.Forms.GroupBox();
             this.tLedBright_0 = new System.Windows.Forms.TrackBar();
             this.bLedBright_0 = new System.Windows.Forms.NumericUpDown();
-            this.btnSave = new Glass.GlassButton();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -76,7 +75,6 @@
             this.GetY_1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dtxMT_Z = new Owf.Controls.DigitalDisplayControl();
             this.label3 = new System.Windows.Forms.Label();
             this.GoInsp_2 = new System.Windows.Forms.Button();
             this.bMTY_CW = new System.Windows.Forms.Button();
@@ -105,11 +103,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.pMT_Y = new System.Windows.Forms.Panel();
-            this.dtxMT_Y = new Owf.Controls.DigitalDisplayControl();
             this.pMT_X = new System.Windows.Forms.Panel();
-            this.dtxMT_X = new Owf.Controls.DigitalDisplayControl();
             this.lblCURPOS = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btSave = new System.Windows.Forms.Button();
+            this.lbMT_X = new System.Windows.Forms.Label();
+            this.lbMT_Y = new System.Windows.Forms.Label();
+            this.lbMT_Z = new System.Windows.Forms.Label();
             this.gbxLedBright.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tLedBright_0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bLedBright_0)).BeginInit();
@@ -133,6 +133,7 @@
             // 
             // TmrVISION
             // 
+            this.TmrVISION.Interval = 150;
             this.TmrVISION.Tick += new System.EventHandler(this.TmrVISION_Tick);
             // 
             // lbLED_BRIGHT
@@ -183,17 +184,6 @@
             this.bLedBright_0.TabIndex = 0;
             this.bLedBright_0.Tag = "0";
             this.bLedBright_0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.btnSave.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnSave.GlowColor = System.Drawing.Color.Gold;
-            this.btnSave.Location = new System.Drawing.Point(773, 502);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(501, 65);
-            this.btnSave.TabIndex = 1320;
-            this.btnSave.Text = "SAVE";
             // 
             // label1
             // 
@@ -574,7 +564,7 @@
             this.gbxMotion.Controls.Add(this.lblCURPOS);
             this.gbxMotion.Location = new System.Drawing.Point(773, 273);
             this.gbxMotion.Name = "gbxMotion";
-            this.gbxMotion.Size = new System.Drawing.Size(501, 228);
+            this.gbxMotion.Size = new System.Drawing.Size(501, 250);
             this.gbxMotion.TabIndex = 1326;
             this.gbxMotion.TabStop = false;
             // 
@@ -582,7 +572,7 @@
             // 
             this.Reset_2.BackColor = System.Drawing.Color.White;
             this.Reset_2.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Reset_2.Location = new System.Drawing.Point(453, 145);
+            this.Reset_2.Location = new System.Drawing.Point(453, 166);
             this.Reset_2.Name = "Reset_2";
             this.Reset_2.Size = new System.Drawing.Size(45, 38);
             this.Reset_2.TabIndex = 1251;
@@ -594,7 +584,7 @@
             // 
             this.Reset_1.BackColor = System.Drawing.Color.White;
             this.Reset_1.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Reset_1.Location = new System.Drawing.Point(453, 67);
+            this.Reset_1.Location = new System.Drawing.Point(453, 88);
             this.Reset_1.Name = "Reset_1";
             this.Reset_1.Size = new System.Drawing.Size(45, 38);
             this.Reset_1.TabIndex = 1250;
@@ -672,7 +662,7 @@
             this.Pre_Z2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_Z2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_Z2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_Z2.Location = new System.Drawing.Point(350, 197);
+            this.Pre_Z2.Location = new System.Drawing.Point(350, 218);
             this.Pre_Z2.Name = "Pre_Z2";
             this.Pre_Z2.Size = new System.Drawing.Size(62, 26);
             this.Pre_Z2.TabIndex = 1245;
@@ -685,7 +675,7 @@
             // 
             this.GetZ_2.BackColor = System.Drawing.Color.White;
             this.GetZ_2.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetZ_2.Location = new System.Drawing.Point(412, 197);
+            this.GetZ_2.Location = new System.Drawing.Point(412, 218);
             this.GetZ_2.Name = "GetZ_2";
             this.GetZ_2.Size = new System.Drawing.Size(41, 27);
             this.GetZ_2.TabIndex = 1244;
@@ -699,7 +689,7 @@
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(334, 197);
+            this.label10.Location = new System.Drawing.Point(334, 218);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(17, 26);
             this.label10.TabIndex = 1243;
@@ -712,7 +702,7 @@
             this.Pre_Y1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_Y1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_Y1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_Y1.Location = new System.Drawing.Point(350, 94);
+            this.Pre_Y1.Location = new System.Drawing.Point(350, 115);
             this.Pre_Y1.Name = "Pre_Y1";
             this.Pre_Y1.Size = new System.Drawing.Size(62, 26);
             this.Pre_Y1.TabIndex = 1242;
@@ -727,7 +717,7 @@
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(334, 94);
+            this.label7.Location = new System.Drawing.Point(334, 115);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 26);
             this.label7.TabIndex = 1240;
@@ -738,7 +728,7 @@
             // 
             this.GetY_1.BackColor = System.Drawing.Color.White;
             this.GetY_1.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetY_1.Location = new System.Drawing.Point(412, 93);
+            this.GetY_1.Location = new System.Drawing.Point(412, 114);
             this.GetY_1.Name = "GetY_1";
             this.GetY_1.Size = new System.Drawing.Size(41, 27);
             this.GetY_1.TabIndex = 1241;
@@ -752,9 +742,9 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(343, 47);
+            this.label4.Location = new System.Drawing.Point(342, 59);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 20);
+            this.label4.Size = new System.Drawing.Size(22, 25);
             this.label4.TabIndex = 1239;
             this.label4.Text = "Z";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -762,22 +752,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.dtxMT_Z);
-            this.panel1.Location = new System.Drawing.Point(364, 47);
+            this.panel1.Controls.Add(this.lbMT_Z);
+            this.panel1.Location = new System.Drawing.Point(364, 59);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(133, 20);
+            this.panel1.Size = new System.Drawing.Size(133, 25);
             this.panel1.TabIndex = 1238;
-            // 
-            // dtxMT_Z
-            // 
-            this.dtxMT_Z.BackColor = System.Drawing.Color.Black;
-            this.dtxMT_Z.DigitColor = System.Drawing.Color.Gold;
-            this.dtxMT_Z.DigitText = "0000.0000";
-            this.dtxMT_Z.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtxMT_Z.Location = new System.Drawing.Point(2, 3);
-            this.dtxMT_Z.Name = "dtxMT_Z";
-            this.dtxMT_Z.Size = new System.Drawing.Size(125, 14);
-            this.dtxMT_Z.TabIndex = 1187;
             // 
             // label3
             // 
@@ -785,7 +764,7 @@
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(262, 147);
+            this.label3.Location = new System.Drawing.Point(262, 168);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 76);
             this.label3.TabIndex = 1237;
@@ -796,7 +775,7 @@
             // 
             this.GoInsp_2.BackColor = System.Drawing.Color.White;
             this.GoInsp_2.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GoInsp_2.Location = new System.Drawing.Point(453, 183);
+            this.GoInsp_2.Location = new System.Drawing.Point(453, 204);
             this.GoInsp_2.Name = "GoInsp_2";
             this.GoInsp_2.Size = new System.Drawing.Size(45, 41);
             this.GoInsp_2.TabIndex = 1236;
@@ -826,7 +805,7 @@
             this.Pre_Z1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_Z1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_Z1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_Z1.Location = new System.Drawing.Point(350, 119);
+            this.Pre_Z1.Location = new System.Drawing.Point(350, 140);
             this.Pre_Z1.Name = "Pre_Z1";
             this.Pre_Z1.Size = new System.Drawing.Size(62, 26);
             this.Pre_Z1.TabIndex = 1235;
@@ -841,7 +820,7 @@
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(334, 119);
+            this.label11.Location = new System.Drawing.Point(334, 140);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(17, 26);
             this.label11.TabIndex = 1233;
@@ -852,7 +831,7 @@
             // 
             this.GetZ_1.BackColor = System.Drawing.Color.White;
             this.GetZ_1.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetZ_1.Location = new System.Drawing.Point(412, 119);
+            this.GetZ_1.Location = new System.Drawing.Point(412, 140);
             this.GetZ_1.Name = "GetZ_1";
             this.GetZ_1.Size = new System.Drawing.Size(41, 27);
             this.GetZ_1.TabIndex = 1234;
@@ -886,7 +865,7 @@
             this.gbxJogSpd.Controls.Add(this.rbnJogSpd_Low);
             this.gbxJogSpd.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxJogSpd.ForeColor = System.Drawing.Color.Black;
-            this.gbxJogSpd.Location = new System.Drawing.Point(9, 148);
+            this.gbxJogSpd.Location = new System.Drawing.Point(5, 176);
             this.gbxJogSpd.Name = "gbxJogSpd";
             this.gbxJogSpd.Size = new System.Drawing.Size(223, 69);
             this.gbxJogSpd.TabIndex = 1230;
@@ -975,7 +954,7 @@
             this.Pre_Y2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_Y2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_Y2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_Y2.Location = new System.Drawing.Point(350, 172);
+            this.Pre_Y2.Location = new System.Drawing.Point(350, 193);
             this.Pre_Y2.Name = "Pre_Y2";
             this.Pre_Y2.Size = new System.Drawing.Size(62, 26);
             this.Pre_Y2.TabIndex = 1229;
@@ -990,7 +969,7 @@
             this.Pre_X2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_X2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_X2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_X2.Location = new System.Drawing.Point(350, 147);
+            this.Pre_X2.Location = new System.Drawing.Point(350, 168);
             this.Pre_X2.Name = "Pre_X2";
             this.Pre_X2.Size = new System.Drawing.Size(62, 26);
             this.Pre_X2.TabIndex = 1228;
@@ -1005,7 +984,7 @@
             this.Pre_X1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pre_X1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pre_X1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Pre_X1.Location = new System.Drawing.Point(350, 69);
+            this.Pre_X1.Location = new System.Drawing.Point(350, 90);
             this.Pre_X1.Name = "Pre_X1";
             this.Pre_X1.Size = new System.Drawing.Size(62, 26);
             this.Pre_X1.TabIndex = 1227;
@@ -1018,7 +997,7 @@
             // 
             this.GoInsp_1.BackColor = System.Drawing.Color.White;
             this.GoInsp_1.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GoInsp_1.Location = new System.Drawing.Point(453, 105);
+            this.GoInsp_1.Location = new System.Drawing.Point(453, 126);
             this.GoInsp_1.Name = "GoInsp_1";
             this.GoInsp_1.Size = new System.Drawing.Size(45, 41);
             this.GoInsp_1.TabIndex = 1219;
@@ -1032,7 +1011,7 @@
             this.lbInspectionPostion_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbInspectionPostion_1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbInspectionPostion_1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbInspectionPostion_1.Location = new System.Drawing.Point(262, 69);
+            this.lbInspectionPostion_1.Location = new System.Drawing.Point(262, 90);
             this.lbInspectionPostion_1.Name = "lbInspectionPostion_1";
             this.lbInspectionPostion_1.Size = new System.Drawing.Size(73, 76);
             this.lbInspectionPostion_1.TabIndex = 1226;
@@ -1043,7 +1022,7 @@
             // 
             this.GetY_2.BackColor = System.Drawing.Color.White;
             this.GetY_2.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetY_2.Location = new System.Drawing.Point(412, 171);
+            this.GetY_2.Location = new System.Drawing.Point(412, 192);
             this.GetY_2.Name = "GetY_2";
             this.GetY_2.Size = new System.Drawing.Size(41, 27);
             this.GetY_2.TabIndex = 1225;
@@ -1057,7 +1036,7 @@
             this.lblX_0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblX_0.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblX_0.ForeColor = System.Drawing.Color.White;
-            this.lblX_0.Location = new System.Drawing.Point(334, 69);
+            this.lblX_0.Location = new System.Drawing.Point(334, 90);
             this.lblX_0.Name = "lblX_0";
             this.lblX_0.Size = new System.Drawing.Size(17, 26);
             this.lblX_0.TabIndex = 1220;
@@ -1068,7 +1047,7 @@
             // 
             this.GetX_2.BackColor = System.Drawing.Color.White;
             this.GetX_2.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetX_2.Location = new System.Drawing.Point(412, 145);
+            this.GetX_2.Location = new System.Drawing.Point(412, 166);
             this.GetX_2.Name = "GetX_2";
             this.GetX_2.Size = new System.Drawing.Size(41, 27);
             this.GetX_2.TabIndex = 1224;
@@ -1082,7 +1061,7 @@
             this.lblY_0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblY_0.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY_0.ForeColor = System.Drawing.Color.White;
-            this.lblY_0.Location = new System.Drawing.Point(334, 147);
+            this.lblY_0.Location = new System.Drawing.Point(334, 168);
             this.lblY_0.Name = "lblY_0";
             this.lblY_0.Size = new System.Drawing.Size(17, 26);
             this.lblY_0.TabIndex = 1221;
@@ -1093,7 +1072,7 @@
             // 
             this.GetX_1.BackColor = System.Drawing.Color.White;
             this.GetX_1.Font = new System.Drawing.Font("맑은 고딕 Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.GetX_1.Location = new System.Drawing.Point(412, 67);
+            this.GetX_1.Location = new System.Drawing.Point(412, 88);
             this.GetX_1.Name = "GetX_1";
             this.GetX_1.Size = new System.Drawing.Size(41, 27);
             this.GetX_1.TabIndex = 1223;
@@ -1107,7 +1086,7 @@
             this.lblZ_0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblZ_0.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZ_0.ForeColor = System.Drawing.Color.White;
-            this.lblZ_0.Location = new System.Drawing.Point(334, 172);
+            this.lblZ_0.Location = new System.Drawing.Point(334, 193);
             this.lblZ_0.Name = "lblZ_0";
             this.lblZ_0.Size = new System.Drawing.Size(17, 26);
             this.lblZ_0.TabIndex = 1222;
@@ -1120,9 +1099,9 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(343, 9);
+            this.label2.Location = new System.Drawing.Point(342, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 20);
+            this.label2.Size = new System.Drawing.Size(22, 25);
             this.label2.TabIndex = 1213;
             this.label2.Text = "X";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1133,9 +1112,9 @@
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.Font = new System.Drawing.Font("맑은 고딕", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(343, 28);
+            this.label6.Location = new System.Drawing.Point(342, 34);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 20);
+            this.label6.Size = new System.Drawing.Size(22, 25);
             this.label6.TabIndex = 1214;
             this.label6.Text = "Y";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1143,42 +1122,20 @@
             // pMT_Y
             // 
             this.pMT_Y.BackColor = System.Drawing.Color.Black;
-            this.pMT_Y.Controls.Add(this.dtxMT_Y);
-            this.pMT_Y.Location = new System.Drawing.Point(364, 28);
+            this.pMT_Y.Controls.Add(this.lbMT_Y);
+            this.pMT_Y.Location = new System.Drawing.Point(364, 34);
             this.pMT_Y.Name = "pMT_Y";
-            this.pMT_Y.Size = new System.Drawing.Size(133, 20);
+            this.pMT_Y.Size = new System.Drawing.Size(133, 25);
             this.pMT_Y.TabIndex = 1211;
-            // 
-            // dtxMT_Y
-            // 
-            this.dtxMT_Y.BackColor = System.Drawing.Color.Black;
-            this.dtxMT_Y.DigitColor = System.Drawing.Color.Gold;
-            this.dtxMT_Y.DigitText = "0000.0000";
-            this.dtxMT_Y.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtxMT_Y.Location = new System.Drawing.Point(2, 3);
-            this.dtxMT_Y.Name = "dtxMT_Y";
-            this.dtxMT_Y.Size = new System.Drawing.Size(125, 14);
-            this.dtxMT_Y.TabIndex = 1187;
             // 
             // pMT_X
             // 
             this.pMT_X.BackColor = System.Drawing.Color.Black;
-            this.pMT_X.Controls.Add(this.dtxMT_X);
+            this.pMT_X.Controls.Add(this.lbMT_X);
             this.pMT_X.Location = new System.Drawing.Point(364, 9);
             this.pMT_X.Name = "pMT_X";
-            this.pMT_X.Size = new System.Drawing.Size(133, 20);
+            this.pMT_X.Size = new System.Drawing.Size(133, 25);
             this.pMT_X.TabIndex = 1210;
-            // 
-            // dtxMT_X
-            // 
-            this.dtxMT_X.BackColor = System.Drawing.Color.Black;
-            this.dtxMT_X.DigitColor = System.Drawing.Color.Gold;
-            this.dtxMT_X.DigitText = "0000.0000";
-            this.dtxMT_X.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtxMT_X.Location = new System.Drawing.Point(2, 3);
-            this.dtxMT_X.Name = "dtxMT_X";
-            this.dtxMT_X.Size = new System.Drawing.Size(125, 14);
-            this.dtxMT_X.TabIndex = 1187;
             // 
             // lblCURPOS
             // 
@@ -1188,7 +1145,7 @@
             this.lblCURPOS.ForeColor = System.Drawing.Color.White;
             this.lblCURPOS.Location = new System.Drawing.Point(262, 9);
             this.lblCURPOS.Name = "lblCURPOS";
-            this.lblCURPOS.Size = new System.Drawing.Size(82, 58);
+            this.lblCURPOS.Size = new System.Drawing.Size(80, 75);
             this.lblCURPOS.TabIndex = 1209;
             this.lblCURPOS.Text = "CURRENT\r\nPOSITION";
             this.lblCURPOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1201,6 +1158,53 @@
             this.panel2.Size = new System.Drawing.Size(759, 211);
             this.panel2.TabIndex = 1327;
             // 
+            // btSave
+            // 
+            this.btSave.BackColor = System.Drawing.Color.White;
+            this.btSave.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSave.Location = new System.Drawing.Point(775, 526);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(500, 65);
+            this.btSave.TabIndex = 1328;
+            this.btSave.Text = "SAVE";
+            this.btSave.UseVisualStyleBackColor = false;
+            // 
+            // lbMT_X
+            // 
+            this.lbMT_X.BackColor = System.Drawing.Color.Black;
+            this.lbMT_X.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMT_X.ForeColor = System.Drawing.Color.Yellow;
+            this.lbMT_X.Location = new System.Drawing.Point(3, 3);
+            this.lbMT_X.Name = "lbMT_X";
+            this.lbMT_X.Size = new System.Drawing.Size(125, 19);
+            this.lbMT_X.TabIndex = 1531;
+            this.lbMT_X.Text = "0000.0000";
+            this.lbMT_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbMT_Y
+            // 
+            this.lbMT_Y.BackColor = System.Drawing.Color.Black;
+            this.lbMT_Y.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMT_Y.ForeColor = System.Drawing.Color.Yellow;
+            this.lbMT_Y.Location = new System.Drawing.Point(3, 3);
+            this.lbMT_Y.Name = "lbMT_Y";
+            this.lbMT_Y.Size = new System.Drawing.Size(125, 19);
+            this.lbMT_Y.TabIndex = 1532;
+            this.lbMT_Y.Text = "0000.0000";
+            this.lbMT_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbMT_Z
+            // 
+            this.lbMT_Z.BackColor = System.Drawing.Color.Black;
+            this.lbMT_Z.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMT_Z.ForeColor = System.Drawing.Color.Yellow;
+            this.lbMT_Z.Location = new System.Drawing.Point(3, 3);
+            this.lbMT_Z.Name = "lbMT_Z";
+            this.lbMT_Z.Size = new System.Drawing.Size(125, 19);
+            this.lbMT_Z.TabIndex = 1533;
+            this.lbMT_Z.Text = "0000.0000";
+            this.lbMT_Z.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormVision
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1208,6 +1212,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1277, 875);
             this.ControlBox = false;
+            this.Controls.Add(this.btSave);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lbMotion);
             this.Controls.Add(this.gbxMotion);
@@ -1215,7 +1220,6 @@
             this.Controls.Add(this.gbxFiducial);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox19);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lbLED_BRIGHT);
             this.Controls.Add(this.gbxLedBright);
             this.Controls.Add(this.pCAM_VIEW);
@@ -1248,7 +1252,6 @@
         private System.Windows.Forms.GroupBox gbxLedBright;
         private System.Windows.Forms.TrackBar tLedBright_0;
         private System.Windows.Forms.NumericUpDown bLedBright_0;
-        private Glass.GlassButton btnSave;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox19;
         private System.Windows.Forms.Button button1;
@@ -1294,9 +1297,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel pMT_Y;
-        private Owf.Controls.DigitalDisplayControl dtxMT_Y;
         private System.Windows.Forms.Panel pMT_X;
-        private Owf.Controls.DigitalDisplayControl dtxMT_X;
         private System.Windows.Forms.Label lblCURPOS;
         private System.Windows.Forms.Button GoInsp_1;
         private System.Windows.Forms.Label Pre_Z2;
@@ -1307,7 +1308,6 @@
         private System.Windows.Forms.Button GetY_1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
-        private Owf.Controls.DigitalDisplayControl dtxMT_Z;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button GoInsp_2;
         private System.Windows.Forms.Button bMTZ_Ccw;
@@ -1322,5 +1322,9 @@
         private System.Windows.Forms.Button Reset_2;
         private System.Windows.Forms.Button Reset_1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.Label lbMT_X;
+        private System.Windows.Forms.Label lbMT_Y;
+        private System.Windows.Forms.Label lbMT_Z;
     }
 }

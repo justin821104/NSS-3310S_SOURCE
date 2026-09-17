@@ -62,6 +62,7 @@ namespace LightControler{
             sp.Read(buf, 0, length);
 
             string data = Encoding.ASCII.GetString(buf);
+            LogWR_.DEBUG_PRINT(data);
         }
         public void RECEIVE(object sender, SerialDataReceivedEventArgs args){
             try{
@@ -81,12 +82,10 @@ namespace LightControler{
 
         public void SetLight(int nCh, double dValue){
             byte[] CR = new byte[1];
-            string msg = string.Empty;
-
             if (dValue > 255) dValue = 255;
             CR[0] = ETC.CR;
-            msg = "B" + (nCh + 1).ToString("0") + dValue.ToString("000") + "#"; //+ Encoding.ASCII.GetString(CR);
-            //msg = "#CH" + (nCh + 1).ToString("00") + "BS0" + dValue.ToString("000") + "E";
+            string msg = "B" + (nCh + 1).ToString("0") + dValue.ToString("000") + "#";
+            //string msg = "#CH" + (nCh + 1).ToString("00") + "BS0" + dValue.ToString("000") + "E";
             SEND(msg);
         }
     }

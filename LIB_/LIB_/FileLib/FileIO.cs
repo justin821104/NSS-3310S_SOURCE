@@ -137,7 +137,12 @@ public class FileIO_ : DATA_
     /// <param name="size"></param>
     /// <returns></returns>
     public bool GetFileSize(string strPath, ref int size){
-        size += 244;
+        size = 0;
+        if (File.Exists(strPath)){
+            FileInfo fi = new FileInfo(strPath);
+            size = (int)fi.Length;
+        }
+        //size += 244;
         return true;
     }
 

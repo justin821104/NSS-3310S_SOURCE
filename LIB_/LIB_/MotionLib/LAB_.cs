@@ -1,4 +1,5 @@
-﻿using Object;
+﻿using NSS_3310S;
+using Object;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -81,58 +82,6 @@ public class LAB_ : DATA_
         if (iRtn != 0) return false;
         return true;
     }
-    public static bool SET_MTRingCount(int[] mt, int delay){
-        bool bStatus = true;
-        for (int m = 0; m < CNT_.MT; m++){
-            for (int iChk = 0; iChk < mt.Length; iChk++){
-                if (m != mt[iChk]) continue;
-                UTIL_.DELAY(100);
-                CAXM.AxmStatusSetActPos(m, 0);
-                CAXM.AxmStatusSetCmdPos(m, 0);
-                UTIL_.DELAY(delay);
-                //m축에 위치정보 표시 범위를 0~360으로 설정.
-                uint nRtn = CAXM.AxmStatusSetPosType(m, 1, 360, 0);
-                if (nRtn != 0) bStatus = false;
-            }
-        }
-        return bStatus;
-    }
-    public static bool SET_AnlogInput(){
-        //Analog Input (SIO-AI4RB) 4CH
-        if (CAXA.AxaInfoGetModuleCount(ref nAICh) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-            for (int i = 0; i < nAICh; i++){
-                //사용자가 원하는 시점에 AD컨버트 하는 모드로 설정
-                if (CAXA.AxaInfoGetModule(i, ref nAIBoardNo, ref nAIModulePos, ref nAIModuleID) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-                    CAXA.AxaiSetTriggerMode(0, 1);
-                    CAXA.AxaiSetRange(i, 0.0, 5.0);
-                }
-            }
-            return true;
-        }
-        else{
-            MessageBox.Show("Analog 입력모듈을 찾을 수 없습니다.");
-            return false;
-        }
-    }
-    public static bool SET_AnlogOutput(){
-        if (CAXA.AxaInfoIsAIOModule(ref iAIStatus) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-            if (CAXA.AxaInfoGetModuleCount(ref iAIMoudleCnt) == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS){
-                for (int i = 0; i < 4; i++) { 
-                    CAXA.AxaoSetRange(i, 0.0, 10.0); 
-                }
-                return true;
-            }
-            else{
-                //아날로그 채널 못 찾음.
-                return false;
-            }
-        }
-        else{
-            //아날로그보드 없음.
-            return false;
-        }
-    }
-
     //N3MLIII-CNT2 모듈
     public static bool SET_TriggerModule(int mCnt){
         for (int i = 0; i < mCnt; i++){
@@ -168,7 +117,6 @@ public class LAB_ : DATA_
             }
         }
     }
-
     public static bool Chk_AOMoudle(int nMod){
         if (aoModNum != null){
             for (int a = 0; a < aoModNum.Length; a++){
@@ -198,9 +146,6 @@ public class LAB_ : DATA_
     }
 
     //INPUT
-    public static uint GET_INPUT_WORD(int iMODULE, int iOFFSET, ref uint uVAL){
-        return CAXD.AxdiReadInportWord(iMODULE, iOFFSET, ref uVAL);
-    }
     public static int GET_INT(double srcVal, bool RoundDown){
         if (!RoundDown) return (int)srcVal;
         string[] sNum = srcVal.ToString().Split('.');
@@ -210,15 +155,7 @@ public class LAB_ : DATA_
         if (chkIN[i].ContactB) return !mIN[i];
         else return mIN[i];
     }
-    public static bool AINON(short i){
-        if (chkIN[i].ContactB) return !mIN[i];
-        else return mIN[i];
-    }
-    public static bool AINOFF(short i){
-        if (chkIN[i].ContactB) return mIN[i];
-        else return !mIN[i];
-    }
-    public static bool GET_INPUT(int i, eRTN eCHK){
+    public static bool GET_INPUT(int i, ref eRTN eCHK){
         //int Mod = i > InputNum[0] ? 1 : 0;
         int Mod = 0; //i > InputNum[0] ? 1 : 0;
         for (int m = 0; m < InputModule.Length; m++){
@@ -227,14 +164,12 @@ public class LAB_ : DATA_
                 break;
             }
         }
-
         int Div16 = GET_INT((double)i / 16, true);
         int Mod16 = i % 16;
         if (Mod >= inModNum.Length || inModNum == null){
             eCHK = eRTN.NOT_MODULE;
             return false;
         }
-
         int nModule = inModNum[Mod];
         int nOffset = (InputOffset[Div16] * 16) + Mod16;
         uint uValue = 0;
@@ -260,69 +195,6 @@ public class LAB_ : DATA_
             mOUT[i[n]] = b; 
         }
     }
-    public static bool OUTON(short i)                   { return mOUT[i]; }
-    public static bool OUTOFF(short i)                  { return !mOUT[i]; }
-    public static void PULSE_ON(int module, int port, int msec){
-        if (!bBD) CAXD.AxdoOutPulseOn(module, port, msec);
-    }
-
-    public static eRTN PULSE_ON(short i, int msec){
-        if (bBD){
-            OUTPUT(i, true);
-            UTIL_.DELAY(msec);
-            OUTPUT(i, false);
-            return eRTN.SUCESS;
-        }
-        int Mod = 0; //i > OutputNum[0] ? 1 : 0;
-        for (int m = 0; m < outModNum.Length; m++){
-            if (OutputNum[m] > i){
-                Mod = m;
-                break;
-            }
-        }
-        int Div16 = GET_INT((double)i / 16, true);
-        int Mod16 = i % 16;
-        if (Mod >= outModNum.Length || outModNum == null) return eRTN.NOT_MODULE;
-
-        int nModule = outModNum[Mod];
-        int nOffset = (OutputOffset[Div16] * 16) + Mod16;
-        uint uRTN = CAXD.AxdoOutPulseOn(nModule, nOffset, msec);
-        if (uRTN != 0){
-            UTIL_.DELAY(3);
-            return eRTN.ERR_OUT_MODULE;
-        }
-        //OUTPUT(i, true);
-        return eRTN.SUCESS;
-    }
-    public static void OUTON_(short i){
-        OUTPUT(i, true);
-        if (!bBD) CAXD.AxdoWriteOutport(i, 1);
-        OUTPUT(i, true);
-    }
-    public static void OUTOFF_(short i){
-        OUTPUT(i, false);
-        if (!bBD) CAXD.AxdoWriteOutport(i, 0);
-        OUTPUT(i, false);
-    }
-    public static void OUTONOFF_(short i, short j){
-        OUTON_(i);
-        OUTOFF_(j);
-    }
-    public static void DOUBLE_OUT(short i, short j, bool b){
-        OUTPUT(i, b);
-        OUTPUT(j, b);
-        if (!bBD){
-            CAXD.AxdoWriteOutport(i, b ? 1 : (uint)0);
-            CAXD.AxdoWriteOutport(j, b ? 1 : (uint)0);
-        }
-    }
-    public static void ARR_OUT(short i, short j, bool b){
-        for (short k = i; k < j; k++){
-            OUTPUT(k, b);
-            if (!bBD) CAXD.AxdoWriteOutport(k, b ? 1 : (uint)0);
-        }
-    }
-
     public static eRTN BIT_OUT(short i, bool b){
         if (bBD){
             OUTPUT(i, b);
@@ -352,32 +224,6 @@ public class LAB_ : DATA_
         OUTPUT(i, b);
         return eRTN.SUCESS;
     }
-    public static void SOL2(short on, short off){
-        OUTON_(on);
-        OUTOFF_(off);
-    }
-    public static void SOL4(short on, short on1, short off, short off1){
-        SOL2(on, off);
-        SOL2(on1, off1);
-    }
-
-    //ANALOG
-    public static double GET_AI_VOLT(int iCH){
-        double dVOLlt = 0;
-        CAXA.AxaiSwReadVoltage(iCH, ref dVOLlt);
-        return dVOLlt;
-    }
-    public static void SET_AO_VOLT(int iCH, double dVOLT){
-        string sSetVOLT = (dVOLT * (0.416)).ToString("0.000");
-        double dSetVOLT = double.Parse(sSetVOLT); //24V = 10V
-        if (dSetVOLT > 10) dSetVOLT = 10;
-        CAXA.AxaoWriteVoltage(iCH, dSetVOLT);
-    }
-    public static double GET_AO_VOLT(int iCH){
-        double dVOLT = 0;
-        CAXA.AxaoReadVoltage(iCH, ref dVOLT);
-        return dVOLT;
-    }
     #endregion "IO"
 
     #region "CounterAgent"
@@ -387,8 +233,7 @@ public class LAB_ : DATA_
         return double.Parse(dCURPOS.ToString("0.000"));
     }
     public static void READ_COUNTER(int m){
-        double mCurPos = 0;
-        mCurPos = GET_COUNTER_ACTUAL(m);
+        double mCurPos = GET_COUNTER_ACTUAL(m);
         cntSTS[m].CurrentPosition = mCurPos;
     }
 
@@ -401,10 +246,12 @@ public class LAB_ : DATA_
         CAXC.AxcTriggerSetEnable(i, 1);
 #else
         CAXC.AxcTriggerSetOutput(i, 1);
+        UTIL_.DELAY(3);
 #endif
     }
     public static void TriggerOutput(int nCh, uVAL eVal){
         CAXC.AxcTriggerSetEnable(nCh, (uint)eVal);
+        UTIL_.DELAY(3);
     }
     #endregion "CounterAgent"
 
@@ -423,7 +270,7 @@ public class LAB_ : DATA_
         uint uP = 0, uN = 0, uStopMode = 0, uPS = 0, uNS = 0;
         double mCurPos, mComPos, mCurSpd;
 
-        if (COM_.IsNotMotor(m)){
+        if (M.IsNotMotor(m)){
             mtSTS[m].bAlram = false;
             mtSTS[m].bHomeComplete = true;
         }
@@ -511,7 +358,7 @@ public class LAB_ : DATA_
                 UTIL_.LOG_HOME(mt, "HOME TIME-OVER");
                 mtCMD[mt].CMDHome = false;
             } // 홈 타임오버 알람.
-            if (INPUT((short)STOP) || mIN[(short)VT_STOP] || bPushStop_Rec){
+            if (INPUT(I.STOP) || mIN[I.vtStop] || bPushStop_Rec){
                 MTSSTOP(mt, "HOME USE-STOP");
                 UTIL_.LOG_HOME(mt, "HOME TIME-OVER");
                 mtCMD[mt].CMDHome = false;
@@ -539,17 +386,25 @@ public class LAB_ : DATA_
 
         if (!bAllHomeComplete && eMCStatus != eMachineStatus.INITIAL) return false;
         if (!mtSTS[m].bHomeComplete){
-            UTIL_.OnERROR(eMTBegin + (eMTGap * m) + eNotHome, 500);
+            E.OnERROR(eMTBegin + (eMTGap * m) + eNotHome, 500);
             return false;
         }
         if (!mtSTS[m].bSvOn) SVON(m);
         if (mtSTS[m].bAlram){
-            UTIL_.OnERROR(eMTBegin + (eMTGap * m) + eALARM, 500);
+            E.OnERROR(eMTBegin + (eMTGap * m) + eALARM, 500);
             return false;
         }
         return true;
     }
 
+    public static void CHECK_MOVING_SPEET(int mt, ref double curSpd, ref double curAcc, ref double curDec) {
+        double maxSpd = mtSoftData[mt].MaxSpd < 5 ? curSpd : mtSoftData[mt].MaxSpd;
+        double maxAcc = mtSoftData[mt].MaxAcc < 50 ? curAcc : mtSoftData[mt].MaxAcc;
+        double maxDec = mtSoftData[mt].MaxDec < 50 ? curDec : mtSoftData[mt].MaxDec;
+        curSpd = maxSpd < curSpd ? maxSpd : curSpd;
+        curAcc = maxAcc < curAcc ? maxAcc : curAcc;
+        curDec = maxDec < curDec ? maxDec : curDec;
+    }
     public static int GET_MAX_MOVE_TIME(int[] m){
         int tMOVE = mtCHK[m[0]].time;
         for (int i = 0; i < m.Length; i++){
@@ -572,18 +427,16 @@ public class LAB_ : DATA_
         else mtDATA[mt, pos].bPLUS = false;
     }
     public static eCOMP CHK_POS_CURR_POS_STATE(int iMT, double dPOS){
-        double CP = 0;
         double POS = dPOS;
-        CP = GET_ACTPOS(iMT);
+        double CP = GET_ACTPOS(iMT);
         if (!mtSTS[iMT].bHomeComplete) return eCOMP.NotHome;
         if (Math.Abs(CP - POS) < 0.7) return eCOMP.Same;
         if (CP >= (POS + 0.7)) return eCOMP.Plus;
         return eCOMP.Minus;
     } //모터 위치값 지정 위치값에서의 차이 확인
     public static eCOMP CHK_POS_TEACH_POS_STATE(int iMT, int iPOS){
-        double dCP = 0;
         double dPOS = mtDATA[iMT, iPOS].Pos;
-        dCP = GET_ACTPOS(iMT);
+        double dCP = GET_ACTPOS(iMT);
         if (!mtSTS[iMT].bHomeComplete) return eCOMP.NotHome;
         if (Math.Abs(dCP - dPOS) < 0.7) return eCOMP.Same;
         if (dCP >= (dPOS + 0.7)) return eCOMP.Plus;
@@ -652,7 +505,7 @@ public class LAB_ : DATA_
             //if (uRTN == 4152){ //구동 중 다른 명령 들어가면.
             //
             //}
-            UTIL_.OnERROR_MOTION(m, eMotMOVE, 500);
+            E.OnERROR_MOTION(m, eMotMOVE, 500);
             return false;
         }
         return true;
@@ -661,8 +514,8 @@ public class LAB_ : DATA_
         if (mtSTS[m].bAlram){
             mtOPTION[m].DontStop = false;
             mtCHK[m].errLog += "MTSSTOP[MOVE ALARM STOP]" + ETC.CrLf + cmd + " FAIL !";
-            LAB_.MTSSTOP(m, "MT_ARRAY_STOP [MOVE ALARM STOP]");
-            UTIL_.OnERROR_MOTION(m, eALARM, 500);
+            MTSSTOP(m, "MT_ARRAY_STOP [MOVE ALARM STOP]");
+            E.OnERROR_MOTION(m, eALARM, 500);
             return false;
         }
         return true;
@@ -705,7 +558,7 @@ public class LAB_ : DATA_
 
     public static double GET_ACTPOS(int m){
         double dCURPOS = 0;
-        if (COM_.IsNotEncMotor(m)) return GET_CMDPOS(m);
+        if (M.IsNotEncMotor(m)) return GET_CMDPOS(m);
         CAXM.AxmStatusGetActPos(m, ref dCURPOS);
         return double.Parse(dCURPOS.ToString("0.000"));
     }
@@ -758,7 +611,7 @@ public class LAB_ : DATA_
     public static bool ALL_SVON(){
         uint status = 0;
         for (int m = 0; m < CNT_.MT; m++){
-            if (COM_.IsNotMotor(m) || !enableHome[m]) continue;
+            if (M.IsNotMotor(m) || !enableHome[m]) continue;
             if (mtSTS[m].bAlram) return false;
             CAXM.AxmSignalIsServoOn(m, ref status);
             if (status == 1) continue;
@@ -766,7 +619,7 @@ public class LAB_ : DATA_
         }
         UTIL_.DELAY(1000);
         for (int m = 0; m < CNT_.MT; m++){
-            if (COM_.IsNotMotor(m)) continue;
+            if (M.IsNotMotor(m)) continue;
             SET_POS_SYNCH(m, 10);
         }
         UTIL_.DELAY(100);
@@ -802,7 +655,7 @@ public class LAB_ : DATA_
     public static bool AlarmStatus(int nThread, string comment){
         for (int i = 0; i < CNT_.MT; i++){
             if (mtSTS[i].bAlram && enableHome[i]){
-                UTIL_.OnERROR_MOTION(i, eALARM, 500);
+                E.OnERROR_MOTION(i, eALARM, 500);
                 LogWR_.AddMessage(nThread, comment + " -> MOTOR ALARM INTIAL FAIL");
                 return false;
             }
@@ -983,24 +836,24 @@ public class LAB_ : DATA_
         if (mtSTS[m].bAlram){
             mtSTS[m].bErrHome = true;
             mtSTS[m].bHomming = false;
-            UTIL_.OnERROR_MOTION(m, eHOME, 500);
+            E.OnERROR_MOTION(m, eHOME, 500);
             return false;
         }
         if (MTBUSY(m)){
             MTSSTOP(m, "MT_HOME -> MTBUSY STOP");
-            UTIL_.OnERROR_MOTION(m, eHOME, 500);
+            E.OnERROR_MOTION(m, eHOME, 500);
             return false;
         }
         if (!mtSTS[m].bSvOn){
             SVON(m);
             UTIL_.DELAY(100);
-            if (!mtSTS[m].bSvOn && !COM_.IsNotEncMotor(m)){
-                UTIL_.OnERROR_MOTION(m, eHOME, 500);
+            if (!mtSTS[m].bSvOn && !M.IsNotEncMotor(m)){
+                E.OnERROR_MOTION(m, eHOME, 500);
                 return false;
             }
         }
 
-        if (COM_.CurrentLocationHome(m)) return true;// 현재 위치에서 홈
+        if (M.CurrentLocationHome(m)) return true;// 현재 위치에서 홈
 
         int dir = 0;
         uint sig = 0, z = 0;
@@ -1018,7 +871,7 @@ public class LAB_ : DATA_
     public static bool WAIT_HOME(int m){
         while (mtCMD[m].CMDHome) UTIL_.DELAY(1);
         if (mtSTS[m].bErrHome){
-            UTIL_.OnERROR_MOTION(m, eHOME, 500);
+            E.OnERROR_MOTION(m, eHOME, 500);
             return false;
         }
         if (!mtSTS[m].bHomeComplete) return false;
@@ -1114,7 +967,7 @@ public class LAB_ : DATA_
         LogWR_.SaveMarsLog(nThread, eLogTYPE.EVT, comment, "START");
         for (int i = 0; i < m.Length; i++){ //모션 이송.
             int mt = m[i];
-            CLEAR_MOVECHKECK(mt, mv[i]);
+            M.CLEAR_MOVECHKECK(mt, mv[i]);
             mtCHK[mt].cmd           = cmd[i];
             mtCHK[mt].coment        = comment + " -> MOVE";
             mtCHK[mt].toller        = toller[i];
@@ -1154,18 +1007,25 @@ public class LAB_ : DATA_
             mtCHK[mt].sts += "SPEED ADJUST -> COMPLETE" + ETC.CrLf;
 
             //소프트 리미트 값 확인 !
+            if (mt == M.X1T || mt == M.X2T) {
+                LogWR_.DEBUG_PRINT(mt.ToString() + " -> " + mtCHK[mt].spd.ToString()  + " / " + mtCHK[mt].acc.ToString() + " / " + mtCHK[mt].dcc.ToString());
+            }
+            CHECK_MOVING_SPEET(mt, ref mtCHK[mt].spd, ref mtCHK[mt].acc, ref mtCHK[mt].dcc);
+            if (mt == M.X1T || mt == M.X2T) {
+                LogWR_.DEBUG_PRINT(mt.ToString() + " -> " + mtCHK[mt].spd.ToString() + " / " + mtCHK[mt].acc.ToString() + " / " + mtCHK[mt].dcc.ToString());
+            }
             if (mtSoftData[mt].CwSoftLimit < mtCHK[mt].pos){ //+
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]");
                 mtCHK[mt].errLog += "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(mt, eCwSoftLime, 500);
+                E.OnERROR_MOTION(mt, eCwSoftLime, 500);
                 goto Fail;
             }
             if (mtSoftData[mt].CcwSoftLimit > mtCHK[mt].pos){ //-
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]");
                 mtCHK[mt].errLog += "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(mt, eCcwSoftLime, 500);
+                E.OnERROR_MOTION(mt, eCcwSoftLime, 500);
                 goto Fail;
             }
 
@@ -1196,7 +1056,7 @@ public class LAB_ : DATA_
                 //{ //구동 중 다른 명령 들어가면.
                 //}
                 MT_ARRAY_STOP(m, mtCHK[mt].errLog);
-                UTIL_.OnERROR_MOTION(mt, eMotMOVE, 500);
+                E.OnERROR_MOTION(mt, eMotMOVE, 500);
                 goto Fail;
             }
         }
@@ -1230,21 +1090,21 @@ public class LAB_ : DATA_
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE +LIMIT STOP]");
                     mtCHK[nAXIS].errLog += "MT_ARRAY_STOP [MOVE +LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nAXIS, eLimitP, 500);
+                    E.OnERROR_MOTION(nAXIS, eLimitP, 500);
                     goto Fail;
                 }
                 if (mtSTS[nAXIS].bSensorCCW){
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE -LIMIT STOP]");
                     mtCHK[nAXIS].errLog += "MT_ARRAY_STOP [MOVE -LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nAXIS, eLimitM, 500);
+                    E.OnERROR_MOTION(nAXIS, eLimitM, 500);
                     goto Fail;
                 }
                 if (mtSTS[nAXIS].bAlram){
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE ALARM STOP]");
                     mtCHK[nAXIS].errLog += "MT_ARRAY_STOP [MOVE ALARM STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nAXIS, eALARM, 500);
+                    E.OnERROR_MOTION(nAXIS, eALARM, 500);
                     goto Fail;
                 }
 
@@ -1294,7 +1154,7 @@ public class LAB_ : DATA_
                             for (int u = 0; u < cMT; u++){
                                 mtOPTION[m[u]].DontStop = false;
                             }
-                            UTIL_.OnERROR_MOTION(cutm, eTimeOver, 500);
+                            E.OnERROR_MOTION(cutm, eTimeOver, 500);
                             goto Fail;
                         }
                     }
@@ -1325,7 +1185,7 @@ public class LAB_ : DATA_
                 int mt                  = m[i];
                 string sERR             = "FAIL RUN TIME = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Gap = " + string.Format("{0:0.000}", mtCHK[mt].posGap);
                 mtCHK[mt].sts           += sERR + ETC.CrLf;
-                mtCHK[mt].rslt          = GET_MOVE_RESULT(mt);
+                mtCHK[mt].rslt          = M.GET_MOVE_RESULT(mt);
                 mtOPTION[mt].DontStop   = false;
             }
             goto Fail;
@@ -1335,7 +1195,7 @@ public class LAB_ : DATA_
             mtCHK[mt].posStop       = GET_ACTPOS(mt);
             mtCHK[mt].posGap        = Math.Abs(mtCHK[mt].posStop - mtCHK[mt].pos);
             mtCHK[mt].sts           = "Succes Run Time = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Grap = " + string.Format("{0:0.000}", mtCHK[mt].posGap) + ETC.CrLf;
-            mtCHK[mt].rslt          = GET_MOVE_RESULT(mt);
+            mtCHK[mt].rslt          = M.GET_MOVE_RESULT(mt);
             mtOPTION[mt].DontStop   = false;
         }
     Sucess:
@@ -1353,7 +1213,7 @@ public class LAB_ : DATA_
         int cMT = m.Length;
         for (int i = 0; i < m.Length; i++){
             int mt = m[i];
-            CLEAR_MOVECHKECK(mt, mv[i]);
+            M.CLEAR_MOVECHKECK(mt, mv[i]);
             mtCHK[mt].cmd       = cmd[i];
             mtCHK[mt].coment    = comment + " -> MOVE";
             mtCHK[mt].toller    = toller[i];
@@ -1404,18 +1264,19 @@ public class LAB_ : DATA_
             }
 
             //소프트 리미트 값 확인 !
+            CHECK_MOVING_SPEET(m[i], ref dVEL[i], ref dACC[i], ref dDEC[i]);
             if (mtSoftData[m[i]].CwSoftLimit < mtCHK[m[i]].pos){
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]");
                 mtCHK[m[i]].errLog += "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m[i], eCwSoftLime, 500);
+                E.OnERROR_MOTION(m[i], eCwSoftLime, 500);
                 return eRTN.FAIL;
             }
             if (mtSoftData[m[i]].CcwSoftLimit > mtCHK[m[i]].pos){
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]");
                 mtCHK[m[i]].errLog += "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m[i], eCcwSoftLime, 500);
+                E.OnERROR_MOTION(m[i], eCcwSoftLime, 500);
                 return eRTN.FAIL;
             }
         }
@@ -1426,7 +1287,7 @@ public class LAB_ : DATA_
         if (0 != dwEND){
             MT_ARRAY_STOP(m, "MT_ARRAY_STOP" + ETC.CrLf + "MUTI_MOVE_IN_EACH_BOARD() FAIL !");
             mtCHK[nAXIS[0]].errLog = "MT_ARRAY_STOP" + ETC.CrLf + "MUTI_MOVE_IN_EACH_BOARD() FAIL !";
-            UTIL_.OnERROR_MOTION(nAXIS[0], eMotMOVE, 500);
+            E.OnERROR_MOTION(nAXIS[0], eMotMOVE, 500);
             return eRTN.FAIL;
         }
 
@@ -1458,19 +1319,19 @@ public class LAB_ : DATA_
                 if (mtSTS[nMT].bSensorCW){
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE +LIMIT STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE +LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eLimitP, 500);
+                    E.OnERROR_MOTION(nMT, eLimitP, 500);
                     return eRTN.FAIL;
                 }
                 if (mtSTS[nMT].bSensorCCW){
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE -LIMIT STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE -LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eLimitM, 500);
+                    E.OnERROR_MOTION(nMT, eLimitM, 500);
                     return eRTN.FAIL;
                 }
                 if (mtSTS[nMT].bAlram){
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE ALARM STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE ALARM STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eALARM, 500);
+                    E.OnERROR_MOTION(nMT, eALARM, 500);
                     return eRTN.FAIL;
                 }
 
@@ -1513,7 +1374,7 @@ public class LAB_ : DATA_
                     errTOLLER   = Math.Abs(dCUR - chkPOS);
                     LogWR_.SAVE_MOVING_ERROR_LOG(nMT, uSTOP.ToString());
                     if (errTOLLER > chkTOLLER && mtCHK[nMT].onlyStart){
-                        UTIL_.OnERROR_MOTION(nMT, eTimeOver, 500);
+                        E.OnERROR_MOTION(nMT, eTimeOver, 500);
                         return eRTN.FAIL;
                     }
                     else if (errTOLLER < 0.02){
@@ -1545,7 +1406,7 @@ public class LAB_ : DATA_
                 int mt          = m[i];
                 string sERR     = "FAIL RUN TIME = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Gap = " + string.Format("{0:0.000}", mtCHK[mt].posGap);
                 mtCHK[mt].sts   += sERR + ETC.CrLf;
-                mtCHK[mt].rslt  = GET_MOVE_RESULT(mt);
+                mtCHK[mt].rslt  = M.GET_MOVE_RESULT(mt);
             }
             UTIL_.DELAY(500);
             return eRTN.FAIL;
@@ -1555,7 +1416,7 @@ public class LAB_ : DATA_
             mtCHK[mt].posStop   = GET_ACTPOS(mt);
             mtCHK[mt].posGap    = Math.Abs(mtCHK[mt].posStop = mtCHK[mt].pos);
             mtCHK[mt].sts       = "Succes Run Time = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Grap = " + string.Format("{0:0.000}", mtCHK[mt].posGap) + ETC.CrLf;
-            mtCHK[mt].rslt      = GET_MOVE_RESULT(mt);
+            mtCHK[mt].rslt      = M.GET_MOVE_RESULT(mt);
         }
         return eRTN.SUCESS; ; // Move Success !
     }
@@ -1565,7 +1426,7 @@ public class LAB_ : DATA_
         int cMT = m.Length;
         for (int i = 0; i < m.Length; i++){
             int mt = m[i];
-            CLEAR_MOVECHKECK(mt, mv[i]);
+            M.CLEAR_MOVECHKECK(mt, mv[i]);
             mtCHK[mt].cmd       = cmd;
             mtCHK[mt].coment    = comment + " -> MOVE";
             mtCHK[mt].Ev        = "";
@@ -1621,14 +1482,14 @@ public class LAB_ : DATA_
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]");
                 mtCHK[m[i]].errLog += "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m[i], eCwSoftLime, 500);
+                E.OnERROR_MOTION(m[i], eCwSoftLime, 500);
                 return eRTN.FAIL;
             }
             if (mtSoftData[m[i]].CcwSoftLimit > mtCHK[m[i]].pos){
                 for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                 MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]");
                 mtCHK[m[i]].errLog += "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m[i], eCcwSoftLime, 500);
+                E.OnERROR_MOTION(m[i], eCcwSoftLime, 500);
                 return eRTN.FAIL;
             }
         }
@@ -1640,7 +1501,7 @@ public class LAB_ : DATA_
             for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
             MT_ARRAY_STOP(m, "MT_ARRAY_STOP" + ETC.CrLf + "MUTI_MOVE_IN_EACH_BOARD() FAIL !");
             mtCHK[nAXIS[0]].errLog = "MT_ARRAY_STOP" + ETC.CrLf + "MUTI_MOVE_IN_EACH_BOARD() FAIL !";
-            UTIL_.OnERROR_MOTION(nAXIS[0], eMotMOVE, 500);
+            E.OnERROR_MOTION(nAXIS[0], eMotMOVE, 500);
             return eRTN.FAIL;
         }
     END_MOVING:
@@ -1667,21 +1528,21 @@ public class LAB_ : DATA_
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE +LIMIT STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE +LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eLimitP, 500);
+                    E.OnERROR_MOTION(nMT, eLimitP, 500);
                     return eRTN.FAIL;
                 }
                 if (mtSTS[nMT].bSensorCCW){
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE -LIMIT STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE -LIMIT STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eLimitM, 500);
+                    E.OnERROR_MOTION(nMT, eLimitM, 500);
                     return eRTN.FAIL;
                 }
                 if (mtSTS[nMT].bAlram){
                     for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
                     MT_ARRAY_STOP(m, "MT_ARRAY_STOP [MOVE ALARM STOP]");
                     mtCHK[nMT].errLog += "MT_ARRAY_STOP [MOVE ALARM STOP]" + ETC.CrLf;
-                    UTIL_.OnERROR_MOTION(nMT, eALARM, 500);
+                    E.OnERROR_MOTION(nMT, eALARM, 500);
                     return eRTN.FAIL;
                 }
 
@@ -1729,7 +1590,7 @@ public class LAB_ : DATA_
                     LogWR_.SAVE_MOVING_ERROR_LOG(nMT, uSTOP.ToString());
                     if (errTOLLER > chkTOLLER && mtCHK[nMT].onlyStart){
                         for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
-                        UTIL_.OnERROR_MOTION(nMT, eTimeOver, 500);
+                        E.OnERROR_MOTION(nMT, eTimeOver, 500);
                         return eRTN.FAIL;
                     }
                     else if (errTOLLER < 0.02){
@@ -1761,7 +1622,7 @@ public class LAB_ : DATA_
                 int mt          = m[i];
                 string sERR     = "FAIL RUN TIME = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Gap = " + string.Format("{0:0.000}", mtCHK[mt].posGap);
                 mtCHK[mt].sts   += sERR + ETC.CrLf;
-                mtCHK[mt].rslt  = GET_MOVE_RESULT(mt);
+                mtCHK[mt].rslt  = M.GET_MOVE_RESULT(mt);
             }
             for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
             UTIL_.DELAY(500);
@@ -1772,7 +1633,7 @@ public class LAB_ : DATA_
             mtCHK[mt].posStop   = GET_ACTPOS(mt);
             mtCHK[mt].posGap    = Math.Abs(mtCHK[mt].posStop = mtCHK[mt].pos);
             mtCHK[mt].sts       = "Succes Run Time = " + string.Format("{0:0.000}", mtCHK[mt].rTime) + " Sec , Grap = " + string.Format("{0:0.000}", mtCHK[mt].posGap) + ETC.CrLf;
-            mtCHK[mt].rslt      = GET_MOVE_RESULT(mt);
+            mtCHK[mt].rslt      = M.GET_MOVE_RESULT(mt);
         }
         for (int k = 0; k < cMT; k++) mtOPTION[m[k]].DontStop = false;
         return eRTN.SUCESS; ; // Move Success !
@@ -1780,7 +1641,7 @@ public class LAB_ : DATA_
 
     //속도 오버라이드 구동.
     public static eRTN MOVE_SPEED_OVERRIDE(int tn, int m, stMoveInfo mv, double overPos, double overSpd, int MoveTime, double toller, bool onlyStart, string cmd, string comment){
-        CLEAR_MOVECHKECK(m, mv);
+        M.CLEAR_MOVECHKECK(m, mv);
         mtCHK[m].cmd        = cmd;
         mtCHK[m].coment     = comment + " -> MOVE";
         mtCHK[m].toller     = toller;
@@ -1813,18 +1674,19 @@ public class LAB_ : DATA_
         }
 
         //소프트 리미트 위치 확인
+        CHECK_MOVING_SPEET(m, ref mtCHK[m].spd, ref mtCHK[m].acc, ref mtCHK[m].dcc);
         if (mtSoftData[m].CwSoftLimit < mtCHK[m].pos){
             mtOPTION[m].DontStop = false;
             MTSSTOP(m, "MT_STOP [MOVE CW SOFT LIMIT STOP]");
             mtCHK[m].errLog += "MT_ARRAY_STOP [MOVE CW SOFT LIMIT STOP]" + ETC.CrLf;
-            UTIL_.OnERROR_MOTION(m, eCwSoftLime, 500);
+            E.OnERROR_MOTION(m, eCwSoftLime, 500);
             return eRTN.FAIL;
         }
         if (mtSoftData[m].CcwSoftLimit > mtCHK[m].pos){
             mtOPTION[m].DontStop = false;
             MTSSTOP(m, "MT_STOP [MOVE CCW SOFT LIMIT STOP]");
             mtCHK[m].errLog += "MT_ARRAY_STOP [MOVE CCW SOFT LIMIT STOP]" + ETC.CrLf;
-            UTIL_.OnERROR_MOTION(m, eCcwSoftLime, 500);
+            E.OnERROR_MOTION(m, eCcwSoftLime, 500);
             return eRTN.FAIL;
         }
 
@@ -1884,7 +1746,7 @@ public class LAB_ : DATA_
             if (dwEND == 4152){ //구동 중 다른 명령 들어가면.
             }
             MTESTOP(m, mtCHK[m].errLog);
-            UTIL_.OnERROR_MOTION(m, eMotMOVE, 500);
+            E.OnERROR_MOTION(m, eMotMOVE, 500);
             return eRTN.FAIL;
         }
 
@@ -1911,21 +1773,21 @@ public class LAB_ : DATA_
                 mtOPTION[m].DontStop = false;
                 MTESTOP(m, "MT_STOP [MOVE +LIMIT STOP]");
                 mtCHK[m].errLog += "MT_STOP [MOVE +LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m, eLimitP, 500);
+                E.OnERROR_MOTION(m, eLimitP, 500);
                 return eRTN.FAIL;
             }
             if (mtSTS[m].bSensorCCW){
                 mtOPTION[m].DontStop = false;
                 MTESTOP(m, "MT_STOP [MOVE -LIMIT STOP]");
                 mtCHK[m].errLog += "MT_STOP [MOVE -LIMIT STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m, eLimitM, 500);
+                E.OnERROR_MOTION(m, eLimitM, 500);
                 return eRTN.FAIL;
             }
             if (mtSTS[m].bAlram){
                 mtOPTION[m].DontStop = false;
                 MTESTOP(m, "MT_STOP [MOVE ALARM STOP]");
                 mtCHK[m].errLog += "MT_STOP [MOVE ALARM STOP]" + ETC.CrLf;
-                UTIL_.OnERROR_MOTION(m, eALARM, 500);
+                E.OnERROR_MOTION(m, eALARM, 500);
                 return eRTN.FAIL;
             }
 
@@ -1972,7 +1834,7 @@ public class LAB_ : DATA_
                 LogWR_.SAVE_MOVING_ERROR_LOG(m, uSTOP.ToString());
                 if (errTOLLER > chkTOLLER && !mtCHK[m].onlyStart){
                     mtOPTION[m].DontStop = false;
-                    UTIL_.OnERROR_MOTION(m, eTimeOver, 500);
+                    E.OnERROR_MOTION(m, eTimeOver, 500);
                     return eRTN.FAIL;
                 }
                 else if (errTOLLER < 0.01){
@@ -1996,7 +1858,7 @@ public class LAB_ : DATA_
         if (!bPOS){ // 구동실패.
             string sERR             = "FAIL RUN TIME = " + string.Format("{0:0.000}", mtCHK[m].rTime) + " Sec , Gap = " + string.Format("{0:0.000}", mtCHK[m].posGap);
             mtCHK[m].sts            += sERR + ETC.CrLf;
-            mtCHK[m].rslt           = GET_MOVE_RESULT(m);
+            mtCHK[m].rslt           = M.GET_MOVE_RESULT(m);
             mtOPTION[m].DontStop    = false;
             UTIL_.DELAY(500);
             return eRTN.FAIL;
@@ -2005,7 +1867,7 @@ public class LAB_ : DATA_
         mtCHK[m].posStop        = GET_ACTPOS(m);
         mtCHK[m].posGap         = Math.Abs(mtCHK[m].posStop - mtCHK[m].pos);
         mtCHK[m].sts            = "Succes Run Time = " + string.Format("{0:0.000}", mtCHK[m].rTime) + " Sec , Grap = " + string.Format("{0:0.000}", mtCHK[m].posGap) + ETC.CrLf;
-        mtCHK[m].rslt           = GET_MOVE_RESULT(m);
+        mtCHK[m].rslt           = M.GET_MOVE_RESULT(m);
         mtOPTION[m].DontStop    = false;
         return eRTN.SUCESS;
     }

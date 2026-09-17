@@ -124,6 +124,13 @@ namespace Object
         public string sTACK;
         public string sLOT;
         public string sOneCycleTime;
+        public string sBlade;
+
+        public string sBorcodeHistory;
+        public string sITSBarcodeHistory;
+        public string sPCBUnitInfo;
+        public string sProgramCheck;
+        public string sPRSData;
     }
 
     /// <summary>
@@ -390,6 +397,10 @@ namespace Object
         public bool MoveOK;
         public int num;
 
+        public bool CheckBox;
+        public bool CheckBoxResult;
+        public string CheckBoxTitle;
+
         public bool isShowEmptPocket;
     }
 
@@ -495,6 +506,7 @@ namespace Object
         public stFinger[] finger;  // 핑거 8개
         public string CMD;  // 특수 명령어
         public double PrsOffset_X, PrsOffset_Y, PrsOffset_T;
+        public int StagePnP; // 픽 앤 플레이스 테이블번호
     }
     public struct stFinger{
         public bool valid;  // 자재있음

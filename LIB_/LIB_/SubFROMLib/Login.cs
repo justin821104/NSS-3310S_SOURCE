@@ -90,5 +90,10 @@ namespace LIB_.SubFROMLib{
             if (DATA_.eLoginLevelBuffer == eLogLevel.ENG || DATA_.eLoginLevelBuffer == eLogLevel.ADMIN) BTN_PasswordChenge.Enabled = true;
             else BTN_PasswordChenge.Enabled = false;
         }
+
+        private void LB_MACHINE_INFO_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

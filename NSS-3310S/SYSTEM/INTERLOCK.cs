@@ -141,7 +141,7 @@ namespace nINTERLOCK{
             CheckInterlock();
             bool bRTN = true;
             for (int i = 0; i < Interlock.Length; i++){
-                if (UTIL_.OnINTERLOCK(Interlock[i], WithError)){
+                if (E.OnINTERLOCK(Interlock[i], WithError)){
                     UTIL_.SYSTEM_MESSAGE(Interlock[i], false);
                     bRTN = false;
                 }
@@ -151,7 +151,8 @@ namespace nINTERLOCK{
         public bool ChkInterlock(int Interlock, bool WithError){
             CheckInterlock();
             bool bRTN = true;
-            if (UTIL_.OnINTERLOCK(Interlock, WithError)){
+            if (bBD) return bRTN;
+            if (E.OnINTERLOCK(Interlock, WithError)){
                 UTIL_.SYSTEM_MESSAGE(Interlock, false);
                 bRTN = false;
             }
@@ -162,7 +163,7 @@ namespace nINTERLOCK{
             bool bRTN = true;
             for (int i = 0; i < Interlock.Length; i++){
                 if (eCHK == eMCStatus){
-                    if (UTIL_.OnINTERLOCK(Interlock[i], WithError)){
+                    if (E.OnINTERLOCK(Interlock[i], WithError)){
                         UTIL_.SYSTEM_MESSAGE(Interlock[i], false);
                         bRTN = false;
                     }
@@ -174,7 +175,7 @@ namespace nINTERLOCK{
             CheckInterlock();
             bool bRTN = true;
             if (eCHK == eMCStatus){
-                if (UTIL_.OnINTERLOCK(Interlock, WithError)){
+                if (E.OnINTERLOCK(Interlock, WithError)){
                     UTIL_.SYSTEM_MESSAGE(Interlock, false);
                     bRTN = false;
                 }
@@ -269,6 +270,7 @@ namespace nINTERLOCK{
                     ConfirmUser[nWAR].bz = O.BUZZER_END;
                     break;
 
+                case W.KIT_CLEANNING:
                 case W.LotEndComplete:
                     ConfirmUser[nWAR].TypeOk = false;
                     ConfirmUser[nWAR].AfterReset = false;
@@ -290,6 +292,17 @@ namespace nINTERLOCK{
                 case W.UnitSizeReturnValueSkip:
                 case W.XMarkInspectionFail:
                     ConfirmUser[nWAR].TypeOk = false;
+                    ConfirmUser[nWAR].AfterReset = false;
+                    ConfirmUser[nWAR].bz = O.BUZZER_ERR;
+                    break;
+
+                case W.ABF_MESSAGE:
+                    ConfirmUser[nWAR].AfterReset = false;
+                    ConfirmUser[nWAR].bz = O.BUZZER_ERR;
+                    break;
+
+                case W.BarcodeReadingTimeOver:
+                    ConfirmUser[nWAR].TypeOk = true;
                     ConfirmUser[nWAR].AfterReset = false;
                     ConfirmUser[nWAR].bz = O.BUZZER_ERR;
                     break;

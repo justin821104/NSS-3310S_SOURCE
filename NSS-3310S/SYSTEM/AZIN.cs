@@ -6,7 +6,7 @@ namespace nAZIN{
         public int nThread;
         int StartIndex = 0;
         int EndIndex = CNT_.MT;
-        double dHalf = CNT_.MT / 2;
+        readonly double dHalf = CNT_.MT / 2;
 
         public void DoReadMotion(){
             do{

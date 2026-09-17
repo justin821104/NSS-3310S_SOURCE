@@ -30,32 +30,32 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDevice));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_DEVICE = new System.Windows.Forms.Label();
             this.lbWorkDevice = new System.Windows.Forms.Label();
             this.lbWorkGroup = new System.Windows.Forms.Label();
@@ -68,6 +68,16 @@
             this.txNAME = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pnlMabBlockVac = new System.Windows.Forms.Panel();
+            this.chkMabBlockVacOff = new System.Windows.Forms.RadioButton();
+            this.chkMabBlockVacOn = new System.Windows.Forms.RadioButton();
+            this.pnlPickUpMabBlockVac = new System.Windows.Forms.Panel();
+            this.chkPickUpMabBlockVacOff = new System.Windows.Forms.RadioButton();
+            this.chkPickUpMabBlockVacOn = new System.Windows.Forms.RadioButton();
+            this.pnlPCBType = new System.Windows.Forms.Panel();
+            this.RBN_PCBTYPE_B1QUAD = new System.Windows.Forms.RadioButton();
+            this.RBN_PCBTYPE_QUAD = new System.Windows.Forms.RadioButton();
+            this.RBN_PCBTYPE_STRIP = new System.Windows.Forms.RadioButton();
             this.MGZSlotSpd = new System.Windows.Forms.Label();
             this.lblMGZ_Pitch_Spd = new System.Windows.Forms.Label();
             this.lblX2UnitPic = new System.Windows.Forms.Label();
@@ -78,7 +88,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lblX1UnitPlace = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.chkPCBTYPE = new JCS.ToggleSwitch();
             this.label4 = new System.Windows.Forms.Label();
             this.lblMGZSlotPitch = new System.Windows.Forms.Label();
             this.MGZSlotPitch = new System.Windows.Forms.Label();
@@ -106,10 +115,8 @@
             this.lblTRAY_PITCH_X = new System.Windows.Forms.Label();
             this.lblTRAY_CNT_Y = new System.Windows.Forms.Label();
             this.lblTRAY_CNT_X = new System.Windows.Forms.Label();
-            this.chkPickUpMabBlockVac = new JCS.ToggleSwitch();
             this.StagePickupVacState = new System.Windows.Forms.Label();
             this.GripperCatchRepeatCnt = new System.Windows.Forms.Label();
-            this.chkMabBlockVac = new JCS.ToggleSwitch();
             this.StagePikcupVacState = new System.Windows.Forms.Label();
             this.UnitSizeNGOverCnt = new System.Windows.Forms.Label();
             this.UseStageState = new System.Windows.Forms.GroupBox();
@@ -118,10 +125,6 @@
             this.ChkPALLET_ALL = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
             this.TrayWorkSpd = new System.Windows.Forms.Label();
-            this.editMAP_BLOCK2_CNT_Y = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.editMAP_BLOCK2_CNT_X = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.StagePickupMovingSpd = new System.Windows.Forms.Label();
             this.StageAirshowerRepeatCnt = new System.Windows.Forms.Label();
             this.StageAirshowerLowSpd = new System.Windows.Forms.Label();
@@ -146,6 +149,10 @@
             this.TrayCntX = new System.Windows.Forms.Label();
             this.Title_TrayInfo = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pnSmartLocationDir = new System.Windows.Forms.Panel();
+            this.rdbSmartLocationDir_1 = new System.Windows.Forms.RadioButton();
+            this.rdbSmartLocationDir = new System.Windows.Forms.RadioButton();
+            this.label24 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkedAirShowerRepeatCnt = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -270,6 +277,9 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.LB_BLADE_BARCODE_SP2 = new System.Windows.Forms.Label();
+            this.LB_BLADE_BARCODE_SP1 = new System.Windows.Forms.Label();
+            this.btnSpindleBladeInfo = new System.Windows.Forms.Button();
             this.GRD_DEVICE = new System.Windows.Forms.DataGridView();
             this.SetDataParaNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SetDataParaName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -310,18 +320,38 @@
             this.LotReset = new System.Windows.Forms.Button();
             this.TEST = new System.Windows.Forms.Button();
             this.LotWrite = new System.Windows.Forms.Button();
-            this.pTopPanel = new Owf.Controls.A1Panel();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnABFandBLADE_COMPARISON = new System.Windows.Forms.Button();
+            this.CUR_BLADE = new System.Windows.Forms.Label();
+            this.CUR_ABF = new System.Windows.Forms.Label();
+            this.btnDEL_ABF = new System.Windows.Forms.Button();
+            this.btnABF = new System.Windows.Forms.Button();
+            this.btnBladeSaveAs = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lvwBLADE_BARCODE = new System.Windows.Forms.ListView();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lvwABF = new System.Windows.Forms.ListView();
             this.btnGroup = new System.Windows.Forms.Button();
             this.swSave = new System.Windows.Forms.Button();
             this.btnOPEN = new System.Windows.Forms.Button();
             this.btnSaveAs = new System.Windows.Forms.Button();
             this.btnDEL = new System.Windows.Forms.Button();
             this.TmrRECIPE = new System.Windows.Forms.Timer(this.components);
+            this.CUR_RECIPE = new System.Windows.Forms.Label();
+            this.CUR_GROUP = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnTrayUnloading = new System.Windows.Forms.Panel();
+            this.rbTrayUnloadingStacker = new System.Windows.Forms.RadioButton();
+            this.rbTrayUnloadingConveyor = new System.Windows.Forms.RadioButton();
             this.gNEW_DEVICE.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.pnlMabBlockVac.SuspendLayout();
+            this.pnlPickUpMabBlockVac.SuspendLayout();
+            this.pnlPCBType.SuspendLayout();
             this.UseStageState.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.pnSmartLocationDir.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -339,7 +369,9 @@
             this.DETAILED_INFO.SuspendLayout();
             this.PPID_LIST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PPID_LIST)).BeginInit();
-            this.pTopPanel.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.pnTrayUnloading.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_DEVICE
@@ -380,7 +412,7 @@
             this.lvwGROUP.HideSelection = false;
             this.lvwGROUP.Location = new System.Drawing.Point(4, 44);
             this.lvwGROUP.Name = "lvwGROUP";
-            this.lvwGROUP.Size = new System.Drawing.Size(217, 827);
+            this.lvwGROUP.Size = new System.Drawing.Size(217, 811);
             this.lvwGROUP.TabIndex = 627;
             this.lvwGROUP.UseCompatibleStateImageBehavior = false;
             this.lvwGROUP.View = System.Windows.Forms.View.List;
@@ -391,7 +423,7 @@
             this.lvwDEVICE.HideSelection = false;
             this.lvwDEVICE.Location = new System.Drawing.Point(222, 44);
             this.lvwDEVICE.Name = "lvwDEVICE";
-            this.lvwDEVICE.Size = new System.Drawing.Size(302, 827);
+            this.lvwDEVICE.Size = new System.Drawing.Size(302, 811);
             this.lvwDEVICE.TabIndex = 623;
             this.lvwDEVICE.UseCompatibleStateImageBehavior = false;
             this.lvwDEVICE.View = System.Windows.Forms.View.List;
@@ -453,7 +485,7 @@
             this.lbl_DeviceName.ForeColor = System.Drawing.Color.Black;
             this.lbl_DeviceName.Location = new System.Drawing.Point(25, 72);
             this.lbl_DeviceName.Name = "lbl_DeviceName";
-            this.lbl_DeviceName.Size = new System.Drawing.Size(71, 16);
+            this.lbl_DeviceName.Size = new System.Drawing.Size(72, 16);
             this.lbl_DeviceName.TabIndex = 3;
             this.lbl_DeviceName.Text = "NEW NAME";
             // 
@@ -469,6 +501,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(64, 32);
             this.tabControl1.Location = new System.Drawing.Point(528, 23);
@@ -480,6 +513,9 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.pnlMabBlockVac);
+            this.tabPage1.Controls.Add(this.pnlPickUpMabBlockVac);
+            this.tabPage1.Controls.Add(this.pnlPCBType);
             this.tabPage1.Controls.Add(this.MGZSlotSpd);
             this.tabPage1.Controls.Add(this.lblMGZ_Pitch_Spd);
             this.tabPage1.Controls.Add(this.lblX2UnitPic);
@@ -490,7 +526,6 @@
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.lblX1UnitPlace);
             this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.chkPCBTYPE);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.lblMGZSlotPitch);
             this.tabPage1.Controls.Add(this.MGZSlotPitch);
@@ -518,18 +553,12 @@
             this.tabPage1.Controls.Add(this.lblTRAY_PITCH_X);
             this.tabPage1.Controls.Add(this.lblTRAY_CNT_Y);
             this.tabPage1.Controls.Add(this.lblTRAY_CNT_X);
-            this.tabPage1.Controls.Add(this.chkPickUpMabBlockVac);
             this.tabPage1.Controls.Add(this.StagePickupVacState);
             this.tabPage1.Controls.Add(this.GripperCatchRepeatCnt);
-            this.tabPage1.Controls.Add(this.chkMabBlockVac);
             this.tabPage1.Controls.Add(this.StagePikcupVacState);
             this.tabPage1.Controls.Add(this.UnitSizeNGOverCnt);
             this.tabPage1.Controls.Add(this.UseStageState);
             this.tabPage1.Controls.Add(this.TrayWorkSpd);
-            this.tabPage1.Controls.Add(this.editMAP_BLOCK2_CNT_Y);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.editMAP_BLOCK2_CNT_X);
-            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.StagePickupMovingSpd);
             this.tabPage1.Controls.Add(this.StageAirshowerRepeatCnt);
             this.tabPage1.Controls.Add(this.StageAirshowerLowSpd);
@@ -559,6 +588,129 @@
             this.tabPage1.Size = new System.Drawing.Size(740, 732);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "레시피 정보1";
+            // 
+            // pnlMabBlockVac
+            // 
+            this.pnlMabBlockVac.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlMabBlockVac.Controls.Add(this.chkMabBlockVacOff);
+            this.pnlMabBlockVac.Controls.Add(this.chkMabBlockVacOn);
+            this.pnlMabBlockVac.Location = new System.Drawing.Point(515, 615);
+            this.pnlMabBlockVac.Name = "pnlMabBlockVac";
+            this.pnlMabBlockVac.Size = new System.Drawing.Size(215, 32);
+            this.pnlMabBlockVac.TabIndex = 1529;
+            // 
+            // chkMabBlockVacOff
+            // 
+            this.chkMabBlockVacOff.AutoSize = true;
+            this.chkMabBlockVacOff.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.chkMabBlockVacOff.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chkMabBlockVacOff.Location = new System.Drawing.Point(113, 9);
+            this.chkMabBlockVacOff.Name = "chkMabBlockVacOff";
+            this.chkMabBlockVacOff.Size = new System.Drawing.Size(83, 16);
+            this.chkMabBlockVacOff.TabIndex = 128;
+            this.chkMabBlockVacOff.Tag = "0";
+            this.chkMabBlockVacOff.Text = "NOT VACUUM";
+            this.chkMabBlockVacOff.UseVisualStyleBackColor = true;
+            // 
+            // chkMabBlockVacOn
+            // 
+            this.chkMabBlockVacOn.AutoSize = true;
+            this.chkMabBlockVacOn.Checked = true;
+            this.chkMabBlockVacOn.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.chkMabBlockVacOn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chkMabBlockVacOn.Location = new System.Drawing.Point(27, 9);
+            this.chkMabBlockVacOn.Name = "chkMabBlockVacOn";
+            this.chkMabBlockVacOn.Size = new System.Drawing.Size(59, 16);
+            this.chkMabBlockVacOn.TabIndex = 127;
+            this.chkMabBlockVacOn.TabStop = true;
+            this.chkMabBlockVacOn.Tag = "0";
+            this.chkMabBlockVacOn.Text = "VACUUM";
+            this.chkMabBlockVacOn.UseVisualStyleBackColor = true;
+            // 
+            // pnlPickUpMabBlockVac
+            // 
+            this.pnlPickUpMabBlockVac.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlPickUpMabBlockVac.Controls.Add(this.chkPickUpMabBlockVacOff);
+            this.pnlPickUpMabBlockVac.Controls.Add(this.chkPickUpMabBlockVacOn);
+            this.pnlPickUpMabBlockVac.Location = new System.Drawing.Point(515, 466);
+            this.pnlPickUpMabBlockVac.Name = "pnlPickUpMabBlockVac";
+            this.pnlPickUpMabBlockVac.Size = new System.Drawing.Size(215, 32);
+            this.pnlPickUpMabBlockVac.TabIndex = 1528;
+            // 
+            // chkPickUpMabBlockVacOff
+            // 
+            this.chkPickUpMabBlockVacOff.AutoSize = true;
+            this.chkPickUpMabBlockVacOff.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.chkPickUpMabBlockVacOff.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chkPickUpMabBlockVacOff.Location = new System.Drawing.Point(113, 9);
+            this.chkPickUpMabBlockVacOff.Name = "chkPickUpMabBlockVacOff";
+            this.chkPickUpMabBlockVacOff.Size = new System.Drawing.Size(83, 16);
+            this.chkPickUpMabBlockVacOff.TabIndex = 128;
+            this.chkPickUpMabBlockVacOff.Tag = "0";
+            this.chkPickUpMabBlockVacOff.Text = "NOT VACUUM";
+            this.chkPickUpMabBlockVacOff.UseVisualStyleBackColor = true;
+            // 
+            // chkPickUpMabBlockVacOn
+            // 
+            this.chkPickUpMabBlockVacOn.AutoSize = true;
+            this.chkPickUpMabBlockVacOn.Checked = true;
+            this.chkPickUpMabBlockVacOn.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.chkPickUpMabBlockVacOn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chkPickUpMabBlockVacOn.Location = new System.Drawing.Point(27, 9);
+            this.chkPickUpMabBlockVacOn.Name = "chkPickUpMabBlockVacOn";
+            this.chkPickUpMabBlockVacOn.Size = new System.Drawing.Size(59, 16);
+            this.chkPickUpMabBlockVacOn.TabIndex = 127;
+            this.chkPickUpMabBlockVacOn.TabStop = true;
+            this.chkPickUpMabBlockVacOn.Tag = "0";
+            this.chkPickUpMabBlockVacOn.Text = "VACUUM";
+            this.chkPickUpMabBlockVacOn.UseVisualStyleBackColor = true;
+            // 
+            // pnlPCBType
+            // 
+            this.pnlPCBType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPCBType.Controls.Add(this.RBN_PCBTYPE_B1QUAD);
+            this.pnlPCBType.Controls.Add(this.RBN_PCBTYPE_QUAD);
+            this.pnlPCBType.Controls.Add(this.RBN_PCBTYPE_STRIP);
+            this.pnlPCBType.Location = new System.Drawing.Point(510, 81);
+            this.pnlPCBType.Name = "pnlPCBType";
+            this.pnlPCBType.Size = new System.Drawing.Size(220, 28);
+            this.pnlPCBType.TabIndex = 1527;
+            // 
+            // RBN_PCBTYPE_B1QUAD
+            // 
+            this.RBN_PCBTYPE_B1QUAD.AutoSize = true;
+            this.RBN_PCBTYPE_B1QUAD.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBN_PCBTYPE_B1QUAD.Location = new System.Drawing.Point(145, 6);
+            this.RBN_PCBTYPE_B1QUAD.Name = "RBN_PCBTYPE_B1QUAD";
+            this.RBN_PCBTYPE_B1QUAD.Size = new System.Drawing.Size(69, 17);
+            this.RBN_PCBTYPE_B1QUAD.TabIndex = 2;
+            this.RBN_PCBTYPE_B1QUAD.TabStop = true;
+            this.RBN_PCBTYPE_B1QUAD.Text = "B1 QUAD";
+            this.RBN_PCBTYPE_B1QUAD.UseVisualStyleBackColor = true;
+            // 
+            // RBN_PCBTYPE_QUAD
+            // 
+            this.RBN_PCBTYPE_QUAD.AutoSize = true;
+            this.RBN_PCBTYPE_QUAD.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBN_PCBTYPE_QUAD.Location = new System.Drawing.Point(75, 6);
+            this.RBN_PCBTYPE_QUAD.Name = "RBN_PCBTYPE_QUAD";
+            this.RBN_PCBTYPE_QUAD.Size = new System.Drawing.Size(54, 17);
+            this.RBN_PCBTYPE_QUAD.TabIndex = 1;
+            this.RBN_PCBTYPE_QUAD.TabStop = true;
+            this.RBN_PCBTYPE_QUAD.Text = "QUAD";
+            this.RBN_PCBTYPE_QUAD.UseVisualStyleBackColor = true;
+            // 
+            // RBN_PCBTYPE_STRIP
+            // 
+            this.RBN_PCBTYPE_STRIP.AutoSize = true;
+            this.RBN_PCBTYPE_STRIP.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBN_PCBTYPE_STRIP.Location = new System.Drawing.Point(5, 6);
+            this.RBN_PCBTYPE_STRIP.Name = "RBN_PCBTYPE_STRIP";
+            this.RBN_PCBTYPE_STRIP.Size = new System.Drawing.Size(54, 17);
+            this.RBN_PCBTYPE_STRIP.TabIndex = 0;
+            this.RBN_PCBTYPE_STRIP.TabStop = true;
+            this.RBN_PCBTYPE_STRIP.Text = "STRIP";
+            this.RBN_PCBTYPE_STRIP.UseVisualStyleBackColor = true;
             // 
             // MGZSlotSpd
             // 
@@ -699,23 +851,6 @@
             this.label7.Text = "X1 유닛 트레이 플레이스 각도 (˚)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // chkPCBTYPE
-            // 
-            this.chkPCBTYPE.BackColor = System.Drawing.Color.Transparent;
-            this.chkPCBTYPE.Checked = true;
-            this.chkPCBTYPE.Location = new System.Drawing.Point(559, 81);
-            this.chkPCBTYPE.Name = "chkPCBTYPE";
-            this.chkPCBTYPE.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPCBTYPE.OffForeColor = System.Drawing.Color.Red;
-            this.chkPCBTYPE.OffText = "STRIP";
-            this.chkPCBTYPE.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPCBTYPE.OnForeColor = System.Drawing.Color.Yellow;
-            this.chkPCBTYPE.OnText = "QUAD";
-            this.chkPCBTYPE.Size = new System.Drawing.Size(171, 28);
-            this.chkPCBTYPE.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android;
-            this.chkPCBTYPE.TabIndex = 1170;
-            this.chkPCBTYPE.Tag = "MD";
-            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -726,7 +861,7 @@
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.label4.Size = new System.Drawing.Size(187, 28);
+            this.label4.Size = new System.Drawing.Size(137, 28);
             this.label4.TabIndex = 1169;
             this.label4.Text = "PCB TYPE ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1097,22 +1232,6 @@
             this.lblTRAY_CNT_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTRAY_CNT_X.Click += new System.EventHandler(this.ParaData_Click);
             // 
-            // chkPickUpMabBlockVac
-            // 
-            this.chkPickUpMabBlockVac.BackColor = System.Drawing.Color.Transparent;
-            this.chkPickUpMabBlockVac.Location = new System.Drawing.Point(559, 466);
-            this.chkPickUpMabBlockVac.Name = "chkPickUpMabBlockVac";
-            this.chkPickUpMabBlockVac.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPickUpMabBlockVac.OffForeColor = System.Drawing.Color.Red;
-            this.chkPickUpMabBlockVac.OffText = "NOT VACUUM";
-            this.chkPickUpMabBlockVac.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPickUpMabBlockVac.OnForeColor = System.Drawing.Color.Yellow;
-            this.chkPickUpMabBlockVac.OnText = "VACUUM";
-            this.chkPickUpMabBlockVac.Size = new System.Drawing.Size(171, 32);
-            this.chkPickUpMabBlockVac.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android;
-            this.chkPickUpMabBlockVac.TabIndex = 859;
-            this.chkPickUpMabBlockVac.Tag = "MC";
-            // 
             // StagePickupVacState
             // 
             this.StagePickupVacState.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -1123,7 +1242,7 @@
             this.StagePickupVacState.Margin = new System.Windows.Forms.Padding(0);
             this.StagePickupVacState.Name = "StagePickupVacState";
             this.StagePickupVacState.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.StagePickupVacState.Size = new System.Drawing.Size(548, 32);
+            this.StagePickupVacState.Size = new System.Drawing.Size(505, 32);
             this.StagePickupVacState.TabIndex = 858;
             this.StagePickupVacState.Text = "맵블록 유닛 픽업시 테이블 진공 사용 유무";
             this.StagePickupVacState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1143,22 +1262,6 @@
             this.GripperCatchRepeatCnt.Text = "그리퍼 매거진에서 스트립 로딩시 반복 회수 (0:에러 없이 무한 반복)";
             this.GripperCatchRepeatCnt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // chkMabBlockVac
-            // 
-            this.chkMabBlockVac.BackColor = System.Drawing.Color.Transparent;
-            this.chkMabBlockVac.Location = new System.Drawing.Point(559, 615);
-            this.chkMabBlockVac.Name = "chkMabBlockVac";
-            this.chkMabBlockVac.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMabBlockVac.OffForeColor = System.Drawing.Color.Red;
-            this.chkMabBlockVac.OffText = "NOT VACUUM";
-            this.chkMabBlockVac.OnFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMabBlockVac.OnForeColor = System.Drawing.Color.Yellow;
-            this.chkMabBlockVac.OnText = "VACUUM";
-            this.chkMabBlockVac.Size = new System.Drawing.Size(171, 32);
-            this.chkMabBlockVac.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android;
-            this.chkMabBlockVac.TabIndex = 853;
-            this.chkMabBlockVac.Tag = "MC";
-            // 
             // StagePikcupVacState
             // 
             this.StagePikcupVacState.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -1169,7 +1272,7 @@
             this.StagePikcupVacState.Margin = new System.Windows.Forms.Padding(0);
             this.StagePikcupVacState.Name = "StagePikcupVacState";
             this.StagePikcupVacState.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.StagePikcupVacState.Size = new System.Drawing.Size(548, 32);
+            this.StagePikcupVacState.Size = new System.Drawing.Size(504, 32);
             this.StagePikcupVacState.TabIndex = 453;
             this.StagePikcupVacState.Text = "맵블록 유닛 픽업을 위해 테이블 이송시 테이블 진공 사용 유무";
             this.StagePikcupVacState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1267,66 +1370,6 @@
             this.TrayWorkSpd.TabIndex = 122;
             this.TrayWorkSpd.Text = "소재 트레이 안착시 구동 속도 (mm/sec)";
             this.TrayWorkSpd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // editMAP_BLOCK2_CNT_Y
-            // 
-            this.editMAP_BLOCK2_CNT_Y.BackColor = System.Drawing.Color.White;
-            this.editMAP_BLOCK2_CNT_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.editMAP_BLOCK2_CNT_Y.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editMAP_BLOCK2_CNT_Y.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.editMAP_BLOCK2_CNT_Y.Location = new System.Drawing.Point(172, 721);
-            this.editMAP_BLOCK2_CNT_Y.Name = "editMAP_BLOCK2_CNT_Y";
-            this.editMAP_BLOCK2_CNT_Y.Size = new System.Drawing.Size(70, 28);
-            this.editMAP_BLOCK2_CNT_Y.TabIndex = 116;
-            this.editMAP_BLOCK2_CNT_Y.Tag = "MD";
-            this.editMAP_BLOCK2_CNT_Y.Text = "00";
-            this.editMAP_BLOCK2_CNT_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.editMAP_BLOCK2_CNT_Y.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(135, 720);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.label5.Size = new System.Drawing.Size(76, 28);
-            this.label5.TabIndex = 118;
-            this.label5.Text = "드라이블록2 Y방향 갯수 (ea)";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Visible = false;
-            // 
-            // editMAP_BLOCK2_CNT_X
-            // 
-            this.editMAP_BLOCK2_CNT_X.BackColor = System.Drawing.Color.White;
-            this.editMAP_BLOCK2_CNT_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.editMAP_BLOCK2_CNT_X.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editMAP_BLOCK2_CNT_X.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.editMAP_BLOCK2_CNT_X.Location = new System.Drawing.Point(48, 722);
-            this.editMAP_BLOCK2_CNT_X.Name = "editMAP_BLOCK2_CNT_X";
-            this.editMAP_BLOCK2_CNT_X.Size = new System.Drawing.Size(70, 28);
-            this.editMAP_BLOCK2_CNT_X.TabIndex = 115;
-            this.editMAP_BLOCK2_CNT_X.Tag = "MD";
-            this.editMAP_BLOCK2_CNT_X.Text = "00";
-            this.editMAP_BLOCK2_CNT_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.editMAP_BLOCK2_CNT_X.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label9.Font = new System.Drawing.Font("굴림체", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label9.Location = new System.Drawing.Point(11, 721);
-            this.label9.Margin = new System.Windows.Forms.Padding(0);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.label9.Size = new System.Drawing.Size(67, 28);
-            this.label9.TabIndex = 117;
-            this.label9.Text = "드라이블록2 X방향 갯수 (ea)";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label9.Visible = false;
             // 
             // StagePickupMovingSpd
             // 
@@ -1648,6 +1691,9 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage2.Controls.Add(this.pnTrayUnloading);
+            this.tabPage2.Controls.Add(this.pnSmartLocationDir);
+            this.tabPage2.Controls.Add(this.label24);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.CHK_SCRAP_VACUUM);
             this.tabPage2.Controls.Add(this.label2);
@@ -1671,6 +1717,57 @@
             this.tabPage2.Size = new System.Drawing.Size(740, 732);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "레시피 정보2";
+            // 
+            // pnSmartLocationDir
+            // 
+            this.pnSmartLocationDir.BackColor = System.Drawing.Color.Black;
+            this.pnSmartLocationDir.Controls.Add(this.rdbSmartLocationDir_1);
+            this.pnSmartLocationDir.Controls.Add(this.rdbSmartLocationDir);
+            this.pnSmartLocationDir.Location = new System.Drawing.Point(470, 520);
+            this.pnSmartLocationDir.Name = "pnSmartLocationDir";
+            this.pnSmartLocationDir.Size = new System.Drawing.Size(259, 33);
+            this.pnSmartLocationDir.TabIndex = 1534;
+            // 
+            // rdbSmartLocationDir_1
+            // 
+            this.rdbSmartLocationDir_1.AutoSize = true;
+            this.rdbSmartLocationDir_1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSmartLocationDir_1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rdbSmartLocationDir_1.Location = new System.Drawing.Point(124, 6);
+            this.rdbSmartLocationDir_1.Name = "rdbSmartLocationDir_1";
+            this.rdbSmartLocationDir_1.Size = new System.Drawing.Size(132, 22);
+            this.rdbSmartLocationDir_1.TabIndex = 1535;
+            this.rdbSmartLocationDir_1.TabStop = true;
+            this.rdbSmartLocationDir_1.Text = "좌표값 부호 반전.";
+            this.rdbSmartLocationDir_1.UseVisualStyleBackColor = true;
+            // 
+            // rdbSmartLocationDir
+            // 
+            this.rdbSmartLocationDir.AutoSize = true;
+            this.rdbSmartLocationDir.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSmartLocationDir.ForeColor = System.Drawing.Color.Red;
+            this.rdbSmartLocationDir.Location = new System.Drawing.Point(4, 6);
+            this.rdbSmartLocationDir.Name = "rdbSmartLocationDir";
+            this.rdbSmartLocationDir.Size = new System.Drawing.Size(114, 22);
+            this.rdbSmartLocationDir.TabIndex = 0;
+            this.rdbSmartLocationDir.TabStop = true;
+            this.rdbSmartLocationDir.Text = "다이싱 좌표값.";
+            this.rdbSmartLocationDir.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label24.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label24.Location = new System.Drawing.Point(16, 520);
+            this.label24.Margin = new System.Windows.Forms.Padding(0);
+            this.label24.Name = "label24";
+            this.label24.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.label24.Size = new System.Drawing.Size(453, 33);
+            this.label24.TabIndex = 1532;
+            this.label24.Text = "스마트 얼라인 좌표 값 부호";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox3
             // 
@@ -2356,7 +2453,7 @@
             this.panel2.Controls.Add(this.gbxSelectHead);
             this.panel2.Location = new System.Drawing.Point(260, 362);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(462, 170);
+            this.panel2.Size = new System.Drawing.Size(462, 129);
             this.panel2.TabIndex = 1171;
             this.panel2.Visible = false;
             // 
@@ -2651,18 +2748,18 @@
             // 
             this.dgvPickerOffsetPitch.AllowUserToResizeColumns = false;
             this.dgvPickerOffsetPitch.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dgvPickerOffsetPitch.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.Black;
+            this.dgvPickerOffsetPitch.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle53;
             this.dgvPickerOffsetPitch.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPickerOffsetPitch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPickerOffsetPitch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle54;
             this.dgvPickerOffsetPitch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPickerOffsetPitch.ColumnHeadersVisible = false;
             this.dgvPickerOffsetPitch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -2678,18 +2775,18 @@
             this.dgvPickerOffsetPitch.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvPickerOffsetPitch.Location = new System.Drawing.Point(3, 54);
             this.dgvPickerOffsetPitch.Name = "dgvPickerOffsetPitch";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPickerOffsetPitch.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle64.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle64.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPickerOffsetPitch.RowHeadersDefaultCellStyle = dataGridViewCellStyle64;
             this.dgvPickerOffsetPitch.RowHeadersVisible = false;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            this.dgvPickerOffsetPitch.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle65.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle65.ForeColor = System.Drawing.Color.Black;
+            this.dgvPickerOffsetPitch.RowsDefaultCellStyle = dataGridViewCellStyle65;
             this.dgvPickerOffsetPitch.RowTemplate.Height = 23;
             this.dgvPickerOffsetPitch.Size = new System.Drawing.Size(705, 72);
             this.dgvPickerOffsetPitch.TabIndex = 1240;
@@ -2698,9 +2795,9 @@
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PowderBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.Color.PowderBlue;
+            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle55;
             this.dataGridViewTextBoxColumn3.HeaderText = "DIR";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -2709,9 +2806,9 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle56.NullValue = "0";
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle56;
             this.dataGridViewTextBoxColumn4.HeaderText = "PK1";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2719,9 +2816,9 @@
             // 
             // dataGridViewTextBoxColumn5
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle57.NullValue = "0";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle57;
             this.dataGridViewTextBoxColumn5.HeaderText = "PK2";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2729,8 +2826,8 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle58;
             this.Column3.HeaderText = "PK3";
             this.Column3.Name = "Column3";
             this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2738,8 +2835,8 @@
             // 
             // Column4
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle59;
             this.Column4.HeaderText = "PK4";
             this.Column4.Name = "Column4";
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2747,8 +2844,8 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle60;
             this.Column5.HeaderText = "PK5";
             this.Column5.Name = "Column5";
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2756,8 +2853,8 @@
             // 
             // Column6
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle61;
             this.Column6.HeaderText = "PK6";
             this.Column6.Name = "Column6";
             this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2765,8 +2862,8 @@
             // 
             // Column7
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle62;
             this.Column7.HeaderText = "PK7";
             this.Column7.Name = "Column7";
             this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2774,8 +2871,8 @@
             // 
             // Column8
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle63;
             this.Column8.HeaderText = "PK8";
             this.Column8.Name = "Column8";
             this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2964,6 +3061,7 @@
             // ChkTrayUnloading
             // 
             this.ChkTrayUnloading.BackColor = System.Drawing.Color.Transparent;
+            this.ChkTrayUnloading.Checked = true;
             this.ChkTrayUnloading.Location = new System.Drawing.Point(494, 556);
             this.ChkTrayUnloading.Name = "ChkTrayUnloading";
             this.ChkTrayUnloading.OffFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3117,12 +3215,11 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(6, 537);
+            this.label18.Location = new System.Drawing.Point(6, 490);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(79, 18);
             this.label18.TabIndex = 848;
             this.label18.Text = "● 기타 정보";
-            this.label18.Visible = false;
             // 
             // label14
             // 
@@ -3391,6 +3488,9 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage3.Controls.Add(this.LB_BLADE_BARCODE_SP2);
+            this.tabPage3.Controls.Add(this.LB_BLADE_BARCODE_SP1);
+            this.tabPage3.Controls.Add(this.btnSpindleBladeInfo);
             this.tabPage3.Controls.Add(this.GRD_DEVICE);
             this.tabPage3.Controls.Add(this.EES_NOT_CONSUMABLE);
             this.tabPage3.Controls.Add(this.EES_NOT_DURABLE);
@@ -3416,60 +3516,101 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LOT 정보";
             // 
+            // LB_BLADE_BARCODE_SP2
+            // 
+            this.LB_BLADE_BARCODE_SP2.AutoSize = true;
+            this.LB_BLADE_BARCODE_SP2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_BLADE_BARCODE_SP2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.LB_BLADE_BARCODE_SP2.Location = new System.Drawing.Point(6, 155);
+            this.LB_BLADE_BARCODE_SP2.Name = "LB_BLADE_BARCODE_SP2";
+            this.LB_BLADE_BARCODE_SP2.Size = new System.Drawing.Size(112, 16);
+            this.LB_BLADE_BARCODE_SP2.TabIndex = 1329;
+            this.LB_BLADE_BARCODE_SP2.Text = "SPINDLE2 BLADE :";
+            this.LB_BLADE_BARCODE_SP2.Visible = false;
+            // 
+            // LB_BLADE_BARCODE_SP1
+            // 
+            this.LB_BLADE_BARCODE_SP1.AutoSize = true;
+            this.LB_BLADE_BARCODE_SP1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_BLADE_BARCODE_SP1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.LB_BLADE_BARCODE_SP1.Location = new System.Drawing.Point(6, 134);
+            this.LB_BLADE_BARCODE_SP1.Name = "LB_BLADE_BARCODE_SP1";
+            this.LB_BLADE_BARCODE_SP1.Size = new System.Drawing.Size(112, 16);
+            this.LB_BLADE_BARCODE_SP1.TabIndex = 1328;
+            this.LB_BLADE_BARCODE_SP1.Text = "SPINDLE1 BLADE :";
+            this.LB_BLADE_BARCODE_SP1.Visible = false;
+            // 
+            // btnSpindleBladeInfo
+            // 
+            this.btnSpindleBladeInfo.BackColor = System.Drawing.Color.White;
+            this.btnSpindleBladeInfo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSpindleBladeInfo.ForeColor = System.Drawing.Color.Black;
+            this.btnSpindleBladeInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnSpindleBladeInfo.Image")));
+            this.btnSpindleBladeInfo.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnSpindleBladeInfo.Location = new System.Drawing.Point(5, 69);
+            this.btnSpindleBladeInfo.Name = "btnSpindleBladeInfo";
+            this.btnSpindleBladeInfo.Padding = new System.Windows.Forms.Padding(5);
+            this.btnSpindleBladeInfo.Size = new System.Drawing.Size(123, 62);
+            this.btnSpindleBladeInfo.TabIndex = 1327;
+            this.btnSpindleBladeInfo.Text = "스핀들\r\n블레이드\r\n바코드 정보 읽기";
+            this.btnSpindleBladeInfo.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnSpindleBladeInfo.UseVisualStyleBackColor = false;
+            this.btnSpindleBladeInfo.Click += new System.EventHandler(this.btnSpindleBladeInfo_Click);
+            // 
             // GRD_DEVICE
             // 
             this.GRD_DEVICE.AllowUserToAddRows = false;
             this.GRD_DEVICE.AllowUserToResizeColumns = false;
             this.GRD_DEVICE.AllowUserToResizeRows = false;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GRD_DEVICE.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle66.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GRD_DEVICE.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle66;
             this.GRD_DEVICE.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GRD_DEVICE.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle67.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle67.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle67.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GRD_DEVICE.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle67;
             this.GRD_DEVICE.ColumnHeadersHeight = 30;
             this.GRD_DEVICE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.GRD_DEVICE.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SetDataParaNum,
             this.SetDataParaName});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GRD_DEVICE.DefaultCellStyle = dataGridViewCellStyle18;
-            this.GRD_DEVICE.Location = new System.Drawing.Point(6, 70);
+            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle70.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle70.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle70.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GRD_DEVICE.DefaultCellStyle = dataGridViewCellStyle70;
+            this.GRD_DEVICE.Location = new System.Drawing.Point(262, 31);
             this.GRD_DEVICE.Name = "GRD_DEVICE";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.GRD_DEVICE.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle71.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle71.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle71.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.GRD_DEVICE.RowHeadersDefaultCellStyle = dataGridViewCellStyle71;
             this.GRD_DEVICE.RowHeadersVisible = false;
             this.GRD_DEVICE.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GRD_DEVICE.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle72.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GRD_DEVICE.RowsDefaultCellStyle = dataGridViewCellStyle72;
             this.GRD_DEVICE.RowTemplate.Height = 40;
-            this.GRD_DEVICE.Size = new System.Drawing.Size(303, 109);
+            this.GRD_DEVICE.Size = new System.Drawing.Size(233, 64);
             this.GRD_DEVICE.TabIndex = 831;
             this.GRD_DEVICE.Visible = false;
             // 
             // SetDataParaNum
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SetDataParaNum.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SetDataParaNum.DefaultCellStyle = dataGridViewCellStyle68;
             this.SetDataParaNum.HeaderText = "NUM";
             this.SetDataParaNum.Name = "SetDataParaNum";
             this.SetDataParaNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3478,8 +3619,8 @@
             // 
             // SetDataParaName
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.SetDataParaName.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.SetDataParaName.DefaultCellStyle = dataGridViewCellStyle69;
             this.SetDataParaName.HeaderText = "DEVICE";
             this.SetDataParaName.Name = "SetDataParaName";
             this.SetDataParaName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3591,7 +3732,7 @@
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.label33.Location = new System.Drawing.Point(482, 75);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(65, 16);
+            this.label33.Size = new System.Drawing.Size(66, 16);
             this.label33.TabIndex = 1319;
             this.label33.Text = "사용자 ID :";
             this.label33.Visible = false;
@@ -3620,6 +3761,7 @@
             this.DETAILED_INFO.TabIndex = 1318;
             this.DETAILED_INFO.TabStop = false;
             this.DETAILED_INFO.UseCompatibleTextRendering = true;
+            this.DETAILED_INFO.Visible = false;
             // 
             // SELECT_LOADER
             // 
@@ -3861,6 +4003,7 @@
             this.PPID_LIST.TabIndex = 1317;
             this.PPID_LIST.TabStop = false;
             this.PPID_LIST.UseCompatibleTextRendering = true;
+            this.PPID_LIST.Visible = false;
             // 
             // DGV_PPID_LIST
             // 
@@ -3868,42 +4011,42 @@
             this.DGV_PPID_LIST.AllowUserToDeleteRows = false;
             this.DGV_PPID_LIST.AllowUserToResizeColumns = false;
             this.DGV_PPID_LIST.AllowUserToResizeRows = false;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_PPID_LIST.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_PPID_LIST.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle73;
             this.DGV_PPID_LIST.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_PPID_LIST.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle74.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle74.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle74.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_PPID_LIST.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle74;
             this.DGV_PPID_LIST.ColumnHeadersHeight = 40;
             this.DGV_PPID_LIST.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV_PPID_LIST.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13});
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_PPID_LIST.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle77.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle77.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle77.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle77.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_PPID_LIST.DefaultCellStyle = dataGridViewCellStyle77;
             this.DGV_PPID_LIST.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DGV_PPID_LIST.Location = new System.Drawing.Point(3, 92);
             this.DGV_PPID_LIST.MultiSelect = false;
             this.DGV_PPID_LIST.Name = "DGV_PPID_LIST";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_PPID_LIST.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle78.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle78.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_PPID_LIST.RowHeadersDefaultCellStyle = dataGridViewCellStyle78;
             this.DGV_PPID_LIST.RowHeadersVisible = false;
             this.DGV_PPID_LIST.RowHeadersWidth = 55;
             this.DGV_PPID_LIST.RowTemplate.Height = 23;
@@ -3913,8 +4056,8 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle75;
             this.dataGridViewTextBoxColumn12.HeaderText = "NO.";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3923,8 +4066,8 @@
             // 
             // dataGridViewTextBoxColumn13
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle76;
             this.dataGridViewTextBoxColumn13.HeaderText = "RECIEP NAME (PPID)";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -3962,7 +4105,7 @@
             this.JIG_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.JIG_ID.Location = new System.Drawing.Point(482, 139);
             this.JIG_ID.Name = "JIG_ID";
-            this.JIG_ID.Size = new System.Drawing.Size(49, 16);
+            this.JIG_ID.Size = new System.Drawing.Size(50, 16);
             this.JIG_ID.TabIndex = 1309;
             this.JIG_ID.Text = "JIG ID :";
             this.JIG_ID.Visible = false;
@@ -3974,7 +4117,7 @@
             this.LOT_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.LOT_ID.Location = new System.Drawing.Point(482, 118);
             this.LOT_ID.Name = "LOT_ID";
-            this.LOT_ID.Size = new System.Drawing.Size(55, 16);
+            this.LOT_ID.Size = new System.Drawing.Size(56, 16);
             this.LOT_ID.TabIndex = 1308;
             this.LOT_ID.Text = "LOT ID :";
             this.LOT_ID.Visible = false;
@@ -3986,7 +4129,7 @@
             this.MARSTER_ID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.MARSTER_ID.Location = new System.Drawing.Point(482, 98);
             this.MARSTER_ID.Name = "MARSTER_ID";
-            this.MARSTER_ID.Size = new System.Drawing.Size(65, 16);
+            this.MARSTER_ID.Size = new System.Drawing.Size(66, 16);
             this.MARSTER_ID.TabIndex = 1307;
             this.MARSTER_ID.Text = "관리자 ID :";
             this.MARSTER_ID.Visible = false;
@@ -4038,24 +4181,153 @@
             this.LotWrite.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.LotWrite.UseVisualStyleBackColor = false;
             // 
-            // pTopPanel
+            // tabPage4
             // 
-            this.pTopPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pTopPanel.BorderColor = System.Drawing.Color.DarkGray;
-            this.pTopPanel.Controls.Add(this.btnGroup);
-            this.pTopPanel.Controls.Add(this.swSave);
-            this.pTopPanel.Controls.Add(this.btnOPEN);
-            this.pTopPanel.Controls.Add(this.btnSaveAs);
-            this.pTopPanel.Controls.Add(this.btnDEL);
-            this.pTopPanel.GradientEndColor = System.Drawing.Color.Lavender;
-            this.pTopPanel.GradientStartColor = System.Drawing.Color.White;
-            this.pTopPanel.Image = null;
-            this.pTopPanel.ImageLocation = new System.Drawing.Point(3, 6);
-            this.pTopPanel.Location = new System.Drawing.Point(528, 795);
-            this.pTopPanel.Name = "pTopPanel";
-            this.pTopPanel.ShadowOffSet = 2;
-            this.pTopPanel.Size = new System.Drawing.Size(745, 79);
-            this.pTopPanel.TabIndex = 1317;
+            this.tabPage4.Controls.Add(this.btnABFandBLADE_COMPARISON);
+            this.tabPage4.Controls.Add(this.CUR_BLADE);
+            this.tabPage4.Controls.Add(this.CUR_ABF);
+            this.tabPage4.Controls.Add(this.btnDEL_ABF);
+            this.tabPage4.Controls.Add(this.btnABF);
+            this.tabPage4.Controls.Add(this.btnBladeSaveAs);
+            this.tabPage4.Controls.Add(this.label23);
+            this.tabPage4.Controls.Add(this.lvwBLADE_BARCODE);
+            this.tabPage4.Controls.Add(this.label20);
+            this.tabPage4.Controls.Add(this.lvwABF);
+            this.tabPage4.Location = new System.Drawing.Point(4, 36);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(740, 732);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "BLADE INTERLOCK";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnABFandBLADE_COMPARISON
+            // 
+            this.btnABFandBLADE_COMPARISON.BackColor = System.Drawing.Color.White;
+            this.btnABFandBLADE_COMPARISON.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnABFandBLADE_COMPARISON.ForeColor = System.Drawing.Color.Black;
+            this.btnABFandBLADE_COMPARISON.Image = ((System.Drawing.Image)(resources.GetObject("btnABFandBLADE_COMPARISON.Image")));
+            this.btnABFandBLADE_COMPARISON.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnABFandBLADE_COMPARISON.Location = new System.Drawing.Point(602, 660);
+            this.btnABFandBLADE_COMPARISON.Name = "btnABFandBLADE_COMPARISON";
+            this.btnABFandBLADE_COMPARISON.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.btnABFandBLADE_COMPARISON.Size = new System.Drawing.Size(132, 66);
+            this.btnABFandBLADE_COMPARISON.TabIndex = 1319;
+            this.btnABFandBLADE_COMPARISON.Text = "현재 자재와 비교";
+            this.btnABFandBLADE_COMPARISON.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnABFandBLADE_COMPARISON.UseVisualStyleBackColor = false;
+            // 
+            // CUR_BLADE
+            // 
+            this.CUR_BLADE.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CUR_BLADE.ForeColor = System.Drawing.Color.Black;
+            this.CUR_BLADE.Location = new System.Drawing.Point(270, 712);
+            this.CUR_BLADE.Name = "CUR_BLADE";
+            this.CUR_BLADE.Size = new System.Drawing.Size(324, 18);
+            this.CUR_BLADE.TabIndex = 1318;
+            this.CUR_BLADE.Text = "CURRENT BLADE";
+            // 
+            // CUR_ABF
+            // 
+            this.CUR_ABF.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CUR_ABF.ForeColor = System.Drawing.Color.Black;
+            this.CUR_ABF.Location = new System.Drawing.Point(7, 712);
+            this.CUR_ABF.Name = "CUR_ABF";
+            this.CUR_ABF.Size = new System.Drawing.Size(253, 18);
+            this.CUR_ABF.TabIndex = 1317;
+            this.CUR_ABF.Text = "CURRENT ABF";
+            // 
+            // btnDEL_ABF
+            // 
+            this.btnDEL_ABF.BackColor = System.Drawing.Color.White;
+            this.btnDEL_ABF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDEL_ABF.ForeColor = System.Drawing.Color.Black;
+            this.btnDEL_ABF.Image = ((System.Drawing.Image)(resources.GetObject("btnDEL_ABF.Image")));
+            this.btnDEL_ABF.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnDEL_ABF.Location = new System.Drawing.Point(602, 169);
+            this.btnDEL_ABF.Name = "btnDEL_ABF";
+            this.btnDEL_ABF.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.btnDEL_ABF.Size = new System.Drawing.Size(132, 66);
+            this.btnDEL_ABF.TabIndex = 1316;
+            this.btnDEL_ABF.Text = "삭제";
+            this.btnDEL_ABF.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnDEL_ABF.UseVisualStyleBackColor = false;
+            // 
+            // btnABF
+            // 
+            this.btnABF.BackColor = System.Drawing.Color.White;
+            this.btnABF.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnABF.ForeColor = System.Drawing.Color.Black;
+            this.btnABF.Image = ((System.Drawing.Image)(resources.GetObject("btnABF.Image")));
+            this.btnABF.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnABF.Location = new System.Drawing.Point(600, 31);
+            this.btnABF.Name = "btnABF";
+            this.btnABF.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.btnABF.Size = new System.Drawing.Size(134, 66);
+            this.btnABF.TabIndex = 1315;
+            this.btnABF.Text = "자재명 생성";
+            this.btnABF.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnABF.UseVisualStyleBackColor = false;
+            // 
+            // btnBladeSaveAs
+            // 
+            this.btnBladeSaveAs.BackColor = System.Drawing.Color.White;
+            this.btnBladeSaveAs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBladeSaveAs.ForeColor = System.Drawing.Color.Black;
+            this.btnBladeSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnBladeSaveAs.Image")));
+            this.btnBladeSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnBladeSaveAs.Location = new System.Drawing.Point(600, 100);
+            this.btnBladeSaveAs.Name = "btnBladeSaveAs";
+            this.btnBladeSaveAs.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
+            this.btnBladeSaveAs.Size = new System.Drawing.Size(134, 66);
+            this.btnBladeSaveAs.TabIndex = 1314;
+            this.btnBladeSaveAs.Text = "블레이드 바코드\r\n생성";
+            this.btnBladeSaveAs.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnBladeSaveAs.UseVisualStyleBackColor = false;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label23.ForeColor = System.Drawing.Color.Black;
+            this.label23.Location = new System.Drawing.Point(269, 7);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(139, 20);
+            this.label23.TabIndex = 631;
+            this.label23.Text = "● 블레이드 리스트";
+            // 
+            // lvwBLADE_BARCODE
+            // 
+            this.lvwBLADE_BARCODE.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvwBLADE_BARCODE.HideSelection = false;
+            this.lvwBLADE_BARCODE.Location = new System.Drawing.Point(267, 31);
+            this.lvwBLADE_BARCODE.Name = "lvwBLADE_BARCODE";
+            this.lvwBLADE_BARCODE.Size = new System.Drawing.Size(327, 674);
+            this.lvwBLADE_BARCODE.TabIndex = 630;
+            this.lvwBLADE_BARCODE.UseCompatibleStateImageBehavior = false;
+            this.lvwBLADE_BARCODE.View = System.Windows.Forms.View.List;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label20.ForeColor = System.Drawing.Color.Black;
+            this.label20.Location = new System.Drawing.Point(8, 7);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(109, 20);
+            this.label20.TabIndex = 629;
+            this.label20.Text = "● 자재 리스트";
+            // 
+            // lvwABF
+            // 
+            this.lvwABF.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvwABF.HideSelection = false;
+            this.lvwABF.Location = new System.Drawing.Point(6, 31);
+            this.lvwABF.Name = "lvwABF";
+            this.lvwABF.Size = new System.Drawing.Size(255, 674);
+            this.lvwABF.TabIndex = 628;
+            this.lvwABF.UseCompatibleStateImageBehavior = false;
+            this.lvwABF.View = System.Windows.Forms.View.List;
             // 
             // btnGroup
             // 
@@ -4064,7 +4336,7 @@
             this.btnGroup.ForeColor = System.Drawing.Color.Black;
             this.btnGroup.Image = ((System.Drawing.Image)(resources.GetObject("btnGroup.Image")));
             this.btnGroup.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnGroup.Location = new System.Drawing.Point(4, 6);
+            this.btnGroup.Location = new System.Drawing.Point(5, 5);
             this.btnGroup.Name = "btnGroup";
             this.btnGroup.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.btnGroup.Size = new System.Drawing.Size(132, 66);
@@ -4080,7 +4352,7 @@
             this.swSave.ForeColor = System.Drawing.Color.Black;
             this.swSave.Image = ((System.Drawing.Image)(resources.GetObject("swSave.Image")));
             this.swSave.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.swSave.Location = new System.Drawing.Point(607, 6);
+            this.swSave.Location = new System.Drawing.Point(608, 5);
             this.swSave.Name = "swSave";
             this.swSave.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.swSave.Size = new System.Drawing.Size(132, 66);
@@ -4096,7 +4368,7 @@
             this.btnOPEN.ForeColor = System.Drawing.Color.Black;
             this.btnOPEN.Image = ((System.Drawing.Image)(resources.GetObject("btnOPEN.Image")));
             this.btnOPEN.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnOPEN.Location = new System.Drawing.Point(274, 6);
+            this.btnOPEN.Location = new System.Drawing.Point(275, 5);
             this.btnOPEN.Name = "btnOPEN";
             this.btnOPEN.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.btnOPEN.Size = new System.Drawing.Size(132, 66);
@@ -4112,7 +4384,7 @@
             this.btnSaveAs.ForeColor = System.Drawing.Color.Black;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnSaveAs.Location = new System.Drawing.Point(139, 6);
+            this.btnSaveAs.Location = new System.Drawing.Point(140, 5);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.btnSaveAs.Size = new System.Drawing.Size(132, 66);
@@ -4128,7 +4400,7 @@
             this.btnDEL.ForeColor = System.Drawing.Color.Black;
             this.btnDEL.Image = ((System.Drawing.Image)(resources.GetObject("btnDEL.Image")));
             this.btnDEL.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnDEL.Location = new System.Drawing.Point(409, 6);
+            this.btnDEL.Location = new System.Drawing.Point(410, 5);
             this.btnDEL.Name = "btnDEL";
             this.btnDEL.Padding = new System.Windows.Forms.Padding(3, 3, 0, 2);
             this.btnDEL.Size = new System.Drawing.Size(132, 66);
@@ -4142,6 +4414,75 @@
             this.TmrRECIPE.Interval = 500;
             this.TmrRECIPE.Tick += new System.EventHandler(this.TmrRECIPE_Tick);
             // 
+            // CUR_RECIPE
+            // 
+            this.CUR_RECIPE.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CUR_RECIPE.ForeColor = System.Drawing.Color.Black;
+            this.CUR_RECIPE.Location = new System.Drawing.Point(224, 857);
+            this.CUR_RECIPE.Name = "CUR_RECIPE";
+            this.CUR_RECIPE.Size = new System.Drawing.Size(298, 18);
+            this.CUR_RECIPE.TabIndex = 1320;
+            this.CUR_RECIPE.Text = "CURRENT RECIPE";
+            // 
+            // CUR_GROUP
+            // 
+            this.CUR_GROUP.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CUR_GROUP.ForeColor = System.Drawing.Color.Black;
+            this.CUR_GROUP.Location = new System.Drawing.Point(6, 857);
+            this.CUR_GROUP.Name = "CUR_GROUP";
+            this.CUR_GROUP.Size = new System.Drawing.Size(213, 18);
+            this.CUR_GROUP.TabIndex = 1319;
+            this.CUR_GROUP.Text = "CURRENT GROUP";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Lavender;
+            this.panel1.Controls.Add(this.btnGroup);
+            this.panel1.Controls.Add(this.swSave);
+            this.panel1.Controls.Add(this.btnDEL);
+            this.panel1.Controls.Add(this.btnOPEN);
+            this.panel1.Controls.Add(this.btnSaveAs);
+            this.panel1.Location = new System.Drawing.Point(528, 798);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(746, 75);
+            this.panel1.TabIndex = 1321;
+            // 
+            // pnTrayUnloading
+            // 
+            this.pnTrayUnloading.BackColor = System.Drawing.Color.Black;
+            this.pnTrayUnloading.Controls.Add(this.rbTrayUnloadingStacker);
+            this.pnTrayUnloading.Controls.Add(this.rbTrayUnloadingConveyor);
+            this.pnTrayUnloading.Location = new System.Drawing.Point(15, 423);
+            this.pnTrayUnloading.Name = "pnTrayUnloading";
+            this.pnTrayUnloading.Size = new System.Drawing.Size(259, 33);
+            this.pnTrayUnloading.TabIndex = 1535;
+            // 
+            // rbTrayUnloadingStacker
+            // 
+            this.rbTrayUnloadingStacker.AutoSize = true;
+            this.rbTrayUnloadingStacker.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbTrayUnloadingStacker.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rbTrayUnloadingStacker.Location = new System.Drawing.Point(152, 6);
+            this.rbTrayUnloadingStacker.Name = "rbTrayUnloadingStacker";
+            this.rbTrayUnloadingStacker.Size = new System.Drawing.Size(80, 20);
+            this.rbTrayUnloadingStacker.TabIndex = 1535;
+            this.rbTrayUnloadingStacker.TabStop = true;
+            this.rbTrayUnloadingStacker.Text = "STACKER";
+            this.rbTrayUnloadingStacker.UseVisualStyleBackColor = true;
+            // 
+            // rbTrayUnloadingConveyor
+            // 
+            this.rbTrayUnloadingConveyor.AutoSize = true;
+            this.rbTrayUnloadingConveyor.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbTrayUnloadingConveyor.ForeColor = System.Drawing.Color.Red;
+            this.rbTrayUnloadingConveyor.Location = new System.Drawing.Point(22, 6);
+            this.rbTrayUnloadingConveyor.Name = "rbTrayUnloadingConveyor";
+            this.rbTrayUnloadingConveyor.Size = new System.Drawing.Size(90, 20);
+            this.rbTrayUnloadingConveyor.TabIndex = 0;
+            this.rbTrayUnloadingConveyor.TabStop = true;
+            this.rbTrayUnloadingConveyor.Text = "CONVEYOR";
+            this.rbTrayUnloadingConveyor.UseVisualStyleBackColor = true;
+            // 
             // FormDevice
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4149,7 +4490,9 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1277, 875);
             this.ControlBox = false;
-            this.Controls.Add(this.pTopPanel);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.CUR_RECIPE);
+            this.Controls.Add(this.CUR_GROUP);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.gNEW_DEVICE);
             this.Controls.Add(this.lbl_DEVICE);
@@ -4166,10 +4509,18 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.pnlMabBlockVac.ResumeLayout(false);
+            this.pnlMabBlockVac.PerformLayout();
+            this.pnlPickUpMabBlockVac.ResumeLayout(false);
+            this.pnlPickUpMabBlockVac.PerformLayout();
+            this.pnlPCBType.ResumeLayout(false);
+            this.pnlPCBType.PerformLayout();
             this.UseStageState.ResumeLayout(false);
             this.UseStageState.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.pnSmartLocationDir.ResumeLayout(false);
+            this.pnSmartLocationDir.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -4193,7 +4544,11 @@
             this.DETAILED_INFO.ResumeLayout(false);
             this.PPID_LIST.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PPID_LIST)).EndInit();
-            this.pTopPanel.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.pnTrayUnloading.ResumeLayout(false);
+            this.pnTrayUnloading.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4213,20 +4568,14 @@
         private System.Windows.Forms.TextBox txNAME;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private JCS.ToggleSwitch chkPickUpMabBlockVac;
         private System.Windows.Forms.Label StagePickupVacState;
         private System.Windows.Forms.Label lblGripper_ReCatchCnt;
         private System.Windows.Forms.Label GripperCatchRepeatCnt;
-        private JCS.ToggleSwitch chkMabBlockVac;
         private System.Windows.Forms.Label lblUnitNGOverCnt;
         private System.Windows.Forms.Label StagePikcupVacState;
         private System.Windows.Forms.Label UnitSizeNGOverCnt;
         private System.Windows.Forms.Label lblTRAY_SLOW_SPEED;
         private System.Windows.Forms.Label TrayWorkSpd;
-        private System.Windows.Forms.Label editMAP_BLOCK2_CNT_Y;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label editMAP_BLOCK2_CNT_X;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblMAP_BLOCK_SLOW_SPEED;
         private System.Windows.Forms.Label StagePickupMovingSpd;
         private System.Windows.Forms.Label lblMAP_BLOCK_AIRSLOWER_SHOW_SPEED;
@@ -4393,7 +4742,6 @@
         private System.Windows.Forms.Label Stage;
         private System.Windows.Forms.Label Tray;
         private System.Windows.Forms.Button btnAutoPickerCal;
-        private Owf.Controls.A1Panel pTopPanel;
         private System.Windows.Forms.Button btnGroup;
         private System.Windows.Forms.Button swSave;
         private System.Windows.Forms.Button btnOPEN;
@@ -4409,7 +4757,6 @@
         private System.Windows.Forms.Label label1;
         private JCS.ToggleSwitch CHK_SCRAP_VACUUM;
         private System.Windows.Forms.Label label2;
-        private JCS.ToggleSwitch chkPCBTYPE;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblX1UnitPlace;
         private System.Windows.Forms.Label label7;
@@ -4462,5 +4809,39 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label MGZSlotSpd;
         private System.Windows.Forms.Label lblMGZ_Pitch_Spd;
+        private System.Windows.Forms.Button btnSpindleBladeInfo;
+        private System.Windows.Forms.Label LB_BLADE_BARCODE_SP2;
+        private System.Windows.Forms.Label LB_BLADE_BARCODE_SP1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ListView lvwBLADE_BARCODE;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ListView lvwABF;
+        private System.Windows.Forms.Button btnDEL_ABF;
+        private System.Windows.Forms.Button btnABF;
+        private System.Windows.Forms.Button btnBladeSaveAs;
+        private System.Windows.Forms.Label CUR_ABF;
+        private System.Windows.Forms.Label CUR_BLADE;
+        private System.Windows.Forms.Label CUR_RECIPE;
+        private System.Windows.Forms.Label CUR_GROUP;
+        private System.Windows.Forms.Button btnABFandBLADE_COMPARISON;
+        private System.Windows.Forms.Panel pnlPCBType;
+        private System.Windows.Forms.RadioButton RBN_PCBTYPE_STRIP;
+        private System.Windows.Forms.RadioButton RBN_PCBTYPE_B1QUAD;
+        private System.Windows.Forms.RadioButton RBN_PCBTYPE_QUAD;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlPickUpMabBlockVac;
+        internal System.Windows.Forms.RadioButton chkPickUpMabBlockVacOff;
+        internal System.Windows.Forms.RadioButton chkPickUpMabBlockVacOn;
+        private System.Windows.Forms.Panel pnlMabBlockVac;
+        internal System.Windows.Forms.RadioButton chkMabBlockVacOff;
+        internal System.Windows.Forms.RadioButton chkMabBlockVacOn;
+        private System.Windows.Forms.Panel pnSmartLocationDir;
+        private System.Windows.Forms.RadioButton rdbSmartLocationDir_1;
+        private System.Windows.Forms.RadioButton rdbSmartLocationDir;
+        private System.Windows.Forms.Panel pnTrayUnloading;
+        private System.Windows.Forms.RadioButton rbTrayUnloadingStacker;
+        private System.Windows.Forms.RadioButton rbTrayUnloadingConveyor;
     }
 }

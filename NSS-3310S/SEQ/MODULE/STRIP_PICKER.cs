@@ -4,7 +4,7 @@ using System;
 
 namespace NSS_3310S.SEQ.MODULE{
     public class STRIP_PICKER : BASE{
-        int nThread = T.StripPk;
+        readonly int nThread = T.StripPk;
         string cmds = string.Empty;
         long TackStart = 0, TackEnd = 0;
 
@@ -21,11 +21,15 @@ namespace NSS_3310S.SEQ.MODULE{
                 if (!CheckRunThread()) continue;
 
             RePic:
-                while (UTIL_.WaitBIT(nThread, B.StripPkRequest, false, "레일에 스트립 공급 할때까지 대기")){
+                while (B.WaitBIT(nThread, B.StripPkRequest, false, "레일에 스트립 공급 할때까지 대기")){
                     if (mIN[I.STRIP_PK_VAC]){
-                        COM_.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
+                        B.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
                         goto Shortcut_Place;
                     }
+                    if (bBD) {
+                        UTIL_.DELAY(1000);
+                        IsBIT[B.StripPkRequest] = true;
+                    } // 시물레이션 중이면 그냥 true  
                 }
                 if (!Pic("스트립 픽업")) goto RePic;
                 if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
@@ -34,7 +38,7 @@ namespace NSS_3310S.SEQ.MODULE{
                 }
             Shortcut_Place:
                 Plc("다이싱 테이블로 스트립 공급");
-                COM_.SetBit(nThread, B.StripPkMask, false, "스트립 피커 스트립 유무");
+                B.SetBit(nThread, B.StripPkMask, false, "스트립 피커 스트립 유무");
             } while (true);
         }
 
@@ -45,8 +49,8 @@ namespace NSS_3310S.SEQ.MODULE{
                 TEACH_.WRTIE_PRE_ALIGN(IsDOUBLE[D.PreAlignX], IsDOUBLE[D.PreAlignY], IsDOUBLE[D.PreAlignT]); //프리얼라인 옵셋값 적용
                 return;
             }
-            while (UTIL_.WaitBIT(nThread, B.UnitPickUp, true, "유닛 픽업 완료 할때 까지 대기")) ;
-            COM_.SetBit(nThread, B.PreAligning, true, "스트립 프리-얼라인 진행");
+            while (B.WaitBIT(nThread, B.UnitPickUp, true, "유닛 픽업 완료 할때 까지 대기")) ;
+            B.SetBit(nThread, B.PreAligning, true, "스트립 프리-얼라인 진행");
 
             LogStart(nThread, "프리-얼라인 진행");
             while (eRTN.SUCESS != MoveZ(P.FirstTrigger, "", "스트립 피커 Z축 첫번째 얼라인 위치 이송")) ;
@@ -59,7 +63,7 @@ namespace NSS_3310S.SEQ.MODULE{
 
             TEACH_.WRTIE_PRE_ALIGN(IsDOUBLE[D.PreAlignX], IsDOUBLE[D.PreAlignY], IsDOUBLE[D.PreAlignT]); //프리얼라인 옵셋값 적용
             LogEnd(nThread, "프리-얼라인 완료");
-            COM_.SetBit(nThread, B.PreAligning, false, "스트립 프리-얼라인 완료");
+            B.SetBit(nThread, B.PreAligning, false, "스트립 프리-얼라인 완료");
         }
 
         public bool Pic(string comment){
@@ -74,7 +78,7 @@ namespace NSS_3310S.SEQ.MODULE{
             if (prMACHINE[CP.UseStipPkCheck] == (int)eUSE.USE){
                 Vac(stBIT.ON);
                 if (mIN[I.STRIP_PK_VAC]){
-                    UTIL_.OnERROR(E.emsNotStripPkVac, 500);
+                    E.OnERROR(E.emsNotStripPkVac, 500);
                     goto RePkrChack;
                 }
                 Vac(stBIT.OFF);
@@ -90,77 +94,86 @@ namespace NSS_3310S.SEQ.MODULE{
             if (!mIN[I.STRIP_PK_VAC] && !bDRYRUN){
                 Vac(stBIT.OFF);
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-                COM_.ViewWarning(nThread, W.StripPk_RePic);
-                while (UTIL_.WaitWarning(nThread, W.StripPk_RePic, "[WARNNING] 스트립 피커 픽업 실패")) ;
+                W.ViewWarning(nThread, W.StripPk_RePic);
+                while (W.WaitWarning(nThread, W.StripPk_RePic, "[WARNNING] 스트립 피커 픽업 실패")) ;
                 if (ConfirmUser[W.StripPk_RePic].result) goto RePIC;
                 while (LAB_.INPUT(I.RAIL_EXIST2)){
-                    UTIL_.OnERROR(E.emsRemoveRailStrip);
+                    E.OnERROR(E.emsRemoveRailStrip);
                 }
                 while (eRTN.SUCESS != MoveX(P.StripPckUp, cmds, "스트립 피커 X축 스트립 픽업 위치 이송")) ;
-                COM_.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 실패");
+                B.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 실패");
                 return false;
             }
             while (eRTN.SUCESS != C.Gripper.InLET_DOWN("인-렛 테이블 다운")) ;
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
             if (!mIN[I.STRIP_PK_VAC] != bDRYRUN){
-                Vac(stBIT.OFF);
+                Vac(stBIT.OFF); 
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-                COM_.ViewWarning(nThread, W.StripPk_RePic);
-                while (UTIL_.WaitWarning(nThread, W.StripPk_RePic, "[WARNNING] 스트립 피커 픽업 실패")) ;
+                W.ViewWarning(nThread, W.StripPk_RePic);
+                while (W.WaitWarning(nThread, W.StripPk_RePic, "[WARNNING] 스트립 피커 픽업 실패")) ;
                 if (ConfirmUser[W.StripPk_RePic].result) goto RePIC;
                 while (LAB_.INPUT(I.RAIL_EXIST2)){
-                    UTIL_.OnERROR(E.emsRemoveRailStrip);
+                    E.OnERROR(E.emsRemoveRailStrip);
                 }
                 while (eRTN.SUCESS != MoveX(P.StripPckUp, cmds, "스트립 피커 X축 스트립 픽업 위치 이송")) ;
-                COM_.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 실패");
+                B.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 실패");
                 return false;
             }
-            COM_.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
-            CLOT.InfoStrip[nThread] = CLOT.InfoStrip[T.Gripper];
+            B.SetBit(nThread, B.StripPkMask, true, "스트립 피커 스트립 유무");
+            //스트립 정보 저장
+            //CLOT.InfoStrip[nThread] = CLOT.InfoStrip[T.Gripper];
+            CLOT.SEND_STRIP_INFO(eSeqBacode.Gripper, T.Gripper, eSeqBacode.StipPk, nThread);
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 if (!CLOT.InfoStrip[T.Gripper].Overlap)
                     SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[T.Gripper].Index, CLOT.InfoStrip[T.Gripper].Barcode, (int)CMES.ModuleID.IN_LET);
             }
-            CLOT.RESET_STRIP_INFO(T.Gripper);
-            //스트립 정보 저장
-            COM_.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 완료");
+            B.SetBit(nThread, B.StripPkRequest, false, "스트립 픽업 완료");
             LogEnd(nThread, comment + " 완료");
             return true;
         }
 
         public bool Plc(string comment){
             //if (!bDRYRUN)
-            while (UTIL_.WaitInput(nThread, I.SAW_LD_REQ, false, "다이싱에서 스트립 공급 요청할때까지 대기")) ;
+            while (I.WaitInput(nThread, I.SAW_LD_REQ, false, "다이싱에서 스트립 공급 요청할때까지 대기")) { 
+                if (bBD) {
+                    if (!IsBIT[B.Simulation_Sawing]) {
+                        break;
+                    }
+                }
+            }
             LogStart(nThread, comment);
+            C.SendSaw.SEND("GET_SVID,*");
             //if (bDRYRUN){
             //    while (eRTN.SUCESS != MoveX(P.StripPlc, "", "스트립 피커 X축 다이싱 내려놓는 위치 이송")) ;
             //    goto DrayRun;
             //}
-            while (UTIL_.WaitBIT(nThread, B.StripPlacStop, B.UnitPkPic, true, true, "다싱에 스트립 공급 진행 대기", stBIT.OR)) ;
-            COM_.SetBit(nThread, B.StripPkPlc, true, "스트립 피커 다이싱 테이블에 스트립 내려놓는 동작 진행");
+            while (B.WaitBIT(nThread, B.StripPlacStop, B.UnitPkPic, true, true, "다싱에 스트립 공급 진행 대기", stBIT.OR)) ;
+            B.SetBit(nThread, B.StripPkPlc, true, "스트립 피커 다이싱 테이블에 스트립 내려놓는 동작 진행");
         ReCheck:
             while (eRTN.SUCESS != MoveX(P.StripPlc, "", "스트립 피커 X축 다이싱 내려놓는 위치 이송")) ;
-            while (UTIL_.WaitInput(nThread, I.SAW_LD_POS, false, "다이싱 테이블 스트립 로딩 위치에 있는지 확인")){
-                if (!mIN[I.SAW_LD_REQ] /*|| (!IsBIT[B.StripPkRequest] && bMF)*/){
-                    COM_.ViewWarning(nThread, W.SawStripReuestsingal);
-                    while (UTIL_.WaitWarning(nThread, W.SawStripReuestsingal, "다이싱 스트립 요청 신호 끊어짐")) ;
-                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-                    while (eRTN.SUCESS != MoveX(P.StripPckUp, "", "스트립 피커 X축 스트립 픽업 위치 이송")) ;
-                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-                    COM_.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
-                    UTIL_.DELAY(100);
-                    ResetInterface();
-                    return false;
-                }
-                if (!mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS]){
-                    while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-                    goto ReCheck;
+            if (!bBD) {
+                while (I.WaitInput(nThread, I.SAW_LD_POS, false, "다이싱 테이블 스트립 로딩 위치에 있는지 확인")) {
+                    if (!mIN[I.SAW_LD_REQ] /*|| (!IsBIT[B.StripPkRequest] && bMF)*/) {
+                        W.ViewWarning(nThread, W.SawStripReuestsingal);
+                        while (W.WaitWarning(nThread, W.SawStripReuestsingal, "다이싱 스트립 요청 신호 끊어짐")) ;
+                        while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
+                        while (eRTN.SUCESS != MoveX(P.StripPckUp, "", "스트립 피커 X축 스트립 픽업 위치 이송")) ;
+                        while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
+                        O.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
+                        UTIL_.DELAY(100);
+                        ResetInterface();
+                        return false;
+                    }
+                    if (!mOUT[O.HANDLER_STRIP_PK_X_PLACE_POS])
+                    {
+                        while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
+                        goto ReCheck;
+                    }
                 }
             }
-            //DrayRun:
-            if (!mIN[I.STRIP_PK_VAC] && !bDRYRUN){
-                COM_.ViewWarning(nThread, W.StripPk_Vanish);
-                while (UTIL_.WaitWarning(nThread, W.StripPk_Vanish, "스트립 피커에 있던 스트립 사라짐")) ;
+            if (!mIN[I.STRIP_PK_VAC] && !bDRYRUN) {
+                W.ViewWarning(nThread, W.StripPk_Vanish);
+                while (W.WaitWarning(nThread, W.StripPk_Vanish, "스트립 피커에 있던 스트립 사라짐")) ;
                 if (ConfirmUser[W.StripPk_Vanish].result) goto ReCheck;
                 while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
                 while (eRTN.SUCESS != MoveX(P.StripPckUp, "", "스트립 피커 X축 스트립 픽업 위치 이송")) ;
@@ -170,32 +183,30 @@ namespace NSS_3310S.SEQ.MODULE{
             }
 
             while (eRTN.SUCESS != MoveZ(P.StripPlc, "offset=-10", "스트립 피커 Z축 스트립 픽업 대기 위치 이송")) ;
-            //if (!bDRYRUN) { 
             while (eRTN.SUCESS != MoveZ(P.StripPlc, "spd=10", "스트립 피커 Z축 스트립 픽업 위치 이송")) ;
-            while (UTIL_.WaitInput(nThread, I.SAW_STAGE_VAC_ON, false, "다이싱 테이블 진공 완료 할떄까지 대기")) ;
-            //}
+            if (!bBD) {
+                while (I.WaitInput(nThread, I.SAW_STAGE_VAC_ON, false, "다이싱 테이블 진공 완료 할떄까지 대기")) ;
+            }
             Blow();
             cmds = "offset=-" + string.Format("{0:0.0}", prMACHINE[CP.StipPkCheckUpPitch]) + ":spd=5";
             while (eRTN.SUCESS != MoveZ(P.StripPlc, cmds, "스트립 피커 Z축 스트립 픽업 위치 이송")) ;
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
             while (eRTN.SUCESS != MoveX(P.StripPckUp, "", "스트립 피커 X축 스트립 픽업 위치 이송")) ;
             ChekPlc();
-            CLOT.RECEIVE_SAW_STRIP_INFO(nThread);
+            //스트립 정보 저장
+            CLOT.RECEIVE_SAW_STRIP_INFO(eSeqBacode.StipPk, nThread);
             if (prMACHINE[CP.UseMES] == (int)eUSE.USE){
                 if (!CLOT.InfoStrip[nThread].Overlap) { 
                     SUBFRM_.gSecsGem.SetPanelModuleOut(CLOT.InfoStrip[nThread].Index, CLOT.InfoStrip[nThread].Barcode, CMES.ModuleID.STRIP_PK);
                     SUBFRM_.gSecsGem.SetPanelModuleIn(CLOT.SawStageStripIndex, CLOT.SawStageStripBarcode, CMES.ModuleID.SAW_STAGE);
                 }
             }
-            CLOT.RESET_STRIP_INFO(nThread);
-            //스트립 정보 저장
+            if (bBD) {
+                IsBIT[B.Simulation_Sawing] = true;
+            }
+            LogWR_.SaveBladeInfo(CLOT.SawStageStripBarcode, "In", CLOT.SawStageStripIndex);
             Tack();
             LogEnd(nThread, comment + " 완료");
-            return true;
-        }
-
-        public bool RePlc(string comment){
-
             return true;
         }
         #endregion
@@ -216,13 +227,13 @@ namespace NSS_3310S.SEQ.MODULE{
         }
         void ChekPlc(){
             while (eRTN.SUCESS != MoveZ(P.Ready, "", "스트립 피커 Z축 대기 위치 이송")) ;
-            COM_.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
+            O.SetOutput(nThread, O.HANDLER_LD_COMPLETE, true, "다이싱 테이블에 스트립 전달 완료");
             while (mIN[I.SAW_LD_REQ] || mIN[I.SAW_LD_POS] || mIN[I.SAW_STAGE_VAC_ON]) UTIL_.DELAY(10);
             ResetInterface();
         }
         public void ResetInterface(){
             mOUT[O.HANDLER_LD_COMPLETE] = false;
-            COM_.SetBit(nThread, B.StripPkPlc, false, "스트립 피커 다이싱 테이블에 스트립 내려놓는 동작 진행 플로그 OFF");
+            B.SetBit(nThread, B.StripPkPlc, false, "스트립 피커 다이싱 테이블에 스트립 내려놓는 동작 진행 플로그 OFF");
         }
 
         public void Vac(bool bFlog){
@@ -249,6 +260,14 @@ namespace NSS_3310S.SEQ.MODULE{
         }
 
         public eRTN MoveX(int nPos, string cmd, string comment){
+            while (!mIN[I.DOOR_SAW_FRONT_RIGHT] || !mIN[I.DOOR_SAW_FRONT_LEFT]){
+                if (mtCHK[M.StripPkX].Ev == "STOP" || mtCHK[M.StripPkX].Ev == "stop" || bPushStop){
+                    UTIL_.DELAY(100);
+                    return eRTN.FAIL;
+                }
+                UTIL_.DELAY(100);
+                if (bBD) break;
+            }
             if (ChkRunning(nThread)) return eRTN.FAIL;
             if (!C.Interlock.ChkInterlock(E.emsStripPkZNotReadyPos, true)) return eRTN.EMS;
 

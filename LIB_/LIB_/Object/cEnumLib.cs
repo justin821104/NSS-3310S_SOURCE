@@ -2,6 +2,10 @@
 
 namespace Object
 {
+    public enum eSetMC{
+        MachineNum_1 = 0, //MACHINE 1호기
+        MachineNum_2 = 1 //MACHINE 2~6호기
+    }
     public enum ePARA{
         COM = 0,
         RECIPE = 1
@@ -31,18 +35,33 @@ namespace Object
     }
 
     public enum eSTATUS{
-        NONE = 10,
-        EMPTY = 0, //없음.
-        MARK = 1, //GOOD.
-        NG = 2, //NG (사이즈 불량)
-        FAIL = 3, //불량 (X MARK)
-        X_MARK = 3,//불량 (X MARK)
+        NONE        = 10,
+        EMPTY       = 0, //없음.
+        MARK        = 1, //GOOD.
+        NG          = 2, //NG (사이즈 불량)
 
-        PICFAIL = 4, //픽업 실패
-        WORKING = 5, //작업 중
-        WORKEND = 6, //작업 완료
-        FIRST = 7, //INSPECTION 검사 유닛 
-        SECOND = 8, //INSPECTION 검사 유닛
+        FAIL        = 3, //불량 (X MARK)
+        X_MARK      = 3, //불량 (X MARK)
+
+        TOP_FAIL    = 4, //TOP VISION 불량 처리 (REJECT BOX)
+        
+        WORKING     = 5, //작업 중
+        WORKEND     = 6, //작업 완료
+        FIRST       = 7, //INSPECTION 검사 유닛 
+        SECOND      = 8, //INSPECTION 검사 유닛
+
+        PICFAIL     = 9  //픽업 실패
+    
+    }
+
+    public enum eSeqBacode{
+        Gripper,
+        StipPk,
+        SawStage,
+        UnitPk,
+        MapBlock1,
+        MapBlock2,
+        MapBlock3,
     }
 
     public enum eConv{
@@ -75,7 +94,8 @@ namespace Object
 
     public enum ePCB{
         STRIP = 0,
-        QUAD = 1
+        QUAD = 1,
+        B1_QUAD = 2
     }
 
     public enum eUnitPK{
@@ -162,6 +182,11 @@ namespace Object
         WASH,
         DRY,
         RINSE,
+    }
+
+    public enum eSPINDLE{
+        SP1 = 0,
+        SP2
     }
 
     public enum eCHK_INTERLOCK{
@@ -331,6 +356,7 @@ namespace Object
         MISTAKE,                // 오류,잘못됨
         NotMOVE,                // 이송 할 수 없음.
         JOB_CANCEL,             // 작업 취소
+        AREA_CHECK,             // 에어리어 센서 감지
 
         BUSY = 30,
         TimeOver,   // 시간 초과
